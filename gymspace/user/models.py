@@ -6,9 +6,9 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     username = models.CharField(max_length=60, unique=True)
     
-    goal = models.CharField(max_length=50)
+    goal = models.CharField(max_length=50, blank=True)
     
-    description = models.CharField(max_length=300)
+    description = models.CharField(max_length=300, blank=True)
     
     email = models.EmailField(max_length=254, unique=True)
     
