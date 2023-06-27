@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    handle = models.OneToOneField(User, on_delete=models.CASCADE)
     username = models.CharField(max_length=60, unique=True)
     
     goal = models.CharField(max_length=50, blank=True)
@@ -24,4 +24,7 @@ class UserProfile(models.Model):
     weight = models.FloatField(null=True, blank=True)
     
     trainer_status = models.BooleanField()
+     
+    def __str__(self):
+        return self.username
      

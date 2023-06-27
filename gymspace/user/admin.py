@@ -3,4 +3,9 @@ from .models import UserProfile
 
 # Register your models here.
 
-admin.site.register(UserProfile)
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = ('username', "email", "trainer_status")
+
+
+
+admin.site.register(UserProfile, UserProfileAdmin)
