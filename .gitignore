@@ -1,0 +1,34 @@
+gymspace/user/__pycache__/
+gymspace/gym/__pycache__/
+gymspace/db.sqlite3
+gymspace/gymspace/__pycache__/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+.DS_Store
+dist
+dist-ssr
+coverage
+*.local
+
+gymspace-frontend/cypress/videos/
+gymspace-frontend/cypress/screenshots/
+
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
