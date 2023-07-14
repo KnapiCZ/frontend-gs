@@ -10,7 +10,7 @@ class UserProfileViewSet(viewsets.ViewSet):
     A simple ViewSet for listing or retrieving users.
     """
     def list(self, request):
-        queryset = User.objects.all()
+        queryset = UserProfile.objects.all()
         serializer = UserProfileSerializer(queryset, many=True)
         return Response(serializer.data)
 

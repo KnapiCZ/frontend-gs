@@ -1,14 +1,16 @@
 <script setup>
-import MainHeader from './components/Header/MainHeader.vue'
+
+import APICaller from './components/API/APICaller.vue'
+
 
 </script>
 
 <template>
-  <MainHeader />
+  <Header />
 
 
   <main>
-    
+    <APICaller />
   </main>
 </template>
 
