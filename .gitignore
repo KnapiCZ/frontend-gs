@@ -1,9 +1,9 @@
-*.log
-*.pot
-*.pyc
-__pycache__
-db.sqlite3
-media
+gymspace/*.log
+gymspace/*.pot
+gymspace/*.pyc
+gymspace/__pycache__
+gymspace/db.sqlite3
+gymspace/media
 
 # Logs
 logs
