@@ -3,7 +3,8 @@ gymspace/*.pot
 gymspace/*.pyc
 gymspace/__pycache__
 gymspace/db.sqlite3
-gymspace/media
+gymspace/*/__pycache__
+gymspace/*/migrations
 
 # Logs
 logs
