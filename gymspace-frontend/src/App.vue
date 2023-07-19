@@ -1,16 +1,18 @@
 <script setup>
 
-import APICaller from './components/API/APICaller.vue'
 import bottom_navigation_bar from './components/bottom_navigation_bar.vue';
 import profile_page from './components/Profile/profile_page.vue';
 
 </script>
 
 <template>
+  <Suspense>
+    <template #default>
   <main>
     <profile_page />
   </main>
-
+    </template>
+  </Suspense>
 </template>
 
 
