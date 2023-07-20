@@ -24,7 +24,8 @@
     width: 20px;
 }
 .block {
-    margin: 0 5px 5px 0;
+    margin-bottom: 5px;
+    margin-left: 10px;
 }
 
 </style>

@@ -9,6 +9,7 @@ import profile_page from './components/Profile/profile_page.vue';
 <template>
   <main>
     <profile_page />
+    <bottom_navigation_bar />
   </main>
 
 </template>
