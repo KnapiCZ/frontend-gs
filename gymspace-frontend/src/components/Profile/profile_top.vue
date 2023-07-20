@@ -1,5 +1,4 @@
 <script setup>
-  import bottom_navigation_bar from '../bottom_navigation_bar.vue';
   import { VCol } from 'vuetify/lib/components/index.mjs';
   import { VRow } from 'vuetify/lib/components/index.mjs';
 
@@ -8,25 +7,30 @@
     followers: Number,
     })
 
+  import { VAvatar } from 'vuetify/lib/components/index.mjs';
 </script>
 
 <template>
   <div class="background">
-    <VRow class="main-info">
-      <VCol>      
-        <div class="top-item">Followers</div> 
-        <div class="bottom-item">{{ props.followers }}</div> 
-      </VCol>
-      <VCol>      
-      <div class="top-item"> @{{ props.handle }}</div>
-      </VCol>
-      <VCol>      
-        <div class="top-item">Post</div>  
-        <div class="bottom-item">25</div> 
-      </VCol>
-    </VRow>
-    </div>
-  <bottom_navigation_bar />
+    <VCol class="main-info">
+      <VAvatar class='PFP' color="yellow"></VAvatar>
+      <VRow>
+        <VCol>      
+          <div class="top-item">Followers</div> 
+          <div class="bottom-item">{{ props.followers }}</div> <!-- API following user count-->
+        </VCol>
+        <VCol>      
+          <div class="top-item"> @{{ props.handle }}</div> <!-- API username-->
+          <div class="bottom-item">trainer lmao </div> <!-- API following user count-->
+
+        </VCol>
+        <VCol>      
+          <div class="top-item">Post</div>  
+          <div class="bottom-item">25</div> <!-- API user post count-->
+        </VCol>
+      </VRow>
+    </VCol>
+  </div>
 </template>
 
 <style scoped>
@@ -40,14 +44,22 @@
   height: 150px;
   text-align: center;
 }
-.main-info{
-  position: absolute;
-  left: 25%;
-  bottom: -20px;
-  width: 50%;
-  display: inline-grid;
-  grid-template-columns: auto auto auto;
+.main-info{  
+  width: 75%;
+  height: 70px;
   margin: auto;
-  background-color: rgba(0, 0, 0, 0.425);
+  padding-top: 20px;
+  position: absolute;
+  bottom: -35px;
+  left: calc((100% / 2) - (75% / 2));
+  background-color: rgba(0, 0, 0, 0.603);
+  color: white;
+  border-radius: 10px;
+}
+.PFP{
+  width: 80px; height: 80px;
+  position: absolute;
+  left: calc((100% / 2) - 40px);
+  top: -60px;
 }
 </style>

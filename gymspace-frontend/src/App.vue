@@ -9,6 +9,7 @@ import profile_page from './components/Profile/profile_page.vue';
   <Suspense>
   <main>
     <profile_page />
+    <bottom_navigation_bar />
   </main>
   </Suspense>
 </template>

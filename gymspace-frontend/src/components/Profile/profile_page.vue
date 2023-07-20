@@ -21,6 +21,7 @@
   console.log(userData)
   console.log(followerData)
 
+  import Tabbar_main from './tab_bar_pages/tabbar_main.vue';
 </script>
 
 <template>
@@ -30,13 +31,15 @@
     <profile_basic_info :description="userData.description" :email="userData.email"/>
 
     <profile_buttons />
-    
+    <Tabbar_main />
   </div>
 </template>
 
 
 <style scoped>
 .page-div{
+  margin: 0;
+  padding: 0;
   text-align: center;
 }
 </style>
