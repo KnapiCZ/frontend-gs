@@ -4,4 +4,6 @@ from user import views
 urlpatterns = [
     path('users/', views.UserProfileViewSet.as_view({'get': 'list'})),
     path('users/<int:pk>', views.UserProfileViewSet.as_view({'get': 'retrieve'})),
+
+    path('following/<int:pk>', views.FollowViewSet.as_view({'get': 'retrieve'}))
 ]

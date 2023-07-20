@@ -2,6 +2,12 @@
   import bottom_navigation_bar from '../bottom_navigation_bar.vue';
   import { VCol } from 'vuetify/lib/components/index.mjs';
   import { VRow } from 'vuetify/lib/components/index.mjs';
+
+  let props = defineProps({
+    handle: String,
+    followers: Number,
+    })
+
 </script>
 
 <template>
@@ -9,10 +15,10 @@
     <VRow class="main-info">
       <VCol>      
         <div class="top-item">Followers</div> 
-        <div class="bottom-item">452k</div> 
+        <div class="bottom-item">{{ props.followers }}</div> 
       </VCol>
       <VCol>      
-        <div class="top-item"> @idk_name_lol</div>
+      <div class="top-item"> @{{ props.handle }}</div>
       </VCol>
       <VCol>      
         <div class="top-item">Post</div>  
