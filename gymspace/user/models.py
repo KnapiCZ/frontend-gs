@@ -24,7 +24,10 @@ class UserProfile(models.Model):
     weight = models.FloatField(null=True, blank=True)
     
     trainer_status = models.BooleanField()
-     
+    
+    followers = models.ManyToManyField(User, null=True, blank=True, related_name='followers', symmetrical=False)
+    
+
     def __str__(self):
         return self.username
 
@@ -33,20 +36,5 @@ class UserProfile(models.Model):
         return handle.username
 
 
-    def filter_and_count(self, pk):
-        return self.following.all().count()
 
-class Follow(models.Model):
-    following = models.ForeignKey(UserProfile, related_name="who_follows", on_delete=models.CASCADE)
-    follower = models.ForeignKey(UserProfile, related_name="who_is_followed", on_delete=models.CASCADE)
-    follow_time = models.DateTimeField(auto_now=True) 
-
-    def __unicode__(self):
-        return str(self.follow_time)
-
-    def __str__(self):
-        return f'{self.follower} follows {self.following}'
-
-    def get_username(self):
-        return self.username
 

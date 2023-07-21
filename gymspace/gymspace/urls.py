@@ -5,7 +5,7 @@ from django.contrib import admin
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserProfileViewSet, basename='users')
-router.register(r'following', views.FollowViewSet, basename='following')
+router.register(r'users/follow', views.FollowCountViewSet, basename='users-follow')
 
 from django.conf import settings
 from django.conf.urls.static import static

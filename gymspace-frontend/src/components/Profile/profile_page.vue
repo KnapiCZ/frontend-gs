@@ -4,22 +4,22 @@
   import profile_buttons from './profile_buttons.vue';
   import profile_basic_info from './profile_basic_info.vue';
 
-  
+  const baseUrl = `http://10.0.45.50:8000/`
   const userId = ref(1)
-    const userUrl = `http://127.0.0.1:8000/api/users/${userId.value}`;
-    const followingUrl = `http://127.0.0.1:8000/api/following/${userId.value}`
+  const userUrl = `${baseUrl}/api/users/${userId.value}`;
+  const followUrl = `${baseUrl}/api/users/follow/${userId.value}`
 
 
    
-        const userResponse = await fetch(userUrl)
-        const userData = await userResponse.json()
+  const userResponse = await fetch(userUrl)
+  const userData = await userResponse.json()
 
-        const followerResponse = await fetch(followingUrl)
-        const followerData = await followerResponse.json()
+  const followResponse = await fetch(followUrl)
+  const followData = await followResponse.json()
 
   //const url = ref("http://127.0.0.1:8000/api/users/"+userId)
   console.log(userData)
-  console.log(followerData)
+  console.log(followData)
 
   import Tabbar_main from './tab_bar_pages/tabbar_main.vue';
 </script>
@@ -27,7 +27,7 @@
 <template>
   <div class="page-div"> 
 
-    <profile_top :handle="userData.handle" :followers="followerData.following"/>
+    <profile_top :handle="userData.handle" :followers="followData.followers"/>
     <profile_basic_info :description="userData.description" :email="userData.email"/>
 
     <profile_buttons />

@@ -1,16 +1,11 @@
 from rest_framework import routers,serializers,viewsets
-from .models import UserProfile, Follow
-from django.db import models
+from .models import UserProfile
 class UserProfileSerializer(serializers.ModelSerializer):
     handle = serializers.CharField(source="get_handle")
 
     class Meta:
         model = UserProfile
-        fields = ['id', 'username', 'handle', 'goal', 'description', 'email', 'sex', 'height', 'weight', 'trainer_status']
-
-class FollowSerializer(serializers.Serializer):
-    following = serializers.IntegerField()
-
+        fields = ['id', 'username', 'handle', 'followers', 'goal', 'description', 'email', 'sex', 'height', 'weight', 'trainer_status']
 
 class UserSmallSerializer(serializers.ModelSerializer):
     handle = serializers.CharField(source="get_handle")
@@ -18,3 +13,7 @@ class UserSmallSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
         fields = ['id', 'handle']
+
+class FollowCountSerializer(serializers.Serializer):
+    followers = serializers.IntegerField()
+    following = serializers.IntegerField()
