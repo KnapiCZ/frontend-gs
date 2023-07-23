@@ -1,40 +1,57 @@
+<script setup>
+  import { VCard } from 'vuetify/lib/components/index.mjs';
+  import { VTabs } from 'vuetify/lib/components/index.mjs';
+  import { VTab } from 'vuetify/lib/components/index.mjs';
+  import { VWindow } from 'vuetify/lib/components/index.mjs';
+  import { VWindowItem } from 'vuetify/lib/components/index.mjs';
+  import { VContainer } from 'vuetify/lib/components/index.mjs';
+  
+</script>
+
+
 <template>
-    <v-card>
-      <v-tabs
+    <VCard>
+      <VTabs
         v-model="tab"
         color="deep-purple-accent-4"
+        bg-color="black"
         align-tabs="center"
       >
-        <v-tab :value="1">Landscape</v-tab>
-        <v-tab :value="2">City</v-tab>
-        <v-tab :value="3">Abstract</v-tab>
-      </v-tabs>
-      <v-window v-model="tab">
-        <v-window-item
-          v-for="n in 3"
-          :key="n"
-          :value="n"
+        <VTab :value="feed"><img src="../../../assets/icons/feed.png" alt="feed"></VTab>
+        <VTab :value="challenges"><img src="../../../assets/icons/challenges.png" alt="challenges"></VTab>
+        <VTab :value="trainer"><img src="../../../assets/icons/trainer.png" alt="trainer"></VTab>
+
+      </VTabs>
+      <VWindow v-model="tab" >
+        <VWindowItem
+          :key="feed"
+          :value="feed"
         >
-          <v-container fluid>
-            <v-row>
-              <v-col
-                v-for="i in 6"
-                :key="i"
-                cols="12"
-                md="4"
-              >
-                <v-img
-                  :src="`https://picsum.photos/500/300?image=${i * n * 5 + 10}`"
-                  :lazy-src="`https://picsum.photos/10/6?image=${i * n * 5 + 10}`"
-                  aspect-ratio="1"
-                ></v-img>
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-window-item>
-      </v-window>
-    </v-card>
+          <VContainer fluid>
+            feedfeedfeedfeedfeedfeedfeed
+          </VContainer>
+        </VWindowItem>        
+        <VWindowItem
+          :key="challenges"
+          :value="challenges"
+        >
+          <VContainer fluid>
+            challengeschallengeschallengeschallenges
+          </VContainer>
+        </VWindowItem>
+        <VWindowItem
+          :key="trainer"
+          :value="trainer"
+        >
+          <VContainer fluid>
+            trainertrainertrainertrainer
+          </VContainer>
+        </VWindowItem>
+      </VWindow>
+    </VCard>
   </template>
+
+
   <script>
     export default {
       data: () => ({

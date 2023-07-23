@@ -3,9 +3,9 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class UserProfile(models.Model):
-    handle = models.OneToOneField(User, on_delete=models.CASCADE)
-    username = models.CharField(max_length=60, unique=True)
-    
+    handle = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
+    username = models.CharField(max_length=60)
+
     goal = models.CharField(max_length=50, blank=True)
     
     description = models.CharField(max_length=300, blank=True)
@@ -24,7 +24,17 @@ class UserProfile(models.Model):
     weight = models.FloatField(null=True, blank=True)
     
     trainer_status = models.BooleanField()
-     
+    
+    followers = models.ManyToManyField(User, null=True, blank=True, related_name='followers', symmetrical=False)
+    
+
     def __str__(self):
         return self.username
-     
+
+    def get_handle(self):
+        handle = User.objects.get(id=self.handle.id)
+        return handle.username
+
+
+
+
