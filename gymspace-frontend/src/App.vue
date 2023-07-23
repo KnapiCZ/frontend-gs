@@ -4,11 +4,14 @@ import bottom_navigation_bar from './components/bottom_navigation_bar.vue';
 import profile_page from './components/Profile/profile_page.vue';
 
 </script>
+
 <template #default>
-  <main>
-    <profile_page />
-    <bottom_navigation_bar />
-  </main>
+    <Suspense>
+      <main>
+        <profile_page />
+        <bottom_navigation_bar />
+      </main>
+    </Suspense>
 </template>
 
 
