@@ -11,12 +11,12 @@
   <style scoped>
   .profileButtons {
     display: inline-block;
-    padding: 5px 20px;
+    padding: 5px auto;
     margin: 20px 10px;
     width: 25%;
     height: 30px;
     background-color: #2F2F2F;
-    color: white;
+    font-weight: bold;
     border-radius: 5px;
   }
   </style>
@@ -30,4 +30,4 @@
   },
 };
 
-</script>
+</script>discrodpip

@@ -62,4 +62,9 @@
   left: calc((100% / 2) - 40px);
   top: -60px;
 }
+
+.bottom-item{
+  font-size: 14px;
+  color: rgb(207, 205, 205)
+}
 </style>
