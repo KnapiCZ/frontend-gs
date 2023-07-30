@@ -1,13 +1,13 @@
 <script setup>
   import { VCol } from 'vuetify/lib/components/index.mjs';
   import { VRow } from 'vuetify/lib/components/index.mjs';
+  import { VAvatar } from 'vuetify/lib/components/index.mjs';
 
   let props = defineProps({
     handle: String,
     followers: Number,
     })
 
-  import { VAvatar } from 'vuetify/lib/components/index.mjs';
 </script>
 
 <template>

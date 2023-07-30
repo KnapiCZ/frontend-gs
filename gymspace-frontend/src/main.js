@@ -10,4 +10,7 @@ import App from "./App.vue";
 import { createVuetify } from "vuetify";
 
 
-createApp(App).use(createVuetify()).mount("#app");
+const app = createApp(App)
+
+app.use(createVuetify())
+app.mount('#app')
