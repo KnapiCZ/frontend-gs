@@ -22,7 +22,7 @@ let props = defineProps({
   text-align: left;
   margin: 40px 20px 20px 20px;
   display: grid;
-  grid-template-columns: 70% 30%;
+  grid-template-columns: 60% 40%;
   font-size: 12px;
 }
 

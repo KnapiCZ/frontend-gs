@@ -8,7 +8,7 @@
     <VLayout>
         <v-bottom-navigation bg-color="#000000">
             <v-btn value="Profile">
-                <VAvatar class='PFP' color="yellow"></VAvatar>
+                <VAvatar class='PFP' image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCNXlxKTKx1BNyefNbP7zji3RNu15aKD6sPAFqJNDUTLpDUSzHyNnQ4L_fraxsAO6mw28&usqp=CAU"></VAvatar>
                 
             </v-btn>
 

@@ -4,7 +4,7 @@
   import ProfileButtons from './ProfileButtons.vue';
   import ProfileBasicInfo from './ProfileBasicInfo.vue';
 
-  const baseUrl = `http://10.0.0.10:8000/`
+  const baseUrl = `http://192.168.88.86:8000/`
   const userId = ref(1)
   const userUrl = `${baseUrl}/api/users/${userId.value}`;
   const followUrl = `${baseUrl}/api/users/follow/${userId.value}`
@@ -21,7 +21,7 @@
   console.log(userData)
   console.log(followData)
 
-  import Tabbar_main from './tab_bar_pages/tabbar_main.vue';
+  import Tabbar_main from './Tabs/TabBar.vue';
 </script>
 
 <template>  
