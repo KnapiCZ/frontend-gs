@@ -5,6 +5,8 @@ gymspace/__pycache__
 gymspace/db.sqlite3
 gymspace/*/__pycache__
 gymspace/*/migrations
+gymspace/global_post_media
+gymspace/global_profile_media
 
 # Logs
 logs

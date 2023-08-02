@@ -4,7 +4,7 @@
   import profile_buttons from './profile_buttons.vue';
   import profile_basic_info from './profile_basic_info.vue';
 
-  const baseUrl = `http://10.0.0.10:8000/`
+  const baseUrl = `http://10.0.45.50:8000/`
   const userId = ref(1)
   const userUrl = `${baseUrl}/api/users/${userId.value}`;
   const followUrl = `${baseUrl}/api/users/follow/${userId.value}`
