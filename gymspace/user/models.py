@@ -53,6 +53,12 @@ class UserProfile(models.Model):
         handle = User.objects.get(id=self.handle.id)
         return handle.username
 
+    def get_profile_picture_url(self):
+        user = UserProfile.objects.get(id=self.id)
+        return user.profile_picture.url
+    def get_background_picture_url(self):
+        user = UserProfile.objects.get(id=self.id)
+        return user.background_picture.url
 
 class UserPost(models.Model):
     author = models.ForeignKey(User,
