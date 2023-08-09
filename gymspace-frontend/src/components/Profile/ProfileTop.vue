@@ -13,7 +13,7 @@
 <template>
   <div class="background">
     <VCol class="main-info">
-      <VAvatar class='PFP' color="yellow"></VAvatar>
+      <VAvatar class='PFP' image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCNXlxKTKx1BNyefNbP7zji3RNu15aKD6sPAFqJNDUTLpDUSzHyNnQ4L_fraxsAO6mw28&usqp=CAU"></VAvatar> <!-- API SCR profiloveho obrazku-->
       <VRow>
         <VCol>      
           <div class="top-item">Followers</div> 
@@ -21,7 +21,7 @@
         </VCol>
         <VCol>      
           <div class="top-item"> @{{ props.handle }}</div> <!-- API username-->
-          <div class="bottom-item">trainer lmao </div> <!-- API following user count-->
+          <div class="bottom-item">trainer</div> <!-- API following user count-->
 
         </VCol>
         <VCol>      
@@ -37,7 +37,7 @@
 .background{
   position: relative;
   margin: auto;
-  background-image: url("../../assets/images/background_image.jpg");
+  background-image: url("../../assets/images/background_image.jpg"); /* API src pozadi na profilu */
   background-position: center;
   background-size: cover;
   width: 100vw;

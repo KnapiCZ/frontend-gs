@@ -5,13 +5,13 @@
 
 
 <template>
-    <button> <!-- ROUTE tag-->
+    <button class="Thumbnail"> <!-- ROUTE tag-->
         <img :src="ImageSource" alt=""> <!-- API thubnail of post src-->
     </button>
-
 </template>
 
 <style scoped>
+
 button{
     width: 30%;
     height: 40%;    

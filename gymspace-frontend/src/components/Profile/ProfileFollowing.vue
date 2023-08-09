@@ -22,6 +22,7 @@
 .block img
 {
     width: 20px;
+    margin-right: 4px;
 }
 .block {
     margin-bottom: 5px;
