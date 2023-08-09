@@ -1,6 +1,5 @@
 <script setup>
-import profile_following from './profile_following.vue';
-import { VRow } from 'vuetify/lib/components/index.mjs';
+import ProfileFollowing from './ProfileFollowing.vue'
 
 let props = defineProps({
   description: String,
@@ -13,7 +12,7 @@ let props = defineProps({
 <template>
   <div class="profile_info">
     <p>{{ props.description }}<br>@gymbeamcz kód: MARTIN5 <br>{{ props.email }}</p> <!--API user bio-->
-    <profile_following />
+    <ProfileFollowing />
   </div>
 </template>
 

@@ -1,8 +1,8 @@
 <script setup>
   import { ref } from 'vue'
-  import profile_top from './profile_top.vue';
-  import profile_buttons from './profile_buttons.vue';
-  import profile_basic_info from './profile_basic_info.vue';
+  import ProfileTop from './ProfileTop.vue'
+  import ProfileButtons from './ProfileButtons.vue';
+  import ProfileBasicInfo from './ProfileBasicInfo.vue';
 
   const baseUrl = `http://10.0.45.50:8000/`
   const userId = ref(1)
@@ -26,9 +26,9 @@
 
 <template>  
   <div class="page-div"> 
-    <profile_top :handle="userData.handle" :followers="followData.followers"/>
-    <profile_basic_info :description="userData.description" :email="userData.email"/>
-    <profile_buttons />
+    <ProfileTop :handle="userData.handle" :followers="followData.followers"/>
+    <ProfileBasicInfo :description="userData.description" :email="userData.email"/>
+    <ProfileButtons />
     <Tabbar_main />
   </div>
 </template>

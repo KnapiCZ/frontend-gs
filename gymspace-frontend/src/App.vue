@@ -1,15 +1,13 @@
 <script setup>
-
-import bottom_navigation_bar from './components/bottom_navigation_bar.vue';
-import profile_page from './components/Profile/profile_page.vue';
-
+  import BottomNavigationBar from './components/BottomNavigationBar_Router/BottomNavigationBar.vue';
+  import GymMainPage from './components/Gyms/GymMainPage.vue';
 </script>
 
 <template #default>
     <Suspense>
       <main>
-        <profile_page />
-        <bottom_navigation_bar />
+        <GymMainPage />
+        <BottomNavigationBar />
       </main>
     </Suspense>
 </template>
@@ -18,12 +16,16 @@ import profile_page from './components/Profile/profile_page.vue';
 
 <style>
 
+main,
 #app {
   min-width: 100vw;
   min-height: 100%;
-  display: flex;
   padding: 0;
   margin: 0;
+}
+
+#app{
+  display: flex;
 }
 
 
