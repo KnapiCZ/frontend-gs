@@ -1,12 +1,10 @@
 <script setup>
   import BottomNavigationBar from './components/BottomNavigationBar_Router/BottomNavigationBar.vue';
-  import GymMainPage from './components/Gyms/GymMainPage.vue';
 </script>
 
 <template #default>
     <Suspense>
       <main>
-        <GymMainPage />
         <BottomNavigationBar />
       </main>
     </Suspense>

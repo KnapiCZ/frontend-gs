@@ -1,7 +1,7 @@
 <script setup>
     import { VCombobox } from 'vuetify/lib/components/index.mjs';
     import GymButton from './GymButton.vue';
-    import Thumbnail from '../Post/Thubnail.vue'
+    import Thumbnail from '../Post/Thumbnail.vue'
 </script>
 
 <template>
