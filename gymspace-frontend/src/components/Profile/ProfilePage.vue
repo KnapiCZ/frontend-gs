@@ -2,9 +2,10 @@
   import ProfileTop from './ProfileTop.vue'
   import ProfileButtons from './ProfileButtons.vue';
   import ProfileBasicInfo from './ProfileBasicInfo.vue';
+  import TabBar from './Tabs/TabBar.vue';
   import api from '../API/apiCaller';
   
-  const userData = await api("userProfile", 1)
+  const userData = await api("userProfile", 2)
   const baseUrl = await api()
 
   const profile_picture_url = `${baseUrl}${userData.profile_picture}`
@@ -12,7 +13,6 @@
   //const url = ref("http://127.0.0.1:8000/api/users/"+userId)
   console.log(userData)
 
-  import Tabbar_main from './Tabs/TabBar.vue';
 </script>
 
 <template>  
@@ -27,7 +27,7 @@
 
     <ProfileBasicInfo :description="userData.description" :email="userData.email"/>
     <ProfileButtons />
-    <Tabbar_main />
+    <TabBar :trainer_status="userData.trainer_status"/>
   </div>
 </template>
 
