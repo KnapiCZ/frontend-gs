@@ -2,7 +2,7 @@ from rest_framework import routers,serializers,viewsets
 from .models import UserProfile
 class UserProfileSerializer(serializers.ModelSerializer):
     handle = serializers.CharField(source="get_handle")
-
+    followers = serializers.IntegerField(source="count_followers")
 
     class Meta:
         model = UserProfile
@@ -28,5 +28,5 @@ class UserSmallSerializer(serializers.ModelSerializer):
         fields = ['id', 'handle']
 
 class FollowCountSerializer(serializers.Serializer):
-    followers = serializers.IntegerField()
+    followed_by = serializers.IntegerField()
     following = serializers.IntegerField()

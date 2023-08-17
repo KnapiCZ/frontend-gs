@@ -1,6 +1,12 @@
 <template>
     <div class="hello">
-      <button class="profileButtons" @click="isFollowing = !isFollowing">{{ isFollowing ? 'Following' : 'Follow' }}</button>
+      <button
+          class="profileButtons"
+          @click="isFollowing = !isFollowing" 
+        >
+          {{ isFollowing ? 'Following' : 'Follow' }}
+      </button> <!-- vytvorit api na follow -->
+
       <button class="profileButtons" @click="">Message</button>
       <button class="profileButtons" @click="">Email</button>
 

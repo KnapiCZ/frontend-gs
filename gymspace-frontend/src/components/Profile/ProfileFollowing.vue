@@ -8,7 +8,7 @@
     <VCol>
         <VRow class="block">
             <img src="../../assets/icons/club.png" alt="clubICO">
-            <p>@nejkejuser</p>
+            <p>@nejkejuser</p> <!-- sem dat nejznamejsi dva uzivatele z following -->
         </VRow>
         <VRow class="block">
             <img src="../../assets/icons/feed.png" alt="feedICO">

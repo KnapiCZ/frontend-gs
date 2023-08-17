@@ -8,6 +8,11 @@ def media_upload_path(instance, filename):
 def profile_upload_path(instance, filename):
     return f'global_profile_media/{instance.handle.id}/profile/{filename}'
 
+def followers(id):
+    return UserProfile.objects.get(id=id).followers.count()
+def following(id):
+    return UserProfile.objects.filter(followers=id).count()
+
 
 class UserProfile(models.Model):
     handle = models.OneToOneField(User,
@@ -37,7 +42,7 @@ class UserProfile(models.Model):
     
     followers = models.ManyToManyField(User,
                                        blank=True,
-                                       related_name='followers',
+                                       related_name='following',
                                        symmetrical=False)
     
     profile_picture = models.ImageField(upload_to=profile_upload_path,
@@ -59,7 +64,10 @@ class UserProfile(models.Model):
     def get_background_picture_url(self):
         user = UserProfile.objects.get(id=self.id)
         return user.background_picture.url
-
+    def count_followers(self):
+        return followers(self.id)
+    def count_following(self):
+        return following(self.id)
 class UserPost(models.Model):
     author = models.ForeignKey(User,
                                on_delete=models.CASCADE,

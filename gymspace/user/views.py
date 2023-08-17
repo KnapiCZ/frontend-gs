@@ -45,8 +45,8 @@ class FollowCountViewSet(viewsets.ViewSet):
         user = UserProfile.objects.get(pk=pk)
         print(user)
         
-        following = len(user.followers.all())
-        followers = UserProfile.objects.filter(followers=pk).count()
+        followers = len(user.followers.all())
+        following = UserProfile.objects.filter(followers=pk).count()
 
         print(followers)
         serializer = FollowCountSerializer(data={"following": following, "followers": followers})
