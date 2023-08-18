@@ -3,16 +3,16 @@
   import ProfileButtons from './ProfileButtons.vue';
   import ProfileBasicInfo from './ProfileBasicInfo.vue';
   import TabBar from './Tabs/TabBar.vue';
-  import api from '../API/apiCaller';
-  
-  const userData = await api("userProfile", 2)
+  import api from '@api';
+
+  const loggedInUserId = 2;
+  const renderedUserId = 1
+  const userData = await api("userProfile", renderedUserId)
   const baseUrl = await api()
 
   const profile_picture_url = `${baseUrl}${userData.profile_picture}`
   const background_picture_url = `${baseUrl}${userData.background_picture}`
   //const url = ref("http://127.0.0.1:8000/api/users/"+userId)
-  console.log(userData)
-
 </script>
 
 <template>  
@@ -26,7 +26,7 @@
     />
 
     <ProfileBasicInfo :description="userData.description" :email="userData.email"/>
-    <ProfileButtons />
+    <ProfileButtons :renderedUserId="userData.id" :loggedInUserId="loggedInUserId"/>
     <TabBar :trainer_status="userData.trainer_status"/>
   </div>
 </template>

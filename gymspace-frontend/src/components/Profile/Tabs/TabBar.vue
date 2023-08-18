@@ -6,7 +6,7 @@
   import { VWindowItem } from 'vuetify/lib/components/index.mjs';
   
   let props = defineProps({
-    trainer_status: String,
+    trainer_status: Boolean,
   })
 </script>
 

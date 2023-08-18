@@ -27,6 +27,14 @@ class UserSmallSerializer(serializers.ModelSerializer):
         model = UserProfile
         fields = ['id', 'handle']
 
-class FollowCountSerializer(serializers.Serializer):
-    followed_by = serializers.IntegerField()
-    following = serializers.IntegerField()
+class FollowSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    followers = serializers.PrimaryKeyRelatedField(queryset=UserProfile.objects.all())
+    class Meta:
+        fields = ["id", "followers"]
+
+class FollowerSerializer(serializers.Serializer):
+    followers = serializers.PrimaryKeyRelatedField(queryset=UserProfile.objects.all())
+
+    class Meta:
+        fields: ["followers"]
