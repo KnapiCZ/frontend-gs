@@ -2,6 +2,7 @@
 import ProfileFollowing from './ProfileFollowing.vue'
 
 let props = defineProps({
+  renderedUserId: Number,
   description: String,
   email: String,
   })
@@ -11,7 +12,7 @@ let props = defineProps({
 <template>
   <div class="profile_info">
     <p>{{ props.description }}<br>@gymbeamcz kód: MARTIN5 <br>{{ props.email }}</p> <!--API user bio-->
-    <ProfileFollowing />
+    <ProfileFollowing :rendered-user-id="props.renderedUserId"/>
   </div>
 </template>
 

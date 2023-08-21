@@ -25,7 +25,11 @@
       :trainer_status="userData.trainer_status"
     />
 
-    <ProfileBasicInfo :description="userData.description" :email="userData.email"/>
+    <ProfileBasicInfo
+      :description="userData.description"
+      :email="userData.email"
+      :rendered-user-id="userData.id"
+    />
     <ProfileButtons :renderedUserId="userData.id" :loggedInUserId="loggedInUserId"/>
     <TabBar :trainer_status="userData.trainer_status"/>
   </div>

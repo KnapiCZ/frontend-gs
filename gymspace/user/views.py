@@ -1,10 +1,15 @@
 from django.shortcuts import render
-from .serializers import UserProfileSerializer, FollowSerializer, FollowerSerializer
+from .serializers import (UserProfileSerializer,
+                            FollowSerializer,
+                            FollowerSerializer,
+                            SmallUserSerializer)
 from .models import UserProfile
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import generics
+
+from django.db.models import Count
 
 class UserProfileViewSet(viewsets.ViewSet):
     """
@@ -43,3 +48,47 @@ class FollowerViewSet(viewsets.ViewSet):
         serializer = FollowerSerializer(queryset)
         followers = serializer.data.get("followers").values_list('pk', flat=True)
         return Response({"followers": followers})
+
+class SmallUserViewSet(viewsets.ViewSet):
+
+    def retrieve(self, request, pk=None):
+        queryset = UserProfile.objects.get(pk=pk)
+        try:
+            first_most_followed = queryset\
+                    .followers\
+                    .annotate(
+                            nused=Count('user_profile__followers')
+                            )\
+                            .order_by('-nused')[0]
+            first_serializer = SmallUserSerializer(data={
+                "id": first_most_followed.user_profile.id,
+                "username": first_most_followed.user_profile.username,
+                "profile_picture": first_most_followed.user_profile.profile_picture
+                })
+        except:
+            first_most_followed = {}
+            first_serializer = SmallUserSerializer(data=first_most_followed)
+        try:
+            second_most_followed = queryset\
+                    .followers\
+                    .annotate(
+                            nused=Count('user_profile__followers')
+                            )\
+                    .order_by('-nused')[1]
+            second_serializer = SmallUserSerializer(data={
+                "id": second_most_followed.user_profile.id,
+                "username": second_most_followed.user_profile.username,
+                "profile_picture": second_most_followed.user_profile.profile_picture,
+                                                    })
+        except:
+            second_most_followed = {}
+            second_serializer = SmallUserSerializer(data=second_most_followed)
+        if first_serializer.is_valid() and second_serializer.is_valid():
+            return Response([first_serializer.data, second_serializer.data])
+        if first_serializer.is_valid() and not second_serializer.is_valid():
+            return Response([first_serializer.data])
+        if not first_serializer.is_valid() and second_serializer.is_valid():
+            return Response([second_serializer.data])
+        else:
+            print(first_serializer.errors)
+            return Response([{}, {}])

@@ -10,7 +10,6 @@
     followers: Number,
     trainer_status: Boolean,
     })
-  console.log(props.followers)
 </script>
 
 <template>

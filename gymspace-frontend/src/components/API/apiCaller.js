@@ -30,6 +30,10 @@ async function callApi(apiType="", firstId=1, secondId=2) {
         }))
         return response.json()
 
+      case "twoMostPopular":
+        response = await(fetch(`${baseUrl}/api/users/small/${firstId}`));
+        return await response.json()
+
       default:
         return `${baseUrl}`
    }

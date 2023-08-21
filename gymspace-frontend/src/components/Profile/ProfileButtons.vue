@@ -43,9 +43,11 @@
   function following(followers) {
     console.log('called')
     if (followers.includes(props.loggedInUserId)) {
-      isFollowing.value = true
+      isFollowing.value = true;
     }
-    else {isFollowing.value = false}
+    else {
+      isFollowing.value = false;
+    }
   }
   async function follow() {
                   await api("follow",

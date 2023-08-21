@@ -20,12 +20,11 @@ class UserProfileSerializer(serializers.ModelSerializer):
                   'profile_picture',
                   'background_picture']
 
-class UserSmallSerializer(serializers.ModelSerializer):
-    handle = serializers.CharField(source="get_handle")
+class SmallUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserProfile
-        fields = ['id', 'handle']
+        fields = ['id', 'username', 'profile_picture']
 
 class FollowSerializer(serializers.Serializer):
     id = serializers.IntegerField()
