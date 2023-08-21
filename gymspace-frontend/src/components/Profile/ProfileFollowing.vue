@@ -1,5 +1,5 @@
 <script setup>
-    import _ from 'lodash/core'
+    import lodash from 'lodash'
     import api from '@api'
     import { VCol } from 'vuetify/lib/components/index.mjs';
     import { VRow } from 'vuetify/lib/components/index.mjs';
@@ -7,7 +7,7 @@
       renderedUserId: Number,
     })
     function checkNull(userObject) {
-      if (_.isEmpty(userObject)) {
+      if (lodash.isEmpty(userObject)) {
         console.log('false')
         return false
       }
@@ -16,12 +16,15 @@
         return userObject
       }
     }
+    function getUrl(userObject) {
+      return userObject ? `${baseUrl}${userObject.profile_picture}`:``
+    }
     const baseUrl = await api()
     const twoMostPopular = await api('twoMostPopular', props.renderedUserId)
     let firstUser = checkNull(twoMostPopular[0])
     let secondUser = checkNull(twoMostPopular[1])
-    let firstUrl = `${baseUrl}${twoMostPopular[0].profile_picture}`
-    let secondUrl = `${baseUrl}${twoMostPopular[1].profile_picture}`
+    let firstUrl = getUrl(firstUser)
+    let secondUrl = getUrl(secondUser)
 </script>
 
 

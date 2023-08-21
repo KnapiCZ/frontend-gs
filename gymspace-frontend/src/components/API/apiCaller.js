@@ -31,7 +31,7 @@ async function callApi(apiType="", firstId=1, secondId=2) {
         return response.json()
 
       case "twoMostPopular":
-        response = await(fetch(`${baseUrl}/api/users/small/${firstId}`));
+       response = await(fetch(`${baseUrl}/api/users-most-followed/${firstId}`));
         return await response.json()
 
       default:

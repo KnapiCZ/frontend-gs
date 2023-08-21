@@ -49,7 +49,7 @@ class FollowerViewSet(viewsets.ViewSet):
         followers = serializer.data.get("followers").values_list('pk', flat=True)
         return Response({"followers": followers})
 
-class SmallUserViewSet(viewsets.ViewSet):
+class MostFollowedViewSet(viewsets.ViewSet):
 
     def retrieve(self, request, pk=None):
         queryset = UserProfile.objects.get(pk=pk)

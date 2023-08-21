@@ -6,7 +6,7 @@
   let props = defineProps({
     profile_picture_url: String,
     background_picture_url: String,
-    handle: String,
+    username: String,
     followers: Number,
     trainer_status: Boolean,
     })
@@ -23,7 +23,7 @@
           <div class="bottom-item">{{ props.followers }}</div> <!-- API following user count-->
         </VCol>
         <VCol>      
-          <div class="top-item"> @{{ props.handle }}</div> <!-- API username-->
+          <div class="top-item"> @{{ props.username }}</div> <!-- API username-->
           <div v-if="props.trainer_status" class="bottom-item">trainer</div> <!-- API following user count-->
 
         </VCol>

@@ -5,7 +5,7 @@ from django.contrib import admin
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserProfileViewSet, basename='users')
-router.register(r'users/small', views.SmallUserViewSet, basename='users-small')
+router.register(r'users-most-followed', views.MostFollowedViewSet, basename='users-most-followed')
 router.register(r'follow', views.UserProfileViewSet, basename='follow')
 router.register(r'follow-data', views.FollowerViewSet, basename='follow-data')
 from django.conf import settings
