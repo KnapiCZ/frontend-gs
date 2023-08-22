@@ -1,9 +1,13 @@
 from rest_framework import routers,serializers,viewsets
-from .models import UserProfile
+from .models import (UserProfile,
+                     UserPost,
+                     UserPostMedia,
+                     )
+
 class UserProfileSerializer(serializers.ModelSerializer):
     handle = serializers.CharField(source="get_handle")
     followers = serializers.IntegerField(source="count_followers")
-
+    post_list = serializers.ListField(source="get_posts")
     class Meta:
         model = UserProfile
         fields = ['id',
@@ -18,7 +22,8 @@ class UserProfileSerializer(serializers.ModelSerializer):
                   'weight',
                   'trainer_status',
                   'profile_picture',
-                  'background_picture']
+                  'background_picture',
+                  'post_list']
 
 class SmallUserSerializer(serializers.ModelSerializer):
 
@@ -37,3 +42,21 @@ class FollowerSerializer(serializers.Serializer):
 
     class Meta:
         fields: ["followers"]
+
+
+class UserPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserPost
+        fields = ['pk',
+                  'author',
+                  'title',
+                  'body',
+                  'likes',
+                  'post_time']
+
+class UserPostMediaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserPostMedia
+        fields = ['pk',
+                  'parent_post',
+                  'media']

@@ -2,11 +2,17 @@
   import BottomNavigationBar from './components/BottomNavigationBar_Router/BottomNavigationBar.vue';
 </script>
 
-<template #default>
+<template>
     <Suspense>
-      <main>
-        <BottomNavigationBar />
-      </main>
+      <template #default>
+        <main>
+          <BottomNavigationBar />
+        </main>
+      </template>
+
+      <template #fallback>
+        <p id='load'>loading</p>
+      </template>
     </Suspense>
 </template>
 
@@ -30,5 +36,8 @@ main,
 body {
   margin: 0;
   padding: 0;
+}
+#load {
+  font-size: 100px;
 }
 </style>

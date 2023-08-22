@@ -6,7 +6,7 @@
 
 <template>
     <button class="Thumbnail"> <!-- ROUTE tag-->
-        <img :src="ImageSource" alt=""> <!-- API thubnail of post src-->
+      <img src="https://placehold.co/600x400/EEE/31343C" alt=""> <!-- API thubnail of post src-->
     </button>
 </template>
 

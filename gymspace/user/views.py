@@ -1,9 +1,8 @@
 from django.shortcuts import render
-from .serializers import (UserProfileSerializer,
-                            FollowSerializer,
-                            FollowerSerializer,
-                            SmallUserSerializer)
-from .models import UserProfile
+from .serializers import *
+from .models import (UserProfile,
+                     UserPost,
+                     UserPostMedia)
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from rest_framework.response import Response
@@ -13,7 +12,7 @@ from django.db.models import Count
 
 class UserProfileViewSet(viewsets.ViewSet):
     """
-    A simple ViewSet for listing or retrieving users.
+    ViewSet for getting all UserProfile data nad following/unfollowing
     """
     def list(self, request):
         queryset = UserProfile.objects.all()
@@ -41,10 +40,16 @@ class UserProfileViewSet(viewsets.ViewSet):
                 return Response({"following": following_user.id, "followed_followers": followers, "followed_id": followed_user.id})
             return Response({'message': 'failed'})
 
+class SmallUserProfileViewSet(viewsets.ViewSet):
+    def retrieve(self, request, pk=None):
+        queryset = UserProfile.objects.get(pk=pk)
+        serializer = SmallUserSerializer(queryset)
+        return Response(serializer.data)
+
 class FollowerViewSet(viewsets.ViewSet):
 
     def retrieve(self, request, pk=None):
-        queryset = UserProfile.objects.get(id=pk)
+        queryset = UserProfile.objects.get(pk=pk)
         serializer = FollowerSerializer(queryset)
         followers = serializer.data.get("followers").values_list('pk', flat=True)
         return Response({"followers": followers})
@@ -92,3 +97,40 @@ class MostFollowedViewSet(viewsets.ViewSet):
         else:
             print(first_serializer.errors)
             return Response([{}, {}])
+
+
+class UserPostViewSet(viewsets.ViewSet):
+    def retrieve(self, request, pk=None):
+        post = UserPost.objects.get(pk=pk)
+        media = UserPostMedia.objects.filter(parent_post__pk=pk)
+
+        post_serializer = UserPostSerializer(data={
+            "author": post.author.pk,
+            "title": post.title,
+            "body": post.body,
+            "likes": post.likes.values_list('pk', flat=True),
+            "post_time": post.post_time
+            })
+        print(media)
+        media_serializer = UserPostMediaSerializer(media, many=True)
+        
+        if post_serializer.is_valid():
+            return Response({"post": post_serializer.data,
+                             "media": media_serializer.data})
+        else:
+            return Response({"post error": post_serializer.errors,})
+
+
+class RecommendedPostViewSet(viewsets.ViewSet):
+    def retrieve(self, request, pk=None):
+        
+        following = UserProfile.objects.filter(followers=pk)\
+                .values_list('pk', flat=True)
+        posts = UserPost.objects\
+                .filter(author__user_profile__in=following)\
+                .order_by('-post_time')[:5]
+        
+        post_serializer = UserPostSerializer(posts, many=True)
+        print(posts)
+        return Response({"posts": post_serializer.data,})
+

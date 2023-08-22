@@ -5,9 +5,11 @@
   import TabBar from './Tabs/TabBar.vue';
   import api from '@api';
 
-  const loggedInUserId = 2;
-  const renderedUserId = 5
-  const userData = await api("userProfile", renderedUserId)
+  const loggedInUserId = sessionStorage.getItem("loggedInUserId");
+  const renderedUserId = sessionStorage.getItem("renderedUserId")
+  const userData = JSON.parse(
+                            sessionStorage.getItem('loggedUser')
+                            )
   const baseUrl = await api()
   const profile_picture_url = `${baseUrl}${userData.profile_picture}`
   const background_picture_url = `${baseUrl}${userData.background_picture}`

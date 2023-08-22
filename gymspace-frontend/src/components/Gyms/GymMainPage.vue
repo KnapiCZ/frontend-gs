@@ -2,6 +2,9 @@
     import { VCombobox } from 'vuetify/lib/components/index.mjs';
     import GymButton from './GymButton.vue';
     import Thumbnail from '../Post/Thumbnail.vue'
+
+    const loggedUser = JSON.parse(sessionStorage.getItem("loggedUser"))
+    
 </script>
 
 <template>
@@ -17,14 +20,14 @@
     
     <h2>Featured posts  </h2>
     <div id="thumbnailContainer">
-      <Thumbnail v-for="(thumnail) in thumnails" :key="thumnail" ImageSource="https://upload.wikimedia.org/wikipedia/commons/c/cf/Example_of_modern_internet_meme.jpg" />
+      <Thumbnail v-for="(thumbnail) in thumbnails" :key="thumbnail" ImageSource="https://upload.wikimedia.org/wikipedia/commons/c/cf/Example_of_modern_internet_meme.jpg" />
     </div>
 </template>
 
 <script>
   export default {
     data: () => ({
-        thumnails: ['id1', 'id2', 'id3', 'id3', 'id3', 'id3'],
+        thumbnails: ['id1', 'id2', 'id3', 'id3', 'id3', 'id3'],
         gyms: [  /*  API zatim vratit logo gymu a jeho nazev nebo null pokud v user zadnem neni  */
           {ImageSRC: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCNXlxKTKx1BNyefNbP7zji3RNu15aKD6sPAFqJNDUTLpDUSzHyNnQ4L_fraxsAO6mw28&usqp=CAU', title: 'Gymspace'},
           {ImageSRC: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCNXlxKTKx1BNyefNbP7zji3RNu15aKD6sPAFqJNDUTLpDUSzHyNnQ4L_fraxsAO6mw28&usqp=CAU', title: 'Suprajs'},

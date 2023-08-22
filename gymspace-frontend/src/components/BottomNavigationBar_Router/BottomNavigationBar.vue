@@ -2,6 +2,21 @@
     import { VBtn } from 'vuetify/lib/components/index.mjs';
     import { VLayout } from 'vuetify/lib/components/index.mjs';
     import { VAvatar } from 'vuetify/lib/components/index.mjs';
+    import api from '@api'
+
+
+    const loggedInUserId = 1;
+    const renderedUserId = 1
+    let loggedUser
+    sessionStorage.setItem("loggedInUserId", loggedInUserId)
+    sessionStorage.setItem("renderedUserId", renderedUserId)
+    await api("userProfile", loggedInUserId).then((loggedUser) => {
+                      sessionStorage.setItem('loggedUser', JSON.stringify(loggedUser) )
+                      }).then(loggedUser = JSON.parse(sessionStorage.getItem('loggedUser')))
+
+    let baseUrl = await api()
+
+    let profilePicture = `${baseUrl}${loggedUser.profile_picture}`
 </script>
 
 <template  >
@@ -10,7 +25,7 @@
         <v-bottom-navigation bg-color="#000000">
             <v-btn value="Profile">
               <router-link to="/">
-                <VAvatar class='PFP' image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCNXlxKTKx1BNyefNbP7zji3RNu15aKD6sPAFqJNDUTLpDUSzHyNnQ4L_fraxsAO6mw28&usqp=CAU"></VAvatar>
+                <VAvatar class='PFP' :image="profilePicture"></VAvatar>
               </router-link>
             </v-btn>
 

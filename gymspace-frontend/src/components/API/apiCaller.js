@@ -8,6 +8,9 @@ async function callApi(apiType="", firstId=1, secondId=2) {
       case "userProfile":
         response = await(fetch(`${baseUrl}/api/users/${firstId}`));
         return response.json()
+      case "smallUserProfile":
+        response = await(fetch(`${baseUrl}/api/users-small/${firstId}`));
+        return response.json()
 
       case "userFollowerCount":
         response = await(fetch(`${baseUrl}/api/users/follow/${firstId}`));
@@ -32,6 +35,10 @@ async function callApi(apiType="", firstId=1, secondId=2) {
 
       case "twoMostPopular":
        response = await(fetch(`${baseUrl}/api/users-most-followed/${firstId}`));
+        return await response.json()
+
+      case "getUserPost":
+       response = await(fetch(`${baseUrl}/api/users-posts/${firstId}`));
         return await response.json()
 
       default:

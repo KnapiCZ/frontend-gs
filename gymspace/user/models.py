@@ -4,9 +4,9 @@ from django.contrib.auth.models import User
 
 
 def media_upload_path(instance, filename):
-    return f'global_post_media/{instance.handle.id}/media/{filename}'
+    return f'global_post_media/{instance.id}/media/{filename}'
 def profile_upload_path(instance, filename):
-    return f'global_profile_media/{instance.handle.id}/profile/{filename}'
+    return f'global_profile_media/{instance.id}/profile/{filename}'
 
 def followers(id):
     return UserProfile.objects.get(id=id).followers.count()
@@ -68,14 +68,25 @@ class UserProfile(models.Model):
         return followers(self.id)
     def count_following(self):
         return following(self.id)
+
+    def get_posts(self):
+        return UserPost.objects.filter(pk=self.pk).values_list('pk', flat=True)
+    def get_posts_queryset(self):
+        return UserPost.objects.filter(pk=self.pk).values_list('pk')
 class UserPost(models.Model):
     author = models.ForeignKey(User,
                                on_delete=models.CASCADE,
                                related_name='posts')
     # priprava na DB gymu
     # gym = models.ForeignKey(Gym, on_delete=models.CASCADE, unique=True)
+    title = models.CharField(max_length=60,
+                             blank=True,
+                             null=True)
 
-    body = models.CharField(max_length=600)
+    body = models.CharField(max_length=600,
+                            blank=True,
+                            null=True
+                            )
     likes = models.ManyToManyField(User,
                                    blank=True,
                                    symmetrical=False,
@@ -83,12 +94,13 @@ class UserPost(models.Model):
 
     post_time = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return f"(user){self.author.user_profile.username} - (title){self.title} - (post id){self.id}"
 class UserPostMedia(models.Model):
     parent_post = models.ForeignKey(UserPost,
                                     on_delete=models.CASCADE,
                                     related_name='media')
     media = models.FileField(upload_to=media_upload_path)
-
 
 
 
