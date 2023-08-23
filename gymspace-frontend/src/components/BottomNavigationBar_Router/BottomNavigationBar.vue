@@ -5,7 +5,7 @@
     import api from '@api'
 
 
-    const loggedInUserId = 4;
+    const loggedInUserId = 1;
     const renderedUserId = 2;
     let loggedUser
     sessionStorage.setItem("loggedInUserId", loggedInUserId)

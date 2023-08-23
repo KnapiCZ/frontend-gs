@@ -1,4 +1,6 @@
 <script setup>
+  import { SwiperSlide } from 'swiper/vue'
+  import 'swiper/css'
   import api from '@api';
   const props = defineProps({
   ImageSource: String,
@@ -11,19 +13,20 @@
 
 
 <template>
-    <button class="Thumbnail"> <!-- ROUTE tag-->
+  <swiper-slide>
+    <button> <!-- ROUTE tag-->
       <img :src="postUrl" alt=""> <!-- API thumbnail of post src-->
     </button>
+  </swiper-slide>
 </template>
 
 <style scoped>
-
-button{
-    width: 30%;
-    height: 40%;    
+.swiper-slide{
+    max-width: 60vw;
 }
+
 img{
-    width: 100%;
-    height: 100%;
+    max-width: 60vw;
+    max-height: 40vh;
 }
 </style>

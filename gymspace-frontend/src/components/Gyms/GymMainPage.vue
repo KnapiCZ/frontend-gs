@@ -2,6 +2,8 @@
     import { VCombobox } from 'vuetify/lib/components/index.mjs';
     import GymButton from './GymButton.vue';
     import Thumbnail from '../Post/Thumbnail.vue'
+    import { Swiper } from 'swiper/vue'
+    import 'swiper/css';
     import api from '@api';
 
     const loggedUser = JSON.parse(sessionStorage.getItem("loggedUser"))
@@ -28,9 +30,12 @@
     <p v-else>You are not in Gym</p>
     <section v-if="recommended_posts.posts.length > 0">
       <h2>Featured posts  </h2>
-      <div id="thumbnailContainer">
+      <swiper-container
+        id="thumbnailContainer"
+        :slides-per-view="auto"
+        >
         <Thumbnail v-for="(post) in postData" :key="post" :ImageSource="post.media[0].media" />
-      </div>
+      </swiper-container>
     </section>
 </template>
 
@@ -65,19 +70,11 @@ p{
   margin: auto;
 }
 
-.Thumbnail{
-  margin: auto 10px;
-	scroll-snap-align: start;
-	display: flex;
-  flex: 0 0 30%;
-}
-
 
 #thumbnailContainer{
   margin: 20px;
   display: flex;                  /* establish flex container */
   overflow-x: scroll;
-	scroll-snap-type: x mandatory;
   align-items: center;
 }
 
