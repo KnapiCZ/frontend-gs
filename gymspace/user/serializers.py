@@ -47,7 +47,7 @@ class FollowerSerializer(serializers.Serializer):
 class UserPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserPost
-        fields = ['pk',
+        fields = ['id',
                   'author',
                   'title',
                   'body',

@@ -105,6 +105,7 @@ class UserPostViewSet(viewsets.ViewSet):
         media = UserPostMedia.objects.filter(parent_post__pk=pk)
 
         post_serializer = UserPostSerializer(data={
+            "id": post.id,
             "author": post.author.pk,
             "title": post.title,
             "body": post.body,

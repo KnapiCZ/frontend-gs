@@ -1,12 +1,18 @@
-<script setup> 
- const postInfo = defineProps(['ImageSource', 'postID'])
+<script setup>
+  import api from '@api';
+  const props = defineProps({
+  ImageSource: String,
+  postID: Number,
+  })
+  const baseUrl = await api()
+  const postUrl = `${baseUrl}${props.ImageSource}`
 </script>
 
 
 
 <template>
     <button class="Thumbnail"> <!-- ROUTE tag-->
-      <img src="https://placehold.co/600x400/EEE/31343C" alt=""> <!-- API thubnail of post src-->
+      <img :src="postUrl" alt=""> <!-- API thumbnail of post src-->
     </button>
 </template>
 
@@ -21,12 +27,3 @@ img{
     height: 100%;
 }
 </style>
-
-<script>
-
-export default {
-    data: () => ({}),
-    }
-
-</script>
-

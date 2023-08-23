@@ -2,9 +2,18 @@
     import { VCombobox } from 'vuetify/lib/components/index.mjs';
     import GymButton from './GymButton.vue';
     import Thumbnail from '../Post/Thumbnail.vue'
+    import api from '@api';
 
     const loggedUser = JSON.parse(sessionStorage.getItem("loggedUser"))
-    
+    const baseUrl = await api()
+    let recommended_posts = await api('recommendedPosts', loggedUser.id);
+    console.log(recommended_posts)
+    let postData = new Array()
+    let data
+    for (let postNumber = 1; postNumber <= recommended_posts.posts.length; postNumber++) {
+      data = await api("getUserPost", postNumber)
+      postData.push(data)
+    }
 </script>
 
 <template>
@@ -17,11 +26,12 @@
     <h2>Your Gyms</h2>
     <GymButton v-if="gyms != null" v-for="(gym, index) in gyms" :key="index" :title="gym.title" :ImageSRC="gym.ImageSRC"/>
     <p v-else>You are not in Gym</p>
-    
-    <h2>Featured posts  </h2>
-    <div id="thumbnailContainer">
-      <Thumbnail v-for="(thumbnail) in thumbnails" :key="thumbnail" ImageSource="https://upload.wikimedia.org/wikipedia/commons/c/cf/Example_of_modern_internet_meme.jpg" />
-    </div>
+    <section v-if="recommended_posts.posts.length > 0">
+      <h2>Featured posts  </h2>
+      <div id="thumbnailContainer">
+        <Thumbnail v-for="(post) in postData" :key="post" :ImageSource="post.media[0].media" />
+      </div>
+    </section>
 </template>
 
 <script>
@@ -29,10 +39,10 @@
     data: () => ({
         thumbnails: ['id1', 'id2', 'id3', 'id3', 'id3', 'id3'],
         gyms: [  /*  API zatim vratit logo gymu a jeho nazev nebo null pokud v user zadnem neni  */
-          {ImageSRC: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCNXlxKTKx1BNyefNbP7zji3RNu15aKD6sPAFqJNDUTLpDUSzHyNnQ4L_fraxsAO6mw28&usqp=CAU', title: 'Gymspace'},
-          {ImageSRC: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCNXlxKTKx1BNyefNbP7zji3RNu15aKD6sPAFqJNDUTLpDUSzHyNnQ4L_fraxsAO6mw28&usqp=CAU', title: 'Suprajs'},
-          {ImageSRC: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCNXlxKTKx1BNyefNbP7zji3RNu15aKD6sPAFqJNDUTLpDUSzHyNnQ4L_fraxsAO6mw28&usqp=CAU', title: 'HAHA  '},
-          {ImageSRC: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCNXlxKTKx1BNyefNbP7zji3RNu15aKD6sPAFqJNDUTLpDUSzHyNnQ4L_fraxsAO6mw28&usqp=CAU', title: 'BRUHHHH'}
+          {ImageSRC: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCNXlxKTKx1BNyefNbP7zji3RNu15aKD6sPAFqJNDUTLpDUSzHyNnQ4L_fraxsAO6mw28&usqp=CAU', title: '0'},
+          {ImageSRC: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCNXlxKTKx1BNyefNbP7zji3RNu15aKD6sPAFqJNDUTLpDUSzHyNnQ4L_fraxsAO6mw28&usqp=CAU', title: '1'},
+          {ImageSRC: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCNXlxKTKx1BNyefNbP7zji3RNu15aKD6sPAFqJNDUTLpDUSzHyNnQ4L_fraxsAO6mw28&usqp=CAU', title: '2'},
+          {ImageSRC: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCNXlxKTKx1BNyefNbP7zji3RNu15aKD6sPAFqJNDUTLpDUSzHyNnQ4L_fraxsAO6mw28&usqp=CAU', title: '3'}
         ]   
       }),
   }

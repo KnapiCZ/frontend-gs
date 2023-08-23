@@ -5,10 +5,8 @@
   import TabBar from './Tabs/TabBar.vue';
   import api from '@api';
 
-  const loggedInUserId = sessionStorage.getItem("loggedInUserId");
-  const renderedUserId = sessionStorage.getItem("renderedUserId")
   const userData = JSON.parse(
-                            sessionStorage.getItem('loggedUser')
+                            sessionStorage.getItem('renderedUser')
                             )
   const baseUrl = await api()
   const profile_picture_url = `${baseUrl}${userData.profile_picture}`
