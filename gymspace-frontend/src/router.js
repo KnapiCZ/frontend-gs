@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import Profile from './components/Profile/ProfilePage.vue';
-import Gym from './components/Gyms/GymMainPage.vue';
+import Profile from './view/Profile/pages/CurrentUser.vue';
+import Gym from './view/GymsClubs/pages/MainPage.vue';
+import MainFypPage from './view/ForYouPage/pages/ForYouPage.vue';
 
 const routes = [
   {
@@ -12,6 +13,11 @@ const routes = [
   {
     path: '/gyms',
     component: Gym
+  },
+
+  {
+    path: '/foryou',
+    component: MainFypPage
   },
 ]
 

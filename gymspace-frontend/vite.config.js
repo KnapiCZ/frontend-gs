@@ -13,7 +13,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
-      '@api': fileURLToPath(new URL('./src/components/API/apiCaller.js', import.meta.url))
+      '@api': fileURLToPath(new URL('./src/logic/API/apiCaller.js', import.meta.url))
     }
   }
 })

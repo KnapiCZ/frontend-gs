@@ -1,5 +1,5 @@
 <script setup>
-  import BottomNavigationBar from './components/BottomNavigationBar_Router/BottomNavigationBar.vue';
+  import BottomNavigationBar from './view/shared/BottomNavigationBar_Router/BottomNavigationBar.vue';
 </script>
 
 <template>

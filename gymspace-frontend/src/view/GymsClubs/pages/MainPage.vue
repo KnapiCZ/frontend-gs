@@ -1,8 +1,8 @@
 <script setup>
     import { VCombobox } from 'vuetify/lib/components/index.mjs';
-    import GymButton from './GymButton.vue';
-    import Thumbnail from '../Post/Thumbnail.vue'
-    import { Swiper, SwiperSlide } from 'swiper/vue'
+    import GymButton from '../components/GymButton.vue';
+    import Thumbnail from '../../Post/components/Thumbnail.vue';
+    import { Swiper, SwiperSlide } from 'swiper/vue';
     import 'swiper/css';
     import api from '@api';
 
