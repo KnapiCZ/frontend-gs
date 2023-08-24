@@ -8,7 +8,6 @@
     let baseUrl = await api()
     const loggedInUserId = 5;
     const renderedUserId = 2;
-    let loggedUser
     let profilePicture
     sessionStorage.setItem("loggedInUserId", loggedInUserId)
     sessionStorage.setItem("renderedUserId", renderedUserId)

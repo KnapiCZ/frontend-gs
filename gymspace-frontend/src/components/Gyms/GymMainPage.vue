@@ -2,7 +2,7 @@
     import { VCombobox } from 'vuetify/lib/components/index.mjs';
     import GymButton from './GymButton.vue';
     import Thumbnail from '../Post/Thumbnail.vue'
-    import { Swiper } from 'swiper/vue'
+    import { Swiper, SwiperSlide } from 'swiper/vue'
     import 'swiper/css';
     import api from '@api';
 
@@ -31,28 +31,17 @@
     <p v-else>You are not in Gym</p>
     <section v-if="recommended_posts.posts.length > 0">
       <h2>Featured posts  </h2>
-      <swiper-container
+      <swiper
         id="thumbnailContainer"
-        :slides-per-view="auto"
+        :slides-per-view="3"
+        :space-between="50"
         >
-        <Thumbnail v-for="(post) in postData" :key="post" :ImageSource="post.media[0].media" />
-      </swiper-container>
+        <swiper-slide v-for="(post) in postData" :key="post">
+          <Thumbnail  :ImageSource="post.media[0].media" />
+        </swiper-slide>
+      </swiper>
     </section>
 </template>
-
-<script>
-  export default {
-    data: () => ({
-        thumbnails: ['id1', 'id2', 'id3', 'id3', 'id3', 'id3'],
-        gyms: [  /*  API zatim vratit logo gymu a jeho nazev nebo null pokud v user zadnem neni  */
-          {ImageSRC: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCNXlxKTKx1BNyefNbP7zji3RNu15aKD6sPAFqJNDUTLpDUSzHyNnQ4L_fraxsAO6mw28&usqp=CAU', title: '0'},
-          {ImageSRC: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCNXlxKTKx1BNyefNbP7zji3RNu15aKD6sPAFqJNDUTLpDUSzHyNnQ4L_fraxsAO6mw28&usqp=CAU', title: '1'},
-          {ImageSRC: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCNXlxKTKx1BNyefNbP7zji3RNu15aKD6sPAFqJNDUTLpDUSzHyNnQ4L_fraxsAO6mw28&usqp=CAU', title: '2'},
-          {ImageSRC: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCNXlxKTKx1BNyefNbP7zji3RNu15aKD6sPAFqJNDUTLpDUSzHyNnQ4L_fraxsAO6mw28&usqp=CAU', title: '3'}
-        ]   
-      }),
-  }
-</script>
 
 <style scoped>
 
