@@ -4,9 +4,9 @@ from django.contrib.auth.models import User
 
 
 def media_upload_path(instance, filename):
-    return f'global_post_media/{instance.id}/media/{filename}'
+    return f'media/global_post_media/{instance.id}/media/{filename}'
 def profile_upload_path(instance, filename):
-    return f'global_profile_media/{instance.id}/profile/{filename}'
+    return f'media/global_profile_media/{instance.id}/profile/{filename}'
 
 def followers(id):
     return UserProfile.objects.get(id=id).followers.count()

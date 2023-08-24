@@ -8,6 +8,7 @@
 
     const loggedUser = JSON.parse(sessionStorage.getItem("loggedUser"))
     const baseUrl = await api()
+    const gyms = await api("gymsMember", loggedUser.id)
     let recommended_posts = await api('recommendedPosts', loggedUser.id);
     console.log(recommended_posts)
     let postData = new Array()
@@ -26,7 +27,7 @@
       class="h-10"
     />
     <h2>Your Gyms</h2>
-    <GymButton v-if="gyms != null" v-for="(gym, index) in gyms" :key="index" :title="gym.title" :ImageSRC="gym.ImageSRC"/>
+    <GymButton v-if="gyms != null" v-for="(gym, index) in gyms" :key="index" :title="gym.title" :ImageSRC="baseUrl+gym.logo"/>
     <p v-else>You are not in Gym</p>
     <section v-if="recommended_posts.posts.length > 0">
       <h2>Featured posts  </h2>

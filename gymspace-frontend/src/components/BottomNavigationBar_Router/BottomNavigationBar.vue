@@ -5,21 +5,23 @@
     import api from '@api'
 
 
-    const loggedInUserId = 1;
+    let baseUrl = await api()
+    const loggedInUserId = 5;
     const renderedUserId = 2;
     let loggedUser
+    let profilePicture
     sessionStorage.setItem("loggedInUserId", loggedInUserId)
     sessionStorage.setItem("renderedUserId", renderedUserId)
     await api("userProfile", loggedInUserId).then((loggedUser) => {
+                      profilePicture = `${baseUrl}${loggedUser.profile_picture}`
                       sessionStorage.setItem('loggedUser', JSON.stringify(loggedUser) )
-                      }).then(loggedUser = JSON.parse(sessionStorage.getItem('loggedUser')));
+                      })
 
     await api("userProfile", renderedUserId).then((renderedUser) => {
                       sessionStorage.setItem('renderedUser', JSON.stringify(renderedUser)
                   )})
-    let baseUrl = await api()
 
-    let profilePicture = `${baseUrl}${loggedUser.profile_picture}`
+     
 </script>
 
 <template  >

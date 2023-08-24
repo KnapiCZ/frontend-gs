@@ -6,19 +6,19 @@ async function callApi(apiType="", firstId=1, secondId=2) {
   switch(apiType)
    {
       case "userProfile":
-        response = await(fetch(`${baseUrl}/api/users/${firstId}`));
+        response = await(fetch(`${baseUrl}/api/users/${firstId}/`));
         return response.json()
       case "smallUserProfile":
-        response = await(fetch(`${baseUrl}/api/users-small/${firstId}`));
+        response = await(fetch(`${baseUrl}/api/users-small/${firstId}/`));
         return response.json()
 
       case "userFollowerCount":
-        response = await(fetch(`${baseUrl}/api/users/follow/${firstId}`));
+        response = await(fetch(`${baseUrl}/api/users/follow/${firstId}/`));
         return await response.json()
       
       case "follow":
         const follow_data = {"followers": firstId, "id": secondId}
-        response = await(fetch(`${baseUrl}/api/follow/${secondId}/`, {
+        response = await(fetch(`${baseUrl}/api/users-follow/${secondId}/`, {
           method: "PATCH",
           headers:  {
             "Content-Type": "application/json",
@@ -28,21 +28,27 @@ async function callApi(apiType="", firstId=1, secondId=2) {
         return response.json()
       
       case "isFollowing":
-        response = await(fetch(`${baseUrl}/api/follow-data/${secondId}`, {
+        response = await(fetch(`${baseUrl}/api/users-follow-data/${secondId}/`, {
           method: "GET",
         }))
         return response.json()
 
       case "twoMostPopular":
-        response = await(fetch(`${baseUrl}/api/users-most-followed/${firstId}`));
+        response = await(fetch(`${baseUrl}/api/users-most-followed/${firstId}/`));
         return await response.json()
 
       case "getUserPost":
-        response = await(fetch(`${baseUrl}/api/users-posts/${firstId}`));
+        response = await(fetch(`${baseUrl}/api/users-posts/${firstId}/`));
         return await response.json()
 
       case "recommendedPosts":
-        response = await(fetch(`${baseUrl}/api/users-gympage-recommended/${firstId}`));
+        response = await(fetch(`${baseUrl}/api/users-gympage-recommended/${firstId}/`));
+        return await response.json()
+
+
+
+      case "gymsMember":
+        response = await(fetch(`${baseUrl}/api/gyms-member/${firstId}/`));
         return await response.json()
 
       default:

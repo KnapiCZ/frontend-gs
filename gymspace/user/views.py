@@ -3,6 +3,7 @@ from .serializers import *
 from .models import (UserProfile,
                      UserPost,
                      UserPostMedia)
+from gym import models
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from rest_framework.response import Response

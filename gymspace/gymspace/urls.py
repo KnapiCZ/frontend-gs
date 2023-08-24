@@ -1,16 +1,22 @@
 from django.urls import include, path
 from rest_framework import routers
-from user import views
+
+from user import views as user_views
+from gym import views as gym_views
+
 from django.contrib import admin
 
 router = routers.DefaultRouter()
-router.register(r'users', views.UserProfileViewSet, basename='users')
-router.register(r'users-most-followed', views.MostFollowedViewSet, basename='users-most-followed')
-router.register(r'follow', views.UserProfileViewSet, basename='follow')
-router.register(r'follow-data', views.FollowerViewSet, basename='follow-data')
-router.register(r'users-posts', views.UserPostViewSet, basename='users-posts')
-router.register(r'users-small', views.SmallUserProfileViewSet, basename='users-posts')
-router.register(r'users-gympage-recommended', views.RecommendedPostViewSet, basename='users-recommended')
+router.register(r'users', user_views.UserProfileViewSet, basename='users')
+router.register(r'users-most-followed', user_views.MostFollowedViewSet, basename='users-most-followed')
+router.register(r'users-follow', user_views.UserProfileViewSet, basename='follow')
+router.register(r'users-follow-data', user_views.FollowerViewSet, basename='follow-data')
+router.register(r'users-posts', user_views.UserPostViewSet, basename='users-posts')
+router.register(r'users-small', user_views.SmallUserProfileViewSet, basename='users-posts')
+router.register(r'users-gympage-recommended', user_views.RecommendedPostViewSet, basename='users-recommended')
+
+
+router.register(r'gyms-member', gym_views.GymViewSet, basename='gyms-member')
 from django.conf import settings
 from django.conf.urls.static import static
 
