@@ -5,6 +5,7 @@
     import { Swiper, SwiperSlide } from 'swiper/vue';
     import 'swiper/css';
     import api from '@api';
+    import { ref } from 'vue'
 
     const loggedUser = JSON.parse(sessionStorage.getItem("loggedUser"))
     const baseUrl = await api()
@@ -17,6 +18,7 @@
       data = await api("getUserPost", postNumber)
       postData.push(data)
     }
+
 </script>
 
 <template>
@@ -31,15 +33,14 @@
     <p v-else>You are not in Gym</p>
     <section v-if="recommended_posts.posts.length > 0">
       <h2>Featured posts  </h2>
-      <swiper
-        id="thumbnailContainer"
-        :slides-per-view="3"
-        :space-between="50"
+      <Swiper
+        :slides-per-view="auto"
+        :space-between="0"
         >
-        <swiper-slide v-for="(post) in postData" :key="post">
+        <SwiperSlide v-for="(post) in postData" :key="post">
           <Thumbnail  :ImageSource="post.media[0].media" />
-        </swiper-slide>
-      </swiper>
+        </SwiperSlide>
+      </Swiper>
     </section>
 </template>
 
@@ -60,12 +61,9 @@ p{
   margin: auto;
 }
 
-
-#thumbnailContainer{
-  margin: 20px;
-  display: flex;                  /* establish flex container */
-  overflow-x: scroll;
-  align-items: center;
+.swiper-slide{
+  display: flex;
+  justify-content: center;
 }
 
 </style>
