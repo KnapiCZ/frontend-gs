@@ -9,12 +9,14 @@
     <div class="description">
         <VRow>
             <VAvatar color="yellow" /> <!-- API PFP of  post owner -->
-
         </VRow>
     </div>
 </template>
 
 <style scoped>
+*{
+    width: 100%;
+}
 
 .description{
     width: 100%;

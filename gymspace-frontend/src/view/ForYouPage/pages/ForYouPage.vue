@@ -4,7 +4,7 @@
   import { VTab } from 'vuetify/lib/components/index.mjs';
   import { VWindow } from 'vuetify/lib/components/index.mjs';
   import { VWindowItem } from 'vuetify/lib/components/index.mjs'; 
-  import PostSliderFyp from '../../Post/components/PostSliderFyp.vue'
+  import SliderFyp from '../../Post/components/SliderFYP.vue'
 </script>
 
 <template>
@@ -22,21 +22,21 @@
       </VTabs>
       <VWindow v-model="tab" v-theme>
         <VWindowItem>
-            <PostSliderFyp
+            <SliderFyp
             v-for="(post) in posts"
             :type="post.type"
             :source="post.source"
             />
         </VWindowItem>        
         <VWindowItem>
-            <PostSliderFyp
+            <SliderFyp
             v-for="(post) in posts"
             :type="post.type"
             :source="post.source"
             />
         </VWindowItem>  
         <VWindowItem>
-            <PostSliderFyp
+            <SliderFyp
             v-for="(post) in posts"
             :type="post.type"
             :source="post.source"

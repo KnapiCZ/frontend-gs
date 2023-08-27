@@ -1,18 +1,22 @@
 <script setup>
-const props = defineProps(['type', 'source'])
-import PostDescriptionFYP from './PostDescriptionFYP.vue';
+import DescriptionFYP from './DescriptionFYP.vue';
+
+const props = defineProps({
+    type: 'img',
+})
+
 </script>
 
 <template>
     <div id="MainContainer">
         <video
             v-if="props.type == 'video'"
-            :src="props.source" >
+            :src="$route.params.source" >
         </video>
         <img 
-            v-if="props.type == 'img'"
-            :src="props.source">
-        <PostDescriptionFYP />
+            v-if="'img' == 'img'"
+            :src="$route.params.source">
+        <DescriptionFYP />
     </div>
 
 </template>
@@ -31,8 +35,6 @@ img,
 video{
     width: 100%;
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
     margin: auto;
 }
 

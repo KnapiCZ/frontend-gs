@@ -1,19 +1,25 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import Profile from './view/Profile/pages/CurrentUser.vue';
+import CurrentUser from './view/Profile/pages/CurrentUser.vue';
+import OtherUser from './view/Profile/pages/OtherUser.vue';
+
 import Gym from './view/GymsClubs/pages/MainPage.vue';
 import MainFypPage from './view/ForYouPage/pages/ForYouPage.vue';
 import LogIn from './view/Authentication/pages/LogIn.vue';
+import UserGeneric from './view/Post/components/UserGeneric.vue'
 
-let isAuthenticated = false
+let isAuthenticated = true
 
 const routes = [
   {
-    path: '/profile', // pridat nazev nebo neco jako my profile?
-    component: Profile,
-    meta:{
-      
-    }
+    path: '/profile', // URL prihlaseneho usera
+    name: 'LogedInUser',
+    component: CurrentUser,
+  },
+
+  {
+    path: '/profile/:userhandle',  // URL nejakeho dalsiho usera + tady video ktere ulehci praci https://vueschool.io/lessons/dynamic-routes?friend=vuerouter
+    component: OtherUser,
   },
 
   {
@@ -31,6 +37,13 @@ const routes = [
     path: '/Login',
     component: LogIn,
     name: 'login'
+  },
+
+  {
+    path: '/post/:id/:source/', // :source je prozatimni param aby se mi ukazal obrazek. predpokladam ze source ziskas primo v componente pres :id potom muzes :source/ smazat
+    name: 'post',
+    component: UserGeneric
+
   }
 ]
 

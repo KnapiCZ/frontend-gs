@@ -29,8 +29,8 @@
     <VLayout>
         <v-bottom-navigation bg-color="black">
 
-            <v-btn value="Profile">
-              <router-link to="/profile">
+            <v-btn>
+              <router-link :to="{name: 'LogedInUser'}">
                 <VAvatar class='PFP' :image="profilePicture"></VAvatar>
               </router-link>
             </v-btn>
@@ -47,7 +47,7 @@
               </RouterLink>    
             </v-btn>
 
-            <v-btn value="Shop">
+            <v-btn>
               <routerLink to="/shop">
                 <img src="../../../assets/icons/shop.png" alt="shop">
               </routerLink>
@@ -62,3 +62,5 @@
         </v-bottom-navigation>
     </VLayout>
 </template>
+
+

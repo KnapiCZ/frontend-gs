@@ -1,8 +1,8 @@
 <script setup>
-  import ProfileTop from './ProfileTop.vue'
-  import ProfileButtons from './ProfileButtons.vue';
-  import ProfileBasicInfo from './ProfileBasicInfo.vue';
-  import TabBar from './Tabs/TabBar.vue';
+  import ProfileTop from '../components/ProfileTop.vue'
+  import ProfileButtons from '../components/ProfileButtons.vue';
+  import ProfileBasicInfo from '../components/ProfileBasicInfo.vue';
+  import TabBar from '../components/Tabs/TabBar.vue';
   import api from '@api';
 
   const userData = JSON.parse(
