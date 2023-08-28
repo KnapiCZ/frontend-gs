@@ -1,5 +1,7 @@
 from django.urls import include, path
 from rest_framework import routers
+from rest_framework.authtoken.views import obtain_auth_token
+from user.auth import CustomAuthToken
 
 from user import views as user_views
 from gym import views as gym_views
@@ -25,5 +27,5 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('api/', include(router.urls)),
     path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('api-auth/', CustomAuthToken.as_view()),
 ] +static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

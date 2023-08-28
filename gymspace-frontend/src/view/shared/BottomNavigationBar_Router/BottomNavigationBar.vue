@@ -30,7 +30,7 @@
         <v-bottom-navigation bg-color="black">
 
             <v-btn>
-              <router-link :to="{name: 'LogedInUser'}">
+              <router-link :to="{name: 'LoggedInUser'}">
                 <VAvatar class='PFP' :image="profilePicture"></VAvatar>
               </router-link>
             </v-btn>

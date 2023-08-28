@@ -1,12 +1,12 @@
 <script setup>
-  import BottomNavigationBar from './view/shared/BottomNavigationBar_Router/BottomNavigationBar.vue';
+  import LogIn from './view/shared/BottomNavigationBar_Router/BottomNavigationBar.vue';
 </script>
 
 <template>
     <Suspense>
       <template #default>
         <main>
-          <BottomNavigationBar />
+          <LogIn />
         </main>
       </template>
 

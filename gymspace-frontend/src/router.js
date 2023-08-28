@@ -12,29 +12,39 @@ let isAuthenticated = true
 
 const routes = [
   {
-    path: '/profile', // URL prihlaseneho usera
-    name: 'LogedInUser',
+    path: '/', // URL prihlaseneho usera
+    name: 'LoggedInUser',
     component: CurrentUser,
+    
   },
 
   {
     path: '/profile/:userhandle',  // URL nejakeho dalsiho usera + tady video ktere ulehci praci https://vueschool.io/lessons/dynamic-routes?friend=vuerouter
     component: OtherUser,
+    meta: {
+      requiresAuth: true
+    }
   },
 
   {
     path: '/gyms',
-    component: Gym
+    component: Gym,
+    meta: {
+      requiresAuth: true
+    }
   },
 
   {
     path: '/foryou',
     component: MainFypPage,
+    meta: {
+      requiresAuth: true
+    }
     
   },
 
   {
-    path: '/Login',
+    path: '/login',
     component: LogIn,
     name: 'login'
   },
@@ -42,7 +52,10 @@ const routes = [
   {
     path: '/post/:id/:source/', // :source je prozatimni param aby se mi ukazal obrazek. predpokladam ze source ziskas primo v componente pres :id potom muzes :source/ smazat
     name: 'post',
-    component: UserGeneric
+    component: UserGeneric,
+    meta: {
+      requiresAuth: true,
+    }
 
   }
 ]
@@ -52,15 +65,4 @@ const router = createRouter({
   routes
 })
   
-  router.beforeEach((to, from, next)=>{
-    if ( to.name !== 'login' && !isAuthenticated ){
-      next({
-        path: '/Login',
-        replace: true
-      })
-    } else {
-      next();
-    }
-  })
-
 export default router

@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
+    'rest_framework.authtoken',
     'user.apps.UserConfig',
     'gym.apps.GymConfig',
     'django.contrib.admin',
@@ -77,7 +78,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'gymspace.wsgi.application'
 
 
-# Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {

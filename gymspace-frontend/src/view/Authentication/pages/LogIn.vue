@@ -1,6 +1,19 @@
 <script setup>
- import { VCol } from 'vuetify/lib/components/index.mjs';
-
+  import { VCol } from 'vuetify/lib/components/index.mjs';
+  import { ref } from 'vue';
+  import api from '@api';
+  let form = ref({
+    username: "amin",
+    password: "cisco",
+  })
+  async function submitForm() {
+    console.log(form)
+    await api("getToken", form.value)
+      .then((token) => {
+          document.cookie = `Authorization=Token ${token.token}`
+      })
+      .catch((error, token) => {console.log(error)})
+  }
 </script>
 
 
@@ -9,9 +22,21 @@
         <p class="welcome">WELCOME TO</p>
 
         <img src="../../../assets/images/logoBigWithText.png" alt="logo">
-        <input id="EmailAuth" type="text" placeholder="Username/E-mail">
-        <input id="PassAuth" type="password" placeholder="Password">
-        <button class="Login">Login</button>
+        <form @submit.prevent="submitForm">
+          <input 
+            id="UsernameAuth"
+            type="text"
+            placeholder="Username"
+            v-model="form.username"
+          >
+          <input 
+            id="PassAuth"
+            type="password"
+            placeholder="Password"
+            v-model="form.password"
+          >
+          <button class="Login">Login</button>
+        </form>
     
     </VCol>
 </template>

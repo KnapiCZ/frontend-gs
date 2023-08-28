@@ -11,7 +11,10 @@ from rest_framework import generics
 
 from django.db.models import Count
 
+from rest_framework.permissions import IsAuthenticated
+
 class UserProfileViewSet(viewsets.ViewSet):
+    permission_classes = (IsAuthenticated,)
     """
     ViewSet for getting all UserProfile data nad following/unfollowing
     """
@@ -42,6 +45,7 @@ class UserProfileViewSet(viewsets.ViewSet):
             return Response({'message': 'failed'})
 
 class SmallUserProfileViewSet(viewsets.ViewSet):
+    permission_classes = (IsAuthenticated,)
     def retrieve(self, request, pk=None):
         queryset = UserProfile.objects.get(pk=pk)
         serializer = SmallUserSerializer(queryset)
@@ -49,6 +53,7 @@ class SmallUserProfileViewSet(viewsets.ViewSet):
 
 class FollowerViewSet(viewsets.ViewSet):
 
+    permission_classes = (IsAuthenticated,)
     def retrieve(self, request, pk=None):
         queryset = UserProfile.objects.get(pk=pk)
         serializer = FollowerSerializer(queryset)
@@ -56,6 +61,7 @@ class FollowerViewSet(viewsets.ViewSet):
         return Response({"followers": followers})
 
 class MostFollowedViewSet(viewsets.ViewSet):
+    permission_classes = (IsAuthenticated,)
 
     def retrieve(self, request, pk=None):
         queryset = UserProfile.objects.get(pk=pk)
@@ -101,6 +107,7 @@ class MostFollowedViewSet(viewsets.ViewSet):
 
 
 class UserPostViewSet(viewsets.ViewSet):
+    permission_classes = (IsAuthenticated,)
     def retrieve(self, request, pk=None):
         post = UserPost.objects.get(pk=pk)
         media = UserPostMedia.objects.filter(parent_post__pk=pk)
@@ -124,6 +131,7 @@ class UserPostViewSet(viewsets.ViewSet):
 
 
 class RecommendedPostViewSet(viewsets.ViewSet):
+    permission_classes = (IsAuthenticated,)
     def retrieve(self, request, pk=None):
         
         following = UserProfile.objects.filter(followers=pk)\
