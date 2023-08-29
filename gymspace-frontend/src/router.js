@@ -6,11 +6,15 @@ import OtherUser from './view/Profile/pages/OtherUser.vue';
 import Gym from './view/GymsClubs/pages/MainPage.vue';
 import MainFypPage from './view/ForYouPage/pages/ForYouPage.vue';
 import LogIn from './view/Authentication/pages/LogIn.vue';
-import UserGeneric from './view/Post/components/UserGeneric.vue'
-
-let isAuthenticated = true
+import UserGeneric from './view/Post/components/UserGeneric.vue';
+import Landing from './view/shared/Landing/LandingPage.vue';
 
 const routes = [
+  {
+    path: '/',
+    component: Landing
+  },
+
   {
     path: '/profile', // URL prihlaseneho usera
     name: 'LoggedInUser',
