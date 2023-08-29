@@ -7,11 +7,10 @@
 
 
     let baseUrl = await api()
-    const loggedInUserId = 5;
-    const renderedUserId = 2;
+    const loggedInUserId = +sessionStorage.getItem('loggedInUserId')
+    const renderedUserId = +sessionStorage.getItem('loggedInUserId');
     let profilePicture
-    sessionStorage.setItem("loggedInUserId", loggedInUserId)
-    sessionStorage.setItem("renderedUserId", renderedUserId)
+    sessionStorage.setItem("renderedUserId", loggedInUserId)
     await api("userProfile", loggedInUserId).then((loggedUser) => {
                       profilePicture = `${baseUrl}${loggedUser.profile_picture}`
                       sessionStorage.setItem('loggedUser', JSON.stringify(loggedUser) )

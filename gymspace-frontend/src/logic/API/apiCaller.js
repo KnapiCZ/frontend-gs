@@ -1,7 +1,7 @@
 
 //const url = ref("http://127.0.0.1:8000/api/users/"+userId)
 async function callApi(apiType="", firstItem=1, secondItem=2) {
-  const baseUrl = `http://192.168.43.107:8080`
+  const baseUrl = `http://10.0.45.50:8080`
   let response
   let data
   switch(apiType)
@@ -21,6 +21,21 @@ async function callApi(apiType="", firstItem=1, secondItem=2) {
           return response.json();
         } catch (error) {
           console.error("Error fetching token:", error);
+          throw error;
+        }
+
+      case "confirmAuth":
+        try {
+          response = await fetch(`${baseUrl}/api/confirm-auth/`, { 
+            method: "POST",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+          return response.json();
+        } catch (error) {
+          console.error("Error confirming: ", error);
           throw error;
         }
 

@@ -1,17 +1,17 @@
 <script setup>
-  import LogIn from './view/shared/BottomNavigationBar_Router/BottomNavigationBar.vue';
+  import Landing from './view/shared/Landing/LandingPage.vue';
 </script>
 
 <template>
     <Suspense>
       <template #default>
         <main>
-          <LogIn />
+          <Landing />
         </main>
       </template>
 
       <template #fallback>
-        <p id='load'>loading</p>
+        <h1>loading</h1>
       </template>
     </Suspense>
 </template>

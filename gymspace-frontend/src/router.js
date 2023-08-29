@@ -12,7 +12,8 @@ import Landing from './view/shared/Landing/LandingPage.vue';
 const routes = [
   {
     path: '/',
-    component: Landing
+    component: Landing,
+    name: 'landingPage'
   },
 
   {

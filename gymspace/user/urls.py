@@ -10,4 +10,6 @@ urlpatterns = [
     path('users-posts/<int:pk>', views.UserPostViewSet.as_view({'get': 'retrieve'})),
     path('users-small/<int:pk>', views.SmallUserProfileViewSet.as_view({'get': 'retrieve'})),
     path('users-gympage-recommended/<int:pk>', views.RecommendedPostViewSet.as_view({'get': 'retrieve'})),
+
+    path('confirm-auth/', views.ConfirmAuth.as_view({'post': 'create'})),
 ]

@@ -2,6 +2,9 @@
   import { VCol } from 'vuetify/lib/components/index.mjs';
   import { ref } from 'vue';
   import api from '@api';
+  import { useRouter } from 'vue-router';
+  const router = useRouter(); 
+
   let form = ref({
     username: "",
     password: "",
@@ -9,6 +12,7 @@
   async function submitForm() {
     console.log(form)
     await api("getToken", form.value)
+    router.go('/')
   }
 </script>
 

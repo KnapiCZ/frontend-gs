@@ -16,6 +16,7 @@ router.register(r'users-follow-data', user_views.FollowerViewSet, basename='foll
 router.register(r'users-posts', user_views.UserPostViewSet, basename='users-posts')
 router.register(r'users-small', user_views.SmallUserProfileViewSet, basename='users-posts')
 router.register(r'users-gympage-recommended', user_views.RecommendedPostViewSet, basename='users-recommended')
+router.register(r'confirm-auth', user_views.ConfirmAuth, basename='confirm-auth')
 
 
 router.register(r'gyms-member', gym_views.GymViewSet, basename='gyms-member')

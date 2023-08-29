@@ -3,15 +3,18 @@ from .serializers import *
 from .models import (UserProfile,
                      UserPost,
                      UserPostMedia)
+from django.contrib.auth.models import User
+
 from gym import models
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
+from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import generics
 
 from django.db.models import Count
 
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.authentication import TokenAuthentication
 
 class UserProfileViewSet(viewsets.ViewSet):
@@ -137,4 +140,16 @@ class RecommendedPostViewSet(viewsets.ViewSet):
         post_serializer = UserPostSerializer(posts, many=True)
         print(posts)
         return Response({"posts": post_serializer.data,})
+
+class ConfirmAuth(viewsets.ViewSet):
+    permission_classes = (AllowAny,)
+    def create(self, request):
+        # Check if 'auth_token' is in the request cookies.
+        # Give precedence to 'Authorization' header.
+        if 'auth_token' in request.COOKIES and \
+                        'HTTP_AUTHORIZATION' not in request.META:
+            user = User.objects.get(auth_token=request.COOKIES.get('auth_token'))
+            return Response({'log': user.id})
+        else:
+            return Response({'log': 'not logged in'})
 
