@@ -8,7 +8,11 @@ from rest_framework import generics
 
 from django.db.models import Count
 
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
 class GymViewSet(viewsets.ViewSet):
+    permission_classes = (IsAuthenticated,)
+    authentication_classes = (TokenAuthentication,)
     """
     ViewSet for getting all Gym data 
     """

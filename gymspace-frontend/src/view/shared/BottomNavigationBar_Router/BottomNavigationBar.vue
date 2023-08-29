@@ -42,7 +42,7 @@
             </v-btn>
 
             <v-btn>
-              <RouterLink to="Add">
+              <RouterLink to="/add">
                   <img src="../../../assets/icons/plus.png" alt="add">
               </RouterLink>    
             </v-btn>

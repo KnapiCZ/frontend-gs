@@ -12,10 +12,12 @@ let isAuthenticated = true
 
 const routes = [
   {
-    path: '/', // URL prihlaseneho usera
+    path: '/profile', // URL prihlaseneho usera
     name: 'LoggedInUser',
     component: CurrentUser,
-    
+    meta: {
+      requiresAuth: true
+    }
   },
 
   {

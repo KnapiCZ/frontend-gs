@@ -3,16 +3,12 @@
   import { ref } from 'vue';
   import api from '@api';
   let form = ref({
-    username: "amin",
-    password: "cisco",
+    username: "",
+    password: "",
   })
   async function submitForm() {
     console.log(form)
     await api("getToken", form.value)
-      .then((token) => {
-          document.cookie = `Authorization=Token ${token.token}`
-      })
-      .catch((error, token) => {console.log(error)})
   }
 </script>
 
