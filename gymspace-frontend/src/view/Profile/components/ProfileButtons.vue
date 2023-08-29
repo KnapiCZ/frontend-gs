@@ -2,17 +2,12 @@
   import api from '@api';
   import { ref } from 'vue';
 
-  const props = defineProps({
-    renderedUserId: Number,
-    loggedInUserId: Number,
-    })
-
+  let loggedInUserId = +sessionStorage.getItem('loggedInUserId')
+  let renderedUserId = +sessionStorage.getItem('renderedUserId')
   const isFollowing = ref()
-  let followingList = await api('isFollowing', props.loggedInUserId, props.renderedUserId)
-  console.log(followingList.followers)
+  let followingList = await api('isFollowing', loggedInUserId, renderedUserId)
   function following(followers) {
-    console.log('called')
-    if (followers.includes(props.loggedInUserId)) {
+    if (followers.includes(loggedInUserId)) {
       isFollowing.value = true;
     }
     else {
@@ -21,8 +16,8 @@
   }
   async function follow() {
                   await api("follow",
-                      props.loggedInUserId,
-                      props.renderedUserId).then(isFollowing.value = !isFollowing.value)
+                      loggedInUserId,
+                      renderedUserId).then(isFollowing.value = !isFollowing.value)
                                     
                   
   }

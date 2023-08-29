@@ -8,11 +8,9 @@
     })
     function checkNull(userObject) {
       if (lodash.isEmpty(userObject)) {
-        console.log('false')
         return false
       }
       else {
-      console.log(true)
         return userObject
       }
     }
