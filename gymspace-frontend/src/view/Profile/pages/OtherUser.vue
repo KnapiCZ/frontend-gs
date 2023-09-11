@@ -1,6 +1,6 @@
 <script setup>
   import ProfileTop from '../components/ProfileTop.vue'
-  import ProfileButtons from '../components/ProfileButtons.vue';
+  import OtherUserButton from '../components/Buttons/OtherUserButton.vue'
   import ProfileBasicInfo from '../components/ProfileBasicInfo.vue';
   import TabBar from '../components/Tabs/TabBar.vue';
   import api from '@api';
@@ -29,7 +29,7 @@
       :email="userData.email"
       :rendered-user-id="userData.id"
     />
-    <ProfileButtons :renderedUserId="userData.id" :loggedInUserId="loggedInUserId"/>
+    <OtherUserButton :renderedUserId="userData.id" :loggedInUserId="loggedInUserId"/>
     <TabBar :trainer_status="userData.trainer_status"/>
   </div>
 </template>
@@ -38,6 +38,7 @@
 .page-div{
   margin: 0;
   padding: 0;
+  padding-bottom: 56px;
   text-align: center;
 }
 </style>

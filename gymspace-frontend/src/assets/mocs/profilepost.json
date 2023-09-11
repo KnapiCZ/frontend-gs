@@ -1,0 +1,10 @@
+[
+    {"id":1, "thumbSRC":"/media/global_profile_media/1/profile/images.jpg", "index":0, "type":"img"},
+    {"id":2, "thumbSRC":"/media/global_profile_media/2/profile/1690636747042.jpg", "index":1, "type":"img"},
+    {"id":3, "thumbSRC":"/media/global_profile_media/3/profile/levneletenky.jpg", "index":2, "type":"img"},
+    {"id":4, "thumbSRC":"/media/global_profile_media/5/profile/hlavicka1.png", "index":3, "type":"img"},
+    {"id":5, "thumbSRC":"/media/global_profile_media/5/profile/hokusai.jpg", "index":4, "type":"img"},
+    {"id":6, "thumbSRC":"/media/global_profile_media/4/profile/1690636747042.jpg", "index":5, "type":"img"},
+    {"id":7, "thumbSRC":"/media/global_profile_media/1/profile/images.jpg", "index":6, "type":"img"}
+
+]

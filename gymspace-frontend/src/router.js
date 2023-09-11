@@ -6,7 +6,7 @@ import OtherUser from './view/Profile/pages/OtherUser.vue';
 import Gym from './view/GymsClubs/pages/MainPage.vue';
 import MainFypPage from './view/ForYouPage/pages/ForYouPage.vue';
 import LogIn from './view/Authentication/pages/LogIn.vue';
-import UserGeneric from './view/Post/components/UserGeneric.vue';
+import SliderFYP from './view/Post/components/SliderFYP.vue';
 import Landing from './view/shared/Landing/LandingPage.vue';
 
 const routes = [
@@ -57,9 +57,9 @@ const routes = [
   },
 
   {
-    path: '/post/:id/:source/', // :source je prozatimni param aby se mi ukazal obrazek. predpokladam ze source ziskas primo v componente pres :id potom muzes :source/ smazat
+    path: '/posts/:initialPosition', // :source je prozatimni param aby se mi ukazal obrazek. predpokladam ze source ziskas primo v componente pres :id potom muzes :source/ smazat
     name: 'post',
-    component: UserGeneric,
+    component: SliderFYP,
     meta: {
       requiresAuth: true,
     }
@@ -71,5 +71,9 @@ const router = createRouter({
   history: createWebHistory(),
   routes
 })
+
+
+
+
   
 export default router

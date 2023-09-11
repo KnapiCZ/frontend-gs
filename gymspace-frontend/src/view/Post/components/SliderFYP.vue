@@ -1,40 +1,47 @@
 <script setup>
-const props = defineProps(['type', 'source'])
-import DescriptionFYP from './DescriptionFYP.vue';
+    import { Swiper, SwiperSlide } from 'swiper/vue';
+    import UserGeneric from './UserGeneric.vue';
+    import json from '../../../assets/mocs/profilepost.json'
+    import api from '@api';
+
+    const baseUrl = await api()
 </script>
 
 <template>
-    
-    <div id="MainContainer">
-        <video
-            v-if="props.type == 'video'"
-            :src="props.source" >
-        </video>
-        <img 
-            v-if="props.type == 'img'"
-            :src="props.source">
-        <DescriptionFYP />
-    </div>
-
+    <Swiper
+        :slides-per-view="1"
+        :initial-slide="$route.params.initialPosition"
+        :height="100"
+        >
+        <SwiperSlide v-for="object in myJson">
+          <UserGeneric  :type="object.type" :sourcePost="baseUrl + object.thumbSRC"/> <!-- mozna by se sem hodilo dat jeste id postu at ho muzes pouzivat jako param-->
+        </SwiperSlide>
+      </Swiper>
 </template>
+
+
+
+<script>
+export default {
+  data: () => ({
+    myJson: json,
+  }),
+}
+
+</script>
 
 <style scoped>
 #MainContainer{
     position: relative;
     width: 100%;
-    height: 85vh;
+    height: 100vh;
     background-color: black;
     scroll-snap-align: start;
 
-
 }
-img,
-video{
-    width: 100%;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    margin: auto;
+
+div .swiper{
+    height: 100vh !important;
 }
 
 </style>

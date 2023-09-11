@@ -22,11 +22,7 @@
       </VTabs>
       <VWindow v-model="tab" v-theme>
         <VWindowItem>
-            <SliderFyp
-            v-for="(post) in posts"
-            :type="post.type"
-            :source="post.source"
-            />
+            <SliderFyp/>
         </VWindowItem>        
         <VWindowItem>
             <SliderFyp
@@ -62,7 +58,7 @@
 
 <style scoped>
 .v-window-item--active{
-  height: 85vh;
+  height: 100vh;
   overflow: auto;
   -webkit-scroll-snap-type: y mandatory;
       -ms-scroll-snap-type: y mandatory;

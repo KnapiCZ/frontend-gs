@@ -10,12 +10,12 @@
     followers: Number,
     trainer_status: Boolean,
     })
+
 </script>
 
 <template>
-  <div class="background">
-    <img style="position: relative;width: 100vw;height: 150px;" :src="props.background_picture_url">
-    <VCol class="main-info">
+  <div id="background" :style="{ backgroundImage: 'url(' + props.background_picture_url + ')'}">
+    <VCol class="main-info " :style="{ backgroundImage: 'url(' + props.background_picture_url + ')'}">
     <VAvatar class='PFP' :image="props.profile_picture_url"></VAvatar> <!-- API SCR profiloveho obrazku-->
       <VRow>
         <VCol>      
@@ -23,8 +23,8 @@
           <div class="bottom-item">{{ props.followers }}</div> <!-- API following user count-->
         </VCol>
         <VCol>      
-          <div class="top-item"> @{{ props.username }}</div> <!-- API username-->
-          <div v-if="props.trainer_status" class="bottom-item">trainer</div> <!-- API following user count-->
+          <div class="top-item"> {{ props.username }}</div> <!-- API username-->
+          <div v-if="props.trainer_status" class="bottom-item">Trainer</div> <!-- API following user count-->
 
         </VCol>
         <VCol>      
@@ -37,15 +37,16 @@
 </template>
 
 <style scoped>
-.background{
+#background{
   position: relative;
   margin: auto;
-  background-position: center;
-  background-size: cover;
   width: 100vw;
   height: 150px;
   text-align: center;
+  background-size: 100vw 185px;
+  background-position: top;
 }
+
 .main-info{  
   width: 75%;
   height: 70px;
@@ -54,7 +55,10 @@
   position: absolute;
   bottom: -35px;
   left: calc((100% / 2) - (75% / 2));
-  background-color: rgba(0, 0, 0, 0.603);
+  background-position: bottom;
+  background-size: 100vw 180px;
+  background-blend-mode: darken;
+  background-color: rgba(0, 0, 0, 0.5);
   color: white;
   border-radius: 10px;
 }
@@ -65,8 +69,7 @@
   top: -60px;
 }
 
-.bottom-item{
-  font-size: 14px;
-  color: rgb(207, 205, 205)
+.top-item{
+  font-weight: bold;
 }
 </style>

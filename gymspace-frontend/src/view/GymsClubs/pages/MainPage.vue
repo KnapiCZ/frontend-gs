@@ -36,7 +36,7 @@
         :space-between="5"
         >
         <SwiperSlide v-for="(post) in postData" :key="post">
-          <Thumbnail  :ImageSource="post.media[0].media" :postID="1"/> <!-- mozna by se sem hodilo dat jeste id postu at ho muzes pouzivat jako param-->
+          <Thumbnail  :ImageSource="post.media[0].media" :postID="1" :postIndex="1"/> <!-- mozna by se sem hodilo dat jeste id postu at ho muzes pouzivat jako param-->
         </SwiperSlide>
       </Swiper>
     </section>

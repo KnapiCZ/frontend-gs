@@ -4,7 +4,9 @@
   import { VTab } from 'vuetify/lib/components/index.mjs';
   import { VWindow } from 'vuetify/lib/components/index.mjs';
   import { VWindowItem } from 'vuetify/lib/components/index.mjs';
-  
+  import GridLayout from '../../../Post/components/GridLayout.vue';
+
+
   let props = defineProps({
     trainer_status: Boolean,
   })
@@ -26,13 +28,13 @@
     </VTabs>
     <VWindow v-model="tab" >
       <VWindowItem>
-        feedfeedfeedfeedfeedfeedfeed
+        <GridLayout></GridLayout>
       </VWindowItem>        
       <VWindowItem>
-        challengeschallengeschallengeschallenges
+        <GridLayout></GridLayout>
       </VWindowItem>
       <VWindowItem v-if="trainer_status">
-        trainertrainertrainertrainer
+        <GridLayout></GridLayout>
       </VWindowItem>
     </VWindow>
   </VCard>
@@ -47,3 +49,10 @@
       }),
     }
   </script>
+
+  <style scoped>
+
+.v-card{
+  background-color: black;
+}
+</style>

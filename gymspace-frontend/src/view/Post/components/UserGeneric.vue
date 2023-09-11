@@ -1,8 +1,10 @@
 <script setup>
 import DescriptionFYP from './DescriptionFYP.vue';
+import api from '@api';
 
 const props = defineProps({
-    type: 'img',
+    type: String,
+    sourcePost: String
 })
 
 </script>
@@ -11,11 +13,11 @@ const props = defineProps({
     <div id="MainContainer">
         <video
             v-if="props.type == 'video'"
-            :src="$route.params.source" >
+            :src="props.sourcePost" >
         </video>
         <img 
             v-if="'img' == 'img'"
-            :src="$route.params.source">
+            :src="props.sourcePost">
         <DescriptionFYP />
     </div>
 
@@ -23,19 +25,18 @@ const props = defineProps({
 
 <style scoped>
 #MainContainer{
-    position: relative;
     width: 100%;
-    height: 85vh;
     background-color: black;
-    scroll-snap-align: start;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
 }
 img,
 video{
     width: 100%;
-    position: absolute;
-    margin: auto;
+    height: fit-content;
+
 }
 
 </style>

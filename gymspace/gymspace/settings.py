@@ -63,6 +63,10 @@ CORS_ORIGIN_ALLOW_ALL = False
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     'http://10.0.45.50:5173',
+    'http://192.168.88.86:5173',
+    'http://localhost:5173',
+    'http://172.20.10.14:5173'
+
 ]
 
 REST_FRAMEWORK = {
