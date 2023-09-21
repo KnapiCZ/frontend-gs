@@ -1,6 +1,7 @@
 <script setup>
-import DescriptionFYP from './DescriptionFYP.vue';
+import DescriptionFYP from '../../ForYouPage/components/DescriptionFYP.vue';
 import api from '@api';
+import SideButtons from '../../ForYouPage/components/SideButtons.vue';
 
 const props = defineProps({
     type: String,
@@ -18,6 +19,7 @@ const props = defineProps({
         <img 
             v-if="'img' == 'img'"
             :src="props.sourcePost">
+        <SideButtons />
         <DescriptionFYP />
     </div>
 

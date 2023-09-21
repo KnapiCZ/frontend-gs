@@ -1,12 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 import CurrentUser from './view/Profile/pages/CurrentUser.vue';
-import OtherUser from './view/Profile/pages/OtherUser.vue';
 
-import Gym from './view/GymsClubs/pages/MainPage.vue';
+import Community from './view/Community/pages/MainPage.vue';
 import MainFypPage from './view/ForYouPage/pages/ForYouPage.vue';
 import LogIn from './view/Authentication/pages/LogIn.vue';
-import SliderFYP from './view/Post/components/SliderFYP.vue';
+import SliderFYP from './view/ForYouPage/components/SliderFYP.vue';
 import Landing from './view/shared/Landing/LandingPage.vue';
 
 const routes = [
@@ -17,25 +16,17 @@ const routes = [
   },
 
   {
-    path: '/profile', // URL prihlaseneho usera
-    name: 'LoggedInUser',
+    path: '/user/:userhandle',  // URL nejakeho dalsiho usera + tady video ktere ulehci praci https://vueschool.io/lessons/dynamic-routes?friend=vuerouter
     component: CurrentUser,
+    name: "user",
     meta: {
       requiresAuth: true
     }
   },
 
   {
-    path: '/profile/:userhandle',  // URL nejakeho dalsiho usera + tady video ktere ulehci praci https://vueschool.io/lessons/dynamic-routes?friend=vuerouter
-    component: OtherUser,
-    meta: {
-      requiresAuth: true
-    }
-  },
-
-  {
-    path: '/gyms',
-    component: Gym,
+    path: '/community',
+    component: Community,
     meta: {
       requiresAuth: true
     }

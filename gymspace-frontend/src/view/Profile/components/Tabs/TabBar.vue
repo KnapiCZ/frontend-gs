@@ -20,10 +20,12 @@
       color="#e8e20a"
       bg-color="black"
       align-tabs="center"
+      slider-color="#CCC400"
+      :grow='true'
     >
-      <VTab><img src="../../../../assets/icons/feed.png" alt="feed"></VTab>
-      <VTab><img src="../../../../assets/icons/challenges.png" alt="challenges"></VTab>
-      <VTab v-if="trainer_status"><img src="../../../../assets/icons/trainer.png" alt="trainer"></VTab>
+      <VTab><img src="../../../../assets/icons/feed.svg" alt="feed"></VTab>
+      <VTab><img src="../../../../assets/icons/challenges.svg" alt="challenges"></VTab>
+      <VTab v-if="trainer_status"><img src="../../../../assets/icons/trainer.svg" alt="trainer"></VTab>
 
     </VTabs>
     <VWindow v-model="tab" >
@@ -54,5 +56,7 @@
 
 .v-card{
   background-color: black;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 </style>

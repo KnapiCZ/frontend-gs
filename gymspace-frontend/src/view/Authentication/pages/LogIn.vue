@@ -21,7 +21,7 @@
     <VCol>
         <p class="welcome">WELCOME TO</p>
 
-        <img src="../../../assets/images/logoBigWithText.png" alt="logo">
+        <img src="../../../assets/images/gymspace_logo.svg" alt="logo">
         <form @submit.prevent="submitForm">
           <input 
             id="UsernameAuth"
@@ -37,7 +37,6 @@
           >
           <button class="Login">Login</button>
         </form>
-    
     </VCol>
 </template>
 

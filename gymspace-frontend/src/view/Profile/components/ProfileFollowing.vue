@@ -1,7 +1,7 @@
 <script setup>
     import lodash from 'lodash'
     import api from '@api'
-    import { VCol } from 'vuetify/lib/components/index.mjs';
+    import { VAvatar, VCol, VIcon } from 'vuetify/lib/components/index.mjs';
     import { VRow } from 'vuetify/lib/components/index.mjs';
     const props = defineProps({
       renderedUserId: Number,
@@ -29,11 +29,11 @@
 <template>
     <VCol>
         <VRow v-if="firstUser" class="block">
-            <img :src="firstUrl" alt="clubICO">
-            <p>@{{ firstUser.username }}</p> <!-- sem dat nejznamejsi dva uzivatele z following -->
+            <img src="../../../assets/icons/community.svg">
+            <p>@{{ firstUser.username }}</p> <!-- sem dat nejznamejsi dva kluby uzivatele -->
         </VRow>
         <VRow v-if="secondUser" class="block">
-            <img :src="secondUrl" alt="feedICO">
+          <img src="../../../assets/icons/website.svg">
             <p>@{{ secondUser.username }}</p>
         </VRow>
     </VCol>
@@ -41,9 +41,11 @@
 
 <style scoped>
 
-.block img
+img
 {
     width: 20px;
+    height: auto;
+    aspect-ratio: 1;
     margin-right: 4px;
 }
 .block {

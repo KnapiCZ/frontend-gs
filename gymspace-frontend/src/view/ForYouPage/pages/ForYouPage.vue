@@ -4,7 +4,7 @@
   import { VTab } from 'vuetify/lib/components/index.mjs';
   import { VWindow } from 'vuetify/lib/components/index.mjs';
   import { VWindowItem } from 'vuetify/lib/components/index.mjs'; 
-  import SliderFyp from '../../Post/components/SliderFYP.vue'
+  import SliderFyp from '../components/SliderFYP.vue'
 </script>
 
 <template>
@@ -14,10 +14,11 @@
         color="white"
         bg-color="#00000000"
         align-tabs="center"
+        :grow="true"
       >
-        <VTab :value="Following" title="Following">Following</VTab>
-        <VTab :value="FYP" title="FOR YOU">FOR YOU</VTab>
-        <VTab :value="CLUB" title="CLUB">CLUB</VTab>
+        <VTab :value="0" title="Following">Following</VTab>
+        <VTab :value="1" title="FOR YOU">FOR YOU</VTab>
+        <VTab :value="2" title="CLUB">CLUB</VTab>
 
       </VTabs>
       <VWindow v-model="tab" v-theme>
@@ -25,18 +26,10 @@
             <SliderFyp/>
         </VWindowItem>        
         <VWindowItem>
-            <SliderFyp
-            v-for="(post) in posts"
-            :type="post.type"
-            :source="post.source"
-            />
+            <SliderFyp />
         </VWindowItem>  
         <VWindowItem>
-            <SliderFyp
-            v-for="(post) in posts"
-            :type="post.type"
-            :source="post.source"
-            />
+            <SliderFyp />
         </VWindowItem>  
       </VWindow>
     </VCard>
@@ -59,10 +52,8 @@
 <style scoped>
 .v-window-item--active{
   height: 100vh;
-  overflow: auto;
-  -webkit-scroll-snap-type: y mandatory;
-      -ms-scroll-snap-type: y mandatory;
-          scroll-snap-type: y mandatory;
+  overflow: hidden;
+
 }
 
 .v-tabs  {  
@@ -73,7 +64,7 @@
   top: 0;
   width: 100%;
   z-index: 5;
-
+  box-shadow: 0 0 10 red;
 }
 
 

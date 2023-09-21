@@ -1,6 +1,6 @@
 <script setup>
     import { Swiper, SwiperSlide } from 'swiper/vue';
-    import UserGeneric from './UserGeneric.vue';
+    import UserGeneric from '../../Post/components/UserGeneric.vue';
     import json from '../../../assets/mocs/profilepost.json'
     import api from '@api';
 
@@ -11,7 +11,7 @@
     <Swiper
         :slides-per-view="1"
         :initial-slide="$route.params.initialPosition"
-        :height="100"
+        direction="vertical"
         >
         <SwiperSlide v-for="object in myJson">
           <UserGeneric  :type="object.type" :sourcePost="baseUrl + object.thumbSRC"/> <!-- mozna by se sem hodilo dat jeste id postu at ho muzes pouzivat jako param-->

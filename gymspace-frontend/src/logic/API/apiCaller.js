@@ -40,7 +40,6 @@ async function callApi(apiType="", firstItem=1, secondItem=2) {
         }
 
       case "userProfile":
-        
         response = await(
           fetch(`${baseUrl}/api/users/${firstItem}/`, 
             {
@@ -50,6 +49,7 @@ async function callApi(apiType="", firstItem=1, secondItem=2) {
 
         );
         return response.json()
+
       case "smallUserProfile":
         response = await(
           fetch(`${baseUrl}/api/users-small/${firstItem}/`,

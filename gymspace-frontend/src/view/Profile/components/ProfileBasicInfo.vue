@@ -11,7 +11,7 @@
 
 <template>
     <div class="profile_info">
-        <p>{{ props.description }}
+        <p>{{ props.description}}
             <br>{{ props.email }}</p> <!--API user bio-->
         <ProfileFollowing :rendered-user-id="props.renderedUserId"/>
     </div>
@@ -24,7 +24,7 @@
     width: auto;
     text-align: left;
     margin-top: 50px;
-    margin-left: calc(25% /2);
+    margin-left: calc(25% /2 + 5px);
     margin-bottom: 0;
     display: grid;
     grid-template-columns: 60% 40%;

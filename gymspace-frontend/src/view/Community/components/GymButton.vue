@@ -14,30 +14,32 @@
 
 <style scoped>
 .v-card{
-    width: auto;
-    height: 64px;
-    margin: 20px;
-    text-align: center;
-    background: linear-gradient(45deg, rgb(71, 71, 71), white);
+  width: auto;
+  height: 64px;
+  margin: 20px;
+  text-align: center;
+  background: rgba(145, 145, 145, 0.3)
 }
 
 h1{
-  display: inline;
   font-size: 36px;
+  font-style: italic;
   font-weight: bold;
+  color: white;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
 }
 img{
   display: inline;
   width: auto;
   height: 100%;
   aspect-ratio: 1;
-  object-fit: cover;
+  object-fit: contain;
   position: absolute;
-  left: 0;
+  left: 5px;
 }
 
 </style>

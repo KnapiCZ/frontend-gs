@@ -1,5 +1,5 @@
 <script setup>
-  import { VCol } from 'vuetify/lib/components/index.mjs';
+  import { VBadge, VCol } from 'vuetify/lib/components/index.mjs';
   import { VRow } from 'vuetify/lib/components/index.mjs';
   import { VAvatar } from 'vuetify/lib/components/index.mjs';
 
@@ -16,7 +16,8 @@
 <template>
   <div id="background" :style="{ backgroundImage: 'url(' + props.background_picture_url + ')'}">
     <VCol class="main-info " :style="{ backgroundImage: 'url(' + props.background_picture_url + ')'}">
-    <VAvatar class='PFP' :image="props.profile_picture_url"></VAvatar> <!-- API SCR profiloveho obrazku-->
+      <VAvatar class='PFP' :image="props.profile_picture_url"></VAvatar> <!-- API SCR profiloveho obrazku-->
+      <img class="check-mark"  src="../../../assets/icons/checkMark.svg"> <!-- API USER VERIFIED-->
       <VRow>
         <VCol>      
           <div class="top-item">Followers</div> 
@@ -67,6 +68,13 @@
   position: absolute;
   left: calc((100% / 2) - 40px);
   top: -60px;
+}
+
+.check-mark{
+  width: 60px; height: 60px;
+  position: absolute;
+  left: calc((100% / 2) );
+  top: -20px;
 }
 
 .top-item{

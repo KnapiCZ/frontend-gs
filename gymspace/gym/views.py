@@ -12,7 +12,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 class GymViewSet(viewsets.ViewSet):
     permission_classes = (IsAuthenticated,)
-    authentication_classes = (TokenAuthentication,)
+    #authentication_classes = (TokenAuthentication,) s timhle to nefunguje idk proc
+
     """
     ViewSet for getting all Gym data 
     """
