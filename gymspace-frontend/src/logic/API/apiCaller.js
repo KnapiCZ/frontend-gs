@@ -1,16 +1,16 @@
 
 //const url = ref("http://127.0.0.1:8000/api/users/"+userId)
 async function callApi(apiType="", firstItem=1, secondItem=2) {
-  const baseUrl = `http://localhost:8080`
+  const baseUrl = `http://127.0.0.1:8080`
   let response
   let data
   switch(apiType)
-   {  
+   {
       case "getToken":
        data = {"username":firstItem.username,"password":firstItem.password}
        console.log(data)
         try {
-          response = await fetch(`${baseUrl}/api-auth/`, { 
+          response = await fetch(`${baseUrl}/api-auth/`, {
             method: "POST",
             credentials: "include",
             headers: {
@@ -26,7 +26,7 @@ async function callApi(apiType="", firstItem=1, secondItem=2) {
 
       case "confirmAuth":
         try {
-          response = await fetch(`${baseUrl}/api/confirm-auth/`, { 
+          response = await fetch(`${baseUrl}/api/confirm-auth/`, {
             method: "POST",
             credentials: "include",
             headers: {
@@ -41,7 +41,7 @@ async function callApi(apiType="", firstItem=1, secondItem=2) {
 
       case "userProfile":
         response = await(
-          fetch(`${baseUrl}/api/users/${firstItem}/`, 
+          fetch(`${baseUrl}/api/users/${firstItem}/`,
             {
               withCredentials: true,
               credentials: "include",
@@ -68,7 +68,7 @@ async function callApi(apiType="", firstItem=1, secondItem=2) {
             })
         );
         return await response.json()
-      
+
       case "follow":
         const follow_data = {"followers": firstItem, "id": secondItem}
         response = await(
@@ -83,7 +83,7 @@ async function callApi(apiType="", firstItem=1, secondItem=2) {
             })
         )
         return response.json()
-      
+
       case "isFollowing":
         response = await(
           fetch(`${baseUrl}/api/users-follow-data/${secondItem}/`,

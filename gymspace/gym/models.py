@@ -1,18 +1,45 @@
 from django.db import models
 from django.contrib.auth.models import User
+from company.models import Company
 # Create your models here.
+
+
 def gym_upload_path(instance, filename):
     return f'media/global_gym_media/{instance.id}/media/{filename}'
 
+
+class Sport(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField(max_length=600)
+
+    def __str__(self):
+        return f'{self.title}'
+
+
 class Gym(models.Model):
+    parent_company = models.ForeignKey(Company, on_delete=models.CASCADE)
+
     title = models.CharField(max_length=300)
-    description = models.CharField(max_length=1000)
+    subtitle = models.CharField(max_length=150)
+    description = models.TextField(max_length=1000)
 
     logo = models.ImageField(upload_to=gym_upload_path)
+    main_image = models.ImageField(upload_to=gym_upload_path)
 
     members = models.ManyToManyField(User,
                                      blank=True,
-                                     related_name='members',
+                                     related_name='gym_members',
                                      symmetrical=False)
+    staff = models.ManyToManyField(User,
+                                   blank=True,
+                                   related_name='gym_staff',
+                                   symmetrical=False)
+
+    city = models.CharField(max_length=50)
+    location = models.CharField(max_length=500)
+    location_size = models.IntegerField(null=True, blank=True)
+
+    supported_sports = models.ManyToManyField(Sport)
+
     def __str__(self):
-        return f'{self.title[:50]}'
+        return f'{self.title}'

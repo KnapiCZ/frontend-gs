@@ -120,7 +120,7 @@ class UserPostViewSet(viewsets.ViewSet):
             })
         print(media)
         media_serializer = UserPostMediaSerializer(media, many=True)
-        
+
         if post_serializer.is_valid():
             return Response({"post": post_serializer.data,
                              "media": media_serializer.data})
@@ -130,13 +130,13 @@ class UserPostViewSet(viewsets.ViewSet):
 
 class RecommendedPostViewSet(viewsets.ViewSet):
     def retrieve(self, request, pk=None):
-        
+
         following = UserProfile.objects.filter(followers=pk)\
                 .values_list('pk', flat=True)
         posts = UserPost.objects\
                 .filter(author__user_profile__in=following)\
                 .order_by('-post_time')[:5]
-        
+
         post_serializer = UserPostSerializer(posts, many=True)
         print(posts)
         return Response({"posts": post_serializer.data,})
@@ -152,4 +152,3 @@ class ConfirmAuth(viewsets.ViewSet):
             return Response({'log': user.id})
         else:
             return Response({'log': 'not logged in'})
-

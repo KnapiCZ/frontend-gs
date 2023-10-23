@@ -1,5 +1,5 @@
 from rest_framework.authtoken.views import ObtainAuthToken
-from rest_framework.authtoken.models import Token 
+from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 
 from rest_framework.permissions import AllowAny
@@ -13,13 +13,14 @@ class CustomAuthToken(ObtainAuthToken):
         user=serializer.validated_data['user']
         token,created=Token.objects.get_or_create(user=user)
         response =  Response({
-            "user_id": user.id,    
+            "user_id": user.id,
         })
         response.set_cookie(key="auth_token",
                             value=f"{token}",
                             httponly=True,
                             max_age=3600,
-                            samesite=None,
+                            samesite='None',
+                            secure=True,
                             )
-        
+
         return response

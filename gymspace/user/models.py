@@ -22,29 +22,29 @@ class UserProfile(models.Model):
     username = models.CharField(max_length=60)
 
     goal = models.CharField(max_length=50, blank=True)
-    
+
     description = models.CharField(max_length=300, blank=True)
-    
+
     email = models.EmailField(max_length=254, unique=True)
-    
-    
+
+
     SEX_CHOICES = (
         ('M', 'Male'),
         ('F', "Female"),
         ('O', 'Other')
     )
     sex = models.CharField(max_length=1, choices=SEX_CHOICES)
-    
+
     height = models.FloatField(null=True, blank=True)
     weight = models.FloatField(null=True, blank=True)
-    
+
     trainer_status = models.BooleanField()
-    
+
     followers = models.ManyToManyField(User,
                                        blank=True,
                                        related_name='following',
                                        symmetrical=False)
-    
+
     profile_picture = models.ImageField(upload_to=profile_upload_path,
                                         null=True, blank=True)
     background_picture = models.ImageField(upload_to=profile_upload_path,
@@ -104,4 +104,3 @@ class UserPostMedia(models.Model):
 
 
 
-    

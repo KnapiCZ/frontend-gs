@@ -36,6 +36,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'user.apps.UserConfig',
     'gym.apps.GymConfig',
+    'company.apps.CompanyConfig',
+    'club.apps.ClubConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -50,7 +52,6 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -66,7 +67,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://192.168.88.86:5173',
     'http://localhost:5173',
     'http://172.20.10.14:5173',
-    'http://10.0.1.42:5173'
+    'http://10.0.1.42:5173',
 
 ]
 
