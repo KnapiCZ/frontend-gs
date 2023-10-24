@@ -1,10 +1,50 @@
 [
-    {"id":1, "thumbSRC":"/media/global_profile_media/1/profile/images.jpg", "index":0, "type":"img"},
-    {"id":2, "thumbSRC":"/media/global_profile_media/2/profile/1690636747042.jpg", "index":1, "type":"img"},
-    {"id":3, "thumbSRC":"/media/global_profile_media/3/profile/levneletenky.jpg", "index":2, "type":"img"},
-    {"id":4, "thumbSRC":"/media/global_profile_media/5/profile/hlavicka1.png", "index":3, "type":"img"},
-    {"id":5, "thumbSRC":"/media/global_profile_media/5/profile/hokusai.jpg", "index":4, "type":"img"},
-    {"id":6, "thumbSRC":"/media/global_profile_media/4/profile/1690636747042.jpg", "index":5, "type":"img"},
-    {"id":7, "thumbSRC":"/media/global_profile_media/1/profile/images.jpg", "index":6, "type":"img"}
-
+    {
+        "id": 1,
+        "username": "ksnapeek",
+        "userhandle": "@admin",
+        "date": "10 November 2023",
+        "description": "This G is getting to shape because she want to win that race. Can u beat her?",
+        "thumbSRC": "/media/global_profile_media/1/profile/photo1.jpg"
+    },
+    {
+        "id": 2,
+        "username": "ksnapeek",
+        "userhandle": "@admin",
+        "date": "4 November 2023",
+        "description": "Deadlift is my favorite. Don't be shy and try it with me.",
+        "thumbSRC": "/media/global_profile_media/1/profile/photo2.jpg"
+    },
+    {
+        "id": 3,
+        "username": "ksnapeek",
+        "userhandle": "@admin",
+        "date": "1 November 2023",
+        "description": "Few years ago I had a bad shape and I was fat. Now LOOK at me I'm getting better and better.",
+        "thumbSRC": "/media/global_profile_media/1/profile/photo3.jpg"
+    },
+    {
+        "id": 4,
+        "username": "ksnapeek",
+        "userhandle": "@admin",
+        "date": "24 September 2023",
+        "description": "Another day in Gym and still no Gymbro #day15",
+        "thumbSRC": "/media/global_profile_media/1/profile/photo4.jpg"
+    },
+    {
+        "id": 5,
+        "username": "ksnapeek",
+        "userhandle": "@admin",
+        "date": "19 September 2023",
+        "description": "Felt cute might delete later",
+        "thumbSRC": "/media/global_profile_media/1/profile/photo5.jpg"
+    },
+    {
+        "id": 6,
+        "username": "ksnapeek",
+        "userhandle": "@admin",
+        "date": "11 September 2023",
+        "description": "gorilla mode",
+        "thumbSRC": "/media/global_profile_media/1/profile/photo6.jpg"
+    }
 ]

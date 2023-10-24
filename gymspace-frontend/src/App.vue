@@ -1,24 +1,30 @@
-<script setup>
-  import Landing from './view/shared/Landing/LandingPage.vue';
+<script setup lang="ts">
+import { IonApp, IonRouterOutlet } from '@ionic/vue';
 </script>
 
 <template>
-    <Suspense>
-      <template #default>
-        <main>
-          <Landing />
-        </main>
-      </template>
+  <Suspense>
+    <template #default>
+      <main>
+        <ion-app>
+          <IonRouterOutlet />
+        </ion-app>
+      </main>
+    </template>
 
-      <template #fallback>
-        <h1>loading</h1>
-      </template>
-    </Suspense>
+    <template #fallback>
+      <h1>loading</h1>
+    </template>
+  </Suspense>
 </template>
 
 
 
 <style>
+* {
+  margin: 0;
+  padding: 0;
+}
 
 main,
 #app {
@@ -29,7 +35,7 @@ main,
   background-color: transparent;
 }
 
-#app{
+#app {
   display: flex;
 }
 
@@ -38,8 +44,10 @@ body {
   margin: 0;
   padding: 0;
 }
+
 #load {
   font-size: 100px;
 }
-
 </style>
+
+

@@ -1,23 +1,24 @@
-<script setup>
-    import Thumbnail from './thumbnail.vue';
-    import json from '../../../assets/mocs/profilepost.json'
+<script setup lang="ts">
+import Thumbnail from './thumbnail.vue';
+import json from '../../../assets/mocs/profilepost.json'
 
- let props = defineProps({
-    id: Number,
-    
- })
+let props = defineProps({
+  id: Number,
+
+})
 
 </script>
 
 
 <template>
-    <div class="grid-container">
-      <Thumbnail v-for="data in myJson" :ImageSource="data.thumbSRC" :postID="data.id" :postIndex="data.index" class="grid-item"/>
-    </div>
+  <div class="grid-container">
+    <Thumbnail v-for="data in myJson" :ImageSource="data.thumbSRC" :postID="data.id" :postIndex="data.id"
+      class="grid-item" />
+  </div>
 </template>
 
 
-<script>
+<script lang="ts">
 export default {
   data: () => ({
     myJson: json,
@@ -31,6 +32,7 @@ export default {
   width: 100%;
   grid-template-columns: auto auto auto;
 }
+
 .grid-item {
   text-align: center;
   aspect-ratio: 0.5;
@@ -42,11 +44,11 @@ export default {
 
 @media screen and (min-width: 1200px) {
   .grid-container {
-  display: grid;
-  width: 30%;
-  grid-template-columns: auto auto auto;
-}
+    display: grid;
+    width: 30%;
+    grid-template-columns: auto auto auto;
+  }
 
-  
+
 }
 </style>

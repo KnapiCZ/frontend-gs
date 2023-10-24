@@ -1,8 +1,3 @@
-<script setup>
-
-</script>
-
-
 <template>
     <div>
         <img src="../../../assets/icons/like.svg" alt="">
@@ -13,13 +8,14 @@
 </template>
 
 <style scoped>
-img{
+img {
     width: 30px;
     height: 30px;
     margin: 20px 10px;
     display: block;
 }
-div{
+
+div {
     height: fit-content;
     width: fit-content;
     position: absolute;
