@@ -1,16 +1,24 @@
+<script setup lang="ts">
+const props = defineProps<{
+    description?: string,
+    hashtags?: string
+}>()
 
+
+
+</script>
 
 
 <template>
-    <p class="main-text">Stay focused be the best version of your self</p>
-    <p class="hashtags">#backday #stayfocused #bebetter</p>
-    <p class="liked-text">Post was also liked by @gymshark, @startworkout and 81 others</p>
+    <p class="main-text">{{ description }}</p>
+    <p class="hashtags">{{ hashtags }}</p>
+    <p class="liked-text">Post was also liked by @gymshark and 81 others</p>
 </template>
 
 
 
 <style scoped>
-p{
+p {
     margin-top: 10px;
     margin-left: calc(8vw + 23px);
     margin-right: 30px;
@@ -18,12 +26,12 @@ p{
     font-size: 13px;
 }
 
-.main-text{
+.main-text {
     font-weight: bold;
 }
 
 .hashtags,
-.liked-text{
+.liked-text {
     margin-top: 3px;
     font-size: 12px;
     color: rgb(153, 153, 153);

@@ -1,35 +1,40 @@
-<script setup>
+<script setup lang="ts">
 import { VRow } from 'vuetify/lib/components/index.mjs';
+
+const props = defineProps<{
+    songname?: string,
+}>()
+
 
 </script>
 
 <template>
     <VRow>
         <img src="../../../../assets/icons/note.svg" alt="note icon">
-        <p>HARDSTYLE REMIX - WARRIORS...</p>
+        <p>{{ songname }}</p>
     </VRow>
-
 </template>
 
 <style scoped>
-.v-row{
+.v-row {
     margin-top: 10px;
     margin-left: calc(8vw + 23px);
     margin-right: 30px;
 }
 
-p{
+p {
     font-weight: bold;
     color: white;
     font-size: 13px;
 }
 
-img{
+img {
     margin: auto 10px auto 0;
     height: 13px;
 }
+
 .hashtags,
-.liked-text{
+.liked-text {
     margin-top: 3px;
     font-size: 12px;
     color: rgb(153, 153, 153);

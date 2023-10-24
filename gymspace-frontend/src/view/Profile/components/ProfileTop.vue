@@ -1,83 +1,104 @@
-<script setup>
-  import { VBadge, VCol } from 'vuetify/lib/components/index.mjs';
-  import { VRow } from 'vuetify/lib/components/index.mjs';
-  import { VAvatar } from 'vuetify/lib/components/index.mjs';
+<script setup lang="ts">
+import { VCol, VRow, VAvatar } from 'vuetify/lib/components/index.mjs';
 
-  let props = defineProps({
-    profile_picture_url: String,
-    background_picture_url: String,
-    username: String,
-    followers: Number,
-    trainer_status: Boolean,
-    })
+let props = defineProps({
+  profile_picture_url: String,
+  background_picture_url: String,
+  username: String,
+  followers: Number,
+  trainer_status: Boolean,
+})
 
 </script>
 
 <template>
-  <div id="background" :style="{ backgroundImage: 'url(' + props.background_picture_url + ')'}">
-    <VCol class="main-info " :style="{ backgroundImage: 'url(' + props.background_picture_url + ')'}">
+  <div id="background" :style="{ backgroundImage: 'url(' + props.background_picture_url + ')' }">
+    <div class="main-info " :style="{ backgroundImage: 'url(' + props.background_picture_url + ')' }">
       <VAvatar class='PFP' :image="props.profile_picture_url"></VAvatar> <!-- API SCR profiloveho obrazku-->
-      <img class="check-mark"  src="../../../assets/icons/checkMark.svg"> <!-- API USER VERIFIED-->
+      <img class="check-mark" src="../../../assets/icons/checkMark.svg"> <!-- API USER VERIFIED-->
       <VRow>
-        <VCol>      
-          <div class="top-item">Followers</div> 
-          <div class="bottom-item">{{ props.followers }}</div> <!-- API following user count-->
-        </VCol>
-        <VCol>      
+        <div class="column">
+          <div class="top-item1">{{ props.followers }}</div>
+          <div class="bottom-item">followers</div> <!-- API following user count-->
+        </div>
+        <div class="column">
           <div class="top-item"> {{ props.username }}</div> <!-- API username-->
           <div v-if="props.trainer_status" class="bottom-item">Trainer</div> <!-- API following user count-->
-
-        </VCol>
-        <VCol>      
-          <div class="top-item">Post</div>  
-          <div class="bottom-item">25</div> <!-- API user post count-->
-        </VCol>
+        </div>
+        <div class="column">
+          <div class="top-item1">25</div>
+          <div class="bottom-item">posts</div> <!-- API user post count-->
+        </div>
       </VRow>
-    </VCol>
+    </div>
   </div>
 </template>
 
 <style scoped>
-#background{
+#background {
   position: relative;
   margin: auto;
   width: 100vw;
-  height: 150px;
+  height: 180px;
   text-align: center;
-  background-size: 100vw 185px;
+  background-size: 100vw 215px;
   background-position: top;
 }
 
-.main-info{  
+.column {
+  width: 30%;
+  height: 60px;
+  margin: auto;
+  padding: 20px 0;
+
+}
+
+.main-info {
   width: 75%;
   height: 70px;
-  margin: auto;
+  margin: 0 !important;
   padding-top: 20px;
   position: absolute;
   bottom: -35px;
-  left: calc((100% / 2) - (75% / 2));
+  left: 50%;
+  transform: translateX(-50%);
   background-position: bottom;
-  background-size: 100vw 180px;
+  background-size: 100vw 210px;
   background-blend-mode: darken;
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
   border-radius: 10px;
 }
-.PFP{
-  width: 80px; height: 80px;
+
+.PFP {
+  width: 80px;
+  height: 80px;
   position: absolute;
-  left: calc((100% / 2) - 40px);
+  left: 50%;
+  transform: translateX(-50%);
   top: -60px;
 }
 
-.check-mark{
-  width: 60px; height: 60px;
+.check-mark {
+  width: 60px;
+  height: 60px;
   position: absolute;
-  left: calc((100% / 2) );
+  left: calc((100% / 2));
   top: -20px;
 }
 
-.top-item{
+.top-item,
+.top-item1 {
   font-weight: bold;
+}
+
+.bottom-item {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.top-item1 {
+  line-height: 22px;
+  font-size: 20px;
 }
 </style>

@@ -1,45 +1,52 @@
-<script setup>
- import { VCard } from 'vuetify/lib/components/index.mjs';
+<script setup lang="ts">
+import { IonButton } from '@ionic/vue';
+import ClubGym from '../pages/ClubGym.vue';
 
- const gymInfo = defineProps(['title', 'ImageSRC'])
+const props = defineProps<{
+  title?: string,
+  ImageSRC?: string,
+  id?: number
+}>()
+
 
 </script>
 
 <template>
-  <VCard>
-    <img :src="gymInfo.ImageSRC" alt="">
-    <h1>{{ title }}</h1>
-  </VCard>
+  <IonButton class="btn ion-no-padding" :id="props.id" color="rgba(255, 255, 255, 0.103)">
+    <img :src="props.ImageSRC" alt="">
+    <h1>{{ props.title }}</h1>
+  </IonButton>
+  <ClubGym :modalId="props.id" :name="props.title" :logo="props.ImageSRC" />
 </template>
 
 <style scoped>
-.v-card{
-  width: auto;
-  height: 64px;
-  margin: 20px;
+.btn {
+  width: calc(100% - 60px);
+  height: 80px;
+  margin: 10px 30px 15px 30px;
   text-align: center;
-  background: rgba(145, 145, 145, 0.3)
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.103) !important;
 }
 
-h1{
-  font-size: 36px;
-  font-style: italic;
+h1 {
+  font-size: 8vw;
   font-weight: bold;
   color: white;
   position: absolute;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  left: 120px;
+  transform: translateY(-50%);
 
 }
-img{
+
+img {
   display: inline;
   width: auto;
-  height: 100%;
+  height: 90%;
   aspect-ratio: 1;
   object-fit: contain;
   position: absolute;
-  left: 5px;
+  left: 20px;
 }
-
 </style>

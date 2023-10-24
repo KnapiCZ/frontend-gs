@@ -7,12 +7,12 @@
   font-style: normal;
 
   src: url(./fonts/Montserrat-Regular.ttf);
-  
+
 }
 
 @font-face {
   font-family: "Montserrat";
-  font-weight: bold; 
+  font-weight: bold;
   font-style: normal;
 
   src: url(./fonts/Montserrat-Bold.ttf);
@@ -20,6 +20,7 @@
 
 @font-face {
   font-family: "Montserrat";
+  font-weight: normal;
   font-style: italic;
 
   src: url(./fonts/Montserrat-Italic.ttf);
@@ -29,13 +30,11 @@
   font-family: "Etna-Sans-Serif";
   font-weight: 400;
   font-style: normal;
-
   src: url(./fonts/Etna-Sans-serif.otf);
 }
 
-*{
-  font-family: "Montserrat";
-font-weight: 400;
+* {
+  font-family: "Montserrat" !important;
 }
 
 
