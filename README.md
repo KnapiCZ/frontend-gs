@@ -3,7 +3,8 @@
 ## Zapnutí serveru pro Vue:
 Jdi do /gymspace-frontend/ v terminálu a napiš:
 ```
-npm run dev -- --host
+ionic serve  (pro local)
+ionic serve --external (pro hostovani)
 ```
 
 Server se zapne na specifické url, koukni se do terminálu.

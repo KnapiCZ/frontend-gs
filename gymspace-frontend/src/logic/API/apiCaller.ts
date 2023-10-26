@@ -1,7 +1,7 @@
 
 //const url = ref("http://127.0.0.1:8000/api/users/"+userId)
 async function callApi(apiType = "", firstItem?: unknown, secondItem?: unknown) {
-  const baseUrl = `http://192.168.226.1:8080`
+  const baseUrl = `http://localhost:8080`
   let response
   let data
   switch (apiType) {

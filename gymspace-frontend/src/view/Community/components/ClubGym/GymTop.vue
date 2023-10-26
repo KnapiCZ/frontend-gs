@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { IonRow, IonCol, IonToolbar, IonButtons, modalController, IonButton, IonTitle } from '@ionic/vue';
-
+import BioButton from './BioButton.vue';
 function closeModal() {
     modalController.dismiss();
 }
 
 let props = defineProps<{
-    logo?: string,
-    name?: string,
+    logo: string,
+    name: string,
 }>()
 
 
@@ -23,7 +23,7 @@ let props = defineProps<{
     </IonToolbar>
     <IonRow id="background">
         <IonCol class="column" size="4">
-            <img class="logo" :src="props.logo">
+            <BioButton :logo="props.logo" :name="props.name" :description="'NIGAAAA'" />
             <p class="top">{{ props.name }}</p>
         </IonCol>
         <IonCol class="column" size="3">
@@ -81,7 +81,7 @@ let props = defineProps<{
     position: relative;
     margin: auto;
     width: 100vw;
-    height: 150px;
+    max-height: 150px;
     text-align: center;
     background-color: black;
 }
