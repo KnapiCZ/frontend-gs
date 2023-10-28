@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { VTab, VWindow, VWindowItem } from 'vuetify/lib/components/index.mjs';
-import { IonContent, IonModal, modalController } from '@ionic/vue';
+import { IonContent, IonModal } from '@ionic/vue';
 import GridLayout from '../../Post/components/GridLayout.vue';
 import TopGym from '../components/ClubGym/GymTop.vue'
 import FeedPost from '@/view/Post/components/Feed/FeedPost.vue';
