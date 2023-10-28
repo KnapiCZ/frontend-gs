@@ -15,7 +15,7 @@ const postUrl = `${baseUrl}${props.ImageSource}`
 
 
 <template>
-  <IonButton class="ion-no-padding" color="transparent" router-direction="forward" :href="'/posts/' + postID">
+  <IonButton class="ion-no-padding" color="transparent" router-direction="forward" :href="'/user/1/post/' + postID">
     <!-- 1source: postURL smaz az po te co smazes :souce/ v router.js 
                                                                                             + na profilu budes chtit ze ti to otevre tenhle post,
                                                                                               ale budes moct scrollovat i mezi dalsimi tvymi posty na profilu

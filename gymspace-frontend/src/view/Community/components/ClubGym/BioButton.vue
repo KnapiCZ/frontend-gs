@@ -3,9 +3,9 @@ import { IonRow } from '@ionic/vue';
 import { VCard, VDialog } from 'vuetify/lib/components/index.mjs';
 
 const props = defineProps<{
-    name: string,
-    description: string,
-    logo: string,
+    name?: string,
+    description?: string,
+    logo?: string,
 
 }>
     ()
@@ -19,7 +19,7 @@ const props = defineProps<{
             width="75vw" height="70vh">
             <VCard>
                 <div class=" top-info">
-                    <img class="logo" :src="$props.logo">
+                    <img class="logo" :src="props.logo">
                     <h1 class="name">{{ name }}</h1>
                     <p>The best boddybuilding club ever</p>
                     <p>hashtags?????</p>

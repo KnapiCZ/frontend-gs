@@ -8,8 +8,8 @@ function closeModal() {
 }
 
 let props = defineProps<{
-    logo: string,
-    name: string,
+    logo?: string,
+    name?: string,
 }>()
 
 let FollowMembers = ref([26, 56]);
@@ -17,18 +17,13 @@ let isFollowing = [false, false];
 
 async function followJoin(type: number) {
     if (isFollowing[type]) {
-        console.log('following changed to false');
-
         isFollowing[type] = !isFollowing[type];
         FollowMembers.value[type] -= 1;
     }
     else {
-        console.log('following changed to true')
-
         isFollowing[type] = !isFollowing[type];
         FollowMembers.value[type] += 1;
     }
-    console.log(FollowMembers.value[0], FollowMembers.value[1])
 }
 
 
