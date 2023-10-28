@@ -8,11 +8,11 @@ import ContactButton from './ContactButton.vue';
 <template>
   <div class="hello">
     <button class="profileButtons">
-      Edit Profile
-    </button> <!-- vytvorit api na follow -->
+      Edit
+    </button>
 
     <button class="profileButtons">
-      Share Profile
+      Share
     </button>
     <ContactButton></ContactButton>
 

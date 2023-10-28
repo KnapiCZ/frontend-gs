@@ -5,7 +5,11 @@ import ProfileBasicInfo from '../components/ProfileBasicInfo.vue';
 import TabBar from '../components/Tabs/TabBar.vue';
 import OtherUserButton from '../components/Buttons/OtherUserButton.vue';
 import api from '@/logic/API/apiCaller';
-import { IonContent, IonPage, IonRouterOutlet } from '@ionic/vue';
+
+import { IonContent, IonPage } from '@ionic/vue';
+import { useStore } from '../../../stores/store';
+
+const store = useStore()
 
 const props = defineProps<{
   id: -1
@@ -19,12 +23,13 @@ await api("userProfile", props.id).then((renderedUser) => {
 const userData = JSON.parse(
   sessionStorage.getItem('renderedUser')!
 )
+
 const loggedInUserId = +sessionStorage.getItem('loggedInUserId')!
 
+store.count = userData.followers
 
 
 function checkLogin() {
-  console.log(props.id + "   " + loggedInUserId)
   if (props.id == loggedInUserId) {
     return true;
 

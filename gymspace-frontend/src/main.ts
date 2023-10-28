@@ -1,10 +1,10 @@
 import { createApp } from 'vue';
-import App from './App.vue';
 import { createVuetify } from "vuetify";
+import { createPinia } from 'pinia'
+import { IonicVue } from '@ionic/vue';
 
 import router from './router';
-
-import { IonicVue } from '@ionic/vue';
+import App from './App.vue';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/vue/css/core.css';
@@ -16,13 +16,16 @@ import './theme/variables.css';
 
 // Vuetify
 import 'vuetify/styles'
-
 import '@/assets/main.css'
+
+const pinia = createPinia()
+const vuetify = createVuetify()
 
 const app = createApp(App)
   .use(IonicVue)
   .use(router)
-  .use(createVuetify());
+  .use(vuetify)
+  .use(pinia);
 
 router.isReady().then(() => {
   app.mount('#app');

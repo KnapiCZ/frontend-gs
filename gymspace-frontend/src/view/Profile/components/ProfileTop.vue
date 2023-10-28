@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { VCol, VRow, VAvatar } from 'vuetify/lib/components/index.mjs';
+import { VRow, VAvatar } from 'vuetify/lib/components/index.mjs';
+import { useStore } from '@/stores/store';
 
 let props = defineProps({
   profile_picture_url: String,
@@ -9,16 +10,18 @@ let props = defineProps({
   trainer_status: Boolean,
 })
 
+const store = useStore();
+
 </script>
 
 <template>
   <div id="background" :style="{ backgroundImage: 'url(' + props.background_picture_url + ')' }">
     <div class="main-info " :style="{ backgroundImage: 'url(' + props.background_picture_url + ')' }">
-      <VAvatar class='PFP' :image="props.profile_picture_url"></VAvatar> <!-- API SCR profiloveho obrazku-->
+      <VAvatar class='PFP' :image="props.profile_picture_url" f></VAvatar> <!-- API SCR profiloveho obrazku-->
       <img class="check-mark" src="../../../assets/icons/checkMark.svg"> <!-- API USER VERIFIED-->
       <VRow>
         <div class="column">
-          <div class="top-item1">{{ props.followers }}</div>
+          <div class="top-item1">{{ store.count }}</div>
           <div class="bottom-item">followers</div> <!-- API following user count-->
         </div>
         <div class="column">
@@ -77,6 +80,10 @@ let props = defineProps({
   left: 50%;
   transform: translateX(-50%);
   top: -60px;
+}
+
+.v-img__img {
+  object-fit: contain !important;
 }
 
 .check-mark {

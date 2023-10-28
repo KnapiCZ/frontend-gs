@@ -28,6 +28,7 @@ await api("userProfile", loggedInUserId).then((loggedUser) => {
 
 </script>
 
+
 <template>
   <IonPage class="ion-no-padding">
     <IonTabs class="ion-no-padding">
@@ -79,7 +80,8 @@ export default {
 
 #profile {
   height: 70%;
-  aspect-ratio: 1;
+  aspect-ratio: 1 !important;
+  object-fit: contain;
   border-radius: 50%;
   border: 2px solid transparent !important;
 }
