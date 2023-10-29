@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import { IonRow, IonCol, IonToolbar, IonButtons, modalController, IonButton, IonTitle } from '@ionic/vue';
+import { IonRow, IonCol, IonToolbar, IonButtons, IonButton, IonTitle, useIonRouter } from '@ionic/vue';
 import BioButton from './BioButton.vue';
 import { ref } from 'vue';
 
-function closeModal() {
-    modalController.dismiss();
-}
+const router = useIonRouter()
 
 let props = defineProps<{
     logo?: string,
@@ -32,7 +30,7 @@ async function followJoin(type: number) {
 <template>
     <IonToolbar>
         <IonButtons slot="start">
-            <IonButton :onclick="closeModal" class="back-button"><img src="../../../../assets/icons/arrowRight.svg">
+            <IonButton @click="router.back()" class="back-button"><img src="../../../../assets/icons/arrowRight.svg">
             </IonButton>
         </IonButtons>
         <IonTitle>{{ name }}</IonTitle>

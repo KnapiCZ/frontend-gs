@@ -18,6 +18,11 @@ const routes: Array<RouteRecordRaw> = [
     name: 'landingPage',
     component: () => import('@/view/shared/BottomNavigationBar_Router/BottomNavigationBar.vue'),
     children: [
+      {
+        path: '',
+        name: 'redirect',
+        redirect: '/foryou'
+      },
 
       {
         path: '/user/:id',
@@ -28,7 +33,7 @@ const routes: Array<RouteRecordRaw> = [
       },
 
       {
-        path: '/posts/:initialPosition',
+        path: '/user/:id/post/:initialPosition',
         name: 'post',
         component: () => import('@/view/Post/view/FeedSlider.vue'),
         meta: { requiresAuth: true, }
@@ -42,13 +47,14 @@ const routes: Array<RouteRecordRaw> = [
       },
 
       {
-        path: '/gym/:id',
+        path: '/community/gym/:id',
+        name: "gym",
         component: () => import('@/view/Community/pages/ClubGym.vue'),
-        meta: { requiresAuth: true }
+        meta: { requiresAuth: true },
       },
 
       {
-        path: '/foryou/',
+        path: '/foryou',
         name: "fyp",
         component: () => import('@/view/ForYouPage/pages/ForYouPage.vue'),
         meta: { requiresAuth: true }

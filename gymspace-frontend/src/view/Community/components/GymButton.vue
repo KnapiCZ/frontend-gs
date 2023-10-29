@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { IonButton } from '@ionic/vue';
+import { IonButton, useIonRouter } from '@ionic/vue';
 import ClubGym from '../pages/ClubGym.vue';
+
+const router = useIonRouter()
 
 const props = defineProps<{
   title?: string,
@@ -12,11 +14,10 @@ const props = defineProps<{
 </script>
 
 <template>
-  <IonButton class="btn ion-no-padding" :id="props.id" color="rgba(255, 255, 255, 0.103)">
+  <IonButton class="btn ion-no-padding" color="rgba(255, 255, 255, 0.103)" @click="() => router.push('/community/gym/1')">
     <img :src="props.ImageSRC" alt="">
     <h1>{{ props.title }}</h1>
   </IonButton>
-  <ClubGym :modalId="props.id" :name="props.title" :logo="props.ImageSRC" />
 </template>
 
 <style scoped>
@@ -48,5 +49,9 @@ img {
   object-fit: contain;
   position: absolute;
   left: 20px;
+}
+
+ion-buton {
+  background-color: rgba(255, 255, 255, 0.103);
 }
 </style>

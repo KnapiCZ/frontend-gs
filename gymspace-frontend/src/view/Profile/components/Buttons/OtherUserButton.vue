@@ -1,16 +1,17 @@
 <script setup lang="ts">
 import api from '@/logic/API/apiCaller';
-import { ref } from 'vue';
 import ContactButton from './ContactButton.vue';
+import { ref } from 'vue';
 import { useStore } from '@/stores/store';
 
 let loggedInUserId = +sessionStorage.getItem('loggedInUserId')!
 let followingList = await api('isFollowing', loggedInUserId, 2)
+
 const isFollowing = ref()
 const store = useStore()
 
-function following(followers: unknown) {
-  if (followers.includes(loggedInUserId)) {
+function following(followers: []) {
+  if (followers.includes(loggedInUserId as never)) {
     isFollowing.value = true;
   }
   else {
@@ -27,7 +28,7 @@ async function follow() {
   }
   await api("follow",
     loggedInUserId,
-    2).then(isFollowing.value = !isFollowing.value)
+    2).then((isFollowing.value as any) = (!isFollowing.value as any))
 }
 
 following(followingList.followers)
