@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { VBtn } from 'vuetify/lib/components/index.mjs';
+import { IonButton } from '@ionic/vue';
 
 
 const props = defineProps({
@@ -11,16 +11,16 @@ const props = defineProps({
 </script>
 
 <template>
-    <VBtn>
+    <IonButton color="transparent">
         <img v-if="props.type === 'email'" src="../../../../assets/icons/envelope.svg" alt="email">
         <img v-if="props.type === 'web'" src="../../../../assets/icons/globe.svg" alt="web">
         <img v-if="props.type === 'nwm'" src="../../../../assets/icons/envelope.svg" alt="other">
         <p>{{ props.name }}</p>
-    </VBtn>
+    </IonButton>
 </template>
 
 <style scoped>
-.v-btn {
+ion-button {
     width: auto;
     height: 60px;
     margin: 10px 30px;

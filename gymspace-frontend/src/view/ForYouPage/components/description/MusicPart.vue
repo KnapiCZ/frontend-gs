@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { VRow } from 'vuetify/lib/components/index.mjs';
+import { IonRow } from '@ionic/vue';
 
 const props = defineProps<{
     songname?: string,
@@ -9,14 +9,14 @@ const props = defineProps<{
 </script>
 
 <template>
-    <VRow>
+    <IonRow>
         <img src="../../../../assets/icons/note.svg" alt="note icon">
         <p>{{ songname }}</p>
-    </VRow>
+    </IonRow>
 </template>
 
 <style scoped>
-.v-row {
+ion-row {
     margin-top: 10px;
     margin-left: calc(8vw + 23px);
     margin-right: 30px;

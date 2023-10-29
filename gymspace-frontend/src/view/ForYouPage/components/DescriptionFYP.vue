@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { IonContent } from '@ionic/vue';
 import HeadPart from './description/HeadPart.vue';
 import MiddlePart from './description/MiddlePart.vue'
 import MusicPart from './description/MusicPart.vue';
@@ -15,20 +16,20 @@ const props = defineProps<{
 
 
 <template>
-    <VContainer class="description">
+    <IonContent class="description ion-no-padding">
         <HeadPart :user-handle="props.userHandle" />
         <MiddlePart :description="props.description" :hashtags="props.hashtags" />
         <MusicPart :songname="props.songname" />
-    </VContainer>
+    </IonContent>
 </template>
 
 <style scoped>
 .description {
-    max-width: 99%;
-    height: 120px;
-    background-color: rgba(50, 50, 50, 0.5);
+    width: 100%;
+    height: 150px;
+    background-image: linear-gradient(transparent, black);
     position: absolute;
-    bottom: 56px;
+    bottom: 52px;
     left: 0;
     overflow: hidden;
 }

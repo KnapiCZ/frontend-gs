@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { IonButton, useIonRouter } from '@ionic/vue';
-import ClubGym from '../pages/ClubGym.vue';
 
 const router = useIonRouter()
 

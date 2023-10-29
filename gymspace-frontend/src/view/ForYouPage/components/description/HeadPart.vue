@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { VRow, VAvatar } from 'vuetify/lib/components/index.mjs';
+import { IonRow } from '@ionic/vue';
+import { VAvatar } from 'vuetify/lib/components/index.mjs';
 
 const props = defineProps<{
     userHandle?: string,
@@ -9,18 +10,18 @@ const props = defineProps<{
 
 
 <template>
-    <VRow class="VRow">
+    <IonRow>
         <VAvatar class="pfp" color="yellow" /> <!-- API PFP of  post owner -->
         <p class="userName">{{ userHandle }}</p>
         <button class="follow">Follow</button>
         <button class="notification">
             <img src="../../../../assets/icons/bell.svg" alt="">
         </button>
-    </VRow>
+    </IonRow>
 </template>
 
 <style scoped>
-.VRow {
+ion-row {
     padding: 5px;
 }
 
