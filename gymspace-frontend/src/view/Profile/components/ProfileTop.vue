@@ -17,7 +17,7 @@ const store = useStore();
 <template>
   <div id="background" :style="{ backgroundImage: 'url(' + props.background_picture_url + ')' }">
     <div class="main-info " :style="{ backgroundImage: 'url(' + props.background_picture_url + ')' }">
-      <VAvatar class='PFP' :image="props.profile_picture_url" f></VAvatar> <!-- API SCR profiloveho obrazku-->
+      <img class='PFP' :src="props.profile_picture_url" f><!-- API SCR profiloveho obrazku-->
       <img class="check-mark" src="../../../assets/icons/checkMark.svg"> <!-- API USER VERIFIED-->
       <VRow>
         <div class="column">
@@ -76,6 +76,7 @@ const store = useStore();
 .PFP {
   width: 80px;
   height: 80px;
+  object-fit: contain;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);

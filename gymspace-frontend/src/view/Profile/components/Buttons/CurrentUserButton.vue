@@ -1,12 +1,13 @@
 <script setup lang="ts">
 
+import { IonRow } from '@ionic/vue';
 import ContactButton from './ContactButton.vue';
 
 </script>
 
 
 <template>
-  <div class="hello">
+  <IonRow>
     <button class="profileButtons">
       Edit
     </button>
@@ -14,22 +15,26 @@ import ContactButton from './ContactButton.vue';
     <button class="profileButtons">
       Share
     </button>
-    <ContactButton></ContactButton>
+    <ContactButton class="profileButtons"></ContactButton>
 
-  </div>
+  </IonRow>
 </template>
   
   
 <style scoped>
+ion-row {
+  margin-top: 10px;
+  width: 100vw;
+}
+
 .profileButtons {
-  display: inline-block;
   padding: 5px auto;
-  margin: 10px 10px;
-  width: 25%;
+  margin: 10px auto;
+  width: 30%;
   height: 30px;
   background-color: rgb(47, 47, 47);
   font-weight: bold;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 </style>
 

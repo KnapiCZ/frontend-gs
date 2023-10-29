@@ -1,15 +1,5 @@
 <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g filter="url(#filter0_f_331_1416)">
-<circle cx="18" cy="18" r="6" fill="#CDC400"/>
-</g>
-<circle cx="18" cy="18" r="6" fill="#CDC400"/>
+<circle cx="18" cy="18" r="6" fill="#e8e20a"/>
 <rect x="15.6083" y="16.7861" width="2.95889" height="1.6" transform="rotate(49.0381 15.6083 16.7861)" fill="black"/>
 <rect x="21.3399" y="17.1763" width="5.62821" height="1.6" transform="rotate(137.325 21.3399 17.1763)" fill="black"/>
-<defs>
-<filter id="filter0_f_331_1416" x="0" y="0" width="36" height="36" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-<feGaussianBlur stdDeviation="6" result="effect1_foregroundBlur_331_1416"/>
-</filter>
-</defs>
 </svg>

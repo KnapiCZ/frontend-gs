@@ -69,16 +69,17 @@ div.toolbar-container * {
 .join {
     width: 90%;
     height: fit-content;
-    border-radius: 20px;
+    border-radius: 10px;
     color: black;
     font-weight: bold;
-    transition: color 0.5s ease;
 }
 
 .follow {
     border: 2px solid #e8e20a;
     background-color: #e8e20a;
-    transition: background-color 0.5s ease;
+    transition: background-color 0.5s ease-in-out;
+    transition: color 0.5s ease-in-out;
+
 
 }
 
@@ -90,7 +91,10 @@ div.toolbar-container * {
 .join {
     border: 2px solid white;
     background-color: white;
-    transition: background-color 0.5s ease;
+    transition: background-color 0.5s ease-in-out;
+    transition: color 0.5s ease-in-out;
+
+
 
 }
 

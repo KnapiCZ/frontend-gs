@@ -43,17 +43,6 @@ p {
     margin: 20px auto
 }
 
-button {
-    display: inline-block;
-    padding: 5px auto;
-    margin: 10px 10px;
-    width: 25%;
-    height: 30px;
-    background-color: rgb(47, 47, 47);
-    font-weight: bold;
-    border-radius: 5px;
-}
-
 .social {
     width: 100%;
     position: absolute;
