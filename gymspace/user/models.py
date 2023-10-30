@@ -4,9 +4,9 @@ from django.contrib.auth.models import User
 
 
 def media_upload_path(instance, filename):
-    return f'media/global_post_media/{instance.id}/media/{filename}'
+    return f'media/global_post_media/{instance.pk}/media/{filename}'
 def profile_upload_path(instance, filename):
-    return f'media/global_profile_media/{instance.id}/profile/{filename}'
+    return f'media/global_profile_media/{instance.pk}/profile/{filename}'
 
 def followers(id):
     return UserProfile.objects.get(id=id).followers.count()
@@ -101,6 +101,4 @@ class UserPostMedia(models.Model):
                                     on_delete=models.CASCADE,
                                     related_name='media')
     media = models.FileField(upload_to=media_upload_path)
-
-
 

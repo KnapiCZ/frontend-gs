@@ -7,7 +7,7 @@ gymspace/*/__pycache__
 gymspace/*/migrations
 gymspace/global_post_media
 gymspace/global_profile_media
-
+gymspace/media
 # Logs
 logs
 *.log

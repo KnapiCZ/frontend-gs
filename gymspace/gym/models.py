@@ -5,7 +5,7 @@ from company.models import Company
 
 
 def gym_upload_path(instance, filename):
-    return f'media/global_gym_media/{instance.id}/media/{filename}'
+    return f'media/global_gym_media/{instance.pk}/media/{filename}'
 
 
 class Sport(models.Model):

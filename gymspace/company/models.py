@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 
 def company_upload_path(instance, filename):
-    return f'media/global_company_media/{instance.id}/media/{filename}'
+    return f'media/global_company_media/{instance.pk}/media/{filename}'
 
 
 class Company(models.Model):

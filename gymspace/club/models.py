@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 
 def club_upload_path(instance, filename):
-    return f'media/global_gym_media/{instance.id}/media/{filename}'
+    return f'media/global_gym_media/{instance.pk}/media/{filename}'
 
 
 class Club(models.Model):
