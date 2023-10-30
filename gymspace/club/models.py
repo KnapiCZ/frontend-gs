@@ -13,7 +13,8 @@ class Club(models.Model):
     target_sport = models.ForeignKey(Sport, on_delete=models.CASCADE)
 
     title = models.CharField(max_length=300)
-    subtitle = models.CharField(max_length=150)
+    subtitle = models.CharField(max_length=150,
+                                null=True, blank=True,)
     description = models.TextField(max_length=1000)
 
     logo = models.ImageField(upload_to=club_upload_path,
