@@ -14,10 +14,11 @@ import 'swiper/css';
 const loggedUser = JSON.parse(sessionStorage.getItem("loggedUser")!)
 const baseUrl = await api()
 const gyms = await api("gymsMember", loggedUser.id)
+
 let recommended_posts = await api('recommendedPosts', loggedUser.id);
-console.log(recommended_posts)
 let postData = new Array()
 let data
+
 for (let postNumber = 2; postNumber <= recommended_posts.posts.length; postNumber++) {
   data = await api("getUserPost", postNumber)
   postData.push(data)

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { VRow, VAvatar } from 'vuetify/lib/components/index.mjs';
 import { useStore } from '@/stores/store';
+import { IonCol, IonRow } from '@ionic/vue';
 
 let props = defineProps({
   profile_picture_url: String,
@@ -17,22 +17,22 @@ const store = useStore();
 <template>
   <div id="background" :style="{ backgroundImage: 'url(' + props.background_picture_url + ')' }">
     <div class="main-info " :style="{ backgroundImage: 'url(' + props.background_picture_url + ')' }">
-      <VAvatar class='PFP' :image="props.profile_picture_url" f></VAvatar> <!-- API SCR profiloveho obrazku-->
+      <img class='PFP' :src="props.profile_picture_url" f><!-- API SCR profiloveho obrazku-->
       <img class="check-mark" src="../../../assets/icons/checkMark.svg"> <!-- API USER VERIFIED-->
-      <VRow>
-        <div class="column">
-          <div class="top-item1">{{ store.count }}</div>
-          <div class="bottom-item">followers</div> <!-- API following user count-->
-        </div>
-        <div class="column">
-          <div class="top-item"> {{ props.username }}</div> <!-- API username-->
-          <div v-if="props.trainer_status" class="bottom-item">Trainer</div> <!-- API following user count-->
-        </div>
-        <div class="column">
-          <div class="top-item1">25</div>
-          <div class="bottom-item">posts</div> <!-- API user post count-->
-        </div>
-      </VRow>
+      <IonRow>
+        <IonCol>
+          <p class="top-item1">{{ store.count }}</p>
+          <p class="bottom-item">followers</p> <!-- API following user count-->
+        </IonCol>
+        <IonCol>
+          <p class="top-item"> {{ props.username }}</p> <!-- API username-->
+          <p v-if="props.trainer_status" class="bottom-item">Trainer</p> <!-- API following user count-->
+        </IonCol>
+        <IonCol>
+          <p class="top-item1">25</p>
+          <p class="bottom-item">posts</p> <!-- API user post count-->
+        </IonCol>
+      </IonRow>
     </div>
   </div>
 </template>
@@ -40,33 +40,22 @@ const store = useStore();
 <style scoped>
 #background {
   position: relative;
-  margin: auto;
   width: 100vw;
   height: 180px;
-  text-align: center;
   background-size: 100vw 215px;
   background-position: top;
-}
-
-.column {
-  width: 30%;
-  height: 60px;
-  margin: auto;
-  padding: 20px 0;
-
 }
 
 .main-info {
   width: 75%;
   height: 70px;
-  margin: 0 !important;
   padding-top: 20px;
   position: absolute;
   bottom: -35px;
   left: 50%;
   transform: translateX(-50%);
   background-position: bottom;
-  background-size: 100vw 210px;
+  background-size: 100vw 215px;
   background-blend-mode: darken;
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
@@ -76,14 +65,12 @@ const store = useStore();
 .PFP {
   width: 80px;
   height: 80px;
+  object-fit: contain;
   position: absolute;
+  border-radius: 50%;
   left: 50%;
-  transform: translateX(-50%);
   top: -60px;
-}
-
-.v-img__img {
-  object-fit: contain !important;
+  transform: translateX(-50%);
 }
 
 .check-mark {
@@ -99,13 +86,12 @@ const store = useStore();
   font-weight: bold;
 }
 
-.bottom-item {
-  font-size: 12px;
-  font-weight: bold;
-}
-
 .top-item1 {
   line-height: 22px;
   font-size: 20px;
+}
+
+.bottom-item {
+  font-size: 12px;
 }
 </style>

@@ -31,7 +31,7 @@ console.log(props.description)
     text-align: left;
     margin-top: 50px;
     margin-left: calc(25% /2 + 5px);
-    margin-bottom: 0;
+    margin-right: calc(25% /2 + 5px);
     display: grid;
     grid-template-columns: 60% 40%;
     font-size: 12px;

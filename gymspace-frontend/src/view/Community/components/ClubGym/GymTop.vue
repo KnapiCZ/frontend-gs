@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import { IonRow, IonCol, IonToolbar, IonButtons, modalController, IonButton, IonTitle } from '@ionic/vue';
+import { IonRow, IonCol, IonToolbar, IonButtons, IonButton, IonTitle, useIonRouter } from '@ionic/vue';
 import BioButton from './BioButton.vue';
 import { ref } from 'vue';
 
-function closeModal() {
-    modalController.dismiss();
-}
+const router = useIonRouter()
 
 let props = defineProps<{
     logo?: string,
@@ -32,7 +30,7 @@ async function followJoin(type: number) {
 <template>
     <IonToolbar>
         <IonButtons slot="start">
-            <IonButton :onclick="closeModal" class="back-button"><img src="../../../../assets/icons/arrowRight.svg">
+            <IonButton @click="router.back()" class="back-button"><img src="../../../../assets/icons/arrowRight.svg">
             </IonButton>
         </IonButtons>
         <IonTitle>{{ name }}</IonTitle>
@@ -71,16 +69,17 @@ div.toolbar-container * {
 .join {
     width: 90%;
     height: fit-content;
-    border-radius: 20px;
+    border-radius: 10px;
     color: black;
     font-weight: bold;
-    transition: color 0.5s ease;
 }
 
 .follow {
     border: 2px solid #e8e20a;
     background-color: #e8e20a;
-    transition: background-color 0.5s ease;
+    transition: background-color 0.5s ease-in-out;
+    transition: color 0.5s ease-in-out;
+
 
 }
 
@@ -92,7 +91,10 @@ div.toolbar-container * {
 .join {
     border: 2px solid white;
     background-color: white;
-    transition: background-color 0.5s ease;
+    transition: background-color 0.5s ease-in-out;
+    transition: color 0.5s ease-in-out;
+
+
 
 }
 

@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { VCol } from 'vuetify/lib/components/index.mjs';
 import { ref } from 'vue';
-import { IonPage, useIonRouter } from '@ionic/vue';
+import { IonCol, IonPage, useIonRouter } from '@ionic/vue';
 import api from '@/logic/API/apiCaller';
 
 const router = useIonRouter();
@@ -20,7 +19,7 @@ async function submitForm() {
 
 <template>
   <IonPage>
-    <VCol>
+    <IonCol>
       <p class="welcome">WELCOME TO</p>
 
       <img src="../../../assets/images/gymspace_logo.svg" alt="logo">
@@ -29,7 +28,7 @@ async function submitForm() {
         <input id="PassAuth" type="password" placeholder="Password" v-model="form.password">
         <button class="Login">Login</button>
       </form>
-    </VCol>
+    </IonCol>
   </IonPage>
 </template>
 

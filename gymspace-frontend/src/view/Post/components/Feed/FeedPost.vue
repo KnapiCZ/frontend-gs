@@ -1,6 +1,11 @@
 <script setup lang="ts">
-import { IonCard, IonCardContent, IonCol, IonRow } from '@ionic/vue';
+import { IonCard, IonCardContent, IonCol, IonRow, useIonRouter } from '@ionic/vue';
 
+const router = useIonRouter();
+
+function goToUser(id: number) {
+    router.push('/user/' + id)
+}
 
 const props = defineProps<{
     image?: string,
@@ -22,7 +27,7 @@ const props = defineProps<{
             <p class="date-posted">{{ date }}</p>
             <hr id="separator">
             <IonRow>
-                <VAvatar color="white" />
+                <VAvatar color="white" @click="goToUser(2)" />
                 <IonCol>
                     <p class="nickname">{{ username }}</p>
                     <p class="handle">{{ userhandle }}</p>

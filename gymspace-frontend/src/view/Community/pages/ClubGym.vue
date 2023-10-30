@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { VTab, VWindow, VWindowItem } from 'vuetify/lib/components/index.mjs';
-import { IonContent, IonModal } from '@ionic/vue';
+import { IonContent, IonPage } from '@ionic/vue';
 import GridLayout from '../../Post/components/GridLayout.vue';
 import TopGym from '../components/ClubGym/GymTop.vue'
 import FeedPost from '@/view/Post/components/Feed/FeedPost.vue';
@@ -8,7 +8,6 @@ import json from '@/assets/mocs/profilepost.json'
 import api from '@/logic/API/apiCaller';
 
 let props = defineProps<{
-    modalId?: number,
     logo?: string,
     name?: string
 }>()
@@ -19,7 +18,7 @@ const baseUrl = await api()
 
 
 <template>
-    <IonModal ref="modal" :trigger="props.modalId">
+    <IonPage>
         <IonContent>
             <TopGym :logo="props.logo" :name="props.name"> </TopGym>
 
@@ -42,7 +41,7 @@ const baseUrl = await api()
                 </VWindowItem>
             </VWindow>
         </IonContent>
-    </IonModal>
+    </IonPage>
 </template>
 
 

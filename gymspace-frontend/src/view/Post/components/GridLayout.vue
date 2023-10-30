@@ -2,11 +2,6 @@
 import Thumbnail from './thumbnail.vue';
 import json from '../../../assets/mocs/profilepost.json'
 
-let props = defineProps({
-  id: Number,
-
-})
-
 </script>
 
 

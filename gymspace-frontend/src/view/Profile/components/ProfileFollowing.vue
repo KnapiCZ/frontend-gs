@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import lodash from 'lodash'
 import api from '@/logic/API/apiCaller';
-import { VCol, VRow } from 'vuetify/lib/components/index.mjs';
+import { IonCol } from '@ionic/vue';
+
 const props = defineProps({
   renderedUserId: Number,
 })
+
 function checkNull(userObject: unknown) {
   if (lodash.isEmpty(userObject)) {
     return false
@@ -14,27 +16,24 @@ function checkNull(userObject: unknown) {
   }
 }
 
-const baseUrl = await api()
 const twoMostPopular = await api('twoMostPopular', props.renderedUserId)
 let firstUser = checkNull(twoMostPopular[0])
-let secondUser = checkNull(twoMostPopular[1])
 </script>
 
 
 <template>
-  <VCol>
-    <VRow v-if="firstUser" class="block">
-      <img src="../../../assets/icons/community.svg">
-      <p>@{{ firstUser.username }}</p> <!-- sem dat nejznamejsi dva kluby uzivatele -->
-    </VRow>
-    <VRow v-if="secondUser" class="block">
-      <img src="../../../assets/icons/website.svg">
-      <p>@{{ secondUser.username }}</p>
-    </VRow>
-  </VCol>
+  <IonCol>
+    <img src="../../../assets/icons/community.svg">
+    <p>@{{ firstUser.username }}</p> <!-- sem dat nejznamejsi dva kluby uzivatele -->
+  </IonCol>
 </template>
 
 <style scoped>
+ion-col {
+  width: 100%;
+  text-align: center;
+}
+
 img {
   width: 20px;
   height: auto;

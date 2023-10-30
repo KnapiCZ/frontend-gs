@@ -1,16 +1,18 @@
 <script setup lang="ts">
 import api from '@/logic/API/apiCaller';
-import { ref } from 'vue';
 import ContactButton from './ContactButton.vue';
+import { IonRow } from '@ionic/vue';
+import { ref } from 'vue';
 import { useStore } from '@/stores/store';
 
 let loggedInUserId = +sessionStorage.getItem('loggedInUserId')!
 let followingList = await api('isFollowing', loggedInUserId, 2)
+
 const isFollowing = ref()
 const store = useStore()
 
-function following(followers: unknown) {
-  if (followers.includes(loggedInUserId)) {
+function following(followers: []) {
+  if (followers.includes(loggedInUserId as never)) {
     isFollowing.value = true;
   }
   else {
@@ -27,37 +29,42 @@ async function follow() {
   }
   await api("follow",
     loggedInUserId,
-    2).then(isFollowing.value = !isFollowing.value)
+    2).then((isFollowing.value as any) = (!isFollowing.value as any))
 }
 
 following(followingList.followers)
 </script>
 
 <template>
-  <div class="hello">
-    <button id="followButton" class="profileButtons" @click="follow">
+  <IonRow>
+    <button id="followButton" class="profileButtons" :class="{ follow: !isFollowing }" @click="follow">
       {{ isFollowing ? 'Following' : 'Follow' }}
     </button> <!-- vytvorit api na follow -->
-    <ContactButton></ContactButton>
+    <ContactButton class="profileButtons"></ContactButton>
 
-  </div>
+  </IonRow>
 </template>
   
   
 <style scoped>
-.profileButtons {
-  display: inline-block;
-  padding: 5px auto;
-  margin: 20px 10px;
-  width: 25%;
-  height: 30px;
-  background-color: #2F2F2F;
-  font-weight: bold;
-  border-radius: 5px;
+ion-row {
+  width: 100%;
 }
 
-.active {
-  background-color: yellow;
+.profileButtons {
+  width: 40%;
+  height: 30px;
+  padding: 5px;
+  margin: 20px auto;
+  background-color: #2F2F2F;
+  font-weight: bold;
+  border-radius: 10px;
+  transition: background-color 0.5s ease-in-out;
+}
+
+.follow {
+  background-color: #e8e20a;
+  color: black;
 }
 </style>
 
