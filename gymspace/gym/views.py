@@ -15,7 +15,7 @@ class GymViewSet(viewsets.ViewSet):
     #authentication_classes = (TokenAuthentication,) s timhle to nefunguje idk proc
 
     """
-    ViewSet for getting all Gym data 
+    ViewSet for getting all Gym data
     """
     def list(self, request):
         queryset = Gym.objects.all()
@@ -24,6 +24,13 @@ class GymViewSet(viewsets.ViewSet):
 
     def retrieve(self, request, pk=None):
         queryset = Gym.objects.filter(members__in=[pk])
-        print(queryset)
         serializer = GymSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+class GymButtonViewSet(viewsets.ViewSet):
+    permission_classes = (IsAuthenticated,)
+
+    def retrieve(self, request, pk=None):
+        queryset = Gym.objects.get(pk=pk)
+        serializer = GymButtonSerializer(queryset)
         return Response(serializer.data)

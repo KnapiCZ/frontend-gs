@@ -20,6 +20,7 @@ router.register(r'confirm-auth', user_views.ConfirmAuth, basename='confirm-auth'
 
 
 router.register(r'gyms-member', gym_views.GymViewSet, basename='gyms-member')
+router.register(r'gyms-button', gym_views.GymButtonViewSet, basename='gyms-button')
 from django.conf import settings
 from django.conf.urls.static import static
 

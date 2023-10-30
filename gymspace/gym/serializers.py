@@ -9,3 +9,12 @@ class GymSerializer(serializers.ModelSerializer):
                   'description',
                   'logo',
                   ]
+
+class GymButtonSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Gym
+        fields = [
+                'id',
+                'title',
+                'logo',
+                ]
