@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import json from '../../../assets/mocs/profilepost.json'
-import api from '@/logic/API/apiCaller';
+import apiUser from '@/logic/API/apiUser';
 import FeedPost from '../components/Feed/FeedPost.vue';
 import { IonPage, IonContent } from '@ionic/vue';
 
-const baseUrl = await api()
+const baseUrl = await apiUser()
 </script>
 
 <template>

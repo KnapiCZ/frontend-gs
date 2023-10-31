@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { IonButton, IonCol, IonPage, useIonRouter } from '@ionic/vue';
-import api from '@/logic/API/apiCaller';
+import api from '@/logic/API/apiAuth';
 
 const router = useIonRouter();
 
@@ -11,7 +11,7 @@ let form = ref({
 })
 async function submitForm() {
   console.log(form)
-  await api("getToken", form.value)
+  await api("getToken", form.value.username, form.value.password)
   router.push('/')
 }
 </script>

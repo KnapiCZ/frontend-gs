@@ -6,21 +6,23 @@ import { ref } from 'vue';
 import Thumbnail from '@/view/Post/components/Thumbnail.vue';
 import json from "@/assets/mocs/profilepost.json"
 import GymButton from '../components/GymButton.vue';
-import api from '@/logic/API/apiCaller';
+import apiGym from '@/logic/API/apiGym';
+import apiPost from '@/logic/API/apiPost';
+
 
 import 'swiper/css';
 
 
 const loggedUser = JSON.parse(sessionStorage.getItem("loggedUser")!)
-const baseUrl = await api()
-const gyms = await api("gymsMember", loggedUser.id)
+const baseUrl = await apiGym()
+const gyms = await apiGym("gymsMember", loggedUser.id)
 
-let recommended_posts = await api('recommendedPosts', loggedUser.id);
+let recommended_posts = await apiPost('recommendedPosts', loggedUser.id);
 let postData = new Array()
 let data
 
 for (let postNumber = 2; postNumber <= recommended_posts.posts.length; postNumber++) {
-  data = await api("getUserPost", postNumber)
+  data = await apiPost("getUserPost", postNumber)
   postData.push(data)
 }
 
@@ -149,3 +151,4 @@ section {
   margin: 0 10px;
 }
 </style>
+@/logic/API/apiUser

@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { IonPage, IonTabs, IonRouterOutlet, IonTabBar, IonTabButton, IonButton, useIonRouter } from '@ionic/vue';
-import api from '@/logic/API/apiCaller';
+import apiAuth from '@/logic/API/apiAuth';
+import apiUser from '@/logic/API/apiUser';
 const router = useIonRouter()
 
 let confirmedUser: { log: string }
 
-await api('confirmAuth').then((confirm) => {
+await apiAuth('confirmAuth').then((confirm) => {
   confirmedUser = confirm
 }).catch((error) => { console.log(error) })
 
@@ -16,11 +17,11 @@ else {
   router.navigate('/login')
 }
 
-let baseUrl = await api()
+let baseUrl = await apiAuth()
 const loggedInUserId = +sessionStorage.getItem('loggedInUserId')!
 let profilePicture: string
 sessionStorage.setItem("renderedUserId", (loggedInUserId as unknown as string))
-await api("userProfile", loggedInUserId).then((loggedUser) => {
+await apiUser("userProfile", loggedInUserId).then((loggedUser) => {
   console.log(loggedUser)
   profilePicture = `${baseUrl}${loggedUser.profile_picture}`
   sessionStorage.setItem('loggedUser', JSON.stringify(loggedUser))

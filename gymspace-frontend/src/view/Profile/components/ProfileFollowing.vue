@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import lodash from 'lodash'
-import api from '@/logic/API/apiCaller';
+import apiUser from '@/logic/API/apiUser';
 import { IonCol } from '@ionic/vue';
 
 const props = defineProps({
@@ -16,7 +16,7 @@ function checkNull(userObject: unknown) {
   }
 }
 
-const twoMostPopular = await api('twoMostPopular', props.renderedUserId)
+const twoMostPopular = await apiUser('twoMostPopular', props.renderedUserId)
 let firstUser = checkNull(twoMostPopular[0])
 </script>
 

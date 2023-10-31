@@ -2,7 +2,7 @@
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import VideoPost from '../../Post/components/VideoPost.vue';
 import json from '../../../assets/mocs/fypPosts.json'
-import api from '@/logic/API/apiCaller';
+import apiUser from '@/logic/API/apiUser';
 
 const props = defineProps<{
   keyStart: number
@@ -10,7 +10,7 @@ const props = defineProps<{
 
 
 
-const baseUrl = await api()
+const baseUrl = await apiUser()
 </script>
 
 <template>

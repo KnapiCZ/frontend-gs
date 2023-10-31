@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import api from '@/logic/API/apiCaller';
+import apiUser from '@/logic/API/apiUser';
 import ContactButton from './ContactButton.vue';
 import { IonRow } from '@ionic/vue';
 import { ref } from 'vue';
 import { useStore } from '@/stores/store';
 
 let loggedInUserId = +sessionStorage.getItem('loggedInUserId')!
-let followingList = await api('isFollowing', loggedInUserId, 2)
+let followingList = await apiUser('isFollowing', loggedInUserId, 2)
 
 const isFollowing = ref()
 const store = useStore()
@@ -27,7 +27,7 @@ async function follow() {
     store.count++
 
   }
-  await api("follow",
+  await apiUser("follow",
     loggedInUserId,
     2).then((isFollowing.value as any) = (!isFollowing.value as any))
 }
@@ -67,5 +67,3 @@ ion-row {
   color: black;
 }
 </style>
-
-

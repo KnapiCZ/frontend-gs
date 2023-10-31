@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import api from '@/logic/API/apiCaller';
+import apiUser from '@/logic/API/apiUser';
 import { IonButton, useIonRouter } from '@ionic/vue';
 
 const router = useIonRouter()
@@ -10,7 +10,7 @@ const props = defineProps({
   postIndex: Number //kde se v seznamu nachazi
 })
 
-const baseUrl = await api()
+const baseUrl = await apiUser()
 const postUrl = `${baseUrl}${props.ImageSource}`
 </script>
 
