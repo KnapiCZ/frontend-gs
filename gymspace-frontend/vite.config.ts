@@ -1,6 +1,6 @@
-import { fileURLToPath, URL } from 'node:url'
 
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
+import path from 'path'
 import vue from '@vitejs/plugin-vue'
 import legacy from '@vitejs/plugin-legacy'
 import vuetify from 'vite-plugin-vuetify'
@@ -11,13 +11,12 @@ export default defineConfig({
     vue(),
     legacy(),
     vuetify({ autoImport: true })
-
   ],
+
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
-      '@api': fileURLToPath(new URL('./src/logic/API/apiCaller.ts', import.meta.url))
-    }
+      '@': path.resolve(__dirname, './src'),
+    },
   },
   test: {
     globals: true,

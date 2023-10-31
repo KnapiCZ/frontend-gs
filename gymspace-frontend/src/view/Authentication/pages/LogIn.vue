@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { IonCol, IonPage, useIonRouter } from '@ionic/vue';
+import { IonButton, IonCol, IonPage, useIonRouter } from '@ionic/vue';
 import api from '@/logic/API/apiCaller';
 
 const router = useIonRouter();
@@ -22,12 +22,20 @@ async function submitForm() {
     <IonCol>
       <p class="welcome">WELCOME TO</p>
 
-      <img src="../../../assets/images/gymspace_logo.svg" alt="logo">
+      <img class="logo" src="../../../assets/images/gymspace_logo.svg" alt="logo">
       <form @submit.prevent="submitForm">
         <input id="UsernameAuth" type="text" placeholder="Username" v-model="form.username">
         <input id="PassAuth" type="password" placeholder="Password" v-model="form.password">
-        <button class="Login">Login</button>
+        <IonButton class="Login" color="transparent" @click="submitForm">Login</IonButton>
       </form>
+      <button class="sign-up">NEW? SIGN-UP HERE</button>
+      <IonButton class="login-by-other" color="transparent"><img class="sign-img" src="../../../assets/icons/apple.svg"
+          alt="">Sign-in with
+        apple</IonButton>
+      <IonButton class="login-by-other" color="transparent"><img class="sign-img" src="../../../assets/icons/google.svg"
+          alt="">Sign-in with
+        google</IonButton>
+
     </IonCol>
   </IonPage>
 </template>
@@ -39,7 +47,7 @@ async function submitForm() {
   width: 100%;
 }
 
-img {
+.logo {
   margin: auto;
   width: 256px;
 
@@ -55,7 +63,7 @@ p {
 }
 
 input,
-button {
+ion-button {
   margin: 10px 0;
   width: 80%;
   height: 50px;
@@ -76,5 +84,22 @@ input {
   font-size: 4vw;
   font-weight: bold;
 
+}
+
+.login-by-other {
+  font-weight: bold;
+  background-color: white;
+  color: black;
+}
+
+.sign-img {
+  width: 40px;
+  height: 40px;
+  margin: 20px 10px;
+
+}
+
+.sign-up {
+  margin-bottom: 50px;
 }
 </style>

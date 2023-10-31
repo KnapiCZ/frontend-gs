@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import api from '@/logic/API/apiCaller';
-import { IonButton } from '@ionic/vue';
+import { IonButton, useIonRouter } from '@ionic/vue';
+
+const router = useIonRouter()
 
 const props = defineProps({
   ImageSource: String,
@@ -15,7 +17,8 @@ const postUrl = `${baseUrl}${props.ImageSource}`
 
 
 <template>
-  <IonButton class="ion-no-padding" color="transparent" router-direction="forward" :href="'/user/1/post/' + postID">
+  <IonButton class="ion-no-padding" color="transparent" router-direction="forward"
+    @click="() => router.push('/user/1/post/' + postID)">
     <!-- 1source: postURL smaz az po te co smazes :souce/ v router.js 
                                                                                             + na profilu budes chtit ze ti to otevre tenhle post,
                                                                                               ale budes moct scrollovat i mezi dalsimi tvymi posty na profilu
