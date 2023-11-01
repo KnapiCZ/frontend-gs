@@ -6,15 +6,10 @@ class GymSerializer(serializers.ModelSerializer):
         model = Gym
         fields = ['id',
                   'title',
-                  'description',
                   'logo',
                   ]
 
 class GymButtonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Gym
-        fields = [
-                'id',
-                'title',
-                'logo',
-                ]
+        fields = '__all__'

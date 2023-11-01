@@ -10,7 +10,7 @@ from django.db.models import Count
 
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
-class GymViewSet(viewsets.ViewSet):
+class MyGymsViewSet(viewsets.ViewSet):
     permission_classes = (IsAuthenticated,)
     #authentication_classes = (TokenAuthentication,) s timhle to nefunguje idk proc
 
@@ -27,7 +27,7 @@ class GymViewSet(viewsets.ViewSet):
         serializer = GymSerializer(queryset, many=True)
         return Response(serializer.data)
 
-class GymButtonViewSet(viewsets.ViewSet):
+class GymInfoViewSet(viewsets.ViewSet):
     permission_classes = (IsAuthenticated,)
 
     def retrieve(self, request, pk=None):
