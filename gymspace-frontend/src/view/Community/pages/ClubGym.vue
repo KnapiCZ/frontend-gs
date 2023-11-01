@@ -5,14 +5,14 @@ import GridLayout from '../../Post/components/GridLayout.vue';
 import TopGym from '../components/ClubGym/GymTop.vue'
 import FeedPost from '@/view/Post/components/Feed/FeedPost.vue';
 import json from '@/assets/mocs/profilepost.json'
-import api from '@/logic/API/apiCaller';
+import apiGym from '@/logic/API/apiGym';
 
 let props = defineProps<{
     logo?: string,
     name?: string
 }>()
 
-const baseUrl = await api()
+const baseUrl = await apiGym()
 
 </script>
 
@@ -69,3 +69,4 @@ export default {
 
 }
 </style>
+@/logic/API/apiUser

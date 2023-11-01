@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
-import api from '@/logic/API/apiCaller';
+import api from '@/logic/API/apiAuth';
 
 let confirmedUser: { log: string }
 

@@ -4,7 +4,7 @@ import CurrentUserButton from '../components/Buttons/CurrentUserButton.vue';
 import ProfileBasicInfo from '../components/ProfileBasicInfo.vue';
 import TabBar from '../components/Tabs/TabBar.vue';
 import OtherUserButton from '../components/Buttons/OtherUserButton.vue';
-import api from '@/logic/API/apiCaller';
+import apiUser from '@/logic/API/apiUser';
 
 import { IonContent, IonPage } from '@ionic/vue';
 import { useStore } from '../../../stores/store';
@@ -15,7 +15,7 @@ const props = defineProps<{
   id: -1
 }>()
 
-await api("userProfile", props.id).then((renderedUser) => {
+await apiUser("userProfile", props.id).then((renderedUser) => {
   sessionStorage.setItem('renderedUser', JSON.stringify(renderedUser)
   )
 })
@@ -38,10 +38,9 @@ function checkLogin() {
   }
 }
 
-const baseUrl = await api()
+const baseUrl = await apiUser()
 const profile_picture_url = `${baseUrl}${userData.profile_picture}`
 const background_picture_url = `${baseUrl}${userData.background_picture}`
-//const url = ref("http://127.0.0.1:8000/api/users/"+userId)
 </script>
 
 <template>
