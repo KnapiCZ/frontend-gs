@@ -5,5 +5,5 @@ urlpatterns = [
     path('gyms-member/', views.MyGymViewSet.as_view({'get': 'list'})),
     path('gyms-member/<int:pk>', views.MyGymViewSet.as_view({'get': 'retrieve'})),
 
-    path('gyms-button/<int:pk>', views.GymButtonViewSet.as_view({'get': 'retrieve'})),
+    path('gyms-button/<int:pk>', views.GymInfoViewSet.as_view({'get': 'retrieve'})),
 ]
