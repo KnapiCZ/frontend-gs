@@ -3,16 +3,16 @@ import apiUser from '@/logic/API/apiUser';
 import ContactButton from './ContactButton.vue';
 import { IonRow } from '@ionic/vue';
 import { ref } from 'vue';
-import { useStore } from '@/stores/store';
-
-let loggedInUserId = +sessionStorage.getItem('loggedInUserId')!
-let followingList = await apiUser('isFollowing', loggedInUserId, 2)
+import { userStore } from '@/stores/UserStore';
 
 const isFollowing = ref()
-const store = useStore()
+const store = userStore()
+
+let followingList = await apiUser('isFollowing', store.loggedUserId, 2)
+
 
 function following(followers: []) {
-  if (followers.includes(loggedInUserId as never)) {
+  if (followers.includes(store.loggedUserId as never)) {
     isFollowing.value = true;
   }
   else {
@@ -22,13 +22,13 @@ function following(followers: []) {
 
 async function follow() {
   if (isFollowing.value) {
-    store.count--
+    store.followers--
   } else {
-    store.count++
+    store.followers++
 
   }
   await apiUser("follow",
-    loggedInUserId,
+    store.loggedUserId,
     2).then((isFollowing.value as any) = (!isFollowing.value as any))
 }
 

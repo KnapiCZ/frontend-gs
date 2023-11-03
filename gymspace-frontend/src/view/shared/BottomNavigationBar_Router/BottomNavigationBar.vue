@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import { IonPage, IonTabs, IonRouterOutlet, IonTabBar, IonTabButton, IonButton, useIonRouter } from '@ionic/vue';
+import { userStore } from '@/stores/UserStore';
 import apiAuth from '@/logic/API/apiAuth';
 import apiUser from '@/logic/API/apiUser';
+
 const router = useIonRouter()
+const store = userStore()
 
 let confirmedUser: { log: string }
 
@@ -11,22 +14,18 @@ await apiAuth('confirmAuth').then((confirm) => {
 }).catch((error) => { console.log(error) })
 
 if (confirmedUser!.log != 'not logged in') {
-  sessionStorage.setItem('loggedInUserId', confirmedUser!.log)
+  store.loggedUserId = confirmedUser!.log as unknown as number
 }
 else {
   router.navigate('/login')
 }
 
 let baseUrl = await apiAuth()
-const loggedInUserId = +sessionStorage.getItem('loggedInUserId')!
 let profilePicture: string
-sessionStorage.setItem("renderedUserId", (loggedInUserId as unknown as string))
-await apiUser("userProfile", loggedInUserId).then((loggedUser) => {
-  console.log(loggedUser)
-  profilePicture = `${baseUrl}${loggedUser.profile_picture}`
-  sessionStorage.setItem('loggedUser', JSON.stringify(loggedUser))
-})
 
+await apiUser("userProfile", store.loggedUserId).then((loggedUser) => {
+  profilePicture = `${baseUrl}${loggedUser.profile_picture}`
+})
 </script>
 
 
@@ -35,7 +34,7 @@ await apiUser("userProfile", loggedInUserId).then((loggedUser) => {
     <IonTabs class="ion-no-padding">
       <IonRouterOutlet></IonRouterOutlet>
       <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="user" class="no-filter" :href="'/user/' + loggedInUserId">
+        <ion-tab-button tab="user" class="no-filter" :href="'/user/' + store.loggedUserId">
           <img id="profile" class="no-filter" :src="profilePicture" />
         </ion-tab-button>
 

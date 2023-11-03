@@ -1,5 +1,6 @@
+// API pro uzivatele
 
-//const url = ref("http://127.0.0.1:8000/api/users/"+userId)
+
 async function apiUser(apiType = "", firstItem?: unknown, secondItem?: unknown) {
   const baseUrl = `http://localhost:8080`
   let response

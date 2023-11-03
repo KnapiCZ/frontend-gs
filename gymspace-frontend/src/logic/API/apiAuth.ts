@@ -1,3 +1,6 @@
+// API pro prihlasovani registraci a pod
+
+
 async function apiAuth(apiType = '', firstItem?: string, secondItem?: string) {
     const baseUrl = `http://localhost:8080`
     let response

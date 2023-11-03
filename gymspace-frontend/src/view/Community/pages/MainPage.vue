@@ -2,6 +2,7 @@
 import { IonPage, IonContent, IonSearchbar, IonToolbar } from '@ionic/vue';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { ref } from 'vue';
+import { userStore } from '@/stores/UserStore';
 
 import Thumbnail from '@/view/Post/components/Thumbnail.vue';
 import json from "@/assets/mocs/profilepost.json"
@@ -9,15 +10,14 @@ import GymButton from '../components/GymButton.vue';
 import apiGym from '@/logic/API/apiGym';
 import apiPost from '@/logic/API/apiPost';
 
-
 import 'swiper/css';
 
+const store = userStore()
 
-const loggedUser = JSON.parse(sessionStorage.getItem("loggedUser")!)
 const baseUrl = await apiGym()
-const gyms = await apiGym("gymsMember", loggedUser.id)
+const gyms = await apiGym("myGyms", 1)
 
-let recommended_posts = await apiPost('recommendedPosts', loggedUser.id);
+let recommended_posts = await apiPost('recommendedPosts', store.loggedUserId);
 let postData = new Array()
 let data
 
@@ -58,8 +58,8 @@ async function toggle(value: number) {
       <button @click="toggle(1)">Your Gyms <img id="arrow1" src="../../../assets/icons/arrowRight.svg"></button>
 
       <div id="extend1" translate="yes">
-        <GymButton v-if="gyms.length !== 0" v-for="(gym, index) in gyms" :key="index" :title="gym.title"
-          :ImageSRC="baseUrl + gym.logo" :id="index" />
+        <GymButton v-if="gyms.length !== 0" v-for="(gym) in gyms" :key="gym.id" :title="gym.title"
+          :ImageSRC="baseUrl + gym.logo" :id="gym.id" />
         <p v-else>You are not in Gym</p>
       </div>
 
@@ -151,4 +151,3 @@ section {
   margin: 0 10px;
 }
 </style>
-@/logic/API/apiUser

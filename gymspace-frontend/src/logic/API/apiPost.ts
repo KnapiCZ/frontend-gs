@@ -1,3 +1,6 @@
+// API pro posty obecne zatim
+
+
 async function apiPost(apiType = '', firstItem?: unknown) {
     const baseUrl = `http://localhost:8080`
     let response

@@ -7,9 +7,6 @@ let props = defineProps({
     email: String,
 })
 
-console.log(props.description)
-
-
 </script>
 
 <template>

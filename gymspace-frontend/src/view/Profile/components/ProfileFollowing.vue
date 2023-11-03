@@ -24,7 +24,6 @@ let firstUser = checkNull(twoMostPopular[0])
 <template>
   <IonCol>
     <img src="../../../assets/icons/community.svg">
-    <p>@{{ firstUser.username }}</p> <!-- sem dat nejznamejsi dva kluby uzivatele -->
   </IonCol>
 </template>
 

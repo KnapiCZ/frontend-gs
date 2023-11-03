@@ -7,9 +7,9 @@ import OtherUserButton from '../components/Buttons/OtherUserButton.vue';
 import apiUser from '@/logic/API/apiUser';
 
 import { IonContent, IonPage } from '@ionic/vue';
-import { useStore } from '../../../stores/store';
+import { userStore } from '../../../stores/UserStore';
 
-const store = useStore()
+const store = userStore()
 
 const props = defineProps<{
   id: -1
@@ -24,13 +24,12 @@ const userData = JSON.parse(
   sessionStorage.getItem('renderedUser')!
 )
 
-const loggedInUserId = +sessionStorage.getItem('loggedInUserId')!
 
-store.count = userData.followers
+store.followers = userData.followers
 
 
 function checkLogin() {
-  if (props.id == loggedInUserId) {
+  if (props.id == store.loggedUserId) {
     return true;
 
   } else {
@@ -51,8 +50,8 @@ const background_picture_url = `${baseUrl}${userData.background_picture}`
           :username="userData.username" :followers="userData.followers" :trainer_status="userData.trainer_status" />
 
         <ProfileBasicInfo :description="userData.description" :email="userData.email" :rendered-user-id="userData.id" />
-        <CurrentUserButton v-if="checkLogin()" :renderedUserId="userData.id" :loggedInUserId="loggedInUserId" />
-        <OtherUserButton v-else :renderedUserId="userData.id" :loggedInUserId="loggedInUserId" />
+        <CurrentUserButton v-if="checkLogin()" :renderedUserId="userData.id" :loggedInUserId="store.loggedUserId" />
+        <OtherUserButton v-else :renderedUserId="userData.id" :loggedUserId="store.loggedUserId" />
         <TabBar :trainer_status="userData.trainer_status" />
       </div>
     </IonContent>
