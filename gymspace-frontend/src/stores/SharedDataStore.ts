@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-export const genericDataStore = defineStore('genericDataStore', {
+export const sharedDataStore = defineStore('sharedDataStore', {
     state: () => {
         return {
             baseUrl: `http://localhost:8080`,

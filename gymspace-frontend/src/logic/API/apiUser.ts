@@ -1,14 +1,14 @@
 // API pro uzivatele
 
 
-async function apiUser(apiType = "", firstItem?: unknown, secondItem?: unknown) {
+async function apiUser(apiType = "", firstId?: number, secondId?: unknown) {
   const baseUrl = `http://localhost:8080`
   let response
   switch (apiType) {
 
     case "userProfile":
       response = await (
-        fetch(`${baseUrl}/api/users/${firstItem}/`,
+        fetch(`${baseUrl}/api/users/${firstId}/`,
           {
             credentials: "include",
           })
@@ -18,7 +18,7 @@ async function apiUser(apiType = "", firstItem?: unknown, secondItem?: unknown) 
 
     case "smallUserProfile":
       response = await (
-        fetch(`${baseUrl}/api/users-small/${firstItem}/`,
+        fetch(`${baseUrl}/api/users-small/${firstId}/`,
           {
             credentials: "include",
           })
@@ -28,7 +28,7 @@ async function apiUser(apiType = "", firstItem?: unknown, secondItem?: unknown) 
 
     case "userFollowerCount":
       response = await (
-        fetch(`${baseUrl}/api/users/follow/${firstItem}/`,
+        fetch(`${baseUrl}/api/users/follow/${firstId}/`,
           {
             credentials: "include",
           })
@@ -36,9 +36,9 @@ async function apiUser(apiType = "", firstItem?: unknown, secondItem?: unknown) 
       return await response.json()
 
     case "follow":
-      const follow_data = { "followers": firstItem, "id": secondItem }
+      const follow_data = { "followers": firstId, "id": secondId }
       response = await (
-        fetch(`${baseUrl}/api/users-follow/${secondItem}/`,
+        fetch(`${baseUrl}/api/users-follow/${secondId}/`,
           {
             method: "PATCH",
             credentials: "include",
@@ -52,7 +52,7 @@ async function apiUser(apiType = "", firstItem?: unknown, secondItem?: unknown) 
 
     case "isFollowing":
       response = await (
-        fetch(`${baseUrl}/api/users-follow-data/${secondItem}/`,
+        fetch(`${baseUrl}/api/users-follow-data/${secondId}/`,
           {
             method: "GET",
             credentials: "include"
@@ -62,7 +62,7 @@ async function apiUser(apiType = "", firstItem?: unknown, secondItem?: unknown) 
 
     case "twoMostPopular":
       response = await (
-        fetch(`${baseUrl}/api/users-most-followed/${firstItem}/`,
+        fetch(`${baseUrl}/api/users-most-followed/${firstId}/`,
           {
             credentials: "include"
           })

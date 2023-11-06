@@ -2,7 +2,8 @@
 import { IonPage, IonContent, IonSearchbar, IonToolbar } from '@ionic/vue';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { ref } from 'vue';
-import { userStore } from '@/stores/UserStore';
+import { userDataStore } from '@/stores/UserDataStore';
+import { gymDataStore } from '@/stores/GymDataStore';
 
 import Thumbnail from '@/view/Post/components/Thumbnail.vue';
 import json from "@/assets/mocs/profilepost.json"
@@ -12,12 +13,13 @@ import apiPost from '@/logic/API/apiPost';
 
 import 'swiper/css';
 
-const store = userStore()
-
+const userStore = userDataStore()
+const gymStore = gymDataStore()
 const baseUrl = await apiGym()
-const gyms = await apiGym("myGyms", 1)
 
-let recommended_posts = await apiPost('recommendedPosts', store.loggedUserId);
+gymStore.updateData(userStore.loggedUserId)
+
+let recommended_posts = await apiPost('recommendedPosts', userStore.loggedUserId);
 let postData = new Array()
 let data
 
@@ -58,8 +60,8 @@ async function toggle(value: number) {
       <button @click="toggle(1)">Your Gyms <img id="arrow1" src="../../../assets/icons/arrowRight.svg"></button>
 
       <div id="extend1" translate="yes">
-        <GymButton v-if="gyms.length !== 0" v-for="(gym) in gyms" :key="gym.id" :title="gym.title"
-          :ImageSRC="baseUrl + gym.logo" :id="gym.id" />
+        <GymButton v-if="gymStore.gymButtons.length !== 0" v-for="(gym) in gymStore.gymButtons" :key="gym.id"
+          :title="gym.title" :ImageSRC="baseUrl + gym.logo" :id="gym.id" />
         <p v-else>You are not in Gym</p>
       </div>
 
@@ -67,8 +69,8 @@ async function toggle(value: number) {
 
       <div id="extend2">
 
-        <GymButton v-if="gyms.length != 0" v-for="(gym, index) in gyms" :key="index + 10" :title="gym.title"
-          :ImageSRC="baseUrl + gym.logo" :id="index + 10" />
+        <GymButton v-if="gymStore.gymButtons.length !== 0" v-for="(gym) in gymStore.gymButtons" :key="gym.id"
+          :title="gym.title" :ImageSRC="baseUrl + gym.logo" :id="gym.id" />
         <p v-else>You are not in Gym</p>
 
 

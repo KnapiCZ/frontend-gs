@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { userStore } from '@/stores/UserStore';
+import { userDataStore } from '@/stores/UserDataStore';
 import { IonCol, IonRow } from '@ionic/vue';
 
 let props = defineProps({
@@ -10,7 +10,7 @@ let props = defineProps({
   trainer_status: Boolean,
 })
 
-const store = userStore();
+const userStore = userDataStore();
 
 </script>
 
@@ -21,7 +21,7 @@ const store = userStore();
       <img class="check-mark" src="../../../assets/icons/checkMark.svg"> <!-- API USER VERIFIED-->
       <IonRow>
         <IonCol>
-          <p class="top-item1">{{ store.followers }}</p>
+          <p class="top-item1">{{ userStore.followersCount }}</p>
           <p class="bottom-item">followers</p> <!-- API following user count-->
         </IonCol>
         <IonCol>

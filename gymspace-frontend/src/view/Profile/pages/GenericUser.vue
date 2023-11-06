@@ -6,32 +6,26 @@ import TabBar from '../components/Tabs/TabBar.vue';
 import OtherUserButton from '../components/Buttons/OtherUserButton.vue';
 import apiUser from '@/logic/API/apiUser';
 
+
 import { IonContent, IonPage } from '@ionic/vue';
-import { userStore } from '../../../stores/UserStore';
+import { userDataStore } from '../../../stores/UserDataStore';
+import { useRoute } from 'vue-router';
 
-const store = userStore()
+const route = useRoute();
+const userStore = userDataStore()
 
-const props = defineProps<{
-  id: -1
-}>()
-
-await apiUser("userProfile", props.id).then((renderedUser) => {
-  sessionStorage.setItem('renderedUser', JSON.stringify(renderedUser)
-  )
-})
-
-const userData = JSON.parse(
-  sessionStorage.getItem('renderedUser')!
-)
+let id = route.params.id as unknown as number
 
 
-store.followers = userData.followers
+let userData = await apiUser("userProfile", id)
+
+userDataStore().followersCount = userData.followers
+
 
 
 function checkLogin() {
-  if (props.id == store.loggedUserId) {
+  if (id == userStore.loggedUserId) {
     return true;
-
   } else {
     return false;
   }
@@ -40,22 +34,22 @@ function checkLogin() {
 const baseUrl = await apiUser()
 const profile_picture_url = `${baseUrl}${userData.profile_picture}`
 const background_picture_url = `${baseUrl}${userData.background_picture}`
+
 </script>
 
 <template>
-  <IonPage class="ion-no-padding">
+  <IonPage class="ion-no-padding" :key="id">
     <IonContent class="ion-no-padding">
       <div class="page-div">
         <ProfileTop :profile_picture_url="profile_picture_url" :background_picture_url="background_picture_url"
           :username="userData.username" :followers="userData.followers" :trainer_status="userData.trainer_status" />
 
         <ProfileBasicInfo :description="userData.description" :email="userData.email" :rendered-user-id="userData.id" />
-        <CurrentUserButton v-if="checkLogin()" :renderedUserId="userData.id" :loggedInUserId="store.loggedUserId" />
-        <OtherUserButton v-else :renderedUserId="userData.id" :loggedUserId="store.loggedUserId" />
+        <CurrentUserButton v-if="checkLogin()" :renderedUserId="userData.id" :loggedInUserId="userStore.loggedUserId" />
+        <OtherUserButton v-else :renderedUserId="userData.id" :loggedUserId="userStore.loggedUserId" />
         <TabBar :trainer_status="userData.trainer_status" />
       </div>
     </IonContent>
-
   </IonPage>
 </template>
 
