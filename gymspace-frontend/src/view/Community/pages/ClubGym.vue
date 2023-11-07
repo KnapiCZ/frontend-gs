@@ -75,4 +75,3 @@ export default {
 
 }
 </style>
-@/logic/API/apiUser

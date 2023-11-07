@@ -51,11 +51,12 @@ async function toggle(value: number) {
 
 <template>
 	<IonPage class="ion-no-padding">
+
 		<IonContent class="ion-no-padding">
+			<IonSearchbar placeholder="Search"></IonSearchbar> <!--   :items vrati to co uzivatel hleda-->
+
 			<img class="background" src="../../../assets/images/Background.png">
-			<IonToolbar>
-				<ion-searchbar placeholder="Custom Placeholder"></ion-searchbar> <!--   :items vrati to co uzivatel hleda-->
-			</IonToolbar>
+
 
 			<button @click="toggle(1)">Your Gyms <img id="arrow1" src="../../../assets/icons/arrowRight.svg"></button>
 			<div id="extend1">
@@ -95,6 +96,10 @@ export default {
 </script>
 
 <style scoped>
+ion-searchbar {
+	margin: 10px auto;
+}
+
 .background {
 	position: absolute;
 	width: 100vw;

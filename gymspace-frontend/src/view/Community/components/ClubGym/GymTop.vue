@@ -64,7 +64,6 @@ div.toolbar-container * {
     background-color: black;
 }
 
-
 .follow,
 .join {
     width: 90%;
@@ -79,8 +78,6 @@ div.toolbar-container * {
     background-color: #e8e20a;
     transition: background-color 0.5s ease-in-out;
     transition: color 0.5s ease-in-out;
-
-
 }
 
 .following {
@@ -93,9 +90,6 @@ div.toolbar-container * {
     background-color: white;
     transition: background-color 0.5s ease-in-out;
     transition: color 0.5s ease-in-out;
-
-
-
 }
 
 .joined {

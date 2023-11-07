@@ -27,11 +27,11 @@ const props = defineProps<{
 	margin: 10px 30px 15px 30px;
 	text-align: center;
 	border-radius: 10px;
-	background-color: rgba(255, 255, 255, 0.103) !important;
+	background-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 h1 {
-	font-size: 8vw;
+	font-size: 34px;
 	font-weight: bold;
 	color: white;
 	position: absolute;
@@ -49,9 +49,5 @@ img {
 	object-fit: contain;
 	position: absolute;
 	left: 20px;
-}
-
-ion-buton {
-	background-color: rgba(255, 255, 255, 0.103);
 }
 </style>
