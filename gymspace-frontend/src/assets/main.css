@@ -2,50 +2,50 @@
 
 
 @font-face {
-  font-family: "Montserrat";
-  font-weight: 400;
-  font-style: normal;
+	font-family: "Montserrat";
+	font-weight: 400;
+	font-style: normal;
 
-  src: url(./fonts/Montserrat-Regular.ttf);
+	src: url(./fonts/Montserrat-Regular.ttf);
 
 }
 
 @font-face {
-  font-family: "Montserrat";
-  font-weight: bold;
-  font-style: normal;
+	font-family: "Montserrat";
+	font-weight: bold;
+	font-style: normal;
 
-  src: url(./fonts/Montserrat-Bold.ttf);
+	src: url(./fonts/Montserrat-Bold.ttf);
 }
 
 @font-face {
-  font-family: "Montserrat";
-  font-weight: normal;
-  font-style: italic;
+	font-family: "Montserrat";
+	font-weight: normal;
+	font-style: italic;
 
-  src: url(./fonts/Montserrat-Italic.ttf);
+	src: url(./fonts/Montserrat-Italic.ttf);
 }
 
 @font-face {
-  font-family: "Etna-Sans-Serif";
-  font-weight: 400;
-  font-style: normal;
-  src: url(./fonts/Etna-Sans-serif.otf);
+	font-family: "Etna-Sans-Serif";
+	font-weight: 400;
+	font-style: normal;
+	src: url(./fonts/Etna-Sans-serif.otf);
 }
 
 * {
-  font-family: "Montserrat" !important;
+	font-family: "Montserrat" !important;
 }
 
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0;
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 0;
 }
 
 @media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+	a:hover {
+		background-color: hsla(160, 100%, 37%, 0.2);
+	}
 }

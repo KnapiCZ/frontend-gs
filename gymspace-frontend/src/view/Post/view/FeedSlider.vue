@@ -8,31 +8,31 @@ const baseUrl = await apiUser()
 </script>
 
 <template>
-    <IonPage class="ion-no-padding">
-        <IonContent class="ion-no-padding" id="MainContainer">
-            <FeedPost v-for="object in myJson" :image="baseUrl + object.thumbSRC" :description="object.description"
-                :date="object.date" :userhandle="object.userhandle" :username="object.username" />
-        </IonContent>
-    </IonPage>
+	<IonPage class="ion-no-padding">
+		<IonContent class="ion-no-padding" id="MainContainer">
+			<FeedPost v-for="object in myJson" :image="baseUrl + object.thumbSRC" :description="object.description"
+				:date="object.date" :userhandle="object.userhandle" :username="object.username" />
+		</IonContent>
+	</IonPage>
 </template>
 
 
 
 <script lang="ts">
 export default {
-    data: () => ({
-        myJson: json,
-    }),
+	data: () => ({
+		myJson: json,
+	}),
 }
 
 </script>
 
 <style scoped>
 #MainContainer {
-    position: relative;
-    width: 100vw;
-    background-color: black;
-    text-align: center;
+	position: relative;
+	width: 100vw;
+	background-color: black;
+	text-align: center;
 
 
 }

@@ -6,66 +6,72 @@ import TopGym from '../components/ClubGym/GymTop.vue'
 import FeedPost from '@/view/Post/components/Feed/FeedPost.vue';
 import json from '@/assets/mocs/profilepost.json'
 import apiGym from '@/logic/API/apiGym';
-
+import { gymDataStore } from '@/stores/GymDataStore';
 let props = defineProps<{
-    logo?: string,
-    name?: string
+	id?: Number,
+	logo?: string,
+	name?: string
 }>()
 
-const baseUrl = await apiGym()
+const gymStore = gymDataStore()
+gymStore.openedGym = props.id as number
 
+const baseUrl = await apiGym()
+let gymInfo = await apiGym("gymInfo", props.id)
+
+console.log(gymInfo)
 </script>
 
 
 <template>
-    <IonPage>
-        <IonContent>
-            <TopGym :logo="props.logo" :name="props.name"> </TopGym>
+	<IonPage>
+		<IonContent>
+			<TopGym :logo="baseUrl + gymInfo.logo" :name="gymInfo.title"> </TopGym>
 
-            <VTabs v-model="tab" color="#e8e20a" bg-color="black" align-tabs="center" slider-color="#e8e20a" :grow='true'>
-                <VTab><img src="../../../assets/icons/feed.svg" alt="feed"></VTab>
-                <VTab><img src="../../../assets/icons/challenges.svg" alt="challenges"></VTab>
-                <VTab><img src="../../../assets/icons/challenges.svg" alt="challenges"></VTab>
-            </VTabs>
+			<VTabs v-model="tab" color="#e8e20a" bg-color="black" align-tabs="center" slider-color="#e8e20a" :grow='true'>
+				<VTab><img src="../../../assets/icons/feed.svg" alt="feed"></VTab>
+				<VTab><img src="../../../assets/icons/challenges.svg" alt="challenges"></VTab>
+				<VTab><img src="../../../assets/icons/challenges.svg" alt="challenges"></VTab>
+			</VTabs>
 
-            <VWindow v-model="tab">
-                <VWindowItem>
-                    <FeedPost v-for="object in myJson" :image="baseUrl + object.thumbSRC" :description="object.description"
-                        :date="object.date" :userhandle="object.userhandle" :username="object.username" />
-                </VWindowItem>
-                <VWindowItem>
-                    <GridLayout></GridLayout>
-                </VWindowItem>
-                <VWindowItem>
-                    <GridLayout></GridLayout>
-                </VWindowItem>
-            </VWindow>
-        </IonContent>
-    </IonPage>
+			<VWindow v-model="tab">
+				<VWindowItem>
+					<FeedPost v-for="object in myJson" :image="baseUrl + object.thumbSRC" :description="object.description"
+						:date="object.date" :userhandle="object.userhandle" :username="object.username" />
+				</VWindowItem>
+				<VWindowItem>
+					<GridLayout></GridLayout>
+				</VWindowItem>
+				<VWindowItem>
+					<GridLayout></GridLayout>
+				</VWindowItem>
+			</VWindow>
+		</IonContent>
+	</IonPage>
 </template>
 
 
 <script lang="ts">
 export default {
-    data: () => ({
-        tab: null,
-        myJson: json,
-    }),
+	data: () => ({
+		tab: null,
+		myJson: json,
+	}),
 }
 </script>
 
 <style scoped>
 .v-window {
-    padding-top: 30px;
-    height: fit-content;
-    width: 100%;
-    text-align: center;
+	padding-top: 30px;
+	height: fit-content;
+	width: 100%;
+	text-align: center;
 
 }
 
 .v-window__container {
-    height: 100%;
-    width: 100%;
+	height: 100%;
+	width: 100%;
 
 }
 </style>

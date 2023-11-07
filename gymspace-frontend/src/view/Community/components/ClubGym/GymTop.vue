@@ -36,8 +36,8 @@ async function followJoin(type: number) {
         <IonTitle>{{ name }}</IonTitle>
     </IonToolbar>
     <IonRow id="background">
-        <IonCol class="column" size="4">
-            <BioButton class="logo" :logo="props.logo" :name="props.name" :description="'NIGAAAA'" />
+        <IonCol class="column logo-column" size="4">
+            <BioButton />
             <p class="top">{{ props.name }}</p>
         </IonCol>
         <IonCol class="column" size="3">
@@ -125,21 +125,20 @@ div.toolbar-container * {
     position: relative;
     margin: auto;
     width: 100vw;
+    height: 200px;
     max-height: 200px;
     text-align: center;
     background-color: black;
 }
 
 .column {
-    max-height: 160px;
+    max-height: 200px;
     margin-top: auto;
     margin-bottom: 20px;
     margin-left: 10px;
 }
 
-.logo {
-    height: auto;
-    margin: 0;
-    margin-top: 10px;
+.logo-column {
+    margin: 0px 10px 45px 20px;
 }
 </style>

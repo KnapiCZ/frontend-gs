@@ -22,11 +22,11 @@ const pinia = createPinia()
 const vuetify = createVuetify()
 
 const app = createApp(App)
-  .use(IonicVue)
-  .use(router)
-  .use(vuetify)
-  .use(pinia);
+	.use(IonicVue)
+	.use(router)
+	.use(vuetify)
+	.use(pinia);
 
 router.isReady().then(() => {
-  app.mount('#app');
+	app.mount('#app');
 });

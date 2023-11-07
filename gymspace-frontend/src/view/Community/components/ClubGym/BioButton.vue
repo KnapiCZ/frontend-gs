@@ -1,91 +1,90 @@
 <script setup lang="ts">
-import { IonButton, IonModal, IonRow, IonToolbar, modalController } from '@ionic/vue';
+import { IonButton, IonButtons, IonModal, IonRow, IonToolbar, IonTitle, modalController } from '@ionic/vue';
+import apiGym from '@/logic/API/apiGym';
+import { gymDataStore } from '@/stores/GymDataStore';
 
-const props = defineProps<{
-    name?: string,
-    description?: string,
-    logo?: string,
+const gymStore = gymDataStore()
 
-}>
-    ()
+const gymData = await apiGym('gymInfo', gymStore.openedGym)
+const baseUrl = await apiGym()
 
 </script>
 
 <template>
-    <IonButton id="parent" :style="{ backgroundImage: 'url(' + props.logo + ')' }" color="rgba(0,0,0,0)">
-        <IonModal ref="modal" trigger="parent">
-            <IonToolbar>
-                <IonButtons slot="start">
-                    <IonButton @click="modalController.dismiss" class="back-button" color="rgba(0,0,0,0)"><img
-                            src="../../../../assets/icons/arrowRight.svg"></IonButton>
-                </IonButtons>
-                <IonTitle>Description</IonTitle>
-            </IonToolbar>
-            <div class=" top-info">
-                <img class="logo" :src="props.logo">
-                <h1 class="name">{{ name }}</h1>
-                <p>The best boddybuilding club ever</p>
-                <p>hashtags?????</p>
-            </div>
+	<IonButton id="parent" :style="{ backgroundImage: 'url(' + baseUrl + gymData.logo + ')' }" color="rgba(0,0,0,0)">
+		<IonModal ref="modal" trigger="parent">
+			<IonToolbar>
+				<IonButtons slot="start">
+					<IonButton @click="modalController.dismiss" class="back-button" color="rgba(0,0,0,0)"><img
+							src="../../../../assets/icons/arrowRight.svg"></IonButton>
+				</IonButtons>
+				<IonTitle>Description</IonTitle>
+			</IonToolbar>
+			<div class=" top-info">
+				<img class="logo" :src="baseUrl + gymData.logo">
+				<h1 class="name">{{ gymData.title }}</h1>
+				<p>{{ gymData.subtitle }}</p>
+			</div>
 
-            <div class="description">
-                <h2>Description</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut labore et
-                    dolore magna aliqua.Elementum integer enim neque volutpat ac tincidunt.Felis bibendum ut tristique
-                    et
-                    egestas.Auctor augue mauris augue neque gravida in.Libero volutpat sed cras ornare arcu.Sit amet
-                    consectetur adipiscing elit duis tristique.Sit amet justo donec enim diam vulputate ut pharetra sit.
-                    Consectetur libero id faucibus nisl tincidunt eget.Elit pellentesque habitant morbi</p>
-            </div>
+			<div class="description">
+				<h2>Description</h2>
+				<p>{{ gymData.description }}</p>
+			</div>
 
-            <h2 class="creator">Created by</h2>
-            <IonRow>
-                <img class="pfp" :src="props.logo" alt="">
-                <p>@gymspace</p>
-            </IonRow>
-        </IonModal>
-    </IonButton>
+			<h2 class="creator">Created by</h2>
+			<IonRow>
+				<img class="pfp" :src="baseUrl + gymData.logo" alt="">
+				<p>@gymspace</p>
+			</IonRow>
+		</IonModal>
+	</IonButton>
 </template>
 
 <style scoped>
+#parent {
+	height: 100%;
+	width: 100%;
+	background-position: center;
+	background-size: contain;
+}
+
 .back-button {
-    height: 100%;
-    aspect-ratio: 1;
+	height: 100%;
+	aspect-ratio: 1;
 }
 
 .back-button img {
-    rotate: 180deg;
+	rotate: 180deg;
 }
 
 ion-row {
-    margin: 10px;
+	margin: 10px;
 }
 
 .description {
-    margin: 0 10px 30px 10px;
+	margin: 0 10px 30px 10px;
 }
 
 .description p {
-    margin: 10px;
-    font-size: 12px;
+	margin: 10px;
+	font-size: 12px;
 }
 
 .logo {
-    width: 30%;
-    margin: 10px;
+	width: 30%;
+	margin: 10px;
 }
 
 .top-info {
-    text-align: center;
-    margin: 0 10px 30px 10px;
+	text-align: center;
+	margin: 0 10px 30px 10px;
 }
 
 .creator {
-    margin: 10px;
+	margin: 10px;
 }
 
 .pfp {
-    height: 40px;
+	height: 40px;
 }
 </style>

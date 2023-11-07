@@ -1,38 +1,38 @@
 [
-    {
-        "id": 1,
-        "type": "video",
-        "userHandle": "@Boxer1o1",
-        "description": "Hitting it faster than light",
-        "hashtags": "#box #training #lightning #beYourSelf",
-        "music": "@Boxer1o1's sound",
-        "vidSrc": "/media/global_post_media/None/media/video1.mp4"
-    },
-    {
-        "id": 2,
-        "type": "video",
-        "userHandle": "@FitBlondie",
-        "description": "New to gym can anyone help me?",
-        "hashtags": "#firstDay #training #gettingToShape #blondeGirl",
-        "music": "no sound in this video",
-        "vidSrc": "/media/global_post_media/None/media/video2.mp4"
-    },
-    {
-        "id": 3,
-        "type": "video",
-        "userHandle": "@JamieWalker",
-        "description": "Working on cardio today",
-        "hashtags": "#marathonprep #training #run",
-        "music": "no sound in this video",
-        "vidSrc": "/media/global_post_media/None/media/video3.mp4"
-    },
-    {
-        "id": 4,
-        "type": "video",
-        "userHandle": "@BlackieChen",
-        "description": "Getting ready for spartan race",
-        "hashtags": "#spartan #race #pushToLimit #getBestOOFS",
-        "music": "no sound in this video",
-        "vidSrc": "/media/global_post_media/None/media/video4.mp4"
-    }
+	{
+		"id": 1,
+		"type": "video",
+		"userHandle": "@Boxer1o1",
+		"description": "Hitting it faster than light",
+		"hashtags": "#box #training #lightning #beYourSelf",
+		"music": "@Boxer1o1's sound",
+		"vidSrc": "/media/global_post_media/None/media/video1.mp4"
+	},
+	{
+		"id": 2,
+		"type": "video",
+		"userHandle": "@FitBlondie",
+		"description": "New to gym can anyone help me?",
+		"hashtags": "#firstDay #training #gettingToShape #blondeGirl",
+		"music": "no sound in this video",
+		"vidSrc": "/media/global_post_media/None/media/video2.mp4"
+	},
+	{
+		"id": 3,
+		"type": "video",
+		"userHandle": "@JamieWalker",
+		"description": "Working on cardio today",
+		"hashtags": "#marathonprep #training #run",
+		"music": "no sound in this video",
+		"vidSrc": "/media/global_post_media/None/media/video3.mp4"
+	},
+	{
+		"id": 4,
+		"type": "video",
+		"userHandle": "@BlackieChen",
+		"description": "Getting ready for spartan race",
+		"hashtags": "#spartan #race #pushToLimit #getBestOOFS",
+		"music": "no sound in this video",
+		"vidSrc": "/media/global_post_media/None/media/video4.mp4"
+	}
 ]

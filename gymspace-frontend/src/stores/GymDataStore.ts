@@ -11,6 +11,7 @@ interface GymButtonI {
 export const gymDataStore = defineStore('gymDataStore', {
     state: () => {
         return {
+            openedGym: -1,
             gymButtons: [] as GymButtonI[],
         }
     },
@@ -22,6 +23,6 @@ export const gymDataStore = defineStore('gymDataStore', {
                     this.gymButtons.push((data[i] as GymButtonI))
                 }
             })
-        }
+        },
     }
 })

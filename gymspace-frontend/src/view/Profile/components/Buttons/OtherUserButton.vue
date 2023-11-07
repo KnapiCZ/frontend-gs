@@ -12,58 +12,58 @@ let followingList = await apiUser('isFollowing', userStore.loggedUserId, 2)
 
 
 function following(followers: []) {
-  if (followers.includes(userStore.loggedUserId as never)) {
-    isFollowing.value = true;
-  }
-  else {
-    isFollowing.value = false;
-  }
+	if (followers.includes(userStore.loggedUserId as never)) {
+		isFollowing.value = true;
+	}
+	else {
+		isFollowing.value = false;
+	}
 }
 
 async function follow() {
-  if (isFollowing.value) {
-    userStore.followersCount--
-  } else {
-    userStore.followersCount++
+	if (isFollowing.value) {
+		userStore.followersCount--
+	} else {
+		userStore.followersCount++
 
-  }
-  await apiUser("follow",
-    userStore.loggedUserId,
-    2).then((isFollowing.value as any) = (!isFollowing.value as any))
+	}
+	await apiUser("follow",
+		userStore.loggedUserId,
+		2).then((isFollowing.value as any) = (!isFollowing.value as any))
 }
 
 following(followingList.followers)
 </script>
 
 <template>
-  <IonRow>
-    <button id="followButton" class="profileButtons" :class="{ follow: !isFollowing }" @click="follow">
-      {{ isFollowing ? 'Following' : 'Follow' }}
-    </button> <!-- vytvorit api na follow -->
-    <ContactButton class="profileButtons"></ContactButton>
+	<IonRow>
+		<button id="followButton" class="profileButtons" :class="{ follow: !isFollowing }" @click="follow">
+			{{ isFollowing ? 'Following' : 'Follow' }}
+		</button> <!-- vytvorit api na follow -->
+		<ContactButton class="profileButtons"></ContactButton>
 
-  </IonRow>
+	</IonRow>
 </template>
   
   
 <style scoped>
 ion-row {
-  width: 100%;
+	width: 100%;
 }
 
 .profileButtons {
-  width: 40%;
-  height: 30px;
-  padding: 5px;
-  margin: 20px auto;
-  background-color: #2F2F2F;
-  font-weight: bold;
-  border-radius: 10px;
-  transition: background-color 0.5s ease-in-out;
+	width: 40%;
+	height: 30px;
+	padding: 5px;
+	margin: 20px auto;
+	background-color: #2F2F2F;
+	font-weight: bold;
+	border-radius: 10px;
+	transition: background-color 0.5s ease-in-out;
 }
 
 .follow {
-  background-color: #e8e20a;
-  color: black;
+	background-color: #e8e20a;
+	color: black;
 }
 </style>

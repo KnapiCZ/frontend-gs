@@ -7,46 +7,46 @@ import LinkButton from "./LinkButton.vue";
 </script>
 
 <template>
-    <button>
-        Contact
-        <VDialog activator="parent" :persistent="false" transition="dialog-bottom-transition" :scrollable="true"
-            width="75vw" height="70vh">
-            <VCard>
-                <p>CONTACT</p>
+	<button>
+		Contact
+		<VDialog activator="parent" :persistent="false" transition="dialog-bottom-transition" :scrollable="true"
+			width="75vw" height="70vh">
+			<VCard>
+				<p>CONTACT</p>
 
-                <LinkButton type="email" link="blablabla" name="Email" />
-                <LinkButton type="web" link="gymspace.cz" name="Gymspace.cz" />
+				<LinkButton type="email" link="blablabla" name="Email" />
+				<LinkButton type="web" link="gymspace.cz" name="Gymspace.cz" />
 
 
 
-                <SocialMedia class="social" />
-            </VCard>
-        </VDialog>
-    </button>
+				<SocialMedia class="social" />
+			</VCard>
+		</VDialog>
+	</button>
 </template>
 
 <style scoped>
 .v-card {
-    margin: auto;
-    width: 75vw;
-    height: 70vh;
-    border-radius: 20px !important;
-    text-align: center;
-    background-color: rgba(14, 14, 14, 0.815);
-    color: white;
-    backdrop-filter: blur(8px);
+	margin: auto;
+	width: 75vw;
+	height: 70vh;
+	border-radius: 20px !important;
+	text-align: center;
+	background-color: rgba(14, 14, 14, 0.815);
+	color: white;
+	backdrop-filter: blur(8px);
 }
 
 p {
-    font-size: 28px;
-    font-weight: bold;
-    margin: 20px auto
+	font-size: 28px;
+	font-weight: bold;
+	margin: 20px auto
 }
 
 .social {
-    width: 100%;
-    position: absolute;
-    bottom: 30px;
+	width: 100%;
+	position: absolute;
+	bottom: 30px;
 
 
 

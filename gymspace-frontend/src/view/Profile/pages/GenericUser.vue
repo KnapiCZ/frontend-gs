@@ -24,11 +24,11 @@ userDataStore().followersCount = userData.followers
 
 
 function checkLogin() {
-  if (id == userStore.loggedUserId) {
-    return true;
-  } else {
-    return false;
-  }
+	if (id == userStore.loggedUserId) {
+		return true;
+	} else {
+		return false;
+	}
 }
 
 const baseUrl = await apiUser()
@@ -38,27 +38,30 @@ const background_picture_url = `${baseUrl}${userData.background_picture}`
 </script>
 
 <template>
-  <IonPage class="ion-no-padding" :key="id">
-    <IonContent class="ion-no-padding">
-      <div class="page-div">
-        <ProfileTop :profile_picture_url="profile_picture_url" :background_picture_url="background_picture_url"
-          :username="userData.username" :followers="userData.followers" :trainer_status="userData.trainer_status" />
+	<IonPage class="ion-no-padding" :key="id">
+		<IonContent class="ion-no-padding">
+			<div class="page-div">
+				<ProfileTop :profile_picture_url="profile_picture_url" :background_picture_url="background_picture_url"
+					:username="userData.username" :followers="userData.followers"
+					:trainer_status="userData.trainer_status" />
 
-        <ProfileBasicInfo :description="userData.description" :email="userData.email" :rendered-user-id="userData.id" />
-        <CurrentUserButton v-if="checkLogin()" :renderedUserId="userData.id" :loggedInUserId="userStore.loggedUserId" />
-        <OtherUserButton v-else :renderedUserId="userData.id" :loggedUserId="userStore.loggedUserId" />
-        <TabBar :trainer_status="userData.trainer_status" />
-      </div>
-    </IonContent>
-  </IonPage>
+				<ProfileBasicInfo :description="userData.description" :email="userData.email"
+					:rendered-user-id="userData.id" />
+				<CurrentUserButton v-if="checkLogin()" :renderedUserId="userData.id"
+					:loggedInUserId="userStore.loggedUserId" />
+				<OtherUserButton v-else :renderedUserId="userData.id" :loggedUserId="userStore.loggedUserId" />
+				<TabBar :trainer_status="userData.trainer_status" />
+			</div>
+		</IonContent>
+	</IonPage>
 </template>
 
 <style scoped>
 .page-div {
-  margin: 0;
-  padding: 0;
-  padding-bottom: 56px;
-  text-align: center;
-  background-color: black;
+	margin: 0;
+	padding: 0;
+	padding-bottom: 56px;
+	text-align: center;
+	background-color: black;
 }
 </style>
