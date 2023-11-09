@@ -31,11 +31,13 @@ const baseUrl = await apiGym()
 				<p>{{ gymData.description }}</p>
 			</div>
 
-			<h2 class="creator">Created by</h2>
-			<IonRow>
-				<img class="pfp" :src="baseUrl + gymData.logo" alt="">
-				<p>@gymspace</p>
-			</IonRow>
+			<div class="creator">
+				<h2>Created by</h2>
+				<IonRow>
+					<img class="pfp" :src="baseUrl + gymData.logo" alt="">
+					<p>@gymspace</p>
+				</IonRow>
+			</div>
 		</IonModal>
 	</IonButton>
 </template>
@@ -57,31 +59,28 @@ const baseUrl = await apiGym()
 	rotate: 180deg;
 }
 
-ion-row {
-	margin: 10px;
+
+
+.top-info {
+	text-align: center;
+	margin: 0 20px 0 20px;
 }
 
 .description {
-	margin: 0 10px 30px 10px;
+	margin: 0 20px 0 20px;
 }
 
 .description p {
-	margin: 10px;
 	font-size: 12px;
 }
 
 .logo {
-	width: 30%;
+	width: 40%;
 	margin: 10px;
-}
-
-.top-info {
-	text-align: center;
-	margin: 0 10px 30px 10px;
 }
 
 .creator {
-	margin: 10px;
+	margin: 0 20px 30px 20px;
 }
 
 .pfp {

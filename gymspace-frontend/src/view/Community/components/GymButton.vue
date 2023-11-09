@@ -31,7 +31,7 @@ const props = defineProps<{
 }
 
 h1 {
-	font-size: 34px;
+	font-size: clamp(28px, 7vw, 64px);
 	font-weight: bold;
 	color: white;
 	position: absolute;

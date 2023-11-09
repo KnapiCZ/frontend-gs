@@ -1,17 +1,34 @@
 <script setup lang="ts">
 import { IonRow, IonCol, IonToolbar, IonButtons, IonButton, IonTitle, useIonRouter } from '@ionic/vue';
-import BioButton from './BioButton.vue';
+import { userDataStore } from '@/stores/UserDataStore';
+import { gymDataStore } from '@/stores/GymDataStore';
 import { ref } from 'vue';
 
-const router = useIonRouter()
+import apiGym from '@/logic/API/apiGym';
+import BioButton from './BioButton.vue';
 
 let props = defineProps<{
     logo?: string,
     name?: string,
 }>()
 
-let FollowMembers = ref([26, 56]);
+const router = useIonRouter()
+const gymStore = gymDataStore()
+const userStore = userDataStore()
+
+let gymInfo = await apiGym("gymInfo", gymStore.openedGym)
+let FollowMembers = ref([26, gymInfo.members.length]);
 let isFollowing = [false, false];
+
+//setup if member or not
+function members(members: []) {
+    if (members.includes(userStore.loggedUserId as never)) {
+        isFollowing[1] = true;
+    }
+    else {
+        isFollowing[1] = false;
+    }
+}
 
 async function followJoin(type: number) {
     if (isFollowing[type]) {
@@ -24,6 +41,19 @@ async function followJoin(type: number) {
     }
 }
 
+async function follow() {
+    if (isFollowing[1]) {
+        userStore.followersCount--
+    } else {
+        userStore.followersCount++
+
+    }
+    //await apiUser("follow",
+    //	userStore.loggedUserId,
+    //	2).then((isJoined.value as any) = (!isJoined.value as any))
+}
+
+members(gymInfo.members)
 
 </script>
 
@@ -50,7 +80,7 @@ async function followJoin(type: number) {
         </IonCol>
         <IonCol class="column" size="3">
             <p class="top">{{ FollowMembers[1] }}</p>
-            <p class="bottom">Members</p>
+            <p class="bottom">members</p>
 
             <button class="join" :class="{ joined: isFollowing[1] }" @click="followJoin(1)">
                 {{ isFollowing[1] ? 'Joined' : 'Join' }}
@@ -60,8 +90,8 @@ async function followJoin(type: number) {
 </template>
 
 <style scoped>
-div.toolbar-container * {
-    background-color: black;
+ion-title {
+    font-weight: bold;
 }
 
 .follow,
@@ -127,12 +157,10 @@ div.toolbar-container * {
 
 .column {
     max-height: 200px;
-    margin-top: auto;
-    margin-bottom: 20px;
-    margin-left: 10px;
+    margin: auto auto 20px auto;
 }
 
 .logo-column {
-    margin: 0px 10px 45px 20px;
+    margin: 0 auto 50px auto;
 }
 </style>
