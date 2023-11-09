@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { VCard, VTabs, VTab, VWindow, VWindowItem } from 'vuetify/lib/components/index.mjs';
-import GridLayout from '../../../Post/components/GridLayout.vue';
+import SmallFeed from '../../../Post/components/SmallFeed.vue';
 import FeedVue from './Feed.vue';
 
 let props = defineProps({
@@ -22,10 +22,10 @@ let props = defineProps({
 				<FeedVue />
 			</VWindowItem>
 			<VWindowItem>
-				<GridLayout></GridLayout>
+				<SmallFeed />
 			</VWindowItem>
 			<VWindowItem v-if="trainer_status">
-				<GridLayout></GridLayout>
+				<SmallFeed />
 			</VWindowItem>
 		</VWindow>
 	</VCard>

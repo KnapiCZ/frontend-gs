@@ -1,6 +1,14 @@
 <script setup lang="ts">
+import { userDataStore } from '@/stores/UserDataStore';
+
 import Thumbnail from './thumbnail.vue';
 import json from '../../../assets/mocs/profilepost.json'
+import apiPost from '@/logic/API/apiPost';
+
+const userStore = userDataStore()
+
+const posts = await apiPost("getUserPost", 1)
+
 
 </script>
 

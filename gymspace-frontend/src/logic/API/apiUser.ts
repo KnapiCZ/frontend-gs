@@ -1,7 +1,7 @@
 // API pro uzivatele
 
 
-async function apiUser(apiType = "", firstId?: number, secondId?: unknown) {
+async function apiUser(apiType = "", firstId?: number, secondId?: number) {
 	const baseUrl = `http://localhost:8080`
 	let response
 	switch (apiType) {
