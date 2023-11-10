@@ -29,6 +29,7 @@
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
+    "@ionic/cli": "^7.1.5",
     "@capacitor/cli": "5.4.2",
     "@types/lodash": "^4.14.199",
     "@vitejs/plugin-legacy": "^4.0.2",

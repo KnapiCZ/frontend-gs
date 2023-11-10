@@ -49,12 +49,14 @@ class UserProfileViewSet(viewsets.ViewSet):
             return Response({'message': 'failed'})
 
 class SmallUserProfileViewSet(viewsets.ViewSet):
+    permission_classes = (IsAuthenticated,)
     def retrieve(self, request, pk=None):
         queryset = UserProfile.objects.get(pk=pk)
         serializer = SmallUserSerializer(queryset)
         return Response(serializer.data)
 
 class FollowerViewSet(viewsets.ViewSet):
+    permission_classes = (IsAuthenticated,)
     def retrieve(self, request, pk=None):
         queryset = UserProfile.objects.get(pk=pk)
         serializer = FollowerSerializer(queryset)
@@ -62,6 +64,7 @@ class FollowerViewSet(viewsets.ViewSet):
         return Response({"followers": followers})
 
 class MostFollowedViewSet(viewsets.ViewSet):
+    permission_classes = (IsAuthenticated,)
     def retrieve(self, request, pk=None):
         queryset = UserProfile.objects.get(pk=pk)
         try:
@@ -105,41 +108,6 @@ class MostFollowedViewSet(viewsets.ViewSet):
             return Response([{}, {}])
 
 
-class UserPostViewSet(viewsets.ViewSet):
-    def retrieve(self, request, pk=None):
-        post = UserPost.objects.get(pk=pk)
-        media = UserPostMedia.objects.filter(parent_post__pk=pk)
-
-        post_serializer = UserPostSerializer(data={
-            "id": post.id,
-            "author": post.author.pk,
-            "title": post.title,
-            "body": post.body,
-            "likes": post.likes.values_list('pk', flat=True),
-            "post_time": post.post_time
-            })
-        print(media)
-        media_serializer = UserPostMediaSerializer(media, many=True)
-
-        if post_serializer.is_valid():
-            return Response({"post": post_serializer.data,
-                             "media": media_serializer.data})
-        else:
-            return Response({"post error": post_serializer.errors,})
-
-
-class RecommendedPostViewSet(viewsets.ViewSet):
-    def retrieve(self, request, pk=None):
-
-        following = UserProfile.objects.filter(followers=pk)\
-                .values_list('pk', flat=True)
-        posts = UserPost.objects\
-                .filter(author__user_profile__in=following)\
-                .order_by('-post_time')[:5]
-
-        post_serializer = UserPostSerializer(posts, many=True)
-        print(posts)
-        return Response({"posts": post_serializer.data,})
 
 class ConfirmAuth(viewsets.ViewSet):
     permission_classes = (AllowAny,)

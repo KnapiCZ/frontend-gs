@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Thumbnail from './thumbnail.vue';
-import json from '../../../assets/mocs/profilepost.json'
+import Thumbnail from './Thumbnail.vue';
+import json from '@/assets/mocs/profilepost.json'
 
 </script>
 

@@ -5,7 +5,7 @@ from company.models import Company
 
 
 def gym_upload_path(instance, filename):
-    return f'media/global_gym_media/{instance.pk}/media/{filename}'
+    return f'media/global_gym_media/gym-{instance.pk}/media/{filename}'
 
 
 class Sport(models.Model):
@@ -42,6 +42,16 @@ class Gym(models.Model):
     location_size = models.IntegerField(null=True, blank=True)
 
     supported_sports = models.ManyToManyField(Sport)
-
+    def save(self, *args, **kwargs):
+        if self.pk is None:
+            logo = self.logo
+            main_image = self.main_image
+            self.logo = None
+            self.main_image = None
+            super(Gym, self).save(*args, **kwargs)
+            self.logo = logo
+            self.main_image = logo
+        else:
+            super(Gym, self).save(*args, **kwargs)
     def __str__(self):
         return f'{self.title}'

@@ -49,7 +49,7 @@ class UserPostSerializer(serializers.ModelSerializer):
         model = UserPost
         fields = ['id',
                   'author',
-                  'title',
+                  'gym',
                   'body',
                   'likes',
                   'post_time']
@@ -60,3 +60,9 @@ class UserPostMediaSerializer(serializers.ModelSerializer):
         fields = ['pk',
                   'parent_post',
                   'media']
+
+
+class UserPostCountSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserPost
+        fields = ['id',]

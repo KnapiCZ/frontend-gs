@@ -1,12 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
+from gym.models import Gym
 # Create your models here.
 
 
 def media_upload_path(instance, filename):
-    return f'media/global_post_media/{instance.pk}/media/{filename}'
+    return f'media/global_post_media/user-{instance.parent_post.author.pk}/media/{filename}'
 def profile_upload_path(instance, filename):
-    return f'media/global_profile_media/{instance.pk}/profile/{filename}'
+    return f'media/global_profile_media/user-{instance.handle.pk}/profile/{filename}'
 
 def followers(id):
     return UserProfile.objects.get(id=id).followers.count()
@@ -73,12 +74,24 @@ class UserProfile(models.Model):
         return UserPost.objects.filter(pk=self.pk).values_list('pk', flat=True)
     def get_posts_queryset(self):
         return UserPost.objects.filter(pk=self.pk).values_list('pk')
+    def save(self, *args, **kwargs):
+        if self.pk is None:
+            profile_image = self.profile_picture
+            background_image = self.background_picture
+            self.profile_picture = None
+            self.background_picture = None
+            super(UserProfile, self).save(*args, **kwargs)
+            self.profile_picture = profile_image
+            self.background_picture = background_image
+        else:
+            super(UserProfile, self).save(*args, **kwargs)
 class UserPost(models.Model):
     author = models.ForeignKey(User,
                                on_delete=models.CASCADE,
                                related_name='posts')
-    # priprava na DB gymu
-    # gym = models.ForeignKey(Gym, on_delete=models.CASCADE, unique=True)
+    gym = models.ForeignKey(Gym,
+                            on_delete=models.CASCADE,
+                            blank=True, null=True,)
     title = models.CharField(max_length=60,
                              blank=True,
                              null=True)
@@ -92,7 +105,7 @@ class UserPost(models.Model):
                                    symmetrical=False,
                                    related_name='likes')
 
-    post_time = models.DateTimeField(auto_now_add=True)
+    post_time = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return f"(user){self.author.user_profile.username} - (title){self.title} - (post id){self.id}"
@@ -101,4 +114,11 @@ class UserPostMedia(models.Model):
                                     on_delete=models.CASCADE,
                                     related_name='media')
     media = models.FileField(upload_to=media_upload_path)
-
+    def save(self, *args, **kwargs):
+        if self.parent_post.pk is None:
+            media = self.media
+            self.media = None
+            super(UserPostMedia, self).save(*args, **kwargs)
+            self.media = media
+        else:
+            super(UserPostMedia, self).save(*args, **kwargs)

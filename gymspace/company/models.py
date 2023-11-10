@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 
 def company_upload_path(instance, filename):
-    return f'media/global_company_media/{instance.pk}/media/{filename}'
+    return f'media/global_company_media/company-{instance.pk}/media/{filename}'
 
 
 class Company(models.Model):
@@ -34,5 +34,16 @@ class Company(models.Model):
     administrator = models.CharField(max_length=150)
     ico = models.PositiveIntegerField()
 
+    def save(self, *args, **kwargs):
+        if self.pk is None:
+            logo = self.logo
+            main_image = self.main_image
+            self.logo = None
+            self.main_image = None
+            super(Company, self).save(*args, **kwargs)
+            self.logo = logo
+            self.main_image = logo
+        else:
+            super(Company, self).save(*args, **kwargs)
     def __str__(self):
         return f'{self.title}'
