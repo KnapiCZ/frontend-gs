@@ -76,7 +76,7 @@ async function toggle(value: number) {
 				<h2>Featured posts </h2>
 				<Swiper :slides-per-view="3" :space-between="15">
 					<SwiperSlide v-for="object in myJson" :key="object.id">
-						<Thumbnail :ImageSource="object.thumbSRC" />
+						<Thumbnail :ImageSource="object.thumbSRC" type="community"/>
 					</SwiperSlide>
 				</Swiper>
 			</section>
@@ -101,7 +101,7 @@ ion-searchbar {
 }
 
 .background {
-	position: absolute;
+	position: fixed;
 	width: 100vw;
 	height: 100vh;
 	object-fit: cover;

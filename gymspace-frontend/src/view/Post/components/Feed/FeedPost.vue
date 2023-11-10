@@ -8,6 +8,7 @@ function goToUser(id: number) {
 }
 
 const props = defineProps<{
+	userId?: number,
 	image?: string,
 	description?: string
 	username?: string,

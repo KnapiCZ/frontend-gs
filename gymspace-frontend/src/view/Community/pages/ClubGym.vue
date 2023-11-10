@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import { VTab, VWindow, VWindowItem } from 'vuetify/lib/components/index.mjs';
 import { IonContent, IonPage } from '@ionic/vue';
-import GridLayout from '../../Post/components/GridLayout.vue';
+
+import SmallFeed from '@/view/Post/components/SmallFeed.vue';
 import TopGym from '../components/ClubGym/GymTop.vue'
 import FeedPost from '@/view/Post/components/Feed/FeedPost.vue';
 import json from '@/assets/mocs/profilepost.json'
 import apiGym from '@/logic/API/apiGym';
 import { gymDataStore } from '@/stores/GymDataStore';
 let props = defineProps<{
-	id?: Number,
+	id: number,
 	logo?: string,
 	name?: string
 }>()
@@ -40,10 +41,10 @@ console.log(gymInfo)
 						:date="object.date" :userhandle="object.userhandle" :username="object.username" />
 				</VWindowItem>
 				<VWindowItem>
-					<GridLayout></GridLayout>
+					<SmallFeed />
 				</VWindowItem>
 				<VWindowItem>
-					<GridLayout></GridLayout>
+					<SmallFeed />
 				</VWindowItem>
 			</VWindow>
 		</IonContent>

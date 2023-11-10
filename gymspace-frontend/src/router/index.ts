@@ -48,6 +48,13 @@ const routes: Array<RouteRecordRaw> = [
 			},
 
 			{
+				path: '/community/explore',
+				name: "explore",
+				component: () => import('@/view/Post/view/FeedSlider.vue'),
+				meta: { requiresAuth: true },
+			},
+
+			{
 				path: '/community/gym/:id',
 				name: "gym",
 				component: () => import('@/view/Community/pages/ClubGym.vue'),

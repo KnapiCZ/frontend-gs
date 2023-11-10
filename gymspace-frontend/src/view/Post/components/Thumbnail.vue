@@ -4,25 +4,34 @@ import { IonButton, useIonRouter } from '@ionic/vue';
 
 const router = useIonRouter()
 
-const props = defineProps({
-	ImageSource: String,
-	postID: Number,
-	postIndex: Number //kde se v seznamu nachazi
-})
+const props = defineProps<{
+	ImageSource: string,
+	postID?: number,
+	type: string // typ = kde se thumbnail nachazi profil -> bude routovat na profil/x/post/, community -> bude routovat na community/explore 
+}>()
 
 const baseUrl = await apiUser()
 const postUrl = `${baseUrl}${props.ImageSource}`
+
+
+function setRouting(type: string) {
+	switch (type) {
+		case 'profil':
+			router.push('/user/1/post/' + props.postID)
+			break
+
+		case 'community':
+			router.push('/community/explore')
+			break
+	}
+}
+
 </script>
 
 
 
 <template>
-	<IonButton class="ion-no-padding" color="transparent" router-direction="forward"
-		@click="() => router.push('/user/1/post/' + postID)">
-		<!-- 1source: postURL smaz az po te co smazes :souce/ v router.js 
-                                                                                            + na profilu budes chtit ze ti to otevre tenhle post,
-                                                                                              ale budes moct scrollovat i mezi dalsimi tvymi posty na profilu
-                                                                                              nebo nekde jinde recomended-->
+	<IonButton class="ion-no-padding" color="transparent" @click="setRouting(props.type)">
 		<img :src="postUrl" alt=""> <!-- API thumbnail of post src-->
 	</IonButton>
 </template>
