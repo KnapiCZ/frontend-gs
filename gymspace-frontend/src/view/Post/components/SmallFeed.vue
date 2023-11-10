@@ -7,7 +7,11 @@ import apiPost from '@/logic/API/apiPost';
 
 const userStore = userDataStore()
 
-const posts = await apiPost("getUserPost", 1)
+const posts = await apiPost("getUserPost", 2)
+const recommended = await apiPost("recommendedPosts", 1)
+
+console.log(posts)
+console.log(recommended)
 
 
 </script>
@@ -15,7 +19,7 @@ const posts = await apiPost("getUserPost", 1)
 
 <template>
 	<div class="grid-container">
-		<Thumbnail v-for="data in myJson" :ImageSource="data.thumbSRC" :postID="data.id" :postIndex="data.id"
+		<Thumbnail v-for="data in myJson" :ImageSource="data.thumbSRC" :postID="data.id" type="community"
 			class="grid-item" />
 	</div>
 </template>

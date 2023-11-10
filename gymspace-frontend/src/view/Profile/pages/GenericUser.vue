@@ -2,19 +2,20 @@
 import ProfileTop from '../components/ProfileTop.vue'
 import CurrentUserButton from '../components/Buttons/CurrentUserButton.vue';
 import ProfileBasicInfo from '../components/ProfileBasicInfo.vue';
-import TabBar from '../components/Tabs/TabBar.vue';
+import TabBar from '../components/TabBar.vue';
 import OtherUserButton from '../components/Buttons/OtherUserButton.vue';
 import apiUser from '@/logic/API/apiUser';
 
 
 import { IonContent, IonPage } from '@ionic/vue';
-import { userDataStore } from '../../../stores/UserDataStore';
+import { userDataStore } from '@/stores/UserDataStore';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
 const userStore = userDataStore()
 
 let id = route.params.id as unknown as number
+userStore.renderedUserId
 
 
 let userData = await apiUser("userProfile", id)

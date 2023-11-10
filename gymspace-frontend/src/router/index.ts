@@ -50,7 +50,7 @@ const routes: Array<RouteRecordRaw> = [
 			{
 				path: '/community/explore',
 				name: "explore",
-				component: () => import('@/view/Community/pages/MainPage.vue'),
+				component: () => import('@/view/Post/view/FeedSlider.vue'),
 				meta: { requiresAuth: true },
 			},
 
