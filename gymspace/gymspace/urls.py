@@ -24,6 +24,7 @@ router.register('users-all-posts', user_post_views.AllUserPostsViewSet, basename
 
 router.register(r'gyms-member', gym_views.MyGymsViewSet, basename='gyms-member')
 router.register(r'gyms-button', gym_views.GymInfoViewSet, basename='gyms-button')
+router.register(r'gyms-join', gym_views.GymViewSet, basename='gyms-join')
 from django.conf import settings
 from django.conf.urls.static import static
 
