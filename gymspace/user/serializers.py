@@ -45,13 +45,15 @@ class FollowerSerializer(serializers.Serializer):
 
 
 class UserPostSerializer(serializers.ModelSerializer):
+    like_count = serializers.IntegerField(source="count_likes")
+
     class Meta:
         model = UserPost
         fields = ['id',
                   'author',
                   'gym',
                   'body',
-                  'likes',
+                  'like_count',
                   'post_time']
 
 class UserPostMediaSerializer(serializers.ModelSerializer):

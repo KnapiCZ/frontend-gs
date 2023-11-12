@@ -14,6 +14,8 @@ def followers(id):
 def following(id):
     return UserProfile.objects.filter(followers=id).count()
 
+def likes(id):
+    return UserPost.objects.get(id=id).likes.count()
 
 class UserProfile(models.Model):
     handle = models.OneToOneField(User,
@@ -107,6 +109,8 @@ class UserPost(models.Model):
 
     post_time = models.DateField(auto_now_add=True)
 
+    def count_likes(self):
+        return likes(self.id)
     def __str__(self):
         return f"(user){self.author.user_profile.username} - (title){self.title} - (post id){self.id}"
 class UserPostMedia(models.Model):

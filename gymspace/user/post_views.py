@@ -52,9 +52,42 @@ class RecommendedPostViewSet(viewsets.ViewSet):
         post_serializer = UserPostSerializer(posts, many=True)
         return Response({"posts": post_serializer.data,})
 
-class AllUserPostsViewSet(viewsets.ViewSet):
+class AllUserPostsIDViewSet(viewsets.ViewSet):
+    """
+    Vrati pole ID vsech prispevku od uzivatele
+    api/users-all-posts-id/<id>/
+    """
     permission_classes = (IsAuthenticated,)
     def retrieve(self, request, pk=None):
         posts = UserPost.objects.filter(author__id=pk)
         serializer = UserPostCountSerializer(posts, many=True)
         return Response({"posts": serializer.data,})
+
+class AllUserPostsDetailViewSet(viewsets.ViewSet):
+    """
+    Vrati detailni pole vsech prispevku od uzivatele
+    api/users-all-posts-detail/<id>/
+    """
+    permission_classes = (IsAuthenticated,)
+    def retrieve(self, request, pk=None):
+        posts = UserPost.objects.filter(author__id=pk)
+        serializer = UserPostSerializer(posts, many=True)
+        return Response({"posts": serializer.data,})
+
+class UserPostLikedStatusViewSet(viewsets.ViewSet):
+
+    """
+    vrati jestli jsem liknul nebo ne urcitej prispevek
+    api/users-posts-liked-status/
+        musis mit auth_token v cookies
+        musi to byt POST
+        v json body:
+            logged_in_user: id
+            post_id: id
+    """
+    permission_classes = (IsAuthenticated,)
+    def create(self, request):
+        post = UserPost.objects.get(pk=request.data.get("post_id"))
+        if int(request.data.get("logged_in_user")) in post.likes.values_list('pk', flat=True):
+             return Response({"liked": "true"})
+        return Response({"liked": "false",})
