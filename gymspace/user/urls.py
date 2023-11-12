@@ -13,8 +13,8 @@ urlpatterns = [
 
     path('users-posts/<int:pk>', post_views.UserPostViewSet.as_view({'get': 'retrieve'})),
     path('users-gympage-recommended/<int:pk>', post_views.RecommendedPostViewSet.as_view({'get': 'retrieve'})),
-    path('users-all-posts-id/<int:pk>', post_views.AllUserPostsIDViewSet.as_view({'get': 'retrieve'})),
-    path('users-all-posts-detail/<int:pk>', post_views.AllUserPostsDetailViewSet.as_view({'get': 'retrieve'})),
+    path('users-posts-all-id/<int:pk>', post_views.AllUserPostsIDViewSet.as_view({'get': 'retrieve'})),
+    path('users-posts-all-posts-detail/<int:pk>', post_views.AllUserPostsDetailViewSet.as_view({'get': 'retrieve'})),
 
     path('users-posts-liked-status/<int:pk>', post_views.UserPostLikedStatusViewSet.as_view({'post': 'create'})),
 ]

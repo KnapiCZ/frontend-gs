@@ -20,8 +20,8 @@ router.register(r'confirm-auth', user_views.ConfirmAuth, basename='confirm-auth'
 
 router.register(r'users-posts', user_post_views.UserPostViewSet, basename='users-posts')
 router.register(r'users-gympage-recommended', user_post_views.RecommendedPostViewSet, basename='users-recommended')
-router.register('users-all-posts-id', user_post_views.AllUserPostsIDViewSet, basename='all-user-posts'),
-router.register('users-all-posts-detail', user_post_views.AllUserPostsDetailViewSet, basename='all-user-posts'),
+router.register('users-posts-all-id', user_post_views.AllUserPostsIDViewSet, basename='all-user-posts'),
+router.register('users-posts-all-detail', user_post_views.AllUserPostsDetailViewSet, basename='all-user-posts'),
 
 router.register(r'users-posts-liked-status', user_post_views.UserPostLikedStatusViewSet, basename='users-posts-liked-status')
 
