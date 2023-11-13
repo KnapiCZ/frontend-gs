@@ -109,6 +109,8 @@ class UserPost(models.Model):
 
     post_time = models.DateField(auto_now_add=True)
 
+    def get_media(self):
+        return UserPost.objects.filter(media__parent_post=self.id).values_list('media__media', flat=True)
     def count_likes(self):
         return likes(self.id)
     def __str__(self):

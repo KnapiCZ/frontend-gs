@@ -55,7 +55,7 @@ class RecommendedPostViewSet(viewsets.ViewSet):
 class AllUserPostsIDViewSet(viewsets.ViewSet):
     """
     Vrati pole ID vsech prispevku od uzivatele
-    api/users-all-posts-id/<id>/
+    api/users-posts-all-id/<id>/
     """
     permission_classes = (IsAuthenticated,)
     def retrieve(self, request, pk=None):
@@ -66,7 +66,7 @@ class AllUserPostsIDViewSet(viewsets.ViewSet):
 class AllUserPostsDetailViewSet(viewsets.ViewSet):
     """
     Vrati detailni pole vsech prispevku od uzivatele
-    api/users-all-posts-detail/<id>/
+    api/users-posts-all-detail/<id>/
     """
     permission_classes = (IsAuthenticated,)
     def retrieve(self, request, pk=None):
