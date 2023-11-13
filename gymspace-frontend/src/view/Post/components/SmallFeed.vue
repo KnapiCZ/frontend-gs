@@ -2,36 +2,21 @@
 import { userDataStore } from '@/stores/UserDataStore';
 
 import Thumbnail from './Thumbnail.vue';
-import json from '../../../assets/mocs/profilepost.json'
-import apiPost from '@/logic/API/apiPost';
+import apiUser from '@/logic/API/apiUser';
 
 const userStore = userDataStore()
 
-const posts = await apiPost("getUserPost", 2)
-const recommended = await apiPost("recommendedPosts", 1)
-
-console.log(posts)
-console.log(recommended)
-
+let posts = await apiUser("allUserPostsDetail", userStore.renderedUserId)
+let baseUrl = await apiUser()
 
 </script>
-
 
 <template>
 	<div class="grid-container">
-		<Thumbnail v-for="data in myJson" :ImageSource="data.thumbSRC" :postID="data.id" type="community"
+		<Thumbnail v-for="data in posts.posts" :ImageSource="data.media[0]" :postID="data.id" type="user"
 			class="grid-item" />
 	</div>
 </template>
-
-
-<script lang="ts">
-export default {
-	data: () => ({
-		myJson: json,
-	}),
-}
-</script>
 
 <style>
 .grid-container {

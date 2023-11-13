@@ -2,22 +2,23 @@
 import { userDataStore } from '@/stores/UserDataStore';
 import { IonCol, IonRow } from '@ionic/vue';
 
-let props = defineProps({
-	profile_picture_url: String,
-	background_picture_url: String,
-	username: String,
-	followers: Number,
-	trainer_status: Boolean,
-})
+let props = defineProps<{
+	profile_picture_url: string,
+	background_picture_url: string,
+	username: string,
+	followers: number,
+	posts: number,
+	trainer_status: boolean,
+}>()
 
 const userStore = userDataStore();
 
 </script>
 
 <template>
-	<div id="background" :style="{ backgroundImage: 'url(' + props.background_picture_url + ')' }">
-		<div class="main-info " :style="{ backgroundImage: 'url(' + props.background_picture_url + ')' }">
-			<img class='PFP' :src="props.profile_picture_url" f><!-- API SCR profiloveho obrazku-->
+	<div id="background" :style="{ backgroundImage: 'url(' + background_picture_url + ')' }">
+		<div class="main-info " :style="{ backgroundImage: 'url(' + background_picture_url + ')' }">
+			<img class='PFP' :src="profile_picture_url" f><!-- API SCR profiloveho obrazku-->
 			<img class="check-mark" src="../../../assets/icons/checkMark.svg"> <!-- API USER VERIFIED-->
 			<IonRow>
 				<IonCol>
@@ -25,11 +26,11 @@ const userStore = userDataStore();
 					<p class="bottom-item">followers</p> <!-- API following user count-->
 				</IonCol>
 				<IonCol>
-					<p class="top-item"> {{ props.username }}</p> <!-- API username-->
+					<p class="top-item"> {{ username }}</p> <!-- API username-->
 					<p v-if="props.trainer_status" class="bottom-item">Trainer</p> <!-- API following user count-->
 				</IonCol>
 				<IonCol>
-					<p class="top-item1">25</p>
+					<p class="top-item1">{{ posts }}</p>
 					<p class="bottom-item">posts</p> <!-- API user post count-->
 				</IonCol>
 			</IonRow>

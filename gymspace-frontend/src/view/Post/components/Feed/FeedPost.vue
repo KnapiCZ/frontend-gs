@@ -1,44 +1,62 @@
 <script setup lang="ts">
 import { IonCard, IonCardContent, IonCol, IonRow, useIonRouter } from '@ionic/vue';
+import apiUser from '@/logic/API/apiUser';
+import { ref } from 'vue';
+
+const props = defineProps<{
+	userId: number
+	username: string
+	userhandle: string
+	userPpf: string
+
+	postId: number
+	description: string
+	date: string
+	image: string
+
+}>()
 
 const router = useIonRouter();
+const isLiked = ref()
+const x = await apiUser("postLiked", props.userId, props.postId)
+
+if (x.liked === 'true') { isLiked.value = true }
+else { isLiked.value = false }
+
+console.log(x.liked)
+console.log(isLiked.value)
 
 function goToUser(id: number) {
 	router.push('/user/' + id)
 }
 
-const props = defineProps<{
-	userId?: number,
-	image?: string,
-	description?: string
-	username?: string,
-	userhandle?: string,
-	date?: string
-}>()
-
+function likeIt() {
+	isLiked.value = !isLiked.value
+	console.log(isLiked.value)
+}
 
 </script>
 
-
 <template>
-	<IonCard id="postCard ion-margin">
-		<img :src="props.image" alt="">
+	<IonCard :id="'postCard' + postId">
+		<img class="postImage" :src="props.image">
 		<IonCardContent>
 			<p class="description">{{ description }}</p>
 			<p class="date-posted">{{ date }}</p>
 			<hr id="separator">
 			<IonRow>
-				<VAvatar color="white" @click="goToUser(2)" />
+				<img class="pfp" :src="props.userPpf" @click="goToUser(props.userId)">
 				<IonCol>
-					<p class="nickname">{{ username }}</p>
-					<p class="handle">{{ userhandle }}</p>
+					<p class="nickname" @click="goToUser(props.userId)">{{ username }}</p>
+					<p class="handle" @click="goToUser(props.userId)">{{ userhandle }}</p>
 				</IonCol>
-				<button>
-					<img class="postBtn" src="../../../../assets/icons/like2.svg">
+				<button class="postBtn">
+					<img src="../../../../assets/icons/comments.svg">
 				</button>
-				<button>
-					<img class="postBtn" src="../../../../assets/icons/comments.svg">
+				<button class="postBtn" @click="likeIt()">
+					<img :class="{ like: isLiked }" src="../../../../assets/icons/like2.svg">
 				</button>
+
 			</IonRow>
 		</IonCardContent>
 	</IonCard>
@@ -57,9 +75,10 @@ const props = defineProps<{
 	color: gray;
 }
 
-.v-avatar {
+.pfp {
 	width: 50px !important;
 	height: 50px !important;
+	object-fit: contain;
 	aspect-ratio: 1;
 	margin: auto 10px 10px auto;
 }
@@ -77,8 +96,21 @@ const props = defineProps<{
 }
 
 .postBtn {
-	width: 100%;
-	margin: 0;
+	margin: auto 10px;
+}
+
+.postBtn:focus {
+	animation: liking 0.5s ease-in-out;
+	-webkit-animation: liking 0.5s ease-in-out;
+}
+
+.postBtn:active {
+	-webkit-animation: none;
+	animation: none;
+}
+
+.like {
+	filter: brightness(0) saturate(100%) invert(77%) sepia(97%) saturate(487%) hue-rotate(359deg) brightness(104%) contrast(101%)
 }
 
 ion-card {
@@ -111,7 +143,7 @@ hr {
 	color: gray;
 }
 
-img {
+.postImage {
 	width: 90%;
 	margin: 20px auto;
 	border-radius: 10px;
@@ -122,5 +154,41 @@ button {
 	height: min-content;
 	margin: auto 10px;
 	border-radius: 0 !important;
+}
+
+@keyframes liking {
+	from {
+		transform: scale(1)
+	}
+
+	25% {
+		transform: scale(0.95)
+	}
+
+	50% {
+		transform: scale(1.1)
+	}
+
+	75% {
+		transform: scale(0.95)
+	}
+
+	to {
+		transform: scale(1)
+	}
+}
+
+@-webkit-keyframes liking {
+	from {
+		-webkit-transform: scale(1)
+	}
+
+	30% {
+		-webkit-transform: scale(1.5)
+	}
+
+	to {
+		-webkit-transform: scale(1)
+	}
 }
 </style>

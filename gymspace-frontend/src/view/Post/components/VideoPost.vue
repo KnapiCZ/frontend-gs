@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import DescriptionFYP from '../../ForYouPage/components/DescriptionFYP.vue';
-import SideButtons from '../../ForYouPage/components/SideButtons.vue';
+import DescriptionFYP from '@/view/ForYouPage/components/DescriptionFYP.vue';
+import SideButtons from '@/view/ForYouPage/components/SideButtons.vue';
 
 const props = defineProps<{
     sourcePost?: string,

@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import apiUser from '@/logic/API/apiUser';
 import { IonButton, useIonRouter } from '@ionic/vue';
+import { userDataStore } from '@/stores/UserDataStore';
 
 const router = useIonRouter()
+const userStore = userDataStore()
 
 const props = defineProps<{
 	ImageSource: string,
@@ -16,8 +18,8 @@ const postUrl = `${baseUrl}${props.ImageSource}`
 
 function setRouting(type: string) {
 	switch (type) {
-		case 'profil':
-			router.push('/user/1/post/' + props.postID)
+		case 'user':
+			router.push('/user/' + userStore.renderedUserId + '/post/' + props.postID)
 			break
 
 		case 'community':

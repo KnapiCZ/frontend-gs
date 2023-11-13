@@ -16,7 +16,7 @@ const props = defineProps<{
 
 
 <template>
-    <IonContent class="description ion-no-padding">
+    <IonContent class="description">
         <HeadPart :user-handle="props.userHandle" />
         <MiddlePart :description="props.description" :hashtags="props.hashtags" />
         <MusicPart :songname="props.songname" />

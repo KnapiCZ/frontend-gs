@@ -2,7 +2,7 @@
 
 
 async function apiUser(apiType = "", firstId?: number, secondId?: number) {
-	const baseUrl = `http://localhost:8080`
+	const baseUrl = `http://localhost:8080/`
 	let response
 	switch (apiType) {
 		case "userProfile":
@@ -65,6 +65,40 @@ async function apiUser(apiType = "", firstId?: number, secondId?: number) {
 					})
 			);
 			return await response.json()
+
+		case "allUserPostsDetail":
+			response = await (
+				fetch(`${baseUrl}/api/users-posts-all-detail/${firstId}/`,
+					{
+						credentials: "include"
+					})
+			);
+			return await response.json()
+
+		case "allUserPostId":
+			response = await (
+				fetch(`${baseUrl}/api/users-posts-all-id/${firstId}/`,
+					{
+						credentials: "include"
+					})
+			);
+			return await response.json()
+
+		case "postLiked":
+			const liked_data = { 'logged_in_user': firstId, 'post_id': secondId }
+			response = await (
+				fetch(`${baseUrl}/api/users-posts-liked-status/`,
+					{
+						method: 'POST',
+						credentials: "include",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify(liked_data)
+					})
+			);
+			return await response.json()
+
 
 		default:
 			return `${baseUrl}`

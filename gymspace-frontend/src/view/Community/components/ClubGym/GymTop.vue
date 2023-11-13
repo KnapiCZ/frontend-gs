@@ -31,14 +31,10 @@ function members(members: []) {
 }
 
 async function followJoin(type: number) {
-    if (isFollowing[type]) {
-        isFollowing[type] = !isFollowing[type];
-        FollowMembers.value[type] -= 1;
-    }
-    else {
-        isFollowing[type] = !isFollowing[type];
-        FollowMembers.value[type] += 1;
-    }
+    if (isFollowing[type]) { FollowMembers.value[type] -= 1; }
+    else { FollowMembers.value[type] += 1; }
+
+    isFollowing[type] = !isFollowing[type];
 }
 
 async function follow() {

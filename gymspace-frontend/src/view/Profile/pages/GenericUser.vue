@@ -6,7 +6,6 @@ import TabBar from '../components/TabBar.vue';
 import OtherUserButton from '../components/Buttons/OtherUserButton.vue';
 import apiUser from '@/logic/API/apiUser';
 
-
 import { IonContent, IonPage } from '@ionic/vue';
 import { userDataStore } from '@/stores/UserDataStore';
 import { useRoute } from 'vue-router';
@@ -15,27 +14,23 @@ const route = useRoute();
 const userStore = userDataStore()
 
 let id = route.params.id as unknown as number
-userStore.renderedUserId
-
-
 let userData = await apiUser("userProfile", id)
 
-userDataStore().followersCount = userData.followers
+const baseUrl = await apiUser()
+let profile_picture_url = `${baseUrl}${userData.profile_picture}`
+let background_picture_url = `${baseUrl}${userData.background_picture}`
 
-
-
-function checkLogin() {
-	if (id == userStore.loggedUserId) {
-		return true;
-	} else {
-		return false;
-	}
+const init = () => {
+	userStore.renderedUserId = id
+	userStore.followersCount = userData.followers
 }
 
-const baseUrl = await apiUser()
-const profile_picture_url = `${baseUrl}${userData.profile_picture}`
-const background_picture_url = `${baseUrl}${userData.background_picture}`
+function checkLogin() {
+	if (id == userStore.loggedUserId) return true;
+	else return false;
+}
 
+init()
 </script>
 
 <template>
@@ -43,7 +38,7 @@ const background_picture_url = `${baseUrl}${userData.background_picture}`
 		<IonContent class="ion-no-padding">
 			<div class="page-div">
 				<ProfileTop :profile_picture_url="profile_picture_url" :background_picture_url="background_picture_url"
-					:username="userData.username" :followers="userData.followers"
+					:username="userData.username" :followers="userData.followers" :posts="userData.post_list.length"
 					:trainer_status="userData.trainer_status" />
 
 				<ProfileBasicInfo :description="userData.description" :email="userData.email"

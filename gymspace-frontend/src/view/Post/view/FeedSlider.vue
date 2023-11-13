@@ -1,11 +1,32 @@
 <script setup lang="ts">
-import json from '../../../assets/mocs/profilepost.json'
 import apiUser from '@/logic/API/apiUser';
 import FeedPost from '../components/Feed/FeedPost.vue';
 import { IonPage, IonContent, IonToolbar, IonButtons, IonButton, IonTitle, useIonRouter } from '@ionic/vue';
+import { useRoute } from 'vue-router';
 
 const router = useIonRouter()
 const baseUrl = await apiUser()
+const route = useRoute()
+
+
+let id = route.params.id as unknown as number
+let init = route.params.initialPosition as unknown as number
+
+let posts = await apiUser("allUserPostsDetail", id)
+let creatorInfo = await apiUser("smallUserProfile", id)
+
+
+function scrollToPost() {
+	if (document.getElementById('post' + init)) {
+		var ele = document.getElementById('post' + init);
+		ele?.scrollIntoView()
+	} else {
+		setTimeout(scrollToPost, 100);
+	}
+}
+
+scrollToPost()
+
 </script>
 
 <template>
@@ -18,22 +39,12 @@ const baseUrl = await apiUser()
 			<IonTitle>Posts</IonTitle>
 		</IonToolbar>
 		<IonContent class="ion-no-padding" id="MainContainer">
-			<FeedPost v-for="object in myJson" :image="baseUrl + object.thumbSRC" :description="object.description"
-				:date="object.date" :userhandle="object.userhandle" :username="object.username" />
+			<FeedPost v-for="post in  posts.posts" :id="'post' + post.id" :userId="creatorInfo.id"
+				:username="creatorInfo.username" :userhandle="'hahaasi'" :userPpf="baseUrl + creatorInfo.profile_picture"
+				:postId="post.id" :description="post.body" :date="post.post_time" :image="baseUrl + post.media[0]" />
 		</IonContent>
 	</IonPage>
 </template>
-
-
-
-<script lang="ts">
-export default {
-	data: () => ({
-		myJson: json,
-	}),
-}
-
-</script>
 
 <style scoped>
 #MainContainer {

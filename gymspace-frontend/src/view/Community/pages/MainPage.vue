@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { IonPage, IonContent, IonSearchbar, IonToolbar } from '@ionic/vue';
+import { IonPage, IonContent, IonSearchbar } from '@ionic/vue';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { ref } from 'vue';
 import { userDataStore } from '@/stores/UserDataStore';
@@ -23,10 +23,10 @@ let recommended_posts = await apiPost('recommendedPosts', userStore.loggedUserId
 let postData = new Array()
 let data
 
-for (let postNumber = 2; postNumber <= recommended_posts.posts.length; postNumber++) {
-	data = await apiPost("getUserPost", postNumber)
-	postData.push(data)
-}
+//for (let postNumber = 2; postNumber <= recommended_posts.posts.length; postNumber++) {
+//	data = await apiPost("getUserPost", postNumber)
+//	postData.push(data)
+//}
 
 let isActive = ref([true, true])
 
@@ -74,11 +74,11 @@ async function toggle(value: number) {
 
 			<section>
 				<h2>Featured posts </h2>
-				<Swiper :slides-per-view="3" :space-between="15">
+				<!--<Swiper :slides-per-view="3" :space-between="15">
 					<SwiperSlide v-for="object in myJson" :key="object.id">
 						<Thumbnail :ImageSource="object.thumbSRC" type="community"/>
 					</SwiperSlide>
-				</Swiper>
+				</Swiper>-->
 			</section>
 		</IonContent>
 	</IonPage>

@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { VCard, VTabs, VTab, VWindow, VWindowItem } from 'vuetify/lib/components/index.mjs';
-import SliderFyp from '../components/Slider.vue';
 import { IonPage } from '@ionic/vue';
+
+
+import SliderFyp from '../components/Slider.vue';
 </script>
 
 <template>
@@ -32,12 +34,7 @@ import { IonPage } from '@ionic/vue';
 <script lang="ts">
 export default {
   data: () => ({
-    tab: null,
-    posts: [
-      { type: 'img', source: 'https://upload.wikimedia.org/wikipedia/commons/c/cf/Example_of_modern_internet_meme.jpg' },
-      { type: 'img', source: 'https://upload.wikimedia.org/wikipedia/commons/c/cf/Example_of_modern_internet_meme.jpg' },
-      { type: 'img', source: 'https://upload.wikimedia.org/wikipedia/commons/c/cf/Example_of_modern_internet_meme.jpg' },
-    ]
+    tab: null
   }),
 }
 </script>
