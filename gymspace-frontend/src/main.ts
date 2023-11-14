@@ -12,11 +12,11 @@ import '@ionic/vue/css/padding.css';
 
 
 /* Theme variables */
-import './theme/variables.css';
+import '@/theme/variables.css';
 
 // Vuetify
 import 'vuetify/styles'
-import '@/assets/main.css'
+import '@/theme/main.css'
 
 const pinia = createPinia()
 const vuetify = createVuetify()
