@@ -1,26 +1,34 @@
 <script setup lang="ts">
 import { VTab, VWindow, VWindowItem } from 'vuetify/lib/components/index.mjs';
 import { IonContent, IonPage } from '@ionic/vue';
+import { gymDataStore } from '@/stores/GymDataStore';
+import { useRoute } from 'vue-router';
 
 import SmallFeed from '@/view/Post/components/SmallFeed.vue';
 import TopGym from '../components/ClubGym/GymTop.vue'
 import FeedPost from '@/view/Post/components/Feed/FeedPost.vue';
-import json from '@/assets/mocs/profilepost.json'
 import apiGym from '@/logic/API/apiGym';
-import { gymDataStore } from '@/stores/GymDataStore';
+import apiUser from '@/logic/API/apiUser';
+
+
 let props = defineProps<{
-	id: number,
+	id: string,
 	logo?: string,
 	name?: string
 }>()
 
+const baseUrl = await apiUser()
+const route = useRoute()
+let gymInfo = await apiGym("gymInfo", props.id as unknown as number)
+
 const gymStore = gymDataStore()
-gymStore.openedGym = props.id as number
+gymStore.openedGym = props.id as unknown as number
 
-const baseUrl = await apiGym()
-let gymInfo = await apiGym("gymInfo", props.id)
 
-console.log(gymInfo)
+let id = 1
+let posts = await apiUser("allUserPostsDetail", id)
+let creatorInfo = await apiUser("smallUserProfile", id)
+
 </script>
 
 
@@ -37,8 +45,10 @@ console.log(gymInfo)
 
 			<VWindow v-model="tab">
 				<VWindowItem>
-					<FeedPost v-for="object in myJson" :image="baseUrl + object.thumbSRC" :description="object.description"
-						:date="object.date" :userhandle="object.userhandle" :username="object.username" />
+					<FeedPost v-for="post in  posts.posts" :id="'post' + post.id" :userId="creatorInfo.id"
+						:username="creatorInfo.username" :userhandle="'hahaasi'"
+						:userPpf="baseUrl + creatorInfo.profile_picture" :postId="post.id" :description="post.body"
+						:date="post.post_time" :image="baseUrl + post.media[0]" />
 				</VWindowItem>
 				<VWindowItem>
 					<SmallFeed />
@@ -56,7 +66,6 @@ console.log(gymInfo)
 export default {
 	data: () => ({
 		tab: null,
-		myJson: json,
 	}),
 }
 </script>

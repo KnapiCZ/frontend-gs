@@ -1,9 +1,9 @@
 <template>
     <div>
-        <img src="../../../assets/icons/like.svg" alt="">
-        <img src="../../../assets/icons/share.svg" alt="">
-        <img src="../../../assets/icons/comments.svg" alt="">
-        <img class="menu" src="../../../assets/icons/menu.svg" alt="">
+        <img src="@/assets/icons/like.svg" alt="like">
+        <img src="@/assets/icons/share.svg" alt="share">
+        <img src="@/assets/icons/comments.svg" alt="comments">
+        <img class="menu" src="@/assets/icons/menu.svg" alt="menu">
     </div>
 </template>
 

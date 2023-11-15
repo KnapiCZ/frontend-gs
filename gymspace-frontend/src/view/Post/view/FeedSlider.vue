@@ -10,7 +10,7 @@ const route = useRoute()
 
 
 let id = route.params.id as unknown as number
-let init = route.params.initialPosition as unknown as number
+let init = route.params.initialPosition as unknown as Number
 
 let posts = await apiUser("allUserPostsDetail", id)
 let creatorInfo = await apiUser("smallUserProfile", id)

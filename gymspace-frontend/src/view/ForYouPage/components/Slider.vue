@@ -14,11 +14,10 @@ const baseUrl = await apiUser()
 </script>
 
 <template>
-  <Swiper :slides-per-view="1" :initial-slide="($route.params.initialPosition as unknown as number)" direction="vertical">
+  <Swiper :slides-per-view="1" direction="vertical">
     <SwiperSlide v-for="(object, index) in myJson">
       <VideoPost :sourcePost="baseUrl + object.vidSrc" :user-handle="object.userHandle" :description="object.description"
         :hashtags="object.hashtags" :songname="object.music" :key="index + props.keyStart" />
-      <!-- mozna by se sem hodilo dat jeste id postu at ho muzes pouzivat jako param-->
     </SwiperSlide>
   </Swiper>
 </template>

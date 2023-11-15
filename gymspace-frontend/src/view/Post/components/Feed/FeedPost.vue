@@ -23,8 +23,7 @@ const x = await apiUser("postLiked", props.userId, props.postId)
 if (x.liked === 'true') { isLiked.value = true }
 else { isLiked.value = false }
 
-console.log(x.liked)
-console.log(isLiked.value)
+console.log(isLiked.value + " " + props.postId)
 
 function goToUser(id: number) {
 	router.push('/user/' + id)
@@ -51,10 +50,10 @@ function likeIt() {
 					<p class="handle" @click="goToUser(props.userId)">{{ userhandle }}</p>
 				</IonCol>
 				<button class="postBtn">
-					<img src="../../../../assets/icons/comments.svg">
+					<img src="@/assets/icons/comments.svg">
 				</button>
 				<button class="postBtn" @click="likeIt()">
-					<img :class="{ like: isLiked }" src="../../../../assets/icons/like2.svg">
+					<img :class="{ like: isLiked }" src="@/assets/icons/like.svg">
 				</button>
 
 			</IonRow>

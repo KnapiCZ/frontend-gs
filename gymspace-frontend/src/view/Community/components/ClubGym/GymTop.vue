@@ -33,8 +33,12 @@ function members(members: []) {
 async function followJoin(type: number) {
     if (isFollowing[type]) { FollowMembers.value[type] -= 1; }
     else { FollowMembers.value[type] += 1; }
-
     isFollowing[type] = !isFollowing[type];
+    if (type === 1) {
+        await apiGym("joinClub", gymInfo.id, userStore.loggedUserId)
+        gymStore.updateData(userStore.loggedUserId)
+    }
+
 }
 
 async function follow() {
