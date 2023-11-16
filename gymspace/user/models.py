@@ -60,6 +60,8 @@ class UserProfile(models.Model):
     def get_handle(self):
         handle = User.objects.get(id=self.handle.id)
         return handle.username
+    def get_auth_id(self):
+        return self.handle.id
 
     def get_profile_picture_url(self):
         user = UserProfile.objects.get(id=self.id)
@@ -73,7 +75,7 @@ class UserProfile(models.Model):
         return following(self.id)
 
     def get_posts(self):
-        return UserPost.objects.filter(pk=self.pk).values_list('pk', flat=True)
+        return UserPost.objects.filter(author__id=self.id).values_list('pk', flat=True)
     def get_posts_queryset(self):
         return UserPost.objects.filter(pk=self.pk).values_list('pk')
     def save(self, *args, **kwargs):

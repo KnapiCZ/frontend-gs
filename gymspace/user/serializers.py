@@ -26,10 +26,15 @@ class UserProfileSerializer(serializers.ModelSerializer):
                   'post_list']
 
 class SmallUserSerializer(serializers.ModelSerializer):
-
+    handle = serializers.CharField(source='get_handle')
+    auth_id = serializers.IntegerField(source='get_auth_id')
     class Meta:
         model = UserProfile
-        fields = ['id', 'username', 'profile_picture']
+        fields = ['id',
+                  'username',
+                  'profile_picture',
+                  'handle',
+                  'auth_id',]
 class FollowSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     followers = serializers.PrimaryKeyRelatedField(queryset=UserProfile.objects.all())
