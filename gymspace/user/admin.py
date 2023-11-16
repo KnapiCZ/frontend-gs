@@ -5,6 +5,7 @@ from .models import UserProfile, UserPost, UserPostMedia
 
 class UserProfileAdmin(admin.ModelAdmin):
     list_display = ('username', "email", "trainer_status")
+    search_fields = ['username', 'email', 'id']
 
 
 
@@ -16,6 +17,7 @@ class UserPostMediaInline(admin.TabularInline):
 class UserPostAdmin(admin.ModelAdmin):
     model = UserPost
     inlines = (UserPostMediaInline,)
+    search_fields = ['title', 'id',]
 
 
 admin.site.register(UserProfile, UserProfileAdmin)
