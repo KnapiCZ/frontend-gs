@@ -70,7 +70,7 @@ export default {
 
 <style scoped>
 .tab-selected {
-	filter: brightness(0) saturate(100%) invert(68%) sepia(69%) saturate(521%) hue-rotate(15deg) brightness(108%) contrast(105%);
+	filter: brightness(0) saturate(100%) invert(84%) sepia(22%) saturate(3283%) hue-rotate(4deg) brightness(112%) contrast(103%);
 	background-color: transparent !important;
 }
 
@@ -87,6 +87,6 @@ export default {
 }
 
 .tab-selected #profile {
-	border: 2px solid yellow !important;
+	border: 2px solid #fff000 !important;
 }
 </style>

@@ -10,7 +10,7 @@ let props = defineProps({
 
 <template>
 	<VCard>
-		<VTabs v-model="tab" color="#e8e20a" bg-color="black" align-tabs="center" slider-color="#CCC400" :grow='true'>
+		<VTabs v-model="tab" color="#fff000" bg-color="black" align-tabs="center" slider-color="#fff000" :grow='true'>
 			<VTab><img src="@/assets/icons/feed.svg" alt="feed"></VTab>
 			<VTab><img src="@/assets/icons/challenges.svg" alt="challenges"></VTab>
 			<VTab v-if="trainer_status"><img src="@/assets/icons/trainer.svg" alt="trainer"></VTab>

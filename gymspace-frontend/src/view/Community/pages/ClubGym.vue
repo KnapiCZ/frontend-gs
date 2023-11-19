@@ -2,14 +2,12 @@
 import { VTab, VWindow, VWindowItem } from 'vuetify/lib/components/index.mjs';
 import { IonContent, IonPage } from '@ionic/vue';
 import { gymDataStore } from '@/stores/GymDataStore';
-import { useRoute } from 'vue-router';
 
 import SmallFeed from '@/view/Post/components/SmallFeed.vue';
 import TopGym from '../components/ClubGym/GymTop.vue'
 import FeedPost from '@/view/Post/components/Feed/FeedPost.vue';
 import apiGym from '@/logic/API/apiGym';
 import apiUser from '@/logic/API/apiUser';
-
 
 let props = defineProps<{
 	id: string,
@@ -18,7 +16,6 @@ let props = defineProps<{
 }>()
 
 const baseUrl = await apiUser()
-const route = useRoute()
 let gymInfo = await apiGym("gymInfo", props.id as unknown as number)
 
 const gymStore = gymDataStore()

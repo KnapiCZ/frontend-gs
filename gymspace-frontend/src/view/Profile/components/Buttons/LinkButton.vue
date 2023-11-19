@@ -30,6 +30,7 @@ ion-button {
 }
 
 img {
+	color: white;
 	position: absolute;
 	left: 10px;
 	margin: auto;

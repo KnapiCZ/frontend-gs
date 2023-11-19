@@ -1,5 +1,6 @@
-<svg width="20" height="7" viewBox="0 0 20 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-<circle cx="3.32873" cy="3.26733" r="2.88378" fill="white"/>
-<circle cx="9.81725" cy="3.26733" r="2.88378" fill="white"/>
-<circle cx="16.3058" cy="3.26733" r="2.88378" fill="white"/>
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="32" cy="32" r="32" fill="black"/>
+<circle cx="13" cy="32" r="7" fill="white"/>
+<circle cx="32" cy="32" r="7" fill="white"/>
+<path d="M58.0001 32C58.0001 35.866 54.8661 39 51.0001 39C47.1341 39 44.0001 35.866 44.0001 32C44.0001 28.134 47.1341 25 51.0001 25C54.8661 25 58.0001 28.134 58.0001 32Z" fill="white"/>
 </svg>

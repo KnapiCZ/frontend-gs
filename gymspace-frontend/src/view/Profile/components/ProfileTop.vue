@@ -18,20 +18,20 @@ const userStore = userDataStore();
 <template>
 	<div id="background" :style="{ backgroundImage: 'url(' + background_picture_url + ')' }">
 		<div class="main-info " :style="{ backgroundImage: 'url(' + background_picture_url + ')' }">
-			<img class='PFP' :src="profile_picture_url" f><!-- API SCR profiloveho obrazku-->
+			<img class='PFP' :src="profile_picture_url">
 			<img class="check-mark" src="../../../assets/icons/checkMark.svg"> <!-- API USER VERIFIED-->
 			<IonRow>
 				<IonCol>
 					<p class="top-item1">{{ userStore.followersCount }}</p>
-					<p class="bottom-item">followers</p> <!-- API following user count-->
+					<p class="bottom-item">followers</p>
 				</IonCol>
 				<IonCol>
-					<p class="top-item"> {{ username }}</p> <!-- API username-->
-					<p v-if="props.trainer_status" class="bottom-item">Trainer</p> <!-- API following user count-->
+					<p class="top-item"> {{ username }}</p>
+					<p v-if="props.trainer_status" class="bottom-item">Trainer</p>
 				</IonCol>
 				<IonCol>
 					<p class="top-item1">{{ posts }}</p>
-					<p class="bottom-item">posts</p> <!-- API user post count-->
+					<p class="bottom-item">posts</p>
 				</IonCol>
 			</IonRow>
 		</div>
@@ -66,12 +66,14 @@ const userStore = userDataStore();
 .PFP {
 	width: 80px;
 	height: 80px;
+	border-radius: 50%;
+	background-color: black;
 	object-fit: contain;
 	position: absolute;
-	border-radius: 50%;
 	left: 50%;
 	top: -60px;
 	transform: translateX(-50%);
+
 }
 
 .check-mark {

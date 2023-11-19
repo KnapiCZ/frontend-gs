@@ -63,7 +63,7 @@ ion-row {
 }
 
 .follow {
-	background-color: #e8e20a;
+	background-color: #fff000;
 	color: black;
 }
 </style>

@@ -79,7 +79,7 @@ input {
 }
 
 .Login {
-	background-color: #e6e109;
+	background-color: #fff000;
 	color: black;
 	font-size: 4vw;
 	font-weight: bold;
