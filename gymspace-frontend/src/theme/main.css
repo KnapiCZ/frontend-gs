@@ -37,6 +37,9 @@
 	font-family: "Montserrat" !important;
 }
 
+img {
+	pointer-events: none;
+}
 
 #app {
 	max-width: 1280px;

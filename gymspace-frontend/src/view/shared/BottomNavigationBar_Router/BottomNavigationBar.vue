@@ -32,7 +32,7 @@ await apiUser("userProfile", userStore.loggedUserId).then((loggedUser) => {
 <template>
 	<IonPage class="ion-no-padding">
 		<IonTabs class="ion-no-padding">
-			<IonRouterOutlet></IonRouterOutlet>
+			<IonRouterOutlet id="content1"></IonRouterOutlet>
 			<ion-tab-bar slot="bottom">
 				<ion-tab-button tab="user" class="no-filter" :href="'/user/' + userStore.loggedUserId">
 					<img id="profile" class="no-filter" :src="profilePicture" />
@@ -42,11 +42,11 @@ await apiUser("userProfile", userStore.loggedUserId).then((loggedUser) => {
 					<img src="../../../assets/icons/community.svg" alt="">
 				</ion-tab-button>
 
-				<ion-button tab="plus" color="transparent">
-					<img src="../../../assets/icons/plus.png" alt="">
-				</ion-button>
+				<ion-tab-button tab="postadd" href="xx">
+					<img src="../../../assets/icons/plusbutton.svg" alt="">
+				</ion-tab-button>
 
-				<ion-tab-button tab="shop" href="/community/">
+				<ion-tab-button tab="shop" href="xx">
 					<img src="../../../assets/icons/shop.svg" alt="">
 				</ion-tab-button>
 
@@ -69,6 +69,10 @@ export default {
 
 
 <style scoped>
+img {
+	height: 70%;
+}
+
 .tab-selected {
 	filter: brightness(0) saturate(100%) invert(84%) sepia(22%) saturate(3283%) hue-rotate(4deg) brightness(112%) contrast(103%);
 	background-color: transparent !important;

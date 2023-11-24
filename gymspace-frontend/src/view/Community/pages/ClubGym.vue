@@ -37,7 +37,7 @@ let creatorInfo = await apiUser("smallUserProfile", id)
 			<VTabs v-model="tab" color="#e8e20a" bg-color="black" align-tabs="center" slider-color="#e8e20a" :grow='true'>
 				<VTab><img src="../../../assets/icons/feed.svg" alt="feed"></VTab>
 				<VTab><img src="../../../assets/icons/challenges.svg" alt="challenges"></VTab>
-				<VTab><img src="../../../assets/icons/challenges.svg" alt="challenges"></VTab>
+				<VTab><img src="../../../assets/icons/challenge.svg" alt="challenges"></VTab>
 			</VTabs>
 
 			<VWindow v-model="tab">
@@ -80,5 +80,9 @@ export default {
 	height: 100%;
 	width: 100%;
 
+}
+
+img {
+	width: 28px !important;
 }
 </style>

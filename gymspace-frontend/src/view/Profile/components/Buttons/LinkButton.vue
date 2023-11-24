@@ -12,8 +12,8 @@ const props = defineProps({
 
 <template>
 	<IonButton color="transparent">
-		<img v-if="props.type === 'email'" src="../../../../assets/icons/envelope.svg" alt="email">
-		<img v-if="props.type === 'web'" src="../../../../assets/icons/globe.svg" alt="web">
+		<img v-if="props.type === 'email'" src="../../../../assets/icons/mail.svg" alt="email">
+		<img v-if="props.type === 'web'" src="../../../../assets/icons/web.svg" alt="web">
 		<img v-if="props.type === 'nwm'" src="../../../../assets/icons/envelope.svg" alt="other">
 		<p>{{ props.name }}</p>
 	</IonButton>
@@ -27,9 +27,11 @@ ion-button {
 	border-radius: 10px;
 	background-color: #2C2C2C;
 	color: white;
+
 }
 
 img {
+	width: 15%;
 	color: white;
 	position: absolute;
 	left: 10px;

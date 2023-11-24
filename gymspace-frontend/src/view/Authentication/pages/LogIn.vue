@@ -26,7 +26,7 @@ async function submitForm() {
 			<form @submit.prevent="submitForm">
 				<input id="UsernameAuth" type="text" placeholder="Username" v-model="form.username">
 				<input id="PassAuth" type="password" placeholder="Password" v-model="form.password">
-				<IonButton class="Login" color="transparent" @click="submitForm">Login</IonButton>
+				<IonButton class="Login" color="transparent" @click="submitForm()">Login</IonButton>
 			</form>
 			<button class="sign-up">NEW? SIGN-UP HERE</button>
 			<IonButton class="login-by-other" color="transparent"><img class="sign-img"

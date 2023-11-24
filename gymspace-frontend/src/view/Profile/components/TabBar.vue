@@ -45,4 +45,8 @@ export default {
 	padding-left: 10px;
 	padding-right: 10px;
 }
+
+img {
+	width: 28px !important;
+}
 </style>

@@ -35,7 +35,7 @@ const routes: Array<RouteRecordRaw> = [
 			{
 				path: '/user/:id/post/:initialPosition',
 				name: 'post',
-				component: () => import('@/view/Post/view/FeedSlider.vue'),
+				component: () => import('@/view/Post/pages/FeedSlider.vue'),
 				props: true,
 				meta: { requiresAuth: true, }
 			},
@@ -50,7 +50,7 @@ const routes: Array<RouteRecordRaw> = [
 			{
 				path: '/community/explore',
 				name: "explore",
-				component: () => import('@/view/Post/view/FeedSlider.vue'),
+				component: () => import('@/view/Post/pages/FeedSlider.vue'),
 				meta: { requiresAuth: true },
 			},
 
@@ -71,7 +71,6 @@ const routes: Array<RouteRecordRaw> = [
 		]
 	},
 ]
-
 
 
 const router = createRouter({

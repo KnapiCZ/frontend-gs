@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { IonCard, IonCardContent, IonCol, IonRow, useIonRouter } from '@ionic/vue';
-import apiUser from '@/logic/API/apiUser';
-import { ref } from 'vue';
+import LikeButton from '@/view/shared/components/LikeButton.vue'
 
 const props = defineProps<{
 	userId: number
@@ -17,22 +16,8 @@ const props = defineProps<{
 }>()
 
 const router = useIonRouter();
-const isLiked = ref()
-const x = await apiUser("postLiked", props.userId, props.postId)
 
-if (x.liked === 'true') { isLiked.value = true }
-else { isLiked.value = false }
-
-console.log(isLiked.value + " " + props.postId)
-
-function goToUser(id: number) {
-	router.push('/user/' + id)
-}
-
-function likeIt() {
-	isLiked.value = !isLiked.value
-	console.log(isLiked.value)
-}
+function goToUser(id: number) { router.push('/user/' + id) }
 
 </script>
 
@@ -50,12 +35,13 @@ function likeIt() {
 					<p class="handle" @click="goToUser(props.userId)">{{ userhandle }}</p>
 				</IonCol>
 				<button class="postBtn">
+					<img src="@/assets/icons/save.svg">
+				</button>
+				<button class="postBtn">
 					<img src="@/assets/icons/comments.svg">
 				</button>
-				<button class="postBtn" @click="likeIt()">
-					<img :class="{ like: isLiked }" src="@/assets/icons/like.svg">
-				</button>
 
+				<LikeButton class="postBtn" :userId="props.userId" :postId="props.postId" />
 			</IonRow>
 		</IonCardContent>
 	</IonCard>
@@ -94,22 +80,8 @@ function likeIt() {
 
 }
 
-.postBtn {
-	margin: auto 10px;
-}
-
-.postBtn:focus {
-	animation: liking 0.5s ease-in-out;
-	-webkit-animation: liking 0.5s ease-in-out;
-}
-
-.postBtn:active {
-	-webkit-animation: none;
-	animation: none;
-}
-
-.like {
-	filter: brightness(0) saturate(100%) invert(77%) sepia(97%) saturate(487%) hue-rotate(359deg) brightness(104%) contrast(101%)
+.postBtn img {
+	height: 28px;
 }
 
 ion-card {
@@ -138,56 +110,20 @@ ion-col {
 hr {
 	width: 100%;
 	margin: 10px auto;
-	border-radius: 2px;
+	border-radius: 3px;
 	color: gray;
 }
 
 .postImage {
-	width: 90%;
-	margin: 20px auto;
-	border-radius: 10px;
+	width: 100%;
+	margin: auto;
+	margin-bottom: 10px;
 }
 
 button {
 	width: 10%;
 	height: min-content;
-	margin: auto 10px;
+	margin: auto 5px;
 	border-radius: 0 !important;
-}
-
-@keyframes liking {
-	from {
-		transform: scale(1)
-	}
-
-	25% {
-		transform: scale(0.95)
-	}
-
-	50% {
-		transform: scale(1.1)
-	}
-
-	75% {
-		transform: scale(0.95)
-	}
-
-	to {
-		transform: scale(1)
-	}
-}
-
-@-webkit-keyframes liking {
-	from {
-		-webkit-transform: scale(1)
-	}
-
-	30% {
-		-webkit-transform: scale(1.5)
-	}
-
-	to {
-		-webkit-transform: scale(1)
-	}
 }
 </style>

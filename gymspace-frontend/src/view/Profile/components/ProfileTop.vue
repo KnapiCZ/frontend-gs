@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { userDataStore } from '@/stores/UserDataStore';
-import { IonCol, IonRow } from '@ionic/vue';
+import { IonCol, IonRow, menuController } from '@ionic/vue';
 
 let props = defineProps<{
 	profile_picture_url: string,
@@ -13,13 +13,20 @@ let props = defineProps<{
 
 const userStore = userDataStore();
 
+const openMenu = async () => {
+	console.log("clicked")
+	await menuController.open();
+}
 </script>
 
 <template>
 	<div id="background" :style="{ backgroundImage: 'url(' + background_picture_url + ')' }">
+		<button @click="openMenu()" class="menu-button">
+			<img src="@/assets/icons/Menu.svg" alt="">
+		</button>
 		<div class="main-info " :style="{ backgroundImage: 'url(' + background_picture_url + ')' }">
 			<img class='PFP' :src="profile_picture_url">
-			<img class="check-mark" src="../../../assets/icons/checkMark.svg"> <!-- API USER VERIFIED-->
+			<img class="check-mark" src="@/assets/icons/checkmark.svg"> <!-- API USER VERIFIED-->
 			<IonRow>
 				<IonCol>
 					<p class="top-item1">{{ userStore.followersCount }}</p>
@@ -77,11 +84,11 @@ const userStore = userDataStore();
 }
 
 .check-mark {
-	width: 60px;
-	height: 60px;
+	width: 20px;
+	height: 20px;
 	position: absolute;
-	left: calc((100% / 2));
-	top: -20px;
+	left: calc((100% / 1.8));
+	top: 0px;
 }
 
 .top-item,
@@ -96,5 +103,17 @@ const userStore = userDataStore();
 
 .bottom-item {
 	font-size: 12px;
+}
+
+.menu-button {
+	width: fit-content;
+	height: fit-content;
+	position: absolute;
+	right: 15px;
+	top: 10px;
+}
+
+.menu-button img {
+	width: 25px;
 }
 </style>

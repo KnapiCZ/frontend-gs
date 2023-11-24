@@ -5,7 +5,7 @@ import ProfileBasicInfo from '../components/ProfileBasicInfo.vue';
 import TabBar from '../components/TabBar.vue';
 import OtherUserButton from '../components/Buttons/OtherUserButton.vue';
 import apiUser from '@/logic/API/apiUser';
-
+import UserMenu from '@/view/Menus/components/UserMenu.vue';
 import { IonContent, IonPage } from '@ionic/vue';
 import { userDataStore } from '@/stores/UserDataStore';
 import { useRoute } from 'vue-router';
@@ -35,7 +35,8 @@ init()
 
 <template>
 	<IonPage class="ion-no-padding" :key="id">
-		<IonContent class="ion-no-padding">
+		<UserMenu></UserMenu>
+		<IonContent class="ion-no-padding" id="user">
 			<div class="page-div">
 				<ProfileTop :profile_picture_url="profile_picture_url" :background_picture_url="background_picture_url"
 					:username="userData.username" :followers="userData.followers" :posts="userData.post_list.length"

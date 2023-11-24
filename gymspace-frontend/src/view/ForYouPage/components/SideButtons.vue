@@ -1,17 +1,23 @@
+<script setup lang="ts">
+import LikeButton from '@/view/shared/components/LikeButton.vue';
+
+
+</script>
+
 <template>
     <div>
-        <img src="@/assets/icons/like.svg" alt="like">
-        <img src="@/assets/icons/share.svg" alt="share">
-        <img src="@/assets/icons/comments.svg" alt="comments">
-        <img class="menu" src="@/assets/icons/menu.svg" alt="menu">
+        <LikeButton class="items" :postId="1" :userId="1" />
+        <img class="items" src="@/assets/icons/share.svg" alt="share">
+        <img class="items" src="@/assets/icons/comments.svg" alt="comments">
+        <img class="items" src="@/assets/icons/menu.svg" alt="menu">
     </div>
 </template>
 
 <style scoped>
-img {
+.items {
     width: 30px;
     height: 30px;
-    margin: 20px 10px;
+    margin: 15px;
     display: block;
 }
 
@@ -20,6 +26,6 @@ div {
     width: fit-content;
     position: absolute;
     right: 0;
-    bottom: 220px;
+    bottom: 250px;
 }
 </style>
