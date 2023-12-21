@@ -28,46 +28,31 @@ function setRouting(type: string) {
 	}
 }
 
-if (postUrl.match(".mp4")) {
+function checkImage() {
+	if (/\.(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(postUrl)) {
+		return true
+	}
+	else {
+		console.log("video  " + postUrl)
+		return false
 
-	var input = document.getElementById('upload');
-	var img = document.getElementById('thumbnail');
-
-	input!.addEventListener('change', function (event) {
-		var file = this.files[0];
-		var url = URL.createObjectURL(file);
-
-		var video = document.createElement('video');
-		video.src = url;
-
-		var snapshot = function () {
-			var canvas = document.createElement('canvas');
-			var ctx = canvas.getContext('2d');
-
-			ctx!.drawImage(video, 0, 0, canvas.width, canvas.height);
-			img!.src = canvas.toDataURL('image/png');
-
-			video.removeEventListener('canplay', snapshot);
-		};
-
-		video.addEventListener('canplay', snapshot);
-
-	});
-
+	}
 }
+
 
 </script>
 
 
 <template>
-	<input type="file" id="upload">
 	<IonButton class="ion-no-padding" color="transparent" @click="setRouting(props.type)">
-		<img :src="postUrl" alt="post thumbnail" id="thumbnail"> <!-- API thumbnail of post src-->
+		<img v-if="checkImage()" :src="postUrl" alt="post thumbnail" class="thumbnail">
+		<video v-else :src="postUrl" alt="post thumbnail" class="thumbnail"></video>
 	</IonButton>
 </template>
 
 <style scoped>
-img {
+img,
+video {
 	width: 100%;
 	aspect-ratio: 0.5;
 	object-fit: cover;

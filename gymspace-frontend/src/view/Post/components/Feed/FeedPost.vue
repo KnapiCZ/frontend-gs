@@ -19,11 +19,20 @@ const router = useIonRouter();
 
 function goToUser(id: number) { router.push('/user/' + id) }
 
+function checkImage() {
+	if (/\.(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(props.image)) {
+		return true
+	}
+	else { return false }
+}
+
 </script>
 
 <template>
 	<IonCard :id="'postCard' + postId">
-		<img class="postImage" :src="props.image">
+		<img v-if="checkImage()" class="postImage" :src="props.image">
+		<video v-else autoplay="true" loop="true" class="postImage" :src="props.image"></video>
+
 		<IonCardContent>
 			<p class="description">{{ description }}</p>
 			<p class="date-posted">{{ date }}</p>

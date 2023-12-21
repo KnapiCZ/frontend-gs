@@ -22,9 +22,12 @@ const gymStore = gymDataStore()
 let gymInfo = await apiGym("gymInfo", props.id)
 let buttonId = "open" + props.id
 
+
+// temporary
 let id = 1
 let posts = await apiUser("allUserPostsDetail", id)
 let creatorInfo = await apiUser("smallUserProfile", id)
+// temporary
 
 function refreshInfo() {
 	gymStore.openedGym = props.id
