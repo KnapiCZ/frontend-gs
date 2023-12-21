@@ -18,12 +18,18 @@ export const gymDataStore = defineStore('gymDataStore', {
     actions: {
 
         async updateData(loggedUserId: number) {
-            this.gymButtons = []
-            await apiGym('myGyms', loggedUserId).then((data) => {
-                for (let i = 0; i < data.length; i++) {
-                    this.gymButtons.push((data[i] as GymButtonI))
-                }
-            })
-        },
+            try {
+                this.gymButtons = []
+                await apiGym('myGyms', loggedUserId).then((data) => {
+                    for (let i = 0; i < data.length; i++) {
+                        this.gymButtons.push((data[i] as GymButtonI))
+                    }
+                })
+            } catch (error) {
+                console.log(error)
+                return error
+            }
+        }
+
     }
 })

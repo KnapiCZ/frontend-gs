@@ -55,14 +55,6 @@ const routes: Array<RouteRecordRaw> = [
 			},
 
 			{
-				path: '/community/gym/:id',
-				name: "gym",
-				component: () => import('@/view/Community/pages/ClubGym.vue'),
-				props: true,
-				meta: { requiresAuth: true },
-			},
-
-			{
 				path: '/foryou',
 				name: "fyp",
 				component: () => import('@/view/ForYouPage/pages/ForYouPage.vue'),

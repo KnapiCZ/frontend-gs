@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { IonRow, IonCol, IonToolbar, IonButtons, IonButton, IonTitle, useIonRouter } from '@ionic/vue';
+import { IonRow, IonCol, IonToolbar, IonButtons, IonButton, IonTitle, modalController } from '@ionic/vue';
 import { userDataStore } from '@/stores/UserDataStore';
 import { gymDataStore } from '@/stores/GymDataStore';
 import { ref } from 'vue';
@@ -8,15 +8,15 @@ import apiGym from '@/logic/API/apiGym';
 import BioButton from './BioButton.vue';
 
 let props = defineProps<{
+    id: number
     logo?: string,
     name?: string,
 }>()
 
-const router = useIonRouter()
 const gymStore = gymDataStore()
 const userStore = userDataStore()
 
-let gymInfo = await apiGym("gymInfo", gymStore.openedGym)
+let gymInfo = await apiGym("gymInfo", props.id)
 let FollowMembers = ref([26, gymInfo.members.length]);
 let isFollowing = [false, false];
 
@@ -31,28 +31,15 @@ function members(members: []) {
 }
 
 async function followJoin(type: number) {
+    console.log("Function Join")
     if (isFollowing[type]) { FollowMembers.value[type] -= 1; }
     else { FollowMembers.value[type] += 1; }
     isFollowing[type] = !isFollowing[type];
     if (type === 1) {
+        console.log("Function typexx")
         await apiGym("joinClub", gymInfo.id, userStore.loggedUserId)
-        gymStore.updateData(userStore.loggedUserId)
     }
-
 }
-
-async function follow() {
-    if (isFollowing[1]) {
-        userStore.followersCount--
-    } else {
-        userStore.followersCount++
-
-    }
-    //await apiUser("follow",
-    //	userStore.loggedUserId,
-    //	2).then((isJoined.value as any) = (!isJoined.value as any))
-}
-
 members(gymInfo.members)
 
 </script>
@@ -60,7 +47,8 @@ members(gymInfo.members)
 <template>
     <IonToolbar>
         <IonButtons slot="start">
-            <IonButton @click="router.back()" class="back-button"><img src="../../../../assets/icons/arrowRight.svg">
+            <IonButton @click="modalController.dismiss()" class="back-button">
+                <img src="../../../../assets/icons/arrowRight.svg">
             </IonButton>
         </IonButtons>
         <IonTitle>{{ name }}</IonTitle>

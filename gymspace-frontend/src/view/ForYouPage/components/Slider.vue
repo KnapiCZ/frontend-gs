@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Swiper, SwiperSlide } from 'swiper/vue';
-import VideoPost from '../../Post/components/VideoPost.vue';
+import VideoPost from '../../Post/components/fyp/VideoPost.vue';
 import json from '../../../assets/mocs/fypPosts.json'
 import apiUser from '@/logic/API/apiUser';
 

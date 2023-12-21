@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { VTab, VWindow, VWindowItem } from 'vuetify/lib/components/index.mjs';
-import { IonContent, IonPage } from '@ionic/vue';
+import { IonContent, IonModal } from '@ionic/vue';
 import { gymDataStore } from '@/stores/GymDataStore';
 
 import SmallFeed from '@/view/Post/components/SmallFeed.vue';
@@ -10,7 +10,7 @@ import apiGym from '@/logic/API/apiGym';
 import apiUser from '@/logic/API/apiUser';
 
 let props = defineProps<{
-	id: string,
+	id: number,
 	logo?: string,
 	name?: string
 }>()
@@ -30,9 +30,8 @@ let creatorInfo = await apiUser("smallUserProfile", id)
 
 
 <template>
-	<IonPage>
+	<IonModal ref="modal" :trigger="'open' + props.id">
 		<IonContent>
-			<TopGym :logo="baseUrl + gymInfo.logo" :name="gymInfo.title"> </TopGym>
 
 			<VTabs v-model="tab" color="#e8e20a" bg-color="black" align-tabs="center" slider-color="#e8e20a" :grow='true'>
 				<VTab><img src="../../../assets/icons/feed.svg" alt="feed"></VTab>
@@ -55,7 +54,7 @@ let creatorInfo = await apiUser("smallUserProfile", id)
 				</VWindowItem>
 			</VWindow>
 		</IonContent>
-	</IonPage>
+	</IonModal>
 </template>
 
 
