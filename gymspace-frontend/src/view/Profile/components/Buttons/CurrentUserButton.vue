@@ -2,20 +2,19 @@
 
 import { IonRow } from '@ionic/vue';
 import ContactButton from './ContactButton.vue';
+import EditProfile from './EditProfile.vue';
 
 </script>
 
 
 <template>
 	<IonRow>
-		<button class="profileButtons">
-			Edit
-		</button>
+		<EditProfile class="user-button" />
 
-		<button class="profileButtons">
+		<button class="user-button">
 			Share
 		</button>
-		<ContactButton class="profileButtons"></ContactButton>
+		<ContactButton class="user-button"></ContactButton>
 
 	</IonRow>
 </template>
@@ -27,7 +26,7 @@ ion-row {
 	width: 100vw;
 }
 
-.profileButtons {
+.user-button {
 	width: 30%;
 	height: 30px;
 	padding: 5px auto;

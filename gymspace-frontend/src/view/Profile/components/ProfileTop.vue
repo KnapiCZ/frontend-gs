@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { userDataStore } from '@/stores/UserDataStore';
-import { IonCol, IonRow, menuController } from '@ionic/vue';
+import { IonCol, IonRow } from '@ionic/vue';
+import UserMenu from '@/view/Menus/components/UserMenu.vue';
 
 let props = defineProps<{
 	profile_picture_url: string,
@@ -13,17 +14,11 @@ let props = defineProps<{
 
 const userStore = userDataStore();
 
-const openMenu = async () => {
-	console.log("clicked")
-	await menuController.open();
-}
 </script>
 
 <template>
 	<div id="background" :style="{ backgroundImage: 'url(' + background_picture_url + ')' }">
-		<button @click="openMenu()" class="menu-button">
-			<img src="@/assets/icons/Menu.svg" alt="">
-		</button>
+		<UserMenu />
 		<div class="main-info " :style="{ backgroundImage: 'url(' + background_picture_url + ')' }">
 			<img class='PFP' :src="profile_picture_url">
 			<img class="check-mark" src="@/assets/icons/checkmark.svg"> <!-- API USER VERIFIED-->
@@ -106,14 +101,8 @@ const openMenu = async () => {
 }
 
 .menu-button {
-	width: fit-content;
-	height: fit-content;
 	position: absolute;
 	right: 15px;
 	top: 10px;
-}
-
-.menu-button img {
-	width: 25px;
 }
 </style>
