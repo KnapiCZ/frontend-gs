@@ -73,3 +73,8 @@ class UserPostCountSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserPost
         fields = ['id',]
+class PostLikeSerializer(serializers.Serializer):
+    post_id = serializers.IntegerField()
+    logged_in_user = serializers.PrimaryKeyRelatedField(queryset=UserPost.objects.all())
+    class Meta:
+        fields = ["post_id", "logged_in_user"]
