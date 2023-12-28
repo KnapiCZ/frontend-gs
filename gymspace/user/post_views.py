@@ -42,6 +42,8 @@ class UserPostViewSet(viewsets.ViewSet):
         """
         LIKE/UNLIKE POSTU
         pro vyuziti je potreba:
+
+            url = api/users-posts/like/
             poslat PATCH request, ktery musi mit:
                 auth_token v Cookies
                 logged_in_user: id v json body
