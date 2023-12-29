@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import { IonPage, IonContent, IonSearchbar } from '@ionic/vue';
-import { Swiper, SwiperSlide } from 'swiper/vue';
 import { ref } from 'vue';
 import { userDataStore } from '@/stores/UserDataStore';
 import { gymDataStore } from '@/stores/GymDataStore';
 
-import Thumbnail from '@/view/Post/components/Thumbnail.vue';
-import GymButton from '../components/GymButton.vue';
+import GymButton from './GymButton.vue';
 import apiGym from '@/logic/API/apiGym';
 import apiPost from '@/logic/API/apiPost';
 
@@ -59,16 +57,16 @@ async function toggle(value: number) {
 
 			<button @click="toggle(1)">Your Gyms <img id="arrow1" src="../../../assets/icons/arrowRight.svg"></button>
 			<div id="extend1">
-				<GymButton v-if="gymStore.gymButtons.length !== 0" v-for="(gym) in gymStore.gymButtons" :title="gym.title"
-					:logo="baseUrl + gym.logo" :id="gym.id" />
-				<p v-else>You are not in Gym</p>
+				<!--<GymButton v-if="gymStore.gymButtons.length !== 0" v-for="(gym) in gymStore.gymButtons" :key="gym.id"
+					:title="gym.title" :ImageSRC="baseUrl + gym.logo" :id="gym.id" />-->
+				<p>You are not in Gym</p>
 			</div>
 
 			<button @click="toggle(2)">Your Clubs <img id="arrow2" src="../../../assets/icons/arrowRight.svg"></button>
 			<div id="extend2">
-				<!--<GymButton v-if="gymStore.gymButtons.length !== 0" v-for="(gym) in gymStore.gymButtons" :key="gym.id"
-					:title="gym.title" :ImageSRC="baseUrl + gym.logo" :id="gym.id" />
-				<p v-else>You are not in Club</p>-->
+				<GymButton v-if="gymStore.gymButtons.length !== 0" v-for="(gym) in gymStore.gymButtons" :title="gym.title"
+					:logo="baseUrl + gym.logo" :id="gym.id" />
+				<p v-else>You are not in Gym</p>
 			</div>
 
 			<section>

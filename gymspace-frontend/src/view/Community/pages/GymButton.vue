@@ -47,7 +47,7 @@ function refreshInfo() {
 			<VTabs v-model="tab" color="#e8e20a" bg-color="black" align-tabs="center" slider-color="#e8e20a" :grow='true'>
 				<VTab><img class="tab-img" src="../../../assets/icons/feed.svg" alt="feed"></VTab>
 				<VTab><img class="tab-img" src="../../../assets/icons/challenges.svg" alt="challenges"></VTab>
-				<VTab><img class="tab-img" src="../../../assets/icons/challenge.svg" alt="challenges"></VTab>
+				<VTab><img class="tab-img" src="../../../assets/icons/challenge.svg" alt="chat"></VTab>
 			</VTabs>
 
 			<VWindow v-model="tab">

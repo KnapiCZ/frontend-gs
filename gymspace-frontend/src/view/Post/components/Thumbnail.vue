@@ -33,7 +33,6 @@ function checkImage() {
 		return true
 	}
 	else {
-		console.log("video  " + postUrl)
 		return false
 
 	}
@@ -46,7 +45,7 @@ function checkImage() {
 <template>
 	<IonButton class="ion-no-padding" color="transparent" @click="setRouting(props.type)">
 		<img v-if="checkImage()" :src="postUrl" alt="post thumbnail" class="thumbnail">
-		<video v-else :src="postUrl" alt="post thumbnail" class="thumbnail"></video>
+		<video v-else :src="postUrl" alt="post thumbnail" class="thumbnail" key="haha"></video>
 	</IonButton>
 </template>
 
@@ -58,5 +57,9 @@ video {
 	object-fit: cover;
 	border-radius: 10px;
 
+}
+
+video {
+	pointer-events: none;
 }
 </style>
