@@ -99,6 +99,22 @@ async function apiUser(apiType = "", firstId?: number, secondId?: number) {
 			);
 			return await response.json()
 
+		case "likePost":
+			const data = { 'logged_in_user': firstId, 'post_id': secondId }
+			response = await (
+				fetch(`${baseUrl}/api/users-posts/like/`,
+					{
+						method: 'PATCH',
+						credentials: "include",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify(data)
+					})
+			);
+			return await response.json()
+
+
 
 		default:
 			return `${baseUrl}`

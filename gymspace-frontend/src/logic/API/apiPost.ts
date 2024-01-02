@@ -2,7 +2,7 @@
 
 
 async function apiPost(apiType = '', firstItem: number) {
-    const baseUrl = `http://localhost:8080`
+    const baseUrl = `http://localhost:8080/`
     let response
 
     switch (apiType) {

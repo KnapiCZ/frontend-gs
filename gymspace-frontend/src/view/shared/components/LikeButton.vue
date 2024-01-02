@@ -15,7 +15,10 @@ if (x.liked === 'true') { isLiked.value = true }
 else { isLiked.value = false }
 
 
-function likeIt() { isLiked.value = !isLiked.value }
+async function likeIt() {
+    isLiked.value = !isLiked.value
+    await apiUser("likePost", props.userId, props.postId)
+}
 
 </script>
 

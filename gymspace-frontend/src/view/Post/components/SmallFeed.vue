@@ -7,7 +7,6 @@ import apiUser from '@/logic/API/apiUser';
 const userStore = userDataStore()
 
 let posts = await apiUser("allUserPostsDetail", userStore.renderedUserId)
-let baseUrl = await apiUser()
 
 </script>
 

@@ -2,8 +2,8 @@
 import { VCard, VTabs, VTab, VWindow, VWindowItem } from 'vuetify/lib/components/index.mjs';
 import { IonPage } from '@ionic/vue';
 
-
 import SliderFyp from '../components/Slider.vue';
+
 </script>
 
 <template>

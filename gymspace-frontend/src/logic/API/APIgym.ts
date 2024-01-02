@@ -1,7 +1,7 @@
 // API pro gymy a cluby
 
 async function apiGym(apiType = '', firstItem?: number, secondItem?: number) {
-    const baseUrl = `http://localhost:8080`
+    const baseUrl = `http://localhost:8080/`
     let response
 
     switch (apiType) {

@@ -29,7 +29,7 @@ function checkImage() {
 </script>
 
 <template>
-	<IonCard :id="'postCard' + postId">
+	<IonCard :id="'postCard' + props.postId">
 		<img v-if="checkImage()" class="postImage" :src="props.image">
 		<video v-else autoplay="true" loop="true" class="postImage" :src="props.image"></video>
 
