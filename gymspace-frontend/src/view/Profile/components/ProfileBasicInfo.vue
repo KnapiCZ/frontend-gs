@@ -11,15 +11,10 @@ let props = defineProps({
 
 <template>
 	<div class="profile_info">
-		<p>
-			@GymBeam <br>
-			kod: martin312 <br>
-			Fitnes trainer
-		</p> <!--API user bio-->
+		<p>{{ description }}</p>
 		<ProfileFollowing :rendered-user-id="props.renderedUserId" />
 	</div>
 </template>
-
 
 <style scoped>
 .profile_info {

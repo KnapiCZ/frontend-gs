@@ -11,25 +11,21 @@ import { useRoute } from 'vue-router';
 
 const route = useRoute();
 const userStore = userDataStore()
+const baseUrl = await apiUser()
 
-let id = (route.params.id as unknown as number)
+let id = route.params.id as unknown as number
 let userData = await apiUser("userProfile", id)
 
-const baseUrl = await apiUser()
 let profile_picture_url = `${baseUrl}${userData.profile_picture}`
 let background_picture_url = `${baseUrl}${userData.background_picture}`
 
-const init = () => {
-	userStore.renderedUserId = (id as number)
-	userStore.followersCount = userData.followers
-}
+userStore.renderedUserId = id
+userStore.followersCount = userData.followers
 
 function checkLogin() {
 	if (id == userStore.loggedUserId) return true;
 	else return false;
 }
-
-init()
 </script>
 
 <template>

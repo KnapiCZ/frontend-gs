@@ -14,11 +14,17 @@ let props = defineProps<{
 
 const userStore = userDataStore();
 
+function checkLogin() {
+	if (userStore.renderedUserId == userStore.loggedUserId) return true;
+	else return false;
+}
+
+
 </script>
 
 <template>
 	<div id="background" :style="{ backgroundImage: 'url(' + background_picture_url + ')' }">
-		<UserMenu />
+		<UserMenu v-show="checkLogin()" />
 		<div class="main-info " :style="{ backgroundImage: 'url(' + background_picture_url + ')' }">
 			<img class='PFP' :src="profile_picture_url">
 			<img class="check-mark" src="@/assets/icons/checkmark.svg"> <!-- API USER VERIFIED-->
