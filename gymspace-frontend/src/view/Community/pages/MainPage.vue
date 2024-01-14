@@ -16,10 +16,10 @@ const baseUrl = await apiGym()
 
 gymStore.updateData(userStore.loggedUserId)
 
-let recommended_posts = await apiPost('recommendedPosts', userStore.loggedUserId);
-let postData = new Array()
-let data
 
+//let recommended_posts = await apiPost('recommendedPosts', userStore.loggedUserId);
+//let postData = new Array()
+//let data
 //for (let postNumber = 2; postNumber <= recommended_posts.posts.length; postNumber++) {
 //	data = await apiPost("getUserPost", postNumber)
 //	postData.push(data)

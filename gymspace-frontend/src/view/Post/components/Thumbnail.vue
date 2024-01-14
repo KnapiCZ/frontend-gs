@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import apiUser from '@/logic/API/apiUser';
+import apiPost from '@/logic/API/apiPost';
 import { IonButton, useIonRouter } from '@ionic/vue';
 import { userDataStore } from '@/stores/UserDataStore';
 
@@ -12,7 +12,7 @@ const props = defineProps<{
 	type: string // typ = kde se thumbnail nachazi profil -> bude routovat na profil/x/post/, community -> bude routovat na community/explore 
 }>()
 
-const baseUrl = await apiUser()
+const baseUrl = await apiPost()
 let postUrl = `${baseUrl}${props.ImageSource}`
 
 

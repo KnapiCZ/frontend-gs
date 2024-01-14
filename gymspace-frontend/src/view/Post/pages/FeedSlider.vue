@@ -1,18 +1,20 @@
 <script setup lang="ts">
-import apiUser from '@/logic/API/apiUser';
+import apiPost from '@/logic/API/apiPost'
+import apiUser from '@/logic/API/apiUser'
+
 import FeedPost from '../components/Feed/FeedPost.vue';
 import { IonPage, IonContent, IonToolbar, IonButtons, IonButton, IonTitle, useIonRouter } from '@ionic/vue';
 import { useRoute } from 'vue-router';
 
 const router = useIonRouter()
-const baseUrl = await apiUser()
+const baseUrl = await apiPost()
 const route = useRoute()
 
 
 let id = route.params.id as unknown as number
 let init = route.params.initialPosition as unknown as Number
 
-let posts = await apiUser("allUserPostsDetail", id)
+let posts = await apiPost("allUserPostsDetail", id)
 let creatorInfo = await apiUser("smallUserProfile", id)
 
 function scrollToPost() {

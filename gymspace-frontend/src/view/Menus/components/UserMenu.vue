@@ -3,20 +3,23 @@ import { IonButton, IonContent, IonModal } from '@ionic/vue';
 
 </script>
 
+
 <template>
-    <button id="user-menu">
-        <img src="@/assets/icons/Menu.svg" alt="">
-    </button>
-    <IonModal type="modal" trigger="user-menu" :initial-breakpoint="0.5" :breakpoints="[0, 0.5, 1]">
-        <h1>Settings</h1>
-        <IonContent>
-            <IonButton expand="full">Your Account </IonButton>
-            <IonButton expand="full">Liked</IonButton>
-            <IonButton expand="full">Privacy</IonButton>
-            <IonButton expand="full">Notifications</IonButton>
-            <IonButton expand="full" color="danger">Log out</IonButton>
-        </IonContent>
-    </IonModal>
+    <div>
+        <button id="user-menu">
+            <img src="@/assets/icons/Menu.svg" alt="">
+        </button>
+        <IonModal type="modal" trigger="user-menu" :initial-breakpoint="0.5" :breakpoints="[0, 0.5, 1]">
+            <h1>Settings</h1>
+            <IonContent>
+                <IonButton expand="full">Your Account </IonButton>
+                <IonButton expand="full">Liked</IonButton>
+                <IonButton expand="full">Privacy</IonButton>
+                <IonButton expand="full">Notifications</IonButton>
+                <IonButton expand="full" color="danger">Log out</IonButton>
+            </IonContent>
+        </IonModal>
+    </div>
 </template>
 
 <style scoped>

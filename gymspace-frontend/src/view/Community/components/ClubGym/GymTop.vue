@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { IonRow, IonCol, IonToolbar, IonButtons, IonButton, IonTitle, modalController } from '@ionic/vue';
 import { userDataStore } from '@/stores/UserDataStore';
-import { gymDataStore } from '@/stores/GymDataStore';
 import { ref } from 'vue';
 
 import apiGym from '@/logic/API/apiGym';
@@ -13,14 +12,13 @@ let props = defineProps<{
     name?: string,
 }>()
 
-const gymStore = gymDataStore()
 const userStore = userDataStore()
 
 let gymInfo = await apiGym("gymInfo", props.id)
 let FollowMembers = ref([26, gymInfo.members.length]);
 let isFollowing = [false, false];
 
-//setup if member or not
+//checking if user is member of Gym
 function members(members: []) {
     if (members.includes(userStore.loggedUserId as never)) {
         isFollowing[1] = true;

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import apiUser from '@/logic/API/apiUser'
+import apiPost from '@/logic/API/apiPost'
 
 const props = defineProps<{
     userId: number
@@ -9,15 +9,16 @@ const props = defineProps<{
 
 
 const isLiked = ref()
-const x = await apiUser("postLiked", props.userId, props.postId)
+
+const x = await apiPost("postLiked", props.postId, props.userId)
 
 if (x.liked === 'true') { isLiked.value = true }
 else { isLiked.value = false }
 
-
+//posle do databaze zadost o zmenu stavu liknuti
 async function likeIt() {
     isLiked.value = !isLiked.value
-    await apiUser("likePost", props.userId, props.postId)
+    await apiPost("likePost", props.postId, props.userId)
 }
 
 </script>

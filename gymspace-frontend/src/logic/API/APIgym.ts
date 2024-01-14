@@ -1,4 +1,4 @@
-// API pro gymy a cluby
+//! API pro DIVISION
 
 async function apiGym(apiType = '', firstItem?: number, secondItem?: number) {
     const baseUrl = `http://localhost:8080/`
@@ -7,7 +7,7 @@ async function apiGym(apiType = '', firstItem?: number, secondItem?: number) {
     switch (apiType) {
 
 
-        //vrati vsechno info o jednom gymu
+        // * vrati vsechno info o jednom gymu
         case "gymInfo":
             response = await (
                 fetch(`${baseUrl}/api/gyms-button/${firstItem}/`,
@@ -18,7 +18,7 @@ async function apiGym(apiType = '', firstItem?: number, secondItem?: number) {
             );
             return await response.json()
 
-        //vrati jmeno logo id vsech gymu ve kterych je uzivatel 
+        // * vrati jmeno logo id vsech gymu ve kterych je uzivatel 
         case "myGyms":
             response = await (
                 fetch(`${baseUrl}/api/gyms-member/${firstItem}/`,
@@ -29,6 +29,7 @@ async function apiGym(apiType = '', firstItem?: number, secondItem?: number) {
             );
             return await response.json()
 
+        // * prida uzivatele (logged_in_user) do gymu (gym_id) 
         case "joinClub":
             let data = { "gym_id": firstItem, "logged_in_user": secondItem }
 

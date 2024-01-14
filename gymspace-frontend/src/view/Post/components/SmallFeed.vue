@@ -2,11 +2,11 @@
 import { userDataStore } from '@/stores/UserDataStore';
 
 import Thumbnail from './Thumbnail.vue';
-import apiUser from '@/logic/API/apiUser';
+import apiPost from '@/logic/API/apiPost';
 
 const userStore = userDataStore()
 
-let posts = await apiUser("allUserPostsDetail", userStore.renderedUserId)
+let posts = await apiPost("allUserPostsDetail", userStore.renderedUserId)
 
 </script>
 

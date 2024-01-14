@@ -1,4 +1,4 @@
-// API pro prihlasovani registraci a pod
+//! API pro prihlasovani registraci a pod
 
 
 async function apiAuth(apiType = '', firstItem?: string, secondItem?: string) {

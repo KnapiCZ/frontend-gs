@@ -9,6 +9,7 @@ import TopGym from '../components/ClubGym/GymTop.vue'
 import FeedPost from '@/view/Post/components/Feed/FeedPost.vue';
 import apiGym from '@/logic/API/apiGym';
 import apiUser from '@/logic/API/apiUser';
+import apiPost from '@/logic/API/apiPost';
 
 const props = defineProps<{
 	id: number
@@ -25,7 +26,7 @@ let buttonId = "open" + props.id
 
 // temporary
 let id = 1
-let posts = await apiUser("allUserPostsDetail", id)
+let posts = await apiPost("allUserPostsDetail", id)
 let creatorInfo = await apiUser("smallUserProfile", id)
 // temporary
 
