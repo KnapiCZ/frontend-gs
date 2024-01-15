@@ -14,7 +14,6 @@ const props = defineProps({
 	<IonButton color="transparent">
 		<img v-if="props.type === 'email'" src="../../../../assets/icons/mail.svg" alt="email">
 		<img v-if="props.type === 'web'" src="../../../../assets/icons/web.svg" alt="web">
-		<img v-if="props.type === 'nwm'" src="../../../../assets/icons/envelope.svg" alt="other">
 		<p>{{ props.name }}</p>
 	</IonButton>
 </template>

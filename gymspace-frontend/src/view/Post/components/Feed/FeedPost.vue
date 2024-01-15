@@ -26,6 +26,23 @@ function checkImage() {
 	else { return false }
 }
 
+//function isInView(el: { getBoundingClientRect: () => any; }) {
+//	var rect = el.getBoundingClientRect();           // absolute position of video element
+//	return !(rect.top > $(window).height() || rect.bottom < 0);   // visible?
+//}
+
+//$(document).on("scroll", function () {
+//	$("video").each(function () {
+//		if (isInView($(this)[0])) {                    // visible?
+//			if ($(this)[0].paused) $(this)[0].play();    // play if not playing
+//		}
+//		else {
+//			if (!$(this)[0].paused) $(this)[0].pause();  // pause if not paused
+//		}
+//	});
+//});
+
+
 </script>
 
 <template>
@@ -125,6 +142,7 @@ hr {
 
 .postImage {
 	width: 100%;
+	height: auto;
 	margin: auto;
 	margin-bottom: 10px;
 }

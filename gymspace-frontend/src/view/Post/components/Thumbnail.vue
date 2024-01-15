@@ -53,7 +53,7 @@ function checkImage() {
 img,
 video {
 	width: 100%;
-	aspect-ratio: 0.5;
+	aspect-ratio: 1/1.5;
 	object-fit: cover;
 	border-radius: 10px;
 

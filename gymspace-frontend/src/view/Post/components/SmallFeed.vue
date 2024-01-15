@@ -26,7 +26,7 @@ let posts = await apiPost("allUserPostsDetail", userStore.renderedUserId)
 
 .grid-item {
 	text-align: center;
-	aspect-ratio: 0.5;
+	aspect-ratio: 1/1.5;
 	object-fit: cover;
 	width: fit-content;
 	margin: 5px;

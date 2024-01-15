@@ -4,7 +4,6 @@ import ProfileFollowing from './ProfileFollowing.vue'
 let props = defineProps({
 	renderedUserId: Number,
 	description: String,
-	email: String,
 })
 
 </script>

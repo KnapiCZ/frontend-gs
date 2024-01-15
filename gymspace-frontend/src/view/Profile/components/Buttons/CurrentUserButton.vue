@@ -9,12 +9,12 @@ import EditProfile from './EditProfile.vue';
 
 <template>
 	<IonRow>
-		<EditProfile class="user-button" />
+		<EditProfile />
 
-		<button class="user-button">
+		<button id="user-button">
 			Share
 		</button>
-		<ContactButton class="user-button"></ContactButton>
+		<ContactButton id="user-button" />
 
 	</IonRow>
 </template>
@@ -26,7 +26,7 @@ ion-row {
 	width: 100vw;
 }
 
-.user-button {
+#user-button {
 	width: 30%;
 	height: 30px;
 	padding: 5px auto;
