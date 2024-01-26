@@ -6,6 +6,8 @@ async function apiPost(apiType = '', firstId?: number, secondId?: number) {
     let response
 
     switch (apiType) {
+
+        //! nefunguje
         case "getUserPost":
             response = await (
                 fetch(`${baseUrl}/api/users-posts/${firstId}/`,
@@ -15,6 +17,7 @@ async function apiPost(apiType = '', firstId?: number, secondId?: number) {
             );
             return await response.json()
 
+        //* vrati stejne co alluserpostdetail
         case "recommendedPosts":
             response = await (
                 fetch(`${baseUrl}/api/users-gympage-recommended/${firstId}/`,
@@ -24,7 +27,7 @@ async function apiPost(apiType = '', firstId?: number, secondId?: number) {
             );
             return await response.json()
 
-        //* vrati id, username, profile_picture, handle, auth_id
+        //* vrati id,  author, body, gym, like_count, media[], post_time
         case "allUserPostsDetail":
             response = await (
                 fetch(`${baseUrl}/api/users-posts-all-detail/${firstId}/`,
@@ -47,7 +50,7 @@ async function apiPost(apiType = '', firstId?: number, secondId?: number) {
 
 
 
-        //* vrati id, username, profile_picture, handle, auth_id
+        //* vraci zda uzivatel (secondId) liknul post (firstId)
         case "postLiked":
             const liked_data = { 'logged_in_user': secondId, 'post_id': firstId }
             response = await (

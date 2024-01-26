@@ -1,6 +1,5 @@
 //! API pro uzivatele -> informace uzivatele, jeho sledujici atd
 
-
 async function apiUser(apiType = "", firstId?: number, secondId?: number) {
 	const baseUrl = `http://localhost:8080/`
 	let response
@@ -26,17 +25,17 @@ async function apiUser(apiType = "", firstId?: number, secondId?: number) {
 			);
 			return response.json()
 
-		//* vrati id, username, profile_picture, handle, auth_id
-		case "userFollowerCount":
-			response = await (
-				fetch(`${baseUrl}/api/users/follow/${firstId}/`,
-					{
-						credentials: "include",
-					})
-			);
-			return await response.json()
+		//* vrati pocet sledujicich
+		//case "userFollowerCount":
+		//	response = await (
+		//		fetch(`${baseUrl}/api/follow/${firstId}/`,
+		//			{
+		//				credentials: "include",
+		//			})
+		//	);
+		//	return await response.json()
 
-		//* vrati id, username, profile_picture, handle, auth_id
+		//* posle do databaze zmenu stavu 
 		case "follow":
 			const follow_data = { "followers": firstId, "id": secondId }
 			response = await (
@@ -52,10 +51,10 @@ async function apiUser(apiType = "", firstId?: number, secondId?: number) {
 			);
 			return response.json()
 
-		//* vrati id, username, profile_picture, handle, auth_id
+		//* vrati seznam lidi kteri sleduji usera (firstId)
 		case "isFollowing":
 			response = await (
-				fetch(`${baseUrl}/api/users-follow-data/${secondId}/`,
+				fetch(`${baseUrl}/api/users-follow-data/${firstId}/`,
 					{
 						method: "GET",
 						credentials: "include"
@@ -63,8 +62,7 @@ async function apiUser(apiType = "", firstId?: number, secondId?: number) {
 			);
 			return response.json()
 
-
-		//* vrati id, username, profile_picture, handle, auth_id
+		//* vrati id prvnich dvou sledujicich
 		case "twoMostPopular":
 			response = await (
 				fetch(`${baseUrl}/api/users-most-followed/${firstId}/`,
