@@ -22,6 +22,7 @@ let posts = await apiPost("allUserPostsDetail", userStore.renderedUserId)
 	display: grid;
 	width: 100%;
 	grid-template-columns: auto auto auto;
+	margin: 0;
 }
 
 .grid-item {
@@ -29,7 +30,7 @@ let posts = await apiPost("allUserPostsDetail", userStore.renderedUserId)
 	aspect-ratio: 1/1.5;
 	object-fit: cover;
 	width: fit-content;
-	margin: 5px;
+	margin: 1px;
 
 }
 

@@ -29,13 +29,8 @@ function setRouting(type: string) {
 }
 
 function checkImage() {
-	if (/\.(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(postUrl)) {
-		return true
-	}
-	else {
-		return false
-
-	}
+	if (/\.(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(postUrl)) { return true }
+	else { return false }
 }
 
 
