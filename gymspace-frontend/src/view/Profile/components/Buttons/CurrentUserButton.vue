@@ -3,13 +3,16 @@
 import { IonRow } from '@ionic/vue';
 import ContactButton from './ContactButton.vue';
 import EditProfile from './EditProfile.vue';
+import { userDataStore } from '@/stores/UserDataStore';
+
+let userStore = userDataStore()
 
 </script>
 
 
 <template>
 	<IonRow>
-		<EditProfile />
+		<EditProfile :key="userStore.componentKey + 200" />
 
 		<button id="user-button">
 			Share
@@ -23,19 +26,16 @@ import EditProfile from './EditProfile.vue';
 <style scoped>
 ion-row {
 	margin-top: 10px;
-	width: 100vw;
 }
 
 #user-button {
-	width: 30%;
+	width: 32%;
 	height: 30px;
-	padding: 5px auto;
-	margin: 10px auto;
+	margin: auto;
 	text-align: center;
+	font-size: 16px;
 	background-color: rgb(47, 47, 47);
 	font-weight: bold;
-	border-radius: 10px;
+	border-radius: 5px;
 }
 </style>
-
-

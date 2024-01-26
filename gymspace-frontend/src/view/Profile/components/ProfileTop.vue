@@ -2,44 +2,39 @@
 import { userDataStore } from '@/stores/UserDataStore';
 import { IonCol, IonRow } from '@ionic/vue';
 import UserMenu from '@/view/Menus/components/UserMenu.vue';
+import apiUser from '@/logic/API/apiUser';
 
-let props = defineProps<{
-	profile_picture_url: string,
-	background_picture_url: string,
-	username: string,
-	followers: number,
-	posts: number,
-	trainer_status: boolean,
-}>()
-
+const baseURL = await apiUser()
 const userStore = userDataStore();
+let userData = JSON.parse(userStore.user)
 
 function checkLogin() {
 	if (userStore.renderedUserId == userStore.loggedUserId) return true;
 	else return false;
 }
 
-
 </script>
 
 <template>
-	<div id="background" :style="{ backgroundImage: 'url(' + background_picture_url + ')' }">
+	<div id="background" :style="{ backgroundImage: 'url(' + baseURL + userData.background_picture + ')' }">
 		<UserMenu v-show="checkLogin()" />
-		<div class="main-info " :style="{ backgroundImage: 'url(' + background_picture_url + ')' }">
-			<img class='PFP' :src="profile_picture_url">
+		<div class="main-info-blur " :style="{ backgroundImage: 'url(' + baseURL + userData.background_picture + ')' }">
+		</div>
+		<div class="main-info">
+			<img class='PFP' :src="baseURL + userData.profile_picture">
 			<img class="check-mark" src="@/assets/icons/checkmark.svg"> <!-- API USER VERIFIED-->
 			<IonRow>
 				<IonCol>
 					<p class="top-item1">{{ userStore.followersCount }}</p>
-					<p class="bottom-item">followers</p>
+					<p class="bottom-item">Followers</p>
 				</IonCol>
 				<IonCol>
-					<p class="top-item"> {{ username }}</p>
-					<p v-if="props.trainer_status" class="bottom-item">Trainer</p>
+					<p class="top-item"> {{ userData.username }}</p>
+					<p class="bottom-item">{{ userData.handle }}</p>
 				</IonCol>
 				<IonCol>
-					<p class="top-item1">{{ posts }}</p>
-					<p class="bottom-item">posts</p>
+					<p class="top-item1">{{ userData.post_list.length }}</p>
+					<p class="bottom-item">Posts</p>
 				</IonCol>
 			</IonRow>
 		</div>
@@ -50,25 +45,38 @@ function checkLogin() {
 #background {
 	position: relative;
 	width: 100vw;
-	height: 180px;
-	background-size: 100vw 215px;
+	aspect-ratio: 16/7.6;
 	background-position: top;
+	background-size: 100vw;
 }
 
-.main-info {
-	width: 75%;
+.main-info-blur {
+	overflow: hidden;
+	width: 80%;
 	height: 70px;
 	padding-top: 20px;
 	position: absolute;
-	bottom: -35px;
+	bottom: calc((100% * -0.185));
 	left: 50%;
 	transform: translateX(-50%);
 	background-position: bottom;
-	background-size: 100vw 215px;
-	background-blend-mode: darken;
-	background-color: rgba(0, 0, 0, 0.5);
-	color: white;
+	background-size: 100vw;
+	filter: blur(3px);
 	border-radius: 10px;
+
+}
+
+.main-info {
+	width: 80%;
+	height: 70px;
+	padding-top: 20px;
+	position: absolute;
+	bottom: calc((100% * -0.185));
+	left: 50%;
+	transform: translateX(-50%);
+	border-radius: 10px;
+	background-blend-mode: darken;
+	background-color: rgba(0, 0, 0, 0.13);
 }
 
 .PFP {

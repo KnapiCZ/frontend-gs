@@ -1,30 +1,53 @@
 <script setup lang="ts">
-import ProfileFollowing from './ProfileFollowing.vue'
+import { ref } from 'vue';
+import { userDataStore } from '@/stores/UserDataStore';
 
-let props = defineProps({
-	renderedUserId: Number,
-	description: String,
-})
+let userStore = userDataStore()
+let userData = JSON.parse(userStore.user)
+
+let isOpened = ref(false)
+
 
 </script>
 
 <template>
 	<div class="profile_info">
-		<p>{{ description }}</p>
-		<ProfileFollowing :rendered-user-id="props.renderedUserId" />
+		<h3>Bio & Goal</h3>
+		<p class="closed" :class="{ opened: isOpened }">
+		<pre>{{ userData.description }}</pre>
+		</p>
+		<p class="show-more-less" @click="isOpened = !isOpened">{{ isOpened ? 'Show less' : 'Show more' }}</p>
+
 	</div>
 </template>
 
 <style scoped>
+* {
+	text-align: left;
+}
+
 .profile_info {
-	color: white;
 	width: auto;
 	text-align: left;
 	margin-top: 50px;
 	margin-left: calc(25% /2 + 5px);
 	margin-right: calc(25% /2 + 5px);
-	display: grid;
-	grid-template-columns: 60% 40%;
-	font-size: 12px;
+}
+
+.closed {
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	/* number of lines to show */
+	-webkit-box-orient: vertical;
+}
+
+.opened {
+	-webkit-line-clamp: none;
+
+}
+
+.show-more-less {
+	color: grey;
 }
 </style>

@@ -11,14 +11,12 @@ import { useRoute } from 'vue-router';
 
 const route = useRoute();
 const userStore = userDataStore()
-const baseUrl = await apiUser()
 
 let id = route.params.id as unknown as number
-let userData = await apiUser("userProfile", id)
 
-let profile_picture_url = `${baseUrl}${userData.profile_picture}`
-let background_picture_url = `${baseUrl}${userData.background_picture}`
+userStore.user = JSON.stringify(await apiUser("userProfile", id))
 
+let userData = JSON.parse(userStore.user)
 userStore.renderedUserId = id
 userStore.followersCount = userData.followers
 
@@ -26,21 +24,18 @@ function checkLogin() {
 	if (id == userStore.loggedUserId) return true;
 	else return false;
 }
+
 </script>
 
 <template>
 	<IonPage class="ion-no-padding" :key="id">
 		<IonContent class="ion-no-padding" id="user">
 			<div class="page-div">
-				<ProfileTop :profile_picture_url="profile_picture_url" :background_picture_url="background_picture_url"
-					:username="userData.username" :followers="userData.followers" :posts="userData.post_list.length"
-					:trainer_status="userData.trainer_status" />
+				<ProfileTop :key="userStore.componentKey" />
 
-				<ProfileBasicInfo :description="userData.description" :email="userData.email"
-					:rendered-user-id="userData.id" />
-				<CurrentUserButton v-if="checkLogin()" :renderedUserId="userData.id"
-					:loggedInUserId="userStore.loggedUserId" />
-				<OtherUserButton v-else :renderedUserId="userData.id" :loggedUserId="userStore.loggedUserId" />
+				<ProfileBasicInfo :key="userStore.componentKey + 100" />
+				<CurrentUserButton v-if="checkLogin()" />
+				<OtherUserButton v-else />
 				<TabBar :trainer_status="userData.trainer_status" />
 			</div>
 		</IonContent>

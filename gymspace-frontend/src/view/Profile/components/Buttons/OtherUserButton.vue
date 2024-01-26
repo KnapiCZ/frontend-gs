@@ -8,8 +8,8 @@ import { userDataStore } from '@/stores/UserDataStore';
 const isFollowing = ref()
 const userStore = userDataStore()
 
-let followingList = await apiUser('isFollowing', userStore.loggedUserId, 2)
-
+let followingList = await apiUser('isFollowing', userStore.renderedUserId, 2)
+console.log(followingList)
 
 function following(followers: []) {
 	if (followers.includes(userStore.loggedUserId as never)) {
