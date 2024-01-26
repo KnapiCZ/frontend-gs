@@ -1,25 +1,40 @@
 <script setup lang="ts">
-import { IonModal, IonToolbar, modalController, IonHeader, IonButton, IonButtons, IonTitle, IonList, IonItem, IonLabel, IonInput, IonTextarea, IonCol, IonAvatar } from '@ionic/vue';
+import { IonModal, IonToolbar, modalController, IonHeader, IonButton, IonButtons, IonTitle, IonList, IonItem, IonInput, IonTextarea, IonCol, IonAvatar } from '@ionic/vue';
 import { userDataStore } from '@/stores/UserDataStore';
+import { ref } from 'vue';
 
 import apiUser from '@/logic/API/apiUser';
+import BioModal from '@/view/Profile/components/DataEditorModals/BioModal.vue'
+import GoalModal from '../DataEditorModals/GoalModal.vue';
+import PronounsModal from '../DataEditorModals/PronounsModal.vue';
+import SexModal from '../DataEditorModals/SexModal.vue';
 
 const userStore = userDataStore()
+const baseUrl = await apiUser()
+const forceRerender = () => {
+    userStore.componentKey += 1;
+};
 
-let baseUrl = await apiUser()
-let userData = await apiUser("userProfile", userStore.loggedUserId)
+userStore.editedUser = userStore.user
 
-console.log(userData)
+let userData = JSON.parse(userStore.editedUser)
+let data = ref({
+    username: userData.username,
+    handle: userData.handle,
+})
+
 function cancel() {
     modalController.dismiss({ id: "user-edit" })
 }
-let sexVar = userData.sex as string
 
-let sex: { [id: string]: string } = {
-    "M": "Male",
-    "F": "Female",
-    "O": "Other",
-    "N": "Rather not to say",
+function save() {
+    userData = JSON.parse(userStore.editedUser)
+    userData.handle = data.value.handle
+    userData.username = data.value.username
+    userStore.editedUser = JSON.stringify(userData)
+    userStore.user = userStore.editedUser
+    forceRerender()
+    modalController.dismiss("user-edit")
 }
 
 </script>
@@ -36,7 +51,7 @@ let sex: { [id: string]: string } = {
                 </IonButtons>
                 <IonTitle>Edit Profile</IonTitle>
                 <IonButtons slot="end">
-                    <IonButton class="save-button" :strong="true" @click="cancel()">Confirm</IonButton>
+                    <IonButton class="save-button" :strong="true" @click="save()">Confirm</IonButton>
                 </IonButtons>
             </IonToolbar>
         </IonHeader>
@@ -53,29 +68,30 @@ let sex: { [id: string]: string } = {
                 </IonCol>
             </IonItem>
             <IonItem>
-                <IonInput label="Handle" label-placement="fixed" placeholder="Unique for every user"
-                    :value="userData.handle">
+                <IonInput v-model="data.handle" onblur="saveEdited()" label="Handle" label-placement="fixed"
+                    placeholder="Unique for every user" :value="data.handle">
                 </IonInput>
             </IonItem>
 
             <IonItem>
-                <IonInput label="Username" label-placement="fixed" placeholder="Your Username" :value="userData.username">
+                <IonInput v-model="data.username" label="Username" label-placement="fixed" placeholder="Your Username"
+                    :value="data.username">
+                </IonInput>
+            </IonItem>
+            <GoalModal />
+            <BioModal />
+            <PronounsModal />
+            <SexModal />
+
+            <IonItem>
+                <IonInput label="Height" label-placement="fixed" placeholder="Your Height" :readonly="true"
+                    :value="userData.height + ' cm'">
                 </IonInput>
             </IonItem>
 
             <IonItem>
-                <IonTextarea label="Bio" label-placement="fixed" placeholder="Type something here" :maxlength="200"
-                    :value="userData.description"></IonTextarea>
-            </IonItem>
-
-            <IonItem :button="true">
-                <IonInput label="Pronouns" label-placement="fixed" placeholder="Your Pronouns" :readonly="true"
-                    value="He/Him"></IonInput>
-            </IonItem>
-
-            <IonItem :button="true">
-                <IonInput label="Gender" label-placement="fixed" placeholder="Your Gender" :readonly="true"
-                    :value="sex[sexVar]">
+                <IonInput label="Weight" label-placement="fixed" placeholder="Your Weight" :readonly="true"
+                    :value="userData.weight + ' kg'">
                 </IonInput>
             </IonItem>
         </IonList>
@@ -154,13 +170,13 @@ img {
 }
 
 #user-edit {
-    width: 30%;
+    width: 32%;
     height: 30px;
-    padding: 5px auto;
-    margin: 10px auto;
-    text-align: center;
-    background-color: rgb(47, 47, 47);
+    margin: auto;
+    font-size: 16px;
     font-weight: bold;
-    border-radius: 10px;
+    text-align: center;
+    border-radius: 5px;
+    background-color: rgb(47, 47, 47);
 }
 </style>
