@@ -1,11 +1,11 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'gymspace-frontend',
+  appId: 'gs.gymspace.app',
+  appName: 'Gymsapce',
   webDir: 'dist',
   server: {
-    androidScheme: 'https'
+    androidScheme: 'http'
   }
 };
 
