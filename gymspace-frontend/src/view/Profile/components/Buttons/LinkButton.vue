@@ -30,15 +30,17 @@ ion-button {
 }
 
 img {
-	width: 15%;
+	height: 90%;
+	aspect-ratio: 1;
 	color: white;
 	position: absolute;
 	left: 10px;
-	margin: auto;
 }
 
 p {
 	font-weight: bold !important;
+	position: absolute;
+	left: 50px;
 
 }
 </style>

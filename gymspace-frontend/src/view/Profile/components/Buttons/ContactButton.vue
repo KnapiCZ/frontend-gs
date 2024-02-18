@@ -9,10 +9,10 @@ import LinkButton from "./LinkButton.vue";
 <template>
 	<button>
 		Contact
-		<VDialog activator="parent" :persistent="false" transition="dialog-bottom-transition" :scrollable="true"
-			width="75vw" height="70vh">
+		<VDialog activator="parent" :persistent="false" transition="dialog-bottom-transition" :scrollable="false"
+			width="80vw" height="70vh">
 			<VCard>
-				<p>CONTACT</p>
+				<p>CONTACTS</p>
 
 				<LinkButton type="email" link="blablabla" name="Email" />
 				<LinkButton type="web" link="gymspace.cz" name="Gymspace.cz" />
@@ -28,10 +28,9 @@ import LinkButton from "./LinkButton.vue";
 <style scoped>
 .v-card {
 	margin: auto;
-	width: 75vw;
+	width: 80vw;
 	height: 70vh;
 	border-radius: 20px !important;
-	text-align: center;
 	background-color: rgba(14, 14, 14, 0.815);
 	color: white;
 	backdrop-filter: blur(8px);
