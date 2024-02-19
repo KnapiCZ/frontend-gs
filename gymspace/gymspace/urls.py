@@ -17,7 +17,6 @@ router.register(r'users-follow', user_views.UserProfileViewSet, basename='follow
 router.register(r'users-follow-data', user_views.FollowerViewSet, basename='follow-data')
 router.register(r'users-small', user_views.SmallUserProfileViewSet, basename='users-posts')
 router.register(r'confirm-auth', user_views.ConfirmAuth, basename='confirm-auth')
-
 router.register(r'users-posts', user_post_views.UserPostViewSet, basename='users-posts')
 router.register(r'users-gympage-recommended', user_post_views.RecommendedPostViewSet, basename='users-recommended')
 router.register('users-posts-all-id', user_post_views.AllUserPostsIDViewSet, basename='all-user-posts'),
@@ -28,6 +27,7 @@ router.register(r'users-posts-liked-status', user_post_views.UserPostLikedStatus
 router.register(r'gyms-member', gym_views.MyGymsViewSet, basename='gyms-member')
 router.register(r'gyms-button', gym_views.GymInfoViewSet, basename='gyms-button')
 router.register(r'gyms-join', gym_views.GymViewSet, basename='gyms-join')
+
 from django.conf import settings
 from django.conf.urls.static import static
 

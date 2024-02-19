@@ -26,7 +26,7 @@ class UserPostViewSet(viewsets.ViewSet):
             "id": post.id,
             "author": post.author.pk,
             "gym": post.gym.pk,
-            "body": post.body,
+            "description": post.body,
             "likes": post.likes.count(),
             "post_time": post.post_time
             })
@@ -65,6 +65,8 @@ class UserPostViewSet(viewsets.ViewSet):
                     post.likes.add(logged_in_user.id)
                     return Response({f"user{logged_in_user.id} join": "success"})
             return Response({'ERROR': 'token does not match logged in user - check the "logged_in_user" id'})
+        else:
+            return Response({'ERROR' : request.data})
 
 class RecommendedPostViewSet(viewsets.ViewSet):
     permission_classes = (IsAuthenticated,)

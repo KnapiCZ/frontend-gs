@@ -46,14 +46,30 @@ class UserProfileViewSet(viewsets.ViewSet):
                 followed_user.followers.add(following_user.id)
                 followers = followed_user.followers.values_list('pk', flat=True)
                 return Response({"following": following_user.id, "followed_followers": followers, "followed_id": followed_user.id})
-            return Response({'message': 'failed'})
-
+            return Response({'message': 'failed'}) 
+        
 class SmallUserProfileViewSet(viewsets.ViewSet):
     permission_classes = (IsAuthenticated,)
     def retrieve(self, request, pk=None):
         queryset = UserProfile.objects.get(pk=pk)
         serializer = SmallUserSerializer(queryset)
         return Response(serializer.data)
+    
+    def partial_update(self, request, pk=None):
+        request.data.pop("followers"),
+        request.data.pop("post_list")
+        user = User.objects.get(auth_token=request.COOKIES.get('auth_token'))
+        user_profile = UserProfile.objects.get(pk=request.data.pop("id"))
+        logged_in_user = User.objects.get(pk=1)
+        if user == logged_in_user:
+            setattr(user, "username", request.data.pop("handle"))
+            for key, value in request.data.items():
+                print(key + '--------', value)
+                setattr(user_profile, key, value)
+            user.save()
+            user_profile.save()
+            return Response({'SUCCESS': 'Data updated'})
+        return Response({"FAILED": "not working"})
 
 class FollowerViewSet(viewsets.ViewSet):
     permission_classes = (IsAuthenticated,)

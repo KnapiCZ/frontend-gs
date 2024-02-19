@@ -8,6 +8,7 @@ urlpatterns = [
     path('follow/<int:pk>', views.UserProfileViewSet.as_view({'patch': 'update'})),
     path('follow-data/<int:pk>', views.FollowerViewSet.as_view({'post': 'create'})),
     path('users-small/<int:pk>', views.SmallUserProfileViewSet.as_view({'get': 'retrieve'})),
+    path('users-small/update/', views.SmallUserProfileViewSet.as_view({'patch': 'update'})),
 
     path('confirm-auth/', views.ConfirmAuth.as_view({'post': 'create'})),
 

@@ -17,7 +17,9 @@ class UserProfileSerializer(serializers.ModelSerializer):
                   'goal',
                   'description',
                   'email',
+                  'contacts',
                   'sex',
+                  'pronouns',
                   'height',
                   'weight',
                   'trainer_status',
@@ -47,7 +49,6 @@ class FollowerSerializer(serializers.Serializer):
     class Meta:
         fields: ["followers"]
 
-
 class UserPostSerializer(serializers.ModelSerializer):
     like_count = serializers.IntegerField(source="count_likes")
     media = serializers.ListField(source="get_media", read_only=True)
@@ -56,7 +57,7 @@ class UserPostSerializer(serializers.ModelSerializer):
         fields = ['id',
                   'author',
                   'gym',
-                  'body',
+                  'description',
                   'like_count',
                   'post_time',
                   'media',]
@@ -68,11 +69,11 @@ class UserPostMediaSerializer(serializers.ModelSerializer):
                   'parent_post',
                   'media']
 
-
 class UserPostCountSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserPost
         fields = ['id',]
+        
 class PostLikeSerializer(serializers.Serializer):
     post_id = serializers.IntegerField()
     logged_in_user = serializers.PrimaryKeyRelatedField(queryset=UserPost.objects.all())

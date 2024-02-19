@@ -24,22 +24,26 @@ class UserProfile(models.Model):
                                   related_name='user_profile')
     username = models.CharField(max_length=60)
 
-    goal = models.CharField(max_length=50, blank=True)
+    goal = models.TextField(max_length=50, blank=True)
 
-    description = models.CharField(max_length=300, blank=True)
+    description = models.TextField(max_length=300, blank=True)
 
     email = models.EmailField(max_length=254, unique=True)
 
+    contacts = models.TextField(blank=True)
 
     SEX_CHOICES = (
         ('M', 'Male'),
         ('F', "Female"),
         ('O', 'Other')
     )
+    
     sex = models.CharField(max_length=1, choices=SEX_CHOICES)
 
-    height = models.FloatField(null=True, blank=True)
-    weight = models.FloatField(null=True, blank=True)
+    pronouns = models.CharField(max_length=20, blank=True)
+
+    height = models.IntegerField(null=True, blank=True, default=0)
+    weight = models.FloatField(null=True, blank=True, default=0)
 
     trainer_status = models.BooleanField()
 
@@ -89,6 +93,7 @@ class UserProfile(models.Model):
             self.background_picture = background_image
         else:
             super(UserProfile, self).save(*args, **kwargs)
+
 class UserPost(models.Model):
     author = models.ForeignKey(User,
                                on_delete=models.CASCADE,
@@ -96,11 +101,8 @@ class UserPost(models.Model):
     gym = models.ForeignKey(Gym,
                             on_delete=models.CASCADE,
                             blank=True, null=True,)
-    title = models.CharField(max_length=60,
-                             blank=True,
-                             null=True)
 
-    body = models.CharField(max_length=600,
+    description = models.TextField(max_length=600,
                             blank=True,
                             null=True
                             )
@@ -116,7 +118,8 @@ class UserPost(models.Model):
     def count_likes(self):
         return likes(self.id)
     def __str__(self):
-        return f"(user){self.author.user_profile.username} - (title){self.title} - (post id){self.id}"
+        return f"(user){self.author.user_profile.username} - (decription){self.description} - (post id){self.id}"
+
 class UserPostMedia(models.Model):
     parent_post = models.ForeignKey(UserPost,
                                     on_delete=models.CASCADE,
