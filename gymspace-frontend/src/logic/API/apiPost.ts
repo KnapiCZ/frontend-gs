@@ -4,7 +4,6 @@
 async function apiPost(apiType = '', firstId?: number, secondId?: number) {
     const baseUrl = `http://localhost:8080/`
     let response
-
     switch (apiType) {
 
         //! nefunguje
@@ -27,7 +26,8 @@ async function apiPost(apiType = '', firstId?: number, secondId?: number) {
             );
             return await response.json()
 
-        //* vrati id,  author, body, gym, like_count, media[], post_time
+        //* vrati seznam vsech uzivatelovych postu Objct[Post,Post,...]
+        // * Post = {id,  author, body, gym, like_count, media[], post_time}
         case "allUserPostsDetail":
             response = await (
                 fetch(`${baseUrl}/api/users-posts-all-detail/${firstId}/`,
@@ -52,7 +52,8 @@ async function apiPost(apiType = '', firstId?: number, secondId?: number) {
 
         //* vraci zda uzivatel (secondId) liknul post (firstId)
         case "postLiked":
-            const liked_data = { 'logged_in_user': secondId, 'post_id': firstId }
+            let liked_data = { 'logged_in_user': secondId, 'post_id': firstId }
+            console.log(liked_data)
             response = await (
                 fetch(`${baseUrl}/api/users-posts-liked-status/`,
                     {
@@ -68,7 +69,7 @@ async function apiPost(apiType = '', firstId?: number, secondId?: number) {
 
         //* vrati id, username, profile_picture, handle, auth_id
         case "likePost":
-            const data = { 'logged_in_user': secondId, 'post_id': firstId }
+            const like_data = { 'logged_in_user': secondId, 'post_id': firstId }
             response = await (
                 fetch(`${baseUrl}/api/users-posts/like/`,
                     {
@@ -77,12 +78,25 @@ async function apiPost(apiType = '', firstId?: number, secondId?: number) {
                         headers: {
                             "Content-Type": "application/json",
                         },
-                        body: JSON.stringify(data)
+                        body: JSON.stringify(like_data)
                     })
             );
             return await response.json()
 
-
+        case "deletePost":
+            const delete_data = { 'logged_in_user': secondId, 'post_id': firstId }
+            response = await (
+                fetch(`${baseUrl}/api/users-posts/delete/`,
+                    {
+                        method: 'DELETE',
+                        credentials: "include",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(delete_data)
+                    })
+            );
+            return await response.json()
 
         default:
             return `${baseUrl}`

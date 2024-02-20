@@ -1,5 +1,7 @@
 //! API pro uzivatele -> informace uzivatele, jeho sledujici atd
 
+import { userDataStore } from "@/stores/UserDataStore";
+
 async function apiUser(apiType = "", firstId?: number, secondId?: number) {
 	const baseUrl = `http://localhost:8080/`
 	let response
@@ -71,6 +73,22 @@ async function apiUser(apiType = "", firstId?: number, secondId?: number) {
 					})
 			);
 			return await response.json()
+
+		case "update":
+			response = await (
+				fetch(`${baseUrl}/api/users-small/update/`,
+					{
+						method: "PATCH",
+						credentials: "include",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: userDataStore().editedUser,
+					})
+			);
+			return response.json()
+
+
 
 		default:
 			return `${baseUrl}`
