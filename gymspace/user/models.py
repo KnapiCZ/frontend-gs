@@ -111,7 +111,7 @@ class UserPost(models.Model):
                                    symmetrical=False,
                                    related_name='likes')
 
-    post_time = models.DateField(auto_now_add=True)
+    post_time = models.DateTimeField(auto_now_add=True)
 
     def get_media(self):
         return UserPost.objects.filter(media__parent_post=self.id).values_list('media__media', flat=True)

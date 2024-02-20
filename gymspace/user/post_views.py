@@ -67,6 +67,17 @@ class UserPostViewSet(viewsets.ViewSet):
             return Response({'ERROR': 'token does not match logged in user - check the "logged_in_user" id'})
         else:
             return Response({'ERROR' : request.data})
+    def delete(self, request, pk=None):
+        serializer = PostLikeSerializer(data=request.data, partial=True)
+        serializer.is_valid()
+        user = User.objects.get(auth_token=request.COOKIES.get('auth_token'))
+        logged_in_user = User.objects.get(pk=serializer.data.get("logged_in_user"))
+        post = UserPost.objects.get(pk=serializer.data.get("post_id"))
+        if user == logged_in_user:
+            post.delete()
+            return Response({'SUCCES': 'File deleted succesfuly'})
+        return Response({'ERROR': 'U dont haveacces to this operation'})
+                
 
 class RecommendedPostViewSet(viewsets.ViewSet):
     permission_classes = (IsAuthenticated,)
