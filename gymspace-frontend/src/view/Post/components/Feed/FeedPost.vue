@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { IonCard, IonCardContent, IonCol, IonRow, useIonRouter } from '@ionic/vue';
 import LikeButton from '@/view/shared/components/LikeButton.vue'
+import apiPost from '@/logic/API/apiPost';
+import { sharedDataStore } from '@/stores/SharedDataStore'
 
 const props = defineProps<{
 	userId: number
@@ -14,10 +16,16 @@ const props = defineProps<{
 	image: string
 
 }>()
+let sharedData = sharedDataStore()
+let time = setTime()
+async function testDelete() {
+	console.log(await apiPost("deletePost", props.postId, props.userId))
+	sharedData.componentKey += 1
+}
 
 const router = useIonRouter();
 
-function goToUser(id: number) { router.push('/user/' + id) }
+function goToUser() { router.push('/user/' + props.userId) }
 
 function checkImage() {
 	if (/\.(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(props.image)) {
@@ -26,21 +34,38 @@ function checkImage() {
 	else { return false }
 }
 
-//function isInView(el: { getBoundingClientRect: () => any; }) {
-//	var rect = el.getBoundingClientRect();           // absolute position of video element
-//	return !(rect.top > $(window).height() || rect.bottom < 0);   // visible?
-//}
+function setTime() {
+	let postTimestamp = new Date(props.date)
+	let current_time = new Date()
+	let difference = new Date(current_time.getTime() - postTimestamp.getTime())
+	if (difference.getDay() >= 7) {
+		return postTimestamp.getDay() + ". " + postTimestamp.getMonth()
+	}
+	if (difference.getDay() >= 1) {
+		return difference.getDay() + " days ago"
+	}
+	if (difference.getDay() == 1) {
+		return difference.getDay() + " day ago"
+	}
+	if (difference.getHours() > 1) {
+		return difference.getHours() + " hours ago"
+	}
+	if (difference.getHours() == 1) {
+		return difference.getHours() + " hour ago"
+	}
+	if (difference.getMinutes() > 1) {
+		return difference.getMinutes() + " minutes ago"
+	}
+	if (difference.getMinutes() == 1) {
+		return difference.getMinutes() + " minute ago"
+	}
+	if (difference.getSeconds() >= 1) {
+		return difference.getSeconds() + " seconds ago"
+	}
+}
 
-//$(document).on("scroll", function () {
-//	$("video").each(function () {
-//		if (isInView($(this)[0])) {                    // visible?
-//			if ($(this)[0].paused) $(this)[0].play();    // play if not playing
-//		}
-//		else {
-//			if (!$(this)[0].paused) $(this)[0].pause();  // pause if not paused
-//		}
-//	});
-//});
+
+setTime()
 
 
 </script>
@@ -52,15 +77,15 @@ function checkImage() {
 
 		<IonCardContent>
 			<p class="description">{{ description }}</p>
-			<p class="date-posted">{{ date }}</p>
+			<p class="date-posted">{{ time }}</p>
 			<hr id="separator">
 			<IonRow>
-				<img class="pfp" :src="props.userPpf" @click="goToUser(props.userId)">
+				<img class="pfp" :src="props.userPpf" @click="goToUser()">
 				<IonCol>
-					<p class="nickname" @click="goToUser(props.userId)">{{ username }}</p>
-					<p class="handle" @click="goToUser(props.userId)">{{ userhandle }}</p>
+					<p class="nickname" @click="goToUser()">{{ username }}</p>
+					<p class="handle" @click="goToUser()">{{ userhandle }}</p>
 				</IonCol>
-				<button class="postBtn">
+				<button class="postBtn" @click="testDelete()">
 					<img src="@/assets/icons/save.svg">
 				</button>
 				<button class="postBtn">

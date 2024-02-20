@@ -42,7 +42,7 @@ scrollToPost()
 		<IonContent class="ion-no-padding" id="MainContainer">
 			<FeedPost v-for="post in  posts.posts" :id="'post' + post.id" :userId="creatorInfo.id"
 				:username="creatorInfo.username" :userhandle="creatorInfo.handle"
-				:userPpf="baseUrl + creatorInfo.profile_picture" :postId="post.id" :description="post.body"
+				:userPpf="baseUrl + creatorInfo.profile_picture" :postId="post.id" :description="post.description"
 				:date="post.post_time" :image="baseUrl + post.media[0]" />
 		</IonContent>
 	</IonPage>
