@@ -64,7 +64,6 @@ class SmallUserProfileViewSet(viewsets.ViewSet):
         if user == logged_in_user:
             setattr(user, "username", request.data.pop("handle"))
             for key, value in request.data.items():
-                print(key + '--------', value)
                 setattr(user_profile, key, value)
             user.save()
             user_profile.save()
