@@ -1,29 +1,43 @@
 <script setup lang="ts">
 import { VCard, VTabs, VTab, VWindow, VWindowItem } from 'vuetify/lib/components/index.mjs';
+import { sharedDataStore } from '@/stores/SharedDataStore'
 import SmallFeed from '@/view/Post/components/SmallFeed.vue';
 
 let props = defineProps({
 	trainer_status: Boolean,
 })
+
+function updateKey() {
+	sharedData.componentKey += 1
+}
+
+let sharedData = sharedDataStore()
+
+
 </script>
 
 
 <template>
 	<VCard>
-		<VTabs v-model="tab" color="#fff000" bg-color="black" align-tabs="center" slider-color="#fff000" :grow='true' tr>
-			<VTab value="one"><img src="@/assets/icons/feed.svg" alt="feed"></VTab>
-			<VTab value="two"><img src="@/assets/icons/challenges.svg" alt="challenges"></VTab>
-			<VTab value="three" v-if="trainer_status"><img src="@/assets/icons/trainer.svg" alt="trainer"></VTab>
+		<VTabs v-model="tab" color="#fff000" bg-color="black" slider-color="#fff000" :grow='true'>
+			<VTab :value="4"><img src="@/assets/icons/feed.svg" alt="feed"></VTab>
+			<VTab :value="3"><img src="@/assets/icons/trophy.svg" alt="challenges"></VTab>
+			<VTab :value="2"><img src="@/assets/icons/challenges.svg" alt="trainer"></VTab>
+			<VTab :value="1" v-if="trainer_status"><img src="@/assets/icons/trainer.svg" alt="trainer"></VTab>
 		</VTabs>
 		<VWindow v-model="tab">
-			<VWindowItem value="one" :transition="false">
-				<SmallFeed />
+			<VWindowItem :value="4" :transition="false" :reverse-transition="false" @click="updateKey()">
+				<SmallFeed :key="sharedData.componentKey" />
 			</VWindowItem>
-			<VWindowItem value="two" :transition="false">
-				<SmallFeed />
+			<VWindowItem :value="3" :transition="false" :reverse-transition="false" @click="updateKey()">
+				<SmallFeed :key="sharedData.componentKey + 5" />
 			</VWindowItem>
-			<VWindowItem v-if="trainer_status" value="three" :transition="false">
-				<SmallFeed />
+			<VWindowItem :value="2" :transition="false" :reverse-transition="false" @click="updateKey()">
+				<SmallFeed :key="sharedData.componentKey + 10" />
+			</VWindowItem>
+			<VWindowItem v-if="trainer_status" :value="1" :transition="false" :reverse-transition="false"
+				@click="updateKey()">
+				<SmallFeed :key="sharedData.componentKey + 15" />
 			</VWindowItem>
 		</VWindow>
 	</VCard>
@@ -42,8 +56,6 @@ export default {
 <style scoped>
 .v-card {
 	background-color: black;
-	padding-left: 10px;
-	padding-right: 10px;
 }
 
 img {

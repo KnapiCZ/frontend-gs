@@ -44,8 +44,8 @@ const baseUrl = await apiGym()
 
 <style scoped>
 #parent {
-	height: 100%;
-	width: 100%;
+	width: 30vw;
+	aspect-ratio: 1;
 	background-position: center;
 	background-size: contain;
 }

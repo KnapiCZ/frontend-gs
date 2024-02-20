@@ -27,12 +27,13 @@ function cancel() {
     modalController.dismiss({ id: "user-edit" })
 }
 
-function save() {
-    userData = JSON.parse(userStore.editedUser)
+async function save() {
+    userStore.user = userStore.editedUser
+    userData = JSON.parse(userStore.user)
     userData.handle = data.value.handle
     userData.username = data.value.username
-    userStore.editedUser = JSON.stringify(userData)
-    userStore.user = userStore.editedUser
+    userStore.user = JSON.stringify(userData)
+    console.log(await apiUser('update'))
     forceRerender()
     modalController.dismiss("user-edit")
 }
@@ -51,7 +52,7 @@ function save() {
                 </IonButtons>
                 <IonTitle>Edit Profile</IonTitle>
                 <IonButtons slot="end">
-                    <IonButton class="save-button" :strong="true" @click="save()">Confirm</IonButton>
+                    <IonButton class="save-button" :strong="true" @click="save()">Save</IonButton>
                 </IonButtons>
             </IonToolbar>
         </IonHeader>
