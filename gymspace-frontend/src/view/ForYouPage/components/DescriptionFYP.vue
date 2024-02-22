@@ -16,7 +16,7 @@ const props = defineProps<{
 
 
 <template>
-    <IonContent class="description">
+    <IonContent :scrollY="false" class="description">
         <HeadPart :user-handle="props.userHandle" />
         <MiddlePart :description="props.description" :hashtags="props.hashtags" />
         <MusicPart :songname="props.songname" />

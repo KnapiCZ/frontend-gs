@@ -2,7 +2,7 @@
 import { VCard, VTabs, VTab, VWindow, VWindowItem } from 'vuetify/lib/components/index.mjs';
 import { IonPage } from '@ionic/vue';
 
-import SliderFyp from '../components/Slider.vue';
+import Slider from '../components/Slider.vue';
 
 </script>
 
@@ -17,13 +17,13 @@ import SliderFyp from '../components/Slider.vue';
       </VTabs>
       <VWindow v-model="tab" v-theme>
         <VWindowItem>
-          <SliderFyp :keyStart="0" />
+          <Slider :keyStart="0" />
         </VWindowItem>
         <VWindowItem>
-          <SliderFyp :keyStart="10" />
+          <Slider :keyStart="10" />
         </VWindowItem>
         <VWindowItem>
-          <SliderFyp :keyStart="20" />
+          <Slider :keyStart="20" />
         </VWindowItem>
       </VWindow>
     </VCard>

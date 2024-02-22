@@ -3,11 +3,14 @@ import DescriptionFYP from '@/view/ForYouPage/components/DescriptionFYP.vue';
 import SideButtons from '@/view/ForYouPage/components/SideButtons.vue';
 
 const props = defineProps<{
-    sourcePost?: string,
-    userHandle?: string,
-    description?: string,
-    hashtags?: string,
+    sourcePost: string
+    postId: number
+    description: string
+    hashtags?: string
     songname?: string
+
+    userId: number
+    userHandle: string
 }>()
 
 </script>
@@ -15,7 +18,7 @@ const props = defineProps<{
 <template>
     <div id="MainContainer">
         <video preload="true" autoplay="true" loop="true" muted="true" :src="props.sourcePost"></video>
-        <SideButtons />
+        <SideButtons :postId="props.postId" :userId="props.userId" />
         <DescriptionFYP :user-handle="props.userHandle" :description="props.description" :hashtags="props.hashtags"
             :songname="props.songname" />
     </div>
