@@ -10,6 +10,7 @@ export const userDataStore = defineStore('userDataStore', {
 			renderedUserId: -1,
 			loggedUserId: -1,
 			followersCount: -1,
+			userPosts: '',
 			user: "",
 			editedUser: "",
 		}

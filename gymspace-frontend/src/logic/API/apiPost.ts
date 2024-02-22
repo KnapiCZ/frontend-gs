@@ -1,7 +1,7 @@
 //! API pro POSTY -> informace postu, generace fyp postu a dalsi
 
 
-async function apiPost(apiType = '', firstId?: number, secondId?: number) {
+async function apiPost(apiType = '', firstId?: number, secondId?: number, data?: string) {
     const baseUrl = `http://localhost:8080/`
     let response
     switch (apiType) {
@@ -48,12 +48,25 @@ async function apiPost(apiType = '', firstId?: number, secondId?: number) {
             );
             return await response.json()
 
+        case "updatePost":
+            let update_data = { 'logged_in_user': secondId, 'post_id': firstId, 'description': data }
+            response = await (
+                fetch(`${baseUrl}/api/users-posts/update/`,
+                    {
+                        method: 'PATCH',
+                        credentials: "include",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(update_data)
+                    })
+            );
+            return await response.json()
 
 
         //* vraci zda uzivatel (secondId) liknul post (firstId)
         case "postLiked":
             let liked_data = { 'logged_in_user': secondId, 'post_id': firstId }
-            console.log(liked_data)
             response = await (
                 fetch(`${baseUrl}/api/users-posts-liked-status/`,
                     {

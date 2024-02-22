@@ -37,42 +37,22 @@ class UserPostViewSet(viewsets.ViewSet):
                              "media": media_serializer.data})
         else:
             return Response({"post error": post_serializer.errors,})
-
+        
     def partial_update(self, request, pk=None):
-        """
-        LIKE/UNLIKE POSTU
-        pro vyuziti je potreba:
-
-            url = api/users-posts/like/
-            poslat PATCH request, ktery musi mit:
-                auth_token v Cookies
-                logged_in_user: id v json body
-                post_id: id v json body
-
-                povoli to pripojeni jen uzivateli, ktery ma shodny auth token a logged_in_user
-        """
-        serializer = PostLikeSerializer(data=request.data, partial=True)
-        if serializer.is_valid():
-            user = User.objects.get(auth_token=request.COOKIES.get('auth_token'))
-            logged_in_user = User.objects.get(pk=serializer.data.get("logged_in_user"))
-            post = UserPost.objects.get(pk=serializer.data.get("post_id"))
-            likes = post.likes.values_list('pk', flat=True)
-            if user == logged_in_user:
-                if logged_in_user.id in likes:
-                    post.likes.remove(logged_in_user.id)
-                    return Response({f"user{logged_in_user.id} leave": "success"})
-                elif logged_in_user.id not in likes:
-                    post.likes.add(logged_in_user.id)
-                    return Response({f"user{logged_in_user.id} join": "success"})
-            return Response({'ERROR': 'token does not match logged in user - check the "logged_in_user" id'})
-        else:
-            return Response({'ERROR' : request.data})
-    def delete(self, request, pk=None):
-        serializer = PostLikeSerializer(data=request.data, partial=True)
-        serializer.is_valid()
         user = User.objects.get(auth_token=request.COOKIES.get('auth_token'))
-        logged_in_user = User.objects.get(pk=serializer.data.get("logged_in_user"))
-        post = UserPost.objects.get(pk=serializer.data.get("post_id"))
+        logged_in_user = User.objects.get(pk=request.data.get('logged_in_user'))
+        post = UserPost.objects.get(pk=request.data.get("post_id"))
+        if user == logged_in_user:
+            post.description = request.data.get('description')
+            post.save()
+            return Response({'SUCCES': 'Description updated succesfuly'})
+        return Response({'ERROR': 'U dont haveacces to this operation'})
+
+ 
+    def delete(self, request, pk=None):
+        user = User.objects.get(auth_token=request.COOKIES.get('auth_token'))
+        logged_in_user = User.objects.get(pk=request.data.get("logged_in_user"))
+        post = UserPost.objects.get(pk=request.data.get("post_id"))
         if user == logged_in_user:
             post.delete()
             return Response({'SUCCES': 'File deleted succesfuly'})
@@ -131,3 +111,32 @@ class UserPostLikedStatusViewSet(viewsets.ViewSet):
         if int(request.data.get("logged_in_user")) in post.likes.values_list('pk', flat=True):
              return Response({"liked": "true"})
         return Response({"liked": "false",})
+
+    def partial_update(self, request, pk=None):
+        """
+        LIKE/UNLIKE POSTU
+        pro vyuziti je potreba:
+
+            url = api/users-posts/like/
+            poslat PATCH request, ktery musi mit:
+                auth_token v Cookies
+                logged_in_user: id v json body
+                post_id: id v json body
+
+                povoli to pripojeni jen uzivateli, ktery ma shodny auth token a logged_in_user
+        """
+        serializer = PostLikeSerializer(data=request.data, partial=True)
+        serializer.is_valid()
+        user = User.objects.get(auth_token=request.COOKIES.get('auth_token'))
+        logged_in_user = User.objects.get(pk=serializer.data.get("logged_in_user"))
+        post = UserPost.objects.get(pk=serializer.data.get("post_id"))
+        likes = post.likes.values_list('pk', flat=True)
+        if user == logged_in_user:
+            if logged_in_user.id in likes:
+                post.likes.remove(logged_in_user.id)
+                return Response({f"user{logged_in_user.id} unlike": "success"})
+            elif logged_in_user.id not in likes:
+                post.likes.add(logged_in_user.id)
+                return Response({f"user {logged_in_user.id} like": "success"})
+        return Response({'ERROR': 'token does not match logged in user - check the "logged_in_user" id'})
+       

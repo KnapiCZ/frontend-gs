@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { IonCard, IonCardContent, IonCol, IonRow, useIonRouter } from '@ionic/vue';
+
 import LikeButton from '@/view/shared/components/LikeButton.vue'
-import apiPost from '@/logic/API/apiPost';
-import { sharedDataStore } from '@/stores/SharedDataStore'
+import OptionsButton from '../OptionsButton.vue'
 
 const props = defineProps<{
 	userId: number
@@ -16,12 +16,8 @@ const props = defineProps<{
 	image: string
 
 }>()
-let sharedData = sharedDataStore()
 let time = setTime()
-async function testDelete() {
-	console.log(await apiPost("deletePost", props.postId, props.userId))
-	sharedData.componentKey += 1
-}
+
 
 const router = useIonRouter();
 
@@ -39,13 +35,13 @@ function setTime() {
 	let current_time = new Date()
 	let difference = new Date(current_time.getTime() - postTimestamp.getTime())
 	if (difference.getDay() >= 7) {
-		return postTimestamp.getDay() + ". " + postTimestamp.getMonth()
+		return postTimestamp.getDate() + ". " + postTimestamp.getMonth()
 	}
-	if (difference.getDay() >= 1) {
-		return difference.getDay() + " days ago"
+	if (difference.getDate() > 1) {
+		return difference.getDate() + " days ago"
 	}
-	if (difference.getDay() == 1) {
-		return difference.getDay() + " day ago"
+	if (difference.getDate() == 1) {
+		return difference.getDate() + " day ago"
 	}
 	if (difference.getHours() > 1) {
 		return difference.getHours() + " hours ago"
@@ -64,9 +60,7 @@ function setTime() {
 	}
 }
 
-
 setTime()
-
 
 </script>
 
@@ -74,7 +68,7 @@ setTime()
 	<IonCard :id="'postCard' + props.postId">
 		<img v-if="checkImage()" class="postImage" :src="props.image">
 		<video v-else autoplay="true" loop="true" class="postImage" :src="props.image"></video>
-
+		<OptionsButton :postId="props.postId" :userId="props.userId" :description="$props.description" />
 		<IonCardContent>
 			<p class="description">{{ description }}</p>
 			<p class="date-posted">{{ time }}</p>
@@ -85,7 +79,7 @@ setTime()
 					<p class="nickname" @click="goToUser()">{{ username }}</p>
 					<p class="handle" @click="goToUser()">{{ userhandle }}</p>
 				</IonCol>
-				<button class="postBtn" @click="testDelete()">
+				<button class="postBtn">
 					<img src="@/assets/icons/save.svg">
 				</button>
 				<button class="postBtn">
@@ -104,11 +98,19 @@ setTime()
 }
 
 .description {
-	font-size: 16px;
+	font-size: 13px;
+	line-clamp: 5;
 }
 
 .date-posted {
 	color: gray;
+	font-size: 11px;
+}
+
+#popover-button {
+	position: absolute;
+	right: 10px;
+	bottom: 20px;
 }
 
 .pfp {
@@ -117,6 +119,7 @@ setTime()
 	object-fit: contain;
 	aspect-ratio: 1;
 	margin: auto 10px 10px auto;
+	border-radius: 50%;
 }
 
 .nickname {
