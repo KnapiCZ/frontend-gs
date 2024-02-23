@@ -1,21 +1,16 @@
 <script setup lang="ts">
-import apiPost from '@/logic/API/apiPost'
-import apiUser from '@/logic/API/apiUser'
 import FeedPost from '../components/Feed/FeedPost.vue';
 import { IonPage, IonContent, IonToolbar, IonButtons, IonButton, IonTitle, useIonRouter } from '@ionic/vue';
 import { userDataStore } from '@/stores/UserDataStore';
 import { useRoute } from 'vue-router';
 
 const router = useIonRouter()
-const baseUrl = await apiPost()
 const route = useRoute()
 
 
-let id = route.params.id as unknown as number
+
 let init = route.params.initialPosition as unknown as Number
 let userStore = userDataStore()
-let posts = JSON.parse(userStore.userPosts)
-let creatorInfo = await apiUser("smallUserProfile", id)
 
 function scrollToPost() {
 	if (document.getElementById('post' + init)) {
@@ -40,10 +35,8 @@ scrollToPost()
 			<IonTitle>Posts</IonTitle>
 		</IonToolbar>
 		<IonContent class="ion-no-padding" id="MainContainer">
-			<FeedPost v-for="post in  posts.posts" :id="'post' + post.id" :userId="creatorInfo.id"
-				:username="creatorInfo.username" :userhandle="creatorInfo.handle"
-				:userPpf="baseUrl + creatorInfo.profile_picture" :postId="post.id" :description="post.description"
-				:date="post.post_time" :image="baseUrl + post.media[0]" />
+			<FeedPost v-for="data in userStore.userPostsId" :key="'post' + data + userStore.componentKey"
+				:postId="(data as unknown as number)" />
 		</IonContent>
 	</IonPage>
 </template>

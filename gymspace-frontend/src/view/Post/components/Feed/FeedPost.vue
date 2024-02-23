@@ -3,35 +3,38 @@ import { IonCard, IonCardContent, IonCol, IonRow, useIonRouter } from '@ionic/vu
 
 import LikeButton from '@/view/shared/components/LikeButton.vue'
 import OptionsButton from '../OptionsButton.vue'
+import apiPost from '@/logic/API/apiPost';
+import apiUser from '@/logic/API/apiUser';
 
 const props = defineProps<{
-	userId: number
-	username: string
-	userhandle: string
-	userPpf: string
-
 	postId: number
-	description: string
-	date: string
-	image: string
-
 }>()
-let time = setTime()
 
+
+let post = (await apiPost("getUserPost", props.postId)).post
+let creatorInfo = await apiUser("smallUserProfile", post.author)
+
+let time = setTime()
+let baseUrl = await apiPost()
+
+let postImg = baseUrl + post.media[0]
+let userPFP = baseUrl + creatorInfo.profile_picture
 
 const router = useIonRouter();
 
-function goToUser() { router.push('/user/' + props.userId) }
+function goToUser() { router.push('/user/' + post.author) }
 
 function checkImage() {
-	if (/\.(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(props.image)) {
+	if (/\.(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(postImg)) {
 		return true
 	}
 	else { return false }
 }
 
+
+
 function setTime() {
-	let postTimestamp = new Date(props.date)
+	let postTimestamp = new Date(post.post_time)
 	let current_time = new Date()
 	let difference = new Date(current_time.getTime() - postTimestamp.getTime())
 	if (difference.getDay() >= 7) {
@@ -59,25 +62,22 @@ function setTime() {
 		return difference.getSeconds() + " seconds ago"
 	}
 }
-
-setTime()
-
 </script>
 
 <template>
-	<IonCard :id="'postCard' + props.postId">
-		<img v-if="checkImage()" class="postImage" :src="props.image">
-		<video v-else autoplay="true" loop="true" class="postImage" :src="props.image"></video>
-		<OptionsButton :postId="props.postId" :userId="props.userId" :description="$props.description" />
+	<IonCard :id="'postCard' + post.id">
+		<img v-if="checkImage()" class="postImage" :src="postImg">
+		<video v-else autoplay="true" loop="true" class="postImage" :src="postImg"></video>
+		<OptionsButton :postId="post.id" :userId="post.author" :description="post.description" />
 		<IonCardContent>
-			<p class="description">{{ description }}</p>
+			<p class="description">{{ post.description }}</p>
 			<p class="date-posted">{{ time }}</p>
 			<hr id="separator">
 			<IonRow>
-				<img class="pfp" :src="props.userPpf" @click="goToUser()">
+				<img class="pfp" :src="userPFP" @click="goToUser()">
 				<IonCol>
-					<p class="nickname" @click="goToUser()">{{ username }}</p>
-					<p class="handle" @click="goToUser()">{{ userhandle }}</p>
+					<p class="nickname" @click="goToUser()">{{ creatorInfo.username }}</p>
+					<p class="handle" @click="goToUser()">{{ creatorInfo.handle }}</p>
 				</IonCol>
 				<button class="postBtn">
 					<img src="@/assets/icons/save.svg">
@@ -86,7 +86,7 @@ setTime()
 					<img src="@/assets/icons/comments.svg">
 				</button>
 
-				<LikeButton class="postBtn" :userId="props.userId" :postId="props.postId" />
+				<LikeButton class="postBtn" :userId="post.author" :postId="post.id" />
 			</IonRow>
 		</IonCardContent>
 	</IonCard>

@@ -6,7 +6,7 @@ async function apiPost(apiType = '', firstId?: number, secondId?: number, data?:
     let response
     switch (apiType) {
 
-        //! nefunguje
+        //* vraci jeden post s id, author, gym, description, like_count, post_time, media
         case "getUserPost":
             response = await (
                 fetch(`${baseUrl}/api/users-posts/${firstId}/`,
@@ -37,7 +37,6 @@ async function apiPost(apiType = '', firstId?: number, secondId?: number, data?:
             );
             return await response.json()
 
-
         //* vrati id, username, profile_picture, handle, auth_id
         case "allUserPostId":
             response = await (
@@ -48,6 +47,7 @@ async function apiPost(apiType = '', firstId?: number, secondId?: number, data?:
             );
             return await response.json()
 
+        //* updatuje danemu postu description
         case "updatePost":
             let update_data = { 'logged_in_user': secondId, 'post_id': firstId, 'description': data }
             response = await (
@@ -84,7 +84,7 @@ async function apiPost(apiType = '', firstId?: number, secondId?: number, data?:
         case "likePost":
             const like_data = { 'logged_in_user': secondId, 'post_id': firstId }
             response = await (
-                fetch(`${baseUrl}/api/users-posts/like/`,
+                fetch(`${baseUrl}/api/users-posts-liked-status/like/`,
                     {
                         method: 'PATCH',
                         credentials: "include",

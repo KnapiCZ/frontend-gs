@@ -69,8 +69,8 @@ async function save() {
                 </IonCol>
             </IonItem>
             <IonItem>
-                <IonInput v-model="data.handle" onblur="saveEdited()" label="Handle" label-placement="fixed"
-                    placeholder="Unique for every user" :value="data.handle">
+                <IonInput v-model="data.handle" label="Handle" label-placement="fixed" placeholder="Unique for every user"
+                    :value="data.handle">
                 </IonInput>
             </IonItem>
 
@@ -150,6 +150,10 @@ ion-avatar {
     margin: auto;
     height: 70px;
     width: 70px;
+}
+
+ion-modal {
+    --ion-background-color: #0E0E0E;
 }
 
 .picture {

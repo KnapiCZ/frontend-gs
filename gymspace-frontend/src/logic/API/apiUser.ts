@@ -74,6 +74,7 @@ async function apiUser(apiType = "", firstId?: number, secondId?: number) {
 			);
 			return await response.json()
 
+		//* updatuje poslane informace uzivatelovi
 		case "update":
 			response = await (
 				fetch(`${baseUrl}/api/users-small/update/`,

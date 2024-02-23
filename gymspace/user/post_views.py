@@ -20,23 +20,9 @@ class UserPostViewSet(viewsets.ViewSet):
     permission_classes = (IsAuthenticated,)
     def retrieve(self, request, pk=None):
         post = UserPost.objects.get(pk=pk)
-        media = UserPostMedia.objects.filter(parent_post__pk=pk)
-
-        post_serializer = UserPostSerializer(data={
-            "id": post.id,
-            "author": post.author.pk,
-            "gym": post.gym.pk,
-            "description": post.body,
-            "likes": post.likes.count(),
-            "post_time": post.post_time
-            })
-        media_serializer = UserPostMediaSerializer(media, many=True)
-
-        if post_serializer.is_valid():
-            return Response({"post": post_serializer.data,
-                             "media": media_serializer.data})
-        else:
-            return Response({"post error": post_serializer.errors,})
+        post_serializer = UserPostSerializer(post)
+        print(post_serializer.data)
+        return Response({"post": post_serializer.data})
         
     def partial_update(self, request, pk=None):
         user = User.objects.get(auth_token=request.COOKIES.get('auth_token'))
@@ -94,6 +80,15 @@ class AllUserPostsDetailViewSet(viewsets.ViewSet):
         serializer = UserPostSerializer(posts, many=True)
         return Response({"posts": serializer.data,})
 
+class UserPostThumbnail(viewsets.ViewSet):
+    permission_classes = (IsAuthenticated,)
+    def retrieve(self, request, pk=None):
+        post = UserPost.objects.get(pk=pk)
+        post_serializer = UserPostSerializer(data={'media': post.media})
+        print(post_serializer.data)
+        return Response({"post": post_serializer.data})
+        
+
 class UserPostLikedStatusViewSet(viewsets.ViewSet):
 
     """
@@ -134,7 +129,7 @@ class UserPostLikedStatusViewSet(viewsets.ViewSet):
         if user == logged_in_user:
             if logged_in_user.id in likes:
                 post.likes.remove(logged_in_user.id)
-                return Response({f"user{logged_in_user.id} unlike": "success"})
+                return Response({f"user {logged_in_user.id} unlike": "success"})
             elif logged_in_user.id not in likes:
                 post.likes.add(logged_in_user.id)
                 return Response({f"user {logged_in_user.id} like": "success"})

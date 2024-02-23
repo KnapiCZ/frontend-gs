@@ -8,15 +8,23 @@ import apiUser from '@/logic/API/apiUser';
 import { IonContent, IonPage } from '@ionic/vue';
 import { userDataStore } from '@/stores/UserDataStore';
 import { useRoute } from 'vue-router';
+import apiPost from '@/logic/API/apiPost';
 
 const route = useRoute();
-const userStore = userDataStore()
+const userStore = userDataStore();
 
-let id = route.params.id as unknown as number
+let id = route.params.id as unknown as number;
+let data = await apiPost('allUserPostId', 1);
+userStore.userPostsId = []
+for (let i = 0; i < data.posts.length; i++) {
+	userStore.userPostsId.push(data.posts[i].id)
+}
+userStore.userPostsId.reverse()
 
 userStore.user = JSON.stringify(await apiUser("userProfile", id))
 
 let userData = JSON.parse(userStore.user)
+
 userStore.renderedUserId = id
 userStore.followersCount = userData.followers
 

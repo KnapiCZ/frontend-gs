@@ -7,7 +7,7 @@ import { IonButton, IonContent, IonModal } from '@ionic/vue';
 <template>
     <div>
         <button id="user-menu">
-            <img src="@/assets/icons/Menu.svg" alt="">
+            <img src="@/assets/icons/settings.svg" alt="">
         </button>
         <IonModal type="modal" trigger="user-menu" :initial-breakpoint="0.5" :breakpoints="[0, 0.5, 1]">
             <h1>Settings</h1>

@@ -6,8 +6,11 @@ import apiUser from '@/logic/API/apiUser';
 
 let postData = await apiPost("allUserPostsDetail", 1)
 let userData = await apiUser("smallUserProfile", 1)
-console.log(postData)
 const baseUrl = await apiPost()
+
+//! bude ziskavat id postu ktere se maji zobrazit a pak id bude posilat dal do videopost (video post se musi prejmenovat nemusi to byt jen video zvladne to i fotky)
+
+
 </script>
 
 <template>
@@ -19,17 +22,6 @@ const baseUrl = await apiPost()
     </SwiperSlide>
   </Swiper>
 </template>
-
-
-
-<script lang="ts">
-export default {
-  data: () => ({
-    myJson: null,
-  }),
-}
-
-</script>
 
 <style scoped>
 div .swiper {

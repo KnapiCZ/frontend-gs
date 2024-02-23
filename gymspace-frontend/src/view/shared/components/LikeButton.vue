@@ -18,7 +18,7 @@ else { isLiked.value = false }
 //posle do databaze zadost o zmenu stavu liknuti
 async function likeIt() {
     isLiked.value = !isLiked.value
-    await apiPost("likePost", props.postId, props.userId)
+    console.debug(await apiPost("likePost", props.postId, props.userId))
 }
 
 </script>

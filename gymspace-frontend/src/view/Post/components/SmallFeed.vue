@@ -6,14 +6,14 @@ import apiPost from '@/logic/API/apiPost';
 
 const userStore = userDataStore()
 
-let getPosts = await apiPost("allUserPostsDetail", userStore.renderedUserId)
-userStore.userPosts = JSON.stringify(getPosts)
-let posts = JSON.parse(userStore.userPosts).posts
+let posts = await apiPost("allUserPostsDetail", userStore.renderedUserId)
+console.log(posts)
 </script>
 
 <template>
 	<div class="grid-container">
-		<Thumbnail v-for="data in posts" :ImageSource="data.media[0]" :postID="data.id" type="user" class="grid-item" />
+		<Thumbnail v-for="data in posts.posts" :ImageSource="data.media[0]" :postID="data.id" type="user"
+			class="grid-item" />
 	</div>
 </template>
 

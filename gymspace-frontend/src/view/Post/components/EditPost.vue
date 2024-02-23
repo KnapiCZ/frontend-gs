@@ -2,6 +2,7 @@
 import { IonButton, IonContent, IonModal, IonTextarea, IonItem, modalController } from '@ionic/vue';
 import { ref } from 'vue';
 import apiPost from '@/logic/API/apiPost';
+import { userDataStore } from '@/stores/UserDataStore';
 
 const props = defineProps<{
     userId: number
@@ -12,7 +13,8 @@ const props = defineProps<{
 let text = ref(props.description)
 
 async function save() {
-    await apiPost('updatePost', props.postId, props.userId, text.value)
+    console.debug(await apiPost('updatePost', props.postId, props.userId, text.value))
+    userDataStore().componentKey += 1
     modalController.dismiss('post-edit' + props.postId)
 }
 </script>
