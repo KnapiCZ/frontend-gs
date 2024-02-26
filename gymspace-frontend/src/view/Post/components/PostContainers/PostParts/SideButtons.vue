@@ -30,6 +30,6 @@ div {
     width: fit-content;
     position: absolute;
     right: 0;
-    bottom: 250px;
+    bottom: 200px;
 }
 </style>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import FeedPost from '../components/Feed/FeedPost.vue';
+import BorderedPost from '../components/PostContainers/BorderedPost.vue';
 import { IonPage, IonContent, IonToolbar, IonButtons, IonButton, IonTitle, useIonRouter } from '@ionic/vue';
 import { userDataStore } from '@/stores/UserDataStore';
 import { useRoute } from 'vue-router';
@@ -35,7 +35,7 @@ scrollToPost()
 			<IonTitle>Posts</IonTitle>
 		</IonToolbar>
 		<IonContent class="ion-no-padding" id="MainContainer">
-			<FeedPost v-for="data in userStore.userPostsId" :key="'post' + data + userStore.componentKey"
+			<BorderedPost v-for="data in userStore.userPostsId" :key="'post' + data + userStore.componentKey"
 				:postId="(data as unknown as number)" />
 		</IonContent>
 	</IonPage>

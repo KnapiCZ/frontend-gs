@@ -9,21 +9,21 @@ import Slider from '../components/Slider.vue';
 <template>
   <IonPage>
     <VCard>
-      <VTabs v-model="tab" color="white" bg-color="#00000000" align-tabs="center" :grow="true">
+      <VTabs v-model="tab" color="white" :center-active="true" slider-color="#00000000" bg-color="#00000000"
+        align-tabs="center" :grow="true">
         <VTab :value="0" title="Following">Following</VTab>
         <VTab :value="1" title="FOR YOU">FOR YOU</VTab>
         <VTab :value="2" title="CLUB">CLUB</VTab>
-
       </VTabs>
-      <VWindow v-model="tab" v-theme>
+      <VWindow v-model="tab">
         <VWindowItem>
-          <Slider :keyStart="0" />
+          <Slider :keyStart="0" :transition="false" :reverse-transition="false" />
         </VWindowItem>
         <VWindowItem>
-          <Slider :keyStart="10" />
+          <Slider :keyStart="10" :transition="false" :reverse-transition="false" />
         </VWindowItem>
         <VWindowItem>
-          <Slider :keyStart="20" />
+          <Slider :keyStart="20" :transition="false" :reverse-transition="false" />
         </VWindowItem>
       </VWindow>
     </VCard>
@@ -41,9 +41,8 @@ export default {
 
 <style scoped>
 .v-window-item--active {
-  height: 100vh;
+  height: calc(100vh - 52px);
   overflow: hidden;
-
 }
 
 .v-tabs {

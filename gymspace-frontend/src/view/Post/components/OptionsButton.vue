@@ -15,8 +15,7 @@ const props = defineProps<{
 
 async function Delete() {
     console.log(await apiPost("deletePost", props.postId, props.userId))
-    let posts = JSON.parse(userStore.userPosts)
-    delete posts[props.postId]
+    delete userStore.userPostsId[userStore.userPostsId.indexOf(props.postId)]
     sharedData.componentKey += 1
 }
 </script>
