@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { IonModal, IonToolbar, modalController, IonHeader, IonButton, IonButtons, IonTitle, IonList, IonItem, IonInput, IonTextarea, IonCol, IonAvatar } from '@ionic/vue';
+import { IonModal, IonToolbar, modalController, IonHeader, IonButton, IonButtons, IonTitle, IonList, IonItem, IonInput, IonCol, IonAvatar } from '@ionic/vue';
 import { userDataStore } from '@/stores/UserDataStore';
 import { ref } from 'vue';
 
@@ -21,6 +21,8 @@ let userData = JSON.parse(userStore.editedUser)
 let data = ref({
     username: userData.username,
     handle: userData.handle,
+    height: userData.height,
+    weight: userData.weight
 })
 
 function cancel() {
@@ -32,6 +34,8 @@ async function save() {
     userData = JSON.parse(userStore.user)
     userData.handle = data.value.handle
     userData.username = data.value.username
+    userData.weight = data.value.weight as unknown as number
+    userData.weight = data.value.weight as unknown as number
     userStore.user = JSON.stringify(userData)
     console.log(await apiUser('update'))
     forceRerender()
@@ -85,14 +89,14 @@ async function save() {
             <SexModal />
 
             <IonItem>
-                <IonInput label="Height" label-placement="fixed" placeholder="Your Height" :readonly="true"
-                    :value="userData.height + ' cm'">
+                <IonInput v-model="data.height" label="Height (cm)" label-placement="fixed" placeholder="Your Height"
+                    :value="data.height">
                 </IonInput>
             </IonItem>
 
             <IonItem>
-                <IonInput label="Weight" label-placement="fixed" placeholder="Your Weight" :readonly="true"
-                    :value="userData.weight + ' kg'">
+                <IonInput v-model="data.weight" label="Weight (kg)" label-placement="fixed" placeholder="Your Weight"
+                    :value="data.weight">
                 </IonInput>
             </IonItem>
         </IonList>

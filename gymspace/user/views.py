@@ -58,9 +58,10 @@ class SmallUserProfileViewSet(viewsets.ViewSet):
     def partial_update(self, request, pk=None):
         request.data.pop("followers"),
         request.data.pop("post_list")
+        id = request.data.pop('id')
         user = User.objects.get(auth_token=request.COOKIES.get('auth_token'))
-        user_profile = UserProfile.objects.get(pk=request.data.pop("id"))
-        logged_in_user = User.objects.get(pk=1)
+        logged_in_user = User.objects.get(pk=id)
+        user_profile = UserProfile.objects.get(pk=id)
         if user == logged_in_user:
             setattr(user, "username", request.data.pop("handle"))
             for key, value in request.data.items():

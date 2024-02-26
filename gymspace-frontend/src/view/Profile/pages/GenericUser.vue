@@ -1,13 +1,13 @@
 <script setup lang="ts">
+import { IonContent, IonPage } from '@ionic/vue';
+import { userDataStore } from '@/stores/UserDataStore';
+import { useRoute } from 'vue-router';
 import ProfileTop from '../components/ProfileTop.vue'
 import CurrentUserButton from '../components/Buttons/CurrentUserButton.vue';
 import ProfileBasicInfo from '../components/ProfileBasicInfo.vue';
 import TabBar from '../components/TabBar.vue';
 import OtherUserButton from '../components/Buttons/OtherUserButton.vue';
 import apiUser from '@/logic/API/apiUser';
-import { IonContent, IonPage } from '@ionic/vue';
-import { userDataStore } from '@/stores/UserDataStore';
-import { useRoute } from 'vue-router';
 import apiPost from '@/logic/API/apiPost';
 
 const route = useRoute();

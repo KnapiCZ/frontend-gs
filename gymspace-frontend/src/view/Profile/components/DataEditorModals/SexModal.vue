@@ -35,7 +35,7 @@ function updateText() {
 
 <template>
     <IonItem id="sex-modal">
-        <IonInput label="Sex" label-placement="fixed" placeholder="Your sex" :value="text" :readonly="true" />
+        <IonInput label="Sex" label-placement="fixed" placeholder="Your sex" :value="sex[text]" :readonly="true" />
     </IonItem>
     <IonModal type="modal" trigger="sex-modal">
         <IonHeader>
@@ -61,17 +61,11 @@ function updateText() {
                 <IonItem>
                     <IonRadio value="O" justify="space-between" @click="updateText()">Other</IonRadio>
                 </IonItem>
-                <IonItem v-show="text == 'O'" id="sex-modal">
-                    <IonInput @ion-change="userData.sex = ($event.target.value as string)" label="Choose"
-                        label-placement="fixed" placeholder="Your sex" :value="text" />
-                </IonItem>
                 <IonItem>
                     <IonRadio value="N" justify="space-between" @click="updateText()">Rather not to say</IonRadio>
                 </IonItem>
             </IonRadioGroup>
-
         </IonContent>
-
     </IonModal>
 </template>
 

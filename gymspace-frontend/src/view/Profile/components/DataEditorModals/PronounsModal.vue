@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { IonModal, IonToolbar, modalController, IonHeader, IonButton, IonButtons, IonTitle, IonItem, IonContent, IonInput } from '@ionic/vue';
+import { IonModal, IonToolbar, modalController, IonHeader, IonButton, IonButtons, IonTitle, IonItem, IonContent, IonInput, IonRadioGroup, IonRadio } from '@ionic/vue';
 import { ref } from 'vue';
 import { userDataStore } from '@/stores/UserDataStore';
 
 const userStore = userDataStore();
 let userData = JSON.parse(userStore.editedUser)
 
-let text = ref()
-text.value = userData.pronouns
+let oldtext = userData.pronouns
+let text = ref(userData.pronouns)
 
 function cancel() {
-    text.value = userData.pronouns
+    text.value = oldtext
     modalController.dismiss({ id: "pronouns-modal" })
 }
 
@@ -24,8 +24,7 @@ function save() {
 
 <template>
     <IonItem id="pronouns-modal">
-        <IonInput @ion-change="userData.pronouns = ($event.target.value as string)" label="Pronouns" label-placement="fixed"
-            placeholder="Your Pronouns" :value="userData.pronouns" :readonly="true" />
+        <IonInput label="Pronouns" label-placement="fixed" placeholder="Your pronouns" :value="text" :readonly="true" />
     </IonItem>
     <IonModal type="modal" trigger="pronouns-modal">
         <IonHeader>
@@ -35,14 +34,15 @@ function save() {
                 </IonButtons>
                 <IonTitle>Pronouns</IonTitle>
                 <IonButtons slot="end">
-                    <IonButton class="save-button" :strong="true" @click="save()">Confirm</IonButton>
+                    <IonButton class="save-button" :strong="true" @click="save()">
+                        Confirm</IonButton>
                 </IonButtons>
             </IonToolbar>
         </IonHeader>
         <IonContent>
-            <IonItem>
-                <IonInput @ion-change="userData.pronouns = ($event.target.value as string)" label="Pronouns"
-                    label-placement="stacked" placeholder="Your Pronouns" :value="userData.pronouns" />
+            <IonItem id="pronouns-modal">
+                <IonInput @ion-change="text = ($event.target.value as string)" label="Choose" label-placement="fixed"
+                    placeholder="Your pronouns" :value="text" />
             </IonItem>
         </IonContent>
 
@@ -90,8 +90,27 @@ ion-avatar {
     padding: 5px auto;
     margin: 10px auto;
     text-align: center;
-    background-color: rgb(47, 47, 47);
+    background-color: #0E0E0E;
     font-weight: bold;
     border-radius: 10px;
+}
+
+ion-radio::part(container) {
+    width: 25px;
+    height: 25px;
+    border-radius: 20px;
+    border: 2px solid #acacac;
+}
+
+ion-radio.radio-checked::part(container) {
+    background: #fff000;
+    border-color: #fff000;
+}
+
+ion-radio.radio-checked::part(mark) {
+    width: 8px;
+    height: 12px;
+    border-color: #0E0E0E;
+    transform: rotate(45deg);
 }
 </style>
