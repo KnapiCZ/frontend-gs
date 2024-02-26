@@ -84,7 +84,7 @@ async function apiUser(apiType = "", firstId?: number, secondId?: number) {
 						headers: {
 							"Content-Type": "application/json",
 						},
-						body: userDataStore().editedUser,
+						body: userDataStore().user,
 					})
 			);
 			return response.json()
