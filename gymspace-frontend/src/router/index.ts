@@ -62,6 +62,19 @@ const routes: Array<RouteRecordRaw> = [
 			},
 		]
 	},
+
+	{
+		path: '/addPost',
+		name: "addPost",
+		component: () => import('@/view/Post/pages/ChoosePhoto.vue'),
+		meta: { requiresAuth: true }
+	},
+	{
+		path: '/addPost/addInfo',
+		name: "addInfo",
+		component: () => import('@/view/Post/pages/AddPostInfo.vue'),
+		meta: { requiresAuth: true }
+	},
 ]
 
 

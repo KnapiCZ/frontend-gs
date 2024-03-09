@@ -6,13 +6,16 @@ export const userDataStore = defineStore('userDataStore', {
 		return {
 			edited: true,
 			componentKey: ref(0),
-			baseUrl: "http://localhost:8080/",
+			baseUrl: `http://localhost:8080/`,
 			renderedUserId: -1,
 			loggedUserId: -1,
 			followersCount: -1,
 			userPostsId: [] as number[],
 			user: "",
 			editedUser: "",
+			choosenPhoto: '',
+			croppedChoosenPhoto: ''
+
 		}
 	}
 })

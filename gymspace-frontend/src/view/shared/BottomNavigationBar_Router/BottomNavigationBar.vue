@@ -42,7 +42,7 @@ await apiUser("userProfile", userStore.loggedUserId).then((loggedUser) => {
 					<img src="../../../assets/icons/community.svg" alt="">
 				</ion-tab-button>
 
-				<ion-tab-button tab="postadd" href="xx">
+				<ion-tab-button tab="postadd" href="/addPost">
 					<img src="../../../assets/icons/plusbutton.svg" alt="">
 				</ion-tab-button>
 

@@ -1,17 +1,53 @@
 //! API pro POSTY -> informace postu, generace fyp postu a dalsi
 
 
-async function apiPost(apiType = '', firstId?: number, secondId?: number, data?: string) {
+async function apiPost(apiType = '', firstId?: number, secondId?: number, data?: unknown) {
     const baseUrl = `http://localhost:8080/`
     let response
     switch (apiType) {
+        case "createPost":
+            response = await (
+                fetch(`${baseUrl}api/users-posts/`,
+                    {
+                        method: 'POST',
+                        credentials: "include",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(data)
+                    })
+            );
+            return await response.json()
 
+        case "deletePost":
+            const delete_data = { 'logged_in_user': secondId, 'post_id': firstId }
+            response = await (
+                fetch(`${baseUrl}/api/users-posts/delete/`,
+                    {
+                        method: 'DELETE',
+                        credentials: "include",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(delete_data)
+                    })
+            );
+            return await response.json()
         //* vraci jeden post s id, author, gym, description, like_count, post_time, media
-        case "getUserPost":
+        case "getPost":
             response = await (
                 fetch(`${baseUrl}/api/users-posts/${firstId}/`,
                     {
                         credentials: "include",
+                    })
+            );
+            return await response.json()
+
+        case "getThumbnail":
+            response = await (
+                fetch(`${baseUrl}api/users-posts/thumbnail/${firstId}/`,
+                    {
+                        credentials: "include"
                     })
             );
             return await response.json()
@@ -96,20 +132,7 @@ async function apiPost(apiType = '', firstId?: number, secondId?: number, data?:
             );
             return await response.json()
 
-        case "deletePost":
-            const delete_data = { 'logged_in_user': secondId, 'post_id': firstId }
-            response = await (
-                fetch(`${baseUrl}/api/users-posts/delete/`,
-                    {
-                        method: 'DELETE',
-                        credentials: "include",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify(delete_data)
-                    })
-            );
-            return await response.json()
+
 
         default:
             return `${baseUrl}`

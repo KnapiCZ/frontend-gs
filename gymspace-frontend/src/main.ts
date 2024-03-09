@@ -3,6 +3,8 @@ import { createVuetify } from "vuetify";
 import { createPinia } from 'pinia'
 import { IonicVue } from '@ionic/vue';
 
+import { defineCustomElements } from '@ionic/pwa-elements/loader';
+
 import router from './router';
 import App from './App.vue';
 
@@ -17,6 +19,8 @@ import '@/theme/variables.css';
 // Vuetify
 import 'vuetify/styles'
 import '@/theme/main.css'
+
+defineCustomElements(window);
 
 const pinia = createPinia()
 const vuetify = createVuetify()
