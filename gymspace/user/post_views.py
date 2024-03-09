@@ -16,12 +16,26 @@ from django.db.models import Count
 
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
+from django.core.files.base import ContentFile
+import base64
+
+
 class UserPostViewSet(viewsets.ViewSet):
     permission_classes = (IsAuthenticated,)
+    
+    def create(self, request):
+        post = UserPost.objects.create(author_id=request.data["author"], description=request.data["description"])
+        for media in request.data["media"]:
+            format, imgstr = media.split(';base64,') 
+            ext = format.split('/')[-1] 
+            data = ContentFile(base64.b64decode(imgstr), name='image.' + ext) 
+            UserPostMedia.objects.create(parent_post_id=post.id, media=data)
+
+        return Response({"SUCCESS": "it works for now"})
+    
     def retrieve(self, request, pk=None):
         post = UserPost.objects.get(pk=pk)
         post_serializer = UserPostSerializer(post)
-        print(post_serializer.data)
         return Response({"post": post_serializer.data})
         
     def partial_update(self, request, pk=None):
@@ -43,7 +57,6 @@ class UserPostViewSet(viewsets.ViewSet):
             post.delete()
             return Response({'SUCCES': 'File deleted succesfuly'})
         return Response({'ERROR': 'U dont haveacces to this operation'})
-                
 
 class RecommendedPostViewSet(viewsets.ViewSet):
     permission_classes = (IsAuthenticated,)
@@ -85,7 +98,6 @@ class UserPostThumbnail(viewsets.ViewSet):
     def retrieve(self, request, pk=None):
         post = UserPost.objects.get(pk=pk)
         post_serializer = UserPostSerializer(data={'media': post.media})
-        print(post_serializer.data)
         return Response({"post": post_serializer.data})
         
 
