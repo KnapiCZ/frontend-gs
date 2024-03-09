@@ -7,13 +7,13 @@ const router = useIonRouter()
 const userStore = userDataStore()
 
 const props = defineProps<{
-	ImageSource: string,
 	postID?: number,
 	type: string // typ = kde se thumbnail nachazi profil -> bude routovat na profil/x/post/, community -> bude routovat na community/explore 
 }>()
-
+let media = await apiPost("getPost", props.postID)
+console.log(media)
 const baseUrl = await apiPost()
-let postUrl = `${baseUrl}${props.ImageSource}`
+let postUrl = `${baseUrl}${media.post.media[0]}`
 
 
 function setRouting(type: string) {

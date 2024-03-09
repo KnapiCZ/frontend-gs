@@ -18,7 +18,10 @@ function checkLogin() {
 <template>
 	<div id="background" :style="{ backgroundImage: 'url(' + baseURL + userData.background_picture + ')' }">
 		<UserMenu v-show="checkLogin()" />
-		<div class="main-info-blur " :style="{ backgroundImage: 'url(' + baseURL + userData.background_picture + ')' }">
+		<div class="blur-wrapper">
+			<div class="main-info-blur "
+				:style="{ backgroundImage: 'url(' + baseURL + userData.background_picture + ')' }">
+			</div>
 		</div>
 		<div class="main-info">
 			<img class='PFP' :src="baseURL + userData.profile_picture">
@@ -50,20 +53,24 @@ function checkLogin() {
 	background-size: 100vw;
 }
 
-.main-info-blur {
+.blur-wrapper {
 	overflow: hidden;
 	width: 80%;
 	height: 70px;
-	padding-top: 20px;
 	position: absolute;
 	bottom: calc((100% * -0.185));
 	left: 50%;
 	transform: translateX(-50%);
+	border-radius: 10px;
+}
+
+.main-info-blur {
+	position: relative;
+	width: 100%;
+	height: 100%;
 	background-position: bottom;
 	background-size: 100vw;
-	filter: blur(3px);
-	border-radius: 10px;
-
+	filter: blur(2px);
 }
 
 .main-info {

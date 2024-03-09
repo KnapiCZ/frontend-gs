@@ -13,11 +13,11 @@ let init = route.params.initialPosition as unknown as Number
 let userStore = userDataStore()
 
 function scrollToPost() {
-	if (document.getElementById('post' + init)) {
-		var ele = document.getElementById('post' + init);
+	if (document.getElementById('postCard' + init)) {
+		var ele = document.getElementById('postCard' + init);
 		ele?.scrollIntoView()
 	} else {
-		setTimeout(scrollToPost, 100);
+		setTimeout(scrollToPost, 10);
 	}
 }
 
@@ -45,7 +45,6 @@ scrollToPost()
 #MainContainer {
 	position: relative;
 	width: 100vw;
-	background-color: black;
 	text-align: center;
 }
 

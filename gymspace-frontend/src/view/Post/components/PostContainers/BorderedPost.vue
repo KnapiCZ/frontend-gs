@@ -10,8 +10,22 @@ const props = defineProps<{
 	postId: number
 }>()
 
+const months = [
+	'January',
+	'February',
+	'March',
+	'April',
+	'May',
+	'June',
+	'July',
+	'August',
+	'September',
+	'October',
+	'November',
+	'December'
+]
 
-let post = (await apiPost("getUserPost", props.postId)).post
+let post = (await apiPost("getPost", props.postId)).post
 let creatorInfo = await apiUser("smallUserProfile", post.author)
 
 let time = setTime()
@@ -32,35 +46,51 @@ function checkImage() {
 }
 
 
-
 function setTime() {
 	let postTimestamp = new Date(post.post_time)
 	let current_time = new Date()
 	let difference = new Date(current_time.getTime() - postTimestamp.getTime())
-	if (difference.getDay() >= 7) {
-		return postTimestamp.getDate() + ". " + postTimestamp.getMonth()
+
+	// pokud uz je jiny rok nez byl post pridan
+	if (difference.getFullYear() !== 1970) {
+		console.debug("[DEBUG]", postTimestamp, current_time)
+		return postTimestamp.getDate() + ' ' + months[postTimestamp.getMonth()] + ' ' + postTimestamp.getFullYear()
 	}
+
+	// pokud je stejny den, mesic a rok jako byl post vydan
+	if (difference.getFullYear() == 1970 && difference.getMonth() == 0 && difference.getDate() == 1) {
+		if (difference.getHours() > 2) {
+			return difference.getHours() + " hours ago"
+		}
+		if (difference.getHours() == 2) {
+			return difference.getHours() - 1 + " hour ago"
+		}
+		if (difference.getMinutes() > 1) {
+			return difference.getMinutes() + " minutes ago"
+		}
+		if (difference.getMinutes() == 1) {
+			return difference.getMinutes() + " minute ago"
+		}
+		if (difference.getSeconds() >= 1) {
+			return difference.getSeconds() + " seconds ago"
+		}
+	}
+
+	//pokud je stejny rok jako byl post vydan ale starsi nez den
+	if (difference.getDate() > 13) {
+		return postTimestamp.getDate() + ' ' + months[postTimestamp.getMonth()]
+	}
+	if (difference.getDate() >= 7) {
+		return "1 week ago"
+	}
+	console.log(difference.getDate())
 	if (difference.getDate() > 1) {
-		return difference.getDate() + " days ago"
+		return difference.getDate() + " days ago" + postTimestamp, current_time
 	}
 	if (difference.getDate() == 1) {
-		return difference.getDate() + " day ago"
+		return difference.getDate() + " day ago" + postTimestamp, current_time
 	}
-	if (difference.getHours() > 1) {
-		return difference.getHours() + " hours ago"
-	}
-	if (difference.getHours() == 1) {
-		return difference.getHours() + " hour ago"
-	}
-	if (difference.getMinutes() > 1) {
-		return difference.getMinutes() + " minutes ago"
-	}
-	if (difference.getMinutes() == 1) {
-		return difference.getMinutes() + " minute ago"
-	}
-	if (difference.getSeconds() >= 1) {
-		return difference.getSeconds() + " seconds ago"
-	}
+
 }
 </script>
 
@@ -103,7 +133,7 @@ function setTime() {
 }
 
 .date-posted {
-	color: gray;
+	color: rgb(190, 190, 190);
 	font-size: 11px;
 }
 
@@ -129,7 +159,7 @@ function setTime() {
 
 .handle {
 	margin: auto;
-	color: gray;
+	color: rgb(179, 178, 178);
 	line-height: 10px;
 
 }
@@ -139,9 +169,9 @@ function setTime() {
 }
 
 ion-card {
-	width: 95%;
-	margin: auto auto 30px auto;
-	background-color: rgba(66, 66, 66, 0.507);
+	width: 100%;
+	margin-bottom: 10px;
+	background-color: rg b(48, 48, 48);
 	border-radius: 20px;
 }
 
@@ -165,7 +195,7 @@ hr {
 	width: 100%;
 	margin: 10px auto;
 	border-radius: 3px;
-	color: gray;
+	color: rgb(201, 201, 201);
 }
 
 .postImage {
