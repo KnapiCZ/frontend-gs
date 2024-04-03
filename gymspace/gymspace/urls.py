@@ -8,6 +8,8 @@ from user import post_views as user_post_views
 
 from gym import views as gym_views
 
+from challenge import views as challenge_views
+
 from django.contrib import admin
 
 router = routers.DefaultRouter()
@@ -24,13 +26,18 @@ router.register('users-posts-all-detail', user_post_views.AllUserPostsDetailView
 
 router.register(r'users-posts-liked-status', user_post_views.UserPostLikedStatusViewSet, basename='users-posts-liked-status')
 
-router.register(r'gyms-member', gym_views.MyGymsViewSet, basename='gyms-member')
-router.register(r'gyms-button', gym_views.GymInfoViewSet, basename='gyms-button')
-router.register(r'gyms-join', gym_views.GymViewSet, basename='gyms-join')
+router.register(r'gym', gym_views.GymViewSet, basename='gym')
+router.register(r'my-gyms', gym_views.MyGymsViewSet, basename='my-gyms')
+
+router.register(r'challenge-id', challenge_views.ChallengeIdViewSet, basename='challenge')
+router.register(r'challenge', challenge_views.ChallengeViewSet, basename='challenge')
+router.register(r'challengeProgress', challenge_views.ProgressViewSet, basename='challenge-progress')
+router.register(r'joinChallenge', challenge_views.ProgressCreateViewSeet, basename='join-challenge')
+
+
 
 from django.conf import settings
 from django.conf.urls.static import static
-
 
 
 urlpatterns = [

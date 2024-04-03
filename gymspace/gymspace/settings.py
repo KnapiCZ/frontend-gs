@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
+    'challenge.apps.ChallengeConfig',
     'user.apps.UserConfig',
     'gym.apps.GymConfig',
     'club.apps.ClubConfig',
@@ -59,16 +60,15 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'gymspace.urls'
 
-
-CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     'http://10.0.45.50:8100',
     'http://192.168.88.86:8100',
     'http://localhost:8100',
+    'http://localhost',
     'http://172.20.10.14:8100',
     'http://10.0.1.42:8100',
-
 ]
 
 REST_FRAMEWORK = {

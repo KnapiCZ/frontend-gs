@@ -9,17 +9,25 @@ import TabBar from '../components/TabBar.vue';
 import OtherUserButton from '../components/Buttons/OtherUserButton.vue';
 import apiUser from '@/logic/API/apiUser';
 import apiPost from '@/logic/API/apiPost';
+import apiChallenge from '@/logic/API/apiChallenge';
 
 const route = useRoute();
 const userStore = userDataStore();
 
-let id = route.params.id as unknown as number;
-let data = await apiPost('allUserPostId', 1);
 userStore.userPostsId = []
+
+let id = route.params.id as unknown as number;
+let data = await apiPost('allUserPostId', id);
+let challenges = await apiChallenge('userChallengesId', id)
+
 for (let i = 0; i < data.posts.length; i++) {
 	userStore.userPostsId.push(data.posts[i].id)
 }
 userStore.userPostsId.reverse()
+
+for (let i = 0; i < challenges.length; i++) {
+	userStore.userChallengeId.push(challenges[i].id)
+}
 
 userStore.user = JSON.stringify(await apiUser("userProfile", id))
 
@@ -38,20 +46,17 @@ function checkLogin() {
 <template>
 	<IonPage class="ion-no-padding" :key="id">
 		<IonContent class="ion-no-padding" id="user">
-			<div class="page-div">
-				<ProfileTop :key="userStore.componentKey" />
-
-				<ProfileBasicInfo :key="userStore.componentKey + 100" />
-				<CurrentUserButton v-if="checkLogin()" />
-				<OtherUserButton v-else />
-				<TabBar :trainer_status="userData.trainer_status" />
-			</div>
+			<ProfileTop :key="userStore.componentKey" />
+			<ProfileBasicInfo :key="userStore.componentKey + 100" />
+			<CurrentUserButton v-if="checkLogin()" />
+			<OtherUserButton v-else />
+			<TabBar :trainer_status="userData.trainer_status" />
 		</IonContent>
 	</IonPage>
 </template>
 
 <style scoped>
-.page-div {
+#user {
 	margin: 0;
 	padding: 0;
 	padding-bottom: 56px;

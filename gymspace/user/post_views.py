@@ -36,7 +36,7 @@ class UserPostViewSet(viewsets.ViewSet):
     def retrieve(self, request, pk=None):
         post = UserPost.objects.get(pk=pk)
         post_serializer = UserPostSerializer(post)
-        return Response({"post": post_serializer.data})
+        return Response(post_serializer.data)
         
     def partial_update(self, request, pk=None):
         user = User.objects.get(auth_token=request.COOKIES.get('auth_token'))
