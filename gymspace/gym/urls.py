@@ -2,10 +2,8 @@ from django.urls import path
 from gym import views
 # define the urls
 urlpatterns = [
-    path('gyms-member/', views.MyGymViewSet.as_view({'get': 'list'})),
-    path('gyms-member/<int:pk>', views.MyGymViewSet.as_view({'get': 'retrieve'})),
-
-    path('gyms-button/<int:pk>', views.GymInfoViewSet.as_view({'get': 'retrieve'})),
-
-    path('gyms-join/<int:pk>', views.GymViewSet.as_view({'patch': 'update'})),
+    path('gym/<int:pk>/', views.GymViewSet.as_view({'get': 'retrieve'})),
+    path('gym/join/<int:pk>/', views.GymViewSet.as_view({'patch': 'update'})),
+    
+    path('my-gyms/', views.MyGymsViewSet.as_view({'get': 'retrieve'})),
 ]

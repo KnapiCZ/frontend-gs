@@ -10,39 +10,32 @@ from django.db.models import Count
 
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
+
+# Seznam views (ve stejnem poradi jako jsou napsany)
+#   1. MyGyms - vrati id vsech gymu ve kterych uzivatel je
+#   2. Gym - RETRIEVE vrati vsechno info o gymu, 
+#            PARTIAL_UPDATE prida/odebere uzivatele z/do clenu klubu
+
 class MyGymsViewSet(viewsets.ViewSet):
     permission_classes = (IsAuthenticated,)
-    #authentication_classes = (TokenAuthentication,) s timhle to nefunguje idk proc
-
+    
     """
-    ViewSet na ziskani malyho gym infa (id, title, logo) 
+    ViewSet na ziskani id gymu 
     """
-    def list(self, request):
-        queryset = Gym.objects.all()
-        serializer = GymSmallSerializer(queryset, many=True)
-        return Response(serializer.data)
-
     def retrieve(self, request, pk=None):
         queryset = Gym.objects.filter(members__in=[pk])
-        serializer = GymSmallSerializer(queryset, many=True)
-        return Response(serializer.data)
-
-class GymInfoViewSet(viewsets.ViewSet):
-    """
-    Vrati UPLNE VSECHNO info o gymu
-    """
-    permission_classes = (IsAuthenticated,)
-
-    def retrieve(self, request, pk=None):
-        queryset = Gym.objects.get(pk=pk)
-        serializer = GymSerializer(queryset)
-        return Response(serializer.data)
+        serializer = GymIdSerializer(queryset, many=True)
+        return Response({"gyms": serializer.data,})
 
 class GymViewSet(viewsets.ViewSet):
     permission_classes = (IsAuthenticated,)
+    
+    """
+    Vrati UPLNE VSECHNO info o gymu
+    """
     def retrieve(self, request, pk=None):
-        queryset = Gym.objects.get(pk=pk)
-        serializer = GymSerializer(queryset)
+        gym = Gym.objects.get(pk=pk)
+        serializer = GymSerializer(gym)
         return Response(serializer.data)
 
     def partial_update(self, request, pk=None):
@@ -59,16 +52,16 @@ class GymViewSet(viewsets.ViewSet):
         serializer = GymFollowSerializer(data=request.data, partial=True)
         if serializer.is_valid():
             user = User.objects.get(auth_token=request.COOKIES.get('auth_token'))
-            following_user = User.objects.get(pk=serializer.data.get("logged_in_user"))
-            followed_user = Gym.objects.get(pk=serializer.data.get("gym_id"))
-            followers = followed_user.members.values_list('pk', flat=True)
-            if user == following_user:
-                if following_user.id in followers:
-                    followed_user.members.remove(following_user.id)
-                    followers = followed_user.members.values_list('pk', flat=True)
-                    return Response({f"user{following_user.id} leave": "success"})
-                elif following_user.id not in followers:
-                    followed_user.members.add(following_user.id)
-                    followers = followed_user.members.values_list('pk', flat=True)
-                    return Response({f"user{following_user.id} join": "success"})
+            joining_user = User.objects.get(pk=serializer.data.get("logged_in_user"))
+            gym = Gym.objects.get(pk=serializer.data.get("gym_id"))
+            members = gym.members.values_list('pk', flat=True)
+            if user == joining_user:
+                if joining_user.id in members:
+                    gym.members.remove(joining_user.id)
+                    members = gym.members.values_list('pk', flat=True)
+                    return Response({f"user{joining_user.id} leave": "success"})
+                elif joining_user.id not in members:
+                    gym.members.add(joining_user.id)
+                    members = gym.members.values_list('pk', flat=True)
+                    return Response({f"user{joining_user.id} join": "success"})
             return Response({'ERROR': 'token does not match logged in user - check the "logged_in_user" id'})

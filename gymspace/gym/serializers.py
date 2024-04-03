@@ -1,13 +1,10 @@
 from rest_framework import routers,serializers,viewsets
 from .models import *
 
-class GymSmallSerializer(serializers.ModelSerializer):
+class GymIdSerializer(serializers.ModelSerializer):
     class Meta:
         model = Gym
-        fields = ['id',
-                  'title',
-                  'logo',
-                  ]
+        fields = ["id",]
 
 class GymSerializer(serializers.ModelSerializer):
     class Meta:

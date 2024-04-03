@@ -6,23 +6,24 @@ async function apiGym(apiType = '', firstItem?: number, secondItem?: number) {
 
     switch (apiType) {
 
-
-        // * vrati vsechno info o jednom gymu
-        case "gymInfo":
+        // * vrati id vsech gymu ve kterych je uzivatel 
+        case "myGyms":
             response = await (
-                fetch(`${baseUrl}/api/gyms-button/${firstItem}/`,
+                fetch(`${baseUrl}/api/my-gyms/${firstItem}/`,
                     {
+                        method: 'GET',
                         credentials: "include",
                     }
                 )
             );
             return await response.json()
 
-        // * vrati jmeno logo id vsech gymu ve kterych je uzivatel 
-        case "myGyms":
+        // * vrati vsechno info o jednom gymu
+        case "gymInfo":
             response = await (
-                fetch(`${baseUrl}/api/gyms-member/${firstItem}/`,
+                fetch(`${baseUrl}/api/gym/${firstItem}/`,
                     {
+                        method: 'GET',
                         credentials: "include",
                     }
                 )

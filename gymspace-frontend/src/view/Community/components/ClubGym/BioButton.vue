@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { IonButton, IonButtons, IonModal, IonRow, IonToolbar, IonTitle, modalController } from '@ionic/vue';
 import apiGym from '@/logic/API/apiGym';
-import { gymDataStore } from '@/stores/GymDataStore';
 
-const gymStore = gymDataStore()
+const props = defineProps<{
+	id: number
+}>()
 
-const gymData = await apiGym('gymInfo', gymStore.openedGym)
+const gymData = await apiGym('gymInfo', props.id)
 const baseUrl = await apiGym()
 
 </script>

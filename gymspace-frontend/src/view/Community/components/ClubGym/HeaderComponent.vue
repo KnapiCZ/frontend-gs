@@ -15,7 +15,7 @@ let props = defineProps<{
 const userStore = userDataStore()
 
 let gymInfo = await apiGym("gymInfo", props.id)
-let FollowMembers = ref([26, gymInfo.members.length]);
+let FollowMembers = ref([0, gymInfo.members.length]);
 let isFollowing = [false, false];
 
 //checking if user is member of Gym
@@ -29,14 +29,13 @@ function members(members: []) {
 }
 
 async function followJoin(type: number) {
-    console.log("Function Join")
     if (isFollowing[type]) { FollowMembers.value[type] -= 1; }
     else { FollowMembers.value[type] += 1; }
     isFollowing[type] = !isFollowing[type];
     if (type === 1) {
-        console.log("Function typexx")
         await apiGym("joinClub", gymInfo.id, userStore.loggedUserId)
     }
+    userStore.componentKey += 1
 }
 members(gymInfo.members)
 
@@ -51,28 +50,28 @@ members(gymInfo.members)
         </IonButtons>
         <IonTitle>{{ name }}</IonTitle>
     </IonToolbar>
-    <IonRow id="background">
-        <IonCol class="column logo-column" size="4">
-            <BioButton />
+    <div id="background" class="grid-container">
+        <div class="column logo-column">
+            <BioButton :id="props.id" />
             <p class="top">{{ props.name }}</p>
-        </IonCol>
-        <IonCol class="column" size="3">
+        </div>
+        <div class="column">
             <p class="top">{{ FollowMembers[0] }}</p> <!-- API username-->
             <p class="bottom">followers</p> <!-- API username-->
 
             <button class="follow" :class="{ following: isFollowing[0] }" @click="followJoin(0)">
                 {{ isFollowing[0] ? 'Following' : 'Follow' }}
             </button>
-        </IonCol>
-        <IonCol class="column" size="3">
+        </div>
+        <div class="column">
             <p class="top">{{ FollowMembers[1] }}</p>
             <p class="bottom">members</p>
 
             <button class="join" :class="{ joined: isFollowing[1] }" @click="followJoin(1)">
                 {{ isFollowing[1] ? 'Joined' : 'Join' }}
             </button>
-        </IonCol>
-    </IonRow>
+        </div>
+    </div>
 </template>
 
 <style scoped>
@@ -80,11 +79,28 @@ ion-title {
     font-weight: bold;
 }
 
+.grid-container {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 50% 25% 25%;
+    margin: 0;
+}
+
+#background {
+    position: relative;
+    margin: auto;
+    width: 100vw;
+    height: 200px;
+    max-height: 200px;
+    text-align: center;
+    background-color: black;
+}
+
 .follow,
 .join {
-    width: 90%;
+    width: 95%;
     height: fit-content;
-    border-radius: 10px;
+    border-radius: 8px;
     color: black;
     font-weight: bold;
 }
@@ -131,22 +147,8 @@ ion-title {
     margin-bottom: 10px;
 }
 
-#background {
-    position: relative;
-    margin: auto;
-    width: 100vw;
-    height: 200px;
-    max-height: 200px;
-    text-align: center;
-    background-color: black;
-}
-
 .column {
-    max-height: 200px;
-    margin: auto auto 20px auto;
-}
-
-.logo-column {
-    margin: 0 auto 50px auto;
+    margin-top: auto;
+    margin-bottom: 20px;
 }
 </style>
