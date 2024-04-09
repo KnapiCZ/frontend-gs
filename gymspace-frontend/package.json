@@ -15,10 +15,10 @@
     "@capacitor/android": "5.4.2",
     "@capacitor/app": "^5.0.6",
     "@capacitor/camera": "^5.0.8",
-    "@capacitor/core": "5.4.2",
+    "@capacitor/core": "^5.7.4",
     "@capacitor/filesystem": "^5.2.0",
     "@capacitor/haptics": "^5.0.6",
-    "@capacitor/ios": "5.4.2",
+    "@capacitor/ios": "^5.4.2",
     "@capacitor/keyboard": "^5.0.6",
     "@capacitor/preferences": "^5.0.6",
     "@capacitor/status-bar": "^5.0.6",
@@ -32,6 +32,7 @@
     "swiper": "^10.3.1",
     "vite-plugin-vuetify": "^1.0.2",
     "vue": "^3.3.11",
+    "vue-advanced-cropper": "^2.8.8",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
