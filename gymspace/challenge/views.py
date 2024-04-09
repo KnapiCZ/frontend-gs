@@ -38,6 +38,7 @@ class ChallengeViewSet(viewsets.ViewSet):
         return Response(serializer.data)
     
 class ProgressViewSet(viewsets.ViewSet):
+    authentication_classes = [TokenAuthentication]
     permission_classes = (IsAuthenticated,)
     """
     ViewSet na ziskani progresu uzivatele all
@@ -62,8 +63,9 @@ class ProgressViewSet(viewsets.ViewSet):
         return Response({"SUCCESS": "Progress updated"})
 
 class ProgressCreateViewSeet(viewsets.ViewSet):
+    authentication_classes = [TokenAuthentication]
     permission_classes = (IsAuthenticated,)
-    
+        
     def create(self, request, pk=None):
         challenge = Challenge.objects.get(id=request.data['challenge'])
         user = User.objects.get(id=request.data['user'])

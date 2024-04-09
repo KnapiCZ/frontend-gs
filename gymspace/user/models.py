@@ -38,7 +38,7 @@ class UserProfile(models.Model):
         ('O', 'Other')
     )
     
-    sex = models.CharField(max_length=1, choices=SEX_CHOICES)
+    sex = models.CharField(max_length=1, blank=True, choices=SEX_CHOICES)
 
     pronouns = models.CharField(max_length=20, blank=True)
 

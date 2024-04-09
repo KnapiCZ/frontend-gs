@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class ClubConfig(AppConfig):
+class DivisionConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "club"
+    name = "division"

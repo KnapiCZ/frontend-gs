@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import Club
+from .models import Division
 # Register your models here.
 
-class ClubAdmin(admin.ModelAdmin):
-    model = Club
+class DivisionAdmin(admin.ModelAdmin):
+    model = Division
     search_fields = ['parent_gym__title', 'id', 'title', 'target_sport__title']
 
-admin.site.register(Club, ClubAdmin)
+admin.site.register(Division, DivisionAdmin)
