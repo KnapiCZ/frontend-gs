@@ -2,7 +2,7 @@
 
 
 async function apiPost(apiType = '', firstId?: number, secondId?: number, data?: unknown) {
-    const baseUrl = `http://localhost:8080/`
+    const baseUrl = `http://192.168.88.86:8080/`
     let response
     switch (apiType) {
         case "createPost":
@@ -10,8 +10,8 @@ async function apiPost(apiType = '', firstId?: number, secondId?: number, data?:
                 fetch(`${baseUrl}api/users-posts/`,
                     {
                         method: 'POST',
-                        credentials: "include",
                         headers: {
+                            'Authorization': 'Token ' + localStorage.getItem("Token"),
                             "Content-Type": "application/json",
                         },
                         body: JSON.stringify(data)
@@ -25,8 +25,8 @@ async function apiPost(apiType = '', firstId?: number, secondId?: number, data?:
                 fetch(`${baseUrl}/api/users-posts/delete/`,
                     {
                         method: 'DELETE',
-                        credentials: "include",
                         headers: {
+                            'Authorization': 'Token ' + localStorage.getItem("Token"),
                             "Content-Type": "application/json",
                         },
                         body: JSON.stringify(delete_data)
@@ -38,7 +38,10 @@ async function apiPost(apiType = '', firstId?: number, secondId?: number, data?:
             response = await (
                 fetch(`${baseUrl}/api/users-posts/${firstId}/`,
                     {
-                        credentials: "include",
+                        headers: {
+                            'Authorization': 'Token ' + localStorage.getItem("Token"),
+                            "Content-Type": "application/json",
+                        },
                     })
             );
             return await response.json()
@@ -47,7 +50,10 @@ async function apiPost(apiType = '', firstId?: number, secondId?: number, data?:
             response = await (
                 fetch(`${baseUrl}api/users-posts/thumbnail/${firstId}/`,
                     {
-                        credentials: "include"
+                        headers: {
+                            'Authorization': 'Token ' + localStorage.getItem("Token"),
+                            "Content-Type": "application/json",
+                        },
                     })
             );
             return await response.json()
@@ -57,7 +63,10 @@ async function apiPost(apiType = '', firstId?: number, secondId?: number, data?:
             response = await (
                 fetch(`${baseUrl}/api/users-gympage-recommended/${firstId}/`,
                     {
-                        credentials: "include"
+                        headers: {
+                            'Authorization': 'Token ' + localStorage.getItem("Token"),
+                            "Content-Type": "application/json",
+                        },
                     })
             );
             return await response.json()
@@ -68,7 +77,10 @@ async function apiPost(apiType = '', firstId?: number, secondId?: number, data?:
             response = await (
                 fetch(`${baseUrl}/api/users-posts-all-detail/${firstId}/`,
                     {
-                        credentials: "include"
+                        headers: {
+                            'Authorization': 'Token ' + localStorage.getItem("Token"),
+                            "Content-Type": "application/json",
+                        },
                     })
             );
             return await response.json()
@@ -78,7 +90,10 @@ async function apiPost(apiType = '', firstId?: number, secondId?: number, data?:
             response = await (
                 fetch(`${baseUrl}/api/users-posts-all-id/${firstId}/`,
                     {
-                        credentials: "include"
+                        headers: {
+                            'Authorization': 'Token ' + localStorage.getItem("Token"),
+                            "Content-Type": "application/json",
+                        },
                     })
             );
             return await response.json()
@@ -90,15 +105,14 @@ async function apiPost(apiType = '', firstId?: number, secondId?: number, data?:
                 fetch(`${baseUrl}/api/users-posts/update/`,
                     {
                         method: 'PATCH',
-                        credentials: "include",
                         headers: {
+                            'Authorization': 'Token ' + localStorage.getItem("Token"),
                             "Content-Type": "application/json",
                         },
                         body: JSON.stringify(update_data)
                     })
             );
             return await response.json()
-
 
         //* vraci zda uzivatel (secondId) liknul post (firstId)
         case "postLiked":
@@ -107,8 +121,8 @@ async function apiPost(apiType = '', firstId?: number, secondId?: number, data?:
                 fetch(`${baseUrl}/api/users-posts-liked-status/`,
                     {
                         method: 'POST',
-                        credentials: "include",
                         headers: {
+                            'Authorization': 'Token ' + localStorage.getItem("Token"),
                             "Content-Type": "application/json",
                         },
                         body: JSON.stringify(liked_data)
@@ -123,16 +137,38 @@ async function apiPost(apiType = '', firstId?: number, secondId?: number, data?:
                 fetch(`${baseUrl}/api/users-posts-liked-status/like/`,
                     {
                         method: 'PATCH',
-                        credentials: "include",
                         headers: {
+                            'Authorization': 'Token ' + localStorage.getItem("Token"),
                             "Content-Type": "application/json",
                         },
                         body: JSON.stringify(like_data)
                     })
             );
             return await response.json()
-
-
+        case "gymPosts":
+            response = await (
+                fetch(`${baseUrl}/api/gym-posts/${firstId}/`,
+                    {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': 'Token ' + localStorage.getItem("Token"),
+                            "Content-Type": "application/json",
+                        },
+                    })
+            );
+            return await response.json()
+        case "divisionPosts":
+            response = await (
+                fetch(`${baseUrl}/api/division-posts/${firstId}/`,
+                    {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': 'Token ' + localStorage.getItem("Token"),
+                            "Content-Type": "application/json",
+                        },
+                    })
+            );
+            return await response.json()
 
         default:
             return `${baseUrl}`

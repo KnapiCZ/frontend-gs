@@ -2,7 +2,7 @@
 
 
 async function apiChallenge(apiType = '', firstItem?: number, secondItem?: number, thirdItem?: number) {
-    const baseUrl = `http://localhost:8080/`
+    const baseUrl = `http://192.168.88.86:8080/`
     let response
 
 
@@ -13,7 +13,10 @@ async function apiChallenge(apiType = '', firstItem?: number, secondItem?: numbe
             response = await (
                 fetch(`${baseUrl}/api/challenge-id/`,
                     {
-                        credentials: "include",
+                        headers: {
+                            'Authorization': 'Token ' + localStorage.getItem("Token"),
+                            "Content-Type": "application/json",
+                        },
                     }
                 )
             );
@@ -25,7 +28,10 @@ async function apiChallenge(apiType = '', firstItem?: number, secondItem?: numbe
                 fetch(`${baseUrl}/api/challenge-id/${firstItem}/`,
                     {
                         method: 'GET',
-                        credentials: "include",
+                        headers: {
+                            'Authorization': 'Token ' + localStorage.getItem("Token"),
+                            "Content-Type": "application/json",
+                        },
                     }
                 )
             );
@@ -36,7 +42,10 @@ async function apiChallenge(apiType = '', firstItem?: number, secondItem?: numbe
             response = await (
                 fetch(`${baseUrl}/api/challenge/${firstItem}/`,
                     {
-                        credentials: "include",
+                        headers: {
+                            'Authorization': 'Token ' + localStorage.getItem("Token"),
+                            "Content-Type": "application/json",
+                        },
                     }
                 )
             );
@@ -47,8 +56,8 @@ async function apiChallenge(apiType = '', firstItem?: number, secondItem?: numbe
                 fetch(`${baseUrl}/api/challengeProgress/`,
                     {
                         method: "POST",
-                        credentials: "include",
                         headers: {
+                            'Authorization': 'Token ' + localStorage.getItem("Token"),
                             "Content-Type": "application/json",
                         },
                         body: JSON.stringify({ "challenge": firstItem, "user": secondItem })
@@ -62,8 +71,8 @@ async function apiChallenge(apiType = '', firstItem?: number, secondItem?: numbe
                 fetch(`${baseUrl}/api/challengeProgress/update/`,
                     {
                         method: "PATCH",
-                        credentials: "include",
                         headers: {
+                            'Authorization': 'Token ' + localStorage.getItem("Token"),
                             "Content-Type": "application/json",
                         },
                         body: JSON.stringify({ "challenge": firstItem, "user": secondItem, "progress": thirdItem })
@@ -77,8 +86,8 @@ async function apiChallenge(apiType = '', firstItem?: number, secondItem?: numbe
                 fetch(`${baseUrl}/api/joinChallenge/`,
                     {
                         method: "POST",
-                        credentials: "include",
                         headers: {
+                            'Authorization': 'Token ' + localStorage.getItem("Token"),
                             "Content-Type": "application/json",
                         },
                         body: JSON.stringify({ "challenge": firstItem, "user": secondItem })

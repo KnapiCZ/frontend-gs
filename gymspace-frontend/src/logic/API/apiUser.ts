@@ -2,17 +2,33 @@
 
 import { userDataStore } from "@/stores/UserDataStore";
 
-async function apiUser(apiType = "", firstId?: number, secondId?: number) {
-	const baseUrl = `http://localhost:8080/`
+async function apiUser(apiType = "", firstId?: number, secondId?: number, data?: string) {
+	const baseUrl = `http://192.168.88.86:8080/`
 	let response
 	switch (apiType) {
+
+		case "createUser":
+			response = await (
+				fetch(`${baseUrl}/api/create-user/`,
+					{
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: data,
+					})
+			);
+			return response.json()
 
 		//* vrati vsechny informace o uzivateli
 		case "userProfile":
 			response = await (
 				fetch(`${baseUrl}/api/users/${firstId}/`,
 					{
-						credentials: "include",
+						headers: {
+							'Authorization': 'Token ' + localStorage.getItem("Token"),
+							"Content-Type": "application/json",
+						},
 					})
 			);
 			return response.json()
@@ -22,20 +38,14 @@ async function apiUser(apiType = "", firstId?: number, secondId?: number) {
 			response = await (
 				fetch(`${baseUrl}/api/users-small/${firstId}/`,
 					{
-						credentials: "include",
+						headers: {
+							'Authorization': 'Token ' + localStorage.getItem("Token"),
+							"Content-Type": "application/json",
+						},
 					})
 			);
 			return response.json()
 
-		//* vrati pocet sledujicich
-		//case "userFollowerCount":
-		//	response = await (
-		//		fetch(`${baseUrl}/api/follow/${firstId}/`,
-		//			{
-		//				credentials: "include",
-		//			})
-		//	);
-		//	return await response.json()
 
 		//* posle do databaze zmenu stavu 
 		case "follow":
@@ -44,8 +54,8 @@ async function apiUser(apiType = "", firstId?: number, secondId?: number) {
 				fetch(`${baseUrl}/api/users-follow/${secondId}/`,
 					{
 						method: "PATCH",
-						credentials: "include",
 						headers: {
+							'Authorization': 'Token ' + localStorage.getItem("Token"),
 							"Content-Type": "application/json",
 						},
 						body: JSON.stringify(follow_data),
@@ -59,20 +69,13 @@ async function apiUser(apiType = "", firstId?: number, secondId?: number) {
 				fetch(`${baseUrl}/api/users-follow-data/${firstId}/`,
 					{
 						method: "GET",
-						credentials: "include"
+						headers: {
+							'Authorization': 'Token ' + localStorage.getItem("Token"),
+							"Content-Type": "application/json",
+						},
 					})
 			);
 			return response.json()
-
-		//* vrati id prvnich dvou sledujicich
-		case "twoMostPopular":
-			response = await (
-				fetch(`${baseUrl}/api/users-most-followed/${firstId}/`,
-					{
-						credentials: "include"
-					})
-			);
-			return await response.json()
 
 		//* updatuje poslane informace uzivatelovi
 		case "update":
@@ -82,14 +85,13 @@ async function apiUser(apiType = "", firstId?: number, secondId?: number) {
 						method: "PATCH",
 						credentials: "include",
 						headers: {
+							'Authorization': 'Token ' + localStorage.getItem("Token"),
 							"Content-Type": "application/json",
 						},
 						body: userDataStore().user,
 					})
 			);
 			return response.json()
-
-
 
 		default:
 			return `${baseUrl}`
