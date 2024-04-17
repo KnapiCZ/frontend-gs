@@ -37,6 +37,15 @@ class SmallUserSerializer(serializers.ModelSerializer):
                   'profile_picture',
                   'handle',
                   'auth_id',]
+
+    def validate_image(self, value):
+        if isinstance(value, str) and value.startswith('data:image'):
+            format, imgstr = value.split(';base64,')  # Check the format
+            ext = format.split('/')[-1]  # Extract file extension
+            data = ContentFile(base64.b64decode(imgstr), name=f"{uuid.uuid4()}.{ext}")
+            return data
+        return value  # Allow direct URL or file upload
+        
 class FollowSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     followers = serializers.PrimaryKeyRelatedField(queryset=UserProfile.objects.all())
@@ -56,9 +65,10 @@ class UserPostSerializer(serializers.ModelSerializer):
         model = UserPost
         fields = ['id',
                   'author',
-                  'gym',
+                  'division',
                   'description',
                   'like_count',
+                  'likes',
                   'post_time',
                   'media',]
 

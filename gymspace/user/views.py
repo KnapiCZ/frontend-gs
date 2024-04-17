@@ -5,7 +5,10 @@ from .models import (UserProfile,
                      UserPostMedia)
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
-
+from django.core.files.base import ContentFile
+from django.views import View
+import base64
+import uuid
 from gym import models
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
@@ -27,8 +30,6 @@ class CreateUserProfileViewSet(viewsets.ViewSet):
         user.save()
         userProfile.save()
         return Response({"SUCCESS": "user CREATED"})
-
-
 
 class UserProfileViewSet(viewsets.ViewSet):
     authentication_classes = [TokenAuthentication]
@@ -75,9 +76,25 @@ class SmallUserProfileViewSet(viewsets.ViewSet):
     def partial_update(self, request, pk=None):
         request.data.pop("followers"),
         request.data.pop("post_list")
+        banner = request.data.pop("background_picture")
+        pfp = request.data.pop("profile_picture")
         id = request.data.pop('id')
         user = User.objects.get(pk=id)
         user_profile = UserProfile.objects.get(pk=id)
+
+        if banner and banner.startswith('data:image'):
+            format, imgstr = banner.split(';base64,')
+            ext = format.split('/')[-1]
+            banner = ContentFile(base64.b64decode(imgstr), name=f"{uuid.uuid4()}.{ext}")
+        if pfp and pfp.startswith('data:image'):
+            format, imgstr = pfp.split(';base64,')  # Check the format
+            ext = format.split('/')[-1]  # Extract file extension
+            pfp = ContentFile(base64.b64decode(imgstr), name=f"{uuid.uuid4()}.{ext}")        
+        if len(banner) > 0:
+            setattr(user_profile, "background_picture", banner)
+        if len(pfp) > 0:
+            setattr(user_profile, "profile_picture", pfp)
+
         setattr(user, "username", request.data.pop("handle"))
         for key, value in request.data.items():
             setattr(user_profile, key, value)
@@ -139,13 +156,12 @@ class MostFollowedViewSet(viewsets.ViewSet):
             print(first_serializer.errors)
             return Response([{}, {}])
 
-
-
 class ConfirmAuth(viewsets.ViewSet):
     permission_classes = (AllowAny,)
     authentication_classes = (TokenAuthentication,)
 
     def create(self, request):
+        print(request.user)
         if request.user.is_authenticated:
             return Response({'log': request.user.id})
         else:

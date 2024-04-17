@@ -2,7 +2,8 @@ from django.shortcuts import render
 from .serializers import *
 from .models import (UserProfile,
                      UserPost,
-                     UserPostMedia)
+                     UserPostMedia,
+                     Division)
 from django.contrib.auth.models import User
 
 from gym import models
@@ -19,6 +20,7 @@ from rest_framework.authentication import TokenAuthentication
 
 from django.core.files.base import ContentFile
 import base64
+import random
 
 
 class UserPostViewSet(viewsets.ViewSet):
@@ -26,7 +28,11 @@ class UserPostViewSet(viewsets.ViewSet):
     permission_classes = (IsAuthenticated,)
         
     def create(self, request):
-        post = UserPost.objects.create(author_id=request.data["author"], description=request.data["description"])
+        try:
+            division = Division.objects.get(pk=request.data["division"])
+        except:
+            division = None
+        post = UserPost.objects.create(author_id=request.data["author"], description=request.data["description"], division=division)
         for media in request.data["media"]:
             format, imgstr = media.split(';base64,') 
             ext = format.split('/')[-1] 
@@ -59,12 +65,15 @@ class RecommendedPostViewSet(viewsets.ViewSet):
     permission_classes = (IsAuthenticated,)
     
     def retrieve(self, request, pk=None):
-
-        following = UserProfile.objects.filter(followers=pk)\
-                .values_list('pk', flat=True)
-        posts = UserPost.objects\
-                .filter(author__user_profile__in=following)\
-                .order_by('-post_time')[:5]
+        post_ids = []
+        following = UserProfile.objects.filter(followers__id=pk)
+        for user in following:
+            posts = UserPost.objects.filter(author__id=user.id)
+            serializer = UserPostCountSerializer(posts, many=True)
+            for post in serializer.data:
+                post_ids.append(post["id"])
+        random.shuffle(post_ids)
+        return Response(post_ids)
 
         post_serializer = UserPostSerializer(posts, many=True)
         return Response({"posts": post_serializer.data,})
@@ -78,9 +87,49 @@ class AllUserPostsIDViewSet(viewsets.ViewSet):
     api/users-posts-all-id/<id>/
     """
     def retrieve(self, request, pk=None):
+        post_ids = []
         posts = UserPost.objects.filter(author__id=pk)
         serializer = UserPostCountSerializer(posts, many=True)
-        return Response({"posts": serializer.data,})
+        for post in serializer.data:
+            post_ids.append(post["id"])
+        post_ids.reverse()
+        return Response(post_ids)
+
+class GymPostsIDViewSet(viewsets.ViewSet):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = (IsAuthenticated,)
+    
+    """
+    Vrati pole ID vsech prispevku do gymu
+    api/users-posts-all-id/<id>/
+    """
+    def retrieve(self, request, pk=None):
+        post_ids = []
+        queryset = Division.objects.filter(parent_gym_id=pk)
+        print(queryset)
+        for division in queryset:
+            posts = UserPost.objects.filter(division=division)
+            serializer = UserPostCountSerializer(posts, many=True)
+            for post in serializer.data:
+                post_ids.append(post["id"])
+        return Response(post_ids)
+
+class DivisionPostsIDViewSet(viewsets.ViewSet):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = (IsAuthenticated,)
+    
+    """
+    Vrati pole ID vsech prispevku do gymu
+    api/users-posts-all-id/<id>/
+    """
+    def retrieve(self, request, pk=None):
+        post_ids = []
+        division = Division.objects.get(pk=pk)
+        posts = UserPost.objects.filter(division=division)
+        serializer = UserPostCountSerializer(posts, many=True)
+        for post in serializer.data:
+            post_ids.append(post["id"])
+        return Response(post_ids)
 
 class AllUserPostsDetailViewSet(viewsets.ViewSet):
     authentication_classes = [TokenAuthentication]
@@ -102,7 +151,6 @@ class UserPostThumbnail(viewsets.ViewSet):
         post_serializer = UserPostSerializer(data={'media': post.media})
         return Response({"post": post_serializer.data})
         
-
 class UserPostLikedStatusViewSet(viewsets.ViewSet):
     authentication_classes = [TokenAuthentication]
     permission_classes = (IsAuthenticated,)

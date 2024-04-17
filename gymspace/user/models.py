@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from gym.models import Gym
+from division.models import Division
 # Create your models here.
 
 
@@ -30,7 +30,7 @@ class UserProfile(models.Model):
 
     email = models.EmailField(max_length=254, unique=True)
 
-    contacts = models.TextField(blank=True)
+    contacts = models.TextField(blank=True, default="\r\n\r\n\r\n\r\n\r\n")
 
     SEX_CHOICES = (
         ('M', 'Male'),
@@ -98,7 +98,7 @@ class UserPost(models.Model):
     author = models.ForeignKey(User,
                                on_delete=models.CASCADE,
                                related_name='posts')
-    gym = models.ForeignKey(Gym,
+    division = models.ForeignKey(Division,
                             on_delete=models.CASCADE,
                             blank=True, null=True,)
 
@@ -111,7 +111,7 @@ class UserPost(models.Model):
                                    symmetrical=False,
                                    related_name='likes')
 
-    post_time = models.DateTimeField(auto_now_add=True)
+    post_time = models.DateTimeField(auto_now_add=True, null=True)
 
     def get_media(self):
         return UserPost.objects.filter(media__parent_post=self.id).values_list('media__media', flat=True)

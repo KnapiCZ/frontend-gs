@@ -21,8 +21,9 @@ urlpatterns = [
     path('users-gympage-recommended/<int:pk>', post_views.RecommendedPostViewSet.as_view({'get': 'retrieve'})),
     path('users-posts-all-id/<int:pk>', post_views.AllUserPostsIDViewSet.as_view({'get': 'retrieve'})),
     path('users-posts-all-posts-detail/<int:pk>', post_views.AllUserPostsDetailViewSet.as_view({'get': 'retrieve'})),
+    path('gym-posts/<int:pk>', post_views.GymPostsIDViewSet.as_view({'get': 'retrieve'})),
+    path('division-posts/<int:pk>', post_views.DivisionPostsIDViewSet.as_view({'get': 'retrieve'})),
 
     path('users-posts-liked-status/like/', post_views.UserPostLikedStatusViewSet.as_view({'patch': 'update'})),
     path('users-posts-liked-status/<int:pk>', post_views.UserPostLikedStatusViewSet.as_view({'post': 'create'})),
-
 ]
