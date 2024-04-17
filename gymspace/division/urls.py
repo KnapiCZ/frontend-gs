@@ -10,5 +10,8 @@ urlpatterns = [
     
     path('divisions-id/', views.DivisionsIdViewSet.as_view({'get': 'retrieve'})),
     path('divisions-id/<int:pk>', views.DivisionsIdViewSet.as_view({'get': 'retrieve'})),
+    
+    path('division-name/<int:pk>', views.DivisionNameViewSet.as_view({'get': 'retrieve'})),
+
 
 ]

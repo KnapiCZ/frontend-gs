@@ -23,8 +23,10 @@ router.register(r'users-small', user_views.SmallUserProfileViewSet, basename='us
 router.register(r'confirm-auth', user_views.ConfirmAuth, basename='confirm-auth')
 router.register(r'users-posts', user_post_views.UserPostViewSet, basename='users-posts')
 router.register(r'users-gympage-recommended', user_post_views.RecommendedPostViewSet, basename='users-recommended')
-router.register('users-posts-all-id', user_post_views.AllUserPostsIDViewSet, basename='all-user-posts'),
-router.register('users-posts-all-detail', user_post_views.AllUserPostsDetailViewSet, basename='all-user-posts'),
+router.register(r'users-posts-all-id', user_post_views.AllUserPostsIDViewSet, basename='all-user-posts'),
+router.register(r'users-posts-all-detail', user_post_views.AllUserPostsDetailViewSet, basename='all-user-posts'),
+router.register(r'gym-posts', user_post_views.GymPostsIDViewSet, basename='gym-posts'),
+router.register(r'division-posts', user_post_views.DivisionPostsIDViewSet, basename='division-posts'),
 
 router.register(r'users-posts-liked-status', user_post_views.UserPostLikedStatusViewSet, basename='users-posts-liked-status')
 
@@ -32,9 +34,10 @@ router.register(r'gym', gym_views.GymViewSet, basename='gym')
 router.register(r'gyms-id', gym_views.GymsIdViewSet, basename='gyms-id')
 
 router.register(r'gym-divisions-id', division_views.GymDivisionsIdViewSet, basename='gym-divisions-id')
-
 router.register(r'division', division_views.DivisionViewSet, basename='division')
 router.register(r'divisions-id', division_views.DivisionsIdViewSet, basename='divisions-id')
+router.register(r'division-name', division_views.DivisionNameViewSet, basename='division-name'),
+
 
 router.register(r'challenge-id', challenge_views.ChallengeIdViewSet, basename='challenge')
 router.register(r'challenge', challenge_views.ChallengeViewSet, basename='challenge')

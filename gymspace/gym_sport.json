@@ -1,0 +1,172 @@
+[
+    {
+        "model": "user.userpost",
+        "pk": 1,
+        "fields": {
+            "description": "Jumpstart your day with morning routines that energize and strengthen.",
+            "author": 1,
+            "gym_id": null
+        }
+    },
+    {
+        "model": "user.userpost",
+        "pk": 2,
+        "fields": {
+            "description": "Transform your body and mind with our comprehensive yoga sessions.",
+            "author": 1,
+            "gym_id": 1
+        }
+    },
+    {
+        "model": "user.userpost",
+        "pk": 3,
+        "fields": {
+            "description": "Achieve peak performance with our tailored athlete conditioning programs.",
+            "author": 1,
+            "gym_id": 2
+        }
+    },
+    {
+        "model": "user.userpost",
+        "pk": 4,
+        "fields": {
+            "description": "Discover the secrets to lifelong fitness with our expert nutrition and exercise plans.",
+            "author": 1,
+            "gym_id": 3
+        }
+    },
+    {
+        "model": "user.userpost",
+        "pk": 5,
+        "fields": {
+            "description": "Elevate your workouts with cutting-edge technology in fitness tracking.",
+            "author": 1,
+            "gym_id": 4
+        }
+    },
+    {
+        "model": "user.userpost",
+        "pk": 6,
+        "fields": {
+            "description": "Master functional movements for strength and stability in everyday life.",
+            "author": 1,
+            "gym_id": 5
+        }
+    },
+    {
+        "model": "user.userpost",
+        "pk": 7,
+        "fields": {
+            "description": "Unleash your inner warrior with high-intensity martial arts workouts.",
+            "author": 1,
+            "gym_id": null
+        }
+    },
+    {
+        "model": "user.userpost",
+        "pk": 8,
+        "fields": {
+            "description": "Embark on a fitness journey with personalized coaching and community support.",
+            "author": 1,
+            "gym_id": 2
+        }
+    },
+    {
+        "model": "user.userpost",
+        "pk": 9,
+        "fields": {
+            "description": "Revitalize your routine with dynamic group classes that motivate and challenge.",
+            "author": 1,
+            "gym_id": 3
+        }
+    },
+    {
+        "model": "user.userpost",
+        "pk": 10,
+        "fields": {
+            "description": "Conquer your fitness goals with our comprehensive boot camp experience.",
+            "author": 1,
+            "gym_id": 1
+        }
+    },
+    {
+        "model": "user.userpostmedia",
+        "pk": 1,
+        "fields": {
+            "media": "media/global_post_media/media/photo1.jpg",
+            "parent_post_id": 1
+        }
+    },
+    {
+        "model": "user.userpostmedia",
+        "pk": 2,
+        "fields": {
+            "media": "media/global_post_media/media/photo2.jpg",
+            "parent_post_id": 2
+        }
+    },
+    {
+        "model": "user.userpostmedia",
+        "pk": 3,
+        "fields": {
+            "media": "media/global_post_media/media/photo3.jpg",
+            "parent_post_id": 3
+        }
+    },
+    {
+        "model": "user.userpostmedia",
+        "pk": 4,
+        "fields": {
+            "media": "media/global_post_media/media/photo4.jpg",
+            "parent_post_id": 4
+        }
+    },
+    {
+        "model": "user.userpostmedia",
+        "pk": 5,
+        "fields": {
+            "media": "media/global_post_media/media/photo5.jpg",
+            "parent_post_id": 5
+        }
+    },
+    {
+        "model": "user.userpostmedia",
+        "pk": 6,
+        "fields": {
+            "media": "media/global_post_media/media/photo6.jpg",
+            "parent_post_id": 6
+        }
+    },
+    {
+        "model": "user.userpostmedia",
+        "pk": 7,
+        "fields": {
+            "media": "media/global_post_media/media/photo7.jpg",
+            "parent_post_id": 7
+        }
+    },
+    {
+        "model": "user.userpostmedia",
+        "pk": 8,
+        "fields": {
+            "media": "media/global_post_media/media/photo8.jpg",
+            "parent_post_id": 8
+        }
+    },
+    {
+        "model": "user.userpostmedia",
+        "pk": 9,
+        "fields": {
+            "media": "media/global_post_media/media/photo9.jpg",
+            "parent_post_id": 9
+        }
+    },
+    {
+        "model": "user.userpostmedia",
+        "pk": 10,
+        "fields": {
+            "media": "media/global_post_media/media/photo10.jpg",
+            "parent_post_id": 10
+        }
+    }
+]

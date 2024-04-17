@@ -55,7 +55,15 @@ class DivisionsIdViewSet(viewsets.ViewSet):
         for division in serializer.data:
             division_ids.append(division["id"])
         return Response(division_ids)
-
+    
+class DivisionNameViewSet(viewsets.ViewSet):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = (IsAuthenticated,)
+    
+    def retrieve(self, request, pk=None):
+        division = Division.objects.get(pk=pk)
+        return Response(division.title)
+    
 class DivisionViewSet(viewsets.ViewSet):
     authentication_classes = [TokenAuthentication]
     permission_classes = (IsAuthenticated,)
@@ -80,15 +88,15 @@ class DivisionViewSet(viewsets.ViewSet):
                 povoli to pripojeni jen uzivateli, ktery ma shodny auth token a logged_in_user
         """
         serializer = DivisionFollowSerializer(data=request.data, partial=True)
-        if serializer.is_valid():
-            joining_user = User.objects.get(pk=serializer.data.get("logged_in_user"))
-            division = Division.objects.get(pk=serializer.data.get("division_id"))
+        serializer.is_valid()
+        joining_user = User.objects.get(pk=serializer.data.get("logged_in_user"))
+        division = Division.objects.get(pk=serializer.data.get("division_id"))
+        members = division.members.values_list('pk', flat=True)
+        if joining_user.id in members:
+            division.members.remove(joining_user.id)
             members = division.members.values_list('pk', flat=True)
-            if joining_user.id in members:
-                division.members.remove(joining_user.id)
-                members = division.members.values_list('pk', flat=True)
-                return Response({f"user{joining_user.id} leave": "success"})
-            elif joining_user.id not in members:
-                division.members.add(joining_user.id)
-                members = division.members.values_list('pk', flat=True)
-                return Response({f"user{joining_user.id} join": "success"})
+            return Response({f"user{joining_user.id} leave": "success"})
+        elif joining_user.id not in members:
+            division.members.add(joining_user.id)
+            members = division.members.values_list('pk', flat=True)
+            return Response({f"user{joining_user.id} join": "success"})
