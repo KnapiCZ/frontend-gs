@@ -3,11 +3,12 @@ import { userDataStore } from '@/stores/UserDataStore';
 import { IonCol, IonRow } from '@ionic/vue';
 import UserMenu from '@/view/Menus/components/UserMenu.vue';
 import apiUser from '@/logic/API/apiUser';
+import FollowersModal from './FollowersModal.vue';
 
 const baseURL = await apiUser()
 const userStore = userDataStore();
 let userData = JSON.parse(userStore.user)
-
+userStore.followersCount = userData.followers
 function checkLogin() {
 	if (userStore.renderedUserId == userStore.loggedUserId) return true;
 	else return false;
@@ -25,9 +26,8 @@ function checkLogin() {
 		</div>
 		<div class="main-info">
 			<img class='PFP' :src="baseURL + userData.profile_picture">
-			<img class="check-mark" src="@/assets/icons/checkmark.svg"> <!-- API USER VERIFIED-->
 			<IonRow>
-				<IonCol>
+				<IonCol :id="'followers-modal' + userStore.componentKey">
 					<p class="top-item1">{{ userStore.followersCount }}</p>
 					<p class="bottom-item">Followers</p>
 				</IonCol>
@@ -42,6 +42,8 @@ function checkLogin() {
 			</IonRow>
 		</div>
 	</div>
+	<FollowersModal :key="userStore.renderedUserId" />
+
 </template>
 
 <style scoped>
@@ -97,14 +99,6 @@ function checkLogin() {
 	top: -60px;
 	transform: translateX(-50%);
 
-}
-
-.check-mark {
-	width: 20px;
-	height: 20px;
-	position: absolute;
-	left: calc((100% / 1.8));
-	top: 0px;
 }
 
 .top-item,

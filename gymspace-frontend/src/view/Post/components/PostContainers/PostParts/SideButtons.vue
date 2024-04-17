@@ -1,19 +1,22 @@
 <script setup lang="ts">
 import LikeButton from '@/view/shared/components/LikeButton.vue';
+import OptionsButton from '../../OptionsButton.vue';
+import { userDataStore } from '@/stores/UserDataStore';
 
+const userStore = userDataStore()
 const props = defineProps<{
     postId: number
     userId: number
+    description: string
 }>()
 
 </script>
 
 <template>
     <div>
-        <LikeButton class="items" :postId="props.postId" :userId="props.userId" />
-        <img class="items" src="@/assets/icons/share.svg" alt="share">
-        <img class="items" src="@/assets/icons/comments.svg" alt="comments">
-        <img class="items" src="@/assets/icons/menu.svg" alt="menu">
+        <LikeButton class="postBtn" :userId="userStore.loggedUserId" :postId="props.postId" />
+        <OptionsButton v-if="props.userId == userStore.loggedUserId" class="items" :userId="props.userId"
+            :postId="props.postId" :description="props.description" />
     </div>
 </template>
 
@@ -25,11 +28,19 @@ const props = defineProps<{
     display: block;
 }
 
+.pop-button {
+    position: relative !important;
+    right: none !important;
+    top: none !important;
+    border-radius: 15px !important;
+
+}
+
 div {
     height: fit-content;
     width: fit-content;
     position: absolute;
-    right: 0;
+    right: 10px;
     bottom: 200px;
 }
 </style>

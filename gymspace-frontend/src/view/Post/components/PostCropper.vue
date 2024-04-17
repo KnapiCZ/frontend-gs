@@ -1,30 +1,39 @@
 <script setup lang="ts">
-import { Cropper } from 'vue-advanced-cropper';
 import 'vue-advanced-cropper/dist/style.css';
-let w = 4
-let h = 5
+import { Cropper } from 'vue-advanced-cropper';
+import { ref } from 'vue';
+
+const props = defineProps<{
+    ratios: []
+}>()
+
+let count = ref(0)
+
 </script>
 
 <template>
-    <Cropper classname="image-cropper" boundingBoxClass="bounding-box-class" imageClass="cropper-image"
-        backgroundClass="cropper-background" @change="onChange" :src="userStore.choosenPhoto" :stencil-props="{
-            previewClass: 'preview',
-            handlers: {},
-            movable: false,
-            resizable: false,
-            aspectRatio: w / h,
-        }" :resize-image="{
-            adjustStencil: false,
+    <div class="wrapper">
+        <Cropper :key="'cropper' + count" classname="image-cropper" boundingBoxClass="bounding-box-class"
+            imageClass="cropper-image" backgroundClass="cropper-background" image-restriction="stencil"
+            @change="onChange" :src="userStore.choosenPhoto" :stencil-props="{
+                previewClass: 'preview',
+                handlers: {},
+                movable: false,
+                resizable: false,
+                aspectRatio: props.ratios[count % 2][0] / props.ratios[count % 2][1],
+            }" :resize-image="{
+                adjustStencil: false,
+            }" />
+        <button v-if="props.ratios.length > 1" @click="() => count++">{{ ratios[count % 2][0] + "/" + ratios[count %
+            2][1] }}</button>
 
-
-        }
-            " image-restriction="stencil" />
-
-
+    </div>
 </template>
 <script lang="ts">
 import { userDataStore } from '@/stores/UserDataStore';
+
 let userStore = userDataStore()
+
 export default {
 
     components: {
@@ -50,11 +59,31 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
+.wrapper {
+    height: 40%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 .image-cropper {
     margin: 0 !important;
     padding: 0 !important;
-    height: 50%;
+    height: 100%;
     background-color: aliceblue;
+}
+
+button {
+    width: 8%;
+    aspect-ratio: 1;
+    position: absolute;
+    left: 10px;
+    bottom: calc(55%);
+    z-index: 10000;
+    color: black;
+    background-color: yellow;
+    border-radius: 10px;
+    font-weight: bold;
 }
 </style>

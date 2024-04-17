@@ -3,30 +3,21 @@ import apiPost from '@/logic/API/apiPost';
 import apiUser from '@/logic/API/apiUser';
 import Description from './PostParts/Description.vue';
 import SideButtons from './PostParts/SideButtons.vue';
-import { useIonRouter } from '@ionic/vue';
 
 const props = defineProps<{
     postId: number
 }>()
 
-
-let post = (await apiPost("getUserPost", props.postId)).post
+let post = await apiPost("getPost", props.postId)
 let creatorInfo = await apiUser("smallUserProfile", post.author)
-
 let baseUrl = await apiPost()
-
 let postImg = baseUrl + post.media[0]
-
-
+let profileImg = baseUrl + creatorInfo.profile_picture
 
 function checkImage() {
-    if (/\.(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(postImg)) {
-        return true
-    }
+    if (/\.(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(postImg)) { return true }
     else { return false }
 }
-
-
 
 </script>
 
@@ -36,16 +27,16 @@ function checkImage() {
         <video v-else autoplay="true" loop="true" preload="true" muted="true" :src="postImg"></video>
         <div id="overlay"></div>
 
-        <SideButtons :postId="props.postId" :userId="creatorInfo.id" />
-        <Description :user-handle="creatorInfo.handle" :description="creatorInfo.description" hashtags="#be_real"
-            :songname="'None'" />
+        <SideButtons :postId="props.postId" :userId="creatorInfo.id" :description="post.description" />
+        <Description :userId="creatorInfo.id" :userHandle="creatorInfo.handle" :profilePicture="profileImg"
+            :description="post.description" hashtags="#be_real" :songname="'None'" />
     </div>
 </template>
 
 <style scoped>
 #MainContainer {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     display: flex;
     position: relative;
     align-items: center;

@@ -1,49 +1,31 @@
 <script setup lang="ts">
 import { VCard, VTabs, VTab, VWindow, VWindowItem } from 'vuetify/lib/components/index.mjs';
-import { sharedDataStore } from '@/stores/SharedDataStore'
+import { userDataStore } from '@/stores/UserDataStore';
 import SmallFeed from '@/view/Post/components/SmallFeed.vue';
 import ChallengeThumbGrid from '@/view/Challenges/pages/ChallengeThumbGrid.vue'
+import apiPost from '@/logic/API/apiPost';
+import apiChallenge from '@/logic/API/apiChallenge';
 
-let props = defineProps({
-	trainer_status: Boolean,
-})
-
-function updateKey() {
-	sharedData.componentKey += 1
-}
-
-let sharedData = sharedDataStore()
-
+const userStore = userDataStore()
+let posts = await apiPost('allUserPostId', userStore.renderedUserId);
+userStore.userChallengeId = await apiChallenge('userChallengesId', userStore.renderedUserId)
 
 </script>
 
 
 <template>
-	<VCard>
+	<VCard :key="userStore.renderedUserId">
 		<VTabs v-model="tab" color="#fff000" bg-color="black" slider-color="#fff000" :grow='true'>
 			<VTab><img src="@/assets/icons/feed.svg" alt="feed"></VTab>
 			<VTab><img src="@/assets/icons/trophy.svg" alt="challenges"></VTab>
-			<!-- Schovano z duvodu maturitni prace, neni cas na dodelani 
-				<VTab :value="2"><img src="@/assets/icons/challenges.svg" alt="trainer"></VTab>
-				<VTab :value="1" v-if="trainer_status"><img src="@/assets/icons/trainer.svg" alt="trainer">
-				</VTab>
-			-->
 		</VTabs>
 		<VWindow v-model="tab">
 			<VWindowItem>
-				<SmallFeed />
+				<SmallFeed :userId="userStore.renderedUserId" :items="posts" />
 			</VWindowItem>
 			<VWindowItem>
 				<ChallengeThumbGrid :type="0" />
 			</VWindowItem>
-			<!-- Schovano z duvodu maturitni prace, neni cas na dodelani 
-				<VWindowItem :value="2" :transition="false" :reverse-transition="false">
-					<SmallFeed />
-				</VWindowItem>
-				<VWindowItem v-if="props.trainer_status" :value="1" :transition="false" :reverse-transition="false">
-					<SmallFeed />
-				</VWindowItem>
-			-->
 		</VWindow>
 	</VCard>
 </template>

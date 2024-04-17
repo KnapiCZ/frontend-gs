@@ -1,5 +1,13 @@
 <script setup lang="ts">
-import { IonButton, IonContent, IonModal } from '@ionic/vue';
+import { IonButton, IonContent, IonModal, useIonRouter, modalController } from '@ionic/vue';
+
+const router = useIonRouter()
+
+function logOut() {
+    localStorage.removeItem("Token")
+    modalController.dismiss()
+    router.replace("/login")
+}
 
 </script>
 
@@ -16,7 +24,8 @@ import { IonButton, IonContent, IonModal } from '@ionic/vue';
                 <IonButton expand="full">Liked</IonButton>
                 <IonButton expand="full">Privacy</IonButton>
                 <IonButton expand="full">Notifications</IonButton>
-                <IonButton expand="full" color="danger">Log out</IonButton>
+                <IonButton expand="full" color="danger" @click="logOut()">Log out
+                </IonButton>
             </IonContent>
         </IonModal>
     </div>

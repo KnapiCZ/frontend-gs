@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
-import api from '@/logic/API/apiAuth';
+import apiAuth from '@/logic/API/apiAuth';
 
 let confirmedUser: { log: string }
 
@@ -13,6 +13,11 @@ const routes: Array<RouteRecordRaw> = [
 		component: () => import('@/view/Authentication/pages/LogIn.vue'),
 	},
 
+	{
+		path: '/signup',
+		name: 'signup',
+		component: () => import('@/view/Authentication/pages/SignIn.vue'),
+	},
 	{
 		path: '/',
 		name: 'landingPage',
@@ -27,11 +32,10 @@ const routes: Array<RouteRecordRaw> = [
 			{
 				path: '/user/:id',
 				name: "user",
-				component: () => import('@/view/Profile/pages/GenericUser.vue'),
+				component: () => import('@/view/Profile/pages/UserWrapper.vue'),
 				props: true,
 				meta: { requiresAuth: true },
 			},
-
 			{
 				path: '/user/:id/post/:initialPosition',
 				name: 'post',
@@ -46,14 +50,6 @@ const routes: Array<RouteRecordRaw> = [
 				component: () => import('@/view/Community/pages/MainPage.vue'),
 				meta: { requiresAuth: true },
 			},
-
-			{
-				path: '/community/explore',
-				name: "explore",
-				component: () => import('@/view/Post/pages/FeedSlider.vue'),
-				meta: { requiresAuth: true },
-			},
-
 			{
 				path: '/foryou',
 				name: "fyp",
@@ -75,6 +71,30 @@ const routes: Array<RouteRecordRaw> = [
 		component: () => import('@/view/Post/pages/AddPostInfo.vue'),
 		meta: { requiresAuth: true }
 	},
+	{
+		path: '/division/:id',
+		name: "division",
+		component: () => import('@/view/Community/pages/Division.vue'),
+		meta: { requiresAuth: true },
+	},
+	{
+		path: '/division/:id/feed/:initialPosition',
+		name: "gymfeed",
+		component: () => import('@/view/Community/pages/DivisionFeedSlider.vue'),
+		meta: { requiresAuth: true },
+	},
+	{
+		path: '/gym/:id',
+		name: "gym",
+		component: () => import('@/view/Community/pages/Gym.vue'),
+		meta: { requiresAuth: true },
+	},
+	{
+		path: '/gym/:id/feed/:initialPosition',
+		name: "gymfeed",
+		component: () => import('@/view/Community/pages/GymFeedSlider.vue'),
+		meta: { requiresAuth: true },
+	}
 ]
 
 
@@ -84,7 +104,8 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from) => {
-	await api('confirmAuth').then((confirm) => {
+	if (to.name == "login" as string || to.name == "signup" as string) return undefined
+	await apiAuth('confirmAuth').then((confirm) => {
 		confirmedUser = confirm
 	}).catch((error) => { console.log(error) })
 

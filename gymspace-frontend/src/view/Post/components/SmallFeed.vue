@@ -1,16 +1,19 @@
 <script setup lang="ts">
-import { userDataStore } from '@/stores/UserDataStore';
+
 
 import Thumbnail from './Thumbnail.vue';
-import apiPost from '@/logic/API/apiPost';
 
-const userStore = userDataStore()
 
+const props = defineProps<{
+	userId: number
+	items: number[]
+}>()
 </script>
 
 <template>
 	<div class="grid-container">
-		<Thumbnail v-for="data in userStore.userPostsId" :postID="data" type="user" class="grid-item" />
+		<Thumbnail v-for="data in items" :postID="data" :path="'/user/' + props.userId + '/post/' + data"
+			class="grid-item" />
 	</div>
 </template>
 
@@ -28,13 +31,5 @@ const userStore = userDataStore()
 	object-fit: cover;
 	width: fit-content;
 	margin: 1px;
-}
-
-@media screen and (min-width: 1200px) {
-	.grid-container {
-		display: grid;
-		width: 30%;
-		grid-template-columns: 33% 33% 33%;
-	}
 }
 </style>

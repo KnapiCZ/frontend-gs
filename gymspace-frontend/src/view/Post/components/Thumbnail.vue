@@ -8,24 +8,17 @@ const userStore = userDataStore()
 
 const props = defineProps<{
 	postID?: number,
-	type: string // typ = kde se thumbnail nachazi profil -> bude routovat na profil/x/post/, community -> bude routovat na community/explore 
+	path: string // typ = kde se thumbnail nachazi profil -> bude routovat na profil/x/post/, community -> bude routovat na community/explore 
+
 }>()
-let media = await apiPost("getPost", props.postID)
-console.log(media)
 const baseUrl = await apiPost()
-let postUrl = `${baseUrl}${media.post.media[0]}`
+
+let media = await apiPost("getPost", props.postID)
+let postUrl = `${baseUrl}${media.media[0]}`
 
 
-function setRouting(type: string) {
-	switch (type) {
-		case 'user':
-			router.push('/user/' + userStore.renderedUserId + '/post/' + props.postID)
-			break
-
-		case 'community':
-			router.push('/community/explore')
-			break
-	}
+function setRouting() {
+	router.push(props.path)
 }
 
 function checkImage() {
@@ -38,7 +31,7 @@ function checkImage() {
 
 
 <template>
-	<IonButton class="ion-no-padding" color="transparent" @click="setRouting(props.type)">
+	<IonButton class="ion-no-padding" color="transparent" @click="setRouting()">
 		<img v-if="checkImage()" :src="postUrl" alt="post thumbnail" class="thumbnail">
 		<video v-else :src="postUrl" alt="post thumbnail" class="thumbnail" key="haha"></video>
 	</IonButton>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { IonModal, IonToolbar, modalController, IonHeader, IonButton, IonButtons, IonTitle, IonList, IonItem, IonInput, IonCol, IonAvatar } from '@ionic/vue';
+import { IonModal, IonToolbar, IonContent, modalController, IonHeader, IonButton, IonButtons, IonTitle, IonList, IonItem, IonInput, IonCol, IonRow } from '@ionic/vue';
 import { userDataStore } from '@/stores/UserDataStore';
 import { ref } from 'vue';
 
@@ -8,6 +8,7 @@ import BioModal from '@/view/Profile/components/DataEditorModals/BioModal.vue'
 import GoalModal from '../DataEditorModals/GoalModal.vue';
 import PronounsModal from '../DataEditorModals/PronounsModal.vue';
 import SexModal from '../DataEditorModals/SexModal.vue';
+import ImageModal from '../DataEditorModals/ImageModal.vue';
 
 const userStore = userDataStore()
 const baseUrl = await apiUser()
@@ -25,16 +26,23 @@ let data = ref({
     weight: userData.weight
 })
 
+userStore.profilePicture = baseUrl + userData.profile_picture
+userStore.backgroundPicture = baseUrl + userData.background_picture
+
+
 function cancel() {
     modalController.dismiss({ id: "user-edit" })
 }
 
 async function save() {
+    let contactsUrls = ""
+    for (let i = 0; i < 5; i++) { contactsUrls += contacts[i] + "\r\n" }
     userStore.user = userStore.editedUser
     userData = JSON.parse(userStore.user)
     userData.handle = data.value.handle
     userData.username = data.value.username
-    userData.weight = data.value.weight as unknown as number
+    userData.contacts = contactsUrls
+    userData.height = data.value.height as unknown as number
     userData.weight = data.value.weight as unknown as number
     userStore.user = JSON.stringify(userData)
     console.log(await apiUser('update'))
@@ -42,10 +50,12 @@ async function save() {
     modalController.dismiss("user-edit")
 }
 
+let contacts = userData.contacts.split("\r\n")
+
 </script>
 
 <template>
-    <button id="user-edit">
+    <button id="user-edit" class="profile-button">
         Edit profile
     </button>
     <IonModal type="modal" trigger="user-edit">
@@ -60,46 +70,72 @@ async function save() {
                 </IonButtons>
             </IonToolbar>
         </IonHeader>
-        <div class="edit-images">
-            <img><img>
-        </div>
-        <IonList>
-            <IonItem class="custom">
-                <IonCol>
-                    <IonAvatar>
-                        <img alt="pfp" :src="baseUrl + userData.profile_picture" />
-                    </IonAvatar>
-                    <p class="picture">Edit picture</p>
-                </IonCol>
-            </IonItem>
-            <IonItem>
-                <IonInput v-model="data.handle" label="Handle" label-placement="fixed" placeholder="Unique for every user"
-                    :value="data.handle">
-                </IonInput>
-            </IonItem>
+        <IonContent>
+            <div class="edit-images">
+                <img><img>
+            </div>
+            <IonList>
+                <IonItem class="custom">
+                    <IonCol>
+                        <IonRow>
+                            <img class="pfp" :src="userStore.profilePicture" />
+                            <img class="banner" :src="userStore.backgroundPicture" alt="">
+                        </IonRow>
+                        <ImageModal class="picture" />
+                    </IonCol>
+                </IonItem>
+                <IonItem>
+                    <IonInput v-model="data.handle" label="Handle" label-placement="fixed"
+                        placeholder="Unique for every user" :value="data.handle">
+                    </IonInput>
+                </IonItem>
 
-            <IonItem>
-                <IonInput v-model="data.username" label="Username" label-placement="fixed" placeholder="Your Username"
-                    :value="data.username">
-                </IonInput>
-            </IonItem>
-            <GoalModal />
-            <BioModal />
-            <PronounsModal />
-            <SexModal />
-
-            <IonItem>
-                <IonInput v-model="data.height" label="Height (cm)" label-placement="fixed" placeholder="Your Height"
-                    :value="data.height">
-                </IonInput>
-            </IonItem>
-
-            <IonItem>
-                <IonInput v-model="data.weight" label="Weight (kg)" label-placement="fixed" placeholder="Your Weight"
-                    :value="data.weight">
-                </IonInput>
-            </IonItem>
-        </IonList>
+                <IonItem>
+                    <IonInput v-model="data.username" label="Username" label-placement="fixed"
+                        placeholder="Your Username" :value="data.username">
+                    </IonInput>
+                </IonItem>
+                <GoalModal />
+                <BioModal />
+                <PronounsModal />
+                <SexModal />
+                <IonItem>
+                    <IonInput v-model="data.height" label="Height (cm)" label-placement="fixed"
+                        placeholder="Your Height" :value="data.height">
+                    </IonInput>
+                </IonItem>
+                <IonItem>
+                    <IonInput v-model="data.weight" label="Weight (kg)" label-placement="fixed"
+                        placeholder="Your Weight" :value="data.weight">
+                    </IonInput>
+                </IonItem>
+                <IonItem>
+                    <IonInput v-model="contacts[0]" label="Web" label-placement="fixed" placeholder="Your web"
+                        :value="contacts[0]">
+                    </IonInput>
+                </IonItem>
+                <IonItem>
+                    <IonInput v-model="contacts[1]" label="Tel" label-placement="fixed" placeholder="Your mobile number"
+                        :value="contacts[1]">
+                    </IonInput>
+                </IonItem>
+                <IonItem>
+                    <IonInput v-model="contacts[2]" label="Email" label-placement="fixed" placeholder="Your email"
+                        :value="contacts[2]">
+                    </IonInput>
+                </IonItem>
+                <IonItem>
+                    <IonInput v-model="contacts[3]" label="Instagram" label-placement="fixed"
+                        placeholder="Your Instagram" :value="contacts[3]">
+                    </IonInput>
+                </IonItem>
+                <IonItem>
+                    <IonInput v-model="contacts[4]" label="YouTube" label-placement="fixed" placeholder="Your Youtube"
+                        :value="contacts[4]">
+                    </IonInput>
+                </IonItem>
+            </IonList>
+        </IonContent>
     </IonModal>
 </template>
 
@@ -110,10 +146,6 @@ ion-title {
 
 ion-button {
     --color: white;
-}
-
-ion-list {
-    height: 100%;
 }
 
 ion-item {
@@ -166,7 +198,19 @@ ion-modal {
     color: #fff000;
     font-weight: bold;
     font-size: small;
+    margin: 20px auto 0 auto;
+}
+
+.pfp {
     margin: auto;
+    height: 100px;
+    width: 100px;
+}
+
+.banner {
+    margin: auto;
+    height: 100px;
+    aspect-ratio: 16/9;
 }
 
 img {
@@ -176,16 +220,5 @@ img {
 
 .save-button {
     --color: #fff000;
-}
-
-#user-edit {
-    width: 32%;
-    height: 30px;
-    margin: auto;
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-    border-radius: 5px;
-    background-color: rgb(47, 47, 47);
 }
 </style>

@@ -18,8 +18,6 @@ import { IonApp, IonRouterOutlet } from '@ionic/vue';
 	</Suspense>
 </template>
 
-
-
 <style>
 * {
 	margin: 0;
@@ -49,5 +47,3 @@ body {
 	font-size: 100px;
 }
 </style>
-
-

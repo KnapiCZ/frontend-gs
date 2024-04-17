@@ -66,3 +66,29 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+
+.profile-button {
+	width: 40%;
+	height: 30px;
+	padding: 5px;
+	margin: 10px auto;
+	background-color: #2F2F2F;
+	font-weight: bold;
+	border-radius: 10px;
+	object-position: center;
+}
+
+.pop-button {
+	width: 30px;
+	aspect-ratio: 1;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	border-radius: 0 0 0 15px;
+	background-color: black;
+}
+
+.pop-button img {
+	width: 100%;
+	height: 100%;
+}

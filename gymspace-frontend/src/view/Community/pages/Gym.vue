@@ -1,64 +1,42 @@
 <script setup lang="ts">
-import { IonButton } from '@ionic/vue';
+import { IonContent, IonPage } from '@ionic/vue';
 import { VTab, VWindow, VWindowItem } from 'vuetify/lib/components/index.mjs';
-import { IonContent, IonModal } from '@ionic/vue';
-
-import SmallFeed from '@/view/Post/components/SmallFeed.vue';
-import HeaderComponent from '../components/ClubGym/HeaderComponent.vue'
-import BorderedPost from '@/view/Post/components/PostContainers/BorderedPost.vue';
+import { useRoute } from 'vue-router';
+import HeaderComponent from '../components/Gym/HeaderComponent.vue'
 import apiGym from '@/logic/API/apiGym';
 import apiUser from '@/logic/API/apiUser';
+import General from '../components/tabs/General.vue';
+import GymFeed from '../components/tabs/GymFeed.vue';
 import apiPost from '@/logic/API/apiPost';
 
-const props = defineProps<{
-	id: number
-	title?: string
-	logo?: string
-}>()
-
+const route = useRoute()
 const baseUrl = await apiUser()
-
-let gymInfo = await apiGym("gymInfo", props.id - 10)
-let buttonId = "open" + props.id
-
-
-// temporary
-let id = 1
-let posts = await apiPost("allUserPostsDetail", id)
-let creatorInfo = await apiUser("smallUserProfile", id)
-// temporary
+let id = route.params.id as unknown as number
+let gymInfo = await apiGym("gymInfo", id)
+let gymPosts = await apiPost("gymPosts", id)
 
 </script>
 
 <template>
-	<IonButton :id="buttonId" class="btn ion-no-padding" color="rgba(255, 255, 255, 0.103)">
-		<img class="logo-img" :src="props.logo" alt="">
-		<h1>{{ props.title }}</h1>
-	</IonButton>
-	<IonModal ref="modal" :trigger="buttonId">
+	<IonPage>
 		<IonContent>
-			<HeaderComponent :logo="baseUrl + gymInfo.logo" :name="gymInfo.title" :id="props.id" />
+			<HeaderComponent type="gym" :logo="baseUrl + gymInfo.logo" :name="gymInfo.title" :id="id" />
 
 			<VTabs v-model="tab" color="#e8e20a" bg-color="black" align-tabs="center" slider-color="#e8e20a"
 				:grow='true'>
 				<VTab><img class="tab-img" src="../../../assets/icons/feed.svg" alt="feed"></VTab>
 				<VTab><img class="tab-img" src="../../../assets/icons/challenges.svg" alt="challenges"></VTab>
-				<VTab><img class="tab-img" src="../../../assets/icons/challenge.svg" alt="chat"></VTab>
 			</VTabs>
-
 			<VWindow v-model="tab">
 				<VWindowItem>
-					<BorderedPost :postId="11" :index="0" />
+					<General :gymId="id" />
 				</VWindowItem>
 				<VWindowItem>
-					<SmallFeed />
-				</VWindowItem>
-				<VWindowItem>
-					<SmallFeed />
+					<GymFeed :gymId="id" :items="gymPosts" />
 				</VWindowItem>
 			</VWindow>
 		</IonContent>
-	</IonModal>
+	</IonPage>
 </template>
 
 <script lang="ts">
@@ -71,7 +49,7 @@ export default {
 
 <style scoped>
 .v-window {
-	padding-top: 30px;
+	padding-top: 10px;
 	height: fit-content;
 	width: 100%;
 	text-align: center;
@@ -97,8 +75,8 @@ export default {
 	background-color: rgba(255, 255, 255, 0.1) !important;
 }
 
-h1 {
-	font-size: clamp(28px, 7vw, 64px);
+h2 {
+	font-size: clamp(20px, 6vw, 64px);
 	font-weight: bold;
 	color: white;
 	position: absolute;

@@ -5,8 +5,12 @@ import LikeButton from '@/view/shared/components/LikeButton.vue'
 import OptionsButton from '../OptionsButton.vue'
 import apiPost from '@/logic/API/apiPost';
 import apiUser from '@/logic/API/apiUser';
+import { userDataStore } from '@/stores/UserDataStore';
+
+const userStore = userDataStore()
 
 const props = defineProps<{
+	index: number
 	postId: number
 }>()
 
@@ -25,7 +29,7 @@ const months = [
 	'December'
 ]
 
-let post = (await apiPost("getPost", props.postId)).post
+let post = await apiPost("getPost", props.postId)
 let creatorInfo = await apiUser("smallUserProfile", post.author)
 
 let time = setTime()
@@ -45,7 +49,6 @@ function checkImage() {
 	else { return false }
 }
 
-
 function setTime() {
 	let postTimestamp = new Date(post.post_time)
 	let current_time = new Date()
@@ -53,7 +56,6 @@ function setTime() {
 
 	// pokud uz je jiny rok nez byl post pridan
 	if (difference.getFullYear() !== 1970) {
-		console.debug("[DEBUG]", postTimestamp, current_time)
 		return postTimestamp.getDate() + ' ' + months[postTimestamp.getMonth()] + ' ' + postTimestamp.getFullYear()
 	}
 
@@ -83,7 +85,6 @@ function setTime() {
 	if (difference.getDate() >= 7) {
 		return "1 week ago"
 	}
-	console.log(difference.getDate())
 	if (difference.getDate() > 1) {
 		return difference.getDate() + " days ago" + postTimestamp, current_time
 	}
@@ -98,7 +99,8 @@ function setTime() {
 	<IonCard :id="'postCard' + post.id">
 		<img v-if="checkImage()" class="postImage" :src="postImg">
 		<video v-else autoplay="true" loop="true" class="postImage" :src="postImg"></video>
-		<OptionsButton :postId="post.id" :userId="post.author" :description="post.description" />
+		<OptionsButton v-if="post.author == userStore.loggedUserId" :postId="post.id" :userId="post.author"
+			:description="post.description" />
 		<IonCardContent>
 			<p class="description">{{ post.description }}</p>
 			<p class="date-posted">{{ time }}</p>
@@ -109,14 +111,7 @@ function setTime() {
 					<p class="nickname" @click="goToUser()">{{ creatorInfo.username }}</p>
 					<p class="handle" @click="goToUser()">{{ creatorInfo.handle }}</p>
 				</IonCol>
-				<button class="postBtn">
-					<img src="@/assets/icons/save.svg">
-				</button>
-				<button class="postBtn">
-					<img src="@/assets/icons/comments.svg">
-				</button>
-
-				<LikeButton class="postBtn" :userId="post.author" :postId="post.id" />
+				<LikeButton class="postBtn" :userId="userStore.loggedUserId" :postId="post.id" />
 			</IonRow>
 		</IonCardContent>
 	</IonCard>

@@ -1,13 +1,32 @@
 <script setup lang="ts">
+import apiUser from '@/logic/API/apiUser';
+import FollowButton from '@/view/shared/components/FollowButton.vue';
 import { IonContent, IonRow } from '@ionic/vue';
+import { ref } from 'vue';
 
 const props = defineProps<{
-    userHandle?: string,
-    description?: string,
-    hashtags?: string,
+    userId: number
+    userHandle?: string
+    profilePicture?: string
+    description?: string
+    hashtags?: string
     songname?: string
-}>()
+    likes?: number[]
+}>();
 
+let text = ref(setText())
+let user: { username: string; }
+try {
+    if (props.likes?.length != 0) {
+        user = await apiUser("smallUserProfile", props.likes![0]).catch()
+    }
+} catch { }
+
+function setText() {
+    if (props.likes?.length == 1) { return 'Post was liked by ' + user.username }
+    if (props.likes?.length! > 1) { return 'Post was liked by ' + user.username + 'and' + (props.likes!.length - 1) + ' others' }
+    else return 'Post was liked by 0 users'
+}
 
 </script>
 
@@ -15,20 +34,14 @@ const props = defineProps<{
 <template>
     <IonContent :scrollY="false" class="description" background-color="transparent">
         <IonRow>
-            <VAvatar class="pfp" color="yellow" /> <!-- API PFP of  post owner -->
+            <img class="pfp" alt="Profile picture" :src="props.profilePicture" />
             <p class="userName">{{ userHandle }}</p>
-            <button class="follow">Follow</button>
-            <button class="notification">
-                <img id="icon" src="@/assets/icons/bell.svg" alt="notification">
-            </button>
+            <FollowButton :userId="props.userId" />
         </IonRow>
         <p id="middle-part" class="main-text">{{ description }}</p>
         <p id="middle-part" class="hashtags">{{ hashtags }}</p>
-        <p id="middle-part" class="liked-text">Post was also liked by @gymshark and 81 others</p>
-        <IonRow class='sound'>
-            <img class="sound" src="@/assets/icons/note.svg" alt="note icon">
-            <p class="sound">{{ songname }}</p>
-        </IonRow>
+        <p id="middle-part" class="liked-text">{{ text }}
+        </p>
     </IonContent>
 </template>
 
@@ -38,7 +51,7 @@ const props = defineProps<{
     height: 150px;
     --ion-background-color: transparent;
     position: absolute;
-    bottom: 51px;
+    bottom: 0;
     left: 0;
     overflow: hidden;
 }
@@ -53,6 +66,8 @@ ion-row {
     aspect-ratio: 1;
     margin-right: 10px;
     margin-left: 10px;
+    object-fit: contain;
+    border-radius: 30px;
 }
 
 
@@ -61,17 +76,9 @@ ion-row {
     height: 25px;
     width: 20%;
     background-color: white;
-    margin: auto 10px auto auto;
+    margin: auto auto auto 10px;
     border-radius: 5px;
     font-weight: bold;
-}
-
-.notification {
-    height: 25px;
-    width: 25px;
-    background-color: black;
-    margin: auto 30px auto 0;
-    border-radius: 5px;
 }
 
 #icon {
@@ -88,10 +95,8 @@ ion-row {
     font-size: 18px;
 }
 
-
-
 #middle-part {
-    margin: 10px;
+    margin: 5px;
     color: white;
     font-size: 12px;
 }
@@ -122,5 +127,17 @@ p.sound {
 img.sound {
     margin: auto 10px auto 0;
     height: 13px;
+}
+
+.profile-button {
+    width: 25%;
+    height: 25px;
+    padding: 0;
+    margin: 0 auto;
+    color: black;
+    background-color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    object-position: center;
 }
 </style>

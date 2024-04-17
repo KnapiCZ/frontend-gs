@@ -1,21 +1,17 @@
+<script setup lang="ts">
+const props = defineProps({
+    social: []
+})
+</script>
+
 <template>
     <div>
-        <button href="xxx">
+        <a v-if="props.social![0] != ''" :href="props.social![0]" target="_blank">
             <img src="../../../../assets/icons/instagram.svg" alt="instagram">
-        </button>
-
-        <button href="xxx">
-            <img src="../../../../assets/icons/tiktok.svg" alt="tiktok">
-        </button>
-
-        <button href="xxx">
-            <img src="../../../../assets/icons/twitter.svg" alt="twitter">
-        </button>
-
-        <button href="xxx">
+        </a>
+        <a v-if="props.social![1] != ''" :href="props.social![1]" target="_blank">
             <img src="../../../../assets/icons/youtube.svg" alt="youtube">
-        </button>
-
+        </a>
     </div>
 </template>
 
@@ -27,7 +23,7 @@ div {
     text-align: center;
 }
 
-button {
+a {
     height: 100%;
     aspect-ratio: 1;
     display: inline-block;

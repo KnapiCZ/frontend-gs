@@ -6,13 +6,13 @@ const props = defineProps<{
 	id: number
 }>()
 
-const gymData = await apiGym('gymInfo', props.id)
+let info = await apiGym('gymInfo', props.id)
 const baseUrl = await apiGym()
 
 </script>
 
 <template>
-	<IonButton id="parent" :style="{ backgroundImage: 'url(' + baseUrl + gymData.logo + ')' }" color="rgba(0,0,0,0)">
+	<IonButton id="parent" :style="{ backgroundImage: 'url(' + baseUrl + info.logo + ')' }" color="rgba(0,0,0,0)">
 		<IonModal ref="modal" trigger="parent">
 			<IonToolbar>
 				<IonButtons slot="start">
@@ -22,21 +22,21 @@ const baseUrl = await apiGym()
 				<IonTitle>Description</IonTitle>
 			</IonToolbar>
 			<div class=" top-info">
-				<img class="logo" :src="baseUrl + gymData.logo">
-				<h1 class="name">{{ gymData.title }}</h1>
-				<p>{{ gymData.subtitle }}</p>
+				<img class="logo" :src="baseUrl + info.logo">
+				<h1 class="name">{{ info.title }}</h1>
+				<p>{{ info.subtitle }}</p>
 			</div>
 
 			<div class="description">
 				<h2>Description</h2>
-				<p>{{ gymData.description }}</p>
+				<p>{{ info.description }}</p>
 			</div>
 
 			<div class="creator">
 				<h2>Created by</h2>
 				<IonRow>
-					<img class="pfp" :src="baseUrl + gymData.logo" alt="">
-					<p>@gymspace</p>
+					<img class="pfp" :src="baseUrl + info.logo" alt="">
+					<p>@{{ info.title }}</p>
 				</IonRow>
 			</div>
 		</IonModal>

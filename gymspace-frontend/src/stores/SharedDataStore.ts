@@ -4,7 +4,7 @@ import { ref } from 'vue'
 export const sharedDataStore = defineStore('sharedDataStore', {
     state: () => {
         return {
-            baseUrl: `http://localhost:8080/`,
+            baseUrl: localStorage.getItem('baseUrl'),
             componentKey: ref(0),
         }
     }

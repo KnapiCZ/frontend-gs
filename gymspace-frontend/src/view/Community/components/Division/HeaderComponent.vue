@@ -1,50 +1,58 @@
 <script setup lang="ts">
-import { IonRow, IonCol, IonToolbar, IonButtons, IonButton, IonTitle, modalController } from '@ionic/vue';
+import { IonToolbar, IonButtons, IonButton, IonTitle, useIonRouter } from '@ionic/vue';
 import { userDataStore } from '@/stores/UserDataStore';
 import { ref } from 'vue';
 
-import apiGym from '@/logic/API/apiGym';
 import BioButton from './BioButton.vue';
+import apiDivision from '@/logic/API/apiDivision';
 
-let props = defineProps<{
+const props = defineProps<{
     id: number
-    logo?: string,
-    name?: string,
+    type: string
+    logo?: string
+    name?: string
 }>()
-
+const router = useIonRouter()
 const userStore = userDataStore()
+const index = userStore.userDivisionId.indexOf(props.id)
+let info = await apiDivision('divisionInfo', props.id)
+let FollowMembers = ref([0, info!.members.length]);
+let isJoined = ref(checkJoined());
+let isFollowing = false
 
-let gymInfo = await apiGym("gymInfo", props.id)
-let FollowMembers = ref([0, gymInfo.members.length]);
-let isFollowing = [false, false];
-
-//checking if user is member of Gym
-function members(members: []) {
-    if (members.includes(userStore.loggedUserId as never)) {
-        isFollowing[1] = true;
-    }
-    else {
-        isFollowing[1] = false;
+function closeDivision() {
+    router.back()
+    if (userStore.remove) {
+        userStore.userDivisionId.splice(index, 1)
+        userStore.remove = false
     }
 }
 
-async function followJoin(type: number) {
-    if (isFollowing[type]) { FollowMembers.value[type] -= 1; }
-    else { FollowMembers.value[type] += 1; }
-    isFollowing[type] = !isFollowing[type];
-    if (type === 1) {
-        await apiGym("joinClub", gymInfo.id, userStore.loggedUserId)
-    }
-    userStore.componentKey += 1
+function checkJoined() {
+    if (info!.members.includes(userStore.loggedUserId as never)) return true;
+    else return false;
 }
-members(gymInfo.members)
+
+async function Join() {
+    if (isJoined.value) {
+        FollowMembers.value[1] -= 1;
+        userStore.remove = true
+
+    } else {
+        FollowMembers.value[1] += 1;
+        if (!userStore.userDivisionId.includes(props.id)) userStore.userDivisionId.push(props.id)
+    }
+    await apiDivision("joinDivision", info!.id, userStore.loggedUserId);
+    isJoined.value = !isJoined.value;
+}
+
 
 </script>
 
 <template>
     <IonToolbar>
         <IonButtons slot="start">
-            <IonButton @click="modalController.dismiss()" class="back-button">
+            <IonButton @click="closeDivision()" class="back-button">
                 <img src="../../../../assets/icons/arrowRight.svg">
             </IonButton>
         </IonButtons>
@@ -52,23 +60,23 @@ members(gymInfo.members)
     </IonToolbar>
     <div id="background" class="grid-container">
         <div class="column logo-column">
-            <BioButton :id="props.id" />
+            <BioButton :id="props.id" :type="props.type" />
             <p class="top">{{ props.name }}</p>
         </div>
         <div class="column">
             <p class="top">{{ FollowMembers[0] }}</p> <!-- API username-->
             <p class="bottom">followers</p> <!-- API username-->
 
-            <button class="follow" :class="{ following: isFollowing[0] }" @click="followJoin(0)">
-                {{ isFollowing[0] ? 'Following' : 'Follow' }}
+            <button class="follow" :class="{ following: isFollowing }" @click="">
+                {{ isFollowing ? 'Following' : 'Follow' }}
             </button>
         </div>
         <div class="column">
             <p class="top">{{ FollowMembers[1] }}</p>
             <p class="bottom">members</p>
 
-            <button class="join" :class="{ joined: isFollowing[1] }" @click="followJoin(1)">
-                {{ isFollowing[1] ? 'Joined' : 'Join' }}
+            <button class="join" :class="{ joined: isJoined }" @click="Join()">
+                {{ isJoined ? 'Joined' : 'Join' }}
             </button>
         </div>
     </div>

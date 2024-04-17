@@ -1,52 +1,38 @@
 <script setup lang="ts">
 import { IonPage, IonContent, IonSearchbar } from '@ionic/vue';
 import { userDataStore } from '@/stores/UserDataStore';
-import GymModal from './GymModal.vue';
-import DivisionModal from './DivisionModal.vue';
-import apiGym from '@/logic/API/apiGym';
-import apiPost from '@/logic/API/apiPost';
-
+import { ref } from 'vue';
+import DivisionCommunityButton from '../components/Division/DivisionCommunityButton.vue';
+import GymCommunityButton from '../components/Gym/GymCommunityButton.vue';
 import 'swiper/css';
-import { SwiperSlide, Swiper } from 'swiper/vue';
+
 
 const userStore = userDataStore()
-
-userStore.userGymId = []
-
-let initialNumber = 0
-let isActive = [false, false]
-let data = await apiGym('myGyms', userStore.loggedUserId)
-
-for (let i = 0; i < data.gyms.length; i++) {
-	userStore.userGymId.push(data.gyms[i].id)
-}
+let isActive = [false, false, false]
+let multiplier = ref([userStore.userGymId.length, userStore.userDivisionId.length, userStore.allGymsId.length])
 
 function toggle(value: number) {
-	let multiplier = userStore.userGymId.length
-	if (multiplier > 3) { multiplier = 3 }
+	let count = ref([userStore.userGymId.length, userStore.userDivisionId.length, userStore.allGymsId.length])
 	if (!isActive[value - 1]) {
 		isActive[value - 1] = true
 		document.getElementById("arrow" + value)!.style.rotate = "90deg";
-		document.getElementById("extend" + value)!.style.height = (userStore.userGymId.length * 90) + "px";
+		document.getElementById("extend" + value)!.style.height = (count.value[value - 1] * 90) + "px";
 	}
 	else {
 		isActive[value - 1] = false
 		document.getElementById("arrow" + value)!.style.rotate = "0deg"
-		document.getElementById("extend" + value)!.style.height = multiplier * 90 + "px";
+		document.getElementById("extend" + value)!.style.height = multiplier.value[value - 1] * 90 + "px";
 	}
 }
 
-
 function init() {
-	let multiplier = userStore.userGymId.length
-	if (multiplier > 3) { multiplier = 3 }
-	if (document.getElementById('extend1') && document.getElementById('extend2')) {
-		document.getElementById('extend1')!.style.height = multiplier * 90 + 'px';
-		document.getElementById('extend2')!.style.height = multiplier * 90 + 'px';
-
-	} else {
-		setTimeout(init, 10);
-	}
+	if (document.getElementById('extend1') && document.getElementById('extend2') && document.getElementById('extend3')) {
+		for (let i = 0; i < 3; i++) {
+			if (multiplier.value[i] > 4) { multiplier.value[i] = 3 }
+			if (multiplier.value[i] == 0) { multiplier.value[i] = 0.25 }
+			document.getElementById('extend' + (i + 1))!.style.height = multiplier.value[i] * 90 + 'px';
+		}
+	} else { setTimeout(init, 10); }
 }
 
 init()
@@ -57,44 +43,39 @@ init()
 	<ion-page class="ion-no-padding">
 
 		<IonContent class="ion-no-padding">
-			<IonSearchbar placeholder="Search"></IonSearchbar> <!--   :items vrati to co uzivatel hleda-->
-
+			<IonSearchbar placeholder="Search"></IonSearchbar>
 			<img class="background" src="../../../assets/images/Background.png">
 
-
-			<button @click="toggle(1)">Your Gyms <img id="arrow1" src="../../../assets/icons/arrowRight.svg"></button>
-			<div id="extend1">
-				<GymModal v-if="userStore.userGymId.length !== 0" v-for="gym in userStore.userGymId" :id="gym"
+			<button @click="toggle(1)">Your Gyms <img v-show="userStore.userGymId.length > 3" id="arrow1"
+					src="../../../assets/icons/arrowRight.svg"></button>
+			<div id="extend1" :key="userStore.componentKey">
+				<GymCommunityButton v-if="userStore.userGymId.length != 0" v-for="gym in userStore.userGymId" :id="gym"
 					:key="'gym' + userStore.componentKey + gym" />
 				<p v-else>You are not in Gym</p>
 			</div>
 
-			<button @click="toggle(2)">Your Clubs <img id="arrow2" src="../../../assets/icons/arrowRight.svg"></button>
-			<div id="extend2">
-				<DivisionModal v-if="userStore.userDivisionId.length !== 0" v-for="division in userStore.userDivisionId"
-					:id="division" :key="'gym' + userStore.componentKey + division" />
+			<button @click="toggle(2)">Your Divisions <img v-show="userStore.userDivisionId.length > 3" id="arrow2"
+					src="../../../assets/icons/arrowRight.svg"></button>
+			<div id="extend2" :key="userStore.componentKey + 10">
+				<DivisionCommunityButton v-if="userStore.userDivisionId.length != 0"
+					v-for="division in userStore.userDivisionId" :id="division"
+					:key="'division' + userStore.componentKey + division" divisionType="big" />
 				<p v-else>You are not in Division</p>
 			</div>
 
-			<section>
-				<h2>Featured posts </h2>
-				<!--<Swiper id="swiperlol" :slides-per-view="3" :space-between="15">
-					<SwiperSlide v-for="(source, index) in data">
-						<Thumbnail :ImageSource="data[index]" type="community" />
-					</SwiperSlide>
-				</Swiper> -->
-			</section>
+			<button @click="toggle(3)">Find new Gym <img v-show="userStore.allGymsId.length > 3" id="arrow3"
+					src="../../../assets/icons/arrowRight.svg"></button>
+			<div id="extend3" :key="userStore.componentKey + 20">
+				<GymCommunityButton v-for="gym in userStore.allGymsId" :id="gym"
+					:key="'newGym' + userStore.componentKey + gym" />
+			</div>
 		</IonContent>
 	</ion-page>
 </template>
 
 <style scoped>
 ion-searchbar {
-	margin: 10px auto;
-}
-
-#swiperlol {
-	height: 100px;
+	margin: auto;
 }
 
 .background {
@@ -107,29 +88,26 @@ ion-searchbar {
 }
 
 #extend1,
-#extend2 {
+#extend2,
+#extend3 {
 	width: auto;
 	height: 270px;
 	overflow: hidden;
 	text-align: center;
 	transition: height 0.2s cubic-bezier(0.19, 1, 0.22, 1);
-
 }
 
 #arrow1,
-#arrow2 {
+#arrow2,
+#arrow3 {
 	margin: 0 10px;
-
 }
 
 button {
-	width: 200px;
-	margin: 20px 0 10px 0;
+	text-align: left;
+	width: 90%;
+	margin: 20px 0 10px 20px;
 	font-size: 18px;
 	font-weight: bold;
-}
-
-section {
-	margin: 20px 10px;
 }
 </style>

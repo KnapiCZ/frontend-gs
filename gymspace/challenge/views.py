@@ -22,9 +22,12 @@ class ChallengeIdViewSet(viewsets.ViewSet):
         return Response(serializer.data)
 
     def retrieve(self, request, pk=None):
+        challenge_ids = []
         queryset = Challenge.objects.filter(members__in=[pk])
         serializer = ChallengeIdSerializer(queryset, many=True)
-        return Response(serializer.data)
+        for challenge in serializer.data:
+            challenge_ids.append(challenge["id"])
+        return Response(challenge_ids)
 
 class ChallengeViewSet(viewsets.ViewSet):
     permission_classes = (IsAuthenticated,)

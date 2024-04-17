@@ -41,7 +41,5 @@ for (let i = 0; i < allChallenges.length; i++) {
 
 .grid-item {
 	text-align: center;
-	aspect-ratio: 1;
-	width: fit-content;
 }
 </style>

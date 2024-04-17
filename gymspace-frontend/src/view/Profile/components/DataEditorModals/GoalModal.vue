@@ -5,7 +5,6 @@ import { userDataStore } from '@/stores/UserDataStore';
 
 const userStore = userDataStore();
 let userData = JSON.parse(userStore.editedUser)
-
 let text = ref()
 text.value = userData.goal
 
@@ -23,9 +22,6 @@ function save() {
 function customFormatter(inputLength: number, maxLength: number) {
     return `${maxLength - inputLength} characters remaining`;
 }
-
-// TODO: save function for userdata
-
 </script>
 
 <template>
@@ -41,17 +37,16 @@ function customFormatter(inputLength: number, maxLength: number) {
                 </IonButtons>
                 <IonTitle>Goal</IonTitle>
                 <IonButtons slot="end">
-                    <IonButton class="save-button" :strong="true" @click="save()">
-                        Confirm</IonButton>
+                    <IonButton class="save-button" :strong="true" @click="save()">Confirm</IonButton>
                 </IonButtons>
             </IonToolbar>
         </IonHeader>
         <IonContent>
-            <IonTextarea @ion-change="text = $event.target.value" id="edit" label="Goal" placeholder="Type something here"
-                :value="text" :counter="true" :maxlength="200" :counter-formatter="customFormatter">
+            <IonTextarea @ion-change="text = $event.target.value" id="edit" label="Goal"
+                placeholder="Type something here" :value="text" :counter="true" :maxlength="200"
+                :counter-formatter="customFormatter">
             </IonTextarea>
         </IonContent>
-
     </IonModal>
 </template>
 

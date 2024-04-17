@@ -1,19 +1,22 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { IonButton, IonCol, IonPage, useIonRouter } from '@ionic/vue';
-import api from '@/logic/API/apiAuth';
+import apiAuth from '@/logic/API/apiAuth';
 
 const router = useIonRouter();
 
 let form = ref({
 	username: "",
 	password: "",
-})
+});
+
 async function submitForm() {
-	console.log(form)
-	await api("getToken", form.value.username, form.value.password)
-	router.push('/')
+	await apiAuth("getToken", form.value.username, form.value.password).then((data) => {
+		localStorage.setItem("Token", data.token);
+	})
+	router.push('/');
 }
+
 </script>
 
 
@@ -28,14 +31,16 @@ async function submitForm() {
 				<input id="PassAuth" type="password" placeholder="Password" v-model="form.password">
 				<IonButton class="Login" color="transparent" @click="submitForm()">Login</IonButton>
 			</form>
-			<button class="sign-up">NEW? SIGN-UP HERE</button>
+			<IonButton class="sign-up" href="/signup">NEW? SIGN-UP HERE</IonButton>
+
+			<!--
 			<IonButton class="login-by-other" color="transparent"><img class="sign-img"
 					src="../../../assets/icons/apple.svg" alt="">Sign-in with
 				apple</IonButton>
 			<IonButton class="login-by-other" color="transparent"><img class="sign-img"
 					src="../../../assets/icons/google.svg" alt="">Sign-in with
 				google</IonButton>
-
+			-->
 		</IonCol>
 	</IonPage>
 </template>
@@ -49,7 +54,7 @@ async function submitForm() {
 
 .logo {
 	margin: auto;
-	width: 256px;
+	width: 60%;
 
 }
 

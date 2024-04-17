@@ -9,7 +9,7 @@ import Slider from '../components/Slider.vue';
 <template>
   <IonPage>
     <VCard>
-      <VTabs v-model="tab" color="white" :center-active="true" slider-color="#00000000" bg-color="#00000000"
+      <VTabs v-model="tab" color="white" :center-active="true" slider-color="white" bg-color="#00000000"
         align-tabs="center" :grow="true">
         <VTab :value="0" title="Following">Following</VTab>
         <VTab :value="1" title="FOR YOU">FOR YOU</VTab>
@@ -20,10 +20,10 @@ import Slider from '../components/Slider.vue';
           <Slider :keyStart="0" :transition="false" :reverse-transition="false" />
         </VWindowItem>
         <VWindowItem>
-          <Slider :keyStart="10" :transition="false" :reverse-transition="false" />
+          <Slider :keyStart="100" :transition="false" :reverse-transition="false" />
         </VWindowItem>
         <VWindowItem>
-          <Slider :keyStart="20" :transition="false" :reverse-transition="false" />
+          <Slider :keyStart="200" :transition="false" :reverse-transition="false" />
         </VWindowItem>
       </VWindow>
     </VCard>

@@ -50,7 +50,7 @@ async function updateProgress() {
 		<p>{{ data.description }}</p>
 		<p v-if="isJoined" id="progress-count">{{ progressValue }}/{{ data.goal }}</p>
 
-		<div v-show="isJoined" id="progress-bar">
+		<div v-show="isJoined && !progressCompleted" id="progress-bar">
 			<div id="progress" :style="{ width: progressCount + '%' }"></div>
 		</div>
 
@@ -77,7 +77,7 @@ img {
 #challenge-div {
 	color: white;
 	width: auto;
-	height: auto;
+	aspect-ratio: 1;
 	margin: 1px;
 	text-align: center;
 	border-radius: 15px;
