@@ -19,12 +19,12 @@ router.register(r'create-user', user_views.CreateUserProfileViewSet, 'create-use
 router.register(r'users', user_views.UserProfileViewSet, basename='users')
 router.register(r'users-follow', user_views.UserProfileViewSet, basename='follow')
 router.register(r'users-follow-data', user_views.FollowerViewSet, basename='follow-data')
-router.register(r'users-small', user_views.SmallUserProfileViewSet, basename='users-posts')
+router.register(r'users-small', user_views.SmallUserProfileViewSet, basename='users-small')
 router.register(r'confirm-auth', user_views.ConfirmAuth, basename='confirm-auth')
 router.register(r'users-posts', user_post_views.UserPostViewSet, basename='users-posts')
 router.register(r'users-gympage-recommended', user_post_views.RecommendedPostViewSet, basename='users-recommended')
-router.register(r'users-posts-all-id', user_post_views.AllUserPostsIDViewSet, basename='all-user-posts'),
-router.register(r'users-posts-all-detail', user_post_views.AllUserPostsDetailViewSet, basename='all-user-posts'),
+router.register(r'users-posts-all-id', user_post_views.AllUserPostsIDViewSet, basename='users-posts-all-id'),
+router.register(r'users-posts-all-detail', user_post_views.AllUserPostsDetailViewSet, basename='users-posts-all-detail'),
 router.register(r'gym-posts', user_post_views.GymPostsIDViewSet, basename='gym-posts'),
 router.register(r'division-posts', user_post_views.DivisionPostsIDViewSet, basename='division-posts'),
 
@@ -39,7 +39,7 @@ router.register(r'divisions-id', division_views.DivisionsIdViewSet, basename='di
 router.register(r'division-name', division_views.DivisionNameViewSet, basename='division-name'),
 
 
-router.register(r'challenge-id', challenge_views.ChallengeIdViewSet, basename='challenge')
+router.register(r'challenge-id', challenge_views.ChallengeIdViewSet, basename='challenge-id')
 router.register(r'challenge', challenge_views.ChallengeViewSet, basename='challenge')
 router.register(r'challengeProgress', challenge_views.ProgressViewSet, basename='challenge-progress')
 router.register(r'joinChallenge', challenge_views.ProgressCreateViewSeet, basename='join-challenge')
