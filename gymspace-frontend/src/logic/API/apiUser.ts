@@ -3,15 +3,19 @@
 import { userDataStore } from "@/stores/UserDataStore";
 
 async function apiUser(apiType = "", firstId?: number, secondId?: number, data?: string) {
-	const baseUrl = `http://192.168.88.86:8080/`
+	const baseUrl = `http://localhost:8000`
 	let response
 	switch (apiType) {
 
 		case "createUser":
+			console.log(data)
 			response = await (
+
+
 				fetch(`${baseUrl}/api/create-user/`,
 					{
 						method: "POST",
+						mode: 'cors',
 						headers: {
 							"Content-Type": "application/json",
 						},
@@ -25,6 +29,7 @@ async function apiUser(apiType = "", firstId?: number, secondId?: number, data?:
 			response = await (
 				fetch(`${baseUrl}/api/users/${firstId}/`,
 					{
+						mode: 'cors',
 						headers: {
 							'Authorization': 'Token ' + localStorage.getItem("Token"),
 							"Content-Type": "application/json",
@@ -38,6 +43,7 @@ async function apiUser(apiType = "", firstId?: number, secondId?: number, data?:
 			response = await (
 				fetch(`${baseUrl}/api/users-small/${firstId}/`,
 					{
+						mode: 'cors',
 						headers: {
 							'Authorization': 'Token ' + localStorage.getItem("Token"),
 							"Content-Type": "application/json",
@@ -54,6 +60,7 @@ async function apiUser(apiType = "", firstId?: number, secondId?: number, data?:
 				fetch(`${baseUrl}/api/users-follow/${secondId}/`,
 					{
 						method: "PATCH",
+						mode: 'cors',
 						headers: {
 							'Authorization': 'Token ' + localStorage.getItem("Token"),
 							"Content-Type": "application/json",
@@ -69,6 +76,7 @@ async function apiUser(apiType = "", firstId?: number, secondId?: number, data?:
 				fetch(`${baseUrl}/api/users-follow-data/${firstId}/`,
 					{
 						method: "GET",
+						mode: 'cors',
 						headers: {
 							'Authorization': 'Token ' + localStorage.getItem("Token"),
 							"Content-Type": "application/json",
@@ -84,6 +92,7 @@ async function apiUser(apiType = "", firstId?: number, secondId?: number, data?:
 					{
 						method: "PATCH",
 						credentials: "include",
+						mode: 'cors',
 						headers: {
 							'Authorization': 'Token ' + localStorage.getItem("Token"),
 							"Content-Type": "application/json",

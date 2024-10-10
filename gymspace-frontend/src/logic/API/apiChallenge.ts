@@ -2,7 +2,7 @@
 
 
 async function apiChallenge(apiType = '', firstItem?: number, secondItem?: number, thirdItem?: number) {
-    const baseUrl = `http://192.168.88.86:8080/`
+    const baseUrl = `http://localhost:8000`
     let response
 
 

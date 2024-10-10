@@ -2,7 +2,7 @@
 
 
 async function apiAuth(apiType = '', firstItem?: string, secondItem?: string) {
-    const baseUrl = `http://192.168.88.86:8080/`
+    const baseUrl = `http://localhost:8000`
     let response
     let data
 

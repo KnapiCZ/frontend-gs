@@ -1,15 +1,14 @@
-//! API pro DIVISION
+//! API pro DIVISION, GYM
 
-async function apiGym(apiType = '', firstItem?: number, secondItem?: number) {
-    const baseUrl = `http://192.168.88.86:8080/`
+async function apiGymDiv(apiType = '', type = '', firstItem?: number, secondItem?: number) {
+    const baseUrl = `http://localhost:8000`
     let response
-
     switch (apiType) {
 
         // * vrati id vsech gymu ve kterych je uzivatel 
-        case "allGyms":
+        case "all":
             response = await (
-                fetch(`${baseUrl}/api/gyms-id/`,
+                fetch(`${baseUrl}/api/${type}s-id/`,
                     {
                         method: 'GET',
                         headers: {
@@ -21,9 +20,9 @@ async function apiGym(apiType = '', firstItem?: number, secondItem?: number) {
             );
             return await response.json()
 
-        case "myGyms":
+        case "my":
             response = await (
-                fetch(`${baseUrl}/api/gyms-id/${firstItem}/`,
+                fetch(`${baseUrl}/api/${type}s-id/${firstItem}/`,
                     {
                         method: 'GET',
                         headers: {
@@ -36,9 +35,9 @@ async function apiGym(apiType = '', firstItem?: number, secondItem?: number) {
             return await response.json()
 
         // * vrati vsechno info o jednom gymu
-        case "gymInfo":
+        case "info":
             response = await (
-                fetch(`${baseUrl}/api/gym/${firstItem}/`,
+                fetch(`${baseUrl}/api/${type}/${firstItem}/`,
                     {
                         method: 'GET',
                         headers: {
@@ -51,11 +50,11 @@ async function apiGym(apiType = '', firstItem?: number, secondItem?: number) {
             return await response.json()
 
         // * prida uzivatele (logged_in_user) do gymu (gym_id) 
-        case "joinGym":
-            let data = { "gym_id": firstItem, "logged_in_user": secondItem }
+        case "join":
+            let data = { "id": firstItem, "logged_in_user": secondItem }
 
             response = await (
-                fetch(`${baseUrl}/api/gym/join/`,
+                fetch(`${baseUrl}/api/${type}/join/`,
                     {
                         method: 'PATCH',
                         credentials: "include",
@@ -67,6 +66,38 @@ async function apiGym(apiType = '', firstItem?: number, secondItem?: number) {
                     }
                 )
             )
+            return await response.json()
+
+
+        // * prida uzivatele (logged_in_user) do gymu (gym_id) 
+        case "divisionName":
+            response = await (
+                fetch(`${baseUrl}/api/division-name/${firstItem}/`,
+                    {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': 'Token ' + localStorage.getItem("Token"),
+                            "Content-Type": "application/json",
+                        },
+                    }
+                )
+            )
+            return await response.json()
+
+
+        case "gymDivisions":
+            response = await (
+                fetch(`${baseUrl}/api/gym-divisions-id/${firstItem}/`,
+                    {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': 'Token ' + localStorage.getItem("Token"),
+                            "Content-Type": "application/json",
+                        },
+                    }
+                )
+            );
+            return await response.json()
 
         default:
             return `${baseUrl}`
@@ -74,4 +105,4 @@ async function apiGym(apiType = '', firstItem?: number, secondItem?: number) {
 
 }
 
-export default apiGym
+export default apiGymDiv
