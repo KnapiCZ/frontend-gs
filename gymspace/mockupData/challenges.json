@@ -1,0 +1,362 @@
+[
+    {
+        "model": "challenge.challenge",
+        "pk": 1,
+        "fields": {
+            "title": "Sprint Challenge",
+            "description": "Run 100 miles in 30 days",
+            "goal": 100
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 2,
+        "fields": {
+            "title": "Core Challenge",
+            "description": "Complete 1000 sit-ups in 2 weeks",
+            "goal": 1000
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 3,
+        "fields": {
+            "title": "Flexibility Challenge",
+            "description": "Achieve full splits in 30 days",
+            "goal": 1
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 4,
+        "fields": {
+            "title": "Endurance Challenge",
+            "description": "Run a marathon (26.2 miles) in 8 weeks",
+            "goal": 26.2
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 5,
+        "fields": {
+            "title": "HIIT Challenge",
+            "description": "Complete 30 HIIT workouts in 30 days",
+            "goal": 30
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 6,
+        "fields": {
+            "title": "Weight Loss Challenge",
+            "description": "Lose 10 pounds in 2 months",
+            "goal": 10
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 7,
+        "fields": {
+            "title": "Swim Challenge",
+            "description": "Swim 5 kilometers in 3 weeks",
+            "goal": 5
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 8,
+        "fields": {
+            "title": "Push-Up Challenge",
+            "description": "Complete 500 push-ups in 30 days",
+            "goal": 500
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 9,
+        "fields": {
+            "title": "Yoga Challenge",
+            "description": "Practice yoga for 60 minutes every day for 30 days",
+            "goal": 30
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 10,
+        "fields": {
+            "title": "Cycling Challenge",
+            "description": "Cycle 200 kilometers in 4 weeks",
+            "goal": 200
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 11,
+        "fields": {
+            "title": "Flex Challenge",
+            "description": "Improve flexibility by 20% in 1 month",
+            "goal": 20
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 12,
+        "fields": {
+            "title": "Burpee Challenge",
+            "description": "Complete 1000 burpees in 2 weeks",
+            "goal": 1000
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 13,
+        "fields": {
+            "title": "Balance Challenge",
+            "description": "Stand on one leg for 10 minutes every day for 30 days",
+            "goal": 30
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 14,
+        "fields": {
+            "title": "Nutrition Challenge",
+            "description": "Eat 5 servings of fruits and vegetables every day for 1 month",
+            "goal": 30
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 15,
+        "fields": {
+            "title": "Mindfulness Challenge",
+            "description": "Practice meditation for 15 minutes every day for 30 days",
+            "goal": 30
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 16,
+        "fields": {
+            "title": "Cardio Challenge",
+            "description": "Complete 50 cardio sessions in 2 months",
+            "goal": 50
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 17,
+        "fields": {
+            "title": "Strength Challenge",
+            "description": "Increase bench press by 20% in 3 months",
+            "goal": 20
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 18,
+        "fields": {
+            "title": "Stretch Challenge",
+            "description": "Improve flexibility by touching toes within 1 month",
+            "goal": 1
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 19,
+        "fields": {
+            "title": "Pull-Up Challenge",
+            "description": "Do 100 pull-ups in 1 week",
+            "goal": 100
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 20,
+        "fields": {
+            "title": "HIIT Marathon",
+            "description": "Complete 26 HIIT sessions in 1 month",
+            "goal": 26
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 21,
+        "fields": {
+            "title": "Flexibility",
+            "description": "Achieve full splits in 60 days",
+            "goal": 1
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 22,
+        "fields": {
+            "title": "Marathon",
+            "description": "Run a marathon (26.2 miles) in 12 weeks",
+            "goal": 26.2
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 23,
+        "fields": {
+            "title": "Weight Loss",
+            "description": "Lose 20 pounds in 6 months",
+            "goal": 20
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 24,
+        "fields": {
+            "title": "Strength",
+            "description": "Increase squat max by 50% in 4 months",
+            "goal": 50
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 25,
+        "fields": {
+            "title": "Swim Challenge",
+            "description": "Swim 10 kilometers in 4 weeks",
+            "goal": 10
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 26,
+        "fields": {
+            "title": "Push-Up Challenge",
+            "description": "Complete 100 push-ups every day for 30 days",
+            "goal": 3000
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 27,
+        "fields": {
+            "title": "Yoga Challenge",
+            "description": "Practice yoga for 60 minutes every day for 60 days",
+            "goal": 60
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 28,
+        "fields": {
+            "title": "Cycling Challenge",
+            "description": "Cycle 300 kilometers in 6 weeks",
+            "goal": 300
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 29,
+        "fields": {
+            "title": "Burpee Challenge",
+            "description": "Complete 100 burpees every day for 30 days",
+            "goal": 3000
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 30,
+        "fields": {
+            "title": "Cardio Challenge",
+            "description": "Complete 100 cardio sessions in 3 months",
+            "goal": 100
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 31,
+        "fields": {
+            "title": "Pull-Up Challenge",
+            "description": "Do 50 pull-ups every day for 2 weeks",
+            "goal": 700
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 32,
+        "fields": {
+            "title": "Nutrition Challenge",
+            "description": "Eat clean for 30 days, no junk food",
+            "goal": 30
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 33,
+        "fields": {
+            "title": "Stairs Challenge",
+            "description": "Climb 1000 flights of stairs in 1 month",
+            "goal": 1000
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 34,
+        "fields": {
+            "title": "Flexibility",
+            "description": "Touch toes with straight legs in 30 days",
+            "goal": 1
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 35,
+        "fields": {
+            "title": "HIIT Challenge",
+            "description": "Complete 50 HIIT workouts in 60 days",
+            "goal": 50
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 36,
+        "fields": {
+            "title": "Balance Challenge",
+            "description": "Balance on one leg for 5 minutes every day for 30 days",
+            "goal": 30
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 37,
+        "fields": {
+            "title": "Meditation Challenge",
+            "description": "Practice meditation for 20 minutes every day for 30 days",
+            "goal": 30
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 38,
+        "fields": {
+            "title": "Dance Challenge",
+            "description": "Learn and perform a new dance routine in 4 weeks",
+            "goal": 1
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 39,
+        "fields": {
+            "title": "Boxing Challenge",
+            "description": "Complete 2000 punches in 2 weeks",
+            "goal": 2000
+        }
+    },
+    {
+        "model": "challenge.challenge",
+        "pk": 40,
+        "fields": {
+            "title": "Water Intake Challenge",
+            "description": "Drink 2 liters of water every day for 30 days",
+            "goal": 30
+        }
+    }
+]

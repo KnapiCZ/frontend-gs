@@ -1,0 +1,162 @@
+[
+    {
+        "model": "company.company",
+        "pk": 1,
+        "fields": {
+            "title": "Fit Zone",
+            "subtitle": "A vibrant fitness hub with cutting-edge equipment.",
+            "description": "Fit Zone offers a dynamic atmosphere for fitness enthusiasts of all levels, focusing on personal training and group classes.",
+            "logo": "uploads/company/logos/fit_zone_logo.png",
+            "main_image": "uploads/company/images/fit_zone_main.png",
+            "city": "Los Angeles",
+            "location": "1234 Main Street, Los Angeles, CA",
+            "date_of_foundation": "2015-06-01",
+            "administrator": "John Doe",
+            "ico": 12345678
+        }
+    },
+    {
+        "model": "company.company",
+        "pk": 2,
+        "fields": {
+            "title": "Power Gym",
+            "subtitle": "Strength training for everyone.",
+            "description": "Power Gym provides a community-focused environment with state-of-the-art strength training equipment and expert guidance.",
+            "logo": "uploads/company/logos/power_gym_logo.png",
+            "main_image": "uploads/company/images/power_gym_main.png",
+            "city": "New York",
+            "location": "567 Elm Avenue, New York, NY",
+            "date_of_foundation": "2018-03-15",
+            "administrator": "Jane Smith",
+            "ico": 23456789
+        }
+    },
+    {
+        "model": "company.company",
+        "pk": 3,
+        "fields": {
+            "title": "Flex Fit",
+            "subtitle": "Fitness meets fun in every class.",
+            "description": "Flex Fit combines enjoyable workouts with expert trainers, promoting a healthy lifestyle and community engagement.",
+            "logo": "uploads/company/logos/flex_fit_logo.png",
+            "main_image": "uploads/company/images/flex_fit_main.png",
+            "city": "Chicago",
+            "location": "789 Oak Boulevard, Chicago, IL",
+            "date_of_foundation": "2020-01-20",
+            "administrator": "Emily Johnson",
+            "ico": 34567890
+        }
+    },
+    {
+        "model": "company.company",
+        "pk": 4,
+        "fields": {
+            "title": "Vital Gym",
+            "subtitle": "Energize your life through fitness.",
+            "description": "Vital Gym focuses on holistic wellness with diverse fitness classes and nutrition guidance for all members.",
+            "logo": "uploads/company/logos/vital_gym_logo.png",
+            "main_image": "uploads/company/images/vital_gym_main.png",
+            "city": "Miami",
+            "location": "1010 Pine Street, Miami, FL",
+            "date_of_foundation": "2019-05-25",
+            "administrator": "Michael Brown",
+            "ico": 45678901
+        }
+    },
+    {
+        "model": "company.company",
+        "pk": 5,
+        "fields": {
+            "title": "Elevate Gym",
+            "subtitle": "Rise above the ordinary in fitness.",
+            "description": "Elevate Gym offers a premium experience with top-notch trainers and advanced equipment to help you achieve your goals.",
+            "logo": "uploads/company/logos/elevate_gym_logo.png",
+            "main_image": "uploads/company/images/elevate_gym_main.png",
+            "city": "Seattle",
+            "location": "1212 Palm Avenue, Seattle, WA",
+            "date_of_foundation": "2016-11-11",
+            "administrator": "Sarah Davis",
+            "ico": 56789012
+        }
+    },
+    {
+        "model": "company.company",
+        "pk": 6,
+        "fields": {
+            "title": "Pure Gym",
+            "subtitle": "Unleash your potential with us.",
+            "description": "Pure Gym is dedicated to providing a supportive environment for all fitness levels, with a focus on personal growth.",
+            "logo": "uploads/company/logos/pure_gym_logo.png",
+            "main_image": "uploads/company/images/pure_gym_main.png",
+            "city": "San Francisco",
+            "location": "1313 Beach Road, San Francisco, CA",
+            "date_of_foundation": "2017-02-14",
+            "administrator": "David Wilson",
+            "ico": 67890123
+        }
+    },
+    {
+        "model": "company.company",
+        "pk": 7,
+        "fields": {
+            "title": "Fit Plus",
+            "subtitle": "Your journey to fitness starts here.",
+            "description": "Fit Plus is a modern fitness center with a variety of classes and personal training options to cater to every member's needs.",
+            "logo": "uploads/company/logos/fit_plus_logo.png",
+            "main_image": "uploads/company/images/fit_plus_main.png",
+            "city": "Dallas",
+            "location": "1414 Maple Lane, Dallas, TX",
+            "date_of_foundation": "2021-08-30",
+            "administrator": "Laura Martinez",
+            "ico": 78901234
+        }
+    },
+    {
+        "model": "company.company",
+        "pk": 8,
+        "fields": {
+            "title": "Peak Gym",
+            "subtitle": "Reach your peak performance with us.",
+            "description": "Peak Gym provides a challenging environment that motivates members to strive for excellence in their fitness journey.",
+            "logo": "uploads/company/logos/peak_gym_logo.png",
+            "main_image": "uploads/company/images/peak_gym_main.png",
+            "city": "Houston",
+            "location": "1515 Lake Street, Houston, TX",
+            "date_of_foundation": "2014-04-22",
+            "administrator": "Chris Taylor",
+            "ico": 89012345
+        }
+    },
+    {
+        "model": "company.company",
+        "pk": 9,
+        "fields": {
+            "title": "Fit Hub",
+            "subtitle": "Where fitness meets community.",
+            "description": "Fit Hub creates a friendly and welcoming space for individuals to pursue their fitness goals with expert support.",
+            "logo": "uploads/company/logos/fit_hub_logo.png",
+            "main_image": "uploads/company/images/fit_hub_main.png",
+            "city": "Atlanta",
+            "location": "1616 Vine Avenue, Atlanta, GA",
+            "date_of_foundation": "2023-01-01",
+            "administrator": "Angela White",
+            "ico": 90123456
+        }
+    },
+    {
+        "model": "company.company",
+        "pk": 10,
+        "fields": {
+            "title": "Active Zone",
+            "subtitle": "Activate your potential with our programs.",
+            "description": "Active Zone is dedicated to creating a vibrant community through engaging fitness programs and wellness initiatives.",
+            "logo": "uploads/company/logos/active_zone_logo.png",
+            "main_image": "uploads/company/images/active_zone_main.png",
+            "city": "Philadelphia",
+            "location": "1818 Chestnut Street, Philadelphia, PA",
+            "date_of_foundation": "2019-07-19",
+            "administrator": "Brian Harris",
+            "ico": 12345679
+        }
+    }
+]

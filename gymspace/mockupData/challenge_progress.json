@@ -1,0 +1,262 @@
+[
+    {
+        "model": "challenge.memberprogress",
+        "pk": 1,
+        "fields": {
+            "user": 10,
+            "challenge": 1,
+            "completed": 0,
+            "progress": 750
+        }
+    },
+    {
+        "model": "challenge.memberprogress",
+        "pk": 2,
+        "fields": {
+            "user": 5,
+            "challenge": 2,
+            "completed": 0,
+            "progress": 150
+        }
+    },
+    {
+        "model": "challenge.memberprogress",
+        "pk": 3,
+        "fields": {
+            "user": 10,
+            "challenge": 3,
+            "completed": 0,
+            "progress": 3
+        }
+    },
+    {
+        "model": "challenge.memberprogress",
+        "pk": 4,
+        "fields": {
+            "user": 9,
+            "challenge": 4,
+            "completed": 0,
+            "progress": 200
+        }
+    },
+    {
+        "model": "challenge.memberprogress",
+        "pk": 5,
+        "fields": {
+            "user": 7,
+            "challenge": 5,
+            "completed": 0,
+            "progress": 25
+        }
+    },
+    {
+        "model": "challenge.memberprogress",
+        "pk": 6,
+        "fields": {
+            "user": 3,
+            "challenge": 6,
+            "completed": 0,
+            "progress": 500
+        }
+    },
+    {
+        "model": "challenge.memberprogress",
+        "pk": 7,
+        "fields": {
+            "user": 2,
+            "challenge": 7,
+            "completed": 0,
+            "progress": 0
+        }
+    },
+    {
+        "model": "challenge.memberprogress",
+        "pk": 8,
+        "fields": {
+            "user": 1,
+            "challenge": 8,
+            "completed": 0,
+            "progress": 50
+        }
+    },
+    {
+        "model": "challenge.memberprogress",
+        "pk": 9,
+        "fields": {
+            "user": 8,
+            "challenge": 9,
+            "completed": 0,
+            "progress": 7
+        }
+    },
+    {
+        "model": "challenge.memberprogress",
+        "pk": 10,
+        "fields": {
+            "user": 4,
+            "challenge": 10,
+            "completed": 0,
+            "progress": 100
+        }
+    },
+    {
+        "model": "challenge.memberprogress",
+        "pk": 11,
+        "fields": {
+            "user": 1,
+            "challenge": 11,
+            "completed": 0,
+            "progress": 15
+        }
+    },
+    {
+        "model": "challenge.memberprogress",
+        "pk": 12,
+        "fields": {
+            "user": 6,
+            "challenge": 12,
+            "completed": 0,
+            "progress": 10
+        }
+    },
+    {
+        "model": "challenge.memberprogress",
+        "pk": 13,
+        "fields": {
+            "user": 9,
+            "challenge": 13,
+            "completed": 0,
+            "progress": 30
+        }
+    },
+    {
+        "model": "challenge.memberprogress",
+        "pk": 14,
+        "fields": {
+            "user": 4,
+            "challenge": 14,
+            "completed": 0,
+            "progress": 60
+        }
+    },
+    {
+        "model": "challenge.memberprogress",
+        "pk": 15,
+        "fields": {
+            "user": 7,
+            "challenge": 15,
+            "completed": 0,
+            "progress": 3
+        }
+    },
+    {
+        "model": "challenge.memberprogress",
+        "pk": 16,
+        "fields": {
+            "user": 2,
+            "challenge": 16,
+            "completed": 0,
+            "progress": 0
+        }
+    },
+    {
+        "model": "challenge.memberprogress",
+        "pk": 17,
+        "fields": {
+            "user": 10,
+            "challenge": 17,
+            "completed": 0,
+            "progress": 120
+        }
+    },
+    {
+        "model": "challenge.memberprogress",
+        "pk": 18,
+        "fields": {
+            "user": 5,
+            "challenge": 18,
+            "completed": 0,
+            "progress": 2000
+        }
+    },
+    {
+        "model": "challenge.memberprogress",
+        "pk": 19,
+        "fields": {
+            "user": 8,
+            "challenge": 19,
+            "completed": 0,
+            "progress": 100
+        }
+    },
+    {
+        "model": "challenge.memberprogress",
+        "pk": 20,
+        "fields": {
+            "user": 9,
+            "challenge": 20,
+            "completed": 0,
+            "progress": 30
+        }
+    },
+    {
+        "model": "challenge.memberprogress",
+        "pk": 21,
+        "fields": {
+            "user": 7,
+            "challenge": 21,
+            "completed": 0,
+            "progress": 0
+        }
+    },
+    {
+        "model": "challenge.memberprogress",
+        "pk": 22,
+        "fields": {
+            "user": 3,
+            "challenge": 22,
+            "completed": 0,
+            "progress": 0
+        }
+    },
+    {
+        "model": "challenge.memberprogress",
+        "pk": 23,
+        "fields": {
+            "user": 2,
+            "challenge": 23,
+            "completed": 0,
+            "progress": 60
+        }
+    },
+    {
+        "model": "challenge.memberprogress",
+        "pk": 24,
+        "fields": {
+            "user": 1,
+            "challenge": 24,
+            "completed": 0,
+            "progress": 15
+        }
+    },
+    {
+        "model": "challenge.memberprogress",
+        "pk": 25,
+        "fields": {
+            "user": 8,
+            "challenge": 25,
+            "completed": 0,
+            "progress": 25
+        }
+    },
+    {
+        "model": "challenge.memberprogress",
+        "pk": 26,
+        "fields": {
+            "user": 4,
+            "challenge": 26,
+            "completed": 0,
+            "progress": 2
+        }
+    }
+]

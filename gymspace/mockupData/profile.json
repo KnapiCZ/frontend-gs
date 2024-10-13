@@ -1,0 +1,192 @@
+[
+    {
+        "model": "user.userprofile",
+        "pk": 1,
+        "fields": {
+            "username": "JohnSmith",
+            "goal": "To build muscle mass and improve overall strength.",
+            "description": "Fitness enthusiast | Gym lover | Passionate about living a healthy lifestyle.",
+            "email": "john.smith@example.com",
+            "contacts": "https://instagram.com/johnsmith, https://twitter.com/johnsmith",
+            "sex": "M",
+            "height": 175,
+            "trainer_status": 1,
+            "profile_picture": "media/global_profile_media/user-1/profile/pfp.jpg",
+            "background_picture": "media/global_profile_media/user-1/profile/banner.png",
+            "handle_id": 1,
+            "pronouns": "he/him",
+            "weight": 75
+        }
+    },
+    {
+        "model": "user.userprofile",
+        "pk": 2,
+        "fields": {
+            "username": "EmmaWatson",
+            "goal": "To improve flexibility and achieve a toned physique.",
+            "description": "Yoga enthusiast | Nature lover | Dreamer.",
+            "email": "emma.watson@example.com",
+            "contacts": "https://instagram.com/emmawatson, https://facebook.com/emmawatson",
+            "sex": "F",
+            "height": 163,
+            "trainer_status": 0,
+            "profile_picture": "media/global_profile_media/user-2/profile/pfp.jpg",
+            "background_picture": "media/global_profile_media/user-2/profile/banner.jpg",
+            "handle_id": 2,
+            "pronouns": "she/her",
+            "weight": 55
+        }
+    },
+    {
+        "model": "user.userprofile",
+        "pk": 3,
+        "fields": {
+            "username": "DavidJones",
+            "goal": "To lose weight and improve cardiovascular health.",
+            "description": "Running enthusiast | Coffee addict | Adventure seeker.",
+            "email": "david.jones@example.com",
+            "contacts": "https://twitter.com/davidjones, https://linkedin.com/davidjones",
+            "sex": "M",
+            "height": 180,
+            "trainer_status": 1,
+            "profile_picture": "media/global_profile_media/user-3/profile/pfp.jpg",
+            "background_picture": "media/global_profile_media/user-3/profile/banner.jpg",
+            "handle_id": 3,
+            "pronouns": "he/him",
+            "weight": 85
+        }
+    },
+    {
+        "model": "user.userprofile",
+        "pk": 4,
+        "fields": {
+            "username": "SophiaClark",
+            "goal": "To increase flexibility and enhance core strength.",
+            "description": "Pilates enthusiast | Bookworm | Dreamer.",
+            "email": "sophia.clark@example.com",
+            "contacts": "https://instagram.com/sophiaclark, https://facebook.com/sophiaclark",
+            "sex": "F",
+            "height": 167,
+            "trainer_status": 0,
+            "profile_picture": "media/global_profile_media/user-4/profile/pfp.jpg",
+            "background_picture": "media/global_profile_media/user-4/profile/banner.jpg",
+            "handle_id": 4,
+            "pronouns": "she/her",
+            "weight": 60
+        }
+    },
+    {
+        "model": "user.userprofile",
+        "pk": 5,
+        "fields": {
+            "username": "MichaelBrown",
+            "goal": "To gain strength and improve endurance.",
+            "description": "Fitness freak | Music lover | Aspiring athlete.",
+            "email": "michael.brown@example.com",
+            "contacts": "https://twitter.com/michaelbrown, https://linkedin.com/michaelbrown",
+            "sex": "M",
+            "height": 175,
+            "trainer_status": 1,
+            "profile_picture": "media/global_profile_media/user-5/profile/pfp.jpg",
+            "background_picture": "media/global_profile_media/user-5/profile/banner.jpg",
+            "handle_id": 5,
+            "pronouns": "he/him",
+            "weight": 80
+        }
+    },
+    {
+        "model": "user.userprofile",
+        "pk": 6,
+        "fields": {
+            "username": "OliviaTaylor",
+            "goal": "To achieve a balanced lifestyle and improve overall fitness.",
+            "description": "Fitness enthusiast | Foodie | Dreamer.",
+            "email": "olivia.taylor@example.com",
+            "contacts": "https://instagram.com/oliviataylor, https://facebook.com/oliviataylor",
+            "sex": "F",
+            "height": 163,
+            "trainer_status": 0,
+            "profile_picture": "media/global_profile_media/user-6/profile/pfp.jpg",
+            "background_picture": "media/global_profile_media/user-6/profile/banner.png",
+            "handle_id": 6,
+            "pronouns": "she/her",
+            "weight": 57
+        }
+    },
+    {
+        "model": "user.userprofile",
+        "pk": 7,
+        "fields": {
+            "username": "WilliamWong",
+            "goal": "To increase muscle mass and strength.",
+            "description": "Fitness enthusiast | Traveler | Dreamer.",
+            "email": "william.wong@example.com",
+            "contacts": "https://twitter.com/williamwong, https://linkedin.com/williamwong",
+            "sex": "M",
+            "height": 180,
+            "trainer_status": 1,
+            "profile_picture": "media/global_profile_media/user-7/profile/pfp.jpg",
+            "background_picture": "media/global_profile_media/user-7/profile/banner.jpg",
+            "handle_id": 7,
+            "pronouns": "he/him",
+            "weight": 78
+        }
+    },
+    {
+        "model": "user.userprofile",
+        "pk": 8,
+        "fields": {
+            "username": "SamanthaRoberts",
+            "goal": "To improve flexibility and achieve a toned physique.",
+            "description": "Yoga enthusiast | Nature lover | Dreamer.",
+            "email": "samantha.roberts@example.com",
+            "contacts": "https://instagram.com/samantharoberts, https://facebook.com/samantharoberts",
+            "sex": "F",
+            "height": 165,
+            "trainer_status": 0,
+            "profile_picture": "media/global_profile_media/user-8/profile/pfp.jpg",
+            "background_picture": "media/global_profile_media/user-8/profile/banner.jpg",
+            "handle_id": 8,
+            "pronouns": "she/her",
+            "weight": 58
+        }
+    },
+    {
+        "model": "user.userprofile",
+        "pk": 9,
+        "fields": {
+            "username": "EmilyDavis",
+            "goal": "To improve strength and overall fitness.",
+            "description": "Health-conscious | Fitness lover | Outdoor adventurer.",
+            "email": "emily.davis@example.com",
+            "contacts": "https://instagram.com/emilydavis, https://facebook.com/emilydavis",
+            "sex": "F",
+            "height": 168,
+            "trainer_status": 0,
+            "profile_picture": "media/global_profile_media/user-9/profile/pfp.jpg",
+            "background_picture": "media/global_profile_media/user-9/profile/banner.jpg",
+            "handle_id": 9,
+            "pronouns": "she/her",
+            "weight": 60
+        }
+    },
+    {
+        "model": "user.userprofile",
+        "pk": 10,
+        "fields": {
+            "username": "Nathan Thomas",
+            "goal": "To run a marathon and improve overall fitness.",
+            "description": "Marathon runner | Coffee lover | Adventure seeker.",
+            "email": "nathan.thomas@example.com",
+            "contacts": "https://twitter.com/nathanthomas, https://linkedin.com/nathanthomas",
+            "sex": "M",
+            "height": 183,
+            "trainer_status": 1,
+            "profile_picture": "media/global_profile_media/user-10/profile/pfp.jpg",
+            "background_picture": "media/global_profile_media/user-10/profile/banner.jpg",
+            "handle_id": 10,
+            "pronouns": "he/him",
+            "weight": 75
+        }
+    }
+]

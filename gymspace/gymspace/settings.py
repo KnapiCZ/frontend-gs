@@ -1,3 +1,5 @@
+import os
+
 """
 Django settings for gymspace project.
 
@@ -20,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'da173bbeead58397ca83fb0fe825fda0659a7e1718d57097f988c9c3371b6c11'
+SECRET_KEY = 'django-insecure-!j%=b$tq^ll0r*xlzbbga$--%z=+u(m1)-8yr1y)ou$9zb-y4i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -66,7 +68,6 @@ CORS_ALLOWED_ORIGINS = [
     'http://10.0.45.50:8100',
     'http://192.168.88.86:8100',
     'http://localhost:8100',
-    'http://localhost:5173',
     'http://172.20.10.14:8100',
     'http://10.0.1.42:8100',
 ]
@@ -105,10 +106,13 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'gymspace',
-        'USER': 'jjyvpitzls',
-        'PASSWORD': 'aEutR$VA03XQwNRB',
-        'HOST': 'gy-server.postgres.database.azure.com',
+        'USER': 'postgres',
+        'PASSWORD': 'admin',
+        'HOST': 'localhost',
         'PORT': '5432',
+        'OPTIONS': {
+        'sslmode': 'disable',
+        }
     }
 }
 
@@ -147,7 +151,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = os.environ.get("DJANGO_STATIC_URL", "/static/")
+STATIC_ROOT = os.environ.get("DJANGO_STATIC_ROOT", "./static/")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
