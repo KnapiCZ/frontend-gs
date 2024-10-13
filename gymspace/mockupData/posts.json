@@ -5,7 +5,7 @@
         "fields": {
             "description": "Jumpstart your day with morning routines that energize and strengthen.",
             "author": 1,
-            "gym_id": null
+            "division_id": null
         }
     },
     {
@@ -14,7 +14,7 @@
         "fields": {
             "description": "Transform your body and mind with our comprehensive yoga sessions.",
             "author": 1,
-            "gym_id": 1
+            "division_id": 1
         }
     },
     {
@@ -23,7 +23,7 @@
         "fields": {
             "description": "Achieve peak performance with our tailored athlete conditioning programs.",
             "author": 1,
-            "gym_id": 2
+            "division_id": 2
         }
     },
     {
@@ -32,7 +32,7 @@
         "fields": {
             "description": "Discover the secrets to lifelong fitness with our expert nutrition and exercise plans.",
             "author": 1,
-            "gym_id": 3
+            "division_id": 3
         }
     },
     {
@@ -41,7 +41,7 @@
         "fields": {
             "description": "Elevate your workouts with cutting-edge technology in fitness tracking.",
             "author": 1,
-            "gym_id": 4
+            "division_id": 4
         }
     },
     {
@@ -50,7 +50,7 @@
         "fields": {
             "description": "Master functional movements for strength and stability in everyday life.",
             "author": 1,
-            "gym_id": 5
+            "division_id": 5
         }
     },
     {
@@ -59,7 +59,7 @@
         "fields": {
             "description": "Unleash your inner warrior with high-intensity martial arts workouts.",
             "author": 1,
-            "gym_id": null
+            "division_id": null
         }
     },
     {
@@ -68,7 +68,7 @@
         "fields": {
             "description": "Embark on a fitness journey with personalized coaching and community support.",
             "author": 1,
-            "gym_id": 2
+            "division_id": 2
         }
     },
     {
@@ -77,7 +77,7 @@
         "fields": {
             "description": "Revitalize your routine with dynamic group classes that motivate and challenge.",
             "author": 1,
-            "gym_id": 3
+            "division_id": 3
         }
     },
     {
@@ -86,7 +86,7 @@
         "fields": {
             "description": "Conquer your fitness goals with our comprehensive boot camp experience.",
             "author": 1,
-            "gym_id": 1
+            "division_id": 1
         }
     },
     {
@@ -94,8 +94,8 @@
         "pk": 11,
         "fields": {
             "description": "Explore the balance of mind and body with our holistic approach to fitness.",
-            "author": 4,
-            "gym_id": null
+            "author": 2,
+            "division_id": null
         }
     },
     {
@@ -103,8 +103,8 @@
         "pk": 12,
         "fields": {
             "description": "Push your limits with our extreme outdoor adventure workouts.",
-            "author": 4,
-            "gym_id": 4
+            "author": 2,
+            "division_id": 4
         }
     },
     {
@@ -112,8 +112,8 @@
         "pk": 13,
         "fields": {
             "description": "Build resilience and mental toughness with our specialized training programs.",
-            "author": 4,
-            "gym_id": 1
+            "author": 2,
+            "division_id": 1
         }
     },
     {
@@ -121,8 +121,8 @@
         "pk": 14,
         "fields": {
             "description": "Fine-tune your fitness with personalized, data-driven workout plans.",
-            "author": 4,
-            "gym_id": 2
+            "author": 2,
+            "division_id": 2
         }
     },
     {
@@ -130,8 +130,8 @@
         "pk": 15,
         "fields": {
             "description": "Ignite your passion for fitness with our vibrant community and inspiring coaches.",
-            "author": 4,
-            "gym_id": 5
+            "author": 2,
+            "division_id": 5
         }
     },
     {
@@ -139,8 +139,8 @@
         "pk": 16,
         "fields": {
             "description": "Rejuvenate your spirit and body with our wellness and recovery programs.",
-            "author": 4,
-            "gym_id": 3
+            "author": 2,
+            "division_id": 3
         }
     },
     {
@@ -148,8 +148,8 @@
         "pk": 17,
         "fields": {
             "description": "Achieve harmony and strength through our specialized yoga and pilates classes.",
-            "author": 4,
-            "gym_id": null
+            "author": 2,
+            "division_id": null
         }
     },
     {
@@ -157,8 +157,8 @@
         "pk": 18,
         "fields": {
             "description": "Find your zen and improve flexibility with our morning yoga sessions.",
-            "author": 5,
-            "gym_id": null
+            "author": 3,
+            "division_id": null
         }
     },
     {
@@ -166,8 +166,8 @@
         "pk": 19,
         "fields": {
             "description": "Elevate your heart rate and shred fat with cardio-intensive circuits.",
-            "author": 5,
-            "gym_id": 2
+            "author": 3,
+            "division_id": 2
         }
     },
     {
@@ -175,8 +175,8 @@
         "pk": 20,
         "fields": {
             "description": "Sculpt and tone with our strength training classes, designed for all levels.",
-            "author": 5,
-            "gym_id": 4
+            "author": 3,
+            "division_id": 4
         }
     },
     {
@@ -184,8 +184,8 @@
         "pk": 21,
         "fields": {
             "description": "Our high-energy kickboxing classes will challenge you and boost your stamina.",
-            "author": 5,
-            "gym_id": 1
+            "author": 3,
+            "division_id": 1
         }
     },
     {
@@ -193,8 +193,8 @@
         "pk": 22,
         "fields": {
             "description": "Dive into aquatic fitness with our swimming programs and water aerobics.",
-            "author": 5,
-            "gym_id": 3
+            "author": 3,
+            "division_id": 3
         }
     },
     {
@@ -202,8 +202,8 @@
         "pk": 23,
         "fields": {
             "description": "Achieve balance and inner peace through our guided meditation sessions.",
-            "author": 5,
-            "gym_id": null
+            "author": 3,
+            "division_id": null
         }
     },
     {
@@ -211,8 +211,8 @@
         "pk": 24,
         "fields": {
             "description": "Join our cycling classes and pedal your way to enduring stamina and strength.",
-            "author": 6,
-            "gym_id": 2
+            "author": 4,
+            "division_id": 2
         }
     },
     {
@@ -220,8 +220,8 @@
         "pk": 25,
         "fields": {
             "description": "Unlock new levels of flexibility and core strength with advanced Pilates.",
-            "author": 6,
-            "gym_id": 1
+            "author": 4,
+            "division_id": 1
         }
     },
     {
@@ -229,8 +229,8 @@
         "pk": 26,
         "fields": {
             "description": "Integrate mind, body, and spirit in our holistic approach to bodybuilding.",
-            "author": 6,
-            "gym_id": 4
+            "author": 4,
+            "division_id": 4
         }
     },
     {
@@ -238,8 +238,8 @@
         "pk": 27,
         "fields": {
             "description": "Maximize endurance with our trail running workshops in breathtaking landscapes.",
-            "author": 6,
-            "gym_id": 5
+            "author": 4,
+            "division_id": 5
         }
     },
     {
@@ -247,8 +247,8 @@
         "pk": 28,
         "fields": {
             "description": "Our bespoke nutritional plans are designed to fuel your fitness journey.",
-            "author": 6,
-            "gym_id": 3
+            "author": 4,
+            "division_id": 3
         }
     },
     {
@@ -256,8 +256,8 @@
         "pk": 29,
         "fields": {
             "description": "Experience the intensity of our boot camp for unparalleled physical transformation.",
-            "author": 6,
-            "gym_id": null
+            "author": 4,
+            "division_id": null
         }
     },
     {
@@ -265,8 +265,8 @@
         "pk": 30,
         "fields": {
             "description": "Cultivate mindfulness and physical agility with our tai chi classes.",
-            "author": 6,
-            "gym_id": 2
+            "author": 4,
+            "division_id": 2
         }
     },
     {
@@ -274,8 +274,8 @@
         "pk": 31,
         "fields": {
             "description": "Our rock climbing sessions will challenge you and elevate your fitness.",
-            "author": 6,
-            "gym_id": null
+            "author": 4,
+            "division_id": null
         }
     },
     {
@@ -362,7 +362,7 @@
         "model": "user.userpostmedia",
         "pk": 11,
         "fields": {
-            "media": "media/global_post_media/user-4/media/photo1.jpg",
+            "media": "media/global_post_media/user-2/media/photo1.jpg",
             "parent_post_id": 11
         }
     },
@@ -370,7 +370,7 @@
         "model": "user.userpostmedia",
         "pk": 12,
         "fields": {
-            "media": "media/global_post_media/user-4/media/photo2.jpg",
+            "media": "media/global_post_media/user-2/media/photo2.jpg",
             "parent_post_id": 12
         }
     },
@@ -378,7 +378,7 @@
         "model": "user.userpostmedia",
         "pk": 13,
         "fields": {
-            "media": "media/global_post_media/user-4/media/photo3.jpg",
+            "media": "media/global_post_media/user-2/media/photo3.jpg",
             "parent_post_id": 13
         }
     },
@@ -386,7 +386,7 @@
         "model": "user.userpostmedia",
         "pk": 14,
         "fields": {
-            "media": "media/global_post_media/user-4/media/photo4.jpg",
+            "media": "media/global_post_media/user-2/media/photo4.jpg",
             "parent_post_id": 14
         }
     },
@@ -394,7 +394,7 @@
         "model": "user.userpostmedia",
         "pk": 15,
         "fields": {
-            "media": "media/global_post_media/user-4/media/photo5.jpg",
+            "media": "media/global_post_media/user-2/media/photo5.jpg",
             "parent_post_id": 15
         }
     },
@@ -402,7 +402,7 @@
         "model": "user.userpostmedia",
         "pk": 16,
         "fields": {
-            "media": "media/global_post_media/user-4/media/photo6.jpg",
+            "media": "media/global_post_media/user-2/media/photo6.jpg",
             "parent_post_id": 16
         }
     },
@@ -410,7 +410,7 @@
         "model": "user.userpostmedia",
         "pk": 17,
         "fields": {
-            "media": "media/global_post_media/user-4/media/photo7.jpg",
+            "media": "media/global_post_media/user-2/media/photo7.jpg",
             "parent_post_id": 17
         }
     },
@@ -418,7 +418,7 @@
         "model": "user.userpostmedia",
         "pk": 18,
         "fields": {
-            "media": "media/global_post_media/user-5/media/photo1.jpg",
+            "media": "media/global_post_media/user-3/media/photo1.jpg",
             "parent_post_id": 18
         }
     },
@@ -426,7 +426,7 @@
         "model": "user.userpostmedia",
         "pk": 19,
         "fields": {
-            "media": "media/global_post_media/user-5/media/photo2.jpg",
+            "media": "media/global_post_media/user-3/media/photo2.jpg",
             "parent_post_id": 19
         }
     },
@@ -434,7 +434,7 @@
         "model": "user.userpostmedia",
         "pk": 20,
         "fields": {
-            "media": "media/global_post_media/user-5/media/photo3.jpg",
+            "media": "media/global_post_media/user-3/media/photo3.jpg",
             "parent_post_id": 20
         }
     },
@@ -442,7 +442,7 @@
         "model": "user.userpostmedia",
         "pk": 21,
         "fields": {
-            "media": "media/global_post_media/user-5/media/photo4.jpg",
+            "media": "media/global_post_media/user-3/media/photo4.jpg",
             "parent_post_id": 21
         }
     },
@@ -450,7 +450,7 @@
         "model": "user.userpostmedia",
         "pk": 22,
         "fields": {
-            "media": "media/global_post_media/user-5/media/photo5.jpg",
+            "media": "media/global_post_media/user-3/media/photo5.jpg",
             "parent_post_id": 22
         }
     },
@@ -458,7 +458,7 @@
         "model": "user.userpostmedia",
         "pk": 23,
         "fields": {
-            "media": "media/global_post_media/user-5/media/photo6.jpg",
+            "media": "media/global_post_media/user-3/media/photo6.jpg",
             "parent_post_id": 23
         }
     },
@@ -466,7 +466,7 @@
         "model": "user.userpostmedia",
         "pk": 24,
         "fields": {
-            "media": "media/global_post_media/user-6/media/photo1.jpg",
+            "media": "media/global_post_media/user-4/media/photo1.jpg",
             "parent_post_id": 24
         }
     },
@@ -474,7 +474,7 @@
         "model": "user.userpostmedia",
         "pk": 25,
         "fields": {
-            "media": "media/global_post_media/user-6/media/photo2.jpg",
+            "media": "media/global_post_media/user-4/media/photo2.jpg",
             "parent_post_id": 25
         }
     },
@@ -482,7 +482,7 @@
         "model": "user.userpostmedia",
         "pk": 26,
         "fields": {
-            "media": "media/global_post_media/user-6/media/photo3.jpg",
+            "media": "media/global_post_media/user-4/media/photo3.jpg",
             "parent_post_id": 26
         }
     },
@@ -490,7 +490,7 @@
         "model": "user.userpostmedia",
         "pk": 27,
         "fields": {
-            "media": "media/global_post_media/user-6/media/photo4.jpg",
+            "media": "media/global_post_media/user-4/media/photo4.jpg",
             "parent_post_id": 27
         }
     },
@@ -498,7 +498,7 @@
         "model": "user.userpostmedia",
         "pk": 28,
         "fields": {
-            "media": "media/global_post_media/user-6/media/photo5.jpg",
+            "media": "media/global_post_media/user-4/media/photo5.jpg",
             "parent_post_id": 28
         }
     },
@@ -506,7 +506,7 @@
         "model": "user.userpostmedia",
         "pk": 29,
         "fields": {
-            "media": "media/global_post_media/user-6/media/photo6.jpg",
+            "media": "media/global_post_media/user-4/media/photo6.jpg",
             "parent_post_id": 29
         }
     },
@@ -514,7 +514,7 @@
         "model": "user.userpostmedia",
         "pk": 30,
         "fields": {
-            "media": "media/global_post_media/user-6/media/photo7.jpg",
+            "media": "media/global_post_media/user-4/media/photo7.jpg",
             "parent_post_id": 30
         }
     },
@@ -522,7 +522,7 @@
         "model": "user.userpostmedia",
         "pk": 31,
         "fields": {
-            "media": "media/global_post_media/user-6/media/photo8.jpg",
+            "media": "media/global_post_media/user-4/media/photo8.jpg",
             "parent_post_id": 31
         }
     }
