@@ -4,7 +4,7 @@ import { userDataStore } from '@/stores/UserDataStore';
 import { ref } from 'vue';
 
 import BioButton from './BioButton.vue';
-import apiDivision from '@/logic/API/apiDivision';
+import apiGymDiv from '@/logic/API/apiGymDiv';
 
 const props = defineProps<{
     id: number
@@ -12,18 +12,21 @@ const props = defineProps<{
     logo?: string
     name?: string
 }>()
+
 const router = useIonRouter()
 const userStore = userDataStore()
-const index = userStore.userDivisionId.indexOf(props.id)
-let info = await apiDivision('divisionInfo', props.id)
+const index1 = userStore.userDivisionId.indexOf(props.id)
+const index2 = userStore.userGymId.indexOf(props.id)
+let info = await apiGymDiv('info', props.type, props.id)
 let FollowMembers = ref([0, info!.members.length]);
 let isJoined = ref(checkJoined());
 let isFollowing = false
 
-function closeDivision() {
+function close() {
     router.back()
     if (userStore.remove) {
-        userStore.userDivisionId.splice(index, 1)
+        if (props.type == 'division') userStore.userDivisionId.splice(index1, 1)
+        else userStore.userGymId.splice(index2, 1)
         userStore.remove = false
     }
 }
@@ -37,23 +40,22 @@ async function Join() {
     if (isJoined.value) {
         FollowMembers.value[1] -= 1;
         userStore.remove = true
-
     } else {
         FollowMembers.value[1] += 1;
-        if (!userStore.userDivisionId.includes(props.id)) userStore.userDivisionId.push(props.id)
+        if (!userStore.userDivisionId.includes(props.id) && props.type == 'division') userStore.userDivisionId.push(props.id)
+        if (!userStore.userDivisionId.includes(props.id)) userStore.userGymId.push(props.id)
     }
-    await apiDivision("joinDivision", info!.id, userStore.loggedUserId);
+    await apiGymDiv("join", 'division', info!.id, userStore.loggedUserId);
     isJoined.value = !isJoined.value;
 }
-
 
 </script>
 
 <template>
     <IonToolbar>
         <IonButtons slot="start">
-            <IonButton @click="closeDivision()" class="back-button">
-                <img src="../../../../assets/icons/arrowRight.svg">
+            <IonButton @click="close()" class="back-button">
+                <img src="../../../assets/icons/arrowRight.svg">
             </IonButton>
         </IonButtons>
         <IonTitle>{{ name }}</IonTitle>
@@ -64,10 +66,10 @@ async function Join() {
             <p class="top">{{ props.name }}</p>
         </div>
         <div class="column">
-            <p class="top">{{ FollowMembers[0] }}</p> <!-- API username-->
-            <p class="bottom">followers</p> <!-- API username-->
+            <p class="top">{{ FollowMembers[0] }}</p>
+            <p class="bottom">followers</p>
 
-            <button class="follow" :class="{ following: isFollowing }" @click="">
+            <button class="follow" :class="{ following: isFollowing }">
                 {{ isFollowing ? 'Following' : 'Follow' }}
             </button>
         </div>

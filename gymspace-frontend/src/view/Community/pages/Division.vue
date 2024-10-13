@@ -3,10 +3,9 @@ import { VTab, VWindow, VWindowItem } from 'vuetify/lib/components/index.mjs';
 import { IonContent, IonPage } from '@ionic/vue';
 import { useRoute } from 'vue-router';
 
-import HeaderComponent from '../components/Division/HeaderComponent.vue';
-import BorderedPost from '@/view/Post/components/PostContainers/BorderedPost.vue';
+import HeaderComponent from '../components/HeaderComponent.vue';
 import ChallengeThumbGrid from '@/view/Challenges/pages/ChallengeThumbGrid.vue';
-import apiDivision from '@/logic/API/apiDivision';
+import apiGymDiv from '@/logic/API/apiGymDiv';
 import apiUser from '@/logic/API/apiUser';
 import apiPost from '@/logic/API/apiPost';
 import DivisionFeed from '../components/tabs/DivisionFeed.vue';
@@ -14,7 +13,7 @@ import DivisionFeed from '../components/tabs/DivisionFeed.vue';
 const route = useRoute()
 const baseUrl = await apiUser();
 let id = route.params.id as unknown as number
-let divisionInfo = await apiDivision("divisionInfo", id);
+let divisionInfo = await apiGymDiv("info", 'division', id);
 let gymPosts = await apiPost("divisionPosts", id)
 
 

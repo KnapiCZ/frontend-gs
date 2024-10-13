@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { IonButton, IonButtons, IonModal, IonRow, IonToolbar, IonTitle, modalController } from '@ionic/vue';
-import apiGym from '@/logic/API/apiGym';
-
+import apiGymDiv from '@/logic/API/apiGymDiv';
 const props = defineProps<{
 	id: number
+	type: string
 }>()
 
-let info = await apiGym('gymInfo', props.id)
-const baseUrl = await apiGym()
+const baseUrl = await apiGymDiv()
+let info = await apiGymDiv('info', props.type, props.id)
 
 </script>
 
@@ -17,7 +17,7 @@ const baseUrl = await apiGym()
 			<IonToolbar>
 				<IonButtons slot="start">
 					<IonButton @click="modalController.dismiss" class="back-button" color="rgba(0,0,0,0)"><img
-							src="../../../../assets/icons/arrowRight.svg"></IonButton>
+							src="../../../assets/icons/arrowRight.svg"></IonButton>
 				</IonButtons>
 				<IonTitle>Description</IonTitle>
 			</IonToolbar>
@@ -59,8 +59,6 @@ const baseUrl = await apiGym()
 .back-button img {
 	rotate: 180deg;
 }
-
-
 
 .top-info {
 	text-align: center;

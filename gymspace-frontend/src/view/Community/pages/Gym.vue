@@ -2,8 +2,8 @@
 import { IonContent, IonPage } from '@ionic/vue';
 import { VTab, VWindow, VWindowItem } from 'vuetify/lib/components/index.mjs';
 import { useRoute } from 'vue-router';
-import HeaderComponent from '../components/Gym/HeaderComponent.vue'
-import apiGym from '@/logic/API/apiGym';
+import HeaderComponent from '../components/HeaderComponent.vue'
+import apiGymDiv from '@/logic/API/apiGymDiv';
 import apiUser from '@/logic/API/apiUser';
 import General from '../components/tabs/General.vue';
 import GymFeed from '../components/tabs/GymFeed.vue';
@@ -12,7 +12,7 @@ import apiPost from '@/logic/API/apiPost';
 const route = useRoute()
 const baseUrl = await apiUser()
 let id = route.params.id as unknown as number
-let gymInfo = await apiGym("gymInfo", id)
+let gymInfo = await apiGymDiv("info", 'gym', id)
 let gymPosts = await apiPost("gymPosts", id)
 
 </script>
@@ -24,8 +24,8 @@ let gymPosts = await apiPost("gymPosts", id)
 
 			<VTabs v-model="tab" color="#e8e20a" bg-color="black" align-tabs="center" slider-color="#e8e20a"
 				:grow='true'>
-				<VTab><img class="tab-img" src="../../../assets/icons/feed.svg" alt="feed"></VTab>
-				<VTab><img class="tab-img" src="../../../assets/icons/challenges.svg" alt="challenges"></VTab>
+				<VTab><img class="tab-img" src="../../../assets/icons/challenge.svg" alt="feed"></VTab>
+				<VTab><img class="tab-img" src="../../../assets/icons/feed.svg" alt="challenges"></VTab>
 			</VTabs>
 			<VWindow v-model="tab">
 				<VWindowItem>

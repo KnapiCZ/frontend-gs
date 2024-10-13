@@ -1,14 +1,13 @@
 <script setup lang="ts">
 import ChallengeThumbGrid from '@/view/Challenges/pages/ChallengeThumbGrid.vue';
-import DivisionCommunityButton from '../Division/DivisionCommunityButton.vue';
-import apiDivision from '@/logic/API/apiDivision';
-
+import CommunityButton from '../CommunityButton.vue';
+import apiGymDiv from '@/logic/API/apiGymDiv';
 
 const props = defineProps<{
     gymId: number
 }>()
 
-let divisions = await apiDivision("gymDivisions", props.gymId)
+let divisions = await apiGymDiv("gymDivisions", 'gym', props.gymId)
 let isActive = false
 
 function toggle() {
@@ -20,21 +19,21 @@ function toggle() {
     else {
         isActive = false
         document.getElementById("arrow")!.style.rotate = "90deg"
-        document.getElementById("extend")!.style.height = 35.5 + "vw";
+        document.getElementById("extend")!.style.height = 37 + "vw";
     }
 }
 
 </script>
 
 <template>
-    <H2>Divisons</H2>
+    <h2>Divisons</h2>
     <div class="grid-division-container extend" id="extend">
-        <DivisionCommunityButton v-for="division in divisions" :id="division" divisionType="small"
+        <CommunityButton v-for="division in divisions" type="division" :id="division" divisionType="small"
             class="grid-division-item" />
     </div>
     <button v-if="divisions.length > 4" @click="toggle()"><img id="arrow"
             src='../../../../assets/icons/arrowRight.svg'></button>
-    <H2>Challenges</H2>
+    <h2>Challenges</h2>
     <ChallengeThumbGrid :type="1" />
 </template>
 
@@ -53,7 +52,7 @@ function toggle() {
 
 #extend {
     width: auto;
-    height: 35.5vw;
+    height: 18vh;
     overflow: hidden;
     text-align: center;
     transition: height 0.2s cubic-bezier(0.19, 1, 0.22, 1);
@@ -63,7 +62,7 @@ function toggle() {
     rotate: 90deg;
 }
 
-H2 {
+h2 {
     margin: 10px 0;
     border-top: 1px white solid;
 }
