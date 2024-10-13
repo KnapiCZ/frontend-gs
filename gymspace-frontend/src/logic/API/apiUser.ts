@@ -3,15 +3,19 @@
 import { userDataStore } from "@/stores/UserDataStore";
 
 async function apiUser(apiType = "", firstId?: number, secondId?: number, data?: string) {
-	const baseUrl = `http://192.168.88.86:8080/`
+	const baseUrl = `http://localhost:8000/`
 	let response
 	switch (apiType) {
 
 		case "createUser":
+			console.log(data)
 			response = await (
-				fetch(`${baseUrl}/api/create-user/`,
+
+
+				fetch(`${baseUrl}api/create-user/`,
 					{
 						method: "POST",
+						mode: 'cors',
 						headers: {
 							"Content-Type": "application/json",
 						},
@@ -23,8 +27,9 @@ async function apiUser(apiType = "", firstId?: number, secondId?: number, data?:
 		//* vrati vsechny informace o uzivateli
 		case "userProfile":
 			response = await (
-				fetch(`${baseUrl}/api/users/${firstId}/`,
+				fetch(`${baseUrl}api/users/${firstId}/`,
 					{
+						mode: 'cors',
 						headers: {
 							'Authorization': 'Token ' + localStorage.getItem("Token"),
 							"Content-Type": "application/json",
@@ -36,8 +41,9 @@ async function apiUser(apiType = "", firstId?: number, secondId?: number, data?:
 		//* vrati id, username, profile_picture, handle, auth_id
 		case "smallUserProfile":
 			response = await (
-				fetch(`${baseUrl}/api/users-small/${firstId}/`,
+				fetch(`${baseUrl}api/users-small/${firstId}/`,
 					{
+						mode: 'cors',
 						headers: {
 							'Authorization': 'Token ' + localStorage.getItem("Token"),
 							"Content-Type": "application/json",
@@ -51,9 +57,10 @@ async function apiUser(apiType = "", firstId?: number, secondId?: number, data?:
 		case "follow":
 			const follow_data = { "followers": firstId, "id": secondId }
 			response = await (
-				fetch(`${baseUrl}/api/users-follow/${secondId}/`,
+				fetch(`${baseUrl}api/users-follow/${secondId}/`,
 					{
 						method: "PATCH",
+						mode: 'cors',
 						headers: {
 							'Authorization': 'Token ' + localStorage.getItem("Token"),
 							"Content-Type": "application/json",
@@ -66,9 +73,10 @@ async function apiUser(apiType = "", firstId?: number, secondId?: number, data?:
 		//* vrati seznam lidi kteri sleduji usera (firstId)
 		case "isFollowing":
 			response = await (
-				fetch(`${baseUrl}/api/users-follow-data/${firstId}/`,
+				fetch(`${baseUrl}api/users-follow-data/${firstId}/`,
 					{
 						method: "GET",
+						mode: 'cors',
 						headers: {
 							'Authorization': 'Token ' + localStorage.getItem("Token"),
 							"Content-Type": "application/json",
@@ -80,10 +88,11 @@ async function apiUser(apiType = "", firstId?: number, secondId?: number, data?:
 		//* updatuje poslane informace uzivatelovi
 		case "update":
 			response = await (
-				fetch(`${baseUrl}/api/users-small/update/`,
+				fetch(`${baseUrl}api/users-small/update/`,
 					{
 						method: "PATCH",
 						credentials: "include",
+						mode: 'cors',
 						headers: {
 							'Authorization': 'Token ' + localStorage.getItem("Token"),
 							"Content-Type": "application/json",

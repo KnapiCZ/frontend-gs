@@ -2,7 +2,7 @@
 
 
 async function apiAuth(apiType = '', firstItem?: string, secondItem?: string) {
-    const baseUrl = `http://192.168.88.86:8080/`
+    const baseUrl = `http://localhost:8000/`
     let response
     let data
 
@@ -10,7 +10,7 @@ async function apiAuth(apiType = '', firstItem?: string, secondItem?: string) {
         case "getToken":
             data = { "username": firstItem, "password": secondItem }
             try {
-                response = await fetch(`${baseUrl}/api-auth/`, {
+                response = await fetch(`${baseUrl}api-auth/`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -25,7 +25,7 @@ async function apiAuth(apiType = '', firstItem?: string, secondItem?: string) {
 
         case "confirmAuth":
             try {
-                response = await fetch(`${baseUrl}/api/confirm-auth/`, {
+                response = await fetch(`${baseUrl}api/confirm-auth/`, {
                     method: "POST",
                     headers: {
                         'Authorization': 'Token ' + localStorage.getItem("Token"),

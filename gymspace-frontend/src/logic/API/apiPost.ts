@@ -2,7 +2,7 @@
 
 
 async function apiPost(apiType = '', firstId?: number, secondId?: number, data?: unknown) {
-    const baseUrl = `http://192.168.88.86:8080/`
+    const baseUrl = `http://localhost:8000/`
     let response
     switch (apiType) {
         case "createPost":
@@ -22,7 +22,7 @@ async function apiPost(apiType = '', firstId?: number, secondId?: number, data?:
         case "deletePost":
             const delete_data = { 'logged_in_user': secondId, 'post_id': firstId }
             response = await (
-                fetch(`${baseUrl}/api/users-posts/delete/`,
+                fetch(`${baseUrl}api/users-posts/delete/`,
                     {
                         method: 'DELETE',
                         headers: {
@@ -36,7 +36,7 @@ async function apiPost(apiType = '', firstId?: number, secondId?: number, data?:
         //* vraci jeden post s id, author, gym, description, like_count, post_time, media
         case "getPost":
             response = await (
-                fetch(`${baseUrl}/api/users-posts/${firstId}/`,
+                fetch(`${baseUrl}api/users-posts/${firstId}/`,
                     {
                         headers: {
                             'Authorization': 'Token ' + localStorage.getItem("Token"),
@@ -61,7 +61,7 @@ async function apiPost(apiType = '', firstId?: number, secondId?: number, data?:
         //* vrati stejne co alluserpostdetail
         case "recommendedPosts":
             response = await (
-                fetch(`${baseUrl}/api/users-gympage-recommended/${firstId}/`,
+                fetch(`${baseUrl}api/users-gympage-recommended/${firstId}/`,
                     {
                         headers: {
                             'Authorization': 'Token ' + localStorage.getItem("Token"),
@@ -75,7 +75,7 @@ async function apiPost(apiType = '', firstId?: number, secondId?: number, data?:
         // * Post = {id,  author, body, gym, like_count, media[], post_time}
         case "allUserPostsDetail":
             response = await (
-                fetch(`${baseUrl}/api/users-posts-all-detail/${firstId}/`,
+                fetch(`${baseUrl}api/users-posts-all-detail/${firstId}/`,
                     {
                         headers: {
                             'Authorization': 'Token ' + localStorage.getItem("Token"),
@@ -88,7 +88,7 @@ async function apiPost(apiType = '', firstId?: number, secondId?: number, data?:
         //* vrati id, username, profile_picture, handle, auth_id
         case "allUserPostId":
             response = await (
-                fetch(`${baseUrl}/api/users-posts-all-id/${firstId}/`,
+                fetch(`${baseUrl}api/users-posts-all-id/${firstId}/`,
                     {
                         headers: {
                             'Authorization': 'Token ' + localStorage.getItem("Token"),
@@ -102,7 +102,7 @@ async function apiPost(apiType = '', firstId?: number, secondId?: number, data?:
         case "updatePost":
             let update_data = { 'logged_in_user': secondId, 'post_id': firstId, 'description': data }
             response = await (
-                fetch(`${baseUrl}/api/users-posts/update/`,
+                fetch(`${baseUrl}api/users-posts/update/`,
                     {
                         method: 'PATCH',
                         headers: {
@@ -118,7 +118,7 @@ async function apiPost(apiType = '', firstId?: number, secondId?: number, data?:
         case "postLiked":
             let liked_data = { 'logged_in_user': secondId, 'post_id': firstId }
             response = await (
-                fetch(`${baseUrl}/api/users-posts-liked-status/`,
+                fetch(`${baseUrl}api/users-posts-liked-status/`,
                     {
                         method: 'POST',
                         headers: {
@@ -134,7 +134,7 @@ async function apiPost(apiType = '', firstId?: number, secondId?: number, data?:
         case "likePost":
             const like_data = { 'logged_in_user': secondId, 'post_id': firstId }
             response = await (
-                fetch(`${baseUrl}/api/users-posts-liked-status/like/`,
+                fetch(`${baseUrl}api/users-posts-liked-status/like/`,
                     {
                         method: 'PATCH',
                         headers: {
@@ -147,7 +147,7 @@ async function apiPost(apiType = '', firstId?: number, secondId?: number, data?:
             return await response.json()
         case "gymPosts":
             response = await (
-                fetch(`${baseUrl}/api/gym-posts/${firstId}/`,
+                fetch(`${baseUrl}api/gym-posts/${firstId}/`,
                     {
                         method: 'GET',
                         headers: {
@@ -159,7 +159,7 @@ async function apiPost(apiType = '', firstId?: number, secondId?: number, data?:
             return await response.json()
         case "divisionPosts":
             response = await (
-                fetch(`${baseUrl}/api/division-posts/${firstId}/`,
+                fetch(`${baseUrl}api/division-posts/${firstId}/`,
                     {
                         method: 'GET',
                         headers: {

@@ -2,7 +2,7 @@
 
 
 async function apiChallenge(apiType = '', firstItem?: number, secondItem?: number, thirdItem?: number) {
-    const baseUrl = `http://192.168.88.86:8080/`
+    const baseUrl = `http://localhost:8000/`
     let response
 
 
@@ -11,7 +11,7 @@ async function apiChallenge(apiType = '', firstItem?: number, secondItem?: numbe
         // * vrati id vsech gymu ve kterych je uzivatel 
         case "allChallengesId":
             response = await (
-                fetch(`${baseUrl}/api/challenge-id/`,
+                fetch(`${baseUrl}api/challenge-id/`,
                     {
                         headers: {
                             'Authorization': 'Token ' + localStorage.getItem("Token"),
@@ -25,7 +25,7 @@ async function apiChallenge(apiType = '', firstItem?: number, secondItem?: numbe
         // * vrati vsechno info o jednom gymu
         case "userChallengesId":
             response = await (
-                fetch(`${baseUrl}/api/challenge-id/${firstItem}/`,
+                fetch(`${baseUrl}api/challenge-id/${firstItem}/`,
                     {
                         method: 'GET',
                         headers: {
@@ -40,7 +40,7 @@ async function apiChallenge(apiType = '', firstItem?: number, secondItem?: numbe
         // * vrati id vsech gymu ve kterych je uzivatel 
         case "challengeInfo":
             response = await (
-                fetch(`${baseUrl}/api/challenge/${firstItem}/`,
+                fetch(`${baseUrl}api/challenge/${firstItem}/`,
                     {
                         headers: {
                             'Authorization': 'Token ' + localStorage.getItem("Token"),
@@ -53,7 +53,7 @@ async function apiChallenge(apiType = '', firstItem?: number, secondItem?: numbe
 
         case "getProgress":
             response = await (
-                fetch(`${baseUrl}/api/challengeProgress/`,
+                fetch(`${baseUrl}api/challengeProgress/`,
                     {
                         method: "POST",
                         headers: {
@@ -68,7 +68,7 @@ async function apiChallenge(apiType = '', firstItem?: number, secondItem?: numbe
 
         case "updateProgress":
             response = await (
-                fetch(`${baseUrl}/api/challengeProgress/update/`,
+                fetch(`${baseUrl}api/challengeProgress/update/`,
                     {
                         method: "PATCH",
                         headers: {
@@ -83,7 +83,7 @@ async function apiChallenge(apiType = '', firstItem?: number, secondItem?: numbe
 
         case "joinChallenge":
             response = await (
-                fetch(`${baseUrl}/api/joinChallenge/`,
+                fetch(`${baseUrl}api/joinChallenge/`,
                     {
                         method: "POST",
                         headers: {
