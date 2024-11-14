@@ -4,6 +4,7 @@ import { createPinia } from 'pinia'
 import { IonicVue } from '@ionic/vue';
 
 import { defineCustomElements } from '@ionic/pwa-elements/loader';
+import { register } from 'swiper/element/bundle';
 
 import router from './router';
 import App from './App.vue';
@@ -12,7 +13,7 @@ import App from './App.vue';
 import '@ionic/vue/css/core.css';
 import '@ionic/vue/css/padding.css';
 
-
+import 'swiper/css';
 /* Theme variables */
 import '@/theme/variables.css';
 
@@ -21,6 +22,7 @@ import 'vuetify/styles'
 import '@/theme/main.css'
 
 defineCustomElements(window);
+register();
 
 const pinia = createPinia()
 const vuetify = createVuetify()

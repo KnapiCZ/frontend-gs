@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 import apiAuth from '@/logic/API/apiAuth';
 
+
 let confirmedUser: { log: string }
 
 
@@ -28,13 +29,13 @@ const routes: Array<RouteRecordRaw> = [
 				name: 'redirect',
 				redirect: '/explore'
 			},
-
 			{
 				path: '/user/:id',
 				name: "user",
 				component: () => import('@/view/Profile/pages/UserWrapper.vue'),
 				props: true,
 				meta: { requiresAuth: true },
+
 			},
 			{
 				path: '/user/:id/post/:initialPosition',
@@ -57,6 +58,12 @@ const routes: Array<RouteRecordRaw> = [
 				meta: { requiresAuth: true },
 				children: [
 					{
+						path: '',
+						redirect: '/foryou'
+					},
+
+
+					{
 						path: '/foryou',
 						name: "foryou",
 						component: () => import('@/view/Explore/pages/ForYou.vue'),
@@ -65,13 +72,13 @@ const routes: Array<RouteRecordRaw> = [
 					{
 						path: '/challenges',
 						name: "explorechallenges",
-						component: () => import('@/view/Community/pages/MainPage.vue'),
+						component: () => import('@/view/Explore/pages/Challenges.vue'),
 						meta: { requiresAuth: true },
 					},
 					{
 						path: '/athletes',
 						name: "athletes",
-						component: () => import('@/view/Community/pages/MainPage.vue'),
+						component: () => import('@/view/Explore/pages/Athetes.vue'),
 						meta: { requiresAuth: true },
 					},
 				]

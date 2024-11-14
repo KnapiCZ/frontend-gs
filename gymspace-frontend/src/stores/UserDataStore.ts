@@ -23,7 +23,9 @@ export const userDataStore = defineStore('userDataStore', {
 			profilePicture: '',
 			backgroundPicture: '',
 
-			croppedChoosenPhoto: ''
+			croppedChoosenPhoto: '',
+
+			clickedChallenge: 0
 
 		}
 	}

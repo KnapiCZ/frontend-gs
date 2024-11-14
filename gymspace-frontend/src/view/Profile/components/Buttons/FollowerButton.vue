@@ -15,7 +15,7 @@ let userData = await apiUser("smallUserProfile", props.userId)
 
 function goToUser() {
     modalController.dismiss()
-    router.navigate('/user/' + props.userId)
+    router.push('/user/' + props.userId)
 }
 
 </script>

@@ -14,7 +14,7 @@ let isOpened = ref(false)
 	<div class="profile_info">
 		<h3>Bio & Goal</h3>
 		<p class="closed" :class="{ opened: isOpened }">
-		<pre>{{ userData.description }}</pre>
+			{{ userData.description }}
 		</p>
 		<p class="show-more-less" @click="isOpened = !isOpened">{{ isOpened ? 'Show less' : 'Show more' }}</p>
 
@@ -37,12 +37,14 @@ let isOpened = ref(false)
 .closed {
 	overflow: hidden;
 	display: -webkit-box;
+	line-clamp: 3;
 	-webkit-line-clamp: 3;
 	/* number of lines to show */
 	-webkit-box-orient: vertical;
 }
 
 .opened {
+	line-clamp: none;
 	-webkit-line-clamp: none;
 
 }
