@@ -5,7 +5,8 @@ import FullSizePost from '../../Post/components/PostContainers/FullSizePost.vue'
 import apiPost from '@/logic/API/apiPost';
 
 let userStore = userDataStore()
-let postIds = await apiPost('recommendedPosts', userStore.loggedUserId)
+let postIds = await apiPost('recommendedPosts', 1)
+console.log(postIds)
 </script>
 
 <template>
@@ -18,6 +19,7 @@ let postIds = await apiPost('recommendedPosts', userStore.loggedUserId)
 
 <style scoped>
 div.swiper {
-  height: calc(100vh - 50px) !important;
+  height: calc(100% - 56px) !important;
+  width: 100%;
 }
 </style>

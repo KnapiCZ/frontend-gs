@@ -8,10 +8,12 @@ const props = defineProps<{
 }>()
 
 const userStore = userDataStore()
-
+// TODO: return false or true from api isFollowing
 let followingList = await apiUser('isFollowing', props.userId, userStore.loggedUserId)
-
+console.log(followingList)
 let isFollowing = ref(checkIfFollowing(followingList.followers))
+console.debug(userStore.user)
+//let userData = JSON.parse(userStore.user)
 
 function checkIfFollowing(followers: []) {
     if (followers.includes(userStore.loggedUserId as never)) {
@@ -23,12 +25,6 @@ function checkIfFollowing(followers: []) {
 }
 
 async function follow() {
-    if (isFollowing.value) {
-        userStore.followersCount--
-    } else {
-        userStore.followersCount++
-
-    }
     await apiUser("follow", userStore.loggedUserId, props.userId).then((isFollowing.value as any) = (!isFollowing.value as any))
 }
 

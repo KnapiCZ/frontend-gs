@@ -43,7 +43,9 @@ body {
 	padding: 0;
 }
 
-#load {
-	font-size: 100px;
+h1 {
+	text-align: center;
+	font-size: 42px;
+	margin: 100px auto;
 }
 </style>

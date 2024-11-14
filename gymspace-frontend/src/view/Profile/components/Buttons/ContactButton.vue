@@ -48,7 +48,7 @@ for (let i = 0; i < data.length; i++) {
 	width: 80vw;
 	height: 70vh;
 	border-radius: 20px !important;
-	background-color: rgba(14, 14, 14, 0.815);
+	background-color: #0e0e0ed0;
 	color: white;
 	backdrop-filter: blur(8px);
 }

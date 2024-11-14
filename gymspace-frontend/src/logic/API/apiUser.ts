@@ -17,7 +17,6 @@ async function apiUser(apiType = "", firstId?: number, secondId?: number, data?:
 					{
 						method: "POST",
 						mode: 'cors',
-						mode: 'cors',
 						headers: {
 							"Content-Type": "application/json",
 						},
@@ -32,7 +31,6 @@ async function apiUser(apiType = "", firstId?: number, secondId?: number, data?:
 				fetch(`${baseUrl}api/users/${firstId}/`,
 					{
 						mode: 'cors',
-						mode: 'cors',
 						headers: {
 							'Authorization': 'Token ' + localStorage.getItem("Token"),
 							"Content-Type": "application/json",
@@ -46,7 +44,6 @@ async function apiUser(apiType = "", firstId?: number, secondId?: number, data?:
 			response = await (
 				fetch(`${baseUrl}api/users-small/${firstId}/`,
 					{
-						mode: 'cors',
 						mode: 'cors',
 						headers: {
 							'Authorization': 'Token ' + localStorage.getItem("Token"),
@@ -65,7 +62,6 @@ async function apiUser(apiType = "", firstId?: number, secondId?: number, data?:
 					{
 						method: "PATCH",
 						mode: 'cors',
-						mode: 'cors',
 						headers: {
 							'Authorization': 'Token ' + localStorage.getItem("Token"),
 							"Content-Type": "application/json",
@@ -82,7 +78,6 @@ async function apiUser(apiType = "", firstId?: number, secondId?: number, data?:
 					{
 						method: "GET",
 						mode: 'cors',
-						mode: 'cors',
 						headers: {
 							'Authorization': 'Token ' + localStorage.getItem("Token"),
 							"Content-Type": "application/json",
@@ -98,7 +93,6 @@ async function apiUser(apiType = "", firstId?: number, secondId?: number, data?:
 					{
 						method: "PATCH",
 						credentials: "include",
-						mode: 'cors',
 						mode: 'cors',
 						headers: {
 							'Authorization': 'Token ' + localStorage.getItem("Token"),

@@ -3,8 +3,7 @@ import { IonPage, IonTabs, IonRouterOutlet, IonTabBar, IonTabButton, useIonRoute
 import { userDataStore } from '@/stores/UserDataStore';
 import apiAuth from '@/logic/API/apiAuth';
 import apiUser from '@/logic/API/apiUser';
-import apiDivision from '@/logic/API/apiDivision';
-import apiGym from '@/logic/API/apiGym';
+import apiGymDiv from '@/logic/API/apiGymDiv';
 
 const router = useIonRouter()
 const userStore = userDataStore()
@@ -13,15 +12,14 @@ let baseUrl = await apiAuth()
 let confirmedUser: { log: string }
 let profilePicture: string
 
-
 await apiAuth('confirmAuth').then((confirm) => {
 	confirmedUser = confirm
 }).catch((error) => {
 	console.log("HAHA NEFUNGUJE")
-	router.navigate('/login')
+	router.replace('/login')
 })
 
-if (confirmedUser!.log != 'not logged in' || (localStorage.getItem('Token') == undefined)) {
+if ((confirmedUser!.log != 'not logged in') || (localStorage.getItem('Token') == undefined)) {
 	userStore.loggedUserId = confirmedUser!.log as unknown as number
 }
 else {
@@ -32,9 +30,9 @@ await apiUser("userProfile", userStore.loggedUserId).then((loggedUser) => {
 	profilePicture = `${baseUrl}${loggedUser.profile_picture}`
 })
 
-let myDivisions = await apiDivision('myDivisions', userStore.loggedUserId)
-let myGyms = await apiGym('myGyms', userStore.loggedUserId)
-let allGyms = await apiGym('allGyms')
+let myDivisions = await apiGymDiv('my', 'division', userStore.loggedUserId)
+let myGyms = await apiGymDiv('my', 'gym', userStore.loggedUserId)
+let allGyms = await apiGymDiv('all', 'gym')
 let index
 
 
@@ -66,7 +64,7 @@ userStore.allGymsId = allGyms
 				<ion-tab-button tab="postadd" href="/addPost">
 					<img src="../../../assets/icons/plusbutton.svg" alt="">
 				</ion-tab-button>
-				<ion-tab-button tab="forYou" href="/foryou/">
+				<ion-tab-button tab="forYou" href="/explore/">
 					<img src="../../../assets/icons/for_you.svg" alt="">
 				</ion-tab-button>
 			</ion-tab-bar>
@@ -86,7 +84,12 @@ export default {
 
 <style scoped>
 img {
-	height: 70%;
+	height: 60%;
+	aspect-ratio: 1;
+}
+
+IonTabButton {
+	max-width: 0px;
 }
 
 .tab-selected {
@@ -99,8 +102,6 @@ img {
 }
 
 #profile {
-	height: 70%;
-	aspect-ratio: 1 !important;
 	object-fit: contain;
 	border-radius: 50%;
 	border: 2px solid transparent !important;
