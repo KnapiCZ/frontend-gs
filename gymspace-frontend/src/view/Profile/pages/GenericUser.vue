@@ -13,13 +13,13 @@ import apiUser from '@/logic/API/apiUser';
 const route = useRoute();
 const userStore = userDataStore();
 const router = useIonRouter()
-const logged_user = localStorage.getItem("logged_user_id")
-userStore.renderedUserId = (route.params.id[0] as unknown as number)
-userStore.user = JSON.stringify(await apiUser("profile", userStore.renderedUserId, undefined, ''))
+
+userStore.renderedUserId = (route.params.id[0] as unknown) as number
+userStore.user = JSON.stringify(await apiUser("userProfile", userStore.renderedUserId))
 
 
 function checkLogin() {
-	if (userStore.renderedUserId == logged_user) return true;
+	if (userStore.renderedUserId == userStore.loggedUserId) return true;
 	else return false;
 }
 </script>
@@ -27,7 +27,7 @@ function checkLogin() {
 <template>
 	<IonPage class="ion-no-padding">
 		<IonContent class="ion-no-padding" id="user">
-			<IonToolbar v-if="userStore.renderedUserId != logged_user">
+			<IonToolbar v-if="userStore.renderedUserId != userStore.loggedUserId">
 				<IonButton slot="start" @click="router.back()" class="back-button" color="transparent">
 					<img src="@/assets/icons/arrowRight.svg">
 				</IonButton>

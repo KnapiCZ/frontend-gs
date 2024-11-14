@@ -1,20 +1,38 @@
 <script setup lang="ts">
 import { IonPage, IonTabs, IonRouterOutlet, IonTabBar, IonTabButton, useIonRouter } from '@ionic/vue';
 import { userDataStore } from '@/stores/UserDataStore';
+import apiAuth from '@/logic/API/apiAuth';
 import apiUser from '@/logic/API/apiUser';
-import apiGym from '@/logic/API/apiGym';
+import apiGymDiv from '@/logic/API/apiGymDiv';
 
 const router = useIonRouter()
 const userStore = userDataStore()
-const user_id = localStorage.getItem("logged_user_id") | 0
 
-console.debug("[DEBUG] " + user_id)
+let baseUrl = await apiAuth()
+let confirmedUser: { log: string }
+let profilePicture: string
 
-let user = await apiUser("profile", user_id, undefined, 'profile_picture')
+await apiAuth('confirmAuth').then((confirm) => {
+	confirmedUser = confirm
+}).catch((error) => {
+	console.log("HAHA NEFUNGUJE")
+	router.replace('/login')
+})
 
-let myDivisions = await apiGym('my', user_id)
-let myGyms = await apiGym('my', user_id)
-let allGyms = await apiGym('all')
+if ((confirmedUser!.log != 'not logged in') || (localStorage.getItem('Token') == undefined)) {
+	userStore.loggedUserId = confirmedUser!.log as unknown as number
+}
+else {
+	router.replace('/login')
+}
+
+await apiUser("userProfile", userStore.loggedUserId).then((loggedUser) => {
+	profilePicture = `${baseUrl}${loggedUser.profile_picture}`
+})
+
+let myDivisions = await apiGymDiv('my', 'division', userStore.loggedUserId)
+let myGyms = await apiGymDiv('my', 'gym', userStore.loggedUserId)
+let allGyms = await apiGymDiv('all', 'gym')
 let index
 
 
@@ -34,22 +52,22 @@ userStore.allGymsId = allGyms
 	<IonPage class="ion-no-padding">
 		<IonTabs class="ion-no-padding">
 			<IonRouterOutlet></IonRouterOutlet>
-			<IonTabBar slot="bottom">
-				<IonTabButton tab="user" class="no-filter" :href="'/user/' + user_id">
-					<img id="profile" class="no-filter" :src="user.profile_picture" />
-				</IonTabButton>
+			<ion-tab-bar slot="bottom">
+				<ion-tab-button tab="user" class="no-filter" :href="'/user/' + userStore.loggedUserId">
+					<img id="profile" class="no-filter" :src="profilePicture" />
+				</ion-tab-button>
 
-				<IonTabButton tab="community" href="/community/">
+				<ion-tab-button tab="community" href="/community/">
 					<img src="../../../assets/icons/community.svg" alt="">
-				</IonTabButton>
+				</ion-tab-button>
 
-				<IonTabButton tab="postadd" href="/addPost">
+				<ion-tab-button tab="postadd" href="/addPost">
 					<img src="../../../assets/icons/plusbutton.svg" alt="">
-				</IonTabButton>
-				<IonTabButton tab="forYou" href="/explore/">
+				</ion-tab-button>
+				<ion-tab-button tab="forYou" href="/explore/">
 					<img src="../../../assets/icons/for_you.svg" alt="">
-				</IonTabButton>
-			</IonTabBar>
+				</ion-tab-button>
+			</ion-tab-bar>
 		</IonTabs>
 	</IonPage>
 </template>
@@ -68,10 +86,6 @@ export default {
 img {
 	height: 60%;
 	aspect-ratio: 1;
-}
-
-IonTabBar {
-	background-color: black !important;
 }
 
 IonTabButton {

@@ -2,51 +2,42 @@
 import { userDataStore } from '@/stores/UserDataStore';
 import { IonCol, IonRow } from '@ionic/vue';
 import UserMenu from '@/view/Menus/components/UserMenu.vue';
+import apiUser from '@/logic/API/apiUser';
 import FollowersModal from './FollowersModal.vue';
-import apiPost from '@/logic/API/apiPost';
 
-//TODO: udelat modal following tak jako modal na gymy na mape (v kodu) / opravit tento
-
-
+const baseURL = await apiUser()
 const userStore = userDataStore();
-const logged_user = localStorage.getItem("logged_user_id")
-
 
 let userData = JSON.parse(userStore.user)
-//let posts = await apiPost('usersPosts', userStore.renderedUserId);
 
 function checkLogin() {
-	if (userStore.renderedUserId == logged_user) return true;
+	if (userStore.renderedUserId == userStore.loggedUserId) return true;
 	else return false;
 }
-
-let isUserVerified = userData.isUserVerified ?? 1;
 
 </script>
 
 <template>
-	<div id="background" :style="{ backgroundImage: 'url(' + userData.background_picture + ')' }">
+	<div id="background" :style="{ backgroundImage: 'url(' + baseURL + userData.background_picture + ')' }">
 		<UserMenu v-show="checkLogin()" />
 		<div class="blur-wrapper">
-			<div class="main-info-blur " :style="{ backgroundImage: 'url(' + userData.background_picture + ')' }">
+			<div class="main-info-blur "
+				:style="{ backgroundImage: 'url(' + baseURL + userData.background_picture + ')' }">
 			</div>
 		</div>
 		<div class="main-info">
-			<div class="profile-image-container">
-				<img class="profile-image" :src="userData.profile_picture">
-				<img v-if="isUserVerified" class="verified-icon" src="../../../assets/icons/checkMark.svg" />
-			</div>
+			<img class='PFP' :src="baseURL + userData.profile_picture">
 			<IonRow>
 				<IonCol id="followers-modal">
-					<p class="top-item1">{{ userData.followers.length }}</p>
+					<p class="top-item1">{{ userData.followers }}</p>
 					<p class="bottom-item">Followers</p>
 				</IonCol>
 				<IonCol>
 					<p class="top-item"> {{ userData.username }}</p>
-					<p class="bottom-item">{{ userData.username }}</p>
+					<p class="bottom-item">{{ userData.handle }}</p>
 				</IonCol>
 				<IonCol>
-					<p class="top-item1">{{ 45 }}</p>
+					<p class="top-item1">{{ userData.post_list.length }}</p>
 					<p class="bottom-item">Posts</p>
 				</IonCol>
 			</IonRow>
@@ -88,40 +79,27 @@ let isUserVerified = userData.isUserVerified ?? 1;
 .main-info {
 	width: 80%;
 	height: 70px;
-	padding-top: 10px;
+	padding-top: 20px;
 	position: absolute;
 	bottom: calc((100% * -0.185));
 	left: 50%;
 	transform: translateX(-50%);
 	border-radius: 10px;
-	background-color: rgba(0, 0, 0, 0.315);
+	background-blend-mode: darken;
+	background-color: rgba(0, 0, 0, 0.13);
 }
 
-.profile-image-container {
-	margin-top: -70px;
-	position: relative;
-	display: inline-block;
+.PFP {
 	width: 80px;
 	height: 80px;
-}
-
-.profile-image {
-	width: 100%;
-	height: 100%;
 	border-radius: 50%;
-	object-fit: cover;
-	border: 2px solid white;
-}
-
-.verified-icon {
+	background-color: black;
+	object-fit: contain;
 	position: absolute;
-	bottom: 5px;
-	right: 5px;
-	width: 20px;
-	height: 20px;
-	background: yellow;
-	border-radius: 50%;
-	border: 2px solid white;
+	left: 50%;
+	top: -60px;
+	transform: translateX(-50%);
+
 }
 
 .top-item,

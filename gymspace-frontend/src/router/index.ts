@@ -2,91 +2,22 @@ import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 import apiAuth from '@/logic/API/apiAuth';
 
+
+let confirmedUser: { log: string }
+
+
 const routes: Array<RouteRecordRaw> = [
 
 	{
 		path: '/login',
 		name: 'login',
 		component: () => import('@/view/Authentication/pages/LogIn.vue'),
-		meta: { requiresAuth: false },
-
 	},
 
 	{
 		path: '/signup',
 		name: 'signup',
-		component: () => import('@/view/Authentication/pages/SignUp.vue'),
-		meta: { requiresAuth: false },
-		children: [
-			{
-				path: '',
-				name: 'redirect1',
-				redirect: '/step-1'
-			},
-
-			{
-				path: '/step-1',
-				name: 'signUpStep1',
-				component: () => import('@/view/Authentication/pages/SignUpStep1.vue'),
-				meta: { requiresAuth: false },
-			},
-			{
-				path: '/step-2',
-				name: 'signUpStep2',
-				component: () => import('@/view/Authentication/pages/SignUpStep2.vue'),
-				meta: { requiresAuth: false },
-			},
-			{
-				path: '/step-3',
-				name: 'signUpStep3',
-				component: () => import('@/view/Authentication/pages/SignUpStep3.vue'),
-				meta: { requiresAuth: true },
-			},
-			{
-				path: '/step-4',
-				name: 'signUpStep4',
-				component: () => import('@/view/Authentication/pages/SignUpStep4.vue'),
-				meta: { requiresAuth: true },
-			},
-			{
-				path: '/step-5',
-				name: 'signUpStep5',
-				component: () => import('@/view/Authentication/pages/SignUpStep5.vue'),
-				meta: { requiresAuth: true },
-			},
-			{
-				path: '/step-6',
-				name: 'signUpStep6',
-				component: () => import('@/view/Authentication/pages/SignUpStep6.vue'),
-				meta: { requiresAuth: true },
-			},
-			{
-				path: '/step-7',
-				name: 'signUpStep7',
-				component: () => import('@/view/Authentication/pages/SignUpStep7.vue'),
-				meta: { requiresAuth: true },
-			},
-			{
-				path: '/step-8',
-				name: 'signUpStep8',
-				component: () => import('@/view/Authentication/pages/SignUpStep8.vue'),
-				meta: { requiresAuth: true },
-			},
-
-		]
-	},
-
-	{
-		path: '/user/:id/trainer',
-		component: () => import('@/view/Explore/pages/Athletes.vue'),
-		props: true,
-		meta: { requiresAuth: true, }
-	},
-	{
-		path: '/user/:id/trainertab',
-		component: () => import('@/view/Explore/pages/AthletesUser.vue'),
-		props: true,
-		meta: { requiresAuth: true, }
+		component: () => import('@/view/Authentication/pages/SignIn.vue'),
 	},
 	{
 		path: '/',
@@ -96,7 +27,7 @@ const routes: Array<RouteRecordRaw> = [
 			{
 				path: '',
 				name: 'redirect',
-				redirect: '/waiting-screen'
+				redirect: '/explore'
 			},
 			{
 				path: '/user/:id',
@@ -113,6 +44,7 @@ const routes: Array<RouteRecordRaw> = [
 				props: true,
 				meta: { requiresAuth: true, }
 			},
+
 			{
 				path: '/community',
 				name: "community",
@@ -121,6 +53,7 @@ const routes: Array<RouteRecordRaw> = [
 			},
 			{
 				path: '/explore',
+				name: "explore",
 				component: () => import('@/view/Explore/pages/Explore.vue'),
 				meta: { requiresAuth: true },
 				children: [
@@ -128,6 +61,7 @@ const routes: Array<RouteRecordRaw> = [
 						path: '',
 						redirect: '/foryou'
 					},
+
 
 					{
 						path: '/foryou',
@@ -144,7 +78,7 @@ const routes: Array<RouteRecordRaw> = [
 					{
 						path: '/athletes',
 						name: "athletes",
-						component: () => import('@/view/Explore/pages/Athletes.vue'),
+						component: () => import('@/view/Explore/pages/Athetes.vue'),
 						meta: { requiresAuth: true },
 					},
 				]
@@ -187,27 +121,7 @@ const routes: Array<RouteRecordRaw> = [
 		name: "gymfeed",
 		component: () => import('@/view/Community/pages/GymFeedSlider.vue'),
 		meta: { requiresAuth: true },
-	},
-	{
-		path: '/paywall',
-		name: 'paywall',
-		component: () => import('@/view/PayWall/pages/TicketPage.vue'),
-		meta: { requiresAuth: false },
-
-	},
-	{ //TODO: projit celej router a optimalizovat a seradit
-		path: '/create-gym',
-		name: 'create-gym',
-		component: () => import('@/view/Community/pages/CreateGym.vue'),
-		meta: { requiresAuth: false },
-
-	},
-	{
-		path: '/waiting-screen',
-		component: () => import('@/view/Authentication/pages/WaitingScreen.vue'),
-		meta: { requiresAuth: true },
-	},
-
+	}
 ]
 
 
@@ -217,27 +131,14 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from) => {
-	// If the route doesn't require authentication, allow access
-	if (!to.meta.requiresAuth) {
-		return true; // Explicitly allow navigation
+	if (to.name == "login" as string || to.name == "signup" as string) return undefined
+	await apiAuth('confirmAuth').then((confirm) => {
+		confirmedUser = confirm
+	}).catch((error) => { console.log(error) })
+
+	if (confirmedUser!.log == 'not logged in' && to.name !== 'login') {
+		return { name: 'login' }
 	}
-
-	try {
-		// Confirm user authentication status
-		const response = await apiAuth('confirmAuth');
-
-		// Check if the user is authenticated by verifying the `log` value
-		if (!response?.log || typeof response.log !== 'number') {
-			// Redirect to login if not authenticated
-			return { name: 'login' };
-		}
-	} catch (error) {
-		console.error('Authentication error:', error);
-		// Redirect to login in case of an error
-		return { name: 'login' };
-	}
-});
-
-
+})
 
 export default router

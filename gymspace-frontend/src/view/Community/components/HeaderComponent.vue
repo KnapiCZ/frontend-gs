@@ -4,7 +4,7 @@ import { userDataStore } from '@/stores/UserDataStore';
 import { ref } from 'vue';
 
 import BioButton from './BioButton.vue';
-import apiGym from '@/logic/API/apiGym';
+import apiGymDiv from '@/logic/API/apiGymDiv';
 
 const props = defineProps<{
     id: number
@@ -17,7 +17,7 @@ const router = useIonRouter()
 const userStore = userDataStore()
 const index1 = userStore.userDivisionId.indexOf(props.id)
 const index2 = userStore.userGymId.indexOf(props.id)
-let info = await apiGym('info', props.id, undefined, '')
+let info = await apiGymDiv('info', props.type, props.id)
 let FollowMembers = ref([0, info!.members.length]);
 let isJoined = ref(checkJoined());
 let isFollowing = false
@@ -45,7 +45,7 @@ async function Join() {
         if (!userStore.userDivisionId.includes(props.id) && props.type == 'division') userStore.userDivisionId.push(props.id)
         if (!userStore.userDivisionId.includes(props.id)) userStore.userGymId.push(props.id)
     }
-    await apiGym("join", info!.id, undefined, undefined, userStore.loggedUserId.toString());
+    await apiGymDiv("join", props.type, info!.id, userStore.loggedUserId);
     isJoined.value = !isJoined.value;
 }
 
@@ -62,7 +62,7 @@ async function Join() {
     </IonToolbar>
     <div id="background" class="grid-container">
         <div class="column logo-column">
-            <img :src="props.logo" :type="props.type" />
+            <BioButton :id="props.id" :type="props.type" />
             <p class="top">{{ props.name }}</p>
         </div>
         <div class="column">

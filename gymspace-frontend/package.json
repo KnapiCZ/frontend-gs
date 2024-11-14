@@ -24,7 +24,7 @@
     "@capacitor/preferences": "^7.0.0",
     "@capacitor/splash-screen": "^7.0.0",
     "@capacitor/status-bar": "^7.0.0",
-    "@ionic-native/video-capture-plus": "^5.36.0",
+"@ionic-native/video-capture-plus": "^5.36.0",
     "@ionic/pwa-elements": "^3.2.2",
     "@ionic/vue": "^7.6.0",
     "@ionic/vue-router": "^7.6.0",
@@ -54,7 +54,7 @@
     "sass": "1.83.4",
     "typescript": "5.7.3",
     "vite": "4.5.9",
-    "vitest": "^0.32.2",
+"vitest": "^0.32.2",
     "vue-tsc": "^1.0.24"
   },
   "description": "An Ionic project"

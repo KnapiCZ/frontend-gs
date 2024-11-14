@@ -3,7 +3,7 @@ import { useIonRouter, IonBackButton, IonButtons, IonContent, IonHeader, IonTool
 import { userDataStore } from '@/stores/UserDataStore';
 import { ref } from 'vue';
 import apiPost from '@/logic/API/apiPost';
-import apiGym from '@/logic/API/apiGym';
+import apiGymDiv from '@/logic/API/apiGymDiv';
 
 const userStore = userDataStore()
 const router = useIonRouter()
@@ -13,15 +13,16 @@ let choosen = ref(0)
 let choosenName = ref("")
 
 async function addPost() {
-    let data = { 'user_id': userStore.loggedUserId, 'description': text.value, 'division': choosen.value, 'media': [userStore.croppedChoosenPhoto], "mentioned_user": [2, 3] }
-    await apiPost('createPost', undefined, JSON.stringify(data))
-    router.replace('/foryou')
+    let data = { 'author': userStore.loggedUserId, 'description': text.value, 'division': choosen.value, 'media': [userStore.croppedChoosenPhoto] }
+    console.debug("[DEBUG] ", await apiPost('createPost', 0, 0, data))
+    router.navigate('/')
 }
 
 for (let i = 0; i < userStore.userDivisionId.length; i++) {
-    let data = await await apiGym('info', userStore.userDivisionId[i], undefined, 'title')
-    names.push(data.title)
+    let data = await apiGymDiv('name', 'division', userStore.userDivisionId[i])
+    names.push(data)
 }
+
 </script>
 
 
@@ -60,7 +61,6 @@ for (let i = 0; i < userStore.userDivisionId.length; i++) {
 <style scoped>
 ion-title {
     margin: 0 20px;
-    font-weight: bold;
 }
 
 .post-button {

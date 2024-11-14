@@ -21,7 +21,7 @@ let challenges = [props.id, 32, 12, 5];
 
 <template>
     <div :id="'challenge-modal' + props.row + props.id" class="image-wrapper">
-        <img id="challenge-thumbnail" src="../../../assets/images/Bodybuilding.png" alt="">
+        <img id="challenge-thumbnail" src="../../../assets/images/photo1.jpg" alt="">
     </div>
     <IonModal ref="modal" :trigger="'challenge-modal' + props.row + props.id"
         :key="'challenge-swipe' + userStore.clickedChallenge">

@@ -1,17 +1,26 @@
 @font-face {
 	font-family: "Montserrat";
+	font-weight: 400;
 	font-style: normal;
 
-	src: url('@/assets/fonts/Montserrat-VariableFont_wght.ttf');
+	src: url(@/assets/fonts/Montserrat-Regular.ttf);
 
 }
 
 @font-face {
 	font-family: "Montserrat";
+	font-weight: bold;
+	font-style: normal;
+
+	src: url(@/assets/fonts/Montserrat-Bold.ttf);
+}
+
+@font-face {
+	font-family: "Montserrat";
+	font-weight: normal;
 	font-style: italic;
 
-	src: url('@/assets/fonts/Montserrat-Italic-VariableFont_wght.ttf');
-
+	src: url(@assets/fonts/Montserrat-Italic.ttf);
 }
 
 @font-face {
@@ -40,14 +49,17 @@ img {
 
 /* color palette from <https://github.com/vuejs/theme> */
 
-* {
-	color: white;
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
 }
-
 
 body {
 	width: 100%;
 	height: 100%;
+	color: white;
 	background: black;
 	font-size: 15px;
 	text-rendering: optimizeLegibility;
@@ -86,138 +98,4 @@ body {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-}
-
-ion-button.sign-up-button {
-	bottom: 20px;
-	width: 50%;
-	height: 44px;
-	margin: 50px auto;
-	color: black;
-	font-size: 14px;
-	font-weight: 900;
-	border-radius: 6px !important;
-	box-shadow: 0 0 45px var(--color-primary-tint);
-	--border-radius: 6px !important;
-	--background: var(--color-primary-tint);
-	--background-hover: #bdb000;
-	--background-activated: #bdb000;
-	--background-focused: #bdb000;
-}
-
-.input-bottom.sc-ion-input-ios .helper-text.sc-ion-input-ios,
-.input-bottom.sc-ion-input-md .helper-text.sc-ion-input-md{
-	color: rgb(255, 0, 0);
-	font-weight: bold;
-	text-shadow: rgb(0, 0, 0) 0 0 20px;
-}
-
-.searchbar-input.sc-ion-searchbar-md,
-.searchbar-input.sc-ion-searchbar-ios {
-	background-position: center !important;
-}
-
-ion-content.sign-up-content,
-ion-content.welcome-page {
-	overflow: hidden;
-	text-align: center;
-	--padding-top: 36px;
-}
-
-h1.sign-up {
-	text-align: left;
-	font-size: 6vh;
-	font-weight: 900;
-	width: 32vh;
-	margin: 4vh 5%;
-	text-shadow: 0 0 10px black;
-}
-
-ion-content.sign-up-content {
-	overflow: hidden;
-	text-align: center;
-}
-
-.sign-up-background-image {
-	opacity: 0.8;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	object-position: top center;
-	z-index: -1;
-}
-
-.pac-item {
-	cursor: default;
-	padding: 0 4px;
-	text-overflow: ellipsis;
-	overflow: hidden;
-	white-space: wrap;
-	line-height: 20px;
-	text-align: left;
-	border: 1px solid #fff000;
-	font-size: 12px;
-	color: #515151;
-	padding: 5px 10px;
-	border-radius: 6px;
-	backdrop-filter: blur(5px);
-	margin: 5px 0;
-}
-
-.pac-item:hover {
-	background: black;
-	color: white;
-}
-
-.pac-item-query {
-	color: white;
-}
-
-.pac-matched {
-	color: var(--color-primary-tint);
-}
-
-.pac-icon-marker {
-	display: none;
-}
-
-.custom-modal-class {
-	margin: auto;
-	--width: 90%;
-	--border-radius: 6px;
-	--border-color: white;
-	--border-width: 1px;
-	--border-style: solid;
-	--border-radius: 6px;
-}
-
-.searchbar-search-icon>.icon-inner> .ionicon{
-	box-shadow: #1eff00 0 0 10px;
-}
-
-.pac-container{
-	background-color: transparent;
-	position: absolute !important;
-	z-index: 1000;
-	border-radius: 6px;
-	border-top: none;
-	font-family: Arial, sans-serif;
-	-webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, .3);
-	box-shadow: 0 2px 6px rgba(0, 0, 0, .3);
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-	overflow: hidden;
-	width: 90% !important;
-	margin: auto 5%;
-	left: 0 !important;
-}
-
-.pac-container:after {
-	/* Disclaimer: not needed to show 'powered by Google' if also a Google Map is shown */
-
-	background-image: none !important;
-	height: 0px;
 }
