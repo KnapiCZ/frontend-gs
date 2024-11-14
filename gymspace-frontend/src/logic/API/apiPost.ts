@@ -2,7 +2,7 @@
 
 
 async function apiPost(apiType = '', firstId?: number, secondId?: number, data?: unknown) {
-    const baseUrl = `http://localhost:8000/`
+    const baseUrl = `https://gymspace-app-t6hic.ondigitalocean.app/`
     let response
     switch (apiType) {
         case "createPost":

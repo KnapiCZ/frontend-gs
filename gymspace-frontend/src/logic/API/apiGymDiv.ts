@@ -1,7 +1,7 @@
 //! API pro DIVISION, GYM
 
 async function apiGymDiv(apiType = '', type = '', firstItem?: number, secondItem?: number) {
-    const baseUrl = `http://localhost:8000/`
+    const baseUrl = `https://gymspace-app-t6hic.ondigitalocean.app/`
     let response
     switch (apiType) {
 

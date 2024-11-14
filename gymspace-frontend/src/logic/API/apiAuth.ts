@@ -2,7 +2,7 @@
 
 
 async function apiAuth(apiType = '', firstItem?: string, secondItem?: string) {
-    const baseUrl = `http://localhost:8000/`
+    const baseUrl = `https://gymspace-app-t6hic.ondigitalocean.app/`
     let response
     let data
 

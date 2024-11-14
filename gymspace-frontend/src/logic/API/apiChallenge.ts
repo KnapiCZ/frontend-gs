@@ -2,7 +2,7 @@
 
 
 async function apiChallenge(apiType = '', firstItem?: number, secondItem?: number, thirdItem?: number) {
-    const baseUrl = `http://localhost:8000/`
+    const baseUrl = `https://gymspace-app-t6hic.ondigitalocean.app/`
     let response
 
 
