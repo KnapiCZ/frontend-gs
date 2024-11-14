@@ -2,11 +2,8 @@ gymspace/*.log
 gymspace/*.pot
 gymspace/*.pyc
 gymspace/__pycache__
-gymspace/db.sqlite3
 gymspace/*/__pycache__
 gymspace/*/migrations
-gymspace/global_post_media
-gymspace/global_profile_media
 gymspace/media
 # Logs
 logs

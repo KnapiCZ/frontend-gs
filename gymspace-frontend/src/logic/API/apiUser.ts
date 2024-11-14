@@ -9,6 +9,7 @@ async function apiUser(apiType = "", firstId?: number, secondId?: number, data?:
 
 		case "createUser":
 			console.log(data)
+			console.log(data)
 			response = await (
 
 

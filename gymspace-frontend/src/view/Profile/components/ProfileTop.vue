@@ -7,8 +7,9 @@ import FollowersModal from './FollowersModal.vue';
 
 const baseURL = await apiUser()
 const userStore = userDataStore();
+
 let userData = JSON.parse(userStore.user)
-userStore.followersCount = userData.followers
+
 function checkLogin() {
 	if (userStore.renderedUserId == userStore.loggedUserId) return true;
 	else return false;
@@ -27,8 +28,8 @@ function checkLogin() {
 		<div class="main-info">
 			<img class='PFP' :src="baseURL + userData.profile_picture">
 			<IonRow>
-				<IonCol :id="'followers-modal' + userStore.componentKey">
-					<p class="top-item1">{{ userStore.followersCount }}</p>
+				<IonCol id="followers-modal">
+					<p class="top-item1">{{ userData.followers }}</p>
 					<p class="bottom-item">Followers</p>
 				</IonCol>
 				<IonCol>

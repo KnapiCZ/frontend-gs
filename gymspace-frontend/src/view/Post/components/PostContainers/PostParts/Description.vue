@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import apiUser from '@/logic/API/apiUser';
-import FollowButton from '@/view/shared/components/FollowButton.vue';
+import FollowButton from '../../../../shared/components/FollowButton.vue';
 import { IonContent, IonRow } from '@ionic/vue';
 import { ref } from 'vue';
 

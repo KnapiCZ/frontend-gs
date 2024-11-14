@@ -1,14 +1,12 @@
 <script setup lang="ts">
 import { IonPage } from '@ionic/vue';
 import GenericUser from './GenericUser.vue';
-import { userDataStore } from '@/stores/UserDataStore';
-
-const userStore = userDataStore()
+import router from '@/router';
 
 </script>
 
 <template>
     <IonPage class="ion-no-padding">
-        <GenericUser :key="userStore.componentKey" />
+        <GenericUser :key="router.currentRoute.value.params.id as unknown as PropertyKey" />
     </IonPage>
 </template>

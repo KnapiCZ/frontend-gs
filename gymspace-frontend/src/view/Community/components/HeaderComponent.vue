@@ -45,7 +45,7 @@ async function Join() {
         if (!userStore.userDivisionId.includes(props.id) && props.type == 'division') userStore.userDivisionId.push(props.id)
         if (!userStore.userDivisionId.includes(props.id)) userStore.userGymId.push(props.id)
     }
-    await apiGymDiv("join", 'division', info!.id, userStore.loggedUserId);
+    await apiGymDiv("join", props.type, info!.id, userStore.loggedUserId);
     isJoined.value = !isJoined.value;
 }
 

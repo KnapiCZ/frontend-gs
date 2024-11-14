@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 import apiAuth from '@/logic/API/apiAuth';
 
+
 let confirmedUser: { log: string }
 
 
@@ -26,15 +27,15 @@ const routes: Array<RouteRecordRaw> = [
 			{
 				path: '',
 				name: 'redirect',
-				redirect: '/foryou'
+				redirect: '/explore'
 			},
-
 			{
 				path: '/user/:id',
 				name: "user",
 				component: () => import('@/view/Profile/pages/UserWrapper.vue'),
 				props: true,
 				meta: { requiresAuth: true },
+
 			},
 			{
 				path: '/user/:id/post/:initialPosition',
@@ -51,10 +52,36 @@ const routes: Array<RouteRecordRaw> = [
 				meta: { requiresAuth: true },
 			},
 			{
-				path: '/foryou',
-				name: "fyp",
-				component: () => import('@/view/ForYouPage/pages/ForYouPage.vue'),
-				meta: { requiresAuth: true }
+				path: '/explore',
+				name: "explore",
+				component: () => import('@/view/Explore/pages/Explore.vue'),
+				meta: { requiresAuth: true },
+				children: [
+					{
+						path: '',
+						redirect: '/foryou'
+					},
+
+
+					{
+						path: '/foryou',
+						name: "foryou",
+						component: () => import('@/view/Explore/pages/ForYou.vue'),
+						meta: { requiresAuth: true },
+					},
+					{
+						path: '/challenges',
+						name: "explorechallenges",
+						component: () => import('@/view/Explore/pages/Challenges.vue'),
+						meta: { requiresAuth: true },
+					},
+					{
+						path: '/athletes',
+						name: "athletes",
+						component: () => import('@/view/Explore/pages/Athetes.vue'),
+						meta: { requiresAuth: true },
+					},
+				]
 			},
 		]
 	},
