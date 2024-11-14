@@ -12,7 +12,7 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@capacitor/android": "^6.0.0",
+    "@capacitor/android": "6.1.2",
     "@capacitor/app": "^6.0.0",
     "@capacitor/camera": "^6.0.0",
     "@capacitor/core": "^6.0.0",
@@ -46,7 +46,6 @@
     "@vue/eslint-config-typescript": "^11.0.2",
     "@vue/test-utils": "^2.3.0",
     "cypress": "^13.4.0",
-    "eslint": "^8.35.0",
     "eslint-plugin-vue": "^9.9.0",
     "jsdom": "^22.1.0",
     "sass": "^1.80.7",
