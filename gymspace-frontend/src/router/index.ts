@@ -136,7 +136,7 @@ router.beforeEach(async (to, from) => {
 		confirmedUser = confirm
 	}).catch((error) => { console.log(error) })
 
-	if (confirmedUser!.log == 'not logged in' && to.name !== 'login') {
+	if ((confirmedUser!.log == 'not logged in' || confirmedUser!.log == undefined) && to.name !== 'login') {
 		return { name: 'login' }
 	}
 })

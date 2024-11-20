@@ -14,16 +14,16 @@ let profilePicture: string
 
 await apiAuth('confirmAuth').then((confirm) => {
 	confirmedUser = confirm
-}).catch((error) => {
+}).catch(() => {
 	console.log("HAHA NEFUNGUJE")
 	router.replace('/login')
 })
-
-if ((confirmedUser!.log != 'not logged in') || (localStorage.getItem('Token') == undefined)) {
+console.debug("[DEBUG] " + confirmedUser!.log)
+if ((confirmedUser!.log != undefined) || (localStorage.getItem('Token') != undefined)) {
 	userStore.loggedUserId = confirmedUser!.log as unknown as number
 }
 else {
-	router.replace('/login')
+	router.push('/login')
 }
 
 await apiUser("userProfile", userStore.loggedUserId).then((loggedUser) => {
