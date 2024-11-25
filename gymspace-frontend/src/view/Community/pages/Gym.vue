@@ -20,7 +20,8 @@ let gymPosts = await apiPost("gymPosts", id)
 <template>
 	<IonPage>
 		<IonContent>
-			<HeaderComponent type="gym" :logo="baseUrl + gymInfo.logo" :name="gymInfo.title" :id="id" />
+			<!--?Zkontrolovat props a optimalizovat 👍-->
+			<HeaderComponent type="gym" :name="gymInfo.title" :id="id" />
 
 			<VTabs v-model="tab" color="#e8e20a" bg-color="black" align-tabs="center" slider-color="#e8e20a"
 				:grow='true'>

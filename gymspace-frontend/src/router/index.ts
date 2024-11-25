@@ -78,7 +78,7 @@ const routes: Array<RouteRecordRaw> = [
 					{
 						path: '/athletes',
 						name: "athletes",
-						component: () => import('@/view/Explore/pages/Athetes.vue'),
+						component: () => import('@/view/Explore/pages/Athletes.vue'),
 						meta: { requiresAuth: true },
 					},
 				]
