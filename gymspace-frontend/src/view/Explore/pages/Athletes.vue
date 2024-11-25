@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { IonContent, IonPage } from '@ionic/vue';
+import { IonButton, IonContent, IonPage, IonToolbar, useIonRouter } from '@ionic/vue';
 import { userDataStore } from '@/stores/UserDataStore';
+import { useRoute } from 'vue-router';
 import apiUser from '@/logic/API/apiUser';
 
 //Využije se později ve vývoji
@@ -8,17 +9,21 @@ const props = defineProps<{
   id: number
 }>();
 
+const route = useRoute();
+const router = useIonRouter()
 const userStore = userDataStore();
 const baseUrl = await apiUser();
-
-//Provizorní id 4
-let userData = await apiUser("userProfile", 4);
+let id = route.params.id as unknown as number;
+let userData = await apiUser("userProfile", id);
 
 </script>
 
 
 <template>
   <IonPage>
+    <IonToolbar>
+      <IonButton @click='router.back()' slot="start" class="back-button"><img src="../../../assets/icons/arrowRight.svg"></IonButton>
+    </IonToolbar>
     <IonContent class="ion-padding profile-content">
 
     <div><img class="background" :src="baseUrl + userData.background_picture"></div>
@@ -69,7 +74,30 @@ let userData = await apiUser("userProfile", 4);
   </IonPage>
 </template>
 
-<style scoped> 
+<style scoped>
+
+.ion-padding {
+  --padding-start: 35px;
+  --padding-end: 35px;
+  --padding-top: 50px;
+  --padding-bottom: 35px;
+}
+
+.back-button {
+    height: 100%;
+    aspect-ratio: 1;
+}
+
+.back-button img {
+    rotate: 180deg;
+}
+
+ion-button {
+    --background: transparent;
+    --box-shadow: none;
+    padding: 10px;
+  }
+
 .background {
     top: 0;
     left: 0;

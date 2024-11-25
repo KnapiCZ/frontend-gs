@@ -19,8 +19,9 @@ import { IonRouterOutlet } from '@ionic/vue';
           <IonLabel>Challenges</IonLabel>
         </IonTabButton>
 
-        <IonTabButton tab="athletes" href="/athletes">
-          <IonLabel>Athletes</IonLabel>
+        <IonTabButton tab="athletes" href="/foryou">
+          <IonLabel>WIP</IonLabel>
+          <!--?Zatím nefunguje-->
         </IonTabButton>
 
       </IonTabBar>
