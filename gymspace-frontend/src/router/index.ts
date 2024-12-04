@@ -26,6 +26,12 @@ const routes: Array<RouteRecordRaw> = [
 		meta: { requiresAuth: true, }
 	},
 	{
+		path: '/user/:id/trainertab',
+		component: () => import('@/view/Explore/pages/AthletesUser.vue'),
+		props: true,
+		meta: { requiresAuth: true, }
+	},
+	{
 		path: '/',
 		name: 'landingPage',
 		component: () => import('@/view/shared/BottomNavigationBar_Router/BottomNavigationBar.vue'),

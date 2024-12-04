@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { IonButton, IonContent, IonPage, IonToolbar, useIonRouter } from '@ionic/vue';
+import { IonButton, IonCol, IonContent, IonPage, IonToolbar, useIonRouter } from '@ionic/vue';
 import { userDataStore } from '@/stores/UserDataStore';
 import { useRoute } from 'vue-router';
 import apiUser from '@/logic/API/apiUser';
@@ -69,6 +69,9 @@ let userData = await apiUser("userProfile", id);
             </div>
             </IonCol>
         </IonRow>
+        <IonCol class="button-section">
+          <IonButton class="contact-button" @click='router.push("/user/"+id+"/trainertab");'>Contact me</IonButton>
+        </IonCol>
         </IonGrid>
     </IonContent>
   </IonPage>
@@ -76,26 +79,41 @@ let userData = await apiUser("userProfile", id);
 
 <style scoped>
 
-.ion-padding {
-  --padding-start: 35px;
-  --padding-end: 35px;
-  --padding-top: 50px;
-  --padding-bottom: 35px;
-}
+  .ion-padding {
+    --padding-start: 35px;
+    --padding-end: 35px;
+    --padding-top: 50px;
+    --padding-bottom: 35px;
+  }
 
-.back-button {
-    height: 100%;
-    aspect-ratio: 1;
-}
+  .back-button {
+      height: 100%;
+      aspect-ratio: 1;
+  }
 
-.back-button img {
-    rotate: 180deg;
-}
+  .back-button img {
+      rotate: 180deg;
+  }
 
-ion-button {
-    --background: transparent;
-    --box-shadow: none;
-    padding: 10px;
+  .contact-button {
+    --background: yellow;
+    padding: 50px;
+    color: black;
+    font-weight: bold;
+    
+    
+  }
+
+  .button-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  ion-button {
+      --background: transparent;
+      --box-shadow: none;
+      padding: 10px;
   }
 
 .background {
@@ -190,12 +208,12 @@ ion-button {
 }
 
 .info-box {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(61, 61, 61, 0.5);
     backdrop-filter: blur(10px);
     border-radius: 8px;
-    border-width: 2px;
+    border-width: 1px;
     border-style: solid;
-    border-color: white;
+    border-color: rgb(65, 65, 65);
     display: flex;
     padding: 16px;
     text-align: left;
@@ -205,8 +223,7 @@ ion-button {
 
 .main-info-box {
     margin-bottom: 40px;
-    background: rgba(255, 255, 255, 0.6);
-    color: black;
+    background: rgba(61, 61, 61, 0.5);
 
 }
 </style>
