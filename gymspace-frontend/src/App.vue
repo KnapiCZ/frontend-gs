@@ -28,19 +28,11 @@ main,
 #app {
 	min-width: 100vw;
 	min-height: 100vh;
-	padding: 0;
-	margin: 0;
 	background-color: transparent;
 }
 
 #app {
 	display: flex;
-}
-
-
-body {
-	margin: 0;
-	padding: 0;
 }
 
 h1 {
