@@ -13,7 +13,7 @@
  */
 
 async function apiGymDiv(apiType = '', type: string, objectId?: number, data?: string, fields?: string, queryParams?: string) {
-    const baseUrl = `http://localhost:8000/`
+    const baseUrl = `https://gymspace-app-t6hic.ondigitalocean.app/`
     let response
     switch (apiType) {
 

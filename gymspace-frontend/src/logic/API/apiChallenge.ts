@@ -17,7 +17,7 @@
  */
 
 async function apiChallenge(apiType = '', object_id?: number, data?: string, fields?: string) {
-    const baseUrl = `http://localhost:8000/`
+    const baseUrl = `https://gymspace-app-t6hic.ondigitalocean.app/`
     let response
 
     switch (apiType) {

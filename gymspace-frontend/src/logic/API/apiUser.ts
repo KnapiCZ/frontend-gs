@@ -14,7 +14,7 @@
  */
 
 async function apiUser(apiType = "", user_id?: number, data?: string, queryParams?: string) {
-	const baseUrl = `http://localhost:8000/`
+	const baseUrl = `https://gymspace-app-t6hic.ondigitalocean.app/`
 	let response
 	switch (apiType) {
 
