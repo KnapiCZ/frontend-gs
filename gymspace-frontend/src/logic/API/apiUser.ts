@@ -78,7 +78,7 @@ async function apiUser(apiType = "", user_id?: number, data?: string, queryParam
 
 		case "usersFollowers":
 			response = await (
-				fetch(`${baseUrl}api/follow/${user_id}/followers`,
+				fetch(`${baseUrl}api/follow/${user_id}/followers/`,
 					{
 						method: "GET",
 						mode: 'cors',
