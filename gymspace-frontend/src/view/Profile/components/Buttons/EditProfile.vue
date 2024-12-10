@@ -11,7 +11,6 @@ import SexModal from '../DataEditorModals/SexModal.vue';
 import ImageModal from '../DataEditorModals/ImageModal.vue';
 
 const userStore = userDataStore()
-const baseUrl = await apiUser()
 const forceRerender = () => {
     userStore.componentKey += 1;
 };
@@ -26,14 +25,15 @@ let data = ref({
     weight: userData.weight
 })
 
-userStore.profilePicture = baseUrl + userData.profile_picture
-userStore.backgroundPicture = baseUrl + userData.background_picture
+userStore.profilePicture = userData.profile_picture
+userStore.backgroundPicture = userData.background_picture
 
 
 function cancel() {
     modalController.dismiss({ id: "user-edit" })
 }
 
+//TODO: zkontrolovat tuto funkci, prizpusobit aktualnimu api, handle nepujde updatovat
 async function save() {
     let contactsUrls = ""
     for (let i = 0; i < 5; i++) { contactsUrls += contacts[i] + "\r\n" }
@@ -45,7 +45,7 @@ async function save() {
     userData.height = data.value.height as unknown as number
     userData.weight = data.value.weight as unknown as number
     userStore.user = JSON.stringify(userData)
-    console.log(await apiUser('update'))
+    console.log(await apiUser('update')) // upravit tento userapi
     forceRerender()
     modalController.dismiss("user-edit")
 }

@@ -1,14 +1,24 @@
-//! API pro prihlasovani registraci a pod
+/**
+ * if arguments are not specified for case -> use undefined
+ * @description apiTypes:
+ * - getToken: gets users token for authorization
+ * - confirmAuth: used for checking if token is valid
+ * 
+ * @param apiType - used to select one of apiTypes
+ * @param username - users username
+ * @param password - users password
+ * @returns  Response
+ */
 
+async function apiAuth(apiType = '', username?: string, password?: string) {
 
-async function apiAuth(apiType = '', firstItem?: string, secondItem?: string) {
-    const baseUrl = `https://gymspace-app-t6hic.ondigitalocean.app/`
+    const baseUrl = `http://localhost:8000/`
     let response
     let data
 
     switch (apiType) {
         case "getToken":
-            data = { "username": firstItem, "password": secondItem }
+            data = { "username": username, "password": password }
             try {
                 response = await fetch(`${baseUrl}api-auth/`, {
                     method: "POST",
@@ -39,7 +49,7 @@ async function apiAuth(apiType = '', firstItem?: string, secondItem?: string) {
             }
 
         default:
-            return `${baseUrl}`
+            return `Invalid apiType`
     }
 }
 

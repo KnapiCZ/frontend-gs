@@ -14,7 +14,7 @@ let userStore = userDataStore()
 let init = route.params.initialPosition as unknown as number
 let id = route.params.id as unknown as number
 
-let post = await apiPost("allUserPostId", id)
+let post = await apiPost("usersPosts", id)
 userStore.userPostsKey = []
 
 function scrollToPost() {

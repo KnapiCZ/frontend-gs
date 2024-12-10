@@ -17,7 +17,7 @@ const router = useIonRouter()
 const userStore = userDataStore()
 const index1 = userStore.userDivisionId.indexOf(props.id)
 const index2 = userStore.userGymId.indexOf(props.id)
-let info = await apiGymDiv('info', props.type, props.id)
+let info = await apiGymDiv('info', props.type, props.id, undefined, '')
 let FollowMembers = ref([0, info!.members.length]);
 let isJoined = ref(checkJoined());
 let isFollowing = false
@@ -45,7 +45,7 @@ async function Join() {
         if (!userStore.userDivisionId.includes(props.id) && props.type == 'division') userStore.userDivisionId.push(props.id)
         if (!userStore.userDivisionId.includes(props.id)) userStore.userGymId.push(props.id)
     }
-    await apiGymDiv("join", props.type, info!.id, userStore.loggedUserId);
+    await apiGymDiv("join", props.type, info!.id, undefined, undefined, userStore.loggedUserId.toString());
     isJoined.value = !isJoined.value;
 }
 

@@ -2,13 +2,12 @@
 import { userDataStore } from '@/stores/UserDataStore';
 import { IonCol, IonRow } from '@ionic/vue';
 import UserMenu from '@/view/Menus/components/UserMenu.vue';
-import apiUser from '@/logic/API/apiUser';
 import FollowersModal from './FollowersModal.vue';
+import apiPost from '@/logic/API/apiPost';
 
-const baseURL = await apiUser()
 const userStore = userDataStore();
-
 let userData = JSON.parse(userStore.user)
+let posts = await apiPost('usersPosts', userStore.loggedUserId);
 
 function checkLogin() {
 	if (userStore.renderedUserId == userStore.loggedUserId) return true;
@@ -18,18 +17,17 @@ function checkLogin() {
 </script>
 
 <template>
-	<div id="background" :style="{ backgroundImage: 'url(' + baseURL + userData.background_picture + ')' }">
+	<div id="background" :style="{ backgroundImage: 'url(' + userData.background_picture + ')' }">
 		<UserMenu v-show="checkLogin()" />
 		<div class="blur-wrapper">
-			<div class="main-info-blur "
-				:style="{ backgroundImage: 'url(' + baseURL + userData.background_picture + ')' }">
+			<div class="main-info-blur " :style="{ backgroundImage: 'url(' + userData.background_picture + ')' }">
 			</div>
 		</div>
 		<div class="main-info">
-			<img class='PFP' :src="baseURL + userData.profile_picture">
+			<img class='PFP' :src="userData.profile_picture">
 			<IonRow>
 				<IonCol id="followers-modal">
-					<p class="top-item1">{{ userData.followers }}</p>
+					<p class="top-item1">{{ userData.followers.length }}</p>
 					<p class="bottom-item">Followers</p>
 				</IonCol>
 				<IonCol>
@@ -37,7 +35,7 @@ function checkLogin() {
 					<p class="bottom-item">{{ userData.handle }}</p>
 				</IonCol>
 				<IonCol>
-					<p class="top-item1">{{ userData.post_list.length }}</p>
+					<p class="top-item1">{{ posts.length }}</p>
 					<p class="bottom-item">Posts</p>
 				</IonCol>
 			</IonRow>
@@ -85,8 +83,7 @@ function checkLogin() {
 	left: 50%;
 	transform: translateX(-50%);
 	border-radius: 10px;
-	background-blend-mode: darken;
-	background-color: rgba(0, 0, 0, 0.13);
+	background-color: rgba(0, 0, 0, 0.315);
 }
 
 .PFP {

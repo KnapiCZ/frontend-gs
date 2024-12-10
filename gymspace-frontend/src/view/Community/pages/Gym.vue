@@ -4,15 +4,13 @@ import { VTab, VWindow, VWindowItem } from 'vuetify/lib/components/index.mjs';
 import { useRoute } from 'vue-router';
 import HeaderComponent from '../components/HeaderComponent.vue'
 import apiGymDiv from '@/logic/API/apiGymDiv';
-import apiUser from '@/logic/API/apiUser';
 import General from '../components/tabs/General.vue';
 import GymFeed from '../components/tabs/GymFeed.vue';
 import apiPost from '@/logic/API/apiPost';
 
 const route = useRoute()
-const baseUrl = await apiUser()
 let id = route.params.id as unknown as number
-let gymInfo = await apiGymDiv("info", 'gym', id)
+let gymInfo = await await apiGymDiv('info', "gym", id, undefined, 'logo,title,id')
 let gymPosts = await apiPost("gymPosts", id)
 
 </script>
@@ -20,7 +18,7 @@ let gymPosts = await apiPost("gymPosts", id)
 <template>
 	<IonPage>
 		<IonContent>
-			<HeaderComponent type="gym" :logo="baseUrl + gymInfo.logo" :name="gymInfo.title" :id="id" />
+			<HeaderComponent type="gym" :logo="gymInfo.logo" :name="gymInfo.title" :id="id" />
 
 			<VTabs v-model="tab" color="#e8e20a" bg-color="black" align-tabs="center" slider-color="#e8e20a"
 				:grow='true'>

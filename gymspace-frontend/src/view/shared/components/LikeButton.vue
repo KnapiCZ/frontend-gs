@@ -9,23 +9,23 @@ const props = defineProps<{
 
 
 const isLiked = ref()
-
-const x = await apiPost("postLiked", props.postId, props.userId)
-
-if (x.liked === 'true') { isLiked.value = true }
-else { isLiked.value = false }
+// TODO: prepsat props.userId na logged_user, protoze tohle kontroluje zda logged_user liknul post a nedava to smysl
+isLiked.value = await apiPost("postLiked", props.postId, undefined, (props.userId as unknown as string))
+console.log(isLiked.value.liked)
+//if (x.liked === true) { isLiked.value = true }
+//else { isLiked.value = false }
 
 //posle do databaze zadost o zmenu stavu liknuti
 async function likeIt() {
-    isLiked.value = !isLiked.value
-    console.debug(await apiPost("likePost", props.postId, props.userId))
+    isLiked.value.liked = !isLiked.value.liked
+    console.debug(await apiPost("updateLike", props.postId, undefined, (props.userId as unknown as string)))
 }
 
 </script>
 
 <template>
     <button @click="likeIt()">
-        <img :class="{ like: isLiked }" src="@/assets/icons/like.svg">
+        <img :class="{ like: isLiked.liked }" src="@/assets/icons/like.svg">
     </button>
 </template>
 

@@ -6,13 +6,12 @@ const props = defineProps<{
 	type: string
 }>()
 
-const baseUrl = await apiGymDiv()
-let info = await apiGymDiv('info', props.type, props.id)
+let info = await apiGymDiv('info', props.type, props.id, undefined, 'logo,title,subtitle,description')
 
 </script>
 
 <template>
-	<IonButton id="parent" :style="{ backgroundImage: 'url(' + baseUrl + info.logo + ')' }" color="rgba(0,0,0,0)">
+	<IonButton id="parent" :style="{ backgroundImage: 'url(' + info.logo + ')' }" color="rgba(0,0,0,0)">
 		<IonModal ref="modal" trigger="parent">
 			<IonToolbar>
 				<IonButtons slot="start">
@@ -22,7 +21,7 @@ let info = await apiGymDiv('info', props.type, props.id)
 				<IonTitle>Description</IonTitle>
 			</IonToolbar>
 			<div class=" top-info">
-				<img class="logo" :src="baseUrl + info.logo">
+				<img class="logo" :src="info.logo">
 				<h1 class="name">{{ info.title }}</h1>
 				<p>{{ info.subtitle }}</p>
 			</div>
@@ -35,7 +34,7 @@ let info = await apiGymDiv('info', props.type, props.id)
 			<div class="creator">
 				<h2>Created by</h2>
 				<IonRow>
-					<img class="pfp" :src="baseUrl + info.logo" alt="">
+					<img class="pfp" :src="info.logo" alt="">
 					<p>@{{ info.title }}</p>
 				</IonRow>
 			</div>

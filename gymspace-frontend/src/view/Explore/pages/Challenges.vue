@@ -21,9 +21,9 @@ let userStore = userDataStore()
                     </div>
                     <Swiper :slides-per-view="3" direction="horizontal" :space-between="2">
                         <SwiperSlide v-for="index in [1, 2, 3, 5, 5, 5, 5, 5, 5, 5]">
-                            <ChallengeSlider :id="index" :row="(row as unknown as string)" :cards="visibleCards"
-                                @cardAccepted="handleCardAccepted" @cardRejected="handleCardRejected"
-                                @cardSkipped="handleCardSkipped" @hideCard="removeCardFromDeck" />
+                            <ChallengeSlider :id="index" :row="row" @cardAccepted="handleCardAccepted"
+                                @cardRejected="handleCardRejected" @cardSkipped="handleCardSkipped"
+                                @hideCard="removeCardFromDeck" />
                         </SwiperSlide>
                     </Swiper>
                     <div id="arrow-wrapper">

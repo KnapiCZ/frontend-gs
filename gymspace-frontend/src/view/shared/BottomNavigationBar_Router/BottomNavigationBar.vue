@@ -8,7 +8,6 @@ import apiGymDiv from '@/logic/API/apiGymDiv';
 const router = useIonRouter()
 const userStore = userDataStore()
 
-let baseUrl = await apiAuth()
 let confirmedUser: { log: string }
 let profilePicture: string
 
@@ -26,8 +25,8 @@ else {
 	router.push('/login')
 }
 
-await apiUser("userProfile", userStore.loggedUserId).then((loggedUser) => {
-	profilePicture = `${baseUrl}${loggedUser.profile_picture}`
+await apiUser("userProfile", userStore.loggedUserId, undefined, 'profile_picture').then((loggedUser) => {
+	profilePicture = `${loggedUser.profile_picture}`
 })
 
 let myDivisions = await apiGymDiv('my', 'division', userStore.loggedUserId)
@@ -52,22 +51,22 @@ userStore.allGymsId = allGyms
 	<IonPage class="ion-no-padding">
 		<IonTabs class="ion-no-padding">
 			<IonRouterOutlet></IonRouterOutlet>
-			<ion-tab-bar slot="bottom">
-				<ion-tab-button tab="user" class="no-filter" :href="'/user/' + userStore.loggedUserId">
+			<IonTabBar slot="bottom">
+				<IonTabButton tab="user" class="no-filter" :href="'/user/' + userStore.loggedUserId">
 					<img id="profile" class="no-filter" :src="profilePicture" />
-				</ion-tab-button>
+				</IonTabButton>
 
-				<ion-tab-button tab="community" href="/community/">
+				<IonTabButton tab="community" href="/community/">
 					<img src="../../../assets/icons/community.svg" alt="">
-				</ion-tab-button>
+				</IonTabButton>
 
-				<ion-tab-button tab="postadd" href="/addPost">
+				<IonTabButton tab="postadd" href="/addPost">
 					<img src="../../../assets/icons/plusbutton.svg" alt="">
-				</ion-tab-button>
-				<ion-tab-button tab="forYou" href="/explore/">
+				</IonTabButton>
+				<IonTabButton tab="forYou" href="/explore/">
 					<img src="../../../assets/icons/for_you.svg" alt="">
-				</ion-tab-button>
-			</ion-tab-bar>
+				</IonTabButton>
+			</IonTabBar>
 		</IonTabs>
 	</IonPage>
 </template>
@@ -86,6 +85,10 @@ export default {
 img {
 	height: 60%;
 	aspect-ratio: 1;
+}
+
+IonTabBar {
+	background-color: black !important;
 }
 
 IonTabButton {

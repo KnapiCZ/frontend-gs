@@ -9,10 +9,8 @@ const props = defineProps<{
 }>()
 
 let post = await apiPost("getPost", props.postId)
-let creatorInfo = await apiUser("smallUserProfile", post.author)
-let baseUrl = await apiPost()
-let postImg = baseUrl + post.media[0]
-let profileImg = baseUrl + creatorInfo.profile_picture
+let creatorInfo = await apiUser("userProfile", post.author, undefined, 'handle,username,profile_picture')
+let postImg = post.media[0]
 
 function checkImage() {
     if (/\.(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(postImg)) { return true }
@@ -23,13 +21,12 @@ function checkImage() {
 
 <template>
     <div id="MainContainer">
-        <img v-if="checkImage()" class="postImage" :src="postImg">
-        <video v-else autoplay="true" loop="true" preload="true" muted="true" :src="postImg"></video>
+        <img class="postImage" :src="postImg">
         <div id="overlay"></div>
 
         <SideButtons :postId="props.postId" :userId="creatorInfo.id" :description="post.description" />
-        <Description :userId="creatorInfo.id" :userHandle="creatorInfo.handle" :profilePicture="profileImg"
-            :description="post.description" hashtags="#be_real" :songname="'None'" />
+        <Description :userId="post.author" :likeCount="post.likeCount" :description="post.description"
+            hashtags="#be_real" :songname="'None'" />
     </div>
 </template>
 

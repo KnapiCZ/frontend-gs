@@ -3,11 +3,15 @@ import { VCard, VTabs, VTab, VWindow, VWindowItem } from 'vuetify/lib/components
 import { userDataStore } from '@/stores/UserDataStore';
 import SmallFeed from '@/view/Post/components/SmallFeed.vue';
 import ChallengeThumbGrid from '@/view/Challenges/pages/ChallengeThumbGrid.vue'
-import apiPost from '@/logic/API/apiPost';
 import apiChallenge from '@/logic/API/apiChallenge';
-
+import apiPost from '@/logic/API/apiPost';
+// TODO: REDESIGN AFTER FIGMA DESIGN APPROVED !!!
+// TODO: REDESIGN AFTER FIGMA DESIGN APPROVED !!!
+// TODO: REDESIGN AFTER FIGMA DESIGN APPROVED !!!
 const userStore = userDataStore()
-let posts = await apiPost('allUserPostId', userStore.renderedUserId);
+
+let posts = await apiPost('usersPosts', userStore.loggedUserId);
+console.debug(posts)
 userStore.userChallengeId = await apiChallenge('userChallengesId', userStore.renderedUserId)
 
 </script>

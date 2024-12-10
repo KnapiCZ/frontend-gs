@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { IonButton, useIonRouter } from '@ionic/vue';
 import apiGymDiv from '@/logic/API/apiGymDiv';
-import apiUser from '@/logic/API/apiUser';
 
 const props = defineProps<{
     id: number
@@ -9,8 +8,7 @@ const props = defineProps<{
     divisionType?: string
 }>();
 const router = useIonRouter()
-const baseUrl = await apiUser();
-let divisionInfo = await apiGymDiv("info", props.type, props.id);
+let divisionInfo = await apiGymDiv('info', props.type, props.id, undefined, 'logo,title')
 
 let goTo = () => {
     router.push('/' + props.type + '/' + props.id)
@@ -20,11 +18,11 @@ let goTo = () => {
 
 <template>
     <div @click="goTo" v-if="props.divisionType == 'small'" class="small-button">
-        <img class="small-logo-img" :src="baseUrl + divisionInfo.logo">
+        <img class="small-logo-img" :src="divisionInfo.logo">
         <h4>{{ divisionInfo.title }}</h4>
     </div>
     <IonButton v-else @click="goTo" class="btn ion-no-padding" color="rgba(255, 255, 255, 0.103)">
-        <img class="logo-img" :src="baseUrl + divisionInfo.logo">
+        <img class="logo-img" :src="divisionInfo.logo">
         <h2>{{ divisionInfo.title }}</h2>
     </IonButton>
 </template>

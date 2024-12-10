@@ -6,7 +6,7 @@ import apiUser from '@/logic/API/apiUser';
 
 const userStore = userDataStore()
 
-let followers = await apiUser("isFollowing", userStore.renderedUserId)
+let followers = await apiUser("usersFollowers", userStore.renderedUserId)
 </script>
 
 <template>
@@ -20,7 +20,7 @@ let followers = await apiUser("isFollowing", userStore.renderedUserId)
             <IonTitle>Followers</IonTitle>
         </IonToolbar>
         <IonContent class="ion-no-padding" id="MainContainer">
-            <FollowerButton v-for="follower in followers.followers" :userId="follower as number" />
+            <FollowerButton v-for="follower in followers.followers" :userId="(follower as number)" />
         </IonContent>
     </IonModal>
 </template>
