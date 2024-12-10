@@ -20,6 +20,18 @@ const routes: Array<RouteRecordRaw> = [
 		component: () => import('@/view/Authentication/pages/SignIn.vue'),
 	},
 	{
+		path: '/user/:id/trainer',
+		component: () => import('@/view/Explore/pages/Athletes.vue'),
+		props: true,
+		meta: { requiresAuth: true, }
+	},
+	{
+		path: '/user/:id/trainertab',
+		component: () => import('@/view/Explore/pages/AthletesUser.vue'),
+		props: true,
+		meta: { requiresAuth: true, }
+	},
+	{
 		path: '/',
 		name: 'landingPage',
 		component: () => import('@/view/shared/BottomNavigationBar_Router/BottomNavigationBar.vue'),
@@ -44,7 +56,6 @@ const routes: Array<RouteRecordRaw> = [
 				props: true,
 				meta: { requiresAuth: true, }
 			},
-
 			{
 				path: '/community',
 				name: "community",
@@ -78,7 +89,7 @@ const routes: Array<RouteRecordRaw> = [
 					{
 						path: '/athletes',
 						name: "athletes",
-						component: () => import('@/view/Explore/pages/Athetes.vue'),
+						component: () => import('@/view/Explore/pages/Athletes.vue'),
 						meta: { requiresAuth: true },
 					},
 				]
