@@ -97,6 +97,7 @@ export default {
 
 .camera-button {
     background-color: transparent;
+    margin: 0 20px;
 }
 
 .camera-button img {

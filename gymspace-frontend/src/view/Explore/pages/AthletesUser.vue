@@ -2,7 +2,6 @@
 import { IonButton, IonCol, IonContent, IonPage, IonToolbar, useIonRouter } from '@ionic/vue';
 import { userDataStore } from '@/stores/UserDataStore';
 import { useRoute } from 'vue-router';
-import apiUser from '@/logic/API/apiUser';
 import UnlockablePost from './components/UnlockablePost.vue';
 
 //Využije se později ve vývoji
@@ -13,9 +12,8 @@ const props = defineProps<{
 const route = useRoute();
 const router = useIonRouter()
 const userStore = userDataStore();
-const baseUrl = await apiUser();
 let id = route.params.id as unknown as number;
-let userData = await apiUser("userProfile", id);
+let userData = JSON.parse(userStore.user)
 
 let isUserVerified = userData.isUserVerified ?? 1;
 
@@ -31,7 +29,7 @@ let isUserVerified = userData.isUserVerified ?? 1;
 
         <div class="profile-section">
             <div class="profile-image-container">
-                <img class="profile-image" :src="baseUrl + userData.profile_picture"/>
+                <img class="profile-image" :src="userData.profile_picture"/>
                 <img v-if="isUserVerified" class="verified-icon" src="../../../assets/icons/checkMark.svg"/>
             </div>
 
@@ -46,7 +44,7 @@ let isUserVerified = userData.isUserVerified ?? 1;
   
         <div class="stats">
             <div class="stat-item">
-                <span class="stat-number">{{ userData.followers }}</span>
+                <span class="stat-number">{{ userData.followers.length }}</span>
                 <span class="stat-label">Followers</span>
             </div>
             <!--?Zatím nenačítá odběry (userData.Subscribers), je tam daná provizorní hodnota-->     

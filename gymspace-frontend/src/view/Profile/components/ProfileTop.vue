@@ -26,7 +26,10 @@ let isUserVerified = userData.isUserVerified ?? 1;
 			</div>
 		</div>
 		<div class="main-info">
-			<img class='PFP' :src="userData.profile_picture">
+			<div class="profile-image-container">
+				<img class="profile-image" :src="userData.profile_picture">
+            	<img v-if="isUserVerified" class="verified-icon" src="../../../assets/icons/checkMark.svg"/>
+			</div>
 			<IonRow>
 				<IonCol id="followers-modal">
 					<p class="top-item1">{{ userData.followers.length }}</p>

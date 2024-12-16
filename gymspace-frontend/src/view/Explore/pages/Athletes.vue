@@ -2,7 +2,6 @@
 import { IonButton, IonCol, IonContent, IonPage, IonToolbar, useIonRouter } from '@ionic/vue';
 import { userDataStore } from '@/stores/UserDataStore';
 import { useRoute } from 'vue-router';
-import apiUser from '@/logic/API/apiUser';
 
 //Využije se později ve vývoji
 const props = defineProps<{
@@ -12,9 +11,8 @@ const props = defineProps<{
 const route = useRoute();
 const router = useIonRouter()
 const userStore = userDataStore();
-const baseUrl = await apiUser();
 let id = route.params.id as unknown as number;
-let userData = await apiUser("userProfile", id);
+let userData = JSON.parse(userStore.user)
 
 
 let isUserVerified = userData.isUserVerified ?? 1;
@@ -29,14 +27,14 @@ let isUserVerified = userData.isUserVerified ?? 1;
     </IonToolbar>
     <IonContent class="ion-padding profile-content">
 
-    <div><img class="background" :src="baseUrl + userData.background_picture"></div>
+    <div><img class="background" :src="userData.background_picture"></div>
       <IonCard class="profile-card">
 
         <IonCardContent class="profile-details">
 
           <div>
             <div class="profile-image-container">
-            <img class="profile-image" :src="baseUrl + userData.profile_picture"/>
+            <img class="profile-image" :src="userData.profile_picture"/>
             <img v-if="isUserVerified" class="verified-icon" src="../../../assets/icons/checkMark.svg"/>
             </div>
           </div>
