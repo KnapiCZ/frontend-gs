@@ -16,6 +16,9 @@ const baseUrl = await apiUser();
 let id = route.params.id as unknown as number;
 let userData = await apiUser("userProfile", id);
 
+
+let isUserVerified = userData.isUserVerified ?? 1;
+
 </script>
 
 
@@ -34,7 +37,7 @@ let userData = await apiUser("userProfile", id);
           <div>
             <div class="profile-image-container">
             <img class="profile-image" :src="baseUrl + userData.profile_picture"/>
-            <img class="verified-icon" src="../../../assets/icons/checkMark.svg"/>
+            <img v-if="isUserVerified" class="verified-icon" src="../../../assets/icons/checkMark.svg"/>
             </div>
           </div>
 

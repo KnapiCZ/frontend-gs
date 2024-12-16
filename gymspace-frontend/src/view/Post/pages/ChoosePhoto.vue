@@ -1,12 +1,16 @@
 <script setup lang="ts">
-import { IonContent, IonCol, IonFab, IonGrid, IonPage, IonHeader, IonImg, IonRow, IonTitle, IonToolbar, IonButton, IonButtons } from '@ionic/vue';
+import { IonContent, IonCol, IonFab, IonGrid, IonPage, IonHeader, IonImg, IonRow, IonTitle, IonToolbar, IonButton, IonButtons, IonBackButton, useIonRouter } from '@ionic/vue';
 import { camera, trash, close } from 'ionicons/icons';
 import { usePhotoGallery, UserPhoto } from '@/plugins/usePhotoGallery';
 import { userDataStore } from '@/stores/UserDataStore';
+import { useRoute } from 'vue-router';
 const { photos, takePhoto } = usePhotoGallery();
 
 import PostCropper from '../components/PostCropper.vue';
 const userStore = userDataStore()
+
+const router = useIonRouter()
+
 </script>
 
 <template>
@@ -14,7 +18,7 @@ const userStore = userDataStore()
         <IonHeader>
             <IonToolbar>
                 <IonButtons slot="start">
-                    <IonButton router-link="/">Back</IonButton>
+                    <IonButton @click="router.back()" class="back-button"><img src="@/assets/icons/arrowRight.svg"></IonButton>
                 </IonButtons>
                 <IonTitle>New Post</IonTitle>
                 <IonButtons slot="end">
@@ -24,11 +28,6 @@ const userStore = userDataStore()
         </IonHeader>
         <PostCropper :ratios="([[4, 5], [1, 1]] as unknown[] as [])" />
         <IonContent>
-            <IonFab vertical="bottom" horizontal="center" slot="fixed">
-                <button @click="takePhoto()">
-                    <img src="@/assets/icons/camera.svg">
-                </button>
-            </IonFab>
             <IonGrid>
                 <IonRow>
                     <IonCol size="3" :key="photo.filepath" v-for="photo in photos">
@@ -42,6 +41,25 @@ const userStore = userDataStore()
 </template>
 
 <style scoped>
+
+ion-title {
+    margin: 0 20px;
+    font-weight: bold;
+}
+
+ion-fab {
+    align-self: right;
+}
+
+.back-button {
+      height: 100%;
+      aspect-ratio: 1;
+}
+
+.back-button img {
+      rotate: 180deg;
+}
+
 #choosen-photo {
     width: 60%;
     aspect-ratio: 4/5;
@@ -53,4 +71,10 @@ const userStore = userDataStore()
     aspect-ratio: 1/1;
     object-fit: cover;
 }
+
+ion-button {
+    color: #fff000;
+    font-weight: bold;
+}
+
 </style>

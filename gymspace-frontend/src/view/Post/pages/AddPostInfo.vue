@@ -59,8 +59,10 @@ for (let i = 0; i < userStore.userDivisionId.length; i++) {
 </template>
 
 <style scoped>
+
 ion-title {
     margin: 0 20px;
+    font-weight: bold;
 }
 
 .post-button {

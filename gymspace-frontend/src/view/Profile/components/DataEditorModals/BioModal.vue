@@ -45,7 +45,7 @@ function customFormatter(inputLength: number, maxLength: number) {
             </IonToolbar>
         </IonHeader>
         <IonContent>
-            <IonTextarea @input="text = $event.target.value" id="edit" label="Bio" placeholder="Type something here"
+            <IonTextarea class="text-input" @input="text = $event.target.value" id="edit" label="Bio" placeholder="Type something here"
                 :value="text" :counter="true" :maxlength="200" :counter-formatter="customFormatter" :auto-grow="true">
             </IonTextarea>
         </IonContent>
@@ -87,6 +87,10 @@ ion-textarea.outside-textarea::after {
     --color: #fff000;
 }
 
+.text-input {
+    padding: 20px;
+}
+
 #user-edit {
     width: 30%;
     height: 30px;
@@ -98,7 +102,9 @@ ion-textarea.outside-textarea::after {
     border-radius: 10px;
 }
 
+
 ion-textarea {
     line-clamp: 8;
+    font-size: 16px;
 }
 </style>

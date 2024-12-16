@@ -131,6 +131,7 @@ ion-radio.radio-checked::part(mark) {
     width: 8px;
     height: 12px;
     border-color: #000;
+    background: #fff000;
     transform: rotate(45deg);
 }
 </style>

@@ -15,6 +15,8 @@ function checkLogin() {
 	else return false;
 }
 
+let isUserVerified = userData.isUserVerified ?? 1;
+
 </script>
 
 <template>
@@ -26,7 +28,11 @@ function checkLogin() {
 			</div>
 		</div>
 		<div class="main-info">
-			<img class='PFP' :src="baseURL + userData.profile_picture">
+			<div class="profile-image-container">
+				<img class="profile-image" :src="baseURL + userData.profile_picture">
+            	<img v-if="isUserVerified" class="verified-icon" src="../../../assets/icons/checkMark.svg"/>
+				
+            </div>
 			<IonRow>
 				<IonCol id="followers-modal">
 					<p class="top-item1">{{ userData.followers }}</p>
@@ -79,7 +85,7 @@ function checkLogin() {
 .main-info {
 	width: 80%;
 	height: 70px;
-	padding-top: 20px;
+	padding-top: 10px;
 	position: absolute;
 	bottom: calc((100% * -0.185));
 	left: 50%;
@@ -89,17 +95,31 @@ function checkLogin() {
 	background-color: rgba(0, 0, 0, 0.13);
 }
 
-.PFP {
-	width: 80px;
-	height: 80px;
-	border-radius: 50%;
-	background-color: black;
-	object-fit: contain;
-	position: absolute;
-	left: 50%;
-	top: -60px;
-	transform: translateX(-50%);
+.profile-image-container {
+  margin-top: -70px;
+  position: relative;
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
 
+.profile-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+}
+
+.verified-icon {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background: yellow;
+  border-radius: 50%;
+  border: 2px solid white;
 }
 
 .top-item,

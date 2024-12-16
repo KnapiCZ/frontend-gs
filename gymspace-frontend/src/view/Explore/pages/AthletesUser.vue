@@ -3,6 +3,7 @@ import { IonButton, IonCol, IonContent, IonPage, IonToolbar, useIonRouter } from
 import { userDataStore } from '@/stores/UserDataStore';
 import { useRoute } from 'vue-router';
 import apiUser from '@/logic/API/apiUser';
+import UnlockablePost from './components/UnlockablePost.vue';
 
 //Využije se později ve vývoji
 const props = defineProps<{
@@ -15,6 +16,8 @@ const userStore = userDataStore();
 const baseUrl = await apiUser();
 let id = route.params.id as unknown as number;
 let userData = await apiUser("userProfile", id);
+
+let isUserVerified = userData.isUserVerified ?? 1;
 
 </script>
 
@@ -29,7 +32,7 @@ let userData = await apiUser("userProfile", id);
         <div class="profile-section">
             <div class="profile-image-container">
                 <img class="profile-image" :src="baseUrl + userData.profile_picture"/>
-                <img class="verified-icon" src="../../../assets/icons/checkMark.svg"/>
+                <img v-if="isUserVerified" class="verified-icon" src="../../../assets/icons/checkMark.svg"/>
             </div>
 
             <h2 class="profile-name">{{userData.username}}</h2>
@@ -55,33 +58,9 @@ let userData = await apiUser("userProfile", id);
   
 
         <IonGrid>
-          <IonRow>
-            <IonCol>
-              <div class="subscription">
-                <img class="lock-icon" src="../../../assets/icons/shop.svg"/>
-                <IonButton expand="block" class="subscribe-button">
-                  Odebírat za 4 € měsíčně
-                </IonButton>
-              </div>
-            </IonCol>
-            <IonCol>
-              <div class="subscription">
-                <img class="lock-icon" src="../../../assets/icons/shop.svg"/>
-                <IonButton expand="block" class="subscribe-button">
-                  Odebírat za 4 € měsíčně
-                </IonButton>
-              </div>
-            </IonCol>
-            <IonCol>
-              <div class="subscription">
-                <img class="lock-icon" src="../../../assets/icons/shop.svg"/>
-                <IonButton expand="block" class="subscribe-button">
-                  Odebírat za 4 € měsíčně
-                </IonButton>
-              </div>
-            </IonCol>
-
-          </IonRow>
+          <UnlockablePost :id="id" />
+          <UnlockablePost :id="id" />
+          <UnlockablePost :id="id" />
         </IonGrid>
       </IonContent>
     </IonPage>
