@@ -14,7 +14,7 @@ const props = defineProps<{
 let index = userStore.userPostsId.indexOf(props.postId)
 
 async function Delete() {
-    console.log(await apiPost("deletePost", props.postId, props.userId))
+    console.log(await apiPost("deletePost", props.postId))
     userStore.userPostsId.splice(index, 1)
 }
 </script>

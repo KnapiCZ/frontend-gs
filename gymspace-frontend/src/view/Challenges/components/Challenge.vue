@@ -2,6 +2,9 @@
 import { ref } from 'vue';
 import apiChallenge from '@/logic/API/apiChallenge';
 import { userDataStore } from '@/stores/UserDataStore';
+// TODO: REDESIGN AFTER FIGMA DESIGN APPROVED !!!
+// TODO: REDESIGN AFTER FIGMA DESIGN APPROVED !!!
+// TODO: REDESIGN AFTER FIGMA DESIGN APPROVED !!!
 
 let userData = userDataStore();
 let keyChange = 0
@@ -9,16 +12,19 @@ const props = defineProps<{
 	id: number
 }>();
 
-let data = await apiChallenge('challengeInfo', props.id);
-let progress = await apiChallenge('getProgress', props.id, userData.loggedUserId);
+let data = {
+	"challenge": props.id,
+	"user": userData.loggedUserId
+}
+
+let challenge = await apiChallenge('getChallenge', props.id);
+let progress = await apiChallenge('getProgress', undefined,);
 let progressValue = ref(progress.progress)
 let progressCount = ref(0)
 let progressCompleted = ref(progress.completed)
-
-
 function checkJoined() {
-	if (data.members.includes(userData.loggedUserId)) {
-		progressCount.value = progressValue.value / data.goal * 100;
+	if (challenge.members.includes(userData.loggedUserId)) {
+		progressCount.value = progressValue.value / data.challenge * 100;
 		return true;
 	}
 	else false;

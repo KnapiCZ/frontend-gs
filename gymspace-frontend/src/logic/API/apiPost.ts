@@ -1,54 +1,98 @@
-//! API pro POSTY -> informace postu, generace fyp postu a dalsi
+/**
+ * if arguments are not specified for case -> use undefined
+ * @description apiTypes:
+ * - usersPosts: returns ids of all users posts, ARGS: data = user
+ * - createPost: used to create users post, ARGS: data = division?, mentioned_user[], user_id, description, media[]
+ * - getPost: returns data of post, ARGS: objectId
+ * - updatePost: used to update post description (for now), ARGS: objectId, data = description
+ * - deletePost: used to delete post, ARGS: objectId
+ * - getThumbnail: (in progress) 
+ * - postLiked: status if user liked post ARGS: objectId=id of post, queryParams=usersId
+ * - updateLike: updates like status of user and post, ARGS: objectId, data= user
+ * - recommendedPosts: returns ids of posts of users i am following(looged_in user), ARGS: objectId(id of user for now)
+ * - gymPosts: Vrati pole ID vsech prispevku do gymu, ARGS: objectId(id of gym)
+ * - divisionPosts: Vrati pole ID vsech prispevku do divisionu: ARGS: objectId(id of division)
+ * @param apiType - used to select one of apiTypes
+ * @param objectId - id of object we are working with progress, challenge or vote
+ * @param data - data needed for api needs successfully complete its task
+ */
 
 
-async function apiPost(apiType = '', firstId?: number, secondId?: number, data?: unknown) {
+async function apiPost(apiType = '', objectId?: number, data?: string, queryParams?: string) {
     const baseUrl = `https://gymspace-app-t6hic.ondigitalocean.app/`
     let response
     switch (apiType) {
+
+        case "usersPosts":
+            response = await (
+                fetch(`${baseUrl}api/posts/${objectId}/users-posts/`,
+                    {
+                        headers: {
+                            'Authorization': 'Token ' + localStorage.getItem("Token"),
+                            "Content-Type": "application/json",
+                        }
+                    })
+            );
+            return await response.json()
+
         case "createPost":
             response = await (
-                fetch(`${baseUrl}api/users-posts/`,
+                fetch(`${baseUrl}api/posts/`,
                     {
                         method: 'POST',
                         headers: {
                             'Authorization': 'Token ' + localStorage.getItem("Token"),
                             "Content-Type": "application/json",
                         },
-                        body: JSON.stringify(data)
+                        body: data
+                    })
+            );
+            return await response.json()
+
+        case "getPost":
+            response = await (
+                fetch(`${baseUrl}api/posts/${objectId}/`,
+                    {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': 'Token ' + localStorage.getItem("Token"),
+                            "Content-Type": "application/json",
+                        }
+                    })
+            );
+            return await response.json()
+
+        case "updatePost":
+            response = await (
+                fetch(`${baseUrl}api/posts/${objectId}/`,
+                    {
+                        method: 'PATCH',
+                        headers: {
+                            'Authorization': 'Token ' + localStorage.getItem("Token"),
+                            "Content-Type": "application/json",
+                        },
+                        body: data
                     })
             );
             return await response.json()
 
         case "deletePost":
-            const delete_data = { 'logged_in_user': secondId, 'post_id': firstId }
             response = await (
-                fetch(`${baseUrl}api/users-posts/delete/`,
+                fetch(`${baseUrl}api/posts/${objectId}/`,
                     {
                         method: 'DELETE',
                         headers: {
                             'Authorization': 'Token ' + localStorage.getItem("Token"),
                             "Content-Type": "application/json",
                         },
-                        body: JSON.stringify(delete_data)
-                    })
-            );
-            return await response.json()
-        //* vraci jeden post s id, author, gym, description, like_count, post_time, media
-        case "getPost":
-            response = await (
-                fetch(`${baseUrl}api/users-posts/${firstId}/`,
-                    {
-                        headers: {
-                            'Authorization': 'Token ' + localStorage.getItem("Token"),
-                            "Content-Type": "application/json",
-                        },
+                        body: data
                     })
             );
             return await response.json()
 
         case "getThumbnail":
             response = await (
-                fetch(`${baseUrl}api/users-posts/thumbnail/${firstId}/`,
+                fetch(`${baseUrl}api/users-posts/thumbnail/${objectId}/`,
                     {
                         headers: {
                             'Authorization': 'Token ' + localStorage.getItem("Token"),
@@ -58,10 +102,35 @@ async function apiPost(apiType = '', firstId?: number, secondId?: number, data?:
             );
             return await response.json()
 
-        //* vrati stejne co alluserpostdetail
+        case "postLiked":
+            response = await (
+                fetch(`${baseUrl}api/like/${objectId}/?user_id=${queryParams}`,
+                    {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': 'Token ' + localStorage.getItem("Token"),
+                            "Content-Type": "application/json",
+                        }
+                    })
+            );
+            return await response.json()
+
+        case "updateLike":
+            response = await (
+                fetch(`${baseUrl}api/like/${objectId}/?user_id=${queryParams}`,
+                    {
+                        method: 'PATCH',
+                        headers: {
+                            'Authorization': 'Token ' + localStorage.getItem("Token"),
+                            "Content-Type": "application/json",
+                        }
+                    })
+            );
+            return await response.json()
+
         case "recommendedPosts":
             response = await (
-                fetch(`${baseUrl}api/users-gympage-recommended/${firstId}/`,
+                fetch(`${baseUrl}api/users-gympage-recommended/${objectId}/`,
                     {
                         headers: {
                             'Authorization': 'Token ' + localStorage.getItem("Token"),
@@ -71,83 +140,9 @@ async function apiPost(apiType = '', firstId?: number, secondId?: number, data?:
             );
             return await response.json()
 
-        //* vrati seznam vsech uzivatelovych postu Objct[Post,Post,...]
-        // * Post = {id,  author, body, gym, like_count, media[], post_time}
-        case "allUserPostsDetail":
-            response = await (
-                fetch(`${baseUrl}api/users-posts-all-detail/${firstId}/`,
-                    {
-                        headers: {
-                            'Authorization': 'Token ' + localStorage.getItem("Token"),
-                            "Content-Type": "application/json",
-                        },
-                    })
-            );
-            return await response.json()
-
-        //* vrati id, username, profile_picture, handle, auth_id
-        case "allUserPostId":
-            response = await (
-                fetch(`${baseUrl}api/users-posts-all-id/${firstId}/`,
-                    {
-                        headers: {
-                            'Authorization': 'Token ' + localStorage.getItem("Token"),
-                            "Content-Type": "application/json",
-                        },
-                    })
-            );
-            return await response.json()
-
-        //* updatuje danemu postu description
-        case "updatePost":
-            let update_data = { 'logged_in_user': secondId, 'post_id': firstId, 'description': data }
-            response = await (
-                fetch(`${baseUrl}api/users-posts/update/`,
-                    {
-                        method: 'PATCH',
-                        headers: {
-                            'Authorization': 'Token ' + localStorage.getItem("Token"),
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify(update_data)
-                    })
-            );
-            return await response.json()
-
-        //* vraci zda uzivatel (secondId) liknul post (firstId)
-        case "postLiked":
-            let liked_data = { 'logged_in_user': secondId, 'post_id': firstId }
-            response = await (
-                fetch(`${baseUrl}api/users-posts-liked-status/`,
-                    {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': 'Token ' + localStorage.getItem("Token"),
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify(liked_data)
-                    })
-            );
-            return await response.json()
-
-        //* vrati id, username, profile_picture, handle, auth_id
-        case "likePost":
-            const like_data = { 'logged_in_user': secondId, 'post_id': firstId }
-            response = await (
-                fetch(`${baseUrl}api/users-posts-liked-status/like/`,
-                    {
-                        method: 'PATCH',
-                        headers: {
-                            'Authorization': 'Token ' + localStorage.getItem("Token"),
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify(like_data)
-                    })
-            );
-            return await response.json()
         case "gymPosts":
             response = await (
-                fetch(`${baseUrl}api/gym-posts/${firstId}/`,
+                fetch(`${baseUrl}api/gym-posts/${objectId}/`,
                     {
                         method: 'GET',
                         headers: {
@@ -157,9 +152,10 @@ async function apiPost(apiType = '', firstId?: number, secondId?: number, data?:
                     })
             );
             return await response.json()
+
         case "divisionPosts":
             response = await (
-                fetch(`${baseUrl}api/division-posts/${firstId}/`,
+                fetch(`${baseUrl}api/division-posts/${objectId}/`,
                     {
                         method: 'GET',
                         headers: {
@@ -171,7 +167,7 @@ async function apiPost(apiType = '', firstId?: number, secondId?: number, data?:
             return await response.json()
 
         default:
-            return `${baseUrl}`
+            return `Invalid apiType`
     }
 }
 

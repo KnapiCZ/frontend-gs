@@ -13,16 +13,15 @@ let choosen = ref(0)
 let choosenName = ref("")
 
 async function addPost() {
-    let data = { 'author': userStore.loggedUserId, 'description': text.value, 'division': choosen.value, 'media': [userStore.croppedChoosenPhoto] }
-    console.debug("[DEBUG] ", await apiPost('createPost', 0, 0, data))
-    router.navigate('/')
+    let data = { 'user_id': userStore.loggedUserId, 'description': text.value, 'division': choosen.value, 'media': [userStore.croppedChoosenPhoto], "mentioned_user": [2, 3] }
+    await apiPost('createPost', undefined, JSON.stringify(data))
+    router.replace('/foryou')
 }
 
 for (let i = 0; i < userStore.userDivisionId.length; i++) {
-    let data = await apiGymDiv('name', 'division', userStore.userDivisionId[i])
-    names.push(data)
+    let data = await await apiGymDiv('info', "division", userStore.userDivisionId[i], undefined, 'title')
+    names.push(data.title)
 }
-
 </script>
 
 

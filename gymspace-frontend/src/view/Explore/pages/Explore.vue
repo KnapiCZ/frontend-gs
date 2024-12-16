@@ -8,6 +8,8 @@ import { IonRouterOutlet } from '@ionic/vue';
 <template>
   <IonPage>
     <IonTabs>
+
+      <!-- !UDELAT TO SAME U USERA -->
       <IonRouterOutlet></IonRouterOutlet>
 
       <IonTabBar slot="top">

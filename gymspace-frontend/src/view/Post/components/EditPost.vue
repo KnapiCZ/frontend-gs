@@ -13,8 +13,10 @@ const props = defineProps<{
 let userStore = userDataStore()
 let text = ref(props.description)
 let index = userStore.userPostsId.indexOf(props.postId)
+
 async function save() {
-    console.debug(await apiPost('updatePost', props.postId, props.userId, text.value))
+    let data = { "description": text.value }
+    console.debug(await apiPost('updatePost', props.postId, JSON.stringify(data)))
     userStore.userPostsKey[index] += 1
     modalController.dismiss('post-edit' + props.postId)
 }

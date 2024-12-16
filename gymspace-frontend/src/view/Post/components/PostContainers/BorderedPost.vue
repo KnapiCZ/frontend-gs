@@ -30,24 +30,16 @@ const months = [
 ]
 
 let post = await apiPost("getPost", props.postId)
-let creatorInfo = await apiUser("smallUserProfile", post.author)
+let creatorInfo = await apiUser("userProfile", post.author, undefined, 'username,handle,profile_picture')
 
 let time = setTime()
-let baseUrl = await apiPost()
 
-let postImg = baseUrl + post.media[0]
-let userPFP = baseUrl + creatorInfo.profile_picture
+let postImg = post.media[0]
+let userPFP = creatorInfo.profile_picture
 
 const router = useIonRouter();
 
 function goToUser() { router.push('/user/' + post.author) }
-
-function checkImage() {
-	if (/\.(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(postImg)) {
-		return true
-	}
-	else { return false }
-}
 
 function setTime() {
 	let postTimestamp = new Date(post.post_time)
@@ -93,12 +85,14 @@ function setTime() {
 	}
 
 }
+// TODO: az budou posty jen videa a ne obrazky tak nahradit img class: postimage timto:
+// 		<video autoplay="true" loop="true" class="postImage" :src="postImg"></video>
+
 </script>
 
 <template>
 	<IonCard :id="'postCard' + post.id">
-		<img v-if="checkImage()" class="postImage" :src="postImg">
-		<video v-else autoplay="true" loop="true" class="postImage" :src="postImg"></video>
+		<img class="postImage" :src="postImg">
 		<OptionsButton v-if="post.author == userStore.loggedUserId" :postId="post.id" :userId="post.author"
 			:description="post.description" />
 		<IonCardContent>
@@ -111,7 +105,7 @@ function setTime() {
 					<p class="nickname" @click="goToUser()">{{ creatorInfo.username }}</p>
 					<p class="handle" @click="goToUser()">{{ creatorInfo.handle }}</p>
 				</IonCol>
-				<LikeButton class="postBtn" :userId="userStore.loggedUserId" :postId="post.id" />
+				<LikeButton class="postBtn" :userId="post.author" :postId="post.id" />
 			</IonRow>
 		</IonCardContent>
 	</IonCard>

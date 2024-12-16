@@ -1,30 +1,24 @@
 <script setup lang="ts">
 import apiUser from '@/logic/API/apiUser';
+import apiPost from '@/logic/API/apiPost';
 import FollowButton from '../../../../shared/components/FollowButton.vue';
 import { IonContent, IonRow } from '@ionic/vue';
 import { ref } from 'vue';
 
 const props = defineProps<{
     userId: number
-    userHandle?: string
-    profilePicture?: string
+    likeCount: number
     description?: string
     hashtags?: string
     songname?: string
-    likes?: number[]
 }>();
 
 let text = ref(setText())
-let user: { username: string; }
-try {
-    if (props.likes?.length != 0) {
-        user = await apiUser("smallUserProfile", props.likes![0]).catch()
-    }
-} catch { }
+let user = await apiUser("userProfile", props.userId, undefined, 'username,handle,profile_picture').catch()
 
 function setText() {
-    if (props.likes?.length == 1) { return 'Post was liked by ' + user.username }
-    if (props.likes?.length! > 1) { return 'Post was liked by ' + user.username + 'and' + (props.likes!.length - 1) + ' others' }
+    if (props.likeCount == 1) { return 'Post was liked by ' + user.username }
+    if (props.likeCount > 1) { return 'Post was liked by ' + user.username + 'and' + (props.likeCount - 1) + ' others' }
     else return 'Post was liked by 0 users'
 }
 
@@ -34,8 +28,8 @@ function setText() {
 <template>
     <IonContent :scrollY="false" class="description" background-color="transparent">
         <IonRow>
-            <img class="pfp" alt="Profile picture" :src="props.profilePicture" />
-            <p class="userName">{{ userHandle }}</p>
+            <img class="pfp" alt="Profile picture" :src="user.profilePicture" />
+            <p class="userName">{{ user.userHandle }}</p>
             <FollowButton :userId="props.userId" />
         </IonRow>
         <p id="middle-part" class="main-text">{{ description }}</p>

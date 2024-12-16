@@ -15,7 +15,7 @@ const userStore = userDataStore();
 const router = useIonRouter()
 
 userStore.renderedUserId = (route.params.id[0] as unknown) as number
-userStore.user = JSON.stringify(await apiUser("userProfile", userStore.renderedUserId))
+userStore.user = JSON.stringify(await apiUser("userProfile", userStore.renderedUserId, undefined, ''))
 
 
 function checkLogin() {

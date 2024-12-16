@@ -9,9 +9,8 @@ const props = defineProps<{
 }>()
 
 const router = useIonRouter()
-const baseUrl = await apiUser()
 
-let userData = await apiUser("smallUserProfile", props.userId)
+let userData = await apiUser("userProfile", props.userId, undefined, 'username,handle,profile_picture')
 
 function goToUser() {
     modalController.dismiss()
@@ -22,12 +21,12 @@ function goToUser() {
 
 <template>
     <IonButton class="btn ion-no-padding" color="rgba(255, 255, 255, 0.103)">
-        <img class="logo-img" :src="baseUrl + userData.profile_picture" alt="" @click="goToUser()">
+        <img class="logo-img" :src="userData.profile_picture" alt="" @click="goToUser()">
         <IonCol @click="goToUser()">
             <p class="top-item">@{{ userData.username }}</p>
             <p class="bottom-item">{{ userData.handle }}</p>
         </IonCol>
-        <FollowButton :userId="props.userId as number" />
+        <FollowButton :userId="(props.userId as number)" />
     </IonButton>
 </template>
 

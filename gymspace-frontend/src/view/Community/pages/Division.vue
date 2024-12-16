@@ -6,14 +6,12 @@ import { useRoute } from 'vue-router';
 import HeaderComponent from '../components/HeaderComponent.vue';
 import ChallengeThumbGrid from '@/view/Challenges/pages/ChallengeThumbGrid.vue';
 import apiGymDiv from '@/logic/API/apiGymDiv';
-import apiUser from '@/logic/API/apiUser';
 import apiPost from '@/logic/API/apiPost';
 import DivisionFeed from '../components/tabs/DivisionFeed.vue';
 
 const route = useRoute()
-const baseUrl = await apiUser();
 let id = route.params.id as unknown as number
-let divisionInfo = await apiGymDiv("info", 'division', id);
+let divisionInfo = await apiGymDiv('info', "division", id, undefined, 'logo,title,id')
 let gymPosts = await apiPost("divisionPosts", id)
 
 
@@ -22,7 +20,7 @@ let gymPosts = await apiPost("divisionPosts", id)
 <template>
 	<IonPage>
 		<IonContent>
-			<HeaderComponent type="division" :logo="baseUrl + divisionInfo.logo" :name="divisionInfo.title" :id="id" />
+			<HeaderComponent type="division" :logo="divisionInfo.logo" :name="divisionInfo.title" :id="id" />
 
 			<VTabs v-model="tab" color="#e8e20a" bg-color="black" align-tabs="center" slider-color="#e8e20a"
 				:grow='true'>

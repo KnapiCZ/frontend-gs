@@ -3,6 +3,9 @@ import { userDataStore } from '@/stores/UserDataStore';
 
 import Challenge from '../components/Challenge.vue';
 import apiChallenge from '@/logic/API/apiChallenge';
+// TODO: REDESIGN AFTER FIGMA DESIGN APPROVED !!!
+// TODO: REDESIGN AFTER FIGMA DESIGN APPROVED !!!
+// TODO: REDESIGN AFTER FIGMA DESIGN APPROVED !!!
 
 const props = defineProps<{
 	type: number

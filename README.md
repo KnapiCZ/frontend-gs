@@ -7,9 +7,6 @@ Jdi do /gymspace-frontend/ v terminálu a napiš:
 ionic serve  (pro local)
 ionic serve --external (pro hostovani)
 ```
-Server se zapne na specifické url, koukni se do terminálu.
-
-
 
 # Commit Guidelines
 

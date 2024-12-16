@@ -23,7 +23,7 @@ async function submitForm() {
     checkPasswordCheck();
     if (canGo) {
         let data = form
-        await apiUser('createUser', 0, 0, JSON.stringify(data));
+        await apiUser('createUser', 0, JSON.stringify(data));
         await apiAuth("getToken", form.handle, form.password);
         await apiAuth("getToken", form.handle, form.password).then((token) => {
             localStorage.setItem("Token", token);
