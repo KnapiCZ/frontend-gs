@@ -9,13 +9,7 @@ const props = defineProps<{
 }>()
 
 let post = await apiPost("getPost", props.postId)
-let creatorInfo = await apiUser("userProfile", post.author, undefined, 'handle,username,profile_picture')
 let postImg = post.media[0]
-
-function checkImage() {
-    if (/\.(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(postImg)) { return true }
-    else { return false }
-}
 
 </script>
 
@@ -24,8 +18,8 @@ function checkImage() {
         <img class="postImage" :src="postImg">
         <div id="overlay"></div>
 
-        <SideButtons :postId="props.postId" :userId="creatorInfo.id" :description="post.description" />
-        <Description :userId="post.author" :likeCount="post.likeCount" :description="post.description"
+        <SideButtons :postId="props.postId" :userId="post.author" :description="post.description" />
+        <Description :userId="post.author" :likeCount="post.like_count" :description="post.description"
             hashtags="#be_real" :songname="'None'" />
     </div>
 </template>

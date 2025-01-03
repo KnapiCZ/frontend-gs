@@ -2,7 +2,6 @@
 import { IonPage } from '@ionic/vue';
 
 import PostSlider from './../../Post/pages/PostSlider.vue';
-
 </script>
 
 <template>

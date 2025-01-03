@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import apiUser from '@/logic/API/apiUser';
-import apiPost from '@/logic/API/apiPost';
 import FollowButton from '../../../../shared/components/FollowButton.vue';
 import { IonContent, IonRow } from '@ionic/vue';
 import { ref } from 'vue';
@@ -13,12 +12,12 @@ const props = defineProps<{
     songname?: string
 }>();
 
-let text = ref(setText())
 let user = await apiUser("userProfile", props.userId, undefined, 'username,handle,profile_picture').catch()
+let text = ref(setText())
 
 function setText() {
     if (props.likeCount == 1) { return 'Post was liked by ' + user.username }
-    if (props.likeCount > 1) { return 'Post was liked by ' + user.username + 'and' + (props.likeCount - 1) + ' others' }
+    if (props.likeCount > 1) { return 'Post was liked by ' + user.username + ' and ' + (props.likeCount - 1) + ' others' }
     else return 'Post was liked by 0 users'
 }
 
@@ -28,8 +27,8 @@ function setText() {
 <template>
     <IonContent :scrollY="false" class="description" background-color="transparent">
         <IonRow>
-            <img class="pfp" alt="Profile picture" :src="user.profilePicture" />
-            <p class="userName">{{ user.userHandle }}</p>
+            <img class="pfp" alt="Profile picture" :src="user.profile_picture" />
+            <p class="userName">{{ user.handle }}</p>
             <FollowButton :userId="props.userId" />
         </IonRow>
         <p id="middle-part" class="main-text">{{ description }}</p>
