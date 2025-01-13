@@ -3,16 +3,15 @@ import { IonContent, IonPage } from '@ionic/vue';
 import { VTab, VWindow, VWindowItem } from 'vuetify/lib/components/index.mjs';
 import { useRoute } from 'vue-router';
 import HeaderComponent from '../components/HeaderComponent.vue'
-import apiGymDiv from '@/logic/API/apiGym';
+import apiGym from '@/logic/API/apiGym';
 import General from '../components/tabs/General.vue';
 import GymFeed from '../components/tabs/GymFeed.vue';
 import apiPost from '@/logic/API/apiPost';
 
 const route = useRoute()
 let id = route.params.id as unknown as number
-let gymInfo = await await apiGymDiv('info', "gym", id, undefined, 'logo,title,id')
-let gymPosts = await apiPost("gymPosts", id)
-
+let gymInfo = await apiGym('info', id, '', 'logo,title')
+console.log(JSON.stringify(gymInfo));
 </script>
 
 <template>
@@ -30,7 +29,7 @@ let gymPosts = await apiPost("gymPosts", id)
 					<General :gymId="id" />
 				</VWindowItem>
 				<VWindowItem>
-					<GymFeed :gymId="id" :items="gymPosts" />
+					<!--- <GymFeed :gymId="id" :items="gymPosts" /> --->
 				</VWindowItem>
 			</VWindow>
 		</IonContent>

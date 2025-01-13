@@ -3,7 +3,7 @@ import { useIonRouter, IonBackButton, IonButtons, IonContent, IonHeader, IonTool
 import { userDataStore } from '@/stores/UserDataStore';
 import { ref } from 'vue';
 import apiPost from '@/logic/API/apiPost';
-import apiGymDiv from '@/logic/API/apiGym';
+import apiGym from '@/logic/API/apiGym';
 
 const userStore = userDataStore()
 const router = useIonRouter()
@@ -19,7 +19,7 @@ async function addPost() {
 }
 
 for (let i = 0; i < userStore.userDivisionId.length; i++) {
-    let data = await await apiGymDiv('info', "division", userStore.userDivisionId[i], undefined, 'title')
+    let data = await await apiGym('info', userStore.userDivisionId[i], undefined, 'title')
     names.push(data.title)
 }
 </script>

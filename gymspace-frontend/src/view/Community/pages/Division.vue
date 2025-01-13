@@ -5,13 +5,13 @@ import { useRoute } from 'vue-router';
 
 import HeaderComponent from '../components/HeaderComponent.vue';
 import ChallengeThumbGrid from '@/view/Challenges/pages/ChallengeThumbGrid.vue';
-import apiGymDiv from '@/logic/API/apiGym';
+import apiGym from '@/logic/API/apiGym';
 import apiPost from '@/logic/API/apiPost';
 import DivisionFeed from '../components/tabs/DivisionFeed.vue';
 
 const route = useRoute()
 let id = route.params.id as unknown as number
-let divisionInfo = await apiGymDiv('info', "division", id, undefined, 'logo,title,id')
+let divisionInfo = await apiGym('info', id, undefined, 'logo,title,id')
 let gymPosts = await apiPost("divisionPosts", id)
 
 

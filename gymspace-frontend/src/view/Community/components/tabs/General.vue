@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import ChallengeThumbGrid from '@/view/Challenges/pages/ChallengeThumbGrid.vue';
 import CommunityButton from '../CommunityButton.vue';
-import apiGymDiv from '@/logic/API/apiGym';
+import apiGym from '@/logic/API/apiGym';
 
 const props = defineProps<{
     gymId: number
 }>()
 
-let divisions = await apiGymDiv("gymDivisions", 'gym', props.gymId)
+let divisions = await apiGym("gymDivisions", props.gymId)
 let isActive = false
 
 function toggle() {
@@ -34,7 +34,7 @@ function toggle() {
     <button v-if="divisions.length > 4" @click="toggle()"><img id="arrow"
             src='../../../../assets/icons/arrowRight.svg'></button>
     <h2>Challenges</h2>
-    <ChallengeThumbGrid :type="1" />
+    <!--- <ChallengeThumbGrid :type="1" /> --->
 </template>
 
 <style scoped>

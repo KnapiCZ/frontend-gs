@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { IonButton, IonButtons, IonModal, IonRow, IonToolbar, IonTitle, modalController } from '@ionic/vue';
-import apiGymDiv from '@/logic/API/apiGym';
+import apiGym from '@/logic/API/apiGym';
 const props = defineProps<{
 	id: number
 	type: string
 }>()
 
-let info = await apiGymDiv('info', props.type, props.id, undefined, 'logo,title,subtitle,description')
+let info = await apiGym('info', props.id, undefined, 'logo,title,subtitle,description')
 
 </script>
 

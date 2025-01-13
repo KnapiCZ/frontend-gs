@@ -3,7 +3,7 @@ import { IonPage, IonTabs, IonRouterOutlet, IonTabBar, IonTabButton, useIonRoute
 import { userDataStore } from '@/stores/UserDataStore';
 import apiAuth from '@/logic/API/apiAuth';
 import apiUser from '@/logic/API/apiUser';
-import apiGymDiv from '@/logic/API/apiGym';
+import apiGym from '@/logic/API/apiGym';
 
 const router = useIonRouter()
 const userStore = userDataStore()
@@ -29,9 +29,9 @@ await apiUser("userProfile", userStore.loggedUserId, undefined, 'profile_picture
 	profilePicture = `${loggedUser.profile_picture}`
 })
 
-let myDivisions = await apiGymDiv('my', 'division', userStore.loggedUserId)
-let myGyms = await apiGymDiv('my', 'gym', userStore.loggedUserId)
-let allGyms = await apiGymDiv('all', 'gym')
+let myDivisions = await apiGym('my', userStore.loggedUserId)
+let myGyms = await apiGym('my', userStore.loggedUserId)
+let allGyms = await apiGym('all')
 let index
 
 

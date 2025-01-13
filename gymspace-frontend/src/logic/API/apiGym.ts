@@ -12,7 +12,7 @@ import config from "./apiConfig";
  * @returns data you wanted from api
  */
 
-async function apiGymDiv(apiType = '', objectId?: number, data?: string, fields?: string, queryParams?: string) {
+async function apiGym(apiType = '', objectId?: number, data?: string, fields?: string, queryParams?: string) {
     let response
     switch (apiType) {
 
@@ -82,4 +82,4 @@ async function apiGymDiv(apiType = '', objectId?: number, data?: string, fields?
 
 }
 
-export default apiGymDiv
+export default apiGym

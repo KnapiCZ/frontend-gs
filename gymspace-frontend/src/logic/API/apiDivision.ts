@@ -12,7 +12,7 @@
  * @returns data you wanted from api
  */
 
-async function apiGymDiv(apiType = '', type: string, objectId?: number, data?: string, fields?: string, queryParams?: string) {
+async function apiGym(apiType = '', type: string, objectId?: number, data?: string, fields?: string, queryParams?: string) {
     const baseUrl = `https://gymspace-app-t6hic.ondigitalocean.app/`
     let response
     switch (apiType) {
@@ -98,4 +98,4 @@ async function apiGymDiv(apiType = '', type: string, objectId?: number, data?: s
 
 }
 
-export default apiGymDiv
+export default apiGym
