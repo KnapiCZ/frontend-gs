@@ -15,7 +15,7 @@ const config: CapacitorConfig = {
     loggingBehavior: 'debug',
   },
   server: {
-    androidScheme: 'http'
+    androidScheme: 'https'
   }
 };
 

@@ -3,7 +3,7 @@ import { useIonRouter, IonBackButton, IonButtons, IonContent, IonHeader, IonTool
 import { userDataStore } from '@/stores/UserDataStore';
 import { ref } from 'vue';
 import apiPost from '@/logic/API/apiPost';
-import apiGymDiv from '@/logic/API/apiGymDiv';
+import apiGymDiv from '@/logic/API/apiGym';
 
 const userStore = userDataStore()
 const router = useIonRouter()
@@ -58,7 +58,6 @@ for (let i = 0; i < userStore.userDivisionId.length; i++) {
 </template>
 
 <style scoped>
-
 ion-title {
     margin: 0 20px;
     font-weight: bold;

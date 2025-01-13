@@ -5,7 +5,7 @@ import { useRoute } from 'vue-router';
 
 import HeaderComponent from '../components/HeaderComponent.vue';
 import ChallengeThumbGrid from '@/view/Challenges/pages/ChallengeThumbGrid.vue';
-import apiGymDiv from '@/logic/API/apiGymDiv';
+import apiGymDiv from '@/logic/API/apiGym';
 import apiPost from '@/logic/API/apiPost';
 import DivisionFeed from '../components/tabs/DivisionFeed.vue';
 

@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { IonCard, IonCardContent, IonCol, IonRow, useIonRouter } from '@ionic/vue';
+import { userDataStore } from '@/stores/UserDataStore';
 
 import LikeButton from '@/view/shared/components/LikeButton.vue'
 import OptionsButton from '../OptionsButton.vue'
 import apiPost from '@/logic/API/apiPost';
 import apiUser from '@/logic/API/apiUser';
-import { userDataStore } from '@/stores/UserDataStore';
 
+const router = useIonRouter();
 const userStore = userDataStore()
 
 const props = defineProps<{
@@ -30,14 +31,11 @@ const months = [
 ]
 
 let post = await apiPost("getPost", props.postId)
-let creatorInfo = await apiUser("userProfile", post.author, undefined, 'username,handle,profile_picture')
+let author = await apiUser("userProfile", post.author, undefined, 'username,handle,profile_picture')
 
 let time = setTime()
 
 let postImg = post.media[0]
-let userPFP = creatorInfo.profile_picture
-
-const router = useIonRouter();
 
 function goToUser() { router.push('/user/' + post.author) }
 
@@ -100,10 +98,10 @@ function setTime() {
 			<p class="date-posted">{{ time }}</p>
 			<hr id="separator">
 			<IonRow>
-				<img class="pfp" :src="userPFP" @click="goToUser()">
+				<img class="pfp" :src="author.profile_picture" @click="goToUser()">
 				<IonCol>
-					<p class="nickname" @click="goToUser()">{{ creatorInfo.username }}</p>
-					<p class="handle" @click="goToUser()">{{ creatorInfo.handle }}</p>
+					<p class="nickname" @click="goToUser()">{{ author.username }}</p>
+					<p class="handle" @click="goToUser()">{{ author.handle }}</p>
 				</IonCol>
 				<LikeButton class="postBtn" :userId="post.author" :postId="post.id" />
 			</IonRow>
@@ -112,18 +110,44 @@ function setTime() {
 </template>
 
 <style scoped>
-* {
-	color: white;
+ion-row {
+	height: fit-content;
+}
+
+ion-card {
+	width: 100%;
+	margin-bottom: 10px;
+	background-color: rgb(48, 48, 48);
+	border-radius: 20px;
+}
+
+ion-card-content {
+	width: auto;
+	text-align: left;
+	margin: 0 20px;
+	padding: 0;
+}
+
+ion-col {
+	display: flexbox;
+	align-items: center;
+}
+
+hr {
+	width: 100%;
+	margin: 10px auto;
+	border-radius: 3px;
+	color: rgb(201, 201, 201);
 }
 
 .description {
-	font-size: 13px;
+	font-size: 16px;
 	line-clamp: 5;
 }
 
 .date-posted {
 	color: rgb(190, 190, 190);
-	font-size: 11px;
+	font-size: 12px;
 }
 
 #popover-button {
@@ -137,7 +161,7 @@ function setTime() {
 	height: 50px !important;
 	object-fit: contain;
 	aspect-ratio: 1;
-	margin: auto 10px 10px auto;
+	margin: auto 10px auto 0;
 	border-radius: 50%;
 }
 
@@ -157,35 +181,6 @@ function setTime() {
 	height: 28px;
 }
 
-ion-card {
-	width: 100%;
-	margin-bottom: 10px;
-	background-color: rg b(48, 48, 48);
-	border-radius: 20px;
-}
-
-ion-card-content {
-	width: auto;
-	text-align: left;
-	margin: 0 20px;
-	padding: 0;
-}
-
-ion-row {
-	height: fit-content;
-}
-
-ion-col {
-	display: flexbox;
-	align-items: center;
-}
-
-hr {
-	width: 100%;
-	margin: 10px auto;
-	border-radius: 3px;
-	color: rgb(201, 201, 201);
-}
 
 .postImage {
 	width: 100%;

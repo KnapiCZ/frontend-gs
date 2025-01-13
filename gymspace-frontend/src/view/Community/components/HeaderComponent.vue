@@ -4,7 +4,7 @@ import { userDataStore } from '@/stores/UserDataStore';
 import { ref } from 'vue';
 
 import BioButton from './BioButton.vue';
-import apiGymDiv from '@/logic/API/apiGymDiv';
+import apiGymDiv from '@/logic/API/apiGym';
 
 const props = defineProps<{
     id: number

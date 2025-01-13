@@ -1,3 +1,5 @@
+import config from "./apiConfig";
+
 /**
  * if arguments are not specified for case -> use undefined
  * @description apiTypes:
@@ -17,139 +19,96 @@
  */
 
 async function apiChallenge(apiType = '', object_id?: number, data?: string, fields?: string) {
-    const baseUrl = `https://gymspace-app-t6hic.ondigitalocean.app/`
     let response
 
     switch (apiType) {
 
         case "allChallengesId":
-            response = await (
-                fetch(`${baseUrl}api/challenge/`,
-                    {
-                        headers: {
-                            'Authorization': 'Token ' + localStorage.getItem("Token"),
-                            "Content-Type": "application/json",
-                        },
-                    }
-                )
-            );
+            response = await fetch(`${config.apiBaseUrl}api/challenge/`,
+                {
+                    method: 'GET',
+                    headers: config.headers
+                }
+            )
+
             return await response.json()
 
 
         case "getChallenge":
-            response = await (
-                fetch(`${baseUrl}api/challenge/${object_id}/`,
-                    {
-                        method: 'GET',
-                        headers: {
-                            'Authorization': 'Token ' + localStorage.getItem("Token"),
-                            "Content-Type": "application/json",
-                        },
-                    }
-                )
-            );
+            response = await fetch(`${config.apiBaseUrl}api/challenge/${object_id}/`,
+                {
+                    method: 'GET',
+                    headers: config.headers
+                }
+            )
             return await response.json()
 
         case "getProgress":
-            response = await (
-                fetch(`${baseUrl}api/progress/${object_id}/`,
-                    {
-                        headers: {
-                            'Authorization': 'Token ' + localStorage.getItem("Token"),
-                            "Content-Type": "application/json",
-                        },
-                    }
-                )
-            );
+            response = await fetch(`${config.apiBaseUrl}api/progress/${object_id}/`,
+                {
+                    method: "GET",
+                    headers: config.headers
+                }
+            )
             return await response.json()
 
         case "createProgress":
-            response = await (
-                fetch(`${baseUrl}api/progress/`,
-                    {
-                        method: "POST",
-                        headers: {
-                            'Authorization': 'Token ' + localStorage.getItem("Token"),
-                            "Content-Type": "application/json",
-                        },
-                        body: data
-                    }
-                )
-            );
+            response = await fetch(`${config.apiBaseUrl}api/progress/`,
+                {
+                    method: "POST",
+                    headers: config.headers,
+                    body: data
+                }
+            )
             return await response.json()
 
         case "updateProgress":
-            response = await (
-                fetch(`${baseUrl}api/progress/${object_id}/`,
-                    {
-                        method: "Patch",
-                        headers: {
-                            'Authorization': 'Token ' + localStorage.getItem("Token"),
-                            "Content-Type": "application/json",
-                        },
-                        body: data
-                    }
-                )
-            );
+            response = await fetch(`${config.apiBaseUrl}api/progress/${object_id}/`,
+                {
+                    method: "PATCH",
+                    headers: config.headers,
+                    body: data
+                }
+            )
             return await response.json()
 
 
 
         case "getVote":
-            response = await (
-                fetch(`${baseUrl}api/vote/${object_id}`,
-                    {
-                        method: "GET",
-                        headers: {
-                            'Authorization': 'Token ' + localStorage.getItem("Token"),
-                            "Content-Type": "application/json",
-                        },
-                    }
-                )
-            );
+            response = await fetch(`${config.apiBaseUrl}api/vote/${object_id}`,
+                {
+                    method: "GET",
+                    headers: config.headers
+                }
+            )
             return await response.json()
 
         case "createVote":
-            response = await (
-                fetch(`${baseUrl}api/vote/`,
-                    {
-                        method: "POST",
-                        headers: {
-                            'Authorization': 'Token ' + localStorage.getItem("Token"),
-                            "Content-Type": "application/json",
-                        },
-                        body: data
-                    }
-                )
-            );
+            response = await fetch(`${config.apiBaseUrl}api/vote/`,
+                {
+                    method: "POST",
+                    headers: config.headers,
+                    body: data
+                }
+            )
             return await response.json()
 
         case "updateVote":
-            response = await (
-                fetch(`${baseUrl}api/vote/${object_id}/`,
-                    {
-                        method: "POST",
-                        headers: {
-                            'Authorization': 'Token ' + localStorage.getItem("Token"),
-                            "Content-Type": "application/json",
-                        },
-                    }
-                )
-            );
+            response = await fetch(`${config.apiBaseUrl}api/vote/${object_id}/`,
+                {
+                    method: "POST",
+                    headers: config.headers,
+                }
+            )
             return await response.json()
 
         case "deleteVote":
-            response = await (
-                fetch(`${baseUrl}api/vote/${object_id}/`,
-                    {
-                        method: "POST",
-                        headers: {
-                            'Authorization': 'Token ' + localStorage.getItem("Token"),
-                            "Content-Type": "application/json",
-                        },
-                    }
-                )
-            );
+            response = await fetch(`${config.apiBaseUrl}api/vote/${object_id}/`,
+                {
+                    method: "POST",
+                    headers: config.headers,
+                }
+            )
             return await response.json()
 
         default:

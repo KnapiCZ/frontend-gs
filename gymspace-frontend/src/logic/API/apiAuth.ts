@@ -1,3 +1,5 @@
+import config from "./apiConfig"
+
 /**
  * if arguments are not specified for case -> use undefined
  * @description apiTypes:
@@ -12,7 +14,6 @@
 
 async function apiAuth(apiType = '', username?: string, password?: string) {
 
-    const baseUrl = `https://gymspace-app-t6hic.ondigitalocean.app/`
     let response
     let data
 
@@ -20,7 +21,7 @@ async function apiAuth(apiType = '', username?: string, password?: string) {
         case "getToken":
             data = { "username": username, "password": password }
             try {
-                response = await fetch(`${baseUrl}api-auth/`, {
+                response = await fetch(`${config.apiBaseUrl}api-auth/`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -35,12 +36,9 @@ async function apiAuth(apiType = '', username?: string, password?: string) {
 
         case "confirmAuth":
             try {
-                response = await fetch(`${baseUrl}api/confirm-auth/`, {
+                response = await fetch(`${config.apiBaseUrl}api/confirm-auth/`, {
                     method: "POST",
-                    headers: {
-                        'Authorization': 'Token ' + localStorage.getItem("Token"),
-                        "Content-Type": "application/json",
-                    },
+                    headers: config.headers
                 });
                 return response.json();
             } catch (error) {

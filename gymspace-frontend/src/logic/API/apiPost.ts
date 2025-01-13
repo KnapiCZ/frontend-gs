@@ -1,3 +1,5 @@
+import config from "./apiConfig";
+
 /**
  * if arguments are not specified for case -> use undefined
  * @description apiTypes:
@@ -19,151 +21,109 @@
 
 
 async function apiPost(apiType = '', objectId?: number, data?: string, queryParams?: string) {
-    const baseUrl = `https://gymspace-app-t6hic.ondigitalocean.app/`
     let response
     switch (apiType) {
 
         case "usersPosts":
-            response = await (
-                fetch(`${baseUrl}api/posts/${objectId}/users-posts/`,
-                    {
-                        headers: {
-                            'Authorization': 'Token ' + localStorage.getItem("Token"),
-                            "Content-Type": "application/json",
-                        }
-                    })
-            );
+            response = await fetch(`${config.apiBaseUrl}api/posts/${objectId}/users-posts/`,
+                {
+                    method: "GET",
+                    headers: config.headers
+                }
+            )
             return await response.json()
 
         case "createPost":
-            response = await (
-                fetch(`${baseUrl}api/posts/`,
-                    {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': 'Token ' + localStorage.getItem("Token"),
-                            "Content-Type": "application/json",
-                        },
-                        body: data
-                    })
-            );
+            response = await fetch(`${config.apiBaseUrl}api/posts/`,
+                {
+                    method: "POST",
+                    headers: config.headers,
+                    body: data
+                }
+            )
             return await response.json()
 
         case "getPost":
-            response = await (
-                fetch(`${baseUrl}api/posts/${objectId}/`,
-                    {
-                        method: 'GET',
-                        headers: {
-                            'Authorization': 'Token ' + localStorage.getItem("Token"),
-                            "Content-Type": "application/json",
-                        }
-                    })
-            );
+            response = await fetch(`${config.apiBaseUrl}api/posts/${objectId}/`,
+                {
+                    method: "GET",
+                    headers: config.headers
+                }
+            )
             return await response.json()
 
         case "updatePost":
-            response = await (
-                fetch(`${baseUrl}api/posts/${objectId}/`,
-                    {
-                        method: 'PATCH',
-                        headers: {
-                            'Authorization': 'Token ' + localStorage.getItem("Token"),
-                            "Content-Type": "application/json",
-                        },
-                        body: data
-                    })
-            );
+            response = await fetch(`${config.apiBaseUrl}api/posts/${objectId}/`,
+                {
+                    method: "PATCH",
+                    headers: config.headers,
+                    body: data
+                }
+            )
             return await response.json()
 
         case "deletePost":
-            response = await (
-                fetch(`${baseUrl}api/posts/${objectId}/`,
-                    {
-                        method: 'DELETE',
-                        headers: {
-                            'Authorization': 'Token ' + localStorage.getItem("Token"),
-                            "Content-Type": "application/json",
-                        },
-                        body: data
-                    })
-            );
+            response = await fetch(`${config.apiBaseUrl}api/posts/${objectId}/`,
+                {
+                    method: 'DELETE',
+                    headers: config.headers,
+                    body: data
+                }
+            )
             return await response.json()
 
         case "getThumbnail":
-            response = await (
-                fetch(`${baseUrl}api/users-posts/thumbnail/${objectId}/`,
-                    {
-                        headers: {
-                            'Authorization': 'Token ' + localStorage.getItem("Token"),
-                            "Content-Type": "application/json",
-                        },
-                    })
-            );
+            response = await fetch(`${config.apiBaseUrl}api/users-posts/thumbnail/${objectId}/`,
+                {
+                    method: "GET",
+                    headers: config.headers
+                }
+            )
             return await response.json()
 
         case "postLiked":
-            response = await (
-                fetch(`${baseUrl}api/like/${objectId}/?user_id=${queryParams}`,
-                    {
-                        method: 'GET',
-                        headers: {
-                            'Authorization': 'Token ' + localStorage.getItem("Token"),
-                            "Content-Type": "application/json",
-                        }
-                    })
-            );
+            response = await fetch(`${config.apiBaseUrl}api/like/${objectId}/?user_id=${queryParams}`,
+                {
+                    method: "GET",
+                    headers: config.headers
+                }
+            )
             return await response.json()
 
         case "updateLike":
-            response = await (
-                fetch(`${baseUrl}api/like/${objectId}/?user_id=${queryParams}`,
-                    {
-                        method: 'PATCH',
-                        headers: {
-                            'Authorization': 'Token ' + localStorage.getItem("Token"),
-                            "Content-Type": "application/json",
-                        }
-                    })
-            );
+            response = await fetch(`${config.apiBaseUrl}api/like/${objectId}/?user_id=${queryParams}`,
+                {
+                    method: "PATCH",
+                    headers: config.headers
+                }
+            )
             return await response.json()
 
         case "recommendedPosts":
-            response = await (
-                fetch(`${baseUrl}api/users-gympage-recommended/${objectId}/`,
-                    {
-                        headers: {
-                            'Authorization': 'Token ' + localStorage.getItem("Token"),
-                            "Content-Type": "application/json",
-                        },
-                    })
-            );
+            response = await fetch(`${config.apiBaseUrl}api/users-gympage-recommended/${objectId}/`,
+                {
+                    method: "GET",
+                    headers: config.headers
+                }
+            )
             return await response.json()
 
         case "gymPosts":
-            response = await (
-                fetch(`${baseUrl}api/gym-posts/${objectId}/`,
-                    {
-                        method: 'GET',
-                        headers: {
-                            'Authorization': 'Token ' + localStorage.getItem("Token"),
-                            "Content-Type": "application/json",
-                        },
-                    })
-            );
+            response = await fetch(`${config.apiBaseUrl}api/gym-posts/${objectId}/`,
+                {
+                    method: "GET",
+                    headers: config.headers
+                }
+            )
             return await response.json()
 
         case "divisionPosts":
-            response = await (
-                fetch(`${baseUrl}api/division-posts/${objectId}/`,
-                    {
-                        method: 'GET',
-                        headers: {
-                            'Authorization': 'Token ' + localStorage.getItem("Token"),
-                            "Content-Type": "application/json",
-                        },
-                    })
-            );
+            response = await fetch(`${config.apiBaseUrl}api/division-posts/${objectId}/`,
+                {
+                    method: "GET",
+                    headers: config.headers
+                }
+            )
             return await response.json()
 
         default:

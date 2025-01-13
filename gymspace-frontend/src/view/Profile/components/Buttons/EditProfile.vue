@@ -39,13 +39,12 @@ async function save() {
     for (let i = 0; i < 5; i++) { contactsUrls += contacts[i] + "\r\n" }
     userStore.user = userStore.editedUser
     userData = JSON.parse(userStore.user)
-    userData.handle = data.value.handle
     userData.username = data.value.username
     userData.contacts = contactsUrls
     userData.height = data.value.height as unknown as number
     userData.weight = data.value.weight as unknown as number
     userStore.user = JSON.stringify(userData)
-    console.log(await apiUser('update')) // upravit tento userapi
+    console.log(await apiUser('updateUserProfile', userStore.loggedUserId, )) // upravit tento userapi
     forceRerender()
     modalController.dismiss("user-edit")
 }
@@ -85,7 +84,7 @@ let contacts = userData.contacts.split("\r\n")
                     </IonCol>
                 </IonItem>
                 <IonItem>
-                    <IonInput v-model="data.handle" label="Handle" label-placement="fixed"
+                    <IonInput v-model="data.handle" :disabled="true" label="Handle" label-placement="fixed"
                         placeholder="Unique for every user" :value="data.handle">
                     </IonInput>
                 </IonItem>

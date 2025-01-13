@@ -1,3 +1,5 @@
+import config from "./apiConfig";
+
 /**
  * if arguments are not specified for case -> use undefined
  * @description apiTypes:
@@ -14,97 +16,67 @@
  */
 
 async function apiUser(apiType = "", user_id?: number, data?: string, queryParams?: string) {
-	const baseUrl = `https://gymspace-app-t6hic.ondigitalocean.app/`
 	let response
+
 	switch (apiType) {
 
 		case "createUser":
-
-			response = await (
-				fetch(`${baseUrl}api/users/`,
-					{
-						method: "POST",
-						mode: 'cors',
-						headers: {
-							"Content-Type": "application/json",
-						},
-						body: data
-					})
-			);
+			response = await fetch(`${config.apiBaseUrl}api/users/`,
+				{
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: data
+				}
+			)
 			return response.json()
 
 		case "userProfile":
-			response = await (
-				fetch(`${baseUrl}api/users/${user_id}/?fields=${queryParams}`,
-					{
-						mode: 'cors',
-						headers: {
-							'Authorization': 'Token ' + localStorage.getItem("Token"),
-							"Content-Type": "application/json",
-						},
-					})
-			);
+			response = await fetch(`${config.apiBaseUrl}api/users/${user_id}/?fields=${queryParams}`,
+				{
+					method: "GET",
+					headers: config.headers
+				}
+			)
 			return response.json()
 
 		case "updateUserProfile":
-			response = await (
-				fetch(`${baseUrl}api/users-small/update/`,
-					{
-						method: "PATCH",
-						credentials: "include",
-						mode: 'cors',
-						headers: {
-							'Authorization': 'Token ' + localStorage.getItem("Token"),
-							"Content-Type": "application/json",
-						},
-						body: data,
-					})
-			);
+			response = await fetch(`${config.apiBaseUrl}api/users-small/update/`,
+				{
+					method: "PATCH",
+					headers: config.headers,
+					body: data
+				}
+			)
 			return response.json()
 
 		case "isFollowing":
-			response = await (
-				fetch(`${baseUrl}api/follow/${user_id}/is-following/?user_id=${queryParams}`,
-					{
-						method: "GET",
-						mode: 'cors',
-						headers: {
-							'Authorization': 'Token ' + localStorage.getItem("Token"),
-							"Content-Type": "application/json",
-						},
-					})
-			);
+			response = await fetch(`${config.apiBaseUrl}api/follow/${user_id}/is-following/?user_id=${queryParams}`,
+				{
+					method: "GET",
+					headers: config.headers
+				}
+			)
 			return response.json()
 
 		case "usersFollowers":
-			response = await (
-				fetch(`${baseUrl}api/follow/${user_id}/followers/`,
-					{
-						method: "GET",
-						mode: 'cors',
-						headers: {
-							'Authorization': 'Token ' + localStorage.getItem("Token"),
-							"Content-Type": "application/json",
-						},
-					})
-			);
+			response = await fetch(`${config.apiBaseUrl}api/follow/${user_id}/followers/`,
+				{
+					method: "GET",
+					headers: config.headers
+				}
+			)
 			return response.json()
 
 		case "follow":
-			response = await (
-				fetch(`${baseUrl}api/follow/${user_id}/?user_id=${queryParams}`,
-					{
-						method: "PATCH",
-						mode: 'cors',
-						headers: {
-							'Authorization': 'Token ' + localStorage.getItem("Token"),
-							"Content-Type": "application/json",
-						}
-					})
-			);
+			response = await fetch(`${config.apiBaseUrl}api/follow/${user_id}/?user_id=${queryParams}`,
+				{
+					method: "PATCH",
+					headers: config.headers
+				}
+			)
 			return response.json()
-
-
 
 		default:
 			return `Invalid apiType`

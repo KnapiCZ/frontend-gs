@@ -3,7 +3,7 @@ import { IonPage, IonTabs, IonRouterOutlet, IonTabBar, IonTabButton, useIonRoute
 import { userDataStore } from '@/stores/UserDataStore';
 import apiAuth from '@/logic/API/apiAuth';
 import apiUser from '@/logic/API/apiUser';
-import apiGymDiv from '@/logic/API/apiGymDiv';
+import apiGymDiv from '@/logic/API/apiGym';
 
 const router = useIonRouter()
 const userStore = userDataStore()

@@ -31,7 +31,7 @@ async function submitForm() {
 				<input id="PassAuth" type="password" placeholder="Password" v-model="form.password">
 				<IonButton class="Login" color="transparent" @click="submitForm()">Login</IonButton>
 			</form>
-			<IonButton class="sign-up" href="/signup">NEW? SIGN-UP HERE</IonButton>
+			<IonButton class="sign-up" href="/step-1">NEW? SIGN-UP HERE</IonButton>
 
 			<!--
 			<IonButton class="login-by-other" color="transparent"><img class="sign-img"

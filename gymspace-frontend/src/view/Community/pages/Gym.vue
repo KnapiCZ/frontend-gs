@@ -3,7 +3,7 @@ import { IonContent, IonPage } from '@ionic/vue';
 import { VTab, VWindow, VWindowItem } from 'vuetify/lib/components/index.mjs';
 import { useRoute } from 'vue-router';
 import HeaderComponent from '../components/HeaderComponent.vue'
-import apiGymDiv from '@/logic/API/apiGymDiv';
+import apiGymDiv from '@/logic/API/apiGym';
 import General from '../components/tabs/General.vue';
 import GymFeed from '../components/tabs/GymFeed.vue';
 import apiPost from '@/logic/API/apiPost';

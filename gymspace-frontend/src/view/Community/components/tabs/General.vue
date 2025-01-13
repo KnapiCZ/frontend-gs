@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import ChallengeThumbGrid from '@/view/Challenges/pages/ChallengeThumbGrid.vue';
 import CommunityButton from '../CommunityButton.vue';
-import apiGymDiv from '@/logic/API/apiGymDiv';
+import apiGymDiv from '@/logic/API/apiGym';
 
 const props = defineProps<{
     gymId: number
