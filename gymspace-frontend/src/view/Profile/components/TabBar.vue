@@ -12,8 +12,8 @@ import apiPost from '@/logic/API/apiPost';
 const userStore = userDataStore()
 const router = useIonRouter()
 
-let posts = await apiPost('usersPosts', userStore.loggedUserId);
-userStore.userChallengeId = await apiChallenge('userChallengesId', userStore.renderedUserId)
+//let posts = await apiPost('usersPosts', userStore.loggedUserId);
+//userStore.userChallengeId = await apiChallenge('userChallengesId', userStore.renderedUserId)
 
 </script>
 

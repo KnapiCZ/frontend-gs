@@ -29,7 +29,7 @@ async function submitForm() {
         // TODO: pridat narozeniny
         await apiUser('createUser', 0, JSON.stringify(form.value));
         await apiAuth("getToken", form.value.username, form.value.password).then((token) => {
-            localStorage.setItem("Token", token);
+            localStorage.setItem("Token", token.Token);
         })
         router.push('/step-3');
     }

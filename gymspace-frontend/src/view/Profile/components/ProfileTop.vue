@@ -13,7 +13,7 @@ const logged_user = localStorage.getItem("logged_user_id")
 
 
 let userData = JSON.parse(userStore.user)
-let posts = await apiPost('usersPosts', userStore.renderedUserId);
+//let posts = await apiPost('usersPosts', userStore.renderedUserId);
 
 function checkLogin() {
 	if (userStore.renderedUserId == logged_user) return true;
@@ -46,7 +46,7 @@ let isUserVerified = userData.isUserVerified ?? 1;
 					<p class="bottom-item">{{ userData.username }}</p>
 				</IonCol>
 				<IonCol>
-					<p class="top-item1">{{ posts.length }}</p>
+					<p class="top-item1">{{ 45 }}</p>
 					<p class="bottom-item">Posts</p>
 				</IonCol>
 			</IonRow>

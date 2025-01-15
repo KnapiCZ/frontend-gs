@@ -8,7 +8,7 @@ const router = useIonRouter()
 const userStore = userDataStore()
 const user_id = localStorage.getItem("logged_user_id") | 0
 
-console.debug("[DEBUG] " + userStore.loggedUserId)
+console.debug("[DEBUG] " + user_id)
 
 let user = await apiUser("userProfile", user_id, undefined, 'profile_picture')
 

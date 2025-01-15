@@ -1,12 +1,22 @@
 <script setup>
 import { IonContent, IonPage, IonSearchbar, modalController } from "@ionic/vue";
-import { onMounted } from "vue";
-import apiGym from "@/logic/API/apiGym";
 import { userDataStore } from "@/stores/UserDataStore";
+import { Geolocation } from '@capacitor/geolocation';
+import { onMounted, ref } from "vue";
+import apiGym from "@/logic/API/apiGym";
 import ChooseGymModal from "../components/ChooseGymModal.vue";
 
 const userStore = userDataStore()
+
 let gyms = []
+const myLocation = ref(
+    {
+        lng: 0,
+        lat: 0
+
+    }
+)
+
 
 const openModal = async (place_id) => {
     const modal = await modalController.create({
@@ -36,13 +46,20 @@ const loadGoogleMapsApi = () => {
 };
 
 
-const initMap = () => {
-    const brnoCenter = { lat: 49.1951, lng: 16.6068 }; // Brno's coordinates
+const printCurrentPosition = async () => {
+    const coordinates = await Geolocation.getCurrentPosition();
+    console.log('Current position:', coordinates,);
+    return { lat: coordinates.coords.latitude, lng: coordinates.coords.longitude }
+};
 
+
+const initMap = async () => {
+    let centerOfMap = await printCurrentPosition()
+    console.log(centerOfMap)
     // Initialize the map
     const map = new google.maps.Map(document.getElementById("map"), {
-        center: brnoCenter,
-        zoom: 14,
+        center: centerOfMap,
+        zoom: 12,
         gestureHandling: "greedy",
         styles: [
             {
@@ -268,6 +285,8 @@ const initMap = () => {
     }
 
 }
+
+
 window.initMap = initMap; // Expose initMap for callback
 
 gyms = await apiGym("location")
