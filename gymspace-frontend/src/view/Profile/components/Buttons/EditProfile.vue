@@ -20,7 +20,6 @@ userStore.editedUser = userStore.user
 let userData = JSON.parse(userStore.editedUser)
 let data = ref({
     username: userData.username,
-    handle: userData.handle,
     height: userData.height,
     weight: userData.weight
 })
@@ -83,12 +82,6 @@ let contacts = userData.contacts.split("\r\n")
                         <ImageModal class="picture" />
                     </IonCol>
                 </IonItem>
-                <IonItem>
-                    <IonInput v-model="data.handle" :disabled="true" label="Handle" label-placement="fixed"
-                        placeholder="Unique for every user" :value="data.handle">
-                    </IonInput>
-                </IonItem>
-
                 <IonItem>
                     <IonInput v-model="data.username" label="Username" label-placement="fixed"
                         placeholder="Your Username" :value="data.username">

@@ -34,7 +34,7 @@ const userStore = userDataStore()
                 <IonRow>
                     <IonCol size="3" :key="photo.filepath" v-for="photo in photos">
                         <IonImg id="thumbnail" :src="photo.webviewPath"
-                            @click="userStore.choosenPhoto = photo.webviewPath as unknown as string"><img></IonImg>
+                            @click="userStore.choosenPhoto = (photo.webviewPath as unknown as string)"><img></IonImg>
                     </IonCol>
                 </IonRow>
             </IonGrid>

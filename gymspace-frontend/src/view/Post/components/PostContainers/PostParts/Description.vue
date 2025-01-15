@@ -12,7 +12,7 @@ const props = defineProps<{
     songname?: string
 }>();
 
-let user = await apiUser("userProfile", props.userId, undefined, 'username,handle,profile_picture').catch()
+let user = await apiUser("userProfile", props.userId, undefined, 'username,profile_picture').catch()
 let text = ref(setText())
 
 function setText() {
@@ -28,7 +28,7 @@ function setText() {
     <IonContent :scrollY="false" class="description" background-color="transparent">
         <IonRow>
             <img class="pfp" alt="Profile picture" :src="user.profile_picture" />
-            <p class="userName">{{ user.handle }}</p>
+            <p class="userName">{{ user.username }}</p>
             <FollowButton :userId="props.userId" />
         </IonRow>
         <p id="middle-part" class="main-text">{{ description }}</p>

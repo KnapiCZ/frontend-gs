@@ -28,7 +28,7 @@ let isUserVerified = userData.isUserVerified ?? 1;
 		<div class="main-info">
 			<div class="profile-image-container">
 				<img class="profile-image" :src="userData.profile_picture">
-            	<img v-if="isUserVerified" class="verified-icon" src="../../../assets/icons/checkMark.svg"/>
+				<img v-if="isUserVerified" class="verified-icon" src="../../../assets/icons/checkMark.svg" />
 			</div>
 			<IonRow>
 				<IonCol id="followers-modal">
@@ -37,7 +37,7 @@ let isUserVerified = userData.isUserVerified ?? 1;
 				</IonCol>
 				<IonCol>
 					<p class="top-item"> {{ userData.username }}</p>
-					<p class="bottom-item">{{ userData.handle }}</p>
+					<p class="bottom-item">{{ userData.username }}</p>
 				</IonCol>
 				<IonCol>
 					<p class="top-item1">{{ posts.length }}</p>
@@ -92,30 +92,30 @@ let isUserVerified = userData.isUserVerified ?? 1;
 }
 
 .profile-image-container {
-  margin-top: -70px;
-  position: relative;
-  display: inline-block;
-  width: 80px;
-  height: 80px;
+	margin-top: -70px;
+	position: relative;
+	display: inline-block;
+	width: 80px;
+	height: 80px;
 }
 
 .profile-image {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid white;
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	object-fit: cover;
+	border: 2px solid white;
 }
 
 .verified-icon {
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
-  width: 20px;
-  height: 20px;
-  background: yellow;
-  border-radius: 50%;
-  border: 2px solid white;
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
+	width: 20px;
+	height: 20px;
+	background: yellow;
+	border-radius: 50%;
+	border: 2px solid white;
 }
 
 .top-item,

@@ -12,7 +12,7 @@ import config from "./apiConfig";
  * @returns data you wanted from api
  */
 
-async function apiGym(apiType = '', objectId?: number, data?: string, fields?: string, queryParams?: string) {
+async function apiGym(apiType = '', objectId?: number, data?: string, fields?: '', queryParams?: string) {
     let response
     switch (apiType) {
 
@@ -34,7 +34,6 @@ async function apiGym(apiType = '', objectId?: number, data?: string, fields?: s
             )
             return await response.json()
 
-        // * vrati vsechno info o jednom gymu
         case "create":
             response = await fetch(`${config.apiBaseUrl}api/gym/`,
                 {
@@ -45,7 +44,6 @@ async function apiGym(apiType = '', objectId?: number, data?: string, fields?: s
             )
             return await response.json()
 
-        // * vrati vsechno info o jednom gymu
         case "info":
             response = await fetch(`${config.apiBaseUrl}api/gym/${objectId}/?fields=${fields}`,
                 {
@@ -55,7 +53,6 @@ async function apiGym(apiType = '', objectId?: number, data?: string, fields?: s
             )
             return await response.json()
 
-        // * prida uzivatele (logged_in_user) do gymu (gym_id) 
         case "join":
 
             response = await fetch(`${config.apiBaseUrl}api/gym/${objectId}/?user_id=${queryParams}`,
@@ -69,6 +66,15 @@ async function apiGym(apiType = '', objectId?: number, data?: string, fields?: s
 
         case "gymDivisions":
             response = await fetch(`${config.apiBaseUrl}api/division/${objectId}/gym-divisions/`,
+                {
+                    method: 'GET',
+                    headers: config.headers
+                }
+            )
+            return await response.json()
+
+        case "location":
+            response = await fetch(`${config.apiBaseUrl}api/gym/gym-location/`,
                 {
                     method: 'GET',
                     headers: config.headers

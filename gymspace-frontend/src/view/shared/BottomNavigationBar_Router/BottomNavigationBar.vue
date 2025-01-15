@@ -1,36 +1,19 @@
 <script setup lang="ts">
 import { IonPage, IonTabs, IonRouterOutlet, IonTabBar, IonTabButton, useIonRouter } from '@ionic/vue';
 import { userDataStore } from '@/stores/UserDataStore';
-import apiAuth from '@/logic/API/apiAuth';
 import apiUser from '@/logic/API/apiUser';
 import apiGym from '@/logic/API/apiGym';
 
 const router = useIonRouter()
 const userStore = userDataStore()
+const user_id = localStorage.getItem("logged_user_id") | 0
 
-let confirmedUser: { log: string }
-let profilePicture: string
+console.debug("[DEBUG] " + userStore.loggedUserId)
 
-await apiAuth('confirmAuth').then((confirm) => {
-	confirmedUser = confirm
-}).catch(() => {
-	console.log("HAHA NEFUNGUJE")
-	router.replace('/login')
-})
-console.debug("[DEBUG] " + confirmedUser!.log)
-if ((confirmedUser!.log != undefined) || (localStorage.getItem('Token') != undefined)) {
-	userStore.loggedUserId = confirmedUser!.log as unknown as number
-}
-else {
-	router.push('/login')
-}
+let user = await apiUser("userProfile", user_id, undefined, 'profile_picture')
 
-await apiUser("userProfile", userStore.loggedUserId, undefined, 'profile_picture').then((loggedUser) => {
-	profilePicture = `${loggedUser.profile_picture}`
-})
-
-let myDivisions = await apiGym('my', userStore.loggedUserId)
-let myGyms = await apiGym('my', userStore.loggedUserId)
+let myDivisions = await apiGym('my', user_id)
+let myGyms = await apiGym('my', user_id)
 let allGyms = await apiGym('all')
 let index
 
@@ -53,7 +36,7 @@ userStore.allGymsId = allGyms
 			<IonRouterOutlet></IonRouterOutlet>
 			<IonTabBar slot="bottom">
 				<IonTabButton tab="user" class="no-filter" :href="'/user/' + userStore.loggedUserId">
-					<img id="profile" class="no-filter" :src="profilePicture" />
+					<img id="profile" class="no-filter" :src="user.profile_picture" />
 				</IonTabButton>
 
 				<IonTabButton tab="community" href="/community/">

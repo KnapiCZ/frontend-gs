@@ -40,7 +40,7 @@ let isUserVerified = userData.isUserVerified ?? 1;
           </div>
 
           <h2 class="profile-name">{{userData.username}}</h2>
-          <p class="profile-role">{{userData.handle}}</p>
+          <p class="profile-role">{{userData.username}}</p>
 
           <p class="profile-bio">
             {{userData.description}}

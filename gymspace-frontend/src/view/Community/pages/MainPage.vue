@@ -3,7 +3,6 @@ import { IonPage, IonContent, IonSearchbar } from '@ionic/vue';
 import { userDataStore } from '@/stores/UserDataStore';
 import { ref } from 'vue';
 import CommunityButton from '../components/CommunityButton.vue';
-import 'swiper/css';
 
 const userStore = userDataStore()
 let isActive = [false, false, false]
