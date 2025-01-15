@@ -17,10 +17,6 @@ let goTo = () => {
 </script>
 
 <template>
-    <div @click="goTo" v-if="props.divisionType == 'small'" class="small-button">
-        <img class="small-logo-img" :src="divisionInfo.logo">
-        <h4>{{ divisionInfo.title }}</h4>
-    </div>
     <IonButton v-else @click="goTo" class="btn ion-no-padding" color="rgba(255, 255, 255, 0.103)">
         <img class="logo-img" :src="divisionInfo.logo">
         <h2>{{ divisionInfo.title }}</h2>
