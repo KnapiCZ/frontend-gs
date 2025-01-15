@@ -84,7 +84,7 @@ onMounted(() => {
                 <div class="value-display">
                     <IonCol>
                         <p class="value">{{ currentNumber }}</p>
-                        <p class="unit">kg</p>
+                        <p class="unit">cm</p>
                     </IonCol>
                 </div>
                 <div class="scale-lines">
@@ -93,7 +93,7 @@ onMounted(() => {
                     </div>
                 </div>
             </div>
-            <IonButton fill="solid" class="signup-btn" @click="">NEXT</IonButton>
+            <IonButton fill="solid" class="sign-up-button" @click="">NEXT</IonButton>
         </IonContent>
     </IonPage>
 </template>

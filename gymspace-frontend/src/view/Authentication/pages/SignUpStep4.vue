@@ -1,23 +1,27 @@
-<template>
-    <IonPage>
-        <IonContent>
-            <div class="top-container">
-                <div class="title-container">
-                    <p class="small-text">CHOOSE YOUR </p>
-                    <h1 class="highlight">HOME GYM</h1>
-                </div>
-                <IonSearchbar showCancelButton="focus" class="custom" />
-                <p class="create-text">
-                    Can’t find your gym? <a href="/create-gym" class="create-link">Create it!</a>
-                </p>
-            </div>
-            <div id="map"></div>
-        </IonContent>
-    </IonPage>
-</template>
 <script setup>
-import { IonContent, IonPage, IonSearchbar } from "@ionic/vue";
+import { IonContent, IonPage, IonSearchbar, modalController } from "@ionic/vue";
 import { onMounted } from "vue";
+import apiGym from "@/logic/API/apiGym";
+import { userDataStore } from "@/stores/UserDataStore";
+import ChooseGymModal from "../components/ChooseGymModal.vue";
+
+const userStore = userDataStore()
+let gyms = []
+
+const openModal = async (place_id) => {
+    const modal = await modalController.create({
+        component: ChooseGymModal,
+        breakpoints: [0.5], // Define your breakpoints here
+        initialBreakpoint: 0.5, // Set the initial breakpoint (default is 0.5)
+        cssClass: 'custom-modal-class', // Optional, if you want to add custom CSS classes
+        swipeToClose: true, // Enable swipe to close
+        showBackdrop: false,
+        id: place_id
+    });
+
+    modal.present();
+};
+
 
 const loadGoogleMapsApi = () => {
     return new Promise((resolve, reject) => {
@@ -30,6 +34,7 @@ const loadGoogleMapsApi = () => {
         document.head.appendChild(script);
     });
 };
+
 
 const initMap = () => {
     const brnoCenter = { lat: 49.1951, lng: 16.6068 }; // Brno's coordinates
@@ -236,51 +241,37 @@ const initMap = () => {
         mapTypeControl: false,
     });
 
-    // Fetch nearby gyms
-    const service = new google.maps.places.PlacesService(map);
 
-    service.nearbySearch(
-        {
-            location: brnoCenter,
-            radius: 5000, // Search within a 5km radius
-            type: "gym", // Only fetch gyms
-        },
-        (results, status) => {
-            if (status === google.maps.places.PlacesServiceStatus.OK && results) {
-                results.forEach((place) => addMarker(place, map));
-            } else {
-                console.error("Error fetching gyms:", status);
-            }
-        }
-    );
-};
+    const addMarker = (gym, map) => {
 
-const addMarker = (place, map) => {
-    if (!place.geometry || !place.geometry.location) return;
+        const marker = new google.maps.Marker({
+            position: { lat: gym.latitude, lng: gym.longtitude },
+            map,
+            title: gym.title,
+            icon: {
+                url: "https://firebasestorage.googleapis.com/v0/b/gymspace-4b1e8.firebasestorage.app/o/division%2Fdivision_1%2Fdivision1.png?alt=media&token=f5914894-f609-47f9-9308-c707be3a834c", // Custom gym icon
+                scaledSize: new google.maps.Size(30, 30),
+            },
+        });
 
-    const marker = new google.maps.Marker({
-        position: place.geometry.location,
-        map,
-        title: place.name,
-        icon: {
-            url: "https://firebasestorage.googleapis.com/v0/b/gymspace-4b1e8.firebasestorage.app/o/division%2Fdivision_1%2Fdivision1.png?alt=media&token=f5914894-f609-47f9-9308-c707be3a834c", // Custom gym icon
-            scaledSize: new google.maps.Size(30, 30),
-        },
-    });
+        marker.addListener("click", () => {
+            openModal(gym.place_id)
+        });
 
-    const infoWindow = new google.maps.InfoWindow({
-        content: `
-            <h3>${place.name}</h3>
-            <p>${place.vicinity || "No address available"}</p>
-        `,
-    });
+    };
 
-    marker.addListener("click", () => {
-        infoWindow.open(map, marker);
-    });
-};
 
+    console.log(gyms)
+    for (let i = 0; i < gyms.length; i++) {
+        console.log(gyms[i])
+        addMarker(gyms[i], map)
+    }
+
+}
 window.initMap = initMap; // Expose initMap for callback
+
+gyms = await apiGym("location")
+
 
 onMounted(async () => {
     try {
@@ -290,6 +281,24 @@ onMounted(async () => {
     }
 });
 </script>
+
+<template>
+    <IonPage>
+        <IonContent>
+            <div class="top-container">
+                <div class="title-container">
+                    <p class="small-text">CHOOSE YOUR </p>
+                    <h1 class="highlight">HOME GYM</h1>
+                </div>
+                <IonSearchbar showCancelButton="focus" class="custom" />
+                <p class="create-text">
+                    Can’t find your gym? <a href="/create-gym" class="create-link">Create it!</a>
+                </p>
+            </div>
+            <div id="map"></div>
+        </IonContent>
+    </IonPage>
+</template>
 
 
 <style scoped>

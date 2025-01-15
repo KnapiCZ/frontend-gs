@@ -1,52 +1,25 @@
-<template>
-    <div class="gym-registration">
-        <h1>Create Your Gym</h1>
-
-        <div class="search-bar">
-            <input type="text" id="autocomplete" v-model="gymName" placeholder="Enter gym name or location" />
-        </div>
-
-        <!-- Additional fields that get filled after selecting a gym -->
-        <div v-if="selectedGym" class="gym-details">
-            <div>
-                <label for="address">Address:</label>
-                <input type="text" id="address" v-model="selectedGym.address" placeholder="Gym address" disabled />
-            </div>
-
-            <div>
-                <label for="latitude">Latitude:</label>
-                <input type="text" id="latitude" v-model="selectedGym.latitude" placeholder="Gym latitude" disabled />
-            </div>
-
-            <div>
-                <label for="longitude">Longitude:</label>
-                <input type="text" id="longitude" v-model="selectedGym.longitude" placeholder="Gym longitude"
-                    disabled />
-            </div>
-
-            <button @click="confirmGym">Confirm Gym</button>
-        </div>
-
-        <div class="create-gym">
-            <p>Can't find your gym?</p>
-            <button @click="">Create Gym</button>
-        </div>
-    </div>
-</template>
-
 <script setup lang="ts">
+import { IonButton, IonInput, IonPage, IonContent, IonCol, useIonRouter } from '@ionic/vue';
+import { userDataStore } from '@/stores/UserDataStore';
 import { ref, onMounted } from 'vue';
+import apiGym from '@/logic/API/apiGym';
 
-// References for gym name and selected gym data
-const city = ref('');
-const street = ref('');
+const userStore = userDataStore()
+const router = useIonRouter()
+
 const gymName = ref('');
-const selectedGym = ref<{
-    name: string | null;
-    address: string | null;
-    latitude: string | null;
-    longitude: string | null;
-} | null>(null);
+const form = ref({
+    creator_id: localStorage.getItem("logged_user_id"),
+    title: "",
+    city: '',
+    address: "",
+    country: "",
+    latitude: 0,
+    longtitude: 0,
+    email: "",
+    phone: "",
+    place_id: ''
+});
 
 // Dynamically load the Google Maps API script
 const loadGoogleMapsScript = () => {
@@ -68,7 +41,7 @@ const loadGoogleMapsScript = () => {
 
 // Initialize the Google Autocomplete API
 const initAutocomplete = () => {
-    const input = document.getElementById('autocomplete') as HTMLInputElement;
+    const input = document.getElementById('ion-input-0') as HTMLInputElement;
     const autocomplete = new google.maps.places.Autocomplete(input, {
         types: ['gym'], // Limit the search to places like gyms
         fields: ['place_id', 'name', 'formatted_address', 'geometry'],
@@ -84,45 +57,49 @@ const initAutocomplete = () => {
 
         // Populate the selected gym data with name, address, and coordinates
         gymName.value = place.name;
-        selectedGym.value = {
-            name: place.name || 'Unnamed gym',
-            address: place.formatted_address || 'No address available',
-            latitude: place.geometry.location.lat().toString(),
-            longitude: place.geometry.location.lng().toString(),
-        };
-
-        // Extract city and street from the formatted address
-        extractCityAndStreet(place.formatted_address);
+        form.value.title = place.name || 'Unnamed gym'
+        form.value.latitude = place.geometry.location.lat()
+        form.value.longtitude = place.geometry.location.lng()
+        form.value.place_id = place.place_id
+        transformAddress(place.formatted_address)
     });
 };
 
-const extractCityAndStreet = (address) => {
-    // Regular expression for matching a postal code (5 digits, or 5+4 digits)
-    const postalCodeRegex = /\b\d{3} \d{2}\b/;
+function transformAddress(address) {
+    // Split address into parts
+    const parts = address.split(", ");
 
-    // Remove postal code from the address
-    const addressWithoutPostalCode = address.replace(postalCodeRegex, '').trim();
+    // The last part is the country
+    const country = parts.pop();
 
-    // Split the remaining address by commas
-    const addressParts = addressWithoutPostalCode.split(',');
+    // The second-to-last part is the city (with postal code)
+    let city = parts.pop();
 
-    // Assuming the first part is the street and second part is the city
-    const street = addressParts[0]?.trim() || '';
-    const city = addressParts[1]?.trim() || '';
-    console.log("Street: " + street + "   City:" + city)
-    return { street, city };
-};
+    // Remove postal code (assumed to be at the start of the city part)
+    city = city.replace(/\d{1,5}\s?\d{0,5}/, '').trim();
+
+    // The first part is the street address
+    const street = parts.join(", ");
+    form.value.address = street
+    form.value.city = city
+    form.value.country = country
+    // Return the formatted address without the postal code
+    return `${street}, ${city}, ${country}`;
+}
 
 
 
 // Function to handle gym registration confirmation
 const confirmGym = () => {
-    if (selectedGym.value) {
-        // Logic to save the gym data, e.g., sending it to the backend
-        alert(`Gym confirmed: ${selectedGym.value.name}`);
-        console.log('Gym Data:', selectedGym.value);
-    }
+    apiGym('create', undefined, JSON.stringify(form.value)).then(() =>
+        router.push('/step-5')
+    )
+
 };
+
+const back = () => {
+    router.back()
+}
 
 // Initialize the Google Autocomplete once the script is loaded
 onMounted(async () => {
@@ -135,59 +112,92 @@ onMounted(async () => {
 });
 </script>
 
+
+<template>
+    <IonPage>
+        <IonContent class="sign-up-content">
+
+            <img src="../../../assets/images/logo-glow.png" class="sign-up-background-image" alt="GymSpace-Logo" />
+            <IonCol>
+
+                <p class="welcome feature">This gym is unofficial. Official gyms need to be approved by their owner</p>
+                <p class="welcome">THIS FEATURE IS COMING SOON</p>
+                <h1 class="sign-up-text">CREATE GYM</h1>
+                <p class="after-text">AND BRING IT TO LIFE</p>
+
+                <form @submit.prevent="confirmGym">
+
+                    <IonInput id="autocomplete" class="custom" v-model="gymName" type="text"
+                        placeholder="Search for gym" error-text="Invalid Password">
+                    </IonInput>
+                    <IonInput id="address" class="custom" v-model="form.address" type="text" placeholder="Street"
+                        error-text="Invalid Password" :readonly="true">
+                    </IonInput>
+                    <IonInput id="city" class="custom" v-model="form.city" type="text" placeholder="City"
+                        error-text="Invalid Password" :readonly="true">
+                    </IonInput>
+                    <IonInput id="email" class="custom" v-model="form.email" type="email" placeholder="Email"
+                        error-text="Invalid Password">
+                    </IonInput>
+                    <IonInput id="mobile" class="pass custom" v-model="form.phone" type="text" placeholder="Phone"
+                        error-text="Invalid Password">
+                    </IonInput>
+                    <IonButton class="sign-up-button" @click="confirmGym">CREATE GYM</IonButton>
+                </form>
+                <p class="welcome" @click="back"><img src="../../../assets/icons/arrowRight.svg" alt="">Return back to
+                    map</p>
+
+            </IonCol>
+        </IonContent>
+    </IonPage>
+</template>
+
+
 <style scoped>
-.gym-registration {
-    width: 100vw;
-    margin: 0 auto;
-    text-align: center;
-
+ion-input.custom {
+    text-align: left;
+    width: 87%;
+    height: 44px;
+    margin: 25px auto;
+    font-size: 16px;
+    --border-style: none;
+    --border-color: none;
+    --border-radius: none;
+    --background: #24242440;
+    --color: #fff;
+    --padding-end: 20px;
+    --padding-start: 20px;
+    border-radius: 6px;
+    border: solid 1px rgba(255, 255, 255, 0.651);
+    backdrop-filter: blur(26px);
 }
 
-.search-bar input {
-    width: 90%;
-    padding: 10px;
-
-    margin: 10px auto;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.gym-details {
+.welcome {
+    font-size: 14px;
+    font-weight: 300;
     margin-top: 20px;
 }
 
-.gym-details div {
-    margin-bottom: 10px;
+.sign-up-text {
+    font-size: 46px;
+    font-weight: 900;
+    margin: 10px auto 30px auto;
 }
 
-.gym-details label {
-    display: block;
-    font-weight: bold;
+.after-text {
+    font-weight: 500;
+    margin-bottom: 30px;
 }
 
-.gym-details input {
-    width: 90%;
-    padding: 10px;
-    margin: 10px auto;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+
+.feature {
+    margin-top: 30px;
+    color: red;
+    padding: 0 10px;
 }
 
-button {
-    background-color: #ffcc00;
-    color: #000;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 4px;
-}
-
-button:hover {
-    background-color: #ffdb4d;
-}
-
-.create-gym {
-    margin-top: 20px;
-    text-align: center;
+.welcome img {
+    rotate: 180deg;
+    margin-right: 10px;
 }
 </style>

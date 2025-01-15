@@ -19,7 +19,7 @@ async function apiAuth(apiType = '', username?: string, password?: string) {
 
     switch (apiType) {
         case "getToken":
-            data = { "username": username, "password": password }
+            data = { "username_or_email": username, "password": password }
             try {
                 response = await fetch(`${config.apiBaseUrl}api-auth/`, {
                     method: "POST",
@@ -39,6 +39,29 @@ async function apiAuth(apiType = '', username?: string, password?: string) {
                 response = await fetch(`${config.apiBaseUrl}api/confirm-auth/`, {
                     method: "POST",
                     headers: config.headers
+                });
+                return response.json();
+            } catch (error) {
+                console.error("Error confirming: ", error);
+                throw error;
+            }
+        case "send2FA":
+            try {
+                response = await fetch(`${config.apiBaseUrl}api/twofa/setup/`, {
+                    method: "POST",
+                    headers: config.headers
+                });
+                return response.json();
+            } catch (error) {
+                console.error("Error confirming: ", error);
+                throw error;
+            }
+        case "confirm2FA":
+            try {
+                response = await fetch(`${config.apiBaseUrl}api/twofa/verify/`, {
+                    method: "POST",
+                    headers: config.headers,
+                    body: JSON.stringify({ token: password })
                 });
                 return response.json();
             } catch (error) {

@@ -153,7 +153,7 @@ onMounted(() => {
                 <span class="label-text">I confirm that I have familiarized myself with the Personal Data Processing
                     Policy and the Terms and Conditions</span>
             </label>
-            <IonButton fill="solid" class="signup-btn" @click="checkAge()">SIGN UP</IonButton>
+            <IonButton fill="solid" class="sign-up-button" @click="checkAge()">SIGN UP</IonButton>
         </IonContent>
     </IonPage>
 </template>
