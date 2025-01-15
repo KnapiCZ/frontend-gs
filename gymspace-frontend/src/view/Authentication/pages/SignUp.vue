@@ -15,6 +15,7 @@ const steps = [
     { path: '/step-4', step: 4 },
     { path: '/step-5', step: 5 },
     { path: '/step-6', step: 6 },
+    { path: '/step-7', step: 7 },
 ];
 
 // Determine the current step based on the path

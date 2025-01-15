@@ -2,6 +2,7 @@
 import ChallengeThumbGrid from '@/view/Challenges/pages/ChallengeThumbGrid.vue';
 import CommunityButton from '../CommunityButton.vue';
 import apiGym from '@/logic/API/apiGym';
+import DivisionThumbnail from '../DivisionThumbnail.vue';
 
 const props = defineProps<{
     gymId: number
@@ -28,7 +29,7 @@ function toggle() {
 <template>
     <h2>Divisons</h2>
     <div class="grid-division-container extend" id="extend">
-        <CommunityButton v-for="division in divisions" type="division" :id="division" divisionType="small"
+        <DivisionThumbnail v-for="division in divisions" type="division" :id="division" divisionType="small"
             class="grid-division-item" />
     </div>
     <button v-if="divisions.length > 4" @click="toggle()"><img id="arrow"

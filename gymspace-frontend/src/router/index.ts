@@ -60,6 +60,12 @@ const routes: Array<RouteRecordRaw> = [
 				component: () => import('@/view/Authentication/pages/SignUpStep6.vue'),
 				meta: { requiresAuth: false },
 			},
+			{
+				path: '/step-7',
+				name: 'signUpStep7',
+				component: () => import('@/view/Authentication/pages/SignUpStep7.vue'),
+				meta: { requiresAuth: false },
+			},
 		]
 	},
 
@@ -188,7 +194,12 @@ const routes: Array<RouteRecordRaw> = [
 		component: () => import('@/view/Community/pages/CreateGym.vue'),
 		meta: { requiresAuth: false },
 
-	}
+	},
+	{
+		path: '/waiting-screen',
+		component: () => import('@/view/Authentication/pages/WaitingScreen.vue'),
+		meta: { requiresAuth: false },
+	},
 ]
 
 
