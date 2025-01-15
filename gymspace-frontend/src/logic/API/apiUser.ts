@@ -1,4 +1,4 @@
-import config from "./apiConfig";
+import getConfig from "./apiConfig";
 
 /**
  * if arguments are not specified for case -> use undefined
@@ -21,7 +21,7 @@ async function apiUser(apiType = "", user_id?: number, data?: string, queryParam
 	switch (apiType) {
 
 		case "createUser":
-			response = await fetch(`${config.apiBaseUrl}api/users/`,
+			response = await fetch(`${getConfig().apiBaseUrl}api/users/`,
 				{
 					method: "POST",
 					headers: {
@@ -33,47 +33,47 @@ async function apiUser(apiType = "", user_id?: number, data?: string, queryParam
 			return response.json()
 
 		case "userProfile":
-			response = await fetch(`${config.apiBaseUrl}api/users/${user_id}/?fields=${queryParams}`,
+			response = await fetch(`${getConfig().apiBaseUrl}api/users/${user_id}/?fields=${queryParams}`,
 				{
 					method: "GET",
-					headers: config.headers
+					headers: getConfig().headers
 				}
 			)
 			return response.json()
 
 		case "updateUserProfile":
-			response = await fetch(`${config.apiBaseUrl}api/users-small/update/`,
+			response = await fetch(`${getConfig().apiBaseUrl}api/users-small/update/`,
 				{
 					method: "PATCH",
-					headers: config.headers,
+					headers: getConfig().headers,
 					body: data
 				}
 			)
 			return response.json()
 
 		case "isFollowing":
-			response = await fetch(`${config.apiBaseUrl}api/follow/${user_id}/is-following/?user_id=${queryParams}`,
+			response = await fetch(`${getConfig().apiBaseUrl}api/follow/${user_id}/is-following/?user_id=${queryParams}`,
 				{
 					method: "GET",
-					headers: config.headers
+					headers: getConfig().headers
 				}
 			)
 			return response.json()
 
 		case "usersFollowers":
-			response = await fetch(`${config.apiBaseUrl}api/follow/${user_id}/followers/`,
+			response = await fetch(`${getConfig().apiBaseUrl}api/follow/${user_id}/followers/`,
 				{
 					method: "GET",
-					headers: config.headers
+					headers: getConfig().headers
 				}
 			)
 			return response.json()
 
 		case "follow":
-			response = await fetch(`${config.apiBaseUrl}api/follow/${user_id}/?user_id=${queryParams}`,
+			response = await fetch(`${getConfig().apiBaseUrl}api/follow/${user_id}/?user_id=${queryParams}`,
 				{
 					method: "PATCH",
-					headers: config.headers
+					headers: getConfig().headers
 				}
 			)
 			return response.json()

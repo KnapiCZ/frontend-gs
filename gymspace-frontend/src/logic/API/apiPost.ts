@@ -1,4 +1,4 @@
-import config from "./apiConfig";
+import getConfig from "./apiConfig";
 
 /**
  * if arguments are not specified for case -> use undefined
@@ -25,103 +25,103 @@ async function apiPost(apiType = '', objectId?: number, data?: string, queryPara
     switch (apiType) {
 
         case "usersPosts":
-            response = await fetch(`${config.apiBaseUrl}api/posts/${objectId}/users-posts/`,
+            response = await fetch(`${getConfig().apiBaseUrl}api/posts/${objectId}/users-posts/`,
                 {
                     method: "GET",
-                    headers: config.headers
+                    headers: getConfig().headers
                 }
             )
             return await response.json()
 
         case "createPost":
-            response = await fetch(`${config.apiBaseUrl}api/posts/`,
+            response = await fetch(`${getConfig().apiBaseUrl}api/posts/`,
                 {
                     method: "POST",
-                    headers: config.headers,
+                    headers: getConfig().headers,
                     body: data
                 }
             )
             return await response.json()
 
         case "getPost":
-            response = await fetch(`${config.apiBaseUrl}api/posts/${objectId}/`,
+            response = await fetch(`${getConfig().apiBaseUrl}api/posts/${objectId}/`,
                 {
                     method: "GET",
-                    headers: config.headers
+                    headers: getConfig().headers
                 }
             )
             return await response.json()
 
         case "updatePost":
-            response = await fetch(`${config.apiBaseUrl}api/posts/${objectId}/`,
+            response = await fetch(`${getConfig().apiBaseUrl}api/posts/${objectId}/`,
                 {
                     method: "PATCH",
-                    headers: config.headers,
+                    headers: getConfig().headers,
                     body: data
                 }
             )
             return await response.json()
 
         case "deletePost":
-            response = await fetch(`${config.apiBaseUrl}api/posts/${objectId}/`,
+            response = await fetch(`${getConfig().apiBaseUrl}api/posts/${objectId}/`,
                 {
                     method: 'DELETE',
-                    headers: config.headers,
+                    headers: getConfig().headers,
                     body: data
                 }
             )
             return await response.json()
 
         case "getThumbnail":
-            response = await fetch(`${config.apiBaseUrl}api/users-posts/thumbnail/${objectId}/`,
+            response = await fetch(`${getConfig().apiBaseUrl}api/users-posts/thumbnail/${objectId}/`,
                 {
                     method: "GET",
-                    headers: config.headers
+                    headers: getConfig().headers
                 }
             )
             return await response.json()
 
         case "postLiked":
-            response = await fetch(`${config.apiBaseUrl}api/like/${objectId}/?user_id=${queryParams}`,
+            response = await fetch(`${getConfig().apiBaseUrl}api/like/${objectId}/?user_id=${queryParams}`,
                 {
                     method: "GET",
-                    headers: config.headers
+                    headers: getConfig().headers
                 }
             )
             return await response.json()
 
         case "updateLike":
-            response = await fetch(`${config.apiBaseUrl}api/like/${objectId}/?user_id=${queryParams}`,
+            response = await fetch(`${getConfig().apiBaseUrl}api/like/${objectId}/?user_id=${queryParams}`,
                 {
                     method: "PATCH",
-                    headers: config.headers
+                    headers: getConfig().headers
                 }
             )
             return await response.json()
 
         case "recommendedPosts":
-            response = await fetch(`${config.apiBaseUrl}api/users-gympage-recommended/${objectId}/`,
+            response = await fetch(`${getConfig().apiBaseUrl}api/users-gympage-recommended/${objectId}/`,
                 {
                     method: "GET",
-                    headers: config.headers
+                    headers: getConfig().headers
                 }
             )
             return await response.json()
 
         case "gymPosts":
-            response = await fetch(`${config.apiBaseUrl}api/gym-posts/${objectId}/`,
+            response = await fetch(`${getConfig().apiBaseUrl}api/gym-posts/${objectId}/`,
                 {
                     method: "GET",
-                    headers: config.headers
+                    headers: getConfig().headers
                 }
             )
             return await response.json()
 
         case "divisionPosts":
-            response = await fetch(`${config.apiBaseUrl}api/division-posts/${objectId}/`,
+            response = await fetch(`${getConfig().apiBaseUrl}api/division-posts/${objectId}/`,
                 {
                     method: "GET",
-                    headers: config.headers
+                    headers: getConfig().headers
                 }
             )
             return await response.json()

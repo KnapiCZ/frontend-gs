@@ -10,7 +10,7 @@ const props = defineProps<{
 
 const router = useIonRouter()
 
-let userData = await apiUser("userProfile", props.userId, undefined, 'username,handle,profile_picture')
+let userData = await apiUser("userProfile", props.userId, undefined, 'username,profile_picture')
 
 function goToUser() {
     modalController.dismiss()
@@ -24,7 +24,7 @@ function goToUser() {
         <img class="logo-img" :src="userData.profile_picture" alt="" @click="goToUser()">
         <IonCol @click="goToUser()">
             <p class="top-item">@{{ userData.username }}</p>
-            <p class="bottom-item">{{ userData.handle }}</p>
+            <p class="bottom-item">{{ userData.username }}</p>
         </IonCol>
         <FollowButton :userId="(props.userId as number)" />
     </IonButton>

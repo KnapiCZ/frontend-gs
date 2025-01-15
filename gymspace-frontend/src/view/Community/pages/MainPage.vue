@@ -3,7 +3,6 @@ import { IonPage, IonContent, IonSearchbar } from '@ionic/vue';
 import { userDataStore } from '@/stores/UserDataStore';
 import { ref } from 'vue';
 import CommunityButton from '../components/CommunityButton.vue';
-import 'swiper/css';
 
 const userStore = userDataStore()
 let isActive = [false, false, false]
@@ -41,7 +40,7 @@ init()
 	<IonPage class="ion-no-padding">
 		<IonContent class="ion-no-padding">
 			<IonSearchbar placeholder="Search"></IonSearchbar>
-			<img class="background" src="../../../assets/images/Background.png">
+			<img class="background" src="../../../assets/images/nav_background.png">
 
 			<button @click="toggle(1)">Your Gyms <img v-show="userStore.userGymId.length > 3" id="arrow1"
 					src="../../../assets/icons/arrowRight.svg"></button>

@@ -88,7 +88,7 @@ body {
 	transform: translate(-50%, -50%);
 }
 
-ion-button.signup-btn {
+ion-button.sign-up-button {
 	width: 50%;
 	height: 44px;
 	margin: 50px auto;
@@ -96,16 +96,19 @@ ion-button.signup-btn {
 	font-size: 14px;
 	font-weight: 900;
 	border-radius: 6px !important;
-	box-shadow: 0 0 45px #fff000;
+	box-shadow: 0 0 45px var(--color-primary-tint);
 	--border-radius: 6px !important;
 	--background: var(--color-primary-tint);
+	--background-hover: #bdb000;
+	--background-activated: #bdb000;
+	--background-focused: #bdb000;
 }
 
 h1.sign-up {
 	text-align: left;
 	font-size: 6vh;
 	font-weight: 900;
-	width: 30vh;
+	width: 32vh;
 	margin: 4vh 5%;
 }
 
@@ -140,9 +143,19 @@ ion-content.sign-up-content {
 }
 
 .pac-matched {
-	color: yellow;
+	color: var(--color-primary-tint);
 }
 
 .pac-icon-marker {
 	display: none;
+}
+
+.custom-modal-class {
+	margin: auto;
+	--width: 90%;
+	--border-radius: 6px;
+	--border-color: white;
+	--border-width: 1px;
+	--border-style: solid;
+	--border-radius: 6px;
 }

@@ -93,7 +93,7 @@ onMounted(() => {
                     </div>
                 </div>
             </div>
-            <IonButton fill="solid" class="signup-btn" @click="">NEXT</IonButton>
+            <IonButton fill="solid" class="sign-up-button" @click="">NEXT</IonButton>
         </IonContent>
     </IonPage>
 </template>

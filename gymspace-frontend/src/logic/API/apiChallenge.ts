@@ -1,4 +1,4 @@
-import config from "./apiConfig";
+import getConfig from "./apiConfig";
 
 /**
  * if arguments are not specified for case -> use undefined
@@ -24,10 +24,10 @@ async function apiChallenge(apiType = '', object_id?: number, data?: string, fie
     switch (apiType) {
 
         case "allChallengesId":
-            response = await fetch(`${config.apiBaseUrl}api/challenge/`,
+            response = await fetch(`${getConfig().apiBaseUrl}api/challenge/`,
                 {
                     method: 'GET',
-                    headers: config.headers
+                    headers: getConfig().headers
                 }
             )
 
@@ -35,38 +35,38 @@ async function apiChallenge(apiType = '', object_id?: number, data?: string, fie
 
 
         case "getChallenge":
-            response = await fetch(`${config.apiBaseUrl}api/challenge/${object_id}/`,
+            response = await fetch(`${getConfig().apiBaseUrl}api/challenge/${object_id}/`,
                 {
                     method: 'GET',
-                    headers: config.headers
+                    headers: getConfig().headers
                 }
             )
             return await response.json()
 
         case "getProgress":
-            response = await fetch(`${config.apiBaseUrl}api/progress/${object_id}/`,
+            response = await fetch(`${getConfig().apiBaseUrl}api/progress/${object_id}/`,
                 {
                     method: "GET",
-                    headers: config.headers
+                    headers: getConfig().headers
                 }
             )
             return await response.json()
 
         case "createProgress":
-            response = await fetch(`${config.apiBaseUrl}api/progress/`,
+            response = await fetch(`${getConfig().apiBaseUrl}api/progress/`,
                 {
                     method: "POST",
-                    headers: config.headers,
+                    headers: getConfig().headers,
                     body: data
                 }
             )
             return await response.json()
 
         case "updateProgress":
-            response = await fetch(`${config.apiBaseUrl}api/progress/${object_id}/`,
+            response = await fetch(`${getConfig().apiBaseUrl}api/progress/${object_id}/`,
                 {
                     method: "PATCH",
-                    headers: config.headers,
+                    headers: getConfig().headers,
                     body: data
                 }
             )
@@ -75,38 +75,38 @@ async function apiChallenge(apiType = '', object_id?: number, data?: string, fie
 
 
         case "getVote":
-            response = await fetch(`${config.apiBaseUrl}api/vote/${object_id}`,
+            response = await fetch(`${getConfig().apiBaseUrl}api/vote/${object_id}`,
                 {
                     method: "GET",
-                    headers: config.headers
+                    headers: getConfig().headers
                 }
             )
             return await response.json()
 
         case "createVote":
-            response = await fetch(`${config.apiBaseUrl}api/vote/`,
+            response = await fetch(`${getConfig().apiBaseUrl}api/vote/`,
                 {
                     method: "POST",
-                    headers: config.headers,
+                    headers: getConfig().headers,
                     body: data
                 }
             )
             return await response.json()
 
         case "updateVote":
-            response = await fetch(`${config.apiBaseUrl}api/vote/${object_id}/`,
+            response = await fetch(`${getConfig().apiBaseUrl}api/vote/${object_id}/`,
                 {
                     method: "POST",
-                    headers: config.headers,
+                    headers: getConfig().headers,
                 }
             )
             return await response.json()
 
         case "deleteVote":
-            response = await fetch(`${config.apiBaseUrl}api/vote/${object_id}/`,
+            response = await fetch(`${getConfig().apiBaseUrl}api/vote/${object_id}/`,
                 {
                     method: "POST",
-                    headers: config.headers,
+                    headers: getConfig().headers,
                 }
             )
             return await response.json()

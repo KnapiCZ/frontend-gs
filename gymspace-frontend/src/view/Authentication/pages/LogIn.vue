@@ -6,13 +6,17 @@ import apiAuth from '@/logic/API/apiAuth';
 const router = useIonRouter();
 
 let form = ref({
-	username: "",
+	username_or_email: "",
 	password: "",
 });
 
+
 async function submitForm() {
-	await apiAuth("getToken", form.value.username, form.value.password).then((data) => {
+	await apiAuth("getToken", form.value.username_or_email, form.value.password).then((data) => {
 		localStorage.setItem("Token", data.token);
+		apiAuth('confirmAuth').then((confirm) => {
+			localStorage.setItem("logged_user_id", confirm.log);
+		})
 	})
 	router.push('/');
 }
@@ -25,9 +29,9 @@ async function submitForm() {
 		<IonCol>
 			<p class="welcome">WELCOME TO</p>
 
-			<img class="logo" src="../../../assets/images/gymspace_logo.svg" alt="logo">
+			<img class="logo" src="\src\assets\images\gs _logo.png" alt="logo">
 			<form @submit.prevent="submitForm">
-				<input id="UsernameAuth" type="text" placeholder="Username" v-model="form.username">
+				<input id="UsernameAuth" type="text" placeholder="Username or Email" v-model="form.username_or_email">
 				<input id="PassAuth" type="password" placeholder="Password" v-model="form.password">
 				<IonButton class="Login" color="transparent" @click="submitForm()">Login</IonButton>
 			</form>

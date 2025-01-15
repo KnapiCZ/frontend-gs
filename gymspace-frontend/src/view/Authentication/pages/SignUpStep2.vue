@@ -8,12 +8,11 @@ import apiAuth from '@/logic/API/apiAuth';
 const userStore = userDataStore()
 const router = useIonRouter();
 const form = ref({
-    handle: "f",
     username: "f",
     email: "f",
     password: "f",
     passwordCheck: "f",
-    birthday: userStore.birthday
+    birthday: "f"
 });
 
 let canGo = true;
@@ -23,14 +22,13 @@ async function submitForm() {
     checkPassword();
     checkEmail();
     checkUsername();
-    checkHandle();
     checkPasswordCheck();
     if (canGo) {
+        form.value.birthday = userStore.birthday
         console.log(form.value)
         // TODO: pridat narozeniny
         await apiUser('createUser', 0, JSON.stringify(form.value));
-        await apiAuth("getToken", form.value.handle, form.value.password);
-        await apiAuth("getToken", form.value.handle, form.value.password).then((token) => {
+        await apiAuth("getToken", form.value.username, form.value.password).then((token) => {
             localStorage.setItem("Token", token);
         })
         router.push('/step-3');
@@ -77,16 +75,6 @@ function checkEmail() {
     }
 }
 
-function checkHandle() {
-    if (form.value.handle != undefined && form.value.handle.match(/^[A-Za-z0-9_]+$/) && form.value.handle.length < 31) {
-        setValid("handle", true);
-        return true;
-    } else {
-        setValid("handle", false);
-        return false;
-    }
-}
-
 function setValid(id: string, value: boolean) {
     let object = document.getElementById(id)?.classList;
     if (value) {
@@ -112,9 +100,6 @@ function setValid(id: string, value: boolean) {
                 <p class="after-text">AND START YOUR JURNEY</p>
 
                 <form @submit.prevent="submitForm" ref="form">
-                    <IonInput id="handle" class="custom" v-model="form.handle" type="text" placeholder="Handle"
-                        error-text="Invalid handle, letters, digits and _ only.">
-                    </IonInput>
                     <IonInput id="username" class="custom" v-model="form.username" type="text" placeholder="Username"
                         error-text="Username can't be empty">
                     </IonInput>
@@ -129,7 +114,7 @@ function setValid(id: string, value: boolean) {
                     <IonInput id="check-password" class="pass custom" v-model="form.passwordCheck" type="password"
                         placeholder="Password confirmation" error-text="Invalid Password">
                     </IonInput>
-                    <IonButton class="signup-btn" @click="submitForm">SIGN UP</IonButton>
+                    <IonButton class="sign-up-button" @click="submitForm">SIGN UP</IonButton>
                 </form>
             </IonCol>
         </IonContent>

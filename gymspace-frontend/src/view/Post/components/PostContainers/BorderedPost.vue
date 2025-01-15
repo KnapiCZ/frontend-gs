@@ -31,7 +31,7 @@ const months = [
 ]
 
 let post = await apiPost("getPost", props.postId)
-let author = await apiUser("userProfile", post.author, undefined, 'username,handle,profile_picture')
+let author = await apiUser("userProfile", post.author, undefined, 'username,profile_picture')
 
 let time = setTime()
 
@@ -101,7 +101,7 @@ function setTime() {
 				<img class="pfp" :src="author.profile_picture" @click="goToUser()">
 				<IonCol>
 					<p class="nickname" @click="goToUser()">{{ author.username }}</p>
-					<p class="handle" @click="goToUser()">{{ author.handle }}</p>
+					<p class="handle" @click="goToUser()">{{ author.username }}</p>
 				</IonCol>
 				<LikeButton class="postBtn" :userId="post.author" :postId="post.id" />
 			</IonRow>
