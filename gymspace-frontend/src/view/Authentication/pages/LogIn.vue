@@ -2,7 +2,6 @@
 import { ref } from 'vue';
 import { IonButton, IonCol, IonPage, useIonRouter } from '@ionic/vue';
 import apiAuth from '@/logic/API/apiAuth';
-import { userDataStore } from '@/stores/UserDataStore';
 
 const router = useIonRouter();
 
@@ -17,7 +16,6 @@ async function submitForm() {
 		localStorage.setItem("Token", data.token);
 		apiAuth('confirmAuth').then((confirm) => {
 			localStorage.setItem("logged_user_id", confirm.log);
-			userStore.loggedUserId = confirm.log
 		})
 	})
 	router.push('/');
@@ -31,7 +29,7 @@ async function submitForm() {
 		<IonCol>
 			<p class="welcome">WELCOME TO</p>
 
-			<img class="logo" src="../../../assets/images/gymspace_logo.svg" alt="logo">
+			<img class="logo" src="\src\assets\images\gs _logo.png" alt="logo">
 			<form @submit.prevent="submitForm">
 				<input id="UsernameAuth" type="text" placeholder="Username or Email" v-model="form.username_or_email">
 				<input id="PassAuth" type="password" placeholder="Password" v-model="form.password">

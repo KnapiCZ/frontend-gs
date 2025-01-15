@@ -5,12 +5,18 @@ import UserMenu from '@/view/Menus/components/UserMenu.vue';
 import FollowersModal from './FollowersModal.vue';
 import apiPost from '@/logic/API/apiPost';
 
+//TODO: udelat modal following tak jako modal na gymy na mape (v kodu) / opravit tento
+
+
 const userStore = userDataStore();
+const logged_user = localStorage.getItem("logged_user_id")
+
+
 let userData = JSON.parse(userStore.user)
-let posts = await apiPost('usersPosts', userStore.loggedUserId);
+let posts = await apiPost('usersPosts', userStore.renderedUserId);
 
 function checkLogin() {
-	if (userStore.renderedUserId == userStore.loggedUserId) return true;
+	if (userStore.renderedUserId == logged_user) return true;
 	else return false;
 }
 

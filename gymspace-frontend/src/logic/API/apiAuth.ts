@@ -1,4 +1,4 @@
-import config from "./apiConfig"
+import getConfig from "./apiConfig"
 
 /**
  * if arguments are not specified for case -> use undefined
@@ -21,7 +21,7 @@ async function apiAuth(apiType = '', username?: string, password?: string) {
         case "getToken":
             data = { "username_or_email": username, "password": password }
             try {
-                response = await fetch(`${config.apiBaseUrl}api-auth/`, {
+                response = await fetch(`${getConfig().apiBaseUrl}api-auth/`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -36,9 +36,9 @@ async function apiAuth(apiType = '', username?: string, password?: string) {
 
         case "confirmAuth":
             try {
-                response = await fetch(`${config.apiBaseUrl}api/confirm-auth/`, {
+                response = await fetch(`${getConfig().apiBaseUrl}api/confirm-auth/`, {
                     method: "POST",
-                    headers: config.headers
+                    headers: getConfig().headers
                 });
                 return response.json();
             } catch (error) {
@@ -47,9 +47,9 @@ async function apiAuth(apiType = '', username?: string, password?: string) {
             }
         case "send2FA":
             try {
-                response = await fetch(`${config.apiBaseUrl}api/twofa/setup/`, {
+                response = await fetch(`${getConfig().apiBaseUrl}api/twofa/setup/`, {
                     method: "POST",
-                    headers: config.headers
+                    headers: getConfig().headers
                 });
                 return response.json();
             } catch (error) {
@@ -58,9 +58,9 @@ async function apiAuth(apiType = '', username?: string, password?: string) {
             }
         case "confirm2FA":
             try {
-                response = await fetch(`${config.apiBaseUrl}api/twofa/verify/`, {
+                response = await fetch(`${getConfig().apiBaseUrl}api/twofa/verify/`, {
                     method: "POST",
-                    headers: config.headers,
+                    headers: getConfig().headers,
                     body: JSON.stringify({ token: password })
                 });
                 return response.json();

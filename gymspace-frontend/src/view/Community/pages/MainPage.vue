@@ -40,7 +40,7 @@ init()
 	<IonPage class="ion-no-padding">
 		<IonContent class="ion-no-padding">
 			<IonSearchbar placeholder="Search"></IonSearchbar>
-			<img class="background" src="../../../assets/images/Background.png">
+			<img class="background" src="../../../assets/images/nav_background.png">
 
 			<button @click="toggle(1)">Your Gyms <img v-show="userStore.userGymId.length > 3" id="arrow1"
 					src="../../../assets/icons/arrowRight.svg"></button>

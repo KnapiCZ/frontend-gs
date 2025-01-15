@@ -1,4 +1,4 @@
-import config from "./apiConfig";
+import getConfig from "./apiConfig";
 
 /**
  * - all: gets all objects of division or gym
@@ -17,67 +17,67 @@ async function apiGym(apiType = '', objectId?: number, data?: string, fields?: '
     switch (apiType) {
 
         case "all":
-            response = await fetch(`${config.apiBaseUrl}api/gym/`,
+            response = await fetch(`${getConfig().apiBaseUrl}api/gym/`,
                 {
                     method: 'GET',
-                    headers: config.headers
+                    headers: getConfig().headers
                 }
             )
             return await response.json()
 
         case "my":
-            response = await fetch(`${config.apiBaseUrl}api/gym/${objectId}/users-gyms/`,
+            response = await fetch(`${getConfig().apiBaseUrl}api/gym/${objectId}/users-gyms/`,
                 {
                     method: 'GET',
-                    headers: config.headers
+                    headers: getConfig().headers
                 }
             )
             return await response.json()
 
         case "create":
-            response = await fetch(`${config.apiBaseUrl}api/gym/`,
+            response = await fetch(`${getConfig().apiBaseUrl}api/gym/`,
                 {
                     method: 'POST',
-                    headers: config.headers,
+                    headers: getConfig().headers,
                     body: data
                 }
             )
             return await response.json()
 
         case "info":
-            response = await fetch(`${config.apiBaseUrl}api/gym/${objectId}/?fields=${fields}`,
+            response = await fetch(`${getConfig().apiBaseUrl}api/gym/${objectId}/?fields=${fields}`,
                 {
                     method: 'GET',
-                    headers: config.headers
+                    headers: getConfig().headers
                 }
             )
             return await response.json()
 
         case "join":
 
-            response = await fetch(`${config.apiBaseUrl}api/gym/${objectId}/?user_id=${queryParams}`,
+            response = await fetch(`${getConfig().apiBaseUrl}api/gym/${objectId}/?user_id=${queryParams}`,
                 {
                     method: 'PATCH',
-                    headers: config.headers,
+                    headers: getConfig().headers,
                     body: data
                 }
             )
             return await response.json()
 
         case "gymDivisions":
-            response = await fetch(`${config.apiBaseUrl}api/division/${objectId}/gym-divisions/`,
+            response = await fetch(`${getConfig().apiBaseUrl}api/division/${objectId}/gym-divisions/`,
                 {
                     method: 'GET',
-                    headers: config.headers
+                    headers: getConfig().headers
                 }
             )
             return await response.json()
 
         case "location":
-            response = await fetch(`${config.apiBaseUrl}api/gym/gym-location/`,
+            response = await fetch(`${getConfig().apiBaseUrl}api/gym/gym-location/`,
                 {
                     method: 'GET',
-                    headers: config.headers
+                    headers: getConfig().headers
                 }
             )
             return await response.json()

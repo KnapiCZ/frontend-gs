@@ -35,7 +35,7 @@ userStore.allGymsId = allGyms
 		<IonTabs class="ion-no-padding">
 			<IonRouterOutlet></IonRouterOutlet>
 			<IonTabBar slot="bottom">
-				<IonTabButton tab="user" class="no-filter" :href="'/user/' + userStore.loggedUserId">
+				<IonTabButton tab="user" class="no-filter" :href="'/user/' + user_id">
 					<img id="profile" class="no-filter" :src="user.profile_picture" />
 				</IonTabButton>
 
