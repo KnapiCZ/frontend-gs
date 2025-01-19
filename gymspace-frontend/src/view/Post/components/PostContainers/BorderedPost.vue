@@ -31,7 +31,7 @@ const months = [
 ]
 
 let post = await apiPost("getPost", props.postId)
-let author = await apiUser("userProfile", post.author, undefined, 'username,profile_picture')
+let author = await apiUser("profile", post.author, undefined, 'username,profile_picture')
 
 let time = setTime()
 

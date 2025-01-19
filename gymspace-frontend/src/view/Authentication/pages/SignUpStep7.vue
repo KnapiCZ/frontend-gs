@@ -1,90 +1,163 @@
 <script lang="ts" setup>
+import { userDataStore } from "@/stores/UserDataStore";
 import { IonContent, IonPage, IonButton, IonCol, useIonRouter } from "@ionic/vue";
-import { ref} from "vue";
+import { ref, nextTick, onMounted } from "vue";
 
 const router = useIonRouter()
+const userStore = userDataStore()
+const currentNumber = ref(85);
+const touchStartX = ref(0);
 
+// Simplified scaleSteps as an array of values
+const scaleSteps = ref(Array.from({ length: 11 }, (_, i) => currentNumber.value + i - 4));
+const visibleScaleSteps = ref(scaleSteps.value.slice(0, 9));
 
-const selectedSex = ref('');
-
-
-const toggleSex = (sex: string) => {
-  selectedSex.value = sex;
+const onTouchStart = (e: TouchEvent) => {
+    touchStartX.value = e.touches[0].clientX;
 };
+
+const onTouchMove = (e: TouchEvent) => {
+    const deltaX = e.touches[0].clientX - touchStartX.value;
+    if (Math.abs(deltaX) > 10) {
+        changeValue(deltaX);
+        touchStartX.value = e.touches[0].clientX;
+    }
+};
+
+const onTouchEnd = () => { };
+
+// Update visibleScaleSteps and manually trigger transformations
+const changeValue = async (delta: number) => {
+    const step = delta > 0 ? -1 : 1;
+    currentNumber.value = Math.max(0, currentNumber.value + step);
+
+    // Adjust the scale steps to match the swipe direction
+    if (delta < 0) {
+        scaleSteps.value.push(scaleSteps.value[scaleSteps.value.length - 1] + 1);
+        scaleSteps.value.shift();
+    } else {
+        scaleSteps.value.unshift(scaleSteps.value[0] - 1);
+        scaleSteps.value.pop();
+    }
+
+    visibleScaleSteps.value = [...scaleSteps.value.slice(0, 9)];
+
+    // Wait for the DOM to update before applying transformations
+    await nextTick();
+    updateTransformations();
+};
+
+// Update transformations using basic TypeScript and DOM manipulation
+const updateTransformations = () => {
+    const centerValue = currentNumber.value;
+
+    visibleScaleSteps.value.forEach((item) => {
+        const element = document.getElementById(`scale-line-${item}`);
+        if (element) {
+            const distanceFromCenter = Math.abs(centerValue - item);
+            const scaleFactor = 1 / Math.pow(1.5, distanceFromCenter); // Apply scaling: 1 / (2^distance)
+            const opacityFactor = Math.max(0.2, 1 - distanceFromCenter * 0.15); // Decrease opacity with distance
+
+            element.style.transform = `scaleY(${Math.max(0.1, scaleFactor)})`;
+            element.style.opacity = opacityFactor.toString();
+            element.style.transition = "transform 0.1s ease, opacity 0.1s ease";
+
+            // Update active class manually
+            if (item === centerValue) {
+                element.classList.add("active");
+            } else {
+                element.classList.remove("active");
+            }
+        }
+    });
+};
+
+const setWeigth = () => {
+    userStore.addToDict("weight", currentNumber.value)
+    router.push("step-8")
+}
+
+// Update transformations on mount to initialize correctly
+onMounted(() => {
+    updateTransformations();
+});
 </script>
 
 <template>
     <IonPage>
         <IonContent class="sign-up-content">
-            <h1 class="sign-up">Choose your gender...</h1>
-            <div class="sex-buttons-container">
-                <img src="../../../assets/images/Male.png" alt="Male Icon" class="sex-icon" style="margin-right: 40%; bottom: 65%;"/>
-                <button
-                    class="sex-button"
-                    :class="{ active: selectedSex === 'male' }"
-                    @click="toggleSex('male')"
-                    >
-                    
-                    MALE
-                    </button>
-                    <img src="../../../assets/images/Female.png" alt="Female Icon" class="sex-icon" style="margin-left: 25%; top: -25%;"/>
-                    <button
-                    class="sex-button"
-                    :class="{ active: selectedSex === 'female' }"
-                    @click="toggleSex('female')"
-                    >
-                    FEMALE
-                    </button>
+            <img src="../../../assets/images/weight.png" class="sign-up-background-image" alt="Cake" />
+            <h1 class="sign-up">Choose your weight...</h1>
+            <div class="swiper-container" @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd">
+                <div class="value-display">
+                    <IonCol>
+                        <p class="value">{{ currentNumber }}</p>
+                        <p class="unit">kg</p>
+                    </IonCol>
+                </div>
+                <div class="scale-lines">
+                    <div v-for="item in visibleScaleSteps" :key="item" :id="'scale-line-' + item"
+                        :class="['scale-line', { 'active': item === currentNumber }]">
+                    </div>
+                </div>
             </div>
-            <IonButton fill="solid" class="signup-btn" @click='router.push("/waiting-screen");'>FINISH</IonButton>
+            <IonButton fill="solid" class="sign-up-button" @click="setWeigth">NEXT</IonButton>
         </IonContent>
     </IonPage>
 </template>
 
 
 <style scoped>
-    h1 {
-        margin-bottom: 92px;
-    }
-    .sex-buttons-container {
-        display: flex;
-        height: 35%;
-        gap: 15px;
-        justify-content: center;
-        position: relative;
-    }
+.swiper-container {
+    width: 87%;
+    aspect-ratio: 1.4/1;
+    color: #fff;
+    margin: auto;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #2424246c;
+    border: 1px solid transparent;
+    border-image: linear-gradient(45deg, #ffffffce 0%, #ffffff5b 10%, #fff00059 72%, #fff000 100%) 1;
+    background-clip: padding-box;
+    backdrop-filter: blur(25px);
+    z-index: 1;
+}
 
-    .sex-button {
-        width: 40%;
-        height: 35%;
-        font-size: 30px;
-        font-weight: 900;
-        color: white;
-        border-radius: 12px;
-        background: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(8px);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-        margin-left: 10px;
-        margin-right: 10px;
-        }
+.value-display {
+    text-align: center;
+    font-size: 48px;
+    font-weight: bold;
+}
 
+.unit {
+    border-bottom: 1px solid #fff;
+    font-size: 16px;
+    padding-bottom: 5px;
+    font-weight: 300;
+    color: #aaa;
+}
 
+.scale-lines {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    width: 400px;
+    height: 90px;
+    overflow: hidden;
+}
 
-    .sex-button.active {
-        border-color: #ffe600;
-        box-shadow: 0 6px 20px rgba(255, 230, 0, 0.7);
-        background: rgba(255, 255, 0, 0.2);
-        transform: scale(1.1);
-    }
-
-    .sex-icon {
-        position: absolute;
-        z-index: -1;
-    }
-
+.scale-line {
+    width: 2px;
+    height: 100px;
+    margin: 0 10px;
+    background-color: #fff;
+    text-align: center;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
 </style>

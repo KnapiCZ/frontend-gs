@@ -59,3 +59,6 @@ coverage
 *.njsproj
 *.sln
 *.sw?
+
+resources/ios/**/*
+resources/android/**/*

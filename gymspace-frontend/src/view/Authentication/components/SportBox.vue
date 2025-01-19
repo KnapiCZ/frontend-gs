@@ -14,8 +14,8 @@ const props = defineProps<{
 
 
 const toggleGlow = () => {
-    userStore.userSports = props.sport_id
-    router.push('/step-4')
+    userStore.addToDict("sports", [props.sport_id])
+    router.push('/step-5')
 
 }
 </script>

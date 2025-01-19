@@ -5,6 +5,7 @@
         font-family: 'Tungsten';
         src: url('../../assets/fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
       }
+
       text {
         font-family: 'Tungsten', sans-serif;
       }
@@ -14,14 +15,15 @@
       <stop offset="94.29%" stop-color="#0A39BD" />
     </linearGradient>
     <filter id="text-glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
       <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
       </feMerge>
     </filter>
   </defs>
-  <text y="50%" text-anchor="start" dy=".3em" font-family="Tungsten" font-size="40" font-weight="900" fill="url(#text-gradient)" filter="url(#text-glow)">
-    PCA CZECHIACHAMPIONSHIP 2025
+  <text y="50%" text-anchor="start" dy=".3em" font-family="Tungsten" font-size="40" font-weight="900"
+    fill="url(#text-gradient)" filter="url(#text-glow)">
+    PCA CZECH CHAMPIONSHIP 2025
   </text>
 </svg>

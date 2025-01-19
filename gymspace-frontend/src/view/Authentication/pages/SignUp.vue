@@ -1,21 +1,23 @@
 <script setup lang="ts">
 import { IonPage, IonTabs, IonRouterOutlet, IonTabBar, IonTabButton } from '@ionic/vue';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 
 // Router instance
 const router = useRouter();
 const route = useRoute();
-
+const currentIndex = ref(0)
 // Define total steps and their corresponding paths
 const steps = [
-    { path: '/step-1', step: 1 },
-    { path: '/step-2', step: 2 },
-    { path: '/step-3', step: 3 },
-    { path: '/step-4', step: 4 },
-    { path: '/step-5', step: 5 },
-    { path: '/step-6', step: 6 },
-    { path: '/step-7', step: 7 },
+    { path: '/step-1', step: 1, canSkip: false },
+    { path: '/step-2', step: 2, canSkip: false },
+    { path: '/step-3', step: 3, canSkip: false },
+    { path: '/step-4', step: 4, canSkip: false },
+    { path: '/step-5', step: 5, canSkip: false },
+    { path: '/step-6', step: 6, canSkip: true },
+    { path: '/step-7', step: 7, canSkip: true },
+    { path: '/step-8', step: 8, canSkip: true },
+
 ];
 
 // Determine the current step based on the path
@@ -26,9 +28,21 @@ const currentStep = computed(() => {
 
 // Navigate back function
 const goBack = () => {
-    const currentIndex = steps.findIndex((step) => step.path === route.path);
-    if (currentIndex > 0) {
-        router.push(steps[currentIndex - 1].path); // Navigate to the previous step
+    currentIndex.value = steps.findIndex((step) => step.path === route.path);
+    if (currentIndex.value > 0) {
+        router.push(steps[currentIndex.value - 1].path); // Navigate to the previous step
+    }
+    else {
+        router.push("/login")
+    }
+};
+const skip = () => {
+    currentIndex.value = steps.findIndex((step) => step.path === route.path);
+    if (currentIndex.value < 8) {
+        router.push(steps[currentIndex.value + 1].path); // Navigate to the previous step
+    }
+    else {
+        router.push("/login")
     }
 };
 </script>
@@ -46,12 +60,24 @@ const goBack = () => {
                     <div class="progress-dot" v-for="step in steps" :key="step.step"
                         :class="{ active: step.step <= currentStep }"></div>
                 </div>
+                <IonTabButton class="back-button skip" @click="skip" :disabled="!steps[currentIndex].canSkip">
+                    <img src="../../../assets/icons/arrowBigLeft.png" alt="Back" />
+                </IonTabButton>
             </IonTabBar>
         </IonTabs>
     </IonPage>
 </template>
 
 <style scoped>
+ion-tab--button {
+    --ripple-color: transparent;
+}
+
+.skip {
+    rotate: 180deg;
+}
+
+
 #sign-up-tab {
     background-color: #242424b3 !important;
     height: 70px;
@@ -80,7 +106,7 @@ const goBack = () => {
 
 /* Individual Progress Dots */
 .progress-dot {
-    width: 36px;
+    width: 26px;
     height: 13px;
     border-radius: 3px;
     background-color: #666;

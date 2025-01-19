@@ -144,7 +144,7 @@ onMounted(() => {
                     </div>
                 </div>
             </div>
-            <div v-if="!isOldEnough" id="warning-age">
+            <div v-show="!isOldEnough" id="warning-age">
                 You must be at least 13 years old to use this app
             </div>
             <label class="pretty-checkbox">
@@ -153,14 +153,14 @@ onMounted(() => {
                 <span class="label-text">I confirm that I have familiarized myself with the Personal Data Processing
                     Policy and the Terms and Conditions</span>
             </label>
-            <IonButton fill="solid" class="sign-up-button" @click="checkAge()">SIGN UP</IonButton>
+            <IonButton fill="solid" class="sign-up-button" @click="checkAge()">NEXT</IonButton>
         </IonContent>
     </IonPage>
 </template>
 
 <style scoped>
 .sign-up-background-image {
-    top: -60px;
+    top: -18vh;
 }
 
 #warning-age {
@@ -169,7 +169,7 @@ onMounted(() => {
     font-weight: 800;
     width: 90%;
     text-align: center;
-    margin: 2vh auto;
+    margin: 3vh auto;
 }
 
 .date-slider {
@@ -261,7 +261,7 @@ onMounted(() => {
 .pretty-checkbox .checkbox {
     height: 24px;
     aspect-ratio: 1;
-    border: 2px solid #ffffff;
+    border: 2px solid #fff000;
     border-radius: 4px;
     position: relative;
     background-color: rgb(0, 0, 0);
@@ -270,11 +270,11 @@ onMounted(() => {
 }
 
 .pretty-checkbox input[type="checkbox"]:checked+.checkbox {
-    background-color: #ffffff;
+    background-color: #fff000;
 }
 
 .pretty-checkbox .label-text {
     font-size: 10px;
-    color: #ffffff;
+    text-shadow: 0 0 10px black;
 }
 </style>

@@ -12,7 +12,7 @@ const props = defineProps<{
     songname?: string
 }>();
 
-let user = await apiUser("userProfile", props.userId, undefined, 'username,profile_picture').catch()
+let user = await apiUser("profile", props.userId, undefined, 'username,profile_picture').catch()
 let text = ref(setText())
 
 function setText() {

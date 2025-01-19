@@ -7,6 +7,12 @@ import apiAuth from '@/logic/API/apiAuth';
 
 const userStore = userDataStore()
 const router = useIonRouter();
+
+const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}$/
+const mailRegex = /^(?=.{1,254}$)(?=.{1,64}@)[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
+
+
+const error_message = ref(' ')
 const form = ref({
     username: "f",
     email: "f",
@@ -17,6 +23,7 @@ const form = ref({
 
 let canGo = true;
 
+
 async function submitForm() {
     canGo = true;
     checkPassword();
@@ -25,54 +32,43 @@ async function submitForm() {
     checkPasswordCheck();
     if (canGo) {
         form.value.birthday = userStore.birthday
-        console.log(form.value)
-        // TODO: pridat narozeniny
-        await apiUser('createUser', 0, JSON.stringify(form.value));
-        await apiAuth("getToken", form.value.username, form.value.password).then((token) => {
-            localStorage.setItem("Token", token.Token);
+        let data = { "username_or_email": form.value.email, "password": form.value.password }
+        console.log(form.value.password, form.value.email, form.value.username)
+
+        await apiUser('create', 0, JSON.stringify(form.value)).then(async (response) => {
+            if (response.status == "success") {
+                await apiAuth("getToken", JSON.stringify(data)).then((token) => {
+                    localStorage.setItem("Token", token.token);
+                    router.push('/step-3');
+                })
+            } else {
+                error_message.value = response.message
+            }
         })
-        router.push('/step-3');
+
     }
 }
 
-function checkPasswordCheck() {
-    if (form.value.passwordCheck != undefined && form.value.password == form.value.passwordCheck) {
-        setValid("check-password", true);
-        return true;
-    } else {
-        setValid("check-password", false);
-        return false;
-    }
+const checkPasswordCheck = () => {
+    if (form.value.passwordCheck == undefined) setValid("username", false);
+    if (form.value.password == form.value.passwordCheck) setValid("check-password", true);
+    else setValid("check-password", false);
 }
-function checkPassword() {
-    if (form.value.password != undefined && form.value.password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}$/)) {
-        setValid("password", true);
-        return true;
-    } else {
-        setValid("password", false);
-        return false;
-    }
+const checkPassword = () => {
+    if (form.value.password == undefined) setValid("username", false);
+    if (form.value.password.match(passRegex)) setValid("password", true);
+    else setValid("password", false);
 }
 
-function checkUsername() {
-    if (form.value.username != undefined && form.value.username.match(/^\S(?:.*\S)?$/)) {
-        setValid("username", true);
-        return true;
-    } else {
-        setValid("username", false);
-        return false;
-    }
+const checkUsername = () => {
+    if (form.value.username == undefined) setValid("username", false);
+    if (form.value.username.match(/^\S(?:.*\S)?$/)) setValid("username", true);
+    else setValid("username", false);
 }
-function checkEmail() {
-    if (form.value.email != undefined && form.value.email.match(
-        /^(?=.{1,254}$)(?=.{1,64}@)[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
-    )) {
-        setValid("email", true);
-        return true;
-    } else {
-        setValid("email", false);
-        return false;
-    }
+const checkEmail = () => {
+    if (form.value.email == undefined) setValid("username", false);
+    if (form.value.email.match(mailRegex)) setValid("email", true);
+    else setValid("email", false);
 }
 
 function setValid(id: string, value: boolean) {
@@ -80,12 +76,10 @@ function setValid(id: string, value: boolean) {
     if (value) {
         object?.remove("ion-invalid");
         object?.remove("ion-touched");
-        return true;
     } else {
         object?.add("ion-invalid");
         object?.add("ion-touched");
         canGo = false;
-        return false;
     }
 }
 </script>
@@ -114,6 +108,7 @@ function setValid(id: string, value: boolean) {
                     <IonInput id="check-password" class="pass custom" v-model="form.passwordCheck" type="password"
                         placeholder="Password confirmation" error-text="Invalid Password">
                     </IonInput>
+                    <p class="error-message">{{ error_message }}</p>
                     <IonButton class="sign-up-button" @click="submitForm">SIGN UP</IonButton>
                 </form>
             </IonCol>
@@ -172,7 +167,19 @@ ion-input.custom {
     margin-bottom: 50px;
 }
 
-div.helper-text {
+ion-input.custom>.input-bottom>div.helper-text,
+ion-input.custom.md .input-bottom .helper-text {
     color: green !important;
+}
+
+.input-bottom.sc-ion-input-ios {
+    color: green !important;
+}
+
+.error-message {
+    font-size: 14px;
+    font-weight: bold;
+    text-shadow: 0 0 10px black;
+    color: yellow;
 }
 </style>

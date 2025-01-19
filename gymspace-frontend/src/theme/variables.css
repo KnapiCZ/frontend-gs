@@ -86,5 +86,5 @@ body {
 .md ion-modal {
 	--ion-background-color: #0E0E0E;
 	--ion-toolbar-background: #0E0E0E;
-	--ion-toolbar-border-color: #737373;
+	--ion-toolbar-border-color: green;
 }

@@ -12,21 +12,19 @@ import getConfig from "./apiConfig"
  * @returns  Response
  */
 
-async function apiAuth(apiType = '', username?: string, password?: string) {
+async function apiAuth(apiType = '', data = '') {
 
     let response
-    let data
 
     switch (apiType) {
         case "getToken":
-            data = { "username_or_email": username, "password": password }
             try {
                 response = await fetch(`${getConfig().apiBaseUrl}api-auth/`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify(data)
+                    body: data
                 });
                 return response.json();
             } catch (error) {
@@ -61,7 +59,7 @@ async function apiAuth(apiType = '', username?: string, password?: string) {
                 response = await fetch(`${getConfig().apiBaseUrl}api/twofa/verify/`, {
                     method: "POST",
                     headers: getConfig().headers,
-                    body: JSON.stringify({ token: password })
+                    body: data
                 });
                 return response.json();
             } catch (error) {

@@ -6,7 +6,7 @@ import apiUser from '@/logic/API/apiUser';
 
 //Využije se později ve vývoji
 const props = defineProps<{
-  id: number
+    id: number
 }>();
 
 const route = useRoute();
@@ -14,7 +14,7 @@ const router = useIonRouter()
 const userStore = userDataStore();
 const baseUrl = await apiUser();
 let id = route.params.id as unknown as number;
-let userData = await apiUser("userProfile", id);
+let userData = await apiUser("profile", id);
 
 </script>
 
@@ -23,37 +23,36 @@ let userData = await apiUser("userProfile", id);
     <IonRow>
         <IonCol>
             <div class="subscription">
-            <img class="lock-icon" src="../../../../assets/icons/lock.svg"/>
-            <IonButton expand="block" class="subscribe-button">
-              Subscribe for 4 € a month
-            </IonButton>
+                <img class="lock-icon" src="../../../../assets/icons/lock.svg" />
+                <IonButton expand="block" class="subscribe-button">
+                    Subscribe for 4 € a month
+                </IonButton>
             </div>
         </IonCol>
     </IonRow>
 </template>
-  
+
 <style scoped>
-    p {
-        padding-top: 10px;
-    }
+p {
+    padding-top: 10px;
+}
 
-    .subscription {
-        text-align: center;
-        background: #4F4F4F;
-        padding: 20px;
-        border-radius: 8px;
-        margin-bottom: 10px;
-    }
+.subscription {
+    text-align: center;
+    background: #4F4F4F;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
 
-    .lock-icon {
-        width: 40px;
-        margin-bottom: 10px;
-    }
+.lock-icon {
+    width: 40px;
+    margin-bottom: 10px;
+}
 
-    .subscribe-button {
-        --background: #313131;
-        color: white;
-        font-weight: bold;
-    }
+.subscribe-button {
+    --background: #313131;
+    color: white;
+    font-weight: bold;
+}
 </style>
-  

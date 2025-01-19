@@ -66,6 +66,12 @@ const routes: Array<RouteRecordRaw> = [
 				component: () => import('@/view/Authentication/pages/SignUpStep7.vue'),
 				meta: { requiresAuth: false },
 			},
+			{
+				path: '/step-8',
+				name: 'signUpStep8',
+				component: () => import('@/view/Authentication/pages/SignUpStep8.vue'),
+				meta: { requiresAuth: false },
+			},
 		]
 	},
 
@@ -89,7 +95,7 @@ const routes: Array<RouteRecordRaw> = [
 			{
 				path: '',
 				name: 'redirect',
-				redirect: '/explore'
+				redirect: '/waiting-screen'
 			},
 			{
 				path: '/user/:id',

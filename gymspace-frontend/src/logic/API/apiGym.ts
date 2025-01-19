@@ -12,7 +12,7 @@ import getConfig from "./apiConfig";
  * @returns data you wanted from api
  */
 
-async function apiGym(apiType = '', objectId?: number, data?: string, fields?: '', queryParams?: string) {
+async function apiGym(apiType = '', objectId?: number, data?: string, fields?: string | "", queryParams?: string) {
     let response
     switch (apiType) {
 
@@ -75,6 +75,15 @@ async function apiGym(apiType = '', objectId?: number, data?: string, fields?: '
 
         case "location":
             response = await fetch(`${getConfig().apiBaseUrl}api/gym/gym-location/`,
+                {
+                    method: 'GET',
+                    headers: getConfig().headers
+                }
+            )
+            return await response.json()
+        
+                case "search":
+            response = await fetch(`${getConfig().apiBaseUrl}api/gym/search-gym/?fields=${fields}&query=${queryParams}`,
                 {
                     method: 'GET',
                     headers: getConfig().headers

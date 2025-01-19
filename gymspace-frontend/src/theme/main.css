@@ -89,6 +89,7 @@ body {
 }
 
 ion-button.sign-up-button {
+	bottom: 20px;
 	width: 50%;
 	height: 44px;
 	margin: 50px auto;
@@ -104,12 +105,19 @@ ion-button.sign-up-button {
 	--background-focused: #bdb000;
 }
 
+.input-bottom.sc-ion-input-ios .helper-text.sc-ion-input-ios{
+	color: rgb(255, 0, 0);
+	font-weight: bold;
+	text-shadow: rgb(255, 0, 0) 0 0 20px;
+}
+
 h1.sign-up {
 	text-align: left;
 	font-size: 6vh;
 	font-weight: 900;
 	width: 32vh;
 	margin: 4vh 5%;
+	text-shadow: 0 0 10px black;
 }
 
 ion-content.sign-up-content {
@@ -118,12 +126,13 @@ ion-content.sign-up-content {
 }
 
 .sign-up-background-image {
+	opacity: 0.8;
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
-	object-fit: contain;
+	object-fit: cover;
 	object-position: top center;
 	z-index: -1;
 }
@@ -158,4 +167,15 @@ ion-content.sign-up-content {
 	--border-width: 1px;
 	--border-style: solid;
 	--border-radius: 6px;
+}
+
+.searchbar-search-icon>.icon-inner> .ionicon{
+	box-shadow: #1eff00 0 0 10px;
+}
+
+.pac-container:after {
+	/* Disclaimer: not needed to show 'powered by Google' if also a Google Map is shown */
+
+	background-image: none !important;
+	height: 0px;
 }

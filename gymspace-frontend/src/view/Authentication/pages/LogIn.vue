@@ -12,13 +12,13 @@ let form = ref({
 
 
 async function submitForm() {
-	await apiAuth("getToken", form.value.username_or_email, form.value.password).then((data) => {
+	await apiAuth("getToken", JSON.stringify(form.value)).then((data) => {
 		localStorage.setItem("Token", data.token);
 		apiAuth('confirmAuth').then((confirm) => {
 			localStorage.setItem("logged_user_id", confirm.log);
 		})
 	})
-	router.push('/');
+	router.push("/waiting-screen");
 }
 
 </script>
@@ -29,13 +29,13 @@ async function submitForm() {
 		<IonCol>
 			<p class="welcome">WELCOME TO</p>
 
-			<img class="logo" src="\src\assets\images\gs _logo.png" alt="logo">
+			<img class="logo" src="\src\assets\images\gs_logo.png" alt="logo">
 			<form @submit.prevent="submitForm">
 				<input id="UsernameAuth" type="text" placeholder="Username or Email" v-model="form.username_or_email">
 				<input id="PassAuth" type="password" placeholder="Password" v-model="form.password">
 				<IonButton class="Login" color="transparent" @click="submitForm()">Login</IonButton>
 			</form>
-			<IonButton class="sign-up" href="/step-1">NEW? SIGN-UP HERE</IonButton>
+			<a class="sign-up" href="/step-1">NEW? SIGN-UP HERE</a>
 
 			<!--
 			<IonButton class="login-by-other" color="transparent"><img class="sign-img"

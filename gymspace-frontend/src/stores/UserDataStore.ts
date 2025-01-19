@@ -1,31 +1,47 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
 
 export const userDataStore = defineStore('userDataStore', {
-	state: () => {
-		return {
-			remove: false,
-			componentKey: ref(0),
-			renderedUserId: -1,
-			loggedUserId: -1,
-			userChallengeId: [] as number[],
-			allGymsId: [] as number[],
-			userGymId: [] as number[],
-			userDivisionId: [] as number[],
-			userPostsId: [] as number[],
-			userPostsKey: [] as number[],
-			userSports: -1,
+	state: () => ({
+		remove: false,
+		componentKey: 0,
+		renderedUserId: -1,
+		userChallengeId: [] as number[],
+		allGymsId: [] as number[],
+		userGymId: [] as number[],
+		userDivisionId: [] as number[],
+		userPostsId: [] as number[],
+		userPostsKey: [] as number[],
+		userSports: -1,
+		//TODO: implement this as default user
+		dict: {} as Record<string, any>,
+		user: '',
+		birthday: '',
+		editedUser: '',
+		choosenPhoto: '',
+		profilePicture: '',
+		backgroundPicture: '',
+		croppedChoosenPhoto: '',
+		clickedChallenge: 0
+	}),
+	actions: {
+		// Method to add a key-value pair to the dictionary
+		addToDict(key: string, value: any) {
+			this.dict[key] = value;
+		},
 
-			user: '',
-			birthday: "",
-			editedUser: '',
-			choosenPhoto: '',
-			profilePicture: '',
-			backgroundPicture: '',
-			croppedChoosenPhoto: '',
+		// Method to reset the dictionary
+		resetDict() {
+			this.dict = {};
+		},
 
-			clickedChallenge: 0
+		// Method to remove a key from the dictionary
+		removeFromDict(key: string) {
+			delete this.dict[key];
+		},
 
-		}
-	}
+		getDictAsJson() {
+			return JSON.stringify(this.dict);
+		},
+
+	},
 })

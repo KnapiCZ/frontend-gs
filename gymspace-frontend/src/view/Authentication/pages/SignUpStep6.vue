@@ -1,7 +1,10 @@
 <script lang="ts" setup>
-import { IonContent, IonPage, IonButton, IonCol } from "@ionic/vue";
+import { userDataStore } from "@/stores/UserDataStore";
+import { IonContent, IonPage, IonButton, IonCol, useIonRouter } from "@ionic/vue";
 import { ref, nextTick, onMounted } from "vue";
 
+const router = useIonRouter()
+const userStore = userDataStore()
 const currentNumber = ref(175);
 const touchStartX = ref(0);
 
@@ -21,14 +24,10 @@ const onTouchMove = (e: TouchEvent) => {
     }
 };
 
-const onTouchEnd = () => { };
-
-// Update visibleScaleSteps and manually trigger transformations
 const changeValue = async (delta: number) => {
     const step = delta > 0 ? -1 : 1;
     currentNumber.value = Math.max(0, currentNumber.value + step);
 
-    // Adjust the scale steps to match the swipe direction
     if (delta < 0) {
         scaleSteps.value.push(scaleSteps.value[scaleSteps.value.length - 1] + 1);
         scaleSteps.value.shift();
@@ -39,12 +38,10 @@ const changeValue = async (delta: number) => {
 
     visibleScaleSteps.value = [...scaleSteps.value.slice(0, 9)];
 
-    // Wait for the DOM to update before applying transformations
     await nextTick();
     updateTransformations();
 };
 
-// Update transformations using basic TypeScript and DOM manipulation
 const updateTransformations = () => {
     const centerValue = currentNumber.value;
 
@@ -69,7 +66,12 @@ const updateTransformations = () => {
     });
 };
 
-// Update transformations on mount to initialize correctly
+const setHeight = () => {
+    userStore.addToDict("height", currentNumber.value)
+    router.push("step-7")
+}
+
+
 onMounted(() => {
     updateTransformations();
 });
@@ -78,13 +80,13 @@ onMounted(() => {
 <template>
     <IonPage>
         <IonContent class="sign-up-content">
-            <img src="../../../assets/images/weight.png" class="sign-up-background-image" alt="Cake" />
-            <h1 class="sign-up">Choose your weight...</h1>
-            <div class="swiper-container" @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd">
+            <img src="../../../assets/images/height.png" class="sign-up-background-image" alt="Cake" />
+            <h1 class="sign-up">Choose your height...</h1>
+            <div class="swiper-container" @touchstart="onTouchStart" @touchmove="onTouchMove">
                 <div class="value-display">
                     <IonCol>
                         <p class="value">{{ currentNumber }}</p>
-                        <p class="unit">kg</p>
+                        <p class="unit">cm</p>
                     </IonCol>
                 </div>
                 <div class="scale-lines">
@@ -93,7 +95,7 @@ onMounted(() => {
                     </div>
                 </div>
             </div>
-            <IonButton fill="solid" class="sign-up-button" @click="">NEXT</IonButton>
+            <IonButton fill="solid" class="sign-up-button" @click="setHeight">NEXT</IonButton>
         </IonContent>
     </IonPage>
 </template>

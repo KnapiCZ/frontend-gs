@@ -17,7 +17,7 @@ let goTo = () => {
 </script>
 
 <template>
-    <IonButton v-else @click="goTo" class="btn ion-no-padding" color="rgba(255, 255, 255, 0.103)">
+    <IonButton @click="goTo" class="btn ion-no-padding" color="rgba(255, 255, 255, 0.103)">
         <img class="logo-img" :src="divisionInfo.logo">
         <h2>{{ divisionInfo.title }}</h2>
     </IonButton>

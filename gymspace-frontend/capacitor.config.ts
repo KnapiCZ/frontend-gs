@@ -4,19 +4,27 @@ const config: CapacitorConfig = {
   appId: 'gs.gymspace.app',
   appName: 'Gymspace',
   webDir: 'dist',
-  loggingBehavior: 'debug',
   plugins: {
     CapacitorCookies: {
       enabled: true,
     },
+    SplashScreen: {
+      launchShowDuration: 3000,
+      launchAutoHide: true,
+      backgroundColor: '#000000',
+      androidScaleType: 'CENTER_CROP',
+      splashFullScreen: true,
+      useDialog: false
+    },
   },
   android: {
-    webContentsDebuggingEnabled: true,
-    loggingBehavior: 'debug',
+    // Removed for production
+    // webContentsDebuggingEnabled: true,
+    // loggingBehavior: 'debug',
   },
   server: {
-    androidScheme: 'https'
-  }
+    androidScheme: 'https', // Keep this for secure connections
+  },
 };
 
 export default config;

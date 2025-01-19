@@ -10,7 +10,7 @@ const props = defineProps<{
 
 const router = useIonRouter()
 
-let userData = await apiUser("userProfile", props.userId, undefined, 'username,profile_picture')
+let userData = await apiUser("profile", props.userId, undefined, 'username,profile_picture')
 
 function goToUser() {
     modalController.dismiss()

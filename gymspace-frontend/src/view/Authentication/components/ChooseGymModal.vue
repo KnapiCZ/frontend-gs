@@ -1,44 +1,77 @@
 <script lang="ts" setup>
-import {
-    IonContent,
-    IonButton,
-    modalController,
-    IonRow,
-    IonCol,
-} from '@ionic/vue';
-import { defineComponent, ref } from 'vue';
+import { IonContent, IonButton, IonRow, IonCol, useIonRouter, modalController } from '@ionic/vue';
+import { onMounted, ref } from 'vue';
+import apiGym from '@/logic/API/apiGym';
+import apiUser from '@/logic/API/apiUser';
+const props = defineProps<{
+    gym_id: number
+}>()
+
+const router = useIonRouter()
+const error_message = ref("")
+const gymData = ref({
+    title: "",
+    city: "",
+    address: "",
+    country: "",
+    creator: 0,
+    count_members: 0
+})
+
+let user_id = localStorage.getItem("logged_user_id")
+
+const joinGym = async () => {
+    await apiGym("join", props.gym_id, undefined, undefined, user_id?.toString()).then((response) => {
+        if (response.status = "success") {
+            modalController.dismiss()
+            router.push("/step-6")
+        } else {
+            error_message.value = response.message
+        }
+    })
+}
+
+onMounted(async () => {
+    try {
+        gymData.value = await apiGym("info", props.gym_id, undefined, "title,city,address,country,creator,count_members");
+        let creator = await apiUser("profile", gymData.value.creator, undefined, "username")
+        gymData.value.creator = creator.username
+    } catch (error) {
+        error_message.value = "Something went wrong."
+    }
+});
 
 </script>
 
 <template>
-    <ion-content class="ion-padding" :scroll-y="false">
+    <ion-content class="ion-padding" :scroll-y="false" :key="props.gym_id">
         <div class="gym-bio">
             <img class="logo" src="../../../assets/images/logo-glow.png" alt="">
             <div class="gym-info">
-                <h2>NEW PARK</h2>
-                <p class="bio-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                    Quisque tincidunt scelerisque libero</p>
-                <a href="newpark.cz"></a>
+                <h2>{{ gymData.title }}</h2>
+                <p class="bio-text">{{ gymData.country }}, {{ gymData.city }},{{ gymData.address }}</p>
+                <p>Created by: {{ gymData.creator }}</p>
             </div>
         </div>
         <IonRow>
             <IonCol>
-                <p class="number">5435</p>
+                <p class="number">soon</p>
                 <p class="small-title">posts</p>
             </IonCol>
             <IonCol class="middle-niggle">
-                <p class="number">452</p>
-                <p class="small-title">joined</p>
+                <p class="number">{{ gymData.count_members }}</p>
+                <p class="small-title">members</p>
             </IonCol>
             <IonCol>
-                <p class="number">1000</p>
+                <p class="number">soon</p>
                 <p class="small-title">spoting</p>
             </IonCol>
         </IonRow>
         <div class="gym-preview">
             COMING SOON...
         </div>
-        <IonButton fill="solid" class="sign-up-button" @click="">JOIN THIS GYM</IonButton>
+        <p class="error-message">{{ error_message }}</p>
+        <IonButton fill="solid" class="sign-up-button" @click="joinGym">JOIN THIS GYM</IonButton>
     </ion-content>
 </template>
 
@@ -82,7 +115,7 @@ ion-content {
 
 
 h2 {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 }
 
 .gym-preview {

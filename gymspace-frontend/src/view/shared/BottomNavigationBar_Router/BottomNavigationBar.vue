@@ -10,7 +10,7 @@ const user_id = localStorage.getItem("logged_user_id") | 0
 
 console.debug("[DEBUG] " + user_id)
 
-let user = await apiUser("userProfile", user_id, undefined, 'profile_picture')
+let user = await apiUser("profile", user_id, undefined, 'profile_picture')
 
 let myDivisions = await apiGym('my', user_id)
 let myGyms = await apiGym('my', user_id)
