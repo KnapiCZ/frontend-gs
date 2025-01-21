@@ -69,7 +69,7 @@ onMounted(() => {
                 <IonRow>
                     <IonCol size="6">
                         <img class="info-card-images" src="../../../assets/images/web.png" alt="Globe Icon" />
-                        <a href="https://pcaczechia.com/shop/tickets-championship-2025" target="_blank"
+                        <a href="https://pcaczechia.com/product/tickets-championship-2025" target="_blank"
                             class="info-card-link">
                             <div class="info-card">
                                 <p class="card-title">Get Your Ticket</p>
@@ -90,7 +90,8 @@ onMounted(() => {
                 </IonRow>
             </IonGrid>
 
-            <a class="link-button" target="_blank" href="https://pcaczechia.com/shop/registrations-championship-2025">
+            <a class="link-button" target="_blank"
+                href="https://pcaczechia.com/product/registrations-championship-2025">
                 <div class="athlete-section">
                     <p class="athlete-text">Are you an Athlete?</p>
                     <p class="championship-text">PARTICIPATE IN</p>
@@ -109,7 +110,7 @@ onMounted(() => {
                 <a href="https://www.youtube.com/@gymspaceofficial" target="_blank" class="social-icon-btn">
                     <img class="social-icon-images" src="../../../assets/icons/youtube.svg">
                 </a>
-                <a href="www.tiktok.com/@gymspace.app" target="_blank" class="social-icon-btn">
+                <a href="https://www.tiktok.com/@gymspace.app" target="_blank" class="social-icon-btn">
                     <img class="social-icon-images" src="../../../assets/icons/tiktok.svg">
                 </a>
             </div>
@@ -193,7 +194,6 @@ onMounted(() => {
         0 0 10.68px #FFFF0080,
         0 0 21.36px #FFFF0080,
         0 0 36.62px #FFFF0080,
-        0 0 64.08px #FFFF00;
 }
 
 .welcome-header .launch-text {
@@ -272,6 +272,7 @@ onMounted(() => {
     z-index: 0;
     backdrop-filter: blur(26.600000381469727px);
     box-shadow: -4px 4px 19.9px 1px #0000009E;
+    aspect-ratio: 1.5/1;
 }
 
 .info-card-images {

@@ -28,6 +28,7 @@
     "@ionic/pwa-elements": "^3.2.2",
     "@ionic/vue": "^7.6.0",
     "@ionic/vue-router": "^7.6.0",
+    "cocoapods": "^0.0.0",
     "formidable": "^3.5.1",
     "interactjs": "^1.10.27",
     "ionicons": "^7.0.0",

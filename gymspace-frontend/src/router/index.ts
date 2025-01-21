@@ -95,7 +95,7 @@ const routes: Array<RouteRecordRaw> = [
 			{
 				path: '',
 				name: 'redirect',
-				redirect: '/waiting-screen'
+				redirect: '/login'
 			},
 			{
 				path: '/user/:id',

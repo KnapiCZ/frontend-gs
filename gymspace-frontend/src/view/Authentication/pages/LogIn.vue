@@ -16,9 +16,11 @@ async function submitForm() {
 		localStorage.setItem("Token", data.token);
 		apiAuth('confirmAuth').then((confirm) => {
 			localStorage.setItem("logged_user_id", confirm.log);
+			if (confirm.log > 0 && data.status != "error") {
+				router.push("/waiting-screen");
+			}
 		})
 	})
-	router.push("/waiting-screen");
 }
 
 </script>
