@@ -40,38 +40,39 @@ const routes: Array<RouteRecordRaw> = [
 				path: '/step-3',
 				name: 'signUpStep3',
 				component: () => import('@/view/Authentication/pages/SignUpStep3.vue'),
-				meta: { requiresAuth: false },
+				meta: { requiresAuth: true },
 			},
 			{
 				path: '/step-4',
 				name: 'signUpStep4',
 				component: () => import('@/view/Authentication/pages/SignUpStep4.vue'),
-				meta: { requiresAuth: false },
+				meta: { requiresAuth: true },
 			},
 			{
 				path: '/step-5',
 				name: 'signUpStep5',
 				component: () => import('@/view/Authentication/pages/SignUpStep5.vue'),
-				meta: { requiresAuth: false },
+				meta: { requiresAuth: true },
 			},
 			{
 				path: '/step-6',
 				name: 'signUpStep6',
 				component: () => import('@/view/Authentication/pages/SignUpStep6.vue'),
-				meta: { requiresAuth: false },
+				meta: { requiresAuth: true },
 			},
 			{
 				path: '/step-7',
 				name: 'signUpStep7',
 				component: () => import('@/view/Authentication/pages/SignUpStep7.vue'),
-				meta: { requiresAuth: false },
+				meta: { requiresAuth: true },
 			},
 			{
 				path: '/step-8',
 				name: 'signUpStep8',
 				component: () => import('@/view/Authentication/pages/SignUpStep8.vue'),
-				meta: { requiresAuth: false },
+				meta: { requiresAuth: true },
 			},
+
 		]
 	},
 
@@ -95,7 +96,7 @@ const routes: Array<RouteRecordRaw> = [
 			{
 				path: '',
 				name: 'redirect',
-				redirect: '/login'
+				redirect: '/waiting-screen'
 			},
 			{
 				path: '/user/:id',
@@ -204,8 +205,9 @@ const routes: Array<RouteRecordRaw> = [
 	{
 		path: '/waiting-screen',
 		component: () => import('@/view/Authentication/pages/WaitingScreen.vue'),
-		meta: { requiresAuth: false },
+		meta: { requiresAuth: true },
 	},
+
 ]
 
 

@@ -1,16 +1,17 @@
 <script setup lang="ts">
-import { IonButton, IonCol, IonPage, useIonRouter, IonInput, IonContent } from '@ionic/vue';
+import { IonButton, IonCol, IonPage, useIonRouter, IonInput, IonContent, IonIcon } from '@ionic/vue';
 import { userDataStore } from '@/stores/UserDataStore';
 import { ref } from 'vue';
 import apiUser from '@/logic/API/apiUser';
 import apiAuth from '@/logic/API/apiAuth';
-
+import { eye } from 'ionicons/icons';
 const userStore = userDataStore()
 const router = useIonRouter();
 
 const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}$/
 const mailRegex = /^(?=.{1,254}$)(?=.{1,64}@)[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
 
+const passwordVisible = ref<boolean[]>([false, false]);
 
 const error_message = ref(' ')
 const form = ref({
@@ -85,6 +86,11 @@ function setValid(id: string, value: boolean) {
         canGo = false;
     }
 }
+
+const togglePasswordVisibility = (index: number): void => {
+    passwordVisible.value[index] = !passwordVisible.value[index];
+};
+
 </script>
 
 <template>
@@ -103,13 +109,26 @@ function setValid(id: string, value: boolean) {
                     <IonInput id="email" class="custom" v-model="form.email" type="email" placeholder="Email"
                         error-text="Invalid email">
                     </IonInput>
-                    <IonInput id="password" class="custom" v-model="form.password" type="password"
-                        placeholder="Password"
+                    <IonInput id="password" class="custom" v-model="form.password"
+                        :type="passwordVisible[0] ? 'text' : 'password'" placeholder="Password"
                         helper-text="Password must contain: 8-32 characters, (A-Z, a-z, 0-9, !@#$%^&*)"
                         error-text="Invalid Password">
+                        <IonButton class="show-password" @ion-focus="togglePasswordVisibility(0)" fill="clear"
+                            slot="end" aria-label="Show/hide">
+                            <IonIcon slot="icon-only" :icon="eye" aria-hidden="true"
+                                style="font-size: 20px; vertical-align: top; padding: 0;">
+                            </IonIcon>
+                        </IonButton>
                     </IonInput>
-                    <IonInput id="check-password" class="pass custom" v-model="form.passwordCheck" type="password"
-                        placeholder="Password confirmation" error-text="Invalid Password">
+                    <IonInput id="check-password" class="pass custom" v-model="form.passwordCheck"
+                        :type="passwordVisible[1] ? 'text' : 'password'" placeholder="Password confirmation"
+                        error-text="Invalid Password">
+                        <IonButton class="show-password" @ion-focus="togglePasswordVisibility(1)" fill="clear"
+                            slot="end" aria-label="Show/hide">
+                            <IonIcon slot="icon-only" :icon="eye" aria-hidden="true"
+                                style="font-size: 20px; vertical-align: top; padding: 0;">
+                            </IonIcon>
+                        </IonButton>
                     </IonInput>
                     <p class="error-message">{{ error_message }}</p>
                     <IonButton class="sign-up-button" @click="submitForm">SIGN UP</IonButton>
@@ -147,6 +166,12 @@ ion-input.custom {
     border-radius: 6px;
     border: solid 1px rgba(255, 255, 255, 0.651);
     backdrop-filter: blur(26px);
+}
+
+.show-password {
+    padding: 0;
+    margin: 0;
+    margin-right: -10px;
 }
 
 .welcome {

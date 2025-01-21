@@ -28,7 +28,12 @@ const pinia = createPinia()
 const vuetify = createVuetify()
 
 const app = createApp(App)
-	.use(IonicVue)
+	.use(IonicVue,
+		{
+  rippleEffect: false,
+ swipeBackEnabled: false,
+}
+	)
 	.use(router)
 	.use(vuetify)
 	.use(pinia);

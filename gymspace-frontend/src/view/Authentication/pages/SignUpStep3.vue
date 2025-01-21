@@ -25,6 +25,17 @@ const confirm2FA = async () => {
     })
 }
 
+const onPaste = (event: ClipboardEvent): void => {
+    event.preventDefault();
+    const pasteData = event.clipboardData?.getData('text') || '';
+    const digits = pasteData.split('').slice(0, 6); // Extract the pasted digits
+    digits.forEach((digit, index) => {
+        if (!isNaN(Number(digit))) {
+            code.value[index] = digit;
+        }
+    });
+};
+
 // Handle input
 const onInput = (index: number) => {
     if (code.value[index].length === 1 && index < code.value.length - 1) {
@@ -53,9 +64,9 @@ onMounted(async () => {
 
             <div class="verification-container">
                 <div class="code-inputs">
-                    <input v-for="(_, index) in code" :key="index" v-model="code[index]" maxlength="1"
-                        @input="onInput(index)" @keydown.backspace="onBackspace(index)" ref="inputs" class="code-box"
-                        type="text" inputmode="numeric" />
+                    <input v-for="(digit, index) in code" :key="index" v-model="code[index]" maxlength="1"
+                        @input="onInput(index)" @paste="onPaste" @keydown.backspace="onBackspace(index)" ref="inputs"
+                        class="code-box" type="text" inputmode="numeric" />
                 </div>
             </div>
             <div class="text-div">
