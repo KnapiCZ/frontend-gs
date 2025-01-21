@@ -77,7 +77,7 @@ onMounted(async () => {
                     <a class="try-again" @click="sendCode">send again.</a>
                 </p>
                 <br>
-                <p class="resend-message">E-mail has been re-sent to you!</p>
+                <p class="resend-message">E-mail has been sent to you!</p>
                 <p class="error-message">{{ error_message }}</p>
             </div>
             <IonButton fill="solid" class="sign-up-button" @click="confirm2FA">SIGN UP</IonButton>

@@ -285,7 +285,8 @@ onMounted(() => {
 }
 
 .card-title {
-    font-size: 2vh;
+    margin-top: 10px;
+    font-size: 1.5vh;
     font-weight: 900;
     line-height: 2.5vh;
     text-underline-position: from-font;
