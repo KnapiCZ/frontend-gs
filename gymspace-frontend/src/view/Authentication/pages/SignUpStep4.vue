@@ -4,7 +4,6 @@ import SportBox from '../components/SportBox.vue';
 import apiSport from '@/logic/API/apiSport';
 
 let sports = await apiSport("allSports")
-console.log(sports)
 </script>
 
 <template>

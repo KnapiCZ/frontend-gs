@@ -34,8 +34,6 @@ async function submitForm() {
     if (canGo) {
         form.value.birthday = userStore.birthday
         let data = { "username_or_email": form.value.email, "password": form.value.password }
-        console.log(form.value.password, form.value.email, form.value.username)
-
         await apiUser('create', 0, JSON.stringify(form.value)).then(async (response) => {
             if (response.status == "success") {
                 await apiAuth("getToken", JSON.stringify(data)).then(async (token) => {

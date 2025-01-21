@@ -18,8 +18,7 @@ const setSex = async () => {
     userStore.addToDict("sex", selectedSex.value)
     router.push("/waiting-screen");
     data = userStore.getDictAsJson()
-    console.log(data)
-    console.log(await apiUser("update", (user_id as unknown as number), data))
+    await apiUser("update", (user_id as unknown as number), data)
 }
 
 </script>

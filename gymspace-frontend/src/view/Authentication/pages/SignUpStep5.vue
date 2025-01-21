@@ -58,13 +58,11 @@ const loadGoogleMapsApi = () => {
 
 const printCurrentPosition = async () => {
     const coordinates = await Geolocation.getCurrentPosition();
-    console.log('Current position:', coordinates,);
     return { lat: coordinates.coords.latitude, lng: coordinates.coords.longitude }
 };
 
 const initMap = async () => {
     let centerOfMap = await printCurrentPosition()
-    console.log(centerOfMap)
     // Initialize the map
     const map = new google.maps.Map(document.getElementById("map"), {
         center: centerOfMap,
@@ -289,7 +287,6 @@ const initMap = async () => {
 
 
     for (let i = 0; i < markerGyms.value.length; i++) {
-        console.log(markerGyms.value[i])
         addMarker(markerGyms.value[i], map)
     }
 
