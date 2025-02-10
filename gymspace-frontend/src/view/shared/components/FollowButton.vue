@@ -11,7 +11,7 @@ const userStore = userDataStore()
 let isFollowing = ref()
 isFollowing.value = await apiUser('isFollowing', props.userId, undefined, userStore.loggedUserId.toString())
 
-async function follow() {
+const follow = async () => {
     await apiUser("follow", props.userId, undefined, userStore.loggedUserId.toString()).then((isFollowing.value.is_following as any) = (!isFollowing.value.is_following as any))
 }
 
