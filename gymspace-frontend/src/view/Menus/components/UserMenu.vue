@@ -3,7 +3,7 @@ import { IonButton, IonContent, IonModal, useIonRouter, modalController } from '
 
 const router = useIonRouter()
 
-function logOut() {
+const logOut = () => {
     localStorage.removeItem("Token")
     modalController.dismiss()
     router.replace("/login")
