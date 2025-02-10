@@ -10,9 +10,12 @@ const router = useIonRouter()
 const code = ref(["", "", "", "", "", ""]);
 const inputs = ref([]);
 const error_message = ref('')
+
 const sendCode = async () => {
     await apiAuth("send2FA")
 }
+
+
 
 const confirm2FA = async () => {
     const formattedCode = code.value.join(""); // Join code digits as a string
@@ -126,5 +129,10 @@ onMounted(async () => {
 .error-message {
     color: red;
     margin-top: 10px;
+}
+
+.try-again {
+    color: #fff000;
+    font-weight: bold;
 }
 </style>

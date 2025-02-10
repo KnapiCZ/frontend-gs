@@ -108,6 +108,17 @@ onMounted(() => {
 
 
 <style scoped>
+.sign-up-background-image {
+    top: 0;
+    right: 0;
+    left: auto;
+    width: auto;
+    object-fit: contain;
+    height: 60%;
+    object-position: center;
+    z-index: -1;
+}
+
 .swiper-container {
     width: 87%;
     aspect-ratio: 1.4/1;

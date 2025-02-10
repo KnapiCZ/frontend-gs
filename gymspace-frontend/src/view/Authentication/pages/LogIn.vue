@@ -112,5 +112,6 @@ input {
 
 .sign-up {
 	margin-bottom: 50px;
+	padding: 10px;
 }
 </style>

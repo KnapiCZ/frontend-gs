@@ -15,6 +15,7 @@ const gymData = ref({
     address: "",
     country: "",
     creator: 0,
+    creatorUsername: "",
     count_members: 0
 })
 
@@ -34,8 +35,11 @@ const joinGym = async () => {
 onMounted(async () => {
     try {
         gymData.value = await apiGym("info", props.gym_id, undefined, "title,city,address,country,creator,count_members");
-        let creator = await apiUser("profile", gymData.value.creator, undefined, "username")
-        gymData.value.creator = creator.username
+        console.log(gymData.value.creator)
+
+        let creator = await apiUser("profile", gymData.value.creator, undefined, "username,")
+        console.log(creator)
+        gymData.value.creatorUsername = creator.username
     } catch (error) {
         error_message.value = "Something went wrong."
     }
@@ -50,7 +54,7 @@ onMounted(async () => {
             <div class="gym-info">
                 <h2>{{ gymData.title }}</h2>
                 <p class="bio-text">{{ gymData.country }}, {{ gymData.city }},{{ gymData.address }}</p>
-                <p>Created by: {{ gymData.creator }}</p>
+                <p>Created by: {{ gymData.creatorUsername }}</p>
             </div>
         </div>
         <IonRow>

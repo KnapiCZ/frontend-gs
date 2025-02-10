@@ -48,7 +48,7 @@ const toggleGlow = () => {
 
 .image-container {
     position: absolute;
-    top: -60%;
+    top: -40%;
     left: 50%;
     transform: translate(-50%, 0);
     width: 100%;
@@ -70,7 +70,7 @@ const toggleGlow = () => {
     text-align: left;
     z-index: 2;
     backdrop-filter: blur(10px);
-    aspect-ratio: 164/110;
+    aspect-ratio: 164/80;
     transition: box-shadow 0.3s ease;
 }
 </style>

@@ -3,8 +3,14 @@ import { IonContent, IonPage, IonButton, useIonRouter } from "@ionic/vue"
 import { ref, onMounted } from "vue"
 import { userDataStore } from "@/stores/UserDataStore"
 import Swiper from "swiper"
+import { SwiperOptions } from "swiper/types"
+import { FreeMode, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/free-mode';
+import 'swiper/css/pagination';
 import "swiper/swiper-bundle.css"
 
+const modules = [FreeMode, Pagination]
 const userStore = userDataStore()
 const router = useIonRouter()
 const isChecked = ref(false) // Checkbox state
@@ -29,34 +35,34 @@ const daySwiper = ref<Swiper | null>(null)
 const monthSwiper = ref<Swiper | null>(null)
 const yearSwiper = ref<Swiper | null>(null)
 
+const customSwiperOptions = (customEvents: SwiperOptions['on'] = {}): SwiperOptions => ({
+    direction: 'vertical',
+    slidesPerView: 3,
+    centeredSlides: true,
+    freeMode: true,
+    pagination: {
+        clickable: true
+    },
+    touchReleaseOnEdges: false,
+    modules: modules,
+    on: {
+        ...customEvents, // Add dynamic event listeners
+    },
+});
+
 // Initialize Swiper for each column
 const initializeSwiper = () => {
-    daySwiper.value = new Swiper('.day-swiper', {
-        direction: 'vertical',
-        slidesPerView: 3,
-        centeredSlides: true,
-        on: {
-            slideChangeTransitionEnd: updateDayValue,
-        }
-    })
+    daySwiper.value = new Swiper('.day-swiper', customSwiperOptions({
+        slideChangeTransitionEnd: updateDayValue,
+    }))
 
-    monthSwiper.value = new Swiper('.month-swiper', {
-        direction: 'vertical',
-        slidesPerView: 3,
-        centeredSlides: true,
-        on: {
-            slideChangeTransitionEnd: updateMonthValue,
-        },
-    })
+    monthSwiper.value = new Swiper('.month-swiper', customSwiperOptions({
+        slideChangeTransitionEnd: updateMonthValue,
+    }))
 
-    yearSwiper.value = new Swiper('.year-swiper', {
-        direction: 'vertical',
-        slidesPerView: 3,
-        centeredSlides: true,
-        on: {
-            slideChangeTransitionEnd: updateYearValue,
-        },
-    })
+    yearSwiper.value = new Swiper('.year-swiper', customSwiperOptions({
+        slideChangeTransitionEnd: updateYearValue,
+    }))
 }
 
 const updateDayValue = () => {
@@ -150,8 +156,11 @@ onMounted(() => {
             <label class="pretty-checkbox">
                 <input type="checkbox" v-model="isChecked" />
                 <span class="checkbox"></span>
-                <span class="label-text">I confirm that I have familiarized myself with the Personal Data Processing
-                    Policy and the Terms and Conditions</span>
+                <span class="label-text">I confirm that I have familiarized myself with the <a
+                        href="https://liborzabloudil.notion.site/Privacy-center-GymSpace-App-181a27c10d4180c28b3fd6973ffdf5d7?pvs=4">
+                        Privacy Policy </a> and the <a
+                        href="https://liborzabloudil.notion.site/Gymspace-Safety-Policy-0bd2b02002c845c9a14bbca1b52420ff?pvs=4">Terms
+                        and Conditions </a></span>
             </label>
             <IonButton fill="solid" class="sign-up-button" @click="checkAge()">NEXT</IonButton>
         </IonContent>
@@ -159,6 +168,10 @@ onMounted(() => {
 </template>
 
 <style scoped>
+ion-content {
+    padding-top: 36px;
+}
+
 .sign-up-background-image {
     top: -18vh;
 }

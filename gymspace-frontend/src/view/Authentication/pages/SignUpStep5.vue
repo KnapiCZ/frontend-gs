@@ -2,7 +2,6 @@
 import { IonContent, IonItem, IonList, IonPage, IonSearchbar, modalController } from "@ionic/vue";
 import { Geolocation } from '@capacitor/geolocation';
 import { onMounted, ref } from "vue";
-import gymMarker from '@/assets/images/gymMarker.png'
 import apiGym from "@/logic/API/apiGym";
 import ChooseGymModal from "../components/ChooseGymModal.vue";
 
@@ -277,6 +276,7 @@ const initMap = async () => {
                 url: "https://firebasestorage.googleapis.com/v0/b/gymspace-4b1e8.firebasestorage.app/o/assets%2FgymMarker.png?alt=media&token=fa78517e-4637-4e5b-a60f-6ab6ca622046", // Custom gym icon
                 scaledSize: new google.maps.Size(50, 50),
             },
+
         });
 
         marker.addListener("click", () => {
@@ -357,6 +357,7 @@ onMounted(async () => {
     width: 90%;
     height: 15vh;
     margin: auto;
+    padding-top: 36px;
     background-color: rgb(37, 36, 21);
     border: 1px solid white;
     border-top: none;
@@ -401,6 +402,8 @@ ion-searchbar.md.custom {
     --placeholder-font-weight: 700;
     --placeholder-opacity: 1;
 }
+
+
 
 .create-text {
     margin-top: 10px;
