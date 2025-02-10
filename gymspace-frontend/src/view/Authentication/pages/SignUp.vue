@@ -15,43 +15,35 @@ const steps = [
     { path: '/step-2', step: 2, canSkip: false, canGoBack: true },
     { path: '/step-3', step: 3, canSkip: false, canGoBack: false },
     { path: '/step-4', step: 4, canSkip: false, canGoBack: false },
-    { path: '/step-5', step: 5, canSkip: false, canGoBack: false },
+    { path: '/step-5', step: 5, canSkip: false, canGoBack: true },
     { path: '/step-6', step: 6, canSkip: true, canGoBack: true },
     { path: '/step-7', step: 7, canSkip: true, canGoBack: true },
     { path: '/step-8', step: 8, canSkip: true, canGoBack: true },
-
 ];
 
 // Determine the current step based on the path
 const currentStep = computed(() => {
     const match = steps.find((step) => step.path === route.path);
-    return match ? match.step : 1; // Default to step 1 if no match
+    return match ? match.step : 1;
 });
-// Navigate back function
+
 const goBack = () => {
-    currentIndex.value = steps.findIndex((step) => step.path === route.path);
-    if (currentIndex.value > 0) {
-        router.navigate(steps[currentIndex.value - 1].path, 'back', 'push');
-    }
-    else {
-        router.push("/login")
-    }
+    if (currentIndex.value > 0) router.navigate(steps[currentIndex.value - 1].path, 'back', 'push');
+    else router.push("/login")
 };
+
 const skip = () => {
-    currentIndex.value = steps.findIndex((step) => step.path === route.path);
-    if (currentIndex.value < 8) {
-        router.push(steps[currentIndex.value + 1].path); // Navigate to the previous step
-    }
-    else {
-        router.push("/login")
-    }
+    if (currentIndex.value < 8) router.push(steps[currentIndex.value + 1].path);
+    else router.push("/login")
 };
 
 watch(
     () => route.path,
     (newPath) => {
-
         currentIndex.value = steps.findIndex((step) => step.path === newPath);
+        if (currentIndex.value == -1) {
+            currentIndex.value = 0
+        }
     },
     { immediate: true } // Run initially to set currentIndex on mount
 );

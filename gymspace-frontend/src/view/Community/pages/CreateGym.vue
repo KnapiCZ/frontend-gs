@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { IonButton, IonInput, IonPage, IonContent, IonCol, useIonRouter } from '@ionic/vue';
-import { userDataStore } from '@/stores/UserDataStore';
 import { ref, onMounted } from 'vue';
 import apiGym from '@/logic/API/apiGym';
 
-const userStore = userDataStore()
 const router = useIonRouter()
 
 const gymName = ref('');
@@ -65,25 +63,19 @@ const initAutocomplete = () => {
     });
 };
 
-function transformAddress(address) {
-    // Split address into parts
+function transformAddress(address: " ") {
     const parts = address.split(", ");
-
-    // The last part is the country
     const country = parts.pop();
 
-    // The second-to-last part is the city (with postal code)
     let city = parts.pop();
 
-    // Remove postal code (assumed to be at the start of the city part)
-    city = city.replace(/\d{1,5}\s?\d{0,5}/, '').trim();
+    city = city?.replace(/\d{1,5}\s?\d{0,5}/, '').trim();
 
-    // The first part is the street address
     const street = parts.join(", ");
     form.value.address = street
     form.value.city = city
     form.value.country = country
-    // Return the formatted address without the postal code
+
     return `${street}, ${city}, ${country}`;
 }
 
@@ -181,7 +173,7 @@ ion-input.custom {
 .sign-up-text {
     font-size: 46px;
     font-weight: 900;
-    margin: 10px auto 30px auto;
+    margin: 10px auto 10px auto;
 }
 
 .after-text {
@@ -199,5 +191,9 @@ ion-input.custom {
 .welcome img {
     rotate: 180deg;
     margin-right: 10px;
+}
+
+ion-button.sign-up-button {
+    margin: 20px auto;
 }
 </style>
