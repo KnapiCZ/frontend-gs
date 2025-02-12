@@ -54,9 +54,23 @@ async function apiAuth(apiType = '', data = '') {
                 console.error("Error confirming: ", error);
                 throw error;
             }
+
         case "confirm2FA":
             try {
                 response = await fetch(`${getConfig().apiBaseUrl}api/twofa/verify/`, {
+                    method: "POST",
+                    headers: getConfig().headers,
+                    body: data
+                });
+                return response.json();
+            } catch (error) {
+                console.error("Error confirming: ", error);
+                throw error;
+            }
+
+        case "delete_account":
+            try {
+                response = await fetch(`${getConfig().apiBaseUrl}api/twofa/delete_account/`, {
                     method: "POST",
                     headers: getConfig().headers,
                     body: data

@@ -15,6 +15,10 @@ const logOut = () => {
     router.navigate("/login", "back", "push")
 }
 
+const deleteAccount = () => {
+    router.navigate("/user/delete-account", "forward", "push")
+}
+
 const targetDate = new Date('2025-05-18T00:00:00').getTime();
 
 const updateCountdown = () => {
@@ -42,7 +46,7 @@ onMounted(() => {
 
 <template>
     <IonPage>
-        <IonContent class="ion-padding welcome-page">
+        <IonContent class="ion-padding welcome-page" :scroll-y="false">
             <img class="background-img" src="../../../assets/images/waiting-screen-bg.gif" alt="Background" />
 
             <div class="welcome-header">
@@ -121,8 +125,10 @@ onMounted(() => {
                     <img class="social-icon-images" src="../../../assets/icons/tiktok.svg">
                 </a>
             </div>
-
-            <IonButton class="log-out-button" @click="logOut">Log Out</IonButton>
+            <IonCol>
+                <IonButton class="log-out-button" @click="logOut">Log Out</IonButton>
+                <IonButton class="log-out-button" @click="deleteAccount">Delete Account</IonButton>
+            </IonCol>
         </IonContent>
     </IonPage>
 </template>
@@ -135,7 +141,7 @@ onMounted(() => {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
+    z-index: 0;
 }
 
 .link-button {
@@ -266,7 +272,7 @@ img.info-card-images {
     left: 10px;
     right: 10px;
     width: 80%;
-    z-index: -1;
+    z-index: 0;
 }
 
 .card-title,

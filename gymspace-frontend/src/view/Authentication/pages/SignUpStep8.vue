@@ -25,7 +25,7 @@ const setSex = async () => {
 
 <template>
     <IonPage>
-        <IonContent class="sign-up-content">
+        <IonContent class="sign-up-content" :scroll-y="false">
             <h1 class="sign-up">Choose your gender...</h1>
             <div class="sex-buttons-container">
                 <img src="../../../assets/images/Male.png" alt="Male Icon" class="sex-icon"
@@ -89,6 +89,6 @@ h1 {
 
 .sex-icon {
     position: absolute;
-    z-index: -1;
+    z-index: 0;
 }
 </style>

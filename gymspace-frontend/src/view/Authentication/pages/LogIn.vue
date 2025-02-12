@@ -38,6 +38,8 @@ async function submitForm() {
 				<IonButton class="Login" color="transparent" @click="submitForm()">Login</IonButton>
 			</form>
 			<a class="sign-up" href="/step-1">NEW? SIGN-UP HERE</a>
+			<a class="sign-up" href="https://support.gymspace.app/password_reset/">FORGOTEN PASSWORD</a>
+
 
 			<!--
 			<IonButton class="login-by-other" color="transparent"><img class="sign-img"
