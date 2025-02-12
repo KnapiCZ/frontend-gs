@@ -98,7 +98,7 @@ const togglePasswordVisibility = (index: number): void => {
 
 <template>
     <IonPage>
-        <IonContent class="sign-up-content">
+        <IonContent class="sign-up-content" :scroll-y="false">
             <img src="../../../assets/images/logo-glow.png" class="sign-up-background-image" alt="GymSpace-Logo" />
             <IonCol>
                 <p class="welcome">Welcome to Gymspace</p>
@@ -107,11 +107,9 @@ const togglePasswordVisibility = (index: number): void => {
 
                 <form @submit.prevent="submitForm" ref="form">
                     <IonInput id="username" class="custom" v-model="form.username" type="text" placeholder="Username"
-                        error-text="Username can't be empty">
-                    </IonInput>
+                        error-text="Username can't be empty" />
                     <IonInput id="email" class="custom" v-model="form.email" type="email" placeholder="Email"
-                        error-text="Invalid email">
-                    </IonInput>
+                        error-text="Invalid email" />
                     <IonInput id="password" class="custom" v-model="form.password"
                         :type="passwordVisible[0] ? 'text' : 'password'" placeholder="Password"
                         helper-text="Password must contain: 8-32 characters, (A-Z, a-z, 0-9, !@#$%^&*)">

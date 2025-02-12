@@ -123,7 +123,7 @@ onMounted(() => {
 
 <template>
     <IonPage>
-        <IonContent class="sign-up-content">
+        <IonContent class="sign-up-content" :scroll-y="false">
             <img src="../../../assets/images/Cake.png" class="sign-up-background-image" alt="Cake" />
             <h1 class="sign-up">Set your birth date...</h1>
             <div class="date-slider">

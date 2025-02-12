@@ -8,7 +8,7 @@ let sports = await apiSport("allSports")
 
 <template>
     <IonPage>
-        <IonContent class="sign-up-content">
+        <IonContent class="sign-up-content" :scroll-y="false">
             <h1 class="sign-up">Choose your sports</h1>
 
             <div class="grid-container">

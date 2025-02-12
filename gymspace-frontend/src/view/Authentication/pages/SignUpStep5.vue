@@ -309,7 +309,7 @@ onMounted(async () => {
 
 <template>
     <IonPage>
-        <IonContent>
+        <IonContent :scroll-y="false">
             <div class="top-container">
                 <div class="title-container">
                     <p class="small-text">CHOOSE YOUR </p>

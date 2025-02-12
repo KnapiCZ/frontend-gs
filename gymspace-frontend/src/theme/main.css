@@ -147,7 +147,7 @@ ion-content.sign-up-content {
 	height: 100%;
 	object-fit: cover;
 	object-position: top center;
-	z-index: -1;
+	z-index: 0;
 }
 
 .pac-item {
@@ -220,4 +220,23 @@ ion-content.sign-up-content {
 
 	background-image: none !important;
 	height: 0px;
+}
+
+ion-input.custom {
+	text-align: left;
+	width: 87%;
+	height: 44px;
+	margin: 25px auto;
+	font-size: 16px;
+	border-radius: 6px;
+	border: solid 1px rgba(255, 255, 255, 0.651);
+	backdrop-filter: blur(26px);
+	--border-style: none;
+	--border-color: none;
+	--border-radius: none;
+	--background: #24242440;
+	--color: #fff;
+	--padding-end: 20px;
+	--padding-start: 20px;
+	--highlight-color-focused: #fff000;
 }

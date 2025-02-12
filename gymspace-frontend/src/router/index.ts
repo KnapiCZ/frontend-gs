@@ -89,6 +89,11 @@ const routes: Array<RouteRecordRaw> = [
 		meta: { requiresAuth: true, }
 	},
 	{
+		path: '/user/delete-account',
+		component: () => import('@/view/Profile/pages/DeleteAccount.vue'),
+		meta: {requiresAuth: true, }
+	},
+	{
 		path: '/',
 		name: 'landingPage',
 		component: () => import('@/view/shared/BottomNavigationBar_Router/BottomNavigationBar.vue'),

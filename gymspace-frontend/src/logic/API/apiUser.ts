@@ -6,6 +6,7 @@ import getConfig from "./apiConfig";
  * - create: used for creating user, ARGS: data = handle, username, email, password, passwordCheck 
  * - profile: returns data of user, ARGS: user_id, queryParams = auth_id, id, handle, goal, description, email, contacts, sex, pronouns, profile_picture, background_picture, width, height
  * - update: updates users profile, ARGS: user_id, data = goal, description, email, contacts, sex, pronouns, profile_picture, background_picture, width, height 
+ * - delete: deletes user profile, ARGS: user_id, data = token(2fa), email
  * - isFollowing: returns {"is_following": True/False}, ARGS: user_id, queryParams = my_id
  * - usersFollowers: returns {"followers": [1,2,3,...]}, ARGS: user_id
  * - follow: adding logged user to followers, ARGS: user_id, data = my_id
@@ -40,6 +41,16 @@ async function apiUser(apiType = "", user_id?: number, data?: string, queryParam
 			)
 			return response.json()
 
+		case "delete":
+			response = await fetch(`${getConfig().apiBaseUrl}api/users/${user_id}/`,
+				{
+					method: "DELETE",
+					headers: getConfig().headers,
+					body: data
+				}
+			)
+			return response.json()
+		
 		case "update":
 			response = await fetch(`${getConfig().apiBaseUrl}api/users/${user_id}/`,
 				{
