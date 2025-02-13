@@ -114,7 +114,7 @@ const routes: Array<RouteRecordRaw> = [
 		path: '/gym/:id',
 		name: "gym",
 		component: () => import('@/view/Community/pages/Gym.vue'),
-		meta: { requiresAuth: true },
+		meta: { requiresAuth: false },
 	},
 	{
 		path: '/gym/:id/feed/:initialPosition',

@@ -27,15 +27,12 @@ function toggle() {
 </script>
 
 <template>
-    <h2>Divisons</h2>
     <div class="grid-division-container extend" id="extend">
         <DivisionThumbnail v-for="division in divisions" type="division" :id="division" divisionType="small"
             class="grid-division-item" />
     </div>
     <button v-if="divisions.length > 4" @click="toggle()"><img id="arrow"
             src='../../../../assets/icons/arrowRight.svg'></button>
-    <h2>Challenges</h2>
-    <!--- <ChallengeThumbGrid :type="1" /> --->
 </template>
 
 <style scoped>

@@ -3,6 +3,9 @@ import { IonContent, IonPage } from '@ionic/vue';
 import { VTab, VWindow, VWindowItem } from 'vuetify/lib/components/index.mjs';
 import { useRoute } from 'vue-router';
 import HeaderComponent from '../components/HeaderComponent.vue'
+import JoinComponent from '../components/JoinComponent.vue'
+import LevelComponent from '../components/LevelComponent.vue'
+import DivisionsComponent from '../components/DivisionsComponent.vue'
 import apiGym from '@/logic/API/apiGym';
 import General from '../components/tabs/General.vue';
 import GymFeed from '../components/tabs/GymFeed.vue';
@@ -18,11 +21,13 @@ console.log(JSON.stringify(gymInfo));
 	<IonPage>
 		<IonContent>
 			<HeaderComponent type="gym" :logo="gymInfo.logo" :name="gymInfo.title" :id="id" />
-
-			<VTabs v-model="tab" color="#e8e20a" bg-color="black" align-tabs="center" slider-color="#e8e20a"
+			<LevelComponent :level="3" :currentXP="6666" :nextLevelXP="12000" :gymPoints="2535" />
+			<JoinComponent />
+			<DivisionsComponent />
+			<VTabs v-model="tab" color="#e8e20a"  align-tabs="center" slider-color="#e8e20a"
 				:grow='true'>
-				<VTab><img class="tab-img" src="../../../assets/icons/challenge.svg" alt="feed"></VTab>
-				<VTab><img class="tab-img" src="../../../assets/icons/feed.svg" alt="challenges"></VTab>
+				<VTab><img class="tab-img" src="../../../assets/icons/feed.svg" alt="feed"></VTab>
+				<VTab><img class="tab-img" src="../../../assets/icons/challenge.svg" alt="challenge"></VTab>
 			</VTabs>
 			<VWindow v-model="tab">
 				<VWindowItem>
