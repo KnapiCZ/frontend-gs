@@ -6,26 +6,15 @@ import { ref } from 'vue';
 const props = defineProps<{
     userId: number
 }>()
+const isFollowing = ref()
 
-const userStore = userDataStore()
-// TODO: return false or true from api isFollowing
-let followingList = await apiUser('isFollowing', props.userId, userStore.loggedUserId)
-console.log(followingList)
-let isFollowing = ref(checkIfFollowing(followingList.followers))
-console.debug(userStore.user)
-//let userData = JSON.parse(userStore.user)
+const loggedUserId = localStorage.getItem("logged_user_id")
+isFollowing.value = await apiUser('isFollowing', props.userId, undefined, loggedUserId?.toString())
 
-function checkIfFollowing(followers: []) {
-    if (followers.includes(userStore.loggedUserId as never)) {
-        return true;
-    }
-    else {
-        return false;
-    }
-}
-
-async function follow() {
-    await apiUser("follow", userStore.loggedUserId, props.userId).then((isFollowing.value as any) = (!isFollowing.value as any))
+const follow = async () => {
+    await apiUser("follow", props.userId, undefined, loggedUserId?.toString()).then(
+        (isFollowing.value.is_following as any) = (!isFollowing.value.is_following as any)
+    )
 }
 
 </script>

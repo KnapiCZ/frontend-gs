@@ -3,14 +3,17 @@ import { IonModal, IonContent, IonToolbar, IonButtons, IonButton, IonTitle, moda
 import { userDataStore } from '@/stores/UserDataStore';
 import FollowerButton from './Buttons/FollowerButton.vue';
 import apiUser from '@/logic/API/apiUser';
+import router from '@/router';
+import { ref } from 'vue';
 
 const userStore = userDataStore()
+const renderedUserId = ref(router.currentRoute.value.params.id as unknown as number)
 
-let followers = await apiUser("isFollowing", userStore.renderedUserId)
+let followers = await apiUser("usersFollowers", renderedUserId.value)
 </script>
 
 <template>
-    <IonModal ref="modal" trigger="followers-modal" :key="userStore.renderedUserId">
+    <IonModal ref="modal" trigger="followers-modal" :key="renderedUserId">
         <IonToolbar>
             <IonButtons slot="start">
                 <IonButton @click="modalController.dismiss('followers-modal')" class="back-button">
