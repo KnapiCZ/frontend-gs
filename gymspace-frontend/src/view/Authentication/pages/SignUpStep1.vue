@@ -29,6 +29,21 @@ const daySwiper = ref<Swiper | null>(null)
 const monthSwiper = ref<Swiper | null>(null)
 const yearSwiper = ref<Swiper | null>(null)
 
+const customSwiperOptions = (customEvents: SwiperOptions['on'] = {}): SwiperOptions => ({
+    direction: 'vertical',
+    slidesPerView: 3,
+    centeredSlides: true,
+    freeMode: false,
+    pagination: {
+        clickable: true
+    },
+    touchReleaseOnEdges: false,
+    modules: modules,
+    on: {
+        ...customEvents, // Add dynamic event listeners
+    },
+});
+
 // Initialize Swiper for each column
 const initializeSwiper = () => {
     daySwiper.value = new Swiper('.day-swiper', {
@@ -159,6 +174,14 @@ onMounted(() => {
 </template>
 
 <style scoped>
+h1 {
+    z-index: 1;
+}
+
+ion-content {
+    padding-top: 36px;
+}
+
 .sign-up-background-image {
     top: -18vh;
 }

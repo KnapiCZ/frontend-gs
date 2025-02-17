@@ -36,18 +36,17 @@ async function submitForm() {
         let data = { "username_or_email": form.value.email, "password": form.value.password }
         await apiUser('create', 0, JSON.stringify(form.value)).then(async (response) => {
             if (response.status == "success") {
-                await apiAuth("getToken", JSON.stringify(data)).then(async (token) => {
-                    localStorage.setItem("Token", token.token);
-                    router.push('/step-3');
-                    await apiAuth("confirmAuth").then((user) => {
-                        localStorage.setItem("logged_user_id", user.log)
-                    })
+                await apiAuth("getToken", JSON.stringify(data)).then((response) => {
+                    if (response.status == "success") {
+                        localStorage.setItem("Token", response.data.token);
+                        localStorage.setItem("logged_user_id", response.data.user_id);
+                        router.push('/step-3');
+                    } else {
+                        error_message.value == response.message
+                    }
                 })
-            } else {
-                error_message.value = response.message
             }
         })
-
     }
 }
 
@@ -200,12 +199,5 @@ ion-input.custom.md .input-bottom .helper-text {
 
 .input-bottom.sc-ion-input-ios {
     color: green !important;
-}
-
-.error-message {
-    font-size: 14px;
-    font-weight: bold;
-    text-shadow: 0 0 10px black;
-    color: yellow;
 }
 </style>

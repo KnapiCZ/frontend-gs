@@ -225,9 +225,9 @@ router.beforeEach(async (to, from) => {
 	try {
 		// Confirm user authentication status
 		const response = await apiAuth('confirmAuth');
-
+		console.log(response)
 		// Check if the user is authenticated by verifying the `log` value
-		if (!response?.log || typeof response.log !== 'number') {
+		if (!response?.data.user_id || typeof response.data.user_id !== 'number') {
 			// Redirect to login if not authenticated
 			return { name: 'login' };
 		}
