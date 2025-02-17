@@ -4,19 +4,21 @@ import { IonCol, IonRow } from '@ionic/vue';
 import UserMenu from '@/view/Menus/components/UserMenu.vue';
 import FollowersModal from './FollowersModal.vue';
 import apiPost from '@/logic/API/apiPost';
+import router from '@/router';
+import { ref } from 'vue';
 
 //TODO: udelat modal following tak jako modal na gymy na mape (v kodu) / opravit tento
 
 
 const userStore = userDataStore();
-const logged_user = localStorage.getItem("logged_user_id")
-
+const logged_user = localStorage.getItem("logged_user_id") as unknown as number
+const renderedUserId = ref(router.currentRoute.value.params.id as unknown as number)
 
 let userData = JSON.parse(userStore.user)
-//let posts = await apiPost('usersPosts', userStore.renderedUserId);
+let posts = await apiPost('usersPosts', renderedUserId.value);
 
 function checkLogin() {
-	if (userStore.renderedUserId == logged_user) return true;
+	if (renderedUserId.value == logged_user) return true;
 	else return false;
 }
 

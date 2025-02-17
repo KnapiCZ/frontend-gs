@@ -6,13 +6,15 @@ import { ref } from 'vue';
 const props = defineProps<{
     userId: number
 }>()
-const userStore = userDataStore()
+const isFollowing = ref()
 
-let isFollowing = ref()
-isFollowing.value = await apiUser('isFollowing', props.userId, undefined, userStore.loggedUserId.toString())
+const loggedUserId = localStorage.getItem("logged_user_id")
+isFollowing.value = await apiUser('isFollowing', props.userId, undefined, loggedUserId?.toString())
 
-async function follow() {
-    await apiUser("follow", props.userId, undefined, userStore.loggedUserId.toString()).then((isFollowing.value.is_following as any) = (!isFollowing.value.is_following as any))
+const follow = async () => {
+    await apiUser("follow", props.userId, undefined, loggedUserId?.toString()).then(
+        (isFollowing.value.is_following as any) = (!isFollowing.value.is_following as any)
+    )
 }
 
 </script>

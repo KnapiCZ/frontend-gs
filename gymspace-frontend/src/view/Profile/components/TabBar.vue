@@ -6,28 +6,32 @@ import SmallFeed from '@/view/Post/components/SmallFeed.vue';
 import ChallengeThumbGrid from '@/view/Challenges/pages/ChallengeThumbGrid.vue'
 import apiChallenge from '@/logic/API/apiChallenge';
 import apiPost from '@/logic/API/apiPost';
+import { ref } from 'vue';
+import router from '@/router';
 // TODO: REDESIGN AFTER FIGMA DESIGN APPROVED !!!
 // TODO: REDESIGN AFTER FIGMA DESIGN APPROVED !!!
 // TODO: REDESIGN AFTER FIGMA DESIGN APPROVED !!!
 const userStore = userDataStore()
-const router = useIonRouter()
+const route = useIonRouter()
 
-//let posts = await apiPost('usersPosts', userStore.loggedUserId);
+const renderedUserId = ref(router.currentRoute.value.params.id as unknown as number)
+let posts = await apiPost('usersPosts', renderedUserId.value)
+
 //userStore.userChallengeId = await apiChallenge('userChallengesId', userStore.renderedUserId)
 
 </script>
 
 
 <template>
-	<VCard :key="userStore.renderedUserId">
+	<VCard :key="renderedUserId">
 		<VTabs v-model="tab" color="#fff000" bg-color="black" slider-color="#fff000" :grow='true'>
 			<VTab><img src="@/assets/icons/feed.svg" alt="feed"></VTab>
 			<VTab><img src="@/assets/icons/trophy.svg" alt="challenges"></VTab>
 			<VBtn
 				class="v-btn v-tab-item--selected v-tab--selected v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-text v-tab"
 				role="tab" style="background: transparent; color: rgb(255, 240, 0); caret-color: rgb(255, 240, 0);"
-				@click='router.push("/user/" + userStore.renderedUserId + "/trainer");'><img
-					src="@/assets/icons/trainer.svg" alt="trainer"></VBtn>
+				@click='route.push("/user/" + renderedUserId + "/trainer");'><img src="@/assets/icons/trainer.svg"
+					alt="trainer"></VBtn>
 		</VTabs>
 		<VWindow v-model="tab">
 			<VWindowItem>
