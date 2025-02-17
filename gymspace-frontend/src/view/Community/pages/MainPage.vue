@@ -2,7 +2,7 @@
 import { IonPage, IonContent, IonSearchbar } from '@ionic/vue';
 import { userDataStore } from '@/stores/UserDataStore';
 import { ref } from 'vue';
-import CommunityButton from '../components/CommunityButton.vue';
+import GymButton from '../components/GymButton.vue';
 
 const userStore = userDataStore()
 let isActive = [false, false, false]
@@ -45,24 +45,7 @@ init()
 			<button @click="toggle(1)">Your Gyms <img v-show="userStore.userGymId.length > 3" id="arrow1"
 					src="../../../assets/icons/arrowRight.svg"></button>
 			<div id="extend1" :key="userStore.componentKey">
-				<CommunityButton v-if="userStore.userGymId.length != 0" v-for="gym in userStore.userGymId" type="gym"
-					:id="gym" :key="'gym' + userStore.componentKey + gym" />
-				<p v-else>You are not in Gym</p>
-			</div>
-
-			<button @click="toggle(2)">Your Divisions <img v-show="userStore.userDivisionId.length > 3" id="arrow2"
-					src="../../../assets/icons/arrowRight.svg"></button>
-			<div id="extend2" :key="userStore.componentKey + 10">
-				<CommunityButton v-if="userStore.userDivisionId.length != 0"
-					v-for="division in userStore.userDivisionId" type="division" :id="division"
-					:key="'division' + userStore.componentKey + division" divisionType="big" />
-				<p v-else>You are not in Division</p>
-			</div>
-			<button @click="toggle(3)">Find new Gym <img v-show="userStore.allGymsId.length > 3" id="arrow3"
-					src="../../../assets/icons/arrowRight.svg"></button>
-			<div id="extend3" :key="userStore.componentKey + 20">
-				<CommunityButton v-for="gym in userStore.allGymsId" type="gym" :id="gym"
-					:key="'newGym' + userStore.componentKey + gym" />
+				<GymButton type="gym" :id="10" :key="'gym' + userStore.componentKey + 2" />
 			</div>
 		</IonContent>
 	</IonPage>

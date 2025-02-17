@@ -29,20 +29,15 @@ const slideNext = () => {
 
 <template>
   <div class="divisions-container">
-    <swiper
-      :modules="[Navigation]"
-      :slides-per-view="2"
-      :space-between="20"
-      @swiper="(swiper) => (swiperRef = swiper)"
-      class="swiper-container"
-    >
+    <swiper :modules="[Navigation]" :slides-per-view="2" :space-between="0" @swiper="(swiper) => (swiperRef = swiper)"
+      class="swiper-container">
       <swiper-slide v-for="division in divisions" :key="division.name">
         <div class="division-card">
-            <img :src="'src/assets/images/' + division.image" :alt="division.name" class="division-image" />
-            <div class="overlay">
-                <h3>{{ division.name }}</h3>
-                <p>SEE MORE <span><img src="../../../assets/icons/SwipeArrowRight.svg"></span></p>
-            </div>
+          <img :src="'src/assets/images/' + division.image" :alt="division.name" class="division-image" />
+          <div class="overlay">
+            <h3>{{ division.name }}</h3>
+            <p>SEE MORE <span><img src="../../../assets/icons/SwipeArrowRight.svg"></span></p>
+          </div>
         </div>
       </swiper-slide>
     </swiper>
@@ -56,89 +51,79 @@ const slideNext = () => {
 </template>
 
 <style scoped>
-
-.divisions-container {
-    width: 100%;
-    text-align: center;
-    margin-top: -20px;
-}
-
+.divisions-container,
 .swiper-container {
-    width: 100%;
-    padding: 20px 0;
+  width: 100%;
 }
 
 .division-card {
-    position: relative;
-    width: 100%;
-    height: 180px;
-    border-radius: 10px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 100%;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .division-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 25px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  margin-bottom: 60px;
 }
 
 .overlay {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    right: 10px;
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
-    backdrop-filter: blur(26.6px);
-    box-shadow: -4px 4px 19.9px 1px #0000009e;
-    padding: 10px;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    align-items: start;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  backdrop-filter: blur(26.6px);
+  box-shadow: -4px 4px 19.9px 1px #0000009e;
+  padding: 10px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.overlay img {
+  height: 12px;
+  margin: auto;
 }
 
 .overlay p {
-    font-size: 14px;
-    font-weight: 400;
-    margin-top: 5px;
-    opacity: 0.8;
+  font-size: 12px;
+  line-height: 12px;
+  font-weight: 400;
+  opacity: 0.8;
 }
 
 .swipe-navigation {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .nav-button {
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    padding: 0 15px;
-    transition: transform 0.2s ease-in-out;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0 15px;
+  transition: transform 0.2s ease-in-out;
 }
 
 .nav-button:hover {
-    transform: scale(1.2);
+  transform: scale(1.2);
 }
 
 .swipe-text {
-    color: white;
-    font-size: 14px;
-    opacity: 0.7;
-    padding-top: 4px;
+  color: white;
+  font-size: 14px;
+  opacity: 0.7;
+  padding-top: 4px;
 }
-
 </style>

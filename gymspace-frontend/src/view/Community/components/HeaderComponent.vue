@@ -1,233 +1,111 @@
 <script setup lang="ts">
-import { IonToolbar, IonButtons, IonButton, IonTitle, useIonRouter } from '@ionic/vue';
+import { useIonRouter } from '@ionic/vue';
 import { userDataStore } from '@/stores/UserDataStore';
 import { ref } from 'vue';
-
-import BioButton from './BioButton.vue';
-import apiGym from '@/logic/API/apiGym';
+import { post } from 'jquery';
 
 const props = defineProps<{
-    id: number
-    type: string
-    logo?: string
-    name?: string
+  id: number
+  type: string
+  logo?: string
+  name?: string
+  postCount?: number | 0
+  spotters?: number | 0
+  members?: number | 0
 }>()
 
 const router = useIonRouter()
-const userStore = userDataStore()
-const index1 = userStore.userDivisionId.indexOf(props.id)
-const index2 = userStore.userGymId.indexOf(props.id)
-let info = await apiGym('info', props.id, undefined, '')
-//let FollowMembers = ref([0, info!.members.length]);
-//let isJoined = ref(checkJoined());
-let isFollowing = false
 
-const description = "We have been here for you since 2014. That's when we opened the largest...";
+const description = "We have been here for you since 2014. That's when we opened the largest We have been here for you since 2014. That's when we opened the largest We have been here for you since 2014. That's when we opened the largest...";
 const expanded = ref(false);
 
 const toggleExpand = () => {
   expanded.value = !expanded.value;
 };
 
-const truncatedText = description.slice(0, 50) + "...";
-
-function close() {
-    router.back()
-    if (userStore.remove) {
-        if (props.type == 'division') userStore.userDivisionId.splice(index1, 1)
-        else userStore.userGymId.splice(index2, 1)
-        userStore.remove = false
-    }
-}
-
-//function checkJoined() {
-//    if (info!.members.includes(userStore.loggedUserId as never)) return true;
-//    else return false;
-//}
-
-// async function Join() {
-//     if (true) {
-//         FollowMembers.value[1] -= 1;
-//         userStore.remove = true
-//     } else {
-//         FollowMembers.value[1] += 1;
-//         if (!userStore.userDivisionId.includes(props.id) && props.type == 'division') userStore.userDivisionId.push(props.id)
-//         if (!userStore.userDivisionId.includes(props.id)) userStore.userGymId.push(props.id)
-//     }
-//     await apiGym("join", info!.id, undefined, undefined, userStore.loggedUserId.toString());
-//     isJoined.value = !isJoined.value;
-// }
+const truncatedText = description.slice(0, 80) + "...";
 
 </script>
 
 <template>
 
   <div class="header-image-container">
-    <img
-      src="/src/assets/images/Cover Image.png"
-      alt="Gym Background"
-      class="header-image"
-    />
+    <img src="/src/assets/images/Cover Image.png" alt="Gym Background" class="header-image" />
   </div>
 
-
   <div class="header-container">
-    <div class="gym-left">
-      <img
-        src="/src/assets/images/gs_logo.png"
-        alt="Gym Logo"
-        class="gym-image"
-      />
-      <h2 class="gym-title">NEW PARK</h2>
-      <a href="https://www.newpark.cz" target="_blank" class="gym-link">
-        <img
-        src="/src/assets/icons/link.svg"
-        alt="link"
-        class="gym-link-icon"
-      /> www.newpark.cz
-      </a>
-    </div>
-
-    <div class="gym-right">
-      
+    <div class="gym-top">
       <div class="gym-stats">
+        <img :src="logo" alt="Gym Logo" class="gym-image" />
+
         <div class="gym-posts">
-          <h2>5435</h2>
+          <h2>{{ postCount }}</h2>
           <p>posts</p>
         </div>
         <div class="gym-joined">
-          <h2>421</h2>
+          <h2>{{ members }}</h2>
           <p>joined</p>
         </div>
         <div class="gym-spotters">
-          <h2>1000</h2>
+          <h2>{{ spotters }}</h2>
           <p>spotting</p>
         </div>
       </div>
-      <p class="gym-description">
-        <span v-if="!expanded">{{ truncatedText }}</span>
-        <span v-else>{{ description }}</span>
-        <button @click="toggleExpand" class="more-button">
-          {{ expanded ? "less" : "more" }}
-        </button>
-      </p>
+
+      <div class="gym-bottom">
+        <h2 class="gym-title">{{ name }}</h2>
+        <p class="gym-description">
+          <span v-if="!expanded">{{ truncatedText }}</span>
+          <span v-else>{{ description }}</span>
+          <button @click="toggleExpand" class="more-button">
+            {{ expanded ? "less" : "more" }}
+          </button>
+        </p>
+        <a href="https://www.newpark.cz" target="_blank" class="gym-link">
+          <img src="/src/assets/icons/link.svg" alt="link" class="gym-link-icon" /> www.newpark.cz
+        </a>
+
+
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-
-ion-title {
-    font-weight: bold;
-}
-
-.grid-container {
-    display: grid;
-    width: 100%;
-    grid-template-columns: 50% 25% 25%;
-    margin: 0;
-}
-
-#background {
-    position: relative;
-    margin: auto;
-    width: 100vw;
-    height: 200px;
-    max-height: 200px;
-    text-align: center;
-    background-color: #0E0E0E;
-}
-
-.follow,
-.join {
-    width: 95%;
-    height: fit-content;
-    border-radius: 8px;
-    color: black;
-    font-weight: bold;
-}
-
-.follow {
-    border: 2px solid #FFF000;
-    background-color: #FFF000;
-    transition: background-color 0.5s ease-in-out;
-    transition: color 0.5s ease-in-out;
-}
-
-.following {
-    background-color: transparent;
-    color: #FFF000;
-}
-
-.join {
-    border: 2px solid white;
-    background-color: white;
-    transition: background-color 0.5s ease-in-out;
-    transition: color 0.5s ease-in-out;
-}
-
-.joined {
-    background-color: transparent;
-    color: white;
-}
-
-.back-button {
-    height: 100%;
-    aspect-ratio: 1;
-}
-
-.back-button img {
-    rotate: 180deg;
-}
-
-.top {
-    font-weight: bold;
-    font-size: 24px;
-}
-
-.bottom {
-    margin-bottom: 10px;
-}
-
-.column {
-    margin-top: auto;
-    margin-bottom: 20px;
-}
-
 .header-image-container {
   position: absolute;
 }
 
+.header-image {
+  width: 100vw;
+  aspect-ratio: 391/180;
+  object-fit: cover;
+}
+
 .header-container {
   box-sizing: border-box;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
   text-align: center;
   background: rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 16px;
   margin: 0 20px;
-  margin-top: 15%;
-  backdrop-filter: blur(26.6px);
+  margin-top: 15vh;
+  backdrop-filter: blur(20px);
   box-shadow: -4px 4px 19.9px 1px #0000009e;
-  
 }
 
-.gym-left {
-  flex: 1;
+.gym-bottom {
+  text-align: left;
 }
 
 .gym-image {
-  width: 45px;
-  height: 45px;
+  width: 14vw;
+  aspect-ratio: 1;
   border-radius: 50%;
   border: 2px solid #FFF000 !important;
-  object-fit: cover;
-  margin-bottom: 8px;
+  object-fit: contain;
 }
-
 
 .gym-title {
   font-size: 16px;
@@ -235,48 +113,39 @@ ion-title {
   line-height: 18.29px;
 }
 
-
-.gym-right {
-  flex: 2;
-  color: #fff;
-}
-
 .gym-stats {
   display: flex;
   justify-content: space-between;
   text-align: center;
   padding: 8px;
-  gap: 2px;
-  color: #fff;
 }
 
-.gym-stats > div {
+.gym-stats>div {
   flex: 1;
 }
 
 .gym-stats h2 {
-  font-size: 18px;
+  font-size: 14px;
   font-weight: bold;
   margin-bottom: 4px;
 }
 
 .gym-stats p {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: normal;
-  color: #fff;
 }
 
-.gym-stats > div:not(:last-child) {
+.gym-stats>div:not(:last-child) {
   border-right: 1px solid rgba(255, 255, 255, 0.2);
   padding-right: 16px;
 }
 
-.gym-stats > div:not(:first-child) {
+.gym-stats>div:not(:first-child) {
   padding-left: 16px;
 }
 
 .gym-description {
-  margin: 8px;
+  margin: 8px 0;
   font-size: 12px;
   color: #ccc;
 }
@@ -285,29 +154,16 @@ ion-title {
   cursor: pointer;
 }
 
-.header-image {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-}
-
-.header-text {
-  margin-top: 16px;
-  justify-content: left;
-}
-
-.header-title {
-  font-weight: bold;
-}
 .header-stats {
   display: flex;
   justify-content: right;
-  color: #fff;
   margin-bottom: 16px;
 }
+
 .header-description {
   margin-top: 8px;
 }
+
 .more-button {
   color: white;
   text-decoration: none;
@@ -326,6 +182,6 @@ ion-title {
 }
 
 .gym-link-icon {
-  height: 16px;
+  height: 18px;
 }
 </style>
