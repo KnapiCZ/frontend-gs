@@ -34,23 +34,6 @@ h2 {
     transform: translateY(-50%);
 }
 
-.small-button {
-    width: 95%;
-    aspect-ratio: 1/1.5;
-    text-align: center;
-    border-radius: 10px;
-    margin: auto;
-    border: 1px #fff000 solid;
-    background-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-.small-logo-img {
-    width: 100%;
-    aspect-ratio: 1;
-    border-radius: 10px;
-    object-fit: contain;
-}
-
 .btn {
     width: 90%;
     height: 80px;
