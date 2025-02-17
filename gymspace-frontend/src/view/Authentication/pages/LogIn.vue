@@ -92,6 +92,7 @@ ion-button {
 	width: 80%;
 	height: 50px;
 	border-radius: 10px;
+
 }
 
 input {
@@ -106,6 +107,7 @@ input {
 	color: black;
 	font-size: 4vw;
 	font-weight: bold;
+
 }
 
 .login-by-other {
@@ -118,6 +120,7 @@ input {
 	width: 40px;
 	height: 40px;
 	margin: 20px 10px;
+
 }
 
 .sign-up {

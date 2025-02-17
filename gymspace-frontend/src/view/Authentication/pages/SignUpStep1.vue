@@ -168,10 +168,6 @@ onMounted(() => {
 </template>
 
 <style scoped>
-h1 {
-    z-index: 1;
-}
-
 ion-content {
     padding-top: 36px;
 }

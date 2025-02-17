@@ -202,4 +202,15 @@ ion-input.custom.md .input-bottom .helper-text {
 .input-bottom.sc-ion-input-ios {
     color: green !important;
 }
+
+.error-message {
+    font-size: 14px;
+    font-weight: bold;
+    text-shadow: 0 0 10px black;
+    color: yellow;
+}
+
+.sign-up-background-image {
+    opacity: 0.5;
+}
 </style>
