@@ -79,7 +79,7 @@ onMounted(() => {
 
 <template>
     <IonPage>
-        <IonContent class="sign-up-content">
+        <IonContent class="sign-up-content" :scroll-y="false">
             <img src="../../../assets/images/height.png" class="sign-up-background-image" alt="Cake" />
             <h1 class="sign-up">Choose your height...</h1>
             <div class="swiper-container" @touchstart="onTouchStart" @touchmove="onTouchMove">

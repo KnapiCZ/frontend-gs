@@ -104,19 +104,36 @@ ion-button.sign-up-button {
 	color: yellow;
 }
 
-.input-bottom.sc-ion-input-ios .helper-text.sc-ion-input-ios{
+.searchbar-input.sc-ion-searchbar-md,
+.searchbar-input.sc-ion-searchbar-ios {
+	background-position: center !important;
+}
+
+.input-bottom.sc-ion-input-ios .helper-text.sc-ion-input-ios,
+.input-bottom.sc-ion-input-md .helper-text.sc-ion-input-md,
+.input-bottom.sc-ion-input-ios .error-text.sc-ion-input-ios,
+.input-bottom.sc-ion-input-md .error-text.sc-ion-input-md{
 	color: rgb(255, 0, 0);
 	font-weight: bold;
-	text-shadow: rgb(255, 0, 0) 0 0 20px;
+	text-shadow: rgb(0, 0, 0) 0 0 20px;
+}
+
+ion-content.sign-up-content,
+ion-content.welcome-page {
+	overflow: hidden;
+	text-align: center;
+	--padding-top: 36px;
 }
 
 h1.sign-up {
+	position: relative;
 	text-align: left;
 	font-size: 6vh;
 	font-weight: 900;
 	width: 32vh;
 	margin: 4vh 5%;
 	text-shadow: 0 0 10px black;
+	z-index: 2;
 }
 
 ion-content.sign-up-content {
@@ -131,14 +148,26 @@ ion-content.sign-up-content {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	object-fit: cover;
+	object-fit: contain;
 	object-position: top center;
-	z-index: -1;
+	z-index: 0;
 }
 
 .pac-item {
-	background: black;
-	color: white;
+	cursor: default;
+	padding: 0 4px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: wrap;
+	line-height: 20px;
+	text-align: left;
+	border: 1px solid #fff000;
+	font-size: 12px;
+	color: #515151;
+	padding: 5px 10px;
+	border-radius: 6px;
+	backdrop-filter: blur(5px);
+	margin: 5px 0;
 }
 
 .pac-item:hover {
@@ -172,9 +201,45 @@ ion-content.sign-up-content {
 	box-shadow: #1eff00 0 0 10px;
 }
 
+.pac-container{
+	background-color: transparent;
+	position: absolute !important;
+	z-index: 1000;
+	border-radius: 6px;
+	border-top: none;
+	font-family: Arial, sans-serif;
+	-webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, .3);
+	box-shadow: 0 2px 6px rgba(0, 0, 0, .3);
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	overflow: hidden;
+	width: 90% !important;
+	margin: auto 5%;
+	left: 0 !important;
+}
+
 .pac-container:after {
 	/* Disclaimer: not needed to show 'powered by Google' if also a Google Map is shown */
 
 	background-image: none !important;
 	height: 0px;
+}
+
+ion-input.custom {
+	text-align: left;
+	width: 87%;
+	height: 44px;
+	margin: 25px auto;
+	font-size: 16px;
+	border-radius: 6px;
+	border: solid 1px rgba(255, 255, 255, 0.651);
+	backdrop-filter: blur(26px);
+	--border-style: none;
+	--border-color: none;
+	--border-radius: none;
+	--background: #24242440;
+	--color: #fff;
+	--padding-end: 20px;
+	--padding-start: 20px;
+	--highlight-color-focused: #fff000;
 }

@@ -4,11 +4,14 @@ import SportBox from '../components/SportBox.vue';
 import apiSport from '@/logic/API/apiSport';
 
 let sports = await apiSport("allSports")
+sports = sports.data
+console.log(sports.sport_image)
+
 </script>
 
 <template>
     <IonPage>
-        <IonContent>
+        <IonContent class="sign-up-content" :scroll-y="false">
             <h1 class="sign-up">Choose your sports</h1>
 
             <div class="grid-container">

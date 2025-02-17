@@ -19,6 +19,8 @@ const steps = [
     { path: '/step-6', step: 6, canSkip: true, canGoBack: true },
     { path: '/step-7', step: 7, canSkip: true, canGoBack: true },
     { path: '/step-8', step: 8, canSkip: true, canGoBack: true },
+    { path: '/waiting-screen', step: 9, canSkip: true, canGoBack: true },
+
 
 ];
 
@@ -39,11 +41,11 @@ const goBack = () => {
 };
 const skip = () => {
     currentIndex.value = steps.findIndex((step) => step.path === route.path);
-    if (currentIndex.value < 8) {
+    if (currentIndex.value < 7) {
         router.push(steps[currentIndex.value + 1].path); // Navigate to the previous step
     }
     else {
-        router.push("/login")
+        router.push("/waiting-screen")
     }
 };
 

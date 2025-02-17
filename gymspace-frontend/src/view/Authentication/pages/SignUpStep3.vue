@@ -58,7 +58,7 @@ onMounted(async () => {
 
 <template>
     <IonPage>
-        <IonContent class="sign-up-content">
+        <IonContent class="sign-up-content" :scroll-y="false">
             <img src="../../../assets/images/2FAEnvelope.png" class="sign-up-background-image" alt="Cake" />
             <h1 class="sign-up">Verify your email</h1>
 
@@ -125,5 +125,10 @@ onMounted(async () => {
 
 .error-message {
     margin-top: 10px;
+}
+
+.try-again {
+    color: #fff000;
+    font-weight: 700;
 }
 </style>

@@ -3,10 +3,12 @@ import { IonContent, IonButton, IonRow, IonCol, useIonRouter, modalController } 
 import { onMounted, ref } from 'vue';
 import apiGym from '@/logic/API/apiGym';
 import apiUser from '@/logic/API/apiUser';
+
 const props = defineProps<{
     gym_id: number
 }>()
 
+const user_id = localStorage.getItem("logged_user_id")
 const router = useIonRouter()
 const error_message = ref("")
 const gymData = ref({
@@ -18,7 +20,6 @@ const gymData = ref({
     count_members: 0
 })
 
-let user_id = localStorage.getItem("logged_user_id")
 
 const joinGym = async () => {
     await apiGym("join", props.gym_id, undefined, undefined, user_id?.toString()).then((response) => {
@@ -31,15 +32,26 @@ const joinGym = async () => {
     })
 }
 
+const loadGym = async () => {
+    await apiGym("info", props.gym_id, undefined, "title,city,address,country,creator,count_members").then((response) => {
+        if (response.status == "success") {
+            gymData.value = response.data
+
+        } else {
+            error_message.value = response.message
+        }
+    })
+    await apiUser("profile", gymData.value.creator, undefined, "username,").then((response) => {
+        console.log(response)
+        if (response.status == "success") gymData.value.creator = response.data.username
+    })
+
+
+}
+
 onMounted(async () => {
-    try {
-        gymData.value = await apiGym("info", props.gym_id, undefined, "title,city,address,country,creator,count_members");
-        let creator = await apiUser("profile", gymData.value.creator, undefined, "username")
-        gymData.value.creator = creator.username
-    } catch (error) {
-        error_message.value = "Something went wrong."
-    }
-});
+    loadGym()
+})
 
 </script>
 

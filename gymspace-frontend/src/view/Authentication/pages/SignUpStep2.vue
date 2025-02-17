@@ -25,7 +25,11 @@ const form = ref({
 let canGo = true;
 
 
-async function submitForm() {
+const backToLogin = () => {
+    router.navigate("/login", "back", "push")
+}
+
+const submitForm = async () => {
     canGo = true;
     checkPassword();
     checkEmail();
@@ -72,7 +76,7 @@ const checkEmail = () => {
     else setValid("email", false);
 }
 
-function setValid(id: string, value: boolean) {
+const setValid = (id: string, value: boolean) => {
     let object = document.getElementById(id)?.classList;
     if (value) {
         object?.remove("ion-invalid");
@@ -85,6 +89,7 @@ function setValid(id: string, value: boolean) {
 }
 
 const togglePasswordVisibility = (index: number): void => {
+    console.log(passwordVisible.value[index])
     passwordVisible.value[index] = !passwordVisible.value[index];
 };
 
@@ -92,7 +97,7 @@ const togglePasswordVisibility = (index: number): void => {
 
 <template>
     <IonPage>
-        <IonContent class="sign-up-content">
+        <IonContent class="sign-up-content" :scroll-y="false">
             <img src="../../../assets/images/logo-glow.png" class="sign-up-background-image" alt="GymSpace-Logo" />
             <IonCol>
                 <p class="welcome">Welcome to Gymspace</p>
@@ -101,17 +106,14 @@ const togglePasswordVisibility = (index: number): void => {
 
                 <form @submit.prevent="submitForm" ref="form">
                     <IonInput id="username" class="custom" v-model="form.username" type="text" placeholder="Username"
-                        error-text="Username can't be empty">
-                    </IonInput>
+                        error-text="Username can't be empty" />
                     <IonInput id="email" class="custom" v-model="form.email" type="email" placeholder="Email"
-                        error-text="Invalid email">
-                    </IonInput>
+                        error-text="Invalid email" />
                     <IonInput id="password" class="custom" v-model="form.password"
                         :type="passwordVisible[0] ? 'text' : 'password'" placeholder="Password"
-                        helper-text="Password must contain: 8-32 characters, (A-Z, a-z, 0-9, !@#$%^&*)"
-                        error-text="Invalid Password">
-                        <IonButton class="show-password" @ion-focus="togglePasswordVisibility(0)" fill="clear"
-                            slot="end" aria-label="Show/hide">
+                        helper-text="Password must contain: 8-32 characters, (A-Z, a-z, 0-9, !@#$%^&*)">
+                        <IonButton class="show-password" @click="togglePasswordVisibility(0)" fill="clear" slot="end"
+                            aria-label="Show/hide">
                             <IonIcon slot="icon-only" :icon="eye" aria-hidden="true"
                                 style="font-size: 20px; vertical-align: top; padding: 0;">
                             </IonIcon>
@@ -120,8 +122,8 @@ const togglePasswordVisibility = (index: number): void => {
                     <IonInput id="check-password" class="pass custom" v-model="form.passwordCheck"
                         :type="passwordVisible[1] ? 'text' : 'password'" placeholder="Password confirmation"
                         error-text="Invalid Password">
-                        <IonButton class="show-password" @ion-focus="togglePasswordVisibility(1)" fill="clear"
-                            slot="end" aria-label="Show/hide">
+                        <IonButton class="show-password" @click="togglePasswordVisibility(1)" fill="clear" slot="end"
+                            aria-label="Show/hide">
                             <IonIcon slot="icon-only" :icon="eye" aria-hidden="true"
                                 style="font-size: 20px; vertical-align: top; padding: 0;">
                             </IonIcon>
@@ -129,6 +131,8 @@ const togglePasswordVisibility = (index: number): void => {
                     </IonInput>
                     <p class="error-message">{{ error_message }}</p>
                     <IonButton class="sign-up-button" @click="submitForm">SIGN UP</IonButton>
+                    <p @click="backToLogin">Back to Login</p>
+
                 </form>
             </IonCol>
         </IonContent>
@@ -142,10 +146,7 @@ const togglePasswordVisibility = (index: number): void => {
     text-align: center;
 }
 
-ion-content.sign-up-content {
-    overflow: hidden;
-    text-align: center;
-}
+
 
 ion-input.custom {
     text-align: left;
@@ -153,6 +154,9 @@ ion-input.custom {
     height: 44px;
     margin: 25px auto;
     font-size: 16px;
+    border-radius: 6px;
+    border: solid 1px rgba(255, 255, 255, 0.651);
+    backdrop-filter: blur(26px);
     --border-style: none;
     --border-color: none;
     --border-radius: none;
@@ -160,9 +164,7 @@ ion-input.custom {
     --color: #fff;
     --padding-end: 20px;
     --padding-start: 20px;
-    border-radius: 6px;
-    border: solid 1px rgba(255, 255, 255, 0.651);
-    backdrop-filter: blur(26px);
+    --highlight-color-focused: #fff000;
 }
 
 .show-password {
@@ -199,5 +201,16 @@ ion-input.custom.md .input-bottom .helper-text {
 
 .input-bottom.sc-ion-input-ios {
     color: green !important;
+}
+
+.error-message {
+    font-size: 14px;
+    font-weight: bold;
+    text-shadow: 0 0 10px black;
+    color: yellow;
+}
+
+.sign-up-background-image {
+    opacity: 0.5;
 }
 </style>

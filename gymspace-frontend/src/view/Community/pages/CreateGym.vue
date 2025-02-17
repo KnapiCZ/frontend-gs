@@ -11,7 +11,7 @@ const gymName = ref('');
 const form = ref({
     creator_id: localStorage.getItem("logged_user_id"),
     title: "",
-    city: '',
+    city: "",
     address: "",
     country: "",
     latitude: 0,
@@ -65,7 +65,7 @@ const initAutocomplete = () => {
     });
 };
 
-function transformAddress(address) {
+function transformAddress(address: string) {
     // Split address into parts
     const parts = address.split(", ");
 
@@ -76,7 +76,7 @@ function transformAddress(address) {
     let city = parts.pop();
 
     // Remove postal code (assumed to be at the start of the city part)
-    city = city.replace(/\d{1,5}\s?\d{0,5}/, '').trim();
+    city = city?.replace(/\d{1,5}\s?\d{0,5}/, '').trim();
 
     // The first part is the street address
     const street = parts.join(", ");

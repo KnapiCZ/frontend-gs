@@ -292,10 +292,17 @@ const initMap = async () => {
 
 }
 
+const loadMarkers = async () => {
+    await apiGym("location").then((response) => {
+        if (response.status == "success") {
+            markerGyms.value = response.data
+        }
+    })
+}
 
 window.initMap = initMap; // Expose initMap for callback
 
-markerGyms.value = await apiGym("location")
+loadMarkers()
 
 
 onMounted(async () => {
@@ -309,7 +316,7 @@ onMounted(async () => {
 
 <template>
     <IonPage>
-        <IonContent>
+        <IonContent class="sign-up-content">
             <div class="top-container">
                 <div class="title-container">
                     <p class="small-text">CHOOSE YOUR </p>
