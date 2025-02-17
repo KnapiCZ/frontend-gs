@@ -127,7 +127,6 @@ onMounted(async () => {
 }
 
 .error-message {
-    color: red;
     margin-top: 10px;
 }
 

@@ -39,7 +39,7 @@ const customSwiperOptions = (customEvents: SwiperOptions['on'] = {}): SwiperOpti
     direction: 'vertical',
     slidesPerView: 3,
     centeredSlides: true,
-    freeMode: true,
+    freeMode: false,
     pagination: {
         clickable: true
     },
@@ -168,6 +168,10 @@ onMounted(() => {
 </template>
 
 <style scoped>
+h1 {
+    z-index: 1;
+}
+
 ion-content {
     padding-top: 36px;
 }

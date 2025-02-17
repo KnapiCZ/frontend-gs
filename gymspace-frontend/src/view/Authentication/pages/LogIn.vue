@@ -4,24 +4,33 @@ import { IonButton, IonCol, IonPage, useIonRouter } from '@ionic/vue';
 import apiAuth from '@/logic/API/apiAuth';
 
 const router = useIonRouter();
-
-let form = ref({
+const error_message = ref(' ')
+const form = ref({
 	username_or_email: "",
 	password: "",
 });
 
 
-async function submitForm() {
-	await apiAuth("getToken", JSON.stringify(form.value)).then((data) => {
-		localStorage.setItem("Token", data.token);
-		apiAuth('confirmAuth').then((confirm) => {
-			localStorage.setItem("logged_user_id", confirm.log);
-			if (confirm.log > 0 && data.status != "error") {
+const submitForm = async () => {
+	if (form.value.username_or_email != "" && form.value.password != "") {
+
+		await apiAuth("getToken", JSON.stringify(form.value)).then((response) => {
+			console.log(response)
+			if (response.status == "success") {
+				localStorage.setItem("Token", response.data.token);
+				localStorage.setItem("logged_user_id", response.data.user_id);
 				router.push("/waiting-screen");
+			} else {
+				error_message.value = response.error[0]
 			}
 		})
-	})
+	} else {
+		error_message.value = "Username/Email and Password can`t be empty"
+		console.log(error_message.value)
+	}
 }
+
+//TODO: improve styling bigger touch area
 
 </script>
 
@@ -29,12 +38,14 @@ async function submitForm() {
 <template>
 	<IonPage>
 		<IonCol>
-			<p class="welcome">WELCOME TO</p>
+			<h1 class="welcome">WELCOME TO</h1>
 
 			<img class="logo" src="\src\assets\images\gs_logo.png" alt="logo">
 			<form @submit.prevent="submitForm">
 				<input id="UsernameAuth" type="text" placeholder="Username or Email" v-model="form.username_or_email">
 				<input id="PassAuth" type="password" placeholder="Password" v-model="form.password">
+				<p class="error-message">{{ error_message }}</p>
+
 				<IonButton class="Login" color="transparent" @click="submitForm()">Login</IonButton>
 			</form>
 			<a class="sign-up" href="/step-1">NEW? SIGN-UP HERE</a>
@@ -66,7 +77,7 @@ async function submitForm() {
 
 }
 
-p {
+h1 {
 	color: white;
 	font-size: 8vw;
 }
@@ -81,7 +92,6 @@ ion-button {
 	width: 80%;
 	height: 50px;
 	border-radius: 10px;
-
 }
 
 input {
@@ -96,7 +106,6 @@ input {
 	color: black;
 	font-size: 4vw;
 	font-weight: bold;
-
 }
 
 .login-by-other {
@@ -109,7 +118,6 @@ input {
 	width: 40px;
 	height: 40px;
 	margin: 20px 10px;
-
 }
 
 .sign-up {

@@ -32,6 +32,17 @@
 
 * {
     font-family: "Montserrat" !important;
+    color: white;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    background: black;
+    font-size: 15px;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 img {
@@ -43,28 +54,6 @@ img {
     margin: 0 auto;
     padding: 0;
     font-size: 12px;
-
-
-}
-
-/* color palette from <https://github.com/vuejs/theme> */
-
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-    margin: 0;
-}
-
-body {
-    width: 100%;
-    height: 100%;
-    color: white;
-    background: black;
-    font-size: 15px;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
 .profile-button {
@@ -117,23 +106,17 @@ ion-button.sign-up-button {
     --background-focused: #bdb000;
 }
 
-.input-bottom.sc-ion-input-ios .helper-text.sc-ion-input-ios,
-.input-bottom.sc-ion-input-md .helper-text.sc-ion-input-md {
+.error-message {
+    font-size: 14px;
+    font-weight: bold;
+    text-shadow: 0 0 10px black;
+    color: yellow;
+}
+
+.input-bottom.sc-ion-input-ios .helper-text.sc-ion-input-ios {
     color: rgb(255, 0, 0);
     font-weight: bold;
-    text-shadow: rgb(0, 0, 0) 0 0 20px;
-}
-
-.searchbar-input.sc-ion-searchbar-md,
-.searchbar-input.sc-ion-searchbar-ios {
-    background-position: center !important;
-}
-
-ion-content.sign-up-content,
-ion-content.welcome-page {
-    overflow: hidden;
-    text-align: center;
-    --padding-top: 36px;
+    text-shadow: rgb(255, 0, 0) 0 0 20px;
 }
 
 h1.sign-up {
