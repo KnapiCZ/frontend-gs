@@ -8,7 +8,7 @@ import "swiper/swiper-bundle.css"
 
 const router = useIonRouter()
 const code = ref(["", "", "", "", "", ""]);
-const inputs = ref([]);
+const inputs = ref<HTMLInputElement[]>([]);
 const error_message = ref('')
 const passwordVisible = ref<boolean>(false);
 const user_id = localStorage.getItem("logged_user_id") as unknown as number
@@ -55,7 +55,7 @@ const onInput = (index: number) => {
 // Handle backspace
 const onBackspace = (index: number) => {
     if (code.value[index] === "" && index > 0) {
-        inputs.value[index - 1]?.focus();
+        inputs.value[index - 1].focus();
     }
 };
 
@@ -64,12 +64,11 @@ const submitForm = () => {
 }
 
 const togglePasswordVisibility = () => {
-    console.log(passwordVisible.value)
     passwordVisible.value = !passwordVisible.value;
 };
 
 onMounted(async () => {
-    // sendCode();
+    sendCode();
 });
 
 </script>

@@ -5,7 +5,6 @@ import apiSport from '@/logic/API/apiSport';
 
 let sports = await apiSport("allSports")
 sports = sports.data
-console.log(sports.sport_image)
 
 </script>
 
