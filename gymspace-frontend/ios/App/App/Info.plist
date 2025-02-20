@@ -49,5 +49,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>GymSpace needs access to your photo library to upload and manage your media.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>GymSpace needs permission to save photos to your library for exporting and storing your media.</string>
 </dict>
 </plist>

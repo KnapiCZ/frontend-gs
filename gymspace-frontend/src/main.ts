@@ -1,5 +1,4 @@
 import { createApp } from 'vue';
-import { createVuetify } from "vuetify";
 import { createPinia } from 'pinia'
 import { IonicVue } from '@ionic/vue';
 
@@ -17,15 +16,12 @@ import 'swiper/css';
 /* Theme variables */
 import '@/theme/variables.css';
 
-// Vuetify
-import 'vuetify/styles'
 import '@/theme/main.css'
 
 defineCustomElements(window);
 register();
 
 const pinia = createPinia()
-const vuetify = createVuetify()
 
 const app = createApp(App)
 	.use(IonicVue,
@@ -35,7 +31,6 @@ const app = createApp(App)
 }
 	)
 	.use(router)
-	.use(vuetify)
 	.use(pinia);
 
 router.isReady().then(() => {

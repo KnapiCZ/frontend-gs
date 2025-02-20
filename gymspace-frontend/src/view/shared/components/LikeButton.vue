@@ -14,7 +14,6 @@ const opacity = ref(0)
 const outline = ref("#f")
 // TODO: prepsat props.userId na logged_user, protoze tohle kontroluje zda logged_user liknul post a nedava to smysl
 isLiked.value = await apiPost("postLiked", props.postId, undefined, userStore.loggedUserId.toString())
-console.log(isLiked.value.liked)
 
 
 if (isLiked.value.liked) { opacity.value = 1; outline.value = "#fff000" }
