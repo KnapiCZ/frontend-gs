@@ -15,9 +15,9 @@ const toggleSex = (sex: string) => {
 };
 
 const setSex = async () => {
-    userStore.addToDict("sex", selectedSex.value)
+    userStore.addToDict("registerData", "sex", selectedSex.value)
     router.push("/waiting-screen");
-    data = userStore.getDictAsJson()
+    data = userStore.getDictAsJson("registerData")
     await apiUser("update", (user_id as unknown as number), data)
 }
 

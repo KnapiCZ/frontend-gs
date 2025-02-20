@@ -15,7 +15,6 @@ const submitForm = async () => {
 	if (form.value.username_or_email != "" && form.value.password != "") {
 
 		await apiAuth("getToken", JSON.stringify(form.value)).then((response) => {
-			console.log(response)
 			if (response.status == "success") {
 				localStorage.setItem("Token", response.data.token);
 				localStorage.setItem("logged_user_id", response.data.user_id);
@@ -26,7 +25,6 @@ const submitForm = async () => {
 		})
 	} else {
 		error_message.value = "Username/Email and Password can`t be empty"
-		console.log(error_message.value)
 	}
 }
 
@@ -109,6 +107,11 @@ input {
 	font-weight: bold;
 
 }
+
+input:focus {
+	outline: solid 1px #ffee00ad;
+}
+
 
 .login-by-other {
 	font-weight: bold;

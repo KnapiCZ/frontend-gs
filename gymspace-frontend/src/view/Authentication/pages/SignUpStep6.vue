@@ -67,7 +67,7 @@ const updateTransformations = () => {
 };
 
 const setHeight = () => {
-    userStore.addToDict("height", currentNumber.value)
+    userStore.addToDict("registerData", "height", currentNumber.value)
     router.push("step-7")
 }
 

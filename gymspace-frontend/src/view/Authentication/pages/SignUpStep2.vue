@@ -36,11 +36,17 @@ const submitForm = async () => {
     checkUsername();
     checkPasswordCheck();
     if (canGo) {
-        form.value.birthday = userStore.birthday
-        let data = { "username_or_email": form.value.email, "password": form.value.password }
-        await apiUser('create', 0, JSON.stringify(form.value)).then(async (response) => {
+        let data = {
+            username: form.value.username,
+            email: form.value.email,
+            password: form.value.password,
+            birthday: userStore.getFromDict("registerData", "birthDate")
+        }
+        console.log(data)
+        await apiUser('create', 0, JSON.stringify(data)).then(async (response) => {
             if (response.status == "success") {
-                await apiAuth("getToken", JSON.stringify(data)).then((response) => {
+                let data2 = { "username_or_email": form.value.email, "password": form.value.password }
+                await apiAuth("getToken", JSON.stringify(data2)).then((response) => {
                     if (response.status == "success") {
                         localStorage.setItem("Token", response.data.token);
                         localStorage.setItem("logged_user_id", response.data.user_id);
@@ -89,7 +95,6 @@ const setValid = (id: string, value: boolean) => {
 }
 
 const togglePasswordVisibility = (index: number): void => {
-    console.log(passwordVisible.value[index])
     passwordVisible.value[index] = !passwordVisible.value[index];
 };
 

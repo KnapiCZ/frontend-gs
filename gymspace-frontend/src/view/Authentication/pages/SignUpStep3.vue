@@ -8,7 +8,7 @@ import "swiper/swiper-bundle.css"
 
 const router = useIonRouter()
 const code = ref(["", "", "", "", "", ""]);
-const inputs = ref([]);
+const inputs = ref<HTMLInputElement[]>([]);
 const error_message = ref('')
 
 const sendCode = async () => {
@@ -83,7 +83,7 @@ onMounted(async () => {
                 <p class="resend-message">E-mail has been sent to you!</p>
                 <p class="error-message">{{ error_message }}</p>
             </div>
-            <IonButton fill="solid" class="sign-up-button" @click="confirm2FA">SIGN UP</IonButton>
+            <IonButton fill="solid" class="sign-up-button" @click="confirm2FA">NEXT</IonButton>
         </IonContent>
     </IonPage>
 </template>

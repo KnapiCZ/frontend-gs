@@ -34,9 +34,6 @@ const updateCountdown = () => {
     }
 };
 
-
-
-
 onMounted(() => {
     updateCountdown()
     setInterval(updateCountdown, 1000)

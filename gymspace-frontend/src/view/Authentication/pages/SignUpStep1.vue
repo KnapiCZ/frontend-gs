@@ -108,7 +108,9 @@ const checkAge = () => {
     if (age >= 13 && isChecked.value) {
         const formattedMonth = (months.indexOf(selectedMonth.value) + 1).toString().padStart(2, '0')
         const formattedDay = selectedDay.value.toString().padStart(2, '0')
-        userStore.birthday = selectedYear.value + "-" + formattedMonth + "-" + formattedDay
+        const formattedBirthDate = selectedYear.value + "-" + formattedMonth + "-" + formattedDay
+
+        userStore.addToDict("registerData", "birthDate", formattedBirthDate)
         router.push('/step-2')
     } else {
         isOldEnough.value = false

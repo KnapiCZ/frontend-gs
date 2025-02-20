@@ -73,7 +73,7 @@ const updateTransformations = () => {
 };
 
 const setWeigth = () => {
-    userStore.addToDict("weight", currentNumber.value)
+    userStore.addToDict("registerData", "weight", currentNumber.value)
     router.push("step-8")
 }
 
