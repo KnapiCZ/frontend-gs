@@ -2,7 +2,6 @@
 import { useIonRouter } from '@ionic/vue';
 import { userDataStore } from '@/stores/UserDataStore';
 import { ref } from 'vue';
-import { post } from 'jquery';
 
 const props = defineProps<{
   id: number
