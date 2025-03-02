@@ -1,4 +1,5 @@
 <script setup>
+import PointsComponent from "@/view/shared/components/PointsComponent.vue";
 import { computed } from "vue";
 
 const props = defineProps({
@@ -6,14 +7,14 @@ const props = defineProps({
   currentXP: Number,
   nextLevelXP: Number,
   gymPoints: Number,
-  color: String,
 });
 
+console.log(props.level, props.currentXP, props.nextLevelXP, props.gymPoints)
 const progressPercentage = computed(() => (props.currentXP / props.nextLevelXP) * 100);
 </script>
 
 <template>
-  <div class="level-container" :style="{ '--level-color': color }">
+  <div class="level-container">
     <div class="level-left">
       <p class="level-text">LV</p>
       <div class="level-circle">
@@ -32,10 +33,7 @@ const progressPercentage = computed(() => (props.currentXP / props.nextLevelXP) 
       </div>
     </div>
 
-    <div class="gym-points">
-      <span class="points">{{ gymPoints }}</span>
-      <img src="@/assets/icons/Points.svg" alt="Points" class="gym-icon" />
-    </div>
+    <PointsComponent :points="props.currentXP" />
   </div>
 </template>
 
@@ -46,7 +44,6 @@ const progressPercentage = computed(() => (props.currentXP / props.nextLevelXP) 
   width: 100%;
   padding: 20px;
   margin-bottom: -55px;
-  --level-color: yellow;
 }
 
 .level-left {
@@ -74,7 +71,7 @@ const progressPercentage = computed(() => (props.currentXP / props.nextLevelXP) 
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 10px 5px var(--level-color);
+  box-shadow: 0 0 10px 5px yellow;
   z-index: 10;
 }
 
@@ -94,9 +91,9 @@ const progressPercentage = computed(() => (props.currentXP / props.nextLevelXP) 
 
 .progress-bar {
   height: 100%;
-  background: var(--level-color);
+  background: yellow;
   transition: width 0.5s ease-in-out;
-  box-shadow: 0 0 10px 3px var(--level-color);
+  box-shadow: 0 0 10px 3px yellow;
 }
 
 .ticks {
@@ -124,29 +121,5 @@ const progressPercentage = computed(() => (props.currentXP / props.nextLevelXP) 
   font-size: 12px;
   color: white;
   text-align: right;
-}
-
-.gym-points {
-  width: 96px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  margin-right: 40px;
-}
-
-.points {
-  font-size: 14px;
-  font-weight: bold;
-  color: white;
-  margin: auto;
-}
-
-.gym-icon {
-  width: 20px;
-  height: 20px;
-  margin: auto;
 }
 </style>

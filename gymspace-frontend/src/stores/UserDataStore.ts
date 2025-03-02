@@ -1,10 +1,15 @@
 import { defineStore } from 'pinia'
 
+interface UserState {
+	registerData: Record<string, any>;
+	user: Record<string, any>;
+	editedUser: Record<string, any>;
+}
+
 export const userDataStore = defineStore('userDataStore', {
 	state: () => ({
 		remove: false,
 		componentKey: 0,
-		renderedUserId: -1,
 		userChallengeId: [] as number[],
 		allGymsId: [] as number[],
 		userGymId: [] as number[],
@@ -12,11 +17,9 @@ export const userDataStore = defineStore('userDataStore', {
 		userPostsId: [] as number[],
 		userPostsKey: [] as number[],
 		userSports: -1,
-		//TODO: implement this as default user
-		dict: {} as Record<string, any>,
-		user: '',
-		birthday: '',
-		editedUser: '',
+		registerData: {} as Record<string, any>,
+		user: {} as Record<string, any>,
+		editedUser: {} as Record<string, any>,
 		choosenPhoto: '',
 		profilePicture: '',
 		backgroundPicture: '',
@@ -24,24 +27,32 @@ export const userDataStore = defineStore('userDataStore', {
 		clickedChallenge: 0
 	}),
 	actions: {
+
+		getFromDict(type: keyof UserState, key: string) {
+			return this[type][key];
+		},
+
 		// Method to add a key-value pair to the dictionary
-		addToDict(key: string, value: any) {
-			this.dict[key] = value;
+		addToDict(type: keyof UserState, key: string, value: any) {
+			this[type][key] = value;
 		},
 
 		// Method to reset the dictionary
-		resetDict() {
-			this.dict = {};
+		resetDict(type: keyof UserState) {
+			this[type] = {};
 		},
 
 		// Method to remove a key from the dictionary
-		removeFromDict(key: string) {
-			delete this.dict[key];
+		removeFromDict(type: keyof UserState, key: string) {
+			delete this[type][key];
 		},
 
-		getDictAsJson() {
-			return JSON.stringify(this.dict);
+		getDictAsJson(type: keyof UserState) {
+			return this[type];
 		},
 
+		setDict(value: any) {
+			this.user = value
+		}
 	},
 })

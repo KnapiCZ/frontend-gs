@@ -1,96 +1,129 @@
-//! API pro DIVISION, GYM, MUZe Se ZMENIT
+import getConfig from "./apiConfig";
+
 /**
- * - all: gets all objects of division or gym, ARGS: type=gym / division
- * - my: gets all objects user is in, ARGS: type=gym / division, objectId: id of user
- * - info: gets all info of object we specify in fields, ARGS: type=gym / division, objectId=id of gym or division, fields=parent_gym,title,subtitle,description,logo,members
- * - join: adds user to gym or division, ARGS: type=gym / division, objectId=id of gym / division, queryParams=user_id
- * - gymDivions: all divisions of gym, ARGS: objectId=id of gym
+ * - all: all divisions
+ * - my: users divisions
+ * - info: data of division || divisionId, fields=parent_gym,title,description,logo,members_count,spotters_count
+ * - gymDivions: all divisions of gym || ARGS: divisionId=id of gym
+ * - member-get: returns if user is member or not || divisionId
+ * - member-join: adds user to members || divisionId
+ * - member-update: change user to admin or !admin || divisionId, queryParams=user_id
+ * - member-leave: removes user from members || divisionId
+ * - spotter-get: returns if user is a spotter || divisionId
+ * - spotter-join: adds user to spotters || queryParams=user_id
+ * - spotter-leave: removes user from spotters || divisionId
  * @param apiType type of api you want to use
  * @param type which data you want division OR gym
- * @param objectId id of object you are working with
+ * @param divisionId id of object you are working with
  * @param fields data of gym or division you want to get default is all
  * @returns data you wanted from api
  */
 
-async function apiGym(apiType = '', type: string, objectId?: number, data?: string, fields?: string, queryParams?: string) {
-    const baseUrl = `https://gymspace-app-t6hic.ondigitalocean.app/`
+async function apiDivision(apiType = '', divisionId?: number, data?: string, queryParams?: string) {
     let response
     switch (apiType) {
 
         case "all":
-            response = await (
-                fetch(`${baseUrl}api/${type}/`,
-                    {
-                        method: 'GET',
-                        headers: {
-                            'Authorization': 'Token ' + localStorage.getItem("Token"),
-                            "Content-Type": "application/json",
-                        },
-                    }
-                )
-            );
-            return await response.json()
+            response = await fetch(`${getConfig().apiBaseUrl}api/division/`,
+                {
+                    method: 'GET',
+                    headers: getConfig().headers
+                }
+            )
+            return response.json()
 
         case "my":
-            response = await (
-                fetch(`${baseUrl}api/${type}/${objectId}/users-${type}s/`,
-                    {
-                        method: 'GET',
-                        headers: {
-                            'Authorization': 'Token ' + localStorage.getItem("Token"),
-                            "Content-Type": "application/json",
-                        },
-                    }
-                )
-            );
-            return await response.json()
+            response = await fetch(`${getConfig().apiBaseUrl}api/division/${divisionId}/users-divisions/`,
+                {
+                    method: 'GET',
+                    headers: getConfig().headers
+                }
+            )
+            return response.json()
 
         // * vrati vsechno info o jednom gymu
         case "info":
-            response = await (
-                fetch(`${baseUrl}api/${type}/${objectId}/?fields=${fields}`,
-                    {
-                        method: 'GET',
-                        headers: {
-                            'Authorization': 'Token ' + localStorage.getItem("Token"),
-                            "Content-Type": "application/json",
-                        },
-                    }
-                )
-            );
-            return await response.json()
+            response = await fetch(`${getConfig().apiBaseUrl}api/division/${divisionId}/?fields=${queryParams}`,
+                {
+                    method: 'GET',
+                    headers: getConfig().headers
+                }
+            )
+            return response.json()
 
-        // * prida uzivatele (logged_in_user) do gymu (gym_id) 
-        case "join":
+        case "gymDivisions":
+            response = await fetch(`${getConfig().apiBaseUrl}api/division/${divisionId}/gym-divisions/`,
+                {
+                    method: 'GET',
+                    headers: getConfig().headers
+                }
+            )
+            return response.json()
 
-            response = await (
-                fetch(`${baseUrl}api/${type}/${objectId}/?user_id=${queryParams}`,
-                    {
-                        method: 'PATCH',
-                        credentials: "include",
-                        headers: {
-                            'Authorization': 'Token ' + localStorage.getItem("Token"),
-                            "Content-Type": "application/json",
-                        },
-                        body: data
-                    }
-                )
+
+        case "member-get":
+            response = await fetch(`${getConfig().apiBaseUrl}api/division-member/${divisionId}/`,
+                {
+                    method: 'GET',
+                    headers: getConfig().headers
+                }
             )
             return await response.json()
 
-        case "gymDivisions":
-            response = await (
-                fetch(`${baseUrl}api/division/${objectId}/gym-divisions/`,
-                    {
-                        method: 'GET',
-                        headers: {
-                            'Authorization': 'Token ' + localStorage.getItem("Token"),
-                            "Content-Type": "application/json",
-                        },
-                    }
-                )
-            );
+        case "member-join":
+            response = await fetch(`${getConfig().apiBaseUrl}api/division-member/?query_params=${divisionId}`,
+                {
+                    method: 'POST',
+                    headers: getConfig().headers
+                }
+            )
             return await response.json()
+
+        case "member-update":
+            response = await fetch(`${getConfig().apiBaseUrl}api/division-member/${divisionId}/?query_params=${queryParams}`,
+                {
+                    method: 'PATCH',
+                    headers: getConfig().headers
+                }
+            )
+            return await response.json()
+
+        case "member-leave":
+            response = await fetch(`${getConfig().apiBaseUrl}api/division-member/${divisionId}/`,
+                {
+                    method: 'DELETE',
+                    headers: getConfig().headers
+                }
+            )
+            return await response.json()
+
+        case "spotter-get":
+            response = await fetch(`${getConfig().apiBaseUrl}api/division-spotter/${divisionId}/?query_params=${queryParams}`,
+                {
+                    method: 'GET',
+                    headers: getConfig().headers
+                }
+            )
+            return await response.json()
+
+        case "spotter-join":
+            response = await fetch(`${getConfig().apiBaseUrl}api/division-spotter/${divisionId}/?query_params=${queryParams}`,
+                {
+                    method: 'POST',
+                    headers: getConfig().headers
+                }
+            )
+            return await response.json()
+
+        case "spotter-leave":
+            response = await fetch(`${getConfig().apiBaseUrl}api/division-spotter/${divisionId}/`,
+                {
+                    method: 'DELETE',
+                    headers: getConfig().headers
+                }
+            )
+            return await response.json()
+
 
         default:
             return `Invalid apiType`
@@ -98,4 +131,4 @@ async function apiGym(apiType = '', type: string, objectId?: number, data?: stri
 
 }
 
-export default apiGym
+export default apiDivision

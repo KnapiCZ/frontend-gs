@@ -1,21 +1,58 @@
-<script setup>
-
-import { IonToolbar, IonButtons, IonButton, IonTitle, useIonRouter } from '@ionic/vue';
-import { userDataStore } from '@/stores/UserDataStore';
-import { ref } from 'vue';
+<script setup lang="ts">
 
 import apiGym from '@/logic/API/apiGym';
+import { onMounted, ref } from 'vue';
 
+const props = defineProps<{
+  gymId: number
+}>()
 
+const joined = ref(false)
+const spotted = ref(false)
 
+const isSpotting = async () => {
+  await apiGym("spotter-get", props.gymId).then((response) => {
+    if (response.status == "success") {
+      spotted.value = response.data
+    }
+  })
+}
+
+const isJoined = async () => {
+  await apiGym("member-get", props.gymId).then((response) => {
+    if (response.status == "success") {
+      joined.value = response.data
+    }
+  })
+}
+
+const join = async () => {
+  await apiGym(joined.value ? 'member-leave' : 'member-join', props.gymId).then((response) => {
+    if (response.status == "success") joined.value = !joined.value
+  })
+}
+
+const spot = async () => {
+  await apiGym(spotted.value ? 'spotter-leave' : 'spotter-join', props.gymId).then((response) => {
+    if (response.status == "success") spotted.value = !spotted.value
+  })
+}
+
+onMounted(() => {
+  isJoined()
+  isSpotting()
+  console.log(joined, spotted)
+})
+
+//TODO: rozdelit dva buttony do dvou divu aby zachovaly pozici kdyz jeden zmizi
 
 </script>
 
 <template>
   <div class="join-spot-container">
     <div class="button-group">
-      <button class="join-button">JOIN</button>
-      <button class="spot-button">SPOT</button>
+      <button v-show="spotted" class="join-button" @click="join">{{ joined ? 'JOIN' : "JOINED" }}</button>
+      <button v-show="joined" class="spot-button" @click="spot">{{ spotted ? "SPOT" : "SPOTTING" }}</button>
     </div>
     <div class="user-info">
       <div class="joined-by">
@@ -59,23 +96,6 @@ import apiGym from '@/logic/API/apiGym';
   box-shadow: -4px 4px 19.9px 1px #0000009e;
 }
 
-.join-spot-container::before {
-  content: "";
-  position: absolute;
-  top: -1px;
-  left: -1px;
-  right: -1px;
-  bottom: -1px;
-  border-radius: 6px;
-  padding: 1px;
-  background: linear-gradient(to bottom,
-            rgb(173, 173, 173) 4.06%,
-            rgba(170, 170, 170, 0.46) 45.45%,
-            rgba(22, 22, 22, 0.13) 100%);
-  -webkit-mask: linear-gradient(white 0 0) content-box, linear-gradient(white 0 0);
-  mask-composite: exclude;
-}
-
 .button-group {
   display: flex;
   justify-content: space-between;
@@ -83,9 +103,10 @@ import apiGym from '@/logic/API/apiGym';
 
 .join-button,
 .spot-button {
-  width: 38%;
+  width: 30%;
   height: 25px;
   background-color: #FFF000;
+  border: 1px solid #fff000;
   color: black;
   border-radius: 6px;
   font-size: 14px;
@@ -94,7 +115,7 @@ import apiGym from '@/logic/API/apiGym';
 }
 
 .spot-button {
-  width: 24%;
+  width: 30%;
   height: 25px;
   background-color: transparent;
   color: white;

@@ -1,6 +1,6 @@
 const getConfig = () => {
     return {
-        apiBaseUrl: 'https://gymspace-app-t6hic.ondigitalocean.app/',
+        apiBaseUrl: 'https://support.gymspace.app/',
         headers: {
             'Authorization': 'Token ' + localStorage.getItem("Token"),
             "Content-Type": "application/json",

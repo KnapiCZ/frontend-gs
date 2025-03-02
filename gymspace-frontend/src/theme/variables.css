@@ -56,6 +56,14 @@ http://ionicframework.com/docs/theming/ */
 	--ion-color-light-contrast-rgb: 255, 255, 255;
 	--ion-color-light-shade: #1e2023;
 	--ion-color-light-tint: #383a3e;
+
+	/** Division Colors **/
+	--powerlifting: #5603AD;
+	--calisthenics: #F2F4F3;
+	--strongmen: #7C6354;
+	--bodybuilding: #2B59C3;
+	--crossfit: #FB5012;
+	--fighting: #F02D3A;
 }
 
 
@@ -88,3 +96,5 @@ body {
 	--ion-toolbar-background: #0E0E0E;
 	--ion-toolbar-border-color: green;
 }
+
+

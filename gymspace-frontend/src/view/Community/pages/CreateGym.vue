@@ -32,8 +32,9 @@ const loadGoogleMapsScript = () => {
         const script = document.createElement('script');
         script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAzxwhowxPHs0lNimraIdQIoETUcsrto-U&libraries=places`;
         script.id = 'google-maps-script';
-        script.onload = resolve;
-        script.onerror = reject;
+        script.onload = () => resolve();
+        script.onerror = () => reject(new Error("Google Maps script failed to load"));
+
 
         document.head.appendChild(script);
     });
@@ -81,8 +82,8 @@ function transformAddress(address: string) {
     // The first part is the street address
     const street = parts.join(", ");
     form.value.address = street
-    form.value.city = city
-    form.value.country = country
+    form.value.city = city ?? ""
+    form.value.country = country ?? ""
     // Return the formatted address without the postal code
     return `${street}, ${city}, ${country}`;
 }
