@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import { useIonRouter } from '@ionic/vue';
-import { userDataStore } from '@/stores/UserDataStore';
 import { ref } from 'vue';
 
 const props = defineProps<{
   id: number
-  type: string
   logo?: string
+  background_image: string
   name?: string
   postCount?: number | 0
   spotters?: number | 0
@@ -25,6 +24,8 @@ const toggleExpand = () => {
 };
 
 const truncatedText = description.slice(0, 80) + "...";
+
+
 
 </script>
 

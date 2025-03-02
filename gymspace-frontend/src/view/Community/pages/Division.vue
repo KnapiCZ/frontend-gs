@@ -1,41 +1,50 @@
 <script setup lang="ts">
-import { VTab, VWindow, VWindowItem } from 'vuetify/lib/components/index.mjs';
 import { IonContent, IonPage } from '@ionic/vue';
 import { useRoute } from 'vue-router';
-
-import HeaderComponent from '../components/HeaderComponent.vue';
-import ChallengeThumbGrid from '@/view/Challenges/pages/ChallengeThumbGrid.vue';
-import apiGym from '@/logic/API/apiGym';
-import apiPost from '@/logic/API/apiPost';
-import DivisionFeed from '../components/tabs/DivisionFeed.vue';
+import DivisionHeaderComponent from '../components/DivisionHeaderComponent.vue'
+import DivisionJoinComponent from '../components/DivisionJoinComponent.vue'
+import DivisionLevelComponent from '../components/DivisionLevelComponent.vue'
+import apiDivision from '@/logic/API/apiDivision';
+import { onMounted, ref } from 'vue';
 
 const route = useRoute()
-let id = route.params.id as unknown as number
-let divisionInfo = await apiGym('info', id, undefined, 'logo,title,id')
-let gymPosts = await apiPost("divisionPosts", id)
+
+const division = ref({
+	logo: "",
+	level: 0,
+	points: 0,
+	count_posts: 0 | 0,
+	count_members: 0,
+	count_spotters: 0,
+	title: "Loading...",
+	background_image: "",
+	target_sport: "strongmen"
+})
+
+let id = (route.params.id as unknown as number)
+console.log(id)
+const loadDivision = async () => {
+	await apiDivision('info', id, '', 'title,logo,background_image,count_members,count_spotters,count_posts,level,points,target_sport,').then((response) => {
+		if (response.status = "success") division.value = response.data
+	})
+	console.log(division.value)
+}
+
+onMounted(() => {
+	loadDivision()
+})
 
 </script>
 
 <template>
 	<IonPage>
 		<IonContent>
-			<HeaderComponent type="division" :logo="divisionInfo.logo" :name="divisionInfo.title" :id="id" />
-			<LevelComponent :level="divisionInfo.level" :currentXP="divisionInfo.points" :nextLevelXP="12000"
-				:gymPoints="divisionInfo.points" color="#ffff00"  />
-			<VTabs v-model="tab" color="#e8e20a" bg-color="black" align-tabs="center" slider-color="#e8e20a"
-				:grow='true'>
-				<VTab><img class="tab-img" src="../../../assets/icons/feed.svg" alt="feed"></VTab>
-				<VTab><img class="tab-img" src="../../../assets/icons/challenges.svg" alt="challenges"></VTab>
-			</VTabs>
-
-			<VWindow v-model="tab">
-				<VWindowItem>
-					<DivisionFeed :divisionId="id" :items="gymPosts" />
-				</VWindowItem>
-				<VWindowItem>
-					<ChallengeThumbGrid :type="1" />
-				</VWindowItem>
-			</VWindow>
+			<DivisionHeaderComponent :logo="division.logo" :name="division.title" :post-count="division.count_posts"
+				:members="division.count_members" :spotters="division.count_spotters"
+				:background_image="division.background_image" :id="id" />
+			<DivisionLevelComponent :sport="division.target_sport" :level="division.level" :currentXP="division.points"
+				:nextLevelXP="12000" :divisionPoints="division.points" />
+			<DivisionJoinComponent />
 		</IonContent>
 	</IonPage>
 </template>
@@ -50,19 +59,30 @@ export default {
 
 <style scoped>
 .v-window {
-	padding-top: 20px;
+	padding-top: 10px;
 	height: fit-content;
 	width: 100%;
 	text-align: center;
+
 }
 
 .v-window__container {
 	height: 100%;
 	width: 100%;
+
 }
 
 .tab-img {
 	height: 28px !important;
+}
+
+.btn {
+	width: 90%;
+	height: 80px;
+	margin: 5px auto;
+	text-align: center;
+	border-radius: 10px;
+	background-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 h2 {
@@ -73,32 +93,7 @@ h2 {
 	top: 50%;
 	left: 120px;
 	transform: translateY(-50%);
-}
 
-.small-button {
-	width: 95%;
-	aspect-ratio: 1/1.5;
-	text-align: center;
-	border-radius: 10px;
-	margin: auto;
-	border: 1px #fff000 solid;
-	background-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-.small-logo-img {
-	width: 100%;
-	aspect-ratio: 1;
-	border-radius: 10px;
-	object-fit: contain;
-}
-
-.btn {
-	width: 90%;
-	height: 80px;
-	margin: 5px auto;
-	text-align: center;
-	border-radius: 10px;
-	background-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 .logo-img {

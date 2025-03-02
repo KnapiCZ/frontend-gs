@@ -1,29 +1,30 @@
 <script setup lang="ts">
 import { IonButton, IonRow, useIonRouter } from '@ionic/vue';
 import apiGym from '@/logic/API/apiGym';
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 
 const props = defineProps<{
     id: number
 }>();
 const router = useIonRouter()
 
-let gym = {
-    "title": 'ffsefessdfsef',
-    "logo": ''
-}
+const gym = ref({
+    title: 'Loading',
+    logo: '',
+    count_not_seen_posts: 0,
+    count_not_seen_messages: 0,
+
+})
 
 const goTo = () => {
     router.push('/gym/' + props.id)
 }
 
-
 onMounted(async () => {
-    await apiGym('info', props.id, undefined, 'title,logo').then((response) => {
-        if (response.status == "success") gym = response.data
+    await apiGym('info', props.id, undefined, 'title,logo,').then((response) => { //implementovat seen posts a pozdeji pak take messages
+        if (response.status == "success") gym.value = response.data
     })
 })
-
 </script>
 
 <template>
@@ -32,8 +33,8 @@ onMounted(async () => {
         <div class="text-div">
             <h2>{{ gym.title }}</h2>
             <ul>
-                <li>5 New Posts</li>
-                <li>135 New Messages</li>
+                <li>{{ gym.count_not_seen_posts }} New Posts</li>
+                <li>{{ gym.count_not_seen_messages }} New Messages</li>
             </ul>
         </div>
     </IonRow>
@@ -41,9 +42,12 @@ onMounted(async () => {
 
 <style scoped>
 h2 {
-    font-size: clamp(20px, 6vw, 64px);
+    font-size: 1.5rem;
     font-weight: bold;
     color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .btn {
@@ -66,6 +70,7 @@ h2 {
 }
 
 .text-div {
+    width: calc(100% - 110px);
     margin: 10px;
     text-align: left;
 }
