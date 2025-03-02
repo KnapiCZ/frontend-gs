@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import { IonPage, IonHeader, IonToolbar, IonContent, IonList, IonItem} from "@ionic/vue";
+import { IonPage, IonHeader, IonContent, IonList, IonItem} from "@ionic/vue";
 
 const leaderboards = {
   world: [
@@ -21,17 +21,27 @@ const activeTab = ref("world");
 <template>
   <IonPage>
     <IonHeader>
+
       <div>
-        <button @click='router.back()' slot="start" class="menu-button"><img src="../../../assets/icons/HamburgerMenu.svg"></button>
+        <button @click='router.back()' class="menu-button"><img src="../../../assets/icons/HamburgerMenu.svg"></button>
       </div>
-      <VTabs v-model="activeTab" color="#e8e20a" align-tabs="center" slider-color="#e8e20a" :grow='true'>
-        <VTab value="world">
-          <img :class="{ active: activeTab === 'world' }" src="../../../assets/icons/Globe.svg" />
-        </VTab>
-        <VTab value="division">
-          <img :class="{ active: activeTab === 'division' }"src="../../../assets/icons/Division.svg" />
-        </VTab>
-      </VTabs>
+
+      <div class="custom-tabs">
+        <button 
+          @click="activeTab = 'world'" 
+          :class="{ active: activeTab === 'world' }"
+        >
+          <img src="@/assets/icons/Globe.svg" />
+        </button>
+        <button 
+          @click="activeTab = 'division'" 
+          :class="{ active: activeTab === 'division' }"
+        >
+          <img src="@/assets/icons/Division.svg" />
+        </button>
+        <div class="tab-slider" :style="{ left: activeTab === 'world' ? '0%' : '50%' }"></div>
+      </div>
+
       <div class="leaderboard-container">
         <h2 class="leaderboard-title"> 
           {{ activeTab === "world" ? "WORLD LEADERBOARD" : "DIVISION LEADERBOARD" }} 
@@ -65,12 +75,47 @@ const activeTab = ref("world");
 
 <style scoped>
 
-  .active {
+  .custom-tabs {
+    display: flex;
+    width: 100%;
+    position: relative;
+    background: black;
+  }
+
+  .custom-tabs button {
+    width: 50%;
+    background: none;
+    border: none;
+    padding: 15px;
+    cursor: pointer;
+    opacity: 1;
+    transition: opacity 0.3s;
+  }
+
+  .custom-tabs button img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .custom-tabs .active {
+    opacity: 1;
     filter: brightness(0) saturate(100%) invert(83%) sepia(99%) saturate(354%) hue-rotate(357deg) brightness(102%) contrast(103%);
+  }
+
+  .tab-slider {
+    position: absolute;
+    bottom: 0;
+    width: 50%;
+    height: 3px;
+    background: #e8e20a;
+    transition: left 0.3s ease-in-out;
   }
 
   .menu-button {
     margin: 20px;
+    border: 0;
+    padding: 0;
+    background: transparent;
   }
 
   .leaderboard-container {
