@@ -89,6 +89,12 @@ const routes: Array<RouteRecordRaw> = [
 		meta: { requiresAuth: true, }
 	},
 	{
+		path: '/user/:id/coachingapp',
+		component: () => import('@/view/Explore/pages/CoachingApp.vue'),
+		props: true,
+		meta: { requiresAuth: true, }
+	},
+	{
 		path: '/user/delete-account',
 		component: () => import('@/view/Profile/pages/DeleteAccount.vue'),
 		meta: {requiresAuth: true, }
@@ -191,6 +197,12 @@ const routes: Array<RouteRecordRaw> = [
 		path: '/gym/:id/feed/:initialPosition',
 		name: "gymfeed",
 		component: () => import('@/view/Community/pages/GymFeedSlider.vue'),
+		meta: { requiresAuth: true },
+	},
+	{
+		path: '/leaderboards',
+		name: "leaderboards",
+		component: () => import('@/view/Community/pages/Leaderboards.vue'),
 		meta: { requiresAuth: true },
 	},
 	{

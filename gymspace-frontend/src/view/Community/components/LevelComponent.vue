@@ -6,13 +6,14 @@ const props = defineProps({
   currentXP: Number,
   nextLevelXP: Number,
   gymPoints: Number,
+  color: String,
 });
 
 const progressPercentage = computed(() => (props.currentXP / props.nextLevelXP) * 100);
 </script>
 
 <template>
-  <div class="level-container">
+  <div class="level-container" :style="{ '--level-color': color }">
     <div class="level-left">
       <p class="level-text">LV</p>
       <div class="level-circle">
@@ -45,6 +46,7 @@ const progressPercentage = computed(() => (props.currentXP / props.nextLevelXP) 
   width: 100%;
   padding: 20px;
   margin-bottom: -55px;
+  --level-color: yellow;
 }
 
 .level-left {
@@ -72,7 +74,7 @@ const progressPercentage = computed(() => (props.currentXP / props.nextLevelXP) 
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 10px 5px yellow;
+  box-shadow: 0 0 10px 5px var(--level-color);
   z-index: 10;
 }
 
@@ -92,9 +94,9 @@ const progressPercentage = computed(() => (props.currentXP / props.nextLevelXP) 
 
 .progress-bar {
   height: 100%;
-  background: yellow;
+  background: var(--level-color);
   transition: width 0.5s ease-in-out;
-  box-shadow: 0 0 10px 3px yellow;
+  box-shadow: 0 0 10px 3px var(--level-color);
 }
 
 .ticks {

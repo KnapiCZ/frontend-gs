@@ -14,16 +14,16 @@ import apiPost from '@/logic/API/apiPost';
 const route = useRoute()
 let id = route.params.id as unknown as number
 let gym = await apiGym('info', id, '', 'title,logo,background_image,post_count,members_count,spotters_count,level,points')
-console.log(gym);
+
 </script>
 
 <template>
 	<IonPage>
 		<IonContent>
 			<HeaderComponent type="gym" :logo="gym.data.logo" :name="gym.data.title" :post-count="25" :members="420"
-				:spotters="25" :id="id" />
+				:spotters="25" :coverImage="gym.data.background_image" :id="id" />
 			<LevelComponent :level="gym.data.level" :currentXP="gym.data.points" :nextLevelXP="12000"
-				:gymPoints="gym.data.points" />
+				:gymPoints="gym.data.points" color="#ffff00"  />
 			<JoinComponent />
 			<DivisionsComponent />
 			<VTabs v-model="tab" color="#e8e20a"  align-tabs="center" slider-color="#e8e20a"

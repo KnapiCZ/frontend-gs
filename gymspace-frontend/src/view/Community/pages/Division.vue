@@ -14,14 +14,14 @@ let id = route.params.id as unknown as number
 let divisionInfo = await apiGym('info', id, undefined, 'logo,title,id')
 let gymPosts = await apiPost("divisionPosts", id)
 
-
 </script>
 
 <template>
 	<IonPage>
 		<IonContent>
 			<HeaderComponent type="division" :logo="divisionInfo.logo" :name="divisionInfo.title" :id="id" />
-
+			<LevelComponent :level="divisionInfo.level" :currentXP="divisionInfo.points" :nextLevelXP="12000"
+				:gymPoints="divisionInfo.points" color="#ffff00"  />
 			<VTabs v-model="tab" color="#e8e20a" bg-color="black" align-tabs="center" slider-color="#e8e20a"
 				:grow='true'>
 				<VTab><img class="tab-img" src="../../../assets/icons/feed.svg" alt="feed"></VTab>
