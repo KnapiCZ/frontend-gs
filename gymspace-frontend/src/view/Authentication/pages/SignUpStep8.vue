@@ -30,13 +30,14 @@ const setSex = async () => {
             <div class="sex-buttons-container">
                 <img src="../../../assets/images/Male.png" alt="Male Icon" class="sex-icon"
                     style="margin-right: 40%; bottom: 65%;" />
-                <button class="sex-button" :class="{ active: selectedSex === 'm' }" @click="toggleSex('m')">
-
+                <button id="male" class="sex-button  border-gradient" :class="{ active: selectedSex === 'm' }"
+                    @click="toggleSex('m')">
                     MALE
                 </button>
                 <img src="../../../assets/images/Female.png" alt="Female Icon" class="sex-icon"
                     style="margin-left: 25%; top: -25%;" />
-                <button class="sex-button" :class="{ active: selectedSex === 'f' }" @click="toggleSex('f')">
+                <button id="female" class="sex-button border-gradient" :class="{ active: selectedSex === 'f' }"
+                    @click="toggleSex('f')">
                     FEMALE
                 </button>
             </div>
@@ -62,12 +63,11 @@ h1 {
 .sex-button {
     width: 40%;
     height: 35%;
-    font-size: 30px;
+    font-size: 1.8rem;
     font-weight: 900;
     color: white;
     border-radius: 12px;
     background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(8px);
     display: flex;
     justify-content: center;
@@ -76,6 +76,21 @@ h1 {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     margin-left: 10px;
     margin-right: 10px;
+}
+
+#male.border-gradient::before {
+    background: linear-gradient(230deg,
+            rgba(255, 255, 255, 0.5) 0%,
+            rgba(255, 240, 0, 0.65) 28%,
+            rgba(255, 255, 255, 0.86) 51%,
+            rgba(255, 255, 255, 0.35) 80%);
+}
+
+#female.border-gradient::before {
+    background: linear-gradient(165deg,
+            rgba(255, 255, 255, 0.35) 14%,
+            rgba(255, 255, 255, 0.46) 44%,
+            rgba(255, 255, 255, 1) 89% rgba(255, 240, 0, 0.93) 100%);
 }
 
 

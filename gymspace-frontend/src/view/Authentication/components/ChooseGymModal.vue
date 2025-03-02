@@ -8,7 +8,6 @@ const props = defineProps<{
     gym_id: number
 }>()
 
-const user_id = localStorage.getItem("logged_user_id")
 const router = useIonRouter()
 const error_message = ref("")
 const gymData = ref({
@@ -17,13 +16,15 @@ const gymData = ref({
     address: "",
     country: "",
     creator: 0,
-    count_members: 0
+    count_members: 0,
+    count_spotters: 0
+
 })
 
 
 const joinGym = async () => {
-    await apiGym("join", props.gym_id, undefined, undefined, user_id?.toString()).then((response) => {
-        if (response.status = "success") {
+    await apiGym("member-join", props.gym_id).then((response) => {
+        if (response.status == "success") {
             modalController.dismiss()
             router.push("/step-6")
         } else {
@@ -33,7 +34,7 @@ const joinGym = async () => {
 }
 
 const loadGym = async () => {
-    await apiGym("info", props.gym_id, undefined, "title,city,address,country,creator,count_members").then((response) => {
+    await apiGym("info", props.gym_id, undefined, "title,city,address,country,creator,count_members,count_spotters,").then((response) => {
         if (response.status == "success") {
             gymData.value = response.data
 
@@ -42,7 +43,6 @@ const loadGym = async () => {
         }
     })
     await apiUser("profile", gymData.value.creator, undefined, "username,").then((response) => {
-        console.log(response)
         if (response.status == "success") gymData.value.creator = response.data.username
     })
 
@@ -56,97 +56,113 @@ onMounted(async () => {
 </script>
 
 <template>
-    <ion-content class="ion-padding" :scroll-y="false" :key="props.gym_id">
-        <div class="gym-bio">
-            <img class="logo" src="../../../assets/images/logo-glow.png" alt="">
-            <div class="gym-info">
-                <h2>{{ gymData.title }}</h2>
-                <p class="bio-text">{{ gymData.country }}, {{ gymData.city }},{{ gymData.address }}</p>
-                <p>Created by: {{ gymData.creator }}</p>
+    <ion-content class="ion-padding border-gradient" :key="props.gym_id">
+        <div class="border-gradient">
+            <div class="gym-bio">
+                <img class="logo" src="../../../assets/images/logo-glow.png" alt="">
+                <div class="gym-info">
+                    <h2>{{ gymData.title }}</h2>
+                    <p class="bio-text">{{ gymData.country }}, {{ gymData.city }},{{ gymData.address }}</p>
+                    <p>Created by: {{ gymData.creator }}</p>
+                </div>
             </div>
+            <IonRow>
+                <IonCol>
+                    <p class="number">soon</p>
+                    <p class="small-title">posts</p>
+                </IonCol>
+                <IonCol class="middle-col">
+                    <p class="number">{{ gymData.count_members }}</p>
+                    <p class="small-title">members</p>
+                </IonCol>
+                <IonCol>
+                    <p class="number">{{ gymData.count_spotters }}</p>
+                    <p class="small-title">spoting</p>
+                </IonCol>
+            </IonRow>
+            <div class="gym-preview">
+                COMING SOON...
+            </div>
+            <p class="error-message">{{ error_message }}</p>
+            <IonButton fill="solid" class="sign-up-button" @click="joinGym">JOIN THIS GYM</IonButton>
         </div>
-        <IonRow>
-            <IonCol>
-                <p class="number">soon</p>
-                <p class="small-title">posts</p>
-            </IonCol>
-            <IonCol class="middle-niggle">
-                <p class="number">{{ gymData.count_members }}</p>
-                <p class="small-title">members</p>
-            </IonCol>
-            <IonCol>
-                <p class="number">soon</p>
-                <p class="small-title">spoting</p>
-            </IonCol>
-        </IonRow>
-        <div class="gym-preview">
-            COMING SOON...
-        </div>
-        <p class="error-message">{{ error_message }}</p>
-        <IonButton fill="solid" class="sign-up-button" @click="joinGym">JOIN THIS GYM</IonButton>
     </ion-content>
 </template>
 
 <style scoped>
+.border-gradient::before {
+    inset: 0;
+    background: linear-gradient(190deg,
+            rgba(255, 255, 255, 0.59) 0%,
+            rgba(255, 240, 0, 0.98) 9%,
+            rgba(255, 255, 255, 0.46) 34%,
+            rgba(255, 255, 255, 0.69) 65%,
+            rgba(255, 240, 0, 0.34) 96%);
+}
+
 ion-content {
     text-align: center;
+    --background: rgba(41, 40, 29, 0.6);
+    backdrop-filter: blur(20px);
 }
 
 .gym-bio {
     display: grid;
-    width: 94%;
+    width: 100%;
     grid-template-columns: 25% 75%;
-    margin: 0 3%;
     border-bottom: solid white 1px;
-    margin-bottom: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .bio-text {
-    font-size: 12px;
+    font-size: 0.8rem;
 }
 
 .logo {
     text-align: center;
-    width: 90%;
+    width: 70%;
     margin: auto;
     aspect-ratio: 1/1 !important;
-    border-radius: 100px;
+    border-radius: 50%;
     border: solid 2px #fff000;
     object-fit: cover;
-    object-position: center;
-    display: inline-block;
 }
 
 .gym-info {
     width: 100%;
-    margin: auto;
     padding: 10px;
     text-align: left;
-    display: inline-block;
 }
-
 
 h2 {
     font-size: 1.2rem;
 }
 
 .gym-preview {
-    width: 87%;
-    text-align: center;
-    line-height: 47px;
-    background-image: url("../../../assets/images/Cover Image.png");
+    width: auto;
     height: 47px;
-    margin: 10px auto;
+    margin: 30px 0;
+    text-align: center;
+    line-height: 2.8rem;
+    background-image: url("../../../assets/images/Cover Image.png");
     border-radius: 6px;
+    border: solid 1px white;
 }
 
 .number {
-    font-size: 18px;
+    font-size: 1rem;
     font-weight: 700;
 }
 
-.middle-niggle {
+.middle-col {
     border-left: solid white 1px;
     border-right: solid white 1px;
+}
+
+.sign-up-button {
+    width: 60%;
+    margin-top: 20px;
+    font-weight: 700;
 }
 </style>

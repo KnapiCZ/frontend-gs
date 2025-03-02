@@ -12,14 +12,21 @@ const markerGyms = ref([])
 let isModalOpen = false;
 
 const handleSearch = async () => {
+    console.log("caleeed")
     if (searchQuery.value.length >= 3) {
-        await apiGym("search", undefined, undefined, searchQuery.value).then((gymsQuery) => {
-            gyms.value = gymsQuery
+        await apiGym("search", undefined, undefined, searchQuery.value).then((response) => {
+            if (response.status == "success") {
+                if (response.data != null) {
+                    gyms.value = response.data
+                } else {
+                    gyms.value = []
+                }
+            }
         })
     } else {
-        gyms.value = undefined
+        gyms.value = []
     }
-};
+}
 
 const openModal = async (gym_id) => {
     if (isModalOpen) return;
@@ -27,9 +34,9 @@ const openModal = async (gym_id) => {
     isModalOpen = true;
     const modal = await modalController.create({
         component: ChooseGymModal,
-        breakpoints: [0.6], // Define your breakpoints here
-        initialBreakpoint: 0.6, // Set the initial breakpoint (default is 0.5)
-        cssClass: 'custom-modal-class', // Optional, if you want to add custom CSS classes
+        breakpoints: [0.5, 0.6], // Define your breakpoints here
+        initialBreakpoint: 0.5, // Set the initial breakpoint (default is 0.5)
+        cssClass: 'custom-modal-class border-radius', // Optional, if you want to add custom CSS classes
         swipeToClose: true, // Enable swipe to close
         showBackdrop: false,
         componentProps: {
@@ -318,26 +325,24 @@ onMounted(async () => {
     <IonPage>
         <IonContent class="sign-up-content">
             <div class="top-container">
-                <div class="title-container">
+                <div class="title-container border-gradient">
                     <p class="small-text">CHOOSE YOUR </p>
                     <h1 class="highlight">HOME GYM</h1>
                 </div>
-                <IonSearchbar showCancelButton="never" class="custom" @ionInput="handleSearch" debounce="300"
-                    v-model="searchQuery" />
-                <IonList>
-                    <IonItem v-if="searchQuery.length >= 3" v-for="gym in gyms" :key="gym.id" class="gym-bio"
-                        @click.once="openModal(gym.id)">
+                <IonSearchbar showCancelButton="never" class="custom border-gradient" @update:modelValue="handleSearch"
+                    debounce="200" v-model="searchQuery" />
+                <IonList v-if="searchQuery.length >= 3 && gyms.length != 0">
+                    <IonItem v-for="gym in gyms" :key="gym.id" class="gym-bio" @click.once="openModal(gym.id)">
                         <img class="logo" src="../../../assets/images/logo-glow.png" alt="">
                         <div class="gym-info">
                             <h2>{{ gym.title }}</h2>
                             <p class="bio-text">{{ gym.city }}, {{ gym.address }}</p>
-                            <a href="newpark.cz"></a>
+                            <a href="newpark.cz">newpark.cz</a>
                         </div>
                     </IonItem>
-
                 </IonList>
                 <p class="create-text">
-                    Can’t find your gym? <a href="/create-gym" class="create-link">Create it!</a>
+                    Can`t find your gym? <a href="/create-gym" class="create-link">Create it!</a>
                 </p>
             </div>
             <div id="map"></div>
@@ -361,13 +366,13 @@ onMounted(async () => {
 }
 
 .title-container {
-    width: 90%;
+    width: 97%;
     height: 15vh;
     margin: auto;
     background-color: rgb(37, 36, 21);
-    border: 1px solid white;
-    border-top: none;
     border-radius: 0 0 6px 6px;
+    padding: 0;
+    position: relative;
 }
 
 p.small-text {
@@ -390,15 +395,17 @@ ion-searchbar.ios.custom,
 ion-searchbar.md.custom {
     font-weight: 800;
     text-align: left;
-    width: 90%;
+    width: 97%;
     margin: 10px auto;
     padding: 0;
-    box-shadow: 0 0px 10px #fff000, inset 0 0px 10px #ffee0060;
-    backdrop-filter: blur(100px) !important;
-    border: solid 1px white;
+    box-shadow: 0 0px 10px #fff000, inset 0 0px 25px 1px #7a7007;
+    backdrop-filter: blur(5px) !important;
     min-height: 0 !important;
     border-radius: 6px;
-    --background: linear-gradient(90deg, #e0ce0daf, #a9a9a946);
+    --background: linear-gradient(90deg,
+            rgba(224, 206, 13, 0.35) 0%,
+            rgba(175, 173, 150, 0.18) 88%,
+            rgb(169, 169, 169, 0.15) 100%);
     --color: #fff;
     --placeholder-color: #fff;
     --icon-color: #fff000;
@@ -409,11 +416,29 @@ ion-searchbar.md.custom {
     --placeholder-opacity: 1;
 }
 
+.title-container.border-gradient::before {
+    border-radius: 0 0 6px 6px;
+    padding-top: 0;
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.46) 52%,
+            rgba(255, 255, 255, 0.69) 65%,
+            rgba(255, 240, 0, 0.68) 80%,
+            rgb(255, 240, 0, 0.34) 96%);
+}
+
+ion-search.border-gradient::before {
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 13) 4%,
+            rgba(255, 255, 255, 0.459) 52%,
+            rgba(255, 255, 255, 0.349) 80%,
+            rgba(255, 240, 0, 0.129), 100%);
+}
+
 .create-text {
     margin-top: 10px;
     color: white;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 0.85rem;
     text-shadow: rgb(0, 0, 0) 0 0 10px;
 }
 
@@ -421,10 +446,6 @@ ion-searchbar.md.custom {
     color: #fff000;
     font-weight: bold;
     text-decoration: none;
-}
-
-.create-link:hover {
-    text-decoration: underline;
 }
 
 .bio-text {
@@ -436,7 +457,6 @@ ion-searchbar.md.custom {
 }
 
 .logo {
-    text-align: center;
     width: 50px;
     margin: auto 5px;
     margin: 10px;
@@ -444,15 +464,11 @@ ion-searchbar.md.custom {
     border-radius: 100px;
     border: solid 1px #fff000;
     object-fit: cover;
-    object-position: center;
-    display: inline-block;
 }
 
 .gym-info {
     width: 100%;
     margin: auto;
-    text-align: left;
-
 }
 
 h2 {

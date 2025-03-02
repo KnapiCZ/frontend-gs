@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { IonContent, IonPage, IonButton, useIonRouter } from "@ionic/vue"
+import { IonContent, IonPage, IonButton, useIonRouter, IonInput } from "@ionic/vue"
 import { ref, onMounted } from "vue";
 import apiAuth from "@/logic/API/apiAuth";
 import "swiper/swiper-bundle.css"
@@ -64,9 +64,9 @@ onMounted(async () => {
 
             <div class="verification-container">
                 <div class="code-inputs">
-                    <input v-for="(digit, index) in code" :key="index" v-model="code[index]" maxlength="1"
+                    <IonInput v-for="(digit, index) in code" :key="index" v-model="code[index]" maxlength="1"
                         @input="onInput(index)" @paste="onPaste" @keydown.backspace="onBackspace(index)" ref="inputs"
-                        class="code-box" type="text" inputmode="numeric" />
+                        mode="ios" class="code-box border-gradient" type="text" inputmode="numeric" />
                 </div>
             </div>
             <div class="text-div">
@@ -97,21 +97,20 @@ onMounted(async () => {
     margin-bottom: 20px;
 }
 
-.code-box {
+ion-input.code-box {
     width: 45px;
-    aspect-ratio: 1/1.5;
+    height: 68px;
     text-align: center;
     font-size: 1.5rem;
-    border: 2px solid #ccc;
     border-radius: 6px;
     color: #fff;
     background-color: #242424b3;
     backdrop-filter: blur(10px);
+    --highlight-color-focused: #fff000;
 }
 
 .code-box:focus {
     outline: none;
-    border-color: #ff0;
 }
 
 .resend-message {
@@ -130,5 +129,13 @@ onMounted(async () => {
 .try-again {
     color: #fff000;
     font-weight: 700;
+}
+
+ion-input.border-gradient::before {
+    padding: 2px;
+    background: linear-gradient(125deg,
+            rgba(255, 255, 255, 0.35) 14%,
+            rgba(255, 255, 255, 0.59) 64%,
+            rgb(236, 218, 71, 0.47) 94%);
 }
 </style>

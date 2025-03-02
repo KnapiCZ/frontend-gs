@@ -46,7 +46,7 @@ onMounted(() => {
         <IonContent class="ion-padding welcome-page" :scroll-y="false">
             <img class="background-img" src="../../../assets/images/waiting-screen-bg.gif" alt="Background" />
 
-            <div class="welcome-header">
+            <div id="first-gradient" class="welcome-header border-gradient">
                 <p class="thank-you-text">Thank you!</p>
                 <p class="welcome-text">AND WELCOME TO</p>
                 <p class="gymspace-text">GYMSPACE</p>
@@ -79,7 +79,7 @@ onMounted(() => {
                         <img class="info-card-images" src="../../../assets/images/web.png" alt="Globe Icon" />
                         <a href="https://pcaczechia.com/product/tickets-championship-2025" target="_blank"
                             class="info-card-link">
-                            <div class="info-card">
+                            <div class="info-card border-gradient">
                                 <p class="card-title">Get Your Ticket</p>
                                 <p class="card-text">News, promotions & competitions!</p>
                             </div>
@@ -88,8 +88,8 @@ onMounted(() => {
                     <IonCol size="6">
                         <img class="info-card-images" src="../../../assets/images/kickstarter.png"
                             alt="Kickstarter Icon" />
-                        <a href="https://startovac.cz/projekty/gymspace.app" target="_blank" class="info-card-link">
-                            <div class="info-card">
+                        <a href="https://startovac.cz/projekty/gymspace.app" target="_blank" class="info-card-link ">
+                            <div class="info-card border-gradient">
                                 <p class="card-title">Crowdfunding</p>
                                 <p class="card-text">Support us and our GymSpace journey!</p>
                             </div>
@@ -98,9 +98,9 @@ onMounted(() => {
                 </IonRow>
             </IonGrid>
 
-            <a class="link-button" target="_blank"
+            <a class="link-button " target="_blank"
                 href="https://pcaczechia.com/product/registrations-championship-2025">
-                <div class="athlete-section">
+                <div class="athlete-section border-gradient">
                     <p class="athlete-text">Are you an Athlete?</p>
                     <p class="championship-text">PARTICIPATE IN</p>
                     <p class="highlight-text"><img src="../../../assets/images/PCACZECHIACHAMPIONSHIP2025.svg"></p>
@@ -109,16 +109,19 @@ onMounted(() => {
             </a>
 
             <div class="social-icons">
-                <a href="https://www.instagram.com/gymspace_official" target="_blank" class="social-icon-btn">
+                <a href="https://www.instagram.com/gymspace_official" target="_blank"
+                    class="social-icon-btn border-gradient">
                     <img class="social-icon-images" src="../../../assets/icons/instagram.svg">
                 </a>
-                <a href="https://www.facebook.com/gymspace.official" target="_blank" class="social-icon-btn">
+                <a href="https://www.facebook.com/gymspace.official" target="_blank"
+                    class="social-icon-btn border-gradient">
                     <img class="social-icon-images" src="../../../assets/icons/facebook.svg">
                 </a>
-                <a href="https://www.youtube.com/@gymspaceofficial" target="_blank" class="social-icon-btn">
+                <a href="https://www.youtube.com/@gymspaceofficial" target="_blank"
+                    class="social-icon-btn border-gradient">
                     <img class="social-icon-images" src="../../../assets/icons/youtube.svg">
                 </a>
-                <a href="https://www.tiktok.com/@gymspace.app" target="_blank" class="social-icon-btn">
+                <a href="https://www.tiktok.com/@gymspace.app" target="_blank" class="social-icon-btn border-gradient">
                     <img class="social-icon-images" src="../../../assets/icons/tiktok.svg">
                 </a>
             </div>
@@ -154,11 +157,43 @@ onMounted(() => {
 .welcome-header,
 .athlete-section {
     background: rgba(0, 0, 0, 0.30);
-    border: 1px solid rgba(255, 255, 255, 0.20);
     padding: 10px;
     border-radius: 6px;
     box-shadow: -4px 4px 19.90px 1px #0000009E;
     backdrop-filter: blur(20px);
+}
+
+.welcome-header.border-gradient::before {
+    background: linear-gradient(80deg,
+            rgba(255, 255, 255, 0.86) 0%,
+            rgba(255, 255, 255, 0.35) 10%,
+            rgba(255, 240, 0, 0.35) 72%,
+            rgba(255, 255, 255, 0.20) 100%);
+}
+
+.info-card.border-gradient::before {
+    background: linear-gradient(35deg,
+            rgba(255, 255, 255, 0.5) 0%,
+            rgba(255, 240, 0, 0.65) 28%,
+            rgba(255, 255, 255, 0.86) 51%,
+            rgba(255, 255, 255, 0.35) 80%);
+}
+
+.athlete-section.border-gradient::before {
+    background: linear-gradient(200deg,
+            rgba(255, 255, 255, 0.50) 0,
+            rgba(255, 0, 0, 1) 28%,
+            rgba(255, 255, 255, 0.86) 51%,
+            rgba(255, 255, 255, 0.35) 80%,
+            rgba(0, 141, 223, 0.56) 100%);
+}
+
+.social-icon-btn.border-gradient::before {
+    border-radius: 50%;
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.53) 8%,
+            rgba(255, 255, 255, 0.46) 31%,
+            rgba(255, 240, 0, 0.20) 100%);
 }
 
 .info-card,
