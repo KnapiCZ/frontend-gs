@@ -11,7 +11,9 @@ const props = defineProps<{
   postCount?: number | 0
   spotters?: number | 0
   members?: number | 0
+  coverImage?: string;
 }>()
+
 
 const router = useIonRouter()
 
@@ -29,39 +31,39 @@ const truncatedText = description.slice(0, 80) + "...";
 <template>
 
   <div class="header-image-container">
-    <img src="/src/assets/images/Cover Image.png" alt="Gym Background" class="header-image" />
+    <img :src="coverImage" alt="Header Background" class="header-cover-image" />
   </div>
 
   <div class="header-container">
-    <div class="gym-top">
-      <div class="gym-stats">
-        <img :src="logo" alt="Gym Logo" class="gym-image" />
+    <div class="header-top">
+      <div class="header-stats">
+        <img :src="logo" alt="Header Logo" class="header-image" />
 
-        <div class="gym-posts">
+        <div class="header-posts">
           <h2>{{ postCount }}</h2>
           <p>posts</p>
         </div>
-        <div class="gym-joined">
+        <div class="header-joined">
           <h2>{{ members }}</h2>
           <p>joined</p>
         </div>
-        <div class="gym-spotters">
+        <div class="header-spotters">
           <h2>{{ spotters }}</h2>
           <p>spotting</p>
         </div>
       </div>
 
-      <div class="gym-bottom">
-        <h2 class="gym-title">{{ name }}</h2>
-        <p class="gym-description">
+      <div class="header-bottom">
+        <h2 class="header-title">{{ name }}</h2>
+        <p class="header-description">
           <span v-if="!expanded">{{ truncatedText }}</span>
           <span v-else>{{ description }}</span>
           <button @click="toggleExpand" class="more-button">
             {{ expanded ? "less" : "more" }}
           </button>
         </p>
-        <a href="https://www.newpark.cz" target="_blank" class="gym-link">
-          <img src="/src/assets/icons/link.svg" alt="link" class="gym-link-icon" /> www.newpark.cz
+        <a href="https://www.newpark.cz" target="_blank" class="header-link">
+          <img src="/src/assets/icons/link.svg" alt="link" class="header-link-icon" /> www.newpark.cz
         </a>
 
 
@@ -75,7 +77,7 @@ const truncatedText = description.slice(0, 80) + "...";
   position: absolute;
 }
 
-.header-image {
+.header-cover-image {
   width: 100vw;
   aspect-ratio: 391/180;
   object-fit: cover;
@@ -94,11 +96,28 @@ const truncatedText = description.slice(0, 80) + "...";
   box-shadow: -4px 4px 19.9px 1px #0000009e;
 }
 
-.gym-bottom {
+.header-container::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  border-radius: 6px;
+  padding: 1px;
+  background: linear-gradient(to bottom,
+            rgb(173, 173, 173) 4.06%,
+            rgba(170, 170, 170, 0.46) 45.45%,
+            rgba(22, 22, 22, 0.13) 100%);
+  -webkit-mask: linear-gradient(white 0 0) content-box, linear-gradient(white 0 0);
+  mask-composite: exclude;
+}
+
+.header-bottom {
   text-align: left;
 }
 
-.gym-image {
+.header-image {
   width: 14vw;
   aspect-ratio: 1;
   border-radius: 50%;
@@ -106,44 +125,44 @@ const truncatedText = description.slice(0, 80) + "...";
   object-fit: contain;
 }
 
-.gym-title {
+.header-title {
   font-size: 16px;
   font-weight: 900;
   line-height: 18.29px;
 }
 
-.gym-stats {
+.header-stats {
   display: flex;
   justify-content: space-between;
   text-align: center;
   padding: 8px;
 }
 
-.gym-stats>div {
+.header-stats>div {
   flex: 1;
 }
 
-.gym-stats h2 {
+.header-stats h2 {
   font-size: 14px;
   font-weight: bold;
   margin-bottom: 4px;
 }
 
-.gym-stats p {
+.header-stats p {
   font-size: 12px;
   font-weight: normal;
 }
 
-.gym-stats>div:not(:last-child) {
+.header-stats>div:not(:last-child) {
   border-right: 1px solid rgba(255, 255, 255, 0.2);
   padding-right: 16px;
 }
 
-.gym-stats>div:not(:first-child) {
+.header-stats>div:not(:first-child) {
   padding-left: 16px;
 }
 
-.gym-description {
+.header-description {
   margin: 8px 0;
   font-size: 12px;
   color: #ccc;
@@ -170,7 +189,7 @@ const truncatedText = description.slice(0, 80) + "...";
   cursor: pointer;
 }
 
-.gym-link {
+.header-link {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -180,7 +199,7 @@ const truncatedText = description.slice(0, 80) + "...";
   font-size: 12px;
 }
 
-.gym-link-icon {
+.header-link-icon {
   height: 18px;
 }
 </style>

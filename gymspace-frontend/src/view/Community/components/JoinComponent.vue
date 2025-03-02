@@ -59,6 +59,23 @@ import apiGym from '@/logic/API/apiGym';
   box-shadow: -4px 4px 19.9px 1px #0000009e;
 }
 
+.join-spot-container::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  border-radius: 6px;
+  padding: 1px;
+  background: linear-gradient(to bottom,
+            rgb(173, 173, 173) 4.06%,
+            rgba(170, 170, 170, 0.46) 45.45%,
+            rgba(22, 22, 22, 0.13) 100%);
+  -webkit-mask: linear-gradient(white 0 0) content-box, linear-gradient(white 0 0);
+  mask-composite: exclude;
+}
+
 .button-group {
   display: flex;
   justify-content: space-between;
