@@ -128,7 +128,7 @@ onMounted(() => {
         <IonContent class="sign-up-content" :scroll-y="false">
             <img src="../../../assets/images/Cake.png" class="sign-up-background-image" alt="Cake" />
             <h1 class="sign-up">Set your birth date...</h1>
-            <div class="date-slider">
+            <div class="date-slider border-gradient">
                 <div class="swiper-container day-swiper">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide" v-for="(day) in days" :key="day">
@@ -175,7 +175,7 @@ ion-content {
 }
 
 .sign-up-background-image {
-    top: -18vh;
+    top: -10vh;
 }
 
 #warning-age {
@@ -195,8 +195,14 @@ ion-content {
     width: 90%;
     background-color: #242424b3;
     border-radius: 6px;
-    border: #ffffffcc solid 1px;
     backdrop-filter: blur(10px);
+}
+
+.border-gradient::before {
+    background: linear-gradient(135deg,
+            rgb(255, 255, 255, 0.35) 14%,
+            rgba(255, 255, 255, 0.59) 64%,
+            rgb(247, 205, 182, 0.94) 87%) #fff00021;
 }
 
 .swiper-container {
@@ -289,7 +295,7 @@ ion-content {
 }
 
 .pretty-checkbox .label-text {
-    font-size: 10px;
+    font-size: 11px;
     text-shadow: 0 0 10px black;
 }
 </style>

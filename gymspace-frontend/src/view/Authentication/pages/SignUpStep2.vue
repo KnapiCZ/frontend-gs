@@ -110,11 +110,11 @@ const togglePasswordVisibility = (index: number): void => {
                 <p class="after-text">AND START YOUR JURNEY</p>
 
                 <form @submit.prevent="submitForm" ref="form">
-                    <IonInput id="username" class="custom" v-model="form.username" type="text" placeholder="Username"
-                        error-text="Username can't be empty" />
-                    <IonInput id="email" class="custom" v-model="form.email" type="email" placeholder="Email"
-                        error-text="Invalid email" />
-                    <IonInput id="password" class="custom" v-model="form.password"
+                    <IonInput id="username" class="custom username border-gradient" v-model="form.username" type="text"
+                        placeholder="Username" error-text="Username can't be empty" />
+                    <IonInput id="email" class="custom border-gradient" v-model="form.email" type="email"
+                        placeholder="Email" error-text="Invalid email" />
+                    <IonInput id="password" class="custom border-gradient" v-model="form.password"
                         :type="passwordVisible[0] ? 'text' : 'password'" placeholder="Password"
                         helper-text="Password must contain: 8-32 characters, (A-Z, a-z, 0-9, !@#$%^&*)">
                         <IonButton class="show-password" @click="togglePasswordVisibility(0)" fill="clear" slot="end"
@@ -124,7 +124,7 @@ const togglePasswordVisibility = (index: number): void => {
                             </IonIcon>
                         </IonButton>
                     </IonInput>
-                    <IonInput id="check-password" class="pass custom" v-model="form.passwordCheck"
+                    <IonInput id="check-password" class="pass custom border-gradient" v-model="form.passwordCheck"
                         :type="passwordVisible[1] ? 'text' : 'password'" placeholder="Password confirmation"
                         error-text="Invalid Password">
                         <IonButton class="show-password" @click="togglePasswordVisibility(1)" fill="clear" slot="end"
@@ -149,27 +149,6 @@ const togglePasswordVisibility = (index: number): void => {
 * {
     margin: auto;
     text-align: center;
-}
-
-
-
-ion-input.custom {
-    text-align: left;
-    width: 87%;
-    height: 44px;
-    margin: 25px auto;
-    font-size: 16px;
-    border-radius: 6px;
-    border: solid 1px rgba(255, 255, 255, 0.651);
-    backdrop-filter: blur(26px);
-    --border-style: none;
-    --border-color: none;
-    --border-radius: none;
-    --background: #24242440;
-    --color: #fff;
-    --padding-end: 20px;
-    --padding-start: 20px;
-    --highlight-color-focused: #fff000;
 }
 
 .show-password {
@@ -217,5 +196,38 @@ ion-input.custom.md .input-bottom .helper-text {
 
 .sign-up-background-image {
     opacity: 0.5;
+}
+
+#username.border-gradient::before {
+    background: linear-gradient(165deg,
+            rgba(255, 255, 255) 4%,
+            rgba(255, 255, 255, 0.459) 52%,
+            rgba(255, 255, 255, 0.349) 80%,
+            rgba(255, 240, 0, 0.129));
+}
+
+#email.border-gradient::before {
+    background: linear-gradient(165deg,
+            rgba(255, 255, 255, 0.35) 14%,
+            rgba(255, 255, 255, 0.46) 48%,
+            rgba(255, 240, 0, 0.13) 73%,
+            rgba(255, 255, 255, 1) 100%);
+}
+
+#password.border-gradient::before {
+    background: linear-gradient(165deg,
+            rgba(255, 255, 255, 1) 4%,
+            rgba(255, 255, 255, 0.46) 39%,
+            rgba(255, 240, 0, 0.13) 65%,
+            rgba(255, 255, 255, 0.46) 84%,
+            rgba(255, 255, 255, 0.35) 100%);
+}
+
+#check-password.border-gradient::before {
+    background: linear-gradient(165deg,
+            rgba(255, 255, 255, 1) 4%,
+            rgba(255, 240, 0, 0.13) 27%,
+            rgba(255, 255, 255, 0.35) 52%,
+            rgba(255, 255, 255, 0.46) 100%);
 }
 </style>

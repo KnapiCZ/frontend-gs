@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { IonButton, IonCol, IonPage, useIonRouter } from '@ionic/vue';
+import { IonButton, IonCol, IonInput, IonPage, useIonRouter } from '@ionic/vue';
 import apiAuth from '@/logic/API/apiAuth';
 
 const router = useIonRouter();
@@ -40,11 +40,13 @@ const submitForm = async () => {
 
 			<img class="logo" src="\src\assets\images\gs_logo.png" alt="logo">
 			<form @submit.prevent="submitForm">
-				<input id="UsernameAuth" type="text" placeholder="Username or Email" v-model="form.username_or_email">
-				<input id="PassAuth" type="password" placeholder="Password" v-model="form.password">
+				<IonInput id="UsernameAuth" class="custom border-gradient" type="text" placeholder="Username or Email"
+					v-model="form.username_or_email" />
+				<IonInput id="PassAuth" class="custom border-gradient" type="password" placeholder="Password"
+					v-model="form.password" />
 				<p class="error-message">{{ error_message }}</p>
 
-				<IonButton class="Login" color="transparent" @click="submitForm()">Login</IonButton>
+				<IonButton class="login" @click="submitForm()">Login</IonButton>
 			</form>
 			<a class="sign-up" href="/step-1">NEW? SIGN-UP HERE</a>
 			<a class="sign-up" href="https://support.gymspace.app/password_reset/">FORGOTEN PASSWORD</a>
@@ -84,34 +86,25 @@ h1 {
 	margin-top: 40px;
 }
 
-input,
-ion-button {
-	margin: 10px 0;
-	width: 80%;
-	height: 50px;
-	border-radius: 10px;
-
-}
-
-input {
-	padding: 0 10px;
-	background-color: #242424;
-	color: white;
-	text-align: left;
-}
-
-.Login {
+ion-button.login {
 	background-color: #fff000;
 	color: black;
-	font-size: 4vw;
+	font-size: 1rem;
 	font-weight: bold;
-
+	margin: 25px;
+	width: 87%;
+	height: 50px;
+	border-radius: 6px;
+	--background: transparent;
 }
 
-input:focus {
-	outline: solid 1px #ffee00ad;
+ion-input.border-gradient::before {
+	background: linear-gradient(165deg,
+			#fff 4%,
+			#ffffff75 52%,
+			#ffffff59 80%),
+		#fff00021;
 }
-
 
 .login-by-other {
 	font-weight: bold;
@@ -123,11 +116,10 @@ input:focus {
 	width: 40px;
 	height: 40px;
 	margin: 20px 10px;
-
 }
 
 .sign-up {
-	margin-bottom: 50px;
-	padding: 10px;
+	padding: 20px 15px;
+	margin: 20px 0px;
 }
 </style>

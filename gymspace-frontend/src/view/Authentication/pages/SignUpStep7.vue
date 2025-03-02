@@ -88,7 +88,8 @@ onMounted(() => {
         <IonContent class="sign-up-content" :scroll-y="false">
             <img src="../../../assets/images/weight.png" class="sign-up-background-image" alt="Cake" />
             <h1 class="sign-up">Choose your weight...</h1>
-            <div class="swiper-container" @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd">
+            <div class="swiper-container border-gradient" @touchstart="onTouchStart" @touchmove="onTouchMove"
+                @touchend="onTouchEnd">
                 <div class="value-display">
                     <IonCol>
                         <p class="value">{{ currentNumber }}</p>
@@ -126,16 +127,16 @@ onMounted(() => {
     margin: auto;
     display: flex;
     position: relative;
-    overflow: hidden;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: #2424246c;
-    border: 1px solid transparent;
-    border-image: linear-gradient(45deg, #ffffffce 0%, #ffffff5b 10%, #fff00059 72%, #fff000 100%) 1;
-    background-clip: padding-box;
     backdrop-filter: blur(25px);
     z-index: 1;
+}
+
+.border-gradient::before {
+    background: linear-gradient(45deg, #ffffffce 0%, #ffffff5b 10%, #fff00059 72%, #fff000 100%)
 }
 
 .value-display {
