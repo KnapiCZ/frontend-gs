@@ -1,213 +1,157 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
-import Swiper from 'swiper';
-import 'swiper/css';
+import { onMounted, ref } from 'vue'
+import Swiper from 'swiper'
+import 'swiper/css'
 import "swiper/swiper-bundle.css"
 
 const props = defineProps<{
-  id: number
-  logo: string
-  background_image: string[]
-  name: string
-  postCount: number | 0
-  spotters: number | 0
-  members: number | 0
+    id: number
+    logo: string
+    background_image: string[]
+    name: string
+    postCount: number | 0
+    spotters: number | 0
+    members: number | 0
 }>()
 
 const background_swiper = ref<Swiper | null>(null)
 
-const description = "We have been here for you since 2014. That's when we opened the largest We have been here for you since 2014. That's when we opened the largest We have been here for you since 2014. That's when we opened the largest...";
-const expanded = ref(false);
-
-const truncatedText = description.slice(0, 80) + "...";
+const description = "We have been here for you since 2014. That's when we opened the largest We have been here for you since 2014. That's when we opened the largest We have been here for you since 2014. That's when we opened the largest..."
+const expanded = ref(false)
+const truncatedText = description.slice(0, 80) + "..."
 
 const toggleExpand = () => {
-  expanded.value = !expanded.value;
-};
+    expanded.value = !expanded.value
+}
 
 const initializeSwiper = () => {
-  background_swiper.value = new Swiper('.background-swiper', {
-    loop: true,
-    autoplay: {
-      delay: 10000
-    },
-  })
+    background_swiper.value = new Swiper('.background-swiper', {
+        loop: true,
+        autoplay: {
+            delay: 10000
+        },
+    })
 }
 
 onMounted(() => {
-  initializeSwiper()
+    initializeSwiper()
 })
 
 </script>
 
 <template>
 
-  <div class="header-image-container">
     <div class="swiper-container background-swiper">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide" v-for="image in background_image">
-          <img :src="image" alt="Gym Background" class="header-image" />
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" v-for="image in background_image">
+                <img :src="image" alt="header Background" class="header-background" />
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 
-  <div class="header-container">
-    <div class="gym-top">
-      <div class="gym-stats">
-        <img :src="logo" alt="Gym Logo" class="gym-image" />
+    <div class="header-container border-gradient margin-inline-default">
+        <div class="header-top">
+            <div class="header-stats row">
+                <img :src="logo" alt="header Logo" class="header-image" />
 
-        <div class="gym-posts">
-          <h2>{{ postCount }}</h2>
-          <p>posts</p>
+                <div class="default-flex">
+                    <h5>{{ postCount }}</h5>
+                    <p>posts</p>
+                </div>
+                <div class="default-flex">
+                    <h5>{{ members }}</h5>
+                    <p>joined</p>
+                </div>
+                <div class="default-flex">
+                    <h5>{{ spotters }}</h5>
+                    <p>spotting</p>
+                </div>
+            </div>
+
+            <div class="header-bottom">
+                <h4 class="header-title">{{ name }}</h4>
+                <p class="header-description smallest-text">
+                    <span v-if="!expanded">{{ truncatedText }}</span>
+                    <span v-else>{{ description }}</span>
+                    <button @click="toggleExpand" class="more-button">
+                        {{ expanded ? "less" : "more" }}
+                    </button>
+                </p>
+                <a href="https://www.newpark.cz" target="_blank" class="header-link row">
+                    <img src="/src/assets/icons/link.svg" alt="link" class="header-link-icon" /> www.newpark.cz
+                </a>
+            </div>
         </div>
-        <div class="gym-joined">
-          <h2>{{ members }}</h2>
-          <p>joined</p>
-        </div>
-        <div class="gym-spotters">
-          <h2>{{ spotters }}</h2>
-          <p>spotting</p>
-        </div>
-      </div>
-
-      <div class="gym-bottom">
-        <h2 class="gym-title">{{ name }}</h2>
-        <p class="gym-description">
-          <span v-if="!expanded">{{ truncatedText }}</span>
-          <span v-else>{{ description }}</span>
-          <button @click="toggleExpand" class="more-button">
-            {{ expanded ? "less" : "more" }}
-          </button>
-        </p>
-        <a href="https://www.newpark.cz" target="_blank" class="gym-link">
-          <img src="/src/assets/icons/link.svg" alt="link" class="gym-link-icon" /> www.newpark.cz
-        </a>
-
-
-      </div>
     </div>
-  </div>
 </template>
 
 <style scoped>
 .swiper-container {
-  width: 100vw;
-  aspect-ratio: 391/180;
-  overflow: hidden;
+    width: 100vw;
+    aspect-ratio: 391/180;
+    overflow: hidden;
+    position: absolute;
+    z-index: 0;
 }
 
-.header-image-container {
-  z-index: 0;
-  position: absolute;
-}
-
-.header-image {
-  width: 100vw;
-  aspect-ratio: 391/180;
-  object-fit: cover;
+.header-background {
+    width: 100vw;
+    aspect-ratio: 391/180;
+    object-fit: cover;
 }
 
 .header-container {
-  box-sizing: border-box;
-  text-align: center;
-  background: rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 6px;
-  padding: 16px;
-  margin: 0 20px;
-  margin-top: 15vh;
-  backdrop-filter: blur(20px);
-  box-shadow: -4px 4px 19.9px 1px #0000009e;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    padding: 16px;
+    margin-top: 15vh;
+    backdrop-filter: blur(20px);
+    box-shadow: -4px 4px 19.9px 1px #0000009e;
 }
 
-.gym-bottom {
-  text-align: left;
+.header-container .border-gradient {
+    background: linear-gradient(to bottom,
+            rgb(173, 173, 173) 4.06%,
+            rgba(170, 170, 170, 0.46) 45.45%,
+            rgba(22, 22, 22, 0.13) 100%);
 }
 
-.gym-image {
-  width: 14vw;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  border: 2px solid #FFF000 !important;
-  object-fit: contain;
+.header-image {
+    width: 14vw;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 2px solid #FFF000;
+    object-fit: contain;
 }
 
-.gym-title {
-  font-size: 16px;
-  font-weight: 900;
-  line-height: 18.29px;
+
+h5 {
+    margin-bottom: 4px;
 }
 
-.gym-stats {
-  display: flex;
-  justify-content: space-between;
-  text-align: center;
-  padding: 8px;
-}
-
-.gym-stats>div {
-  flex: 1;
-}
-
-.gym-stats h2 {
-  font-size: 14px;
-  font-weight: bold;
-  margin-bottom: 4px;
-}
-
-.gym-stats p {
-  font-size: 12px;
-  font-weight: normal;
-}
-
-.gym-stats>div:not(:last-child) {
-  border-right: 1px solid rgba(255, 255, 255, 0.2);
-  padding-right: 16px;
-}
-
-.gym-stats>div:not(:first-child) {
-  padding-left: 16px;
-}
-
-.gym-description {
-  margin: 8px 0;
-  font-size: 12px;
-  color: #ccc;
-}
-
-.more-button {
-  cursor: pointer;
+.header-stats>div:nth-child(3) {
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .header-stats {
-  display: flex;
-  justify-content: right;
-  margin-bottom: 16px;
+    text-align: center;
+    padding: 8px 0;
 }
 
 .header-description {
-  margin-top: 8px;
+    margin-top: 8px;
 }
 
 .more-button {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  cursor: pointer;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
 }
 
-.gym-link {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #FFF000;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 12px;
-}
-
-.gym-link-icon {
-  height: 18px;
+.header-link {
+    justify-content: start;
+    gap: 8px;
 }
 </style>

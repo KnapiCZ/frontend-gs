@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { IonButton, IonRow, useIonRouter } from '@ionic/vue';
-import apiDivision from '@/logic/API/apiDivision';
-import { onMounted, ref } from 'vue';
-import { updateDivisionColor } from '@/logic/utils/common';
+import { useIonRouter } from '@ionic/vue'
+import apiDivision from '@/logic/API/apiDivision'
+import { onMounted, ref } from 'vue'
+import { updateDivisionColor } from '@/logic/utils/common'
 
 const props = defineProps<{
     id: number
-}>();
+}>()
 const router = useIonRouter()
 
 const division = ref({
@@ -17,6 +17,7 @@ const division = ref({
     count_not_seen_messages: 0,
 
 })
+
 
 const goTo = () => {
     router.push('/division/' + props.id)
@@ -32,7 +33,7 @@ onMounted(async () => {
 </script>
 
 <template>
-    <IonRow @click="goTo" class="btn ion-no-padding" color="rgba(255, 255, 255, 0.103)">
+    <div @click="goTo" class="btn row">
         <img class="logo-img" :src="division.logo">
         <div class="text-div">
             <h2>{{ division.title }}</h2>
@@ -41,42 +42,35 @@ onMounted(async () => {
                 <li>{{ division.count_not_seen_messages }} New Messages</li>
             </ul>
         </div>
-    </IonRow>
+    </div>
 </template>
 
 <style scoped>
 h2 {
-    width: auto;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: white;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .btn {
-    width: 90%;
+    width: auto;
     height: 90px;
-    margin: 5px auto;
-    text-align: center;
+    margin: 8px;
     border-radius: 6px;
     border: solid var(--division-color) 1px;
-    background-color: rgba(255, 255, 255, 0.1) !important;
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .logo-img {
-    display: inline;
     width: auto;
     height: 60px;
     aspect-ratio: 1;
+    border-radius: 50%;
+    border: 1px solid #fff000;
     object-fit: contain;
-    margin: 15px;
 }
 
 .text-div {
-    width: calc(100% - 110px);
-    margin: 10px;
     text-align: left;
 }
 

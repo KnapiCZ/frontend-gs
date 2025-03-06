@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { IonButton, IonRow, useIonRouter } from '@ionic/vue';
-import apiGym from '@/logic/API/apiGym';
-import { onMounted, ref } from 'vue';
+import { useIonRouter } from '@ionic/vue'
+import apiGym from '@/logic/API/apiGym'
+import { onMounted, ref } from 'vue'
+import background from '@/assets/images/BG.png'
 
 const props = defineProps<{
     id: number
-}>();
+}>()
 const router = useIonRouter()
 
 const gym = ref({
@@ -24,11 +25,12 @@ onMounted(async () => {
     await apiGym('info', props.id, undefined, 'title,logo,').then((response) => { //implementovat seen posts a pozdeji pak take messages
         if (response.status == "success") gym.value = response.data
     })
+
 })
 </script>
 
 <template>
-    <IonRow @click="goTo" class="btn ion-no-padding" color="rgba(255, 255, 255, 0.103)">
+    <div @click="goTo" class="btn row" :style="{ 'background-image': background }">
         <img class="logo-img" :src="gym.logo">
         <div class="text-div">
             <h2>{{ gym.title }}</h2>
@@ -37,41 +39,35 @@ onMounted(async () => {
                 <li>{{ gym.count_not_seen_messages }} New Messages</li>
             </ul>
         </div>
-    </IonRow>
+    </div>
 </template>
 
 <style scoped>
 h2 {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: white;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .btn {
-    width: 90%;
+    width: auto;
     height: 90px;
-    margin: 5px auto;
-    text-align: center;
+    margin: 8px;
+    padding: 0 8px;
     border-radius: 6px;
     border: solid #fff000 1px;
-    background-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 .logo-img {
-    display: inline;
     width: auto;
     height: 60px;
     aspect-ratio: 1;
+    border-radius: 50%;
+    border: 1px solid #fff000;
     object-fit: contain;
-    margin: 15px;
 }
 
 .text-div {
-    width: calc(100% - 110px);
-    margin: 10px;
     text-align: left;
 }
 

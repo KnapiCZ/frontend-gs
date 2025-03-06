@@ -8,7 +8,7 @@ const props = defineProps<{
     gymId: number
 }>()
 
-let divisions = await apiGym("gymDivisions", props.gymId)
+let divisions = await apiGym("all", props.gymId)
 let isActive = false
 
 function toggle() {
