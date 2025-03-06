@@ -1,18 +1,15 @@
 <script setup lang="ts">
-import { IonPage, IonTabs, IonRouterOutlet, IonTabBar, IonTabButton } from '@ionic/vue';
-import apiUser from '@/logic/API/apiUser';
-import { onMounted, ref } from 'vue';
+import { IonPage, IonTabs, IonRouterOutlet, IonTabBar, IonTabButton } from '@ionic/vue'
+import apiUser from '@/logic/API/apiUser'
+import { onMounted, ref } from 'vue'
 
 const user_id = localStorage.getItem("logged_user_id") as unknown as number
-
-console.debug("[DEBUG] " + user_id)
-
 const profile_picture = ref<string>()
 
 onMounted(async () => {
-	await apiUser("profile", user_id, undefined, 'profile_picture,').then((response) => {
-		if (response.status == "success") profile_picture.value = response.data.profile_picture
-	})
+    await apiUser("profile", user_id, undefined, 'profile_picture,').then((response) => {
+        if (response.status == "success") profile_picture.value = response.data.profile_picture
+    })
 
 })
 
@@ -20,38 +17,38 @@ onMounted(async () => {
 
 
 <template>
-	<IonPage class="ion-no-padding">
-		<IonTabs class="ion-no-padding">
-			<IonRouterOutlet></IonRouterOutlet>
-			<IonTabBar slot="bottom">
-				<IonTabButton tab="user" class="no-filter" :href="'/user/' + user_id">
-					<img id="profile" class="no-filter" :src="profile_picture" />
-				</IonTabButton>
+    <IonPage class="ion-no-padding">
+        <IonTabs class="ion-no-padding">
+            <IonRouterOutlet></IonRouterOutlet>
+            <IonTabBar slot="bottom">
+                <IonTabButton tab="user" class="no-filter" :href="'/user/' + user_id">
+                    <img id="profile" class="no-filter" :src="profile_picture" />
+                </IonTabButton>
 
-				<IonTabButton tab="community" href="/community/">
-					<img class="colored" src="../../../assets/new_icons/Gym.svg" alt="">
-				</IonTabButton>
+                <IonTabButton tab="community" href="/community/">
+                    <img class="colored" src="../../../assets/new_icons/Gym.svg" alt="">
+                </IonTabButton>
 
-				<IonTabButton tab="postadd" href="/addPost">
-					<img src="../../../assets/icons/plusbutton.svg" alt="">
-				</IonTabButton>
+                <IonTabButton tab="postadd" href="/addPost">
+                    <img src="../../../assets/icons/plusbutton.svg" alt="">
+                </IonTabButton>
 
-				<IonTabButton tab="community" href="/games/">
-					<img class="colored" src="../../../assets/new_icons/Games.svg" alt="">
-				</IonTabButton>
+                <IonTabButton tab="games" href="/games/">
+                    <img class="colored" src="../../../assets/new_icons/Games.svg" alt="">
+                </IonTabButton>
 
-				<IonTabButton tab="forYou" href="/explore/">
-					<img class="colored" src="../../../assets/new_icons/Search.svg" alt="">
-				</IonTabButton>
-			</IonTabBar>
-		</IonTabs>
-	</IonPage>
+                <IonTabButton tab="forYou" href="/explore/">
+                    <img class="colored" src="../../../assets/new_icons/Search.svg" alt="">
+                </IonTabButton>
+            </IonTabBar>
+        </IonTabs>
+    </IonPage>
 </template>
 
 
 <script lang="ts">
 export default {
-	data: () => ({ value: 4 }),
+    data: () => ({ value: 4 }),
 }
 
 
@@ -60,38 +57,38 @@ export default {
 
 <style scoped>
 img {
-	height: 60%;
-	aspect-ratio: 1;
+    height: 60%;
+    aspect-ratio: 1;
 }
 
 .colored {
-	filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(85deg) brightness(104%) contrast(103%);
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(85deg) brightness(104%) contrast(103%);
 }
 
 ion-tab-bar {
-	--background: black !important;
+    --background: black;
 }
 
 IonTabButton {
-	max-width: 0px;
+    max-width: 0;
 }
 
 .tab-selected {
-	filter: brightness(0) saturate(100%) invert(84%) sepia(22%) saturate(3283%) hue-rotate(4deg) brightness(112%) contrast(103%);
-	background-color: transparent !important;
+    filter: brightness(0) saturate(100%) invert(84%) sepia(22%) saturate(3283%) hue-rotate(4deg) brightness(112%) contrast(103%);
+    background-color: transparent;
 }
 
 .no-filter {
-	filter: none !important;
+    filter: none;
 }
 
 #profile {
-	object-fit: contain;
-	border-radius: 50%;
-	border: 2px solid transparent !important;
+    object-fit: contain;
+    border-radius: 50%;
+    border: 2px solid transparent;
 }
 
 .tab-selected #profile {
-	border: 2px solid #fff000 !important;
+    border: 2px solid #fff000;
 }
 </style>

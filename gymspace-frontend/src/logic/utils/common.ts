@@ -1,5 +1,15 @@
 //! Zde budou funkce ktere se pouzivaji na vice mistech pozdeji se to muze rozdelit na vic souboru podle slozitosti
 import '@/theme/main.css'
+
+const sport_colors = [
+    '--powerlifting',
+    '--calisthenics',
+    '--strongmen',
+    '--bodybuilding',
+    '--crossfit',
+    '--fighting'
+]
+
 //
 // Nastaveni barev pro division
 //

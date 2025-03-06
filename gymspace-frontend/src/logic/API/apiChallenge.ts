@@ -30,11 +30,27 @@ async function apiChallenge(apiType = '', object_id?: number, data?: string, fie
                     headers: getConfig().headers
                 }
             )
-
             return await response.json()
 
-
         case "getChallenge":
+            response = await fetch(`${getConfig().apiBaseUrl}api/challenge/${object_id}/`,
+                {
+                    method: 'GET',
+                    headers: getConfig().headers
+                }
+            )
+            return await response.json()
+
+        case "createChallenge":
+            response = await fetch(`${getConfig().apiBaseUrl}api/challenge/${object_id}/`,
+                {
+                    method: 'GET',
+                    headers: getConfig().headers
+                }
+            )
+            return await response.json()
+
+        case "updateChallenge":
             response = await fetch(`${getConfig().apiBaseUrl}api/challenge/${object_id}/`,
                 {
                     method: 'GET',
@@ -71,8 +87,6 @@ async function apiChallenge(apiType = '', object_id?: number, data?: string, fie
                 }
             )
             return await response.json()
-
-
 
         case "getVote":
             response = await fetch(`${getConfig().apiBaseUrl}api/vote/${object_id}`,

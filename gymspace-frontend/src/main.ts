@@ -13,10 +13,10 @@ import '@ionic/vue/css/core.css';
 import '@ionic/vue/css/padding.css';
 
 import 'swiper/css';
+
 /* Theme variables */
 import '@/theme/variables.css';
-
-import '@/theme/main.css'
+import '@/theme/main.css';
 
 defineCustomElements(window);
 register();
@@ -26,9 +26,9 @@ const pinia = createPinia()
 const app = createApp(App)
 	.use(IonicVue,
 		{
-  rippleEffect: false,
- swipeBackEnabled: false,
-}
+			rippleEffect: false,
+			swipeBackEnabled: false,
+		}
 	)
 	.use(router)
 	.use(pinia);

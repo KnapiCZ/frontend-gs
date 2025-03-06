@@ -22,8 +22,10 @@
 }
 
 * {
-	font-family: "Montserrat" !important;
-		color: white;
+	font-family: "Montserrat";
+	color: white;
+	margin: 0;
+	padding: 0;
 }
 	
 body {
@@ -52,33 +54,8 @@ button {
 	text-align: center;
 }
 
-/*
-Flex classes use for flex setup insted of writing it to scoped css
-*/
 
-.box {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.row {
-	display: flex;
-	flex-wrap: nowrap;
-	flex-direction: row;
-	justify-content: space-evenly;
-	align-items: baseline;
-}
-
-.column {
-	display: flex;
-	flex-wrap: wrap;
-	flex-direction: column;
-	justify-content:space-around;
-}
-
-
-.profile-button {
+ion-button.default {
 	width: 80%;
 	height: 32px;
 	min-height: 32px;
@@ -93,8 +70,8 @@ Flex classes use for flex setup insted of writing it to scoped css
 	width: 30px;
 	aspect-ratio: 1;
 	position: absolute;
-	right: 0px;
-	top: 0px;
+	right: 0;
+	top: 0;
 	border-radius: 0 0 0 15px;
 	background-color: black;
 }
@@ -111,33 +88,16 @@ Flex classes use for flex setup insted of writing it to scoped css
 	transform: translate(-50%, -50%);
 }
 
-ion-button.sign-up-button {
-	bottom: 20px;
-	width: 50%;
-	height: 44px;
-	margin: 50px auto;
-	color: black;
-	font-size: 14px;
-	font-weight: 900;
-	border-radius: 6px !important;
-	box-shadow: 0 0 45px var(--color-primary-tint);
-	--border-radius: 6px !important;
-	--background: var(--color-primary-tint);
-	--background-hover: #bdb000;
-	--background-activated: #bdb000;
-	--background-focused: #bdb000;
-}
-
 .error-message {
 	font-size: 14px;
-	font-weight: bold;
+	font-weight: 300;
 	text-shadow: 0 0 10px black;
-	color: yellow;
+	color: red;
 }
 
 .searchbar-input.sc-ion-searchbar-md,
 .searchbar-input.sc-ion-searchbar-ios {
-	background-position: center !important;
+	background-position: center;
 }
 
 .input-bottom.sc-ion-input-ios .helper-text.sc-ion-input-ios,
@@ -149,13 +109,6 @@ ion-button.sign-up-button {
 	text-shadow: rgb(0, 0, 0) 0 0 20px;
 }
 
-ion-content.sign-up-content,
-ion-content.welcome-page {
-	overflow: hidden;
-	text-align: center;
-	--padding-top: 36px;
-}
-
 h1.sign-up {
 	position: relative;
 	text-align: left;
@@ -165,11 +118,6 @@ h1.sign-up {
 	margin: 4vh 5%;
 	text-shadow: 0 0 10px black;
 	z-index: 2;
-}
-
-ion-content.sign-up-content {
-	overflow: hidden;
-	text-align: center;
 }
 
 .sign-up-background-image {
@@ -186,7 +134,6 @@ ion-content.sign-up-content {
 
 .pac-item {
 	cursor: default;
-	padding: 0 4px;
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: wrap;
@@ -245,48 +192,102 @@ ion-content.sign-up-content {
 
 .pac-container:after {
 	background-image: none !important;
-	height: 0px;
-}
-
-ion-input.custom {
-	text-align: left;
-	width: auto;
-	height: 50px;
-	margin: 25px;
-	font-size: 16px;
-	border-radius: 6px;
-	backdrop-filter: blur(26px);
-	--border-style: none;
-	--border-color: none;
-	--border-radius: none;
-	--background: #24242440;
-	--color: #fff;
-	--padding-end: 20px;
-	--padding-start: 20px;
-	--highlight-color-focused: #fff000;
-}
-
-.border-gradient::before {
-	content: "";
-	position: absolute;
-	inset: -1px;
-	border-radius: 6px;
-	padding: 1px;
-	background: linear-gradient(135deg,
-			#fff 4%,
-			#ffffff75 52%,
-			#ffffff59 80%,
-			 #fff00021);
-	mask: linear-gradient(white 0 0) content-box,
-		linear-gradient(white 0 0);
-	-webkit-mask: linear-gradient(white 0 0) content-box, linear-gradient(white 0 0);
-	mask-composite: exclude;
+	height: 0;
 }
 
 /*
+    Default container styles
+*/
 
-tab bar styles
+.wrapper-div{
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    backdrop-filter: blur(20px);
+}
 
+
+/*
+    Default top notch pading
+*/
+
+.top-padding-notch{
+    --padding-top: 44px
+    }
+
+/*
+	Default Font styles
+*/
+
+h1{
+	font-size: 1.25rem;
+	font-style: normal;
+	font-weight: 900;
+	line-height: normal;
+}
+
+h2 {
+	font-size: 1.25rem;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+}
+
+h3 {
+	font-size: 1.125rem;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+}
+
+h4 {
+	font-size: 1rem;
+	font-style: normal;
+	font-weight: 900;
+	line-height: normal;
+}
+
+h5{
+	font-size: 0.9375rem;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+}
+
+h6{
+	font-family: Montserrat;
+	font-size: 0.875rem;
+	font-style: normal;
+	font-weight: 900;
+	line-height: normal;
+}
+
+p{
+	font-size: 0.875rem;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 1.225rem;
+	letter-spacing: -0.04063rem;
+}
+
+a{
+	color: #FFF000;
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 12px;
+}
+
+.smallest-text{
+	font-size: 0.75rem;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 1.05rem;
+	letter-spacing: -0.04063rem;
+}
+
+
+
+/*
+	tab bar styles
 */
 
 
@@ -312,4 +313,135 @@ ion-segment-content {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+
+/*
+	Flex classes use for flex setup insted of writing it to scoped css
+*/
+
+/*
+	Flex Containers
+*/
+
+ .box {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.row {
+	display: flex;
+	flex-wrap: nowrap;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.column {
+	display: flex;
+	flex-wrap: nowrap;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+/*
+	Flex Items (none for now)
+*/
+
+.default-flex{
+	flex: 1;
+}
+
+/*
+    Border gradient with working radius and transparent background and other global styles
+*/
+
+.border-gradient::before {
+	content: "";
+	position: absolute;
+	inset: -1px;
+	border-radius: 6px;
+	padding: 1px;
+	background: linear-gradient(135deg,
+			#fff 4%,
+			#ffffff75 52%,
+			#ffffff59 80%,
+			#fff00021);
+	mask: linear-gradient(white 0 0) content-box,
+		linear-gradient(white 0 0);
+	-webkit-mask: linear-gradient(white 0 0) content-box, linear-gradient(white 0 0);
+	mask-composite: exclude;
+}
+
+.margin-inline-default{
+	margin: 0 8px;
+}
+
+/*
+    Ionic custom styles used to setup default look
+*/
+ion-textarea.custom,
+ion-input.custom {
+	text-align: left;
+	width: auto;
+	height: 50px;
+	margin: 25px;
+	font-size: 16px;
+	border-radius: 6px;
+	backdrop-filter: blur(26px);
+	--border-style: none;
+	--border-color: none;
+	--border-radius: none;
+	--background: #24242440;
+	--color: #fff;
+	--padding-end: 20px;
+	--padding-start: 20px;
+	--highlight-color-focused: #fff000;
+}
+
+ion-content.sign-up-content,
+ion-content.welcome-page {
+	overflow: hidden;
+	text-align: center;
+}
+
+ion-button.default {
+	width: 80%;
+	height: 25px;
+	min-height: 25px;
+	font-size: 0.875rem;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+	text-transform: uppercase;
+	border-radius: 6px;
+	--border-width: 1px;
+	--border-style: solid;
+	--border-color: #2F2F2F;
+	--background: #2F2F2F;
+	--border-radius: 6px;
+	--background-hover: #464646;
+	--background-activated: #464646;
+}
+
+ion-button.sign-up-button {
+	bottom: 20px;
+	width: 50%;
+	height: 44px;
+	margin: 36px auto;
+	color: black;
+	font-size: 0.875rem;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+	text-transform: uppercase;
+	border-radius: 6px;
+	box-shadow: 0 0 45px var(--color-primary-tint);
+	--border-radius: 6px;
+	--background: var(--color-primary-tint);
+	--background-hover: #bdb000;
+	--background-activated: #bdb000;
+	--background-focused: #bdb000;
 }

@@ -1,4 +1,6 @@
-import getConfig from "./apiConfig";
+import getConfig from "./apiConfig"
+
+type ApiType = "all" | "users-divisions" | 'gymDivisions' | "create" | "info" | "location" | "search" | "member-get" | "member-join" | "member-update" | "member-leave" | "spotter-join" | "spotter-get" | "spotter-leave"
 
 /**
  * - all: all divisions
@@ -19,33 +21,32 @@ import getConfig from "./apiConfig";
  * @returns data you wanted from api
  */
 
-async function apiDivision(apiType = '', divisionId?: number, data?: string, queryParams?: string) {
+async function apiDivision(apiType: ApiType, divisionId?: number, data?: string, queryParams?: string) {
     let response
     switch (apiType) {
 
         case "all":
             response = await fetch(`${getConfig().apiBaseUrl}api/division/`,
                 {
-                    method: 'GET',
+                    method: "GET",
                     headers: getConfig().headers
                 }
             )
             return response.json()
 
-        case "my":
+        case "users-divisions":
             response = await fetch(`${getConfig().apiBaseUrl}api/division/${divisionId}/users-divisions/`,
                 {
-                    method: 'GET',
+                    method: "GET",
                     headers: getConfig().headers
                 }
             )
             return response.json()
 
-        // * vrati vsechno info o jednom gymu
         case "info":
             response = await fetch(`${getConfig().apiBaseUrl}api/division/${divisionId}/?fields=${queryParams}`,
                 {
-                    method: 'GET',
+                    method: "GET",
                     headers: getConfig().headers
                 }
             )
@@ -54,7 +55,7 @@ async function apiDivision(apiType = '', divisionId?: number, data?: string, que
         case "gymDivisions":
             response = await fetch(`${getConfig().apiBaseUrl}api/division/${divisionId}/gym-divisions/`,
                 {
-                    method: 'GET',
+                    method: "GET",
                     headers: getConfig().headers
                 }
             )
@@ -64,65 +65,70 @@ async function apiDivision(apiType = '', divisionId?: number, data?: string, que
         case "member-get":
             response = await fetch(`${getConfig().apiBaseUrl}api/division-member/${divisionId}/`,
                 {
-                    method: 'GET',
+                    method: "GET",
                     headers: getConfig().headers
                 }
             )
-            return await response.json()
+            return response.json()
 
         case "member-join":
+            console.log('join')
             response = await fetch(`${getConfig().apiBaseUrl}api/division-member/?query_params=${divisionId}`,
                 {
-                    method: 'POST',
+                    method: "POST",
                     headers: getConfig().headers
                 }
             )
-            return await response.json()
+            return response.json()
 
         case "member-update":
+            console.log('update')
+
             response = await fetch(`${getConfig().apiBaseUrl}api/division-member/${divisionId}/?query_params=${queryParams}`,
                 {
-                    method: 'PATCH',
+                    method: "PATCH",
                     headers: getConfig().headers
                 }
             )
-            return await response.json()
+            return response.json()
 
         case "member-leave":
+            console.log('leave')
+
             response = await fetch(`${getConfig().apiBaseUrl}api/division-member/${divisionId}/`,
                 {
-                    method: 'DELETE',
+                    method: "DELETE",
                     headers: getConfig().headers
                 }
             )
-            return await response.json()
+            return response.json()
 
         case "spotter-get":
-            response = await fetch(`${getConfig().apiBaseUrl}api/division-spotter/${divisionId}/?query_params=${queryParams}`,
+            response = await fetch(`${getConfig().apiBaseUrl}api/division-spotter/${divisionId}/`,
                 {
-                    method: 'GET',
+                    method: "GET",
                     headers: getConfig().headers
                 }
             )
-            return await response.json()
+            return response.json()
 
         case "spotter-join":
-            response = await fetch(`${getConfig().apiBaseUrl}api/division-spotter/${divisionId}/?query_params=${queryParams}`,
+            response = await fetch(`${getConfig().apiBaseUrl}api/division-spotter/?query_params=${divisionId}`,
                 {
-                    method: 'POST',
+                    method: "POST",
                     headers: getConfig().headers
                 }
             )
-            return await response.json()
+            return response.json()
 
         case "spotter-leave":
             response = await fetch(`${getConfig().apiBaseUrl}api/division-spotter/${divisionId}/`,
                 {
-                    method: 'DELETE',
+                    method: "DELETE",
                     headers: getConfig().headers
                 }
             )
-            return await response.json()
+            return response.json()
 
 
         default:
