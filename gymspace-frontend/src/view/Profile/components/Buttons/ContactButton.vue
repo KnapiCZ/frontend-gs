@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import SocialMedia from './SocialMedia.vue';
 import LinkButton from "./LinkButton.vue";
+import { IonButton } from '@ionic/vue';
 import { userDataStore } from '@/stores/UserDataStore';
 
 const userStore = userDataStore()
@@ -28,44 +29,9 @@ for (let i = 0; i < data.length; i++) {
 </script>
 
 <template>
-	<button class="profile-button">
+	<IonButton class="profile-button">
 		Contact
-		<!--
-			<VDialog activator="parent" :persistent="false" transition="dialog-bottom-transition" :scrollable="false"
-			width="80vw" height="70vh">
-			<VCard>
-				<p>CONTACTS</p>
-				<LinkButton v-for="(link, index) in data" :type="types[index]" :link="link" :name="link" />
-				<SocialMedia v-if="social.length > 0" class="social" :social="(social! as unknown as undefined)" />
-				</VCard>
-			</VDialog>
-			-->
-	</button>
+	</IonButton>
 </template>
 
-<style scoped>
-.v-card {
-	margin: auto;
-	width: 80vw;
-	height: 70vh;
-	border-radius: 20px !important;
-	background-color: #0e0e0ed0;
-	color: white;
-	backdrop-filter: blur(8px);
-}
-
-p {
-	font-size: 28px;
-	font-weight: bold;
-	margin: 20px auto
-}
-
-.social {
-	width: 100%;
-	position: absolute;
-	bottom: 30px;
-
-
-
-}
-</style>
+<style scoped></style>
