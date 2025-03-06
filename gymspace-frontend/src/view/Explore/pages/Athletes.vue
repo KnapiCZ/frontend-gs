@@ -12,10 +12,10 @@ const route = useRoute();
 const router = useIonRouter()
 const userStore = userDataStore();
 let id = route.params.id as unknown as number;
-let userData = JSON.parse(userStore.user)
+let userData = userStore.getDictAsJson('user')
 
 
-let isUserVerified = userData.isUserVerified ?? 1;
+let isUserVerified = 1;
 
 </script>
 
@@ -23,116 +23,118 @@ let isUserVerified = userData.isUserVerified ?? 1;
 <template>
   <IonPage>
     <IonToolbar>
-      <IonButton @click='router.back()' slot="start" class="back-button"><img src="../../../assets/icons/arrowRight.svg"></IonButton>
+      <IonButton @click='router.back()' slot="start" class="back-button"><img
+          src="../../../assets/icons/arrowRight.svg"></IonButton>
     </IonToolbar>
     <IonContent class="ion-padding profile-content">
 
-    <div><img class="background" :src="userData.background_picture"></div>
+      <div><img class="background" :src="userData.background_picture"></div>
       <IonCard class="profile-card">
 
         <IonCardContent class="profile-details">
 
           <div>
             <div class="profile-image-container">
-            <img class="profile-image" :src="userData.profile_picture"/>
-            <img v-if="isUserVerified" class="verified-icon" src="../../../assets/icons/checkMark.svg"/>
+              <img class="profile-image" :src="userData.profile_picture" />
+              <img v-if="isUserVerified" class="verified-icon" src="../../../assets/icons/checkMark.svg" />
             </div>
           </div>
 
-          <h2 class="profile-name">{{userData.username}}</h2>
-          <p class="profile-role">{{userData.username}}</p>
+          <h2 class="profile-name">{{ userData.username }}</h2>
+          <p class="profile-role">{{ userData.username }}</p>
 
           <p class="profile-bio">
-            {{userData.description}}
+            {{ userData.description }}
           </p>
         </IonCardContent>
       </IonCard>
 
 
-        <IonGrid class="footer-section">
+      <IonGrid class="footer-section">
         <IonRow class="main-info-box-row">
-            <IonCol size="12">
+          <IonCol size="12">
             <div class="info-box main-info-box">
-                Jméno, profese, odznáčky, divisions
+              Jméno, profese, odznáčky, divisions
             </div>
-            </IonCol>
+          </IonCol>
         </IonRow>
 
         <IonRow class="two-boxes-row">
-            <IonCol size="6">
+          <IonCol size="6">
             <div class="info-box">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+              dolore magna aliqua.
             </div>
-            </IonCol>
-            <IonCol size="6">
+          </IonCol>
+          <IonCol size="6">
             <div class="info-box">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+              dolore magna aliqua.
             </div>
-            </IonCol>
+          </IonCol>
         </IonRow>
         <IonCol class="button-section">
-          <IonButton class="contact-button" @click='router.push("/user/"+id+"/trainertab");'>Contact me</IonButton>
+          <IonButton class="contact-button" @click='router.push("/user/" + id + "/trainertab");'>Contact me</IonButton>
         </IonCol>
-        </IonGrid>
+      </IonGrid>
     </IonContent>
   </IonPage>
 </template>
 
 <style scoped>
+.ion-padding {
+  --padding-start: 35px;
+  --padding-end: 35px;
+  --padding-top: 50px;
+  --padding-bottom: 35px;
+}
 
-  .ion-padding {
-    --padding-start: 35px;
-    --padding-end: 35px;
-    --padding-top: 50px;
-    --padding-bottom: 35px;
-  }
+.back-button {
+  height: 100%;
+  aspect-ratio: 1;
+}
 
-  .back-button {
-      height: 100%;
-      aspect-ratio: 1;
-  }
+.back-button img {
+  rotate: 180deg;
+}
 
-  .back-button img {
-      rotate: 180deg;
-  }
+.contact-button {
+  --background: yellow;
+  padding: 50px;
+  color: black;
+  font-weight: bold;
 
-  .contact-button {
-    --background: yellow;
-    padding: 50px;
-    color: black;
-    font-weight: bold;
-    
-    
-  }
 
-  .button-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+}
 
-  ion-button {
-      --background: transparent;
-      --box-shadow: none;
-      padding: 10px;
-  }
+.button-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ion-button {
+  --background: transparent;
+  --box-shadow: none;
+  padding: 10px;
+}
 
 .background {
-    top: 0;
-    left: 0;
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    opacity: 0.8;
-    z-index: -1;
+  top: 0;
+  left: 0;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  opacity: 0.8;
+  z-index: -1;
 }
 
 
 .profile-content {
   color: #fff;
   position: relative;
-  text-shadow: 0px 0px 5px black;
+  text-shadow: 0 0 5px black;
 }
 
 .profile-card {
@@ -176,23 +178,23 @@ let isUserVerified = userData.isUserVerified ?? 1;
 
 
 .profile-name {
-    font-size: 18px;
-    font-weight: bold;
-    margin: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 8px;
 }
 
 .profile-role {
-    font-size: 14px;
-    margin-bottom: 8px;
+  font-size: 14px;
+  margin-bottom: 8px;
 }
 
 .profile-bio {
-    font-size: 12px;
+  font-size: 12px;
 }
 
 .footer-section {
-    margin-top: 16px;
-    width: 100%;
+  margin-top: 16px;
+  width: 100%;
 }
 
 .main-info-box-row {
@@ -209,22 +211,22 @@ let isUserVerified = userData.isUserVerified ?? 1;
 }
 
 .info-box {
-    background: rgba(61, 61, 61, 0.5);
-    backdrop-filter: blur(10px);
-    border-radius: 8px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: rgb(65, 65, 65);
-    display: flex;
-    padding: 16px;
-    text-align: left;
-    font-size: 12px;
-    box-shadow: -15px 10px 5px rgba(0, 0, 0, 0.5);
+  background: rgba(61, 61, 61, 0.5);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(65, 65, 65);
+  display: flex;
+  padding: 16px;
+  text-align: left;
+  font-size: 12px;
+  box-shadow: -15px 10px 5px rgba(0, 0, 0, 0.5);
 }
 
 .main-info-box {
-    margin-bottom: 40px;
-    background: rgba(61, 61, 61, 0.5);
+  margin-bottom: 40px;
+  background: rgba(61, 61, 61, 0.5);
 
 }
 </style>

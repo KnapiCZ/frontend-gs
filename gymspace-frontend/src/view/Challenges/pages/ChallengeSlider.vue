@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import { Swiper, SwiperSlide } from 'swiper/vue';
-import { userDataStore } from '@/stores/UserDataStore';
-import apiPost from '@/logic/API/apiPost';
-import { IonModal } from '@ionic/vue';
-import ChallengeSwipeCard from '../components/ChallengeSwipeCard.vue';
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import { userDataStore } from '@/stores/UserDataStore'
+import apiPost from '@/logic/API/apiPost'
+import { IonModal } from '@ionic/vue'
+import ChallengeSwipeCard from '../components/ChallengeSwipeCard.vue'
 
 const props = defineProps<{
     row: string
     id: number
     cards: string[]
-}>();
+}>()
 
 
 let userStore = userDataStore()
-let postIds = await apiPost('recommendedPosts', userStore.loggedUserId)
-let challenges = [props.id, 32, 12, 5];
+//let postIds = await apiPost('recommendedPosts', userStore.loggedUserId)
+let challenges = [props.id, 32, 12, 5]
 // TODO: api ktera bude vracet challenge a pak doporucene dalsi challenge based on rank a zamereni
 // TODO: dat challenge do popup slideru jako u profile cantacts
 </script>
@@ -45,13 +45,13 @@ export default {
             required: true
         }
     }
-};
+}
 </script>
 
 
 <style scoped>
 div.swiper {
-    height: 100% !important;
+    height: 100%;
 }
 
 .cards {
@@ -79,7 +79,7 @@ ion-modal ion-toolbar {
 
 #challenge-thumbnail {
     width: 95%;
-    aspect-ratio: 1/1 !important;
+    aspect-ratio: 1;
     border: 2px #fff000 solid;
     border-radius: 20px;
     margin: 2px;
