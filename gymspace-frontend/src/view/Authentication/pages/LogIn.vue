@@ -17,9 +17,10 @@ const submitForm = async () => {
 
         await apiAuth("getToken", JSON.stringify(form.value)).then((response) => {
             if (response.status == "success") {
+                let path = '/user/' + response.data.user_id
                 localStorage.setItem("Token", response.data.token)
                 localStorage.setItem("logged_user_id", response.data.user_id)
-                router.navigate("/waiting-screen", 'forward', 'push')
+                router.navigate(path, 'forward', 'push')
             } else {
                 error_message.value = response.error[0]
             }
@@ -30,7 +31,7 @@ const submitForm = async () => {
 }
 
 const createAccount = () => {
-    router.navigate('/step-1', 'forward', 'push')
+    router.navigate('/user/', 'forward', 'push')
 }
 
 </script>

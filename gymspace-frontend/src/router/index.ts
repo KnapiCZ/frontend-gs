@@ -113,7 +113,7 @@ const routes: Array<RouteRecordRaw> = [
             {
                 path: '',
                 name: 'redirect',
-                redirect: '/waiting-screen'
+                redirect: '/community'
             },
             {
                 path: '/user/:id',
