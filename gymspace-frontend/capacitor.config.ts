@@ -19,8 +19,8 @@ const config: CapacitorConfig = {
   },
   android: {
     // Removed for production
-    // webContentsDebuggingEnabled: true,
-    // loggingBehavior: 'debug',
+    webContentsDebuggingEnabled: true,
+    loggingBehavior: 'debug',
   },
   server: {
     androidScheme: 'https', // Keep this for secure connections

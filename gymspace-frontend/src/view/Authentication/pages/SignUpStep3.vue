@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { IonContent, IonPage, IonButton, useIonRouter, IonInput } from "@ionic/vue"
-import { ref, onMounted } from "vue";
-import apiAuth from "@/logic/API/apiAuth";
+import { ref, onMounted } from "vue"
+import apiAuth from "@/logic/API/apiAuth"
 import "swiper/swiper-bundle.css"
 
 
 
 const router = useIonRouter()
-const code = ref(["", "", "", "", "", ""]);
-const inputs = ref<HTMLInputElement[]>([]);
+const code = ref(["", "", "", "", "", ""])
+const inputs = ref<HTMLInputElement[]>([])
 const error_message = ref('')
 
 const sendCode = async () => {
@@ -18,7 +18,7 @@ const sendCode = async () => {
 
 
 const confirm2FA = async () => {
-    const formattedCode = code.value.join(""); // Join code digits as a string
+    const formattedCode = code.value.join("") // Join code digits as a string
     await apiAuth("confirm2FA", JSON.stringify({ "token": formattedCode })).then((response) => {
         if (response.status == "success") {
             router.push("/step-4")
@@ -29,39 +29,39 @@ const confirm2FA = async () => {
 }
 
 const onPaste = (event: ClipboardEvent): void => {
-    event.preventDefault();
-    const pasteData = event.clipboardData?.getData('text') || '';
-    const digits = pasteData.split('').slice(0, 6); // Extract the pasted digits
+    event.preventDefault()
+    const pasteData = event.clipboardData?.getData('text') || ''
+    const digits = pasteData.split('').slice(0, 6) // Extract the pasted digits
     digits.forEach((digit, index) => {
         if (!isNaN(Number(digit))) {
-            code.value[index] = digit;
+            code.value[index] = digit
         }
-    });
-};
+    })
+}
 
 // Handle input
 const onInput = (index: number) => {
     if (code.value[index].length === 1 && index < code.value.length - 1) {
-        inputs.value[index + 1].focus();
+        inputs.value[index + 1].focus()
     }
-};
+}
 
 // Handle backspace
 const onBackspace = (index: number) => {
     if (code.value[index] === "" && index > 0) {
-        inputs.value[index - 1]?.focus();
+        inputs.value[index - 1]?.focus()
     }
-};
+}
 
 onMounted(async () => {
-    sendCode();
+    sendCode()
 });
 
 </script>
 
 <template>
     <IonPage>
-        <IonContent class="sign-up-content" :scroll-y="false">
+        <IonContent class="sign-up-content top-padding-notch" :scroll-y="false">
             <img src="../../../assets/images/2FAEnvelope.png" class="sign-up-background-image" alt="Cake" />
             <h1 class="sign-up">Verify your email</h1>
 

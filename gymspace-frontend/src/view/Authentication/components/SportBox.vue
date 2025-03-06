@@ -1,16 +1,15 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { userDataStore } from '@/stores/UserDataStore';
-import { useIonRouter } from '@ionic/vue';
+import { userDataStore } from '@/stores/UserDataStore'
+import { useIonRouter } from '@ionic/vue'
 
-const router = useIonRouter();
+const router = useIonRouter()
 const userStore = userDataStore()
 const props = defineProps<{
     title: string,
     description: string,
     imageSrc: string,
     sport_id: number
-}>();
+}>()
 
 
 const toggleGlow = () => {

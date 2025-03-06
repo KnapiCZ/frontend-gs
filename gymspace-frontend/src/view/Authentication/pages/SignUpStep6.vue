@@ -1,70 +1,70 @@
 <script lang="ts" setup>
-import { userDataStore } from "@/stores/UserDataStore";
-import { IonContent, IonPage, IonButton, IonCol, useIonRouter } from "@ionic/vue";
-import { ref, nextTick, onMounted } from "vue";
+import { userDataStore } from "@/stores/UserDataStore"
+import { IonContent, IonPage, IonButton, IonCol, useIonRouter } from "@ionic/vue"
+import { ref, nextTick, onMounted } from "vue"
 
 const router = useIonRouter()
 const userStore = userDataStore()
-const currentNumber = ref(175);
-const touchStartX = ref(0);
+const currentNumber = ref(175)
+const touchStartX = ref(0)
 
 // Simplified scaleSteps as an array of values
-const scaleSteps = ref(Array.from({ length: 11 }, (_, i) => currentNumber.value + i - 4));
-const visibleScaleSteps = ref(scaleSteps.value.slice(0, 9));
+const scaleSteps = ref(Array.from({ length: 11 }, (_, i) => currentNumber.value + i - 4))
+const visibleScaleSteps = ref(scaleSteps.value.slice(0, 9))
 
 const onTouchStart = (e: TouchEvent) => {
-    touchStartX.value = e.touches[0].clientX;
-};
+    touchStartX.value = e.touches[0].clientX
+}
 
 const onTouchMove = (e: TouchEvent) => {
-    const deltaX = e.touches[0].clientX - touchStartX.value;
+    const deltaX = e.touches[0].clientX - touchStartX.value
     if (Math.abs(deltaX) > 10) {
-        changeValue(deltaX);
-        touchStartX.value = e.touches[0].clientX;
+        changeValue(deltaX)
+        touchStartX.value = e.touches[0].clientX
     }
-};
+}
 
 const changeValue = async (delta: number) => {
-    const step = delta > 0 ? -1 : 1;
-    currentNumber.value = Math.max(0, currentNumber.value + step);
+    const step = delta > 0 ? -1 : 1
+    currentNumber.value = Math.max(0, currentNumber.value + step)
 
     if (delta < 0) {
-        scaleSteps.value.push(scaleSteps.value[scaleSteps.value.length - 1] + 1);
-        scaleSteps.value.shift();
+        scaleSteps.value.push(scaleSteps.value[scaleSteps.value.length - 1] + 1)
+        scaleSteps.value.shift()
     } else {
-        scaleSteps.value.unshift(scaleSteps.value[0] - 1);
-        scaleSteps.value.pop();
+        scaleSteps.value.unshift(scaleSteps.value[0] - 1)
+        scaleSteps.value.pop()
     }
 
-    visibleScaleSteps.value = [...scaleSteps.value.slice(0, 9)];
+    visibleScaleSteps.value = [...scaleSteps.value.slice(0, 9)]
 
-    await nextTick();
-    updateTransformations();
-};
+    await nextTick()
+    updateTransformations()
+}
 
 const updateTransformations = () => {
-    const centerValue = currentNumber.value;
+    const centerValue = currentNumber.value
 
     visibleScaleSteps.value.forEach((item) => {
-        const element = document.getElementById(`scale-line-${item}`);
+        const element = document.getElementById(`scale-line-${item}`)
         if (element) {
-            const distanceFromCenter = Math.abs(centerValue - item);
-            const scaleFactor = 1 / Math.pow(1.5, distanceFromCenter); // Apply scaling: 1 / (2^distance)
-            const opacityFactor = Math.max(0.2, 1 - distanceFromCenter * 0.15); // Decrease opacity with distance
+            const distanceFromCenter = Math.abs(centerValue - item)
+            const scaleFactor = 1 / Math.pow(1.5, distanceFromCenter) // Apply scaling: 1 / (2^distance)
+            const opacityFactor = Math.max(0.2, 1 - distanceFromCenter * 0.2) // Decrease opacity with distance
 
-            element.style.transform = `scaleY(${Math.max(0.1, scaleFactor)})`;
-            element.style.opacity = opacityFactor.toString();
-            element.style.transition = "transform 0.1s ease, opacity 0.1s ease";
+            element.style.transform = `scaleY(${Math.max(0.1, scaleFactor)})`
+            element.style.opacity = opacityFactor.toString()
+            element.style.transition = "transform 0.1s ease, opacity 0.1s ease"
 
             // Update active class manually
             if (item === centerValue) {
-                element.classList.add("active");
+                element.classList.add("active")
             } else {
-                element.classList.remove("active");
+                element.classList.remove("active")
             }
         }
-    });
-};
+    })
+}
 
 const setHeight = () => {
     userStore.addToDict("registerData", "height", currentNumber.value)
@@ -73,23 +73,23 @@ const setHeight = () => {
 
 
 onMounted(() => {
-    updateTransformations();
-});
+    updateTransformations()
+})
 </script>
 
 <template>
     <IonPage>
-        <IonContent class="sign-up-content" :scroll-y="false">
+        <IonContent class="sign-up-content top-padding-notch" :scroll-y="false">
             <img src="../../../assets/images/height.png" class="sign-up-background-image" alt="Cake" />
             <h1 class="sign-up">Choose your height...</h1>
             <div class="swiper-container border-gradient" @touchstart="onTouchStart" @touchmove="onTouchMove">
-                <div class="value-display">
-                    <IonCol>
-                        <p class="value">{{ currentNumber }}</p>
+                <div>
+                    <div class="column">
+                        <h1 class="value">{{ currentNumber }}</h1>
                         <p class="unit">cm</p>
-                    </IonCol>
+                    </div>
                 </div>
-                <div class="scale-lines">
+                <div class="scale-lines row">
                     <div v-for="item in visibleScaleSteps" :key="item" :id="'scale-line-' + item"
                         :class="['scale-line', { 'active': item === currentNumber }]">
                     </div>
@@ -121,14 +121,12 @@ onMounted(() => {
     background: linear-gradient(45deg, #ffffffce 0%, #ffffff5b 10%, #fff00059 72%, #fff000 100%)
 }
 
-.value-display {
-    text-align: center;
+.value {
     font-size: 48px;
-    font-weight: bold;
+    font-weight: 900;
 }
 
 .unit {
-    border-bottom: 1px solid #fff;
     font-size: 16px;
     padding-bottom: 5px;
     font-weight: 300;
@@ -136,9 +134,6 @@ onMounted(() => {
 }
 
 .scale-lines {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
     justify-content: center;
     margin-top: 20px;
     width: 400px;
@@ -147,11 +142,16 @@ onMounted(() => {
 }
 
 .scale-line {
-    width: 2px;
+    width: 1px;
     height: 100px;
-    margin: 0 10px;
+    margin: 0 12px;
     background-color: #fff;
     text-align: center;
     transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.column {
+    width: 100%;
+    border-bottom: 1px solid #fff;
 }
 </style>
