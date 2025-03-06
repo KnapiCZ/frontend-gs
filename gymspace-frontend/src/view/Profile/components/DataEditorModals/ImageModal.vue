@@ -4,7 +4,11 @@ import { userDataStore } from '@/stores/UserDataStore';
 import ChooseImagesModal from './ChooseImagesModal.vue';
 
 const userStore = userDataStore()
-let userData = JSON.parse(userStore.editedUser)
+
+const props = defineProps<{
+    profile_picture: string
+    background_picture: string
+}>()
 
 </script>
 
@@ -14,10 +18,8 @@ let userData = JSON.parse(userStore.editedUser)
         <IonModal type="modal" trigger="edit-images" :initial-breakpoint="0.6" :breakpoints="[0.6, 1]">
             <h1>Edit pictures</h1>
             <IonContent>
-                <ChooseImagesModal name="Banner" :img="userData.background_picture"
-                    :ratios="([[16, 9]] as unknown as [])" />
-                <ChooseImagesModal name="Profile" :img="userData.profile_picture"
-                    :ratios="([[1, 1]] as unknown as [])" />
+                <ChooseImagesModal name="Banner" :img="background_picture" :ratios="([[16, 9]] as unknown as [])" />
+                <ChooseImagesModal name="Profile" :img="profile_picture" :ratios="([[1, 1]] as unknown as [])" />
             </IonContent>
         </IonModal>
     </div>

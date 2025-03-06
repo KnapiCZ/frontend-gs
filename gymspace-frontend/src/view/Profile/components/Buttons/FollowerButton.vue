@@ -31,13 +31,6 @@ function goToUser() {
 </template>
 
 <style scoped>
-.profile-button {
-    width: 25% !important;
-    height: 25px;
-    border-radius: 20px;
-    margin: 10px;
-}
-
 .btn {
     width: 100%;
     height: 60px;

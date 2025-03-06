@@ -10,7 +10,6 @@ const userStore = userDataStore()
 </script>
 
 <template>
-
     <IonModal>
         <IonHeader>
             <IonToolbar>

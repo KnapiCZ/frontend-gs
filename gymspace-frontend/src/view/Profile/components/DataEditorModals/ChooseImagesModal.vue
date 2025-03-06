@@ -13,18 +13,16 @@ const props = defineProps<{
 
 const { photos, takePhoto } = usePhotoGallery();
 const userStore = userDataStore()
-let userData = JSON.parse(userStore.editedUser)
+
+
 
 async function save() {
     if (props.name == "Banner") {
-        userStore.backgroundPicture = userStore.croppedChoosenPhoto
-        userData.background_picture = userStore.croppedChoosenPhoto
+        userStore.addToDict("editedUser", 'background_picture', userStore.croppedChoosenPhoto)
     }
     else {
-        userStore.profilePicture = userStore.croppedChoosenPhoto
-        userData.profile_picture = userStore.croppedChoosenPhoto
+        userStore.addToDict("editedUser", 'profile_picture', userStore.croppedChoosenPhoto)
     }
-    userStore.editedUser = JSON.stringify(userData)
     modalController.dismiss()
 }
 
