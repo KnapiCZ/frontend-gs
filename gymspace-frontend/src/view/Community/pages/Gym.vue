@@ -59,5 +59,3 @@ onMounted(() => {
 		</IonContent>
 	</IonPage>
 </template>
-
-<style scoped></style>

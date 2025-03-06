@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { IonButton, useIonRouter } from '@ionic/vue';
-import apiGym from '@/logic/API/apiGym';
+import { IonButton, useIonRouter } from '@ionic/vue'
+import apiGym from '@/logic/API/apiGym'
 
 const props = defineProps<{
     id: number
     type: string
     divisionType?: string
-}>();
+}>()
 const router = useIonRouter()
 let divisionInfo = await apiGym('info', props.id, undefined, 'logo,title')
 
@@ -41,7 +41,7 @@ h2 {
     border-radius: 10px;
     margin: auto;
     border: 1px #fff000 solid;
-    background-color: rgba(255, 255, 255, 0.1) !important;
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .small-logo-img {
@@ -57,7 +57,7 @@ h2 {
     margin: 5px auto;
     text-align: center;
     border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.1) !important;
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .logo-img {
