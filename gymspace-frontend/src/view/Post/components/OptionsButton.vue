@@ -13,9 +13,13 @@ const props = defineProps<{
 
 let index = userStore.userPostsId.indexOf(props.postId)
 
-async function Delete() {
-    console.log(await apiPost("deletePost", props.postId))
-    userStore.userPostsId.splice(index, 1)
+const deletePost = async () => {
+    await apiPost("deletePost", props.postId).then((response) => {
+        if (response.status == "success") {
+            userStore.userPostsId.splice(index, 1)
+        } else {
+        }
+    })
 }
 </script>
 
@@ -25,7 +29,7 @@ async function Delete() {
     <ion-popover :trigger="'popover-button' + props.postId" :dismiss-on-select="true" :arrow="false">
         <ion-list>
             <EditPost :index="index" :userId="props.userId" :postId="props.postId" :description="props.description" />
-            <ion-item :button="true" :detail="false" lines="none" color="danger" @click="Delete()">Delete</ion-item>
+            <ion-item :button="true" :detail="false" lines="none" color="danger" @click="deletePost()">Delete</ion-item>
         </ion-list>
     </ion-popover>
 </template>

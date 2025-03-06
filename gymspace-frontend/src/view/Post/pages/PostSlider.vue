@@ -6,7 +6,6 @@ import apiPost from '@/logic/API/apiPost';
 
 let userStore = userDataStore()
 let postIds = await apiPost('recommendedPosts', 1)
-console.log(postIds)
 </script>
 
 <template>

@@ -29,10 +29,10 @@ const props = defineProps<{
 }
 
 .pop-button {
-    position: relative !important;
-    right: none !important;
-    top: none !important;
-    border-radius: 15px !important;
+    position: relative;
+    right: none;
+    top: none;
+    border-radius: 15px;
 
 }
 

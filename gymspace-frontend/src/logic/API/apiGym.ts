@@ -1,12 +1,10 @@
-import getConfig from "./apiConfig";
+import getConfig from "./apiConfig"
 
-
-type QueryParam = "place_id" | "creator" | "title" | "description" | "logo" | "count_members" | "count_spotters" | "count_posts" | "points" | "level";
-type ApiType = "all" | "my" | "create" | "info" | "location" | "search" | "member-get" | "member-join" | "member-update" | "member-leave" | "spotter-join" | "spotter-get" | "spotter-leave"
+type ApiType = "all" | "users-gym" | "create" | "info" | "location" | "search" | "member-get" | "member-join" | "member-update" | "member-leave" | "spotter-join" | "spotter-get" | "spotter-leave"
 
 /**
  * - all: all gyms
- * - my: users gym
+ * - users-gym: gym of user
  * - info: data of gym || gymId, queryParams
  * - create: xxx
  * - search: xxx
@@ -34,16 +32,16 @@ async function apiGym(apiType: ApiType, gymId?: number, data?: string, queryPara
                     headers: getConfig().headers
                 }
             )
-            return await response.json()
+            return response.json()
 
-        case "my":
-            response = await fetch(`${getConfig().apiBaseUrl}api/gym/users-gym/`,
+        case "users-gym":
+            response = await fetch(`${getConfig().apiBaseUrl}api/gym/${gymId}/users-gym/`,
                 {
                     method: 'GET',
                     headers: getConfig().headers
                 }
             )
-            return await response.json()
+            return response.json()
 
         case "create":
             response = await fetch(`${getConfig().apiBaseUrl}api/gym/`,
@@ -53,7 +51,7 @@ async function apiGym(apiType: ApiType, gymId?: number, data?: string, queryPara
                     body: data
                 }
             )
-            return await response.json()
+            return response.json()
 
         case "info":
             response = await fetch(`${getConfig().apiBaseUrl}api/gym/${gymId}/?fields=${queryParams}`,
@@ -62,7 +60,7 @@ async function apiGym(apiType: ApiType, gymId?: number, data?: string, queryPara
                     headers: getConfig().headers
                 }
             )
-            return await response.json()
+            return response.json()
 
         case "location":
             response = await fetch(`${getConfig().apiBaseUrl}api/gym/gym-location/`,
@@ -71,7 +69,7 @@ async function apiGym(apiType: ApiType, gymId?: number, data?: string, queryPara
                     headers: getConfig().headers
                 }
             )
-            return await response.json()
+            return response.json()
 
         case "search":
             response = await fetch(`${getConfig().apiBaseUrl}api/gym/search-gym/?query=${queryParams}`,
@@ -80,7 +78,7 @@ async function apiGym(apiType: ApiType, gymId?: number, data?: string, queryPara
                     headers: getConfig().headers
                 }
             )
-            return await response.json()
+            return response.json()
 
         case "member-get":
             response = await fetch(`${getConfig().apiBaseUrl}api/gym-member/${gymId}/`,
@@ -89,7 +87,7 @@ async function apiGym(apiType: ApiType, gymId?: number, data?: string, queryPara
                     headers: getConfig().headers
                 }
             )
-            return await response.json()
+            return response.json()
 
         case "member-join":
             response = await fetch(`${getConfig().apiBaseUrl}api/gym-member/?query_params=${gymId}`,
@@ -98,7 +96,7 @@ async function apiGym(apiType: ApiType, gymId?: number, data?: string, queryPara
                     headers: getConfig().headers
                 }
             )
-            return await response.json()
+            return response.json()
 
         case "member-update":
             response = await fetch(`${getConfig().apiBaseUrl}api/gym-member/${gymId}/?query_params=${queryParams}`,
@@ -107,7 +105,7 @@ async function apiGym(apiType: ApiType, gymId?: number, data?: string, queryPara
                     headers: getConfig().headers
                 }
             )
-            return await response.json()
+            return response.json()
 
         case "member-leave":
             response = await fetch(`${getConfig().apiBaseUrl}api/gym-member/${gymId}/`,
@@ -116,7 +114,7 @@ async function apiGym(apiType: ApiType, gymId?: number, data?: string, queryPara
                     headers: getConfig().headers
                 }
             )
-            return await response.json()
+            return response.json()
 
         case "spotter-get":
             response = await fetch(`${getConfig().apiBaseUrl}api/gym-spotter/${gymId}/`,
@@ -125,7 +123,7 @@ async function apiGym(apiType: ApiType, gymId?: number, data?: string, queryPara
                     headers: getConfig().headers
                 }
             )
-            return await response.json()
+            return response.json()
 
         case "spotter-join":
             response = await fetch(`${getConfig().apiBaseUrl}api/gym-spotter/?query_params=${gymId}`,
@@ -134,7 +132,7 @@ async function apiGym(apiType: ApiType, gymId?: number, data?: string, queryPara
                     headers: getConfig().headers
                 }
             )
-            return await response.json()
+            return response.json()
 
         case "spotter-leave":
             response = await fetch(`${getConfig().apiBaseUrl}api/gym-spotter/${gymId}/`,
@@ -143,7 +141,7 @@ async function apiGym(apiType: ApiType, gymId?: number, data?: string, queryPara
                     headers: getConfig().headers
                 }
             )
-            return await response.json()
+            return response.json()
 
         default:
             return `Invalid apiType`

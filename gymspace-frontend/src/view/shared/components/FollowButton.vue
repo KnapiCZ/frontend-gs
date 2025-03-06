@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import apiUser from '@/logic/API/apiUser';
-import { userDataStore } from '@/stores/UserDataStore';
-import { ref } from 'vue';
+import apiUser from '@/logic/API/apiUser'
+import { userDataStore } from '@/stores/UserDataStore'
+import { IonButton } from '@ionic/vue'
+import { ref } from 'vue'
 
 const props = defineProps<{
     userId: number
@@ -20,14 +21,14 @@ const follow = async () => {
 </script>
 
 <template>
-    <button class="profile-button" :class="{ follow: !isFollowing }" @click="follow">
-        {{ isFollowing ? 'Following' : 'Follow' }}
-    </button>
+    <IonButton class="profile-button" :class="{ follow: !isFollowing.is_following }" @click="follow">
+        {{ isFollowing.is_following ? 'Following' : 'Follow' }}
+    </IonButton>
 </template>
 
 <style scoped>
 .follow {
-    background-color: #fff000 !important;
+    --background: #fff000;
     color: black;
 }
 </style>
