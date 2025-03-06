@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { IonPage, IonContent, IonGrid, IonRow, IonCol, IonButton, useIonRouter } from '@ionic/vue';
-import { ref, onMounted } from 'vue';
+import { IonPage, IonContent, IonGrid, IonRow, IonCol, IonButton, useIonRouter } from '@ionic/vue'
+import { ref, onMounted } from 'vue'
 
 const router = useIonRouter()
 
@@ -8,7 +8,7 @@ const time = ref({
     days: 0,
     hours: 0,
     minutes: 0
-});
+})
 
 const logOut = () => {
     localStorage.removeItem("Token")
@@ -19,20 +19,20 @@ const deleteAccount = () => {
     router.navigate("/user/delete-account", "forward", "push")
 }
 
-const targetDate = new Date('2025-05-18T00:00:00').getTime();
+const targetDate = new Date('2025-05-18T00:00:00').getTime()
 
 const updateCountdown = () => {
-    const now = new Date().getTime();
-    const timeLeft = targetDate - now;
+    const now = new Date().getTime()
+    const timeLeft = targetDate - now
 
     if (timeLeft > 0) {
-        time.value.days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-        time.value.hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        time.value.minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        time.value.days = Math.floor(timeLeft / (1000 * 60 * 60 * 24))
+        time.value.hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+        time.value.minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60))
     } else {
-        time.value = { days: 0, hours: 0, minutes: 0 };
+        time.value = { days: 0, hours: 0, minutes: 0 }
     }
-};
+}
 
 onMounted(() => {
     updateCountdown()
@@ -43,7 +43,7 @@ onMounted(() => {
 
 <template>
     <IonPage>
-        <IonContent class="ion-padding welcome-page" :scroll-y="false">
+        <IonContent class="top-padding-notch welcome-page" :scroll-y="false">
             <img class="background-img" src="../../../assets/images/waiting-screen-bg.gif" alt="Background" />
 
             <div id="first-gradient" class="welcome-header border-gradient">
@@ -53,7 +53,7 @@ onMounted(() => {
                 <p class="launch-text">APP IS LAUNCHING IN:</p>
 
 
-                <div class="countdown">
+                <div class="countdown box">
                     <div class="countdown-item">
                         <h2>{{ time.days }}</h2>
                         <p>DAYS</p>
@@ -108,20 +108,21 @@ onMounted(() => {
                 </div>
             </a>
 
-            <div class="social-icons">
+            <div class="social-icons box">
                 <a href="https://www.instagram.com/gymspace_official" target="_blank"
-                    class="social-icon-btn border-gradient">
+                    class="social-icon-btn border-gradient box">
                     <img class="social-icon-images" src="../../../assets/icons/instagram.svg">
                 </a>
                 <a href="https://www.facebook.com/gymspace.official" target="_blank"
-                    class="social-icon-btn border-gradient">
+                    class="social-icon-btn border-gradient box">
                     <img class="social-icon-images" src="../../../assets/icons/facebook.svg">
                 </a>
                 <a href="https://www.youtube.com/@gymspaceofficial" target="_blank"
-                    class="social-icon-btn border-gradient">
+                    class="social-icon-btn border-gradient box">
                     <img class="social-icon-images" src="../../../assets/icons/youtube.svg">
                 </a>
-                <a href="https://www.tiktok.com/@gymspace.app" target="_blank" class="social-icon-btn border-gradient">
+                <a href="https://www.tiktok.com/@gymspace.app" target="_blank"
+                    class="social-icon-btn border-gradient box">
                     <img class="social-icon-images" src="../../../assets/icons/tiktok.svg">
                 </a>
             </div>
@@ -252,8 +253,6 @@ onMounted(() => {
 }
 
 .countdown {
-    display: flex;
-    justify-content: center;
     margin: 1.00vh 0;
     gap: 20px;
 }
@@ -335,8 +334,7 @@ img.info-card-images {
 }
 
 .social-icons {
-    display: flex;
-    justify-content: center;
+
     margin-top: 20px;
     gap: 35px;
 }
@@ -347,16 +345,12 @@ img.info-card-images {
 }
 
 .social-icon-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
     width: 12.00vw;
     aspect-ratio: 1;
     background-color: rgba(255, 255, 255, 0.10);
-    border: 1px solid rgba(255, 255, 255, 0.20);
     border-radius: 50%;
     transition: all 0.30s ease;
-    backdrop-filter: blur(26.60px);
+    backdrop-filter: blur(20px);
     box-shadow: -4px 4px 19.90px 1px #0000009E;
 }
 

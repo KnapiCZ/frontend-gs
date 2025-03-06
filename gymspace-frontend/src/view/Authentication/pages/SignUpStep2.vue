@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { IonButton, IonCol, IonPage, useIonRouter, IonInput, IonContent, IonIcon } from '@ionic/vue';
-import { userDataStore } from '@/stores/UserDataStore';
-import { ref } from 'vue';
-import apiUser from '@/logic/API/apiUser';
-import apiAuth from '@/logic/API/apiAuth';
-import { eye } from 'ionicons/icons';
+import { IonButton, IonCol, IonPage, useIonRouter, IonInput, IonContent, IonIcon } from '@ionic/vue'
+import { userDataStore } from '@/stores/UserDataStore'
+import { ref } from 'vue'
+import apiUser from '@/logic/API/apiUser'
+import apiAuth from '@/logic/API/apiAuth'
+import { eye } from 'ionicons/icons'
 const userStore = userDataStore()
-const router = useIonRouter();
+const router = useIonRouter()
 
-const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}$/
+const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~@#$%^&+=]).{8,}$/
 const mailRegex = /^(?=.{1,254}$)(?=.{1,64}@)[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
 
-const passwordVisible = ref<boolean[]>([false, false]);
+const passwordVisible = ref<boolean[]>([false, false])
 
 const error_message = ref(' ')
 const form = ref({
@@ -20,9 +20,9 @@ const form = ref({
     password: "f",
     passwordCheck: "f",
     birthday: "f"
-});
+})
 
-let canGo = true;
+let canGo = true
 
 
 const backToLogin = () => {
@@ -30,11 +30,11 @@ const backToLogin = () => {
 }
 
 const submitForm = async () => {
-    canGo = true;
-    checkPassword();
-    checkEmail();
-    checkUsername();
-    checkPasswordCheck();
+    canGo = true
+    checkPassword()
+    checkEmail()
+    checkUsername()
+    checkPasswordCheck()
     if (canGo) {
         let data = {
             username: form.value.username,
@@ -42,67 +42,68 @@ const submitForm = async () => {
             password: form.value.password,
             birthday: userStore.getFromDict("registerData", "birthDate")
         }
-        console.log(data)
         await apiUser('create', 0, JSON.stringify(data)).then(async (response) => {
             if (response.status == "success") {
                 let data2 = { "username_or_email": form.value.email, "password": form.value.password }
                 await apiAuth("getToken", JSON.stringify(data2)).then((response) => {
                     if (response.status == "success") {
-                        localStorage.setItem("Token", response.data.token);
-                        localStorage.setItem("logged_user_id", response.data.user_id);
-                        router.push('/step-3');
+                        localStorage.setItem("Token", response.data.token)
+                        localStorage.setItem("logged_user_id", response.data.user_id)
+                        router.push('/step-3')
                     } else {
                         error_message.value == response.message
                     }
                 })
+            } else {
+                error_message.value = response.message
             }
         })
     }
 }
 
 const checkPasswordCheck = () => {
-    if (form.value.passwordCheck == undefined) setValid("username", false);
-    if (form.value.password == form.value.passwordCheck) setValid("check-password", true);
-    else setValid("check-password", false);
+    if (form.value.passwordCheck == undefined) setValid("username", false)
+    if (form.value.password == form.value.passwordCheck) setValid("check-password", true)
+    else setValid("check-password", false)
 }
 const checkPassword = () => {
-    if (form.value.password == undefined) setValid("username", false);
-    if (form.value.password.match(passRegex)) setValid("password", true);
-    else setValid("password", false);
+    if (form.value.password == undefined) setValid("username", false)
+    if (form.value.password.match(passRegex)) setValid("password", true)
+    else setValid("password", false)
 }
 
 const checkUsername = () => {
-    if (form.value.username == undefined) setValid("username", false);
-    if (form.value.username.match(/^\S(?:.*\S)?$/)) setValid("username", true);
-    else setValid("username", false);
+    if (form.value.username == undefined) setValid("username", false)
+    if (form.value.username.match(/^\S(?:.*\S)?$/)) setValid("username", true)
+    else setValid("username", false)
 }
 const checkEmail = () => {
-    if (form.value.email == undefined) setValid("username", false);
-    if (form.value.email.match(mailRegex)) setValid("email", true);
-    else setValid("email", false);
+    if (form.value.email == undefined) setValid("username", false)
+    if (form.value.email.match(mailRegex)) setValid("email", true)
+    else setValid("email", false)
 }
 
 const setValid = (id: string, value: boolean) => {
-    let object = document.getElementById(id)?.classList;
+    let object = document.getElementById(id)?.classList
     if (value) {
-        object?.remove("ion-invalid");
-        object?.remove("ion-touched");
+        object?.remove("ion-invalid")
+        object?.remove("ion-touched")
     } else {
-        object?.add("ion-invalid");
-        object?.add("ion-touched");
-        canGo = false;
+        object?.add("ion-invalid")
+        object?.add("ion-touched")
+        canGo = false
     }
 }
 
 const togglePasswordVisibility = (index: number): void => {
-    passwordVisible.value[index] = !passwordVisible.value[index];
+    passwordVisible.value[index] = !passwordVisible.value[index]
 };
 
 </script>
 
 <template>
     <IonPage>
-        <IonContent class="sign-up-content" :scroll-y="false">
+        <IonContent class="sign-up-content top-padding-notch" :scroll-y="false">
             <img src="../../../assets/images/logo-glow.png" class="sign-up-background-image" alt="GymSpace-Logo" />
             <IonCol>
                 <p class="welcome">Welcome to Gymspace</p>
@@ -116,7 +117,8 @@ const togglePasswordVisibility = (index: number): void => {
                         placeholder="Email" error-text="Invalid email" />
                     <IonInput id="password" class="custom border-gradient" v-model="form.password"
                         :type="passwordVisible[0] ? 'text' : 'password'" placeholder="Password"
-                        helper-text="Password must contain: 8-32 characters, (A-Z, a-z, 0-9, !@#$%^&*)">
+                        helper-text="Password must contain: 8-32 characters, (A-Z, a-z, 0-9, special character)"
+                        error-text="Invalid Password">
                         <IonButton class="show-password" @click="togglePasswordVisibility(0)" fill="clear" slot="end"
                             aria-label="Show/hide">
                             <IonIcon slot="icon-only" :icon="eye" aria-hidden="true"
@@ -180,11 +182,11 @@ const togglePasswordVisibility = (index: number): void => {
 
 ion-input.custom>.input-bottom>div.helper-text,
 ion-input.custom.md .input-bottom .helper-text {
-    color: green !important;
+    color: green;
 }
 
 .input-bottom.sc-ion-input-ios {
-    color: green !important;
+    color: green;
 }
 
 .error-message {

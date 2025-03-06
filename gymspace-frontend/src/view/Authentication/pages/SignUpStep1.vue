@@ -4,10 +4,10 @@ import { ref, onMounted } from "vue"
 import { userDataStore } from "@/stores/UserDataStore"
 import Swiper from "swiper"
 import { SwiperOptions } from "swiper/types"
-import { FreeMode, Pagination } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/free-mode';
-import 'swiper/css/pagination';
+import { FreeMode, Pagination } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/free-mode'
+import 'swiper/css/pagination'
 import "swiper/swiper-bundle.css"
 
 const modules = [FreeMode, Pagination]
@@ -48,7 +48,7 @@ const customSwiperOptions = (customEvents: SwiperOptions['on'] = {}): SwiperOpti
     on: {
         ...customEvents, // Add dynamic event listeners
     },
-});
+})
 
 // Initialize Swiper for each column
 const initializeSwiper = () => {
@@ -125,10 +125,10 @@ onMounted(() => {
 
 <template>
     <IonPage>
-        <IonContent class="sign-up-content" :scroll-y="false">
+        <IonContent class="sign-up-content top-padding-notch" :scroll-y="false">
             <img src="../../../assets/images/Cake.png" class="sign-up-background-image" alt="Cake" />
             <h1 class="sign-up">Set your birth date...</h1>
-            <div class="date-slider border-gradient">
+            <div class="date-slider box border-gradient wrapper-div">
                 <div class="swiper-container day-swiper">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide" v-for="(day) in days" :key="day">
@@ -152,10 +152,10 @@ onMounted(() => {
                     </div>
                 </div>
             </div>
-            <div v-show="!isOldEnough" id="warning-age">
+            <p v-show="!isOldEnough" id="warning-age">
                 You must be at least 13 years old to use this app
-            </div>
-            <label class="pretty-checkbox">
+            </p>
+            <label class="pretty-checkbox box">
                 <input type="checkbox" v-model="isChecked" />
                 <span class="checkbox"></span>
                 <span class="label-text">I confirm that I have familiarized myself with the <a
@@ -180,7 +180,6 @@ ion-content {
 
 #warning-age {
     color: #F2634A;
-    font-size: 12px;
     font-weight: 800;
     width: 90%;
     text-align: center;
@@ -188,14 +187,9 @@ ion-content {
 }
 
 .date-slider {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     margin: 60px auto;
     width: 90%;
-    background-color: #242424b3;
-    border-radius: 6px;
-    backdrop-filter: blur(10px);
+
 }
 
 .border-gradient::before {
@@ -225,10 +219,7 @@ ion-content {
 
 .item {
     font-size: 16px;
-    color: #fff;
     display: flex;
-    align-items: center;
-    justify-content: center;
     transition: transform 0.3s ease, color 0.3s ease;
     scale: 0.8;
     opacity: 0.25;
@@ -269,9 +260,6 @@ ion-content {
 
 .pretty-checkbox {
     width: 90%;
-    display: flex;
-    align-items: center;
-    text-align: center;
     margin: auto;
 }
 

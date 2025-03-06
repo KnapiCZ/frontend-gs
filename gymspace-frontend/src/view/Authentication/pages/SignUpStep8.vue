@@ -1,31 +1,31 @@
 <script lang="ts" setup>
-import { userDataStore } from "@/stores/UserDataStore";
-import { IonContent, IonPage, IonButton, useIonRouter } from "@ionic/vue";
-import { ref } from "vue";
-import apiUser from "@/logic/API/apiUser";
+import { userDataStore } from "@/stores/UserDataStore"
+import { IonContent, IonPage, IonButton, useIonRouter } from "@ionic/vue"
+import { ref } from "vue"
+import apiUser from "@/logic/API/apiUser"
 
 const userStore = userDataStore()
 const router = useIonRouter()
-const selectedSex = ref('');
+const selectedSex = ref('')
 
 let user_id = localStorage.getItem("logged_user_id")
-let data = ""
+let data = {}
 const toggleSex = (sex: string) => {
-    selectedSex.value = sex;
-};
+    selectedSex.value = sex
+}
 
 const setSex = async () => {
     userStore.addToDict("registerData", "sex", selectedSex.value)
-    router.push("/waiting-screen");
+    router.push("/waiting-screen")
     data = userStore.getDictAsJson("registerData")
-    await apiUser("update", (user_id as unknown as number), data)
+    await apiUser("update", (user_id as unknown as number), JSON.stringify(data))
 }
 
 </script>
 
 <template>
     <IonPage>
-        <IonContent class="sign-up-content" :scroll-y="false">
+        <IonContent class="sign-up-content top-padding-notch" :scroll-y="false">
             <h1 class="sign-up">Choose your gender...</h1>
             <div class="sex-buttons-container">
                 <img src="../../../assets/images/Male.png" alt="Male Icon" class="sex-icon"
@@ -66,7 +66,7 @@ h1 {
     font-size: 1.8rem;
     font-weight: 900;
     color: white;
-    border-radius: 12px;
+    border-radius: 6px;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(8px);
     display: flex;

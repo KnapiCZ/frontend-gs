@@ -1,7 +1,7 @@
-<script setup>
-import { IonContent, IonPage } from '@ionic/vue';
-import SportBox from '../components/SportBox.vue';
-import apiSport from '@/logic/API/apiSport';
+<script setup lang="ts">
+import { IonContent, IonPage } from '@ionic/vue'
+import SportBox from '../components/SportBox.vue'
+import apiSport from '@/logic/API/apiSport'
 
 let sports = await apiSport("allSports")
 sports = sports.data
@@ -10,7 +10,7 @@ sports = sports.data
 
 <template>
     <IonPage>
-        <IonContent class="sign-up-content" :scroll-y="false">
+        <IonContent class="sign-up-content top-padding-notch" :scroll-y="false">
             <h1 class="sign-up">Choose your sports</h1>
 
             <div class="grid-container">
@@ -28,11 +28,8 @@ sports = sports.data
     grid-template-columns: repeat(2, 42%);
     grid-template-rows: repeat(3, 16vh);
     justify-content: center;
-    /* Add spacing between columns */
     align-items: center;
-    /* Center items vertically */
     gap: 10px;
-    /* Spacing between rows */
     box-sizing: border-box;
 }
 

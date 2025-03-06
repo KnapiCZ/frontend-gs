@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { IonContent, IonButton, IonRow, IonCol, useIonRouter, modalController } from '@ionic/vue';
-import { onMounted, ref } from 'vue';
-import apiGym from '@/logic/API/apiGym';
-import apiUser from '@/logic/API/apiUser';
+import { IonContent, IonButton, IonRow, IonCol, useIonRouter, modalController } from '@ionic/vue'
+import { onMounted, ref } from 'vue'
+import apiGym from '@/logic/API/apiGym'
+import apiUser from '@/logic/API/apiUser'
 
 const props = defineProps<{
     gym_id: number
@@ -56,7 +56,7 @@ onMounted(async () => {
 </script>
 
 <template>
-    <ion-content class="ion-padding border-gradient" :key="props.gym_id">
+    <ion-content class="custom ion-padding border-gradient" :key="props.gym_id">
         <div class="border-gradient">
             <div class="gym-bio">
                 <img class="logo" src="../../../assets/images/logo-glow.png" alt="">
@@ -100,9 +100,11 @@ onMounted(async () => {
             rgba(255, 240, 0, 0.34) 96%);
 }
 
-ion-content {
+ion-page,
+ion-content.custom {
     text-align: center;
-    --background: rgba(41, 40, 29, 0.6);
+    --ion-background-color: transparent;
+    --background: transparent;
     backdrop-filter: blur(20px);
 }
 
@@ -123,7 +125,7 @@ ion-content {
     text-align: center;
     width: 70%;
     margin: auto;
-    aspect-ratio: 1/1 !important;
+    aspect-ratio: 1;
     border-radius: 50%;
     border: solid 2px #fff000;
     object-fit: cover;

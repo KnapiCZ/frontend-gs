@@ -1,125 +1,109 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { IonButton, IonCol, IonInput, IonPage, useIonRouter } from '@ionic/vue';
-import apiAuth from '@/logic/API/apiAuth';
+import { ref } from 'vue'
+import { IonButton, IonCol, IonContent, IonInput, IonPage, useIonRouter } from '@ionic/vue'
+import apiAuth from '@/logic/API/apiAuth'
+import { pull } from 'lodash'
 
-const router = useIonRouter();
+const router = useIonRouter()
 const error_message = ref(' ')
 const form = ref({
-	username_or_email: "",
-	password: "",
-});
+    username_or_email: "",
+    password: "",
+})
 
 
 const submitForm = async () => {
-	if (form.value.username_or_email != "" && form.value.password != "") {
+    if (form.value.username_or_email != "" && form.value.password != "") {
 
-		await apiAuth("getToken", JSON.stringify(form.value)).then((response) => {
-			if (response.status == "success") {
-				localStorage.setItem("Token", response.data.token);
-				localStorage.setItem("logged_user_id", response.data.user_id);
-				router.push("/waiting-screen");
-			} else {
-				error_message.value = response.error[0]
-			}
-		})
-	} else {
-		error_message.value = "Username/Email and Password can`t be empty"
-	}
+        await apiAuth("getToken", JSON.stringify(form.value)).then((response) => {
+            if (response.status == "success") {
+                localStorage.setItem("Token", response.data.token)
+                localStorage.setItem("logged_user_id", response.data.user_id)
+                router.navigate("/waiting-screen", 'forward', 'push')
+            } else {
+                error_message.value = response.error[0]
+            }
+        })
+    } else {
+        error_message.value = "Username/Email and Password can`t be empty"
+    }
 }
 
-//TODO: improve styling bigger touch area
+const createAccount = () => {
+    router.navigate('/step-1', 'forward', 'push')
+}
 
 </script>
 
 
 <template>
-	<IonPage>
-		<IonCol>
-			<h1 class="welcome">WELCOME TO</h1>
+    <IonPage>
+        <IonContent class="top-padding-notch">
+            <IonCol>
+                <h1 class="welcome">WELCOME TO</h1>
 
-			<img class="logo" src="\src\assets\images\gs_logo.png" alt="logo">
-			<form @submit.prevent="submitForm">
-				<IonInput id="UsernameAuth" class="custom border-gradient" type="text" placeholder="Username or Email"
-					v-model="form.username_or_email" />
-				<IonInput id="PassAuth" class="custom border-gradient" type="password" placeholder="Password"
-					v-model="form.password" />
-				<p class="error-message">{{ error_message }}</p>
+                <img class="logo" src="\src\assets\images\gs_logo.png" alt="logo">
+                <form @submit.prevent="submitForm">
+                    <IonInput id="UsernameAuth" class="custom border-gradient" type="text"
+                        placeholder="Username or Email" v-model="form.username_or_email" />
+                    <IonInput id="PassAuth" class="custom border-gradient" type="password" placeholder="Password"
+                        v-model="form.password" />
+                    <p class="error-message">{{ error_message }}</p>
 
-				<IonButton class="login" @click="submitForm()">Login</IonButton>
-			</form>
-			<a class="sign-up" href="/step-1">NEW? SIGN-UP HERE</a>
-			<a class="sign-up" href="https://support.gymspace.app/password_reset/">FORGOTEN PASSWORD</a>
+                    <IonButton class="default" @click="submitForm()">Login</IonButton>
+                </form>
+                <div class="row">
+                    <a class="sign-up" @click="createAccount">NEW? SIGN-UP HERE</a>
+                    <a class="sign-up" href="https://support.gymspace.app/password_reset/">FORGOTEN PASSWORD</a>
 
-
-			<!--
-			<IonButton class="login-by-other" color="transparent"><img class="sign-img"
-					src="../../../assets/icons/apple.svg" alt="">Sign-in with
-				apple</IonButton>
-			<IonButton class="login-by-other" color="transparent"><img class="sign-img"
-					src="../../../assets/icons/google.svg" alt="">Sign-in with
-				google</IonButton>
-			-->
-		</IonCol>
-	</IonPage>
+                </div>
+            </IonCol>
+        </IonContent>
+    </IonPage>
 </template>
 
 <style scoped>
 * {
-	margin: auto;
-	text-align: center;
-	width: 100%;
+    text-align: center;
 }
 
 .logo {
-	margin: auto;
-	width: 60%;
+    margin: auto;
+    width: 60%;
 
-}
-
-h1 {
-	color: white;
-	font-size: 8vw;
 }
 
 .welcome {
-	margin-top: 40px;
+    margin-top: 40px;
 }
 
-ion-button.login {
-	background-color: #fff000;
-	color: black;
-	font-size: 1rem;
-	font-weight: bold;
-	margin: 25px;
-	width: 87%;
-	height: 50px;
-	border-radius: 6px;
-	--background: transparent;
+.column {
+    width: 100%;
+}
+
+
+ion-button.default {
+    width: 70%;
+    color: black;
+    height: 50px;
+    --background: #fff000;
 }
 
 ion-input.border-gradient::before {
-	background: linear-gradient(165deg,
-			#fff 4%,
-			#ffffff75 52%,
-			#ffffff59 80%),
-		#fff00021;
-}
-
-.login-by-other {
-	font-weight: bold;
-	background-color: white;
-	color: black;
+    background: linear-gradient(165deg,
+            #fff 4%,
+            #ffffff75 52%,
+            #ffffff59 80%),
+        #fff00021;
 }
 
 .sign-img {
-	width: 40px;
-	height: 40px;
-	margin: 20px 10px;
+    width: 40px;
+    height: 40px;
+    margin: 20px 10px;
 }
 
 .sign-up {
-	padding: 20px 15px;
-	margin: 20px 0px;
+    padding: 16px;
 }
 </style>

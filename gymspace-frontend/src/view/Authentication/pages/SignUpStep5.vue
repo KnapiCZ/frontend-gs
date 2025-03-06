@@ -1,18 +1,36 @@
-<script setup>
-import { IonContent, IonItem, IonList, IonPage, IonSearchbar, modalController } from "@ionic/vue";
-import { Geolocation } from '@capacitor/geolocation';
-import { onMounted, ref } from "vue";
-import gymMarker from '@/assets/images/gymMarker.png'
-import apiGym from "@/logic/API/apiGym";
-import ChooseGymModal from "../components/ChooseGymModal.vue";
+<script setup lang="ts">
+import { IonContent, IonItem, IonList, IonPage, IonSearchbar, modalController } from "@ionic/vue"
+import { Geolocation } from '@capacitor/geolocation'
+import { onMounted, ref } from "vue"
+import apiGym from "@/logic/API/apiGym"
+import ChooseGymModal from "../components/ChooseGymModal.vue"
 
-const searchQuery = ref("");
-const gyms = ref([])
+interface gym {
+    id: number,
+    title: string,
+    city: string,
+    address: string
+    latitude: number,
+    longitude: number
+}
+
+declare global {
+    interface Window {
+        initMap: () => void
+    }
+}
+
+
+const google = (window as any).google
+
+
+const searchQuery = ref("")
+
+const gyms = ref<gym[]>([])
 const markerGyms = ref([])
-let isModalOpen = false;
+let isModalOpen = false
 
 const handleSearch = async () => {
-    console.log("caleeed")
     if (searchQuery.value.length >= 3) {
         await apiGym("search", undefined, undefined, searchQuery.value).then((response) => {
             if (response.status == "success") {
@@ -28,45 +46,44 @@ const handleSearch = async () => {
     }
 }
 
-const openModal = async (gym_id) => {
-    if (isModalOpen) return;
+const openModal = async (gym_id: number) => {
+    if (isModalOpen) return
 
-    isModalOpen = true;
+    isModalOpen = true
     const modal = await modalController.create({
         component: ChooseGymModal,
         breakpoints: [0.5, 0.6], // Define your breakpoints here
         initialBreakpoint: 0.5, // Set the initial breakpoint (default is 0.5)
         cssClass: 'custom-modal-class border-radius', // Optional, if you want to add custom CSS classes
-        swipeToClose: true, // Enable swipe to close
         showBackdrop: false,
         componentProps: {
             gym_id: gym_id
         }
-    });
+    })
 
-    await modal.present();
+    await modal.present()
 
     modal.onDidDismiss().then(() => {
-        isModalOpen = false;
-    });
-};
+        isModalOpen = false
+    })
+}
 
 const loadGoogleMapsApi = () => {
     return new Promise((resolve, reject) => {
-        const script = document.createElement("script");
-        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAzxwhowxPHs0lNimraIdQIoETUcsrto-U&libraries=places&v=weekly&callback=initMap`;
-        script.async = true;
-        script.defer = true;
-        script.onload = resolve;
-        script.onerror = reject;
-        document.head.appendChild(script);
-    });
-};
+        const script = document.createElement("script")
+        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAzxwhowxPHs0lNimraIdQIoETUcsrto-U&libraries=places&v=weekly&callback=initMap`
+        script.async = true
+        script.defer = true
+        script.onload = resolve
+        script.onerror = reject
+        document.head.appendChild(script)
+    })
+}
 
 const printCurrentPosition = async () => {
-    const coordinates = await Geolocation.getCurrentPosition();
+    const coordinates = await Geolocation.getCurrentPosition()
     return { lat: coordinates.coords.latitude, lng: coordinates.coords.longitude }
-};
+}
 
 const initMap = async () => {
     let centerOfMap = await printCurrentPosition()
@@ -271,26 +288,26 @@ const initMap = async () => {
         streetViewControl: false,
         fullscreenControl: false,
         mapTypeControl: false,
-    });
+    })
 
 
-    const addMarker = (gym, map) => {
+    const addMarker = (gym: gym, map) => {
 
         const marker = new google.maps.Marker({
-            position: { lat: gym.latitude, lng: gym.longtitude },
+            position: { lat: gym.latitude, lng: gym.longitude },
             map,
             title: gym.title,
             icon: {
                 url: "https://firebasestorage.googleapis.com/v0/b/gymspace-4b1e8.firebasestorage.app/o/assets%2FgymMarker.png?alt=media&token=fa78517e-4637-4e5b-a60f-6ab6ca622046", // Custom gym icon
                 scaledSize: new google.maps.Size(50, 50),
             },
-        });
+        })
 
         marker.addListener("click", () => {
             openModal(gym.id)
-        });
+        })
 
-    };
+    }
 
 
     for (let i = 0; i < markerGyms.value.length; i++) {
@@ -307,30 +324,30 @@ const loadMarkers = async () => {
     })
 }
 
-window.initMap = initMap; // Expose initMap for callback
+window.initMap = initMap // Expose initMap for callback
 
-loadMarkers()
-
+await loadMarkers()
 
 onMounted(async () => {
     try {
-        await loadGoogleMapsApi();
+        await loadGoogleMapsApi()
+        await initMap()
     } catch (error) {
-        console.error("Error loading Google Maps API:", error);
+        console.error("Error loading Google Maps API:", error)
     }
-});
+})
 </script>
 
 <template>
     <IonPage>
-        <IonContent class="sign-up-content">
+        <IonContent class="sign-up-content ">
             <div class="top-container">
                 <div class="title-container border-gradient">
                     <p class="small-text">CHOOSE YOUR </p>
                     <h1 class="highlight">HOME GYM</h1>
                 </div>
-                <IonSearchbar showCancelButton="never" class="custom border-gradient" @update:modelValue="handleSearch"
-                    debounce="200" v-model="searchQuery" />
+                <IonSearchbar mode="md" showCancelButton="never" class="custom border-gradient"
+                    @update:modelValue="handleSearch" debounce="200" v-model="searchQuery" />
                 <IonList v-if="searchQuery.length >= 3 && gyms.length != 0">
                     <IonItem v-for="gym in gyms" :key="gym.id" class="gym-bio" @click.once="openModal(gym.id)">
                         <img class="logo" src="../../../assets/images/logo-glow.png" alt="">
@@ -369,9 +386,11 @@ onMounted(async () => {
     width: 97%;
     height: 15vh;
     margin: auto;
-    background-color: rgb(37, 36, 21);
+    background-color: rgba(41, 40, 29, 0.18);
+    backdrop-filter: blur(20px);
     border-radius: 0 0 6px 6px;
     padding: 0;
+    padding-top: 44px;
     position: relative;
 }
 
@@ -390,18 +409,16 @@ h1 {
     font-weight: bold;
 }
 
-ion-searchbar.custom,
-ion-searchbar.ios.custom,
-ion-searchbar.md.custom {
+ion-searchbar.custom {
     font-weight: 800;
     text-align: left;
     width: 97%;
     margin: 10px auto;
     padding: 0;
-    box-shadow: 0 0px 10px #fff000, inset 0 0px 25px 1px #7a7007;
-    backdrop-filter: blur(5px) !important;
-    min-height: 0 !important;
-    border-radius: 6px;
+    box-shadow: 0 0 10px #fff000, inset 0 0 25px 1px #7a7007;
+    backdrop-filter: blur(5px);
+    min-height: 0;
+    border: none;
     --background: linear-gradient(90deg,
             rgba(224, 206, 13, 0.35) 0%,
             rgba(175, 173, 150, 0.18) 88%,
@@ -414,6 +431,7 @@ ion-searchbar.md.custom {
     --cancel-button-color: #19422d;
     --placeholder-font-weight: 700;
     --placeholder-opacity: 1;
+    --box-shadow: none
 }
 
 .title-container.border-gradient::before {
@@ -423,15 +441,17 @@ ion-searchbar.md.custom {
             rgba(255, 255, 255, 0.46) 52%,
             rgba(255, 255, 255, 0.69) 65%,
             rgba(255, 240, 0, 0.68) 80%,
-            rgb(255, 240, 0, 0.34) 96%);
+            rgba(255, 240, 0, 0.34) 96%);
 }
 
-ion-search.border-gradient::before {
-    background: linear-gradient(135deg,
-            rgba(255, 255, 255, 13) 4%,
-            rgba(255, 255, 255, 0.459) 52%,
-            rgba(255, 255, 255, 0.349) 80%,
-            rgba(255, 240, 0, 0.129), 100%);
+ion-searchbar.border-gradient::before {
+    background: conic-gradient(from 0deg,
+            rgba(255, 240, 0, 1) 0%,
+            rgba(255, 240, 0, 0.3) 50%,
+            rgba(255, 240, 0, 1) 73%,
+            rgba(255, 255, 255, 1) 75%,
+            rgba(255, 255, 255, 1) 77%,
+            rgba(255, 240, 0, 1) 79%)
 }
 
 .create-text {
@@ -458,9 +478,8 @@ ion-search.border-gradient::before {
 
 .logo {
     width: 50px;
-    margin: auto 5px;
     margin: 10px;
-    aspect-ratio: 1/1 !important;
+    aspect-ratio: 1/1;
     border-radius: 100px;
     border: solid 1px #fff000;
     object-fit: cover;

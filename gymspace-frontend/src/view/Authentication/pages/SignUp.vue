@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import { IonPage, IonTabs, IonRouterOutlet, IonTabBar, IonTabButton, useIonRouter } from '@ionic/vue';
-import { computed, ref } from 'vue';
-import { useRoute } from 'vue-router';
-import { watch } from "vue";
+import { IonPage, IonTabs, IonRouterOutlet, IonTabBar, IonTabButton, useIonRouter } from '@ionic/vue'
+import { computed, ref } from 'vue'
+import { useRoute } from 'vue-router'
+import { watch } from "vue"
+import { backspace } from 'ionicons/icons'
 
 
 // Router instance
-const router = useIonRouter();
-const route = useRoute();
-const currentIndex = ref(0)
+const router = useIonRouter()
+const route = useRoute()
+const currentIndex = ref()
 // Define total steps and their corresponding paths
 const steps = [
     { path: '/step-1', step: 1, canSkip: false, canGoBack: true },
@@ -19,40 +20,45 @@ const steps = [
     { path: '/step-6', step: 6, canSkip: true, canGoBack: true },
     { path: '/step-7', step: 7, canSkip: true, canGoBack: true },
     { path: '/step-8', step: 8, canSkip: true, canGoBack: true },
-];
+]
 
 // Determine the current step based on the path
 const currentStep = computed(() => {
-    const match = steps.find((step) => step.path === route.path);
-    return match ? match.step : 1; // Default to step 1 if no match
-});
+    const match = steps.find((step) => step.path === route.path)
+    return match ? match.step : 1 // Default to step 1 if no match
+})
 // Navigate back function
 const goBack = () => {
-    currentIndex.value = steps.findIndex((step) => step.path === route.path);
+    currentIndex.value = steps.findIndex((step) => step.path === route.path)
     if (currentIndex.value > 0) {
-        router.navigate(steps[currentIndex.value - 1].path, 'back', 'push');
+        router.navigate(steps[currentIndex.value - 1].path, 'back', 'push')
     }
     else {
-        router.push("/login")
+        router.navigate("/login", 'back', 'push')
     }
-};
+}
 const skip = () => {
-    currentIndex.value = steps.findIndex((step) => step.path === route.path);
+    currentIndex.value = steps.findIndex((step) => step.path === route.path)
     if (currentIndex.value < 7) {
-        router.push(steps[currentIndex.value + 1].path); // Navigate to the previous step
+        router.push(steps[currentIndex.value + 1].path) // Navigate to the previous step
     }
     else {
         router.push("/waiting-screen")
     }
-};
+}
 
 watch(
     () => route.path,
     (newPath) => {
+        const index = steps.findIndex((step) => step.path === newPath)
+        if (index !== -1) {
+            currentIndex.value = index
+        } else {
 
-        currentIndex.value = steps.findIndex((step) => step.path === newPath);
+            currentIndex.value = null
+        }
     },
-    { immediate: true } // Run initially to set currentIndex on mount
+    { immediate: true }
 );
 
 
@@ -63,7 +69,8 @@ watch(
         <IonTabs class="ion-no-padding">
             <IonRouterOutlet></IonRouterOutlet>
             <IonTabBar slot="bottom" id="sign-up-tab">
-                <IonTabButton class="back-button" @click="goBack" :disabled="!steps[currentIndex].canGoBack">
+                <IonTabButton v-if="currentIndex !== null" class="back-button" @click="goBack"
+                    :disabled="!steps[currentIndex].canGoBack">
                     <img src="../../../assets/icons/arrowBigLeft.png" alt="Back" />
                 </IonTabButton>
 
@@ -71,7 +78,8 @@ watch(
                     <div class="progress-dot" v-for="step in steps" :key="step.step"
                         :class="{ active: step.step <= currentStep }"></div>
                 </div>
-                <IonTabButton class="back-button skip" @click="skip" :disabled="!steps[currentIndex].canSkip">
+                <IonTabButton v-if="currentIndex !== null" class="back-button skip" @click="skip"
+                    :disabled="!steps[currentIndex].canSkip">
                     <img src="../../../assets/icons/arrowBigLeft.png" alt="Back" />
                 </IonTabButton>
             </IonTabBar>
@@ -90,7 +98,7 @@ ion-tab--button {
 
 
 #sign-up-tab {
-    background-color: #242424b3 !important;
+    --background: #242424b3;
     height: 70px;
     padding: 0 16px;
     border-radius: 6px 6px 0 0;
