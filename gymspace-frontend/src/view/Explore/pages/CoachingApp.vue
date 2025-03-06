@@ -1,6 +1,7 @@
 <template>
-    <div class="box">
-        <div class="text">
+    <!--
+        <div class="box">
+            <div class="text">
             <div class="overlap">
                 <div class="BG">
                     <div class="overlap-group">
@@ -72,14 +73,15 @@
             </div>
         </div>
     </div>
+    -->
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent } from "vue"
 
 export default defineComponent({
     name: "Box",
-});
+})
 </script>
 
 <style>

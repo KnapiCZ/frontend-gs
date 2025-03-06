@@ -1,22 +1,27 @@
 <script setup lang="ts">
-import { IonButton, IonCol, IonContent, IonPage, IonToolbar, useIonRouter } from '@ionic/vue';
-import { userDataStore } from '@/stores/UserDataStore';
-import { useRoute } from 'vue-router';
-import UnlockablePost from './components/UnlockablePost.vue';
+import { IonButton, IonCol, IonContent, IonPage, IonToolbar, useIonRouter } from '@ionic/vue'
+import { useRoute } from 'vue-router'
+import UnlockablePost from '../components/UnlockablePost.vue'
+import { ref } from 'vue'
+import Description from '@/view/Post/components/PostContainers/PostParts/Description.vue'
 
 //Využije se později ve vývoji
 const props = defineProps<{
     id: number
-}>();
+}>()
 
-const route = useRoute();
+const route = useRoute()
 const router = useIonRouter()
-const userStore = userDataStore();
-let id = route.params.id as unknown as number;
-let userData = JSON.parse(userStore.user)
 
-let isUserVerified = userData.isUserVerified ?? 1;
+const user = ref({
+    profile_picture: "",
+    username: "Loading...",
+    description: "Loading...",
+    count_followers: 0
+})
 
+let id = route.params.id as unknown as number
+let isUserVerified = 1
 </script>
 
 
@@ -30,25 +35,25 @@ let isUserVerified = userData.isUserVerified ?? 1;
 
             <div class="profile-section">
                 <div class="profile-image-container">
-                    <img class="profile-image" :src="userData.profile_picture" />
+                    <img class="profile-image" :src="user.profile_picture" />
                     <img v-if="isUserVerified" class="verified-icon" src="../../../assets/icons/checkMark.svg" />
                 </div>
 
-                <h2 class="profile-name">{{ userData.username }}</h2>
-                <p class="profile-role">{{ userData.username }}</p>
+                <h2 class="profile-name">{{ user.username }}</h2>
+                <p class="profile-role">{{ user.username }}</p>
 
                 <p class="profile-bio">
-                    {{ userData.description }}
+                    {{ user.description }}
                 </p>
 
             </div>
 
             <div class="stats">
                 <div class="stat-item">
-                    <span class="stat-number">{{ userData.followers.length }}</span>
+                    <span class="stat-number">{{ user.count_followers }}</span>
                     <span class="stat-label">Followers</span>
                 </div>
-                <!--?Zatím nenačítá odběry (userData.Subscribers), je tam daná provizorní hodnota-->
+                <!--?Zatím nenačítá odběry (user.Subscribers), je tam daná provizorní hodnota-->
                 <div class="stat-item">
                     <span class="stat-number">{{ 5 }}</span>
                     <span class="stat-label">Subscribers</span>

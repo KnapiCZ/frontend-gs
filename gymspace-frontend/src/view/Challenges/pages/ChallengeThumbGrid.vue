@@ -14,7 +14,6 @@ const props = defineProps<{
 const userStore = userDataStore()
 
 let allChallenges = await apiChallenge('none')
-console.log(allChallenges)
 
 
 
