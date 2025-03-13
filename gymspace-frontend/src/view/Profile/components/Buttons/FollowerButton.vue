@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { IonButton, IonCol, modalController, useIonRouter } from '@ionic/vue';
-import FollowButton from '@/view/shared/components/FollowButton.vue';
+import { IonButton, IonCol, modalController, useIonRouter } from "@ionic/vue"
+import FollowButton from "@/view/shared/components/FollowButton.vue"
 
-import apiUser from '@/logic/API/apiUser';
+import apiUser from "@/logic/API/apiUser"
 
 const props = defineProps<{
     userId: number
@@ -10,23 +10,22 @@ const props = defineProps<{
 
 const router = useIonRouter()
 
-let userData = await apiUser("profile", props.userId, undefined, 'username,profile_picture')
+let userData = await apiUser("profile", props.userId, undefined, "username,profile_picture,")
 
 function goToUser() {
     modalController.dismiss()
-    router.push('/user/' + props.userId)
+    router.push("/user/" + props.userId)
 }
-
 </script>
 
 <template>
     <IonButton class="btn ion-no-padding" color="rgba(255, 255, 255, 0.103)">
-        <img class="logo-img" :src="userData.profile_picture" alt="" @click="goToUser()">
+        <img class="logo-img" :src="userData.profile_picture" alt="" @click="goToUser()" />
         <IonCol @click="goToUser()">
             <p class="top-item">@{{ userData.username }}</p>
             <p class="bottom-item">{{ userData.username }}</p>
         </IonCol>
-        <FollowButton :userId="(props.userId as number)" />
+        <FollowButton :userId="props.userId as number" />
     </IonButton>
 </template>
 
@@ -38,7 +37,7 @@ function goToUser() {
     text-align: left;
     border-radius: 30px 0 0 30px;
     border-bottom: 2px white solid;
-    background-color: #00000000 !important;
+    background-color: #00000000;
 }
 
 p {

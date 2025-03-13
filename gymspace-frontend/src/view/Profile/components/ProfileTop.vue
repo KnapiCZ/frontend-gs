@@ -1,29 +1,30 @@
 <script setup lang="ts">
-import { modalController } from '@ionic/vue'
-import { ref } from 'vue'
-import FollowersModal from './modals/FollowersModal.vue'
-import UserMenu from '@/view/Menus/components/UserMenu.vue'
-import router from '@/router'
+import { modalController } from "@ionic/vue"
+import { ref } from "vue"
+import FollowersModal from "./modals/FollowersModal.vue"
+import UserMenu from "@/view/Menus/components/UserMenu.vue"
+import router from "@/router"
 
 const props = defineProps<{
+    id: number
     background_picture: string
     profile_picture: string
     count_followers: number
     count_posts: number
     username: string
+    full_name: string
 }>()
 
-const logged_user = localStorage.getItem("logged_user_id") as unknown as number
 const renderedUserId = ref(router.currentRoute.value.params.id as unknown as number)
 
 let isModalOpen = false
 
-const openModal = async () => {
+const openModal = async (id: number) => {
     if (isModalOpen) return
 
     isModalOpen = true
     const modal = await modalController.create({
-        component: FollowersModal
+        component: FollowersModal,
     })
 
     await modal.present()
@@ -34,7 +35,7 @@ const openModal = async () => {
 }
 
 const checkLogin = () => {
-    if (renderedUserId.value == logged_user) return true
+    if (renderedUserId.value == props.id) return true
     else return false
 }
 
@@ -43,34 +44,33 @@ let isUserVerified = 1
 
 <template>
     <div id="background" :style="{ backgroundImage: 'url(' + props.background_picture + ')' }">
-        <UserMenu v-show="checkLogin()" />
         <div class="main-info border-gradient">
             <div class="profile-image-container row">
                 <div>
-                    <img class="gym-image" :src="profile_picture" alt="Gym Logo">
+                    <img class="gym-image" :src="profile_picture" alt="Gym Logo" />
                 </div>
                 <div class="center-div">
-                    <img class="profile-image" :src="profile_picture">
+                    <img class="profile-image" :src="profile_picture" />
                     <img v-if="isUserVerified" class="verified-icon" src="../../../assets/icons/checkMark.svg" />
                 </div>
                 <div>
-                    <img class="division-image" :src="profile_picture">
-                    <img class="division-image" :src="profile_picture">
-                    <img class="division-image" :src="profile_picture">
+                    <img class="division-image" :src="profile_picture" />
+                    <img class="division-image" :src="profile_picture" />
+                    <img class="division-image" :src="profile_picture" />
                 </div>
             </div>
             <div class="row">
-                <div class="column" @click="openModal()">
-                    <h2 class="top-item1">{{ count_followers }}</h2>
-                    <p class="bottom-item">Followers</p>
+                <div class="column side" @click="openModal(id)">
+                    <h2>{{ count_followers }}</h2>
+                    <p>Followers</p>
                 </div>
-                <div class="column">
-                    <h2 class="top-item"> {{ username }}</h2>
-                    <p class="bottom-item">{{ username }}</p>
+                <div class="column middle">
+                    <h2>{{ full_name }}</h2>
+                    <p>{{ username }}</p>
                 </div>
-                <div class="column">
-                    <h2 class="top-item1">{{ count_posts }}</h2>
-                    <p class="bottom-item">Posts</p>
+                <div class="column side">
+                    <h2>{{ count_posts }}</h2>
+                    <p>Posts</p>
                 </div>
             </div>
         </div>
@@ -104,7 +104,15 @@ let isUserVerified = 1
 }
 
 .column {
-    width: 30%;
+    z-index: 2;
+}
+
+.side {
+    flex: 1;
+}
+
+.middle {
+    flex: 2;
 }
 
 .row {
@@ -151,7 +159,6 @@ let isUserVerified = 1
     background: yellow;
     border-radius: 50%;
 }
-
 
 .border-gradient::before {
     background: linear-gradient(180deg,

@@ -1,9 +1,22 @@
 <script setup lang="ts">
-import { modalController, IonContent, IonCol, IonFab, IonGrid, IonImg, IonRow, IonTitle, IonToolbar, IonButton, IonButtons, IonModal } from '@ionic/vue';
-import { camera, trash, close } from 'ionicons/icons';
-import { usePhotoGallery, UserPhoto } from '@/plugins/usePhotoGallery';
-import { userDataStore } from '@/stores/UserDataStore';
-import PostCropper from '@/view/Post/components/PostCropper.vue';
+import {
+    modalController,
+    IonContent,
+    IonCol,
+    IonFab,
+    IonGrid,
+    IonImg,
+    IonRow,
+    IonTitle,
+    IonToolbar,
+    IonButton,
+    IonButtons,
+    IonModal,
+} from "@ionic/vue"
+import { camera, trash, close } from "ionicons/icons"
+import { usePhotoGallery, UserPhoto } from "@/plugins/usePhotoGallery"
+import { userDataStore } from "@/stores/UserDataStore"
+import PostCropper from "@/view/Post/components/PostCropper.vue"
 
 const props = defineProps<{
     img: string
@@ -11,17 +24,14 @@ const props = defineProps<{
     ratios: []
 }>()
 
-const { photos, takePhoto } = usePhotoGallery();
+const { photos, takePhoto } = usePhotoGallery()
 const userStore = userDataStore()
-
-
 
 async function save() {
     if (props.name == "Banner") {
-        userStore.addToDict("editedUser", 'background_picture', userStore.croppedChoosenPhoto)
-    }
-    else {
-        userStore.addToDict("editedUser", 'profile_picture', userStore.croppedChoosenPhoto)
+        userStore.addToDict("editedUser", "background_picture", userStore.croppedChoosenPhoto)
+    } else {
+        userStore.addToDict("editedUser", "profile_picture", userStore.croppedChoosenPhoto)
     }
     modalController.dismiss()
 }
@@ -32,9 +42,7 @@ function setImage() {
 </script>
 
 <template>
-    <IonButton :id="props.name" class="tlacitko" @click="setImage()" expand="full">
-        Edit {{ name }}
-    </IonButton>
+    <IonButton :id="props.name" class="tlacitko" @click="setImage()" expand="full"> Edit {{ name }} </IonButton>
     <IonModal :trigger="props.name">
         <IonToolbar>
             <IonButtons slot="start">
@@ -49,14 +57,17 @@ function setImage() {
         <IonContent>
             <IonFab vertical="bottom" horizontal="center" slot="fixed">
                 <button @click="takePhoto()">
-                    <img src="@/assets/icons/camera.svg">
+                    <img src="@/assets/icons/camera.svg" />
                 </button>
             </IonFab>
             <IonGrid>
                 <IonRow>
-                    <IonCol size="3" :key="photo.filepath" v-for="photo in photos">
-                        <IonImg id="thumbnail" :src="photo.webviewPath"
-                            @click="() => userStore.choosenPhoto = (photo.webviewPath as unknown as string)" />
+                    <IonCol size="3" :key="photo.webviewPath" v-for="photo in photos">
+                        <IonImg
+                            id="thumbnail"
+                            :src="photo.webviewPath"
+                            @click="() => (userStore.choosenPhoto = photo.webviewPath as unknown as string)"
+                        />
                     </IonCol>
                 </IonRow>
             </IonGrid>
@@ -93,6 +104,5 @@ img {
     height: 100%;
     margin: 10px 20px;
     vertical-align: middle;
-
 }
 </style>

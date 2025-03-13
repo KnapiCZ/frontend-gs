@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import apiPost from '@/logic/API/apiPost'
-import { userDataStore } from '@/stores/UserDataStore';
+import { ref } from "vue"
+import apiPost from "@/logic/API/apiPost"
+import { userDataStore } from "@/stores/UserDataStore"
 
 const props = defineProps<{
     userId: number
@@ -15,20 +15,23 @@ const outline = ref("#f")
 // TODO: prepsat props.userId na logged_user, protoze tohle kontroluje zda logged_user liknul post a nedava to smysl
 isLiked.value = await apiPost("postLiked", props.postId, undefined, userStore.loggedUserId.toString())
 
-
-if (isLiked.value.liked) { opacity.value = 1; outline.value = "#fff000" }
-else { opacity.value = 0; outline.value = "#132546" }
+if (isLiked.value.liked) {
+    opacity.value = 1
+    outline.value = "#fff000"
+} else {
+    opacity.value = 0
+    outline.value = "#132546"
+}
 
 //posle do databaze zadost o zmenu stavu liknuti
 async function likeIt() {
     isLiked.value.liked = !isLiked.value.liked
     if (isLiked.value.liked) {
-        opacity.value = 1;
-        outline.value = "#fff000";
-    }
-    else {
-        opacity.value = 0;
-        outline.value = "#ffffff";
+        opacity.value = 1
+        outline.value = "#fff000"
+    } else {
+        opacity.value = 0
+        outline.value = "#ffffff"
     }
 
     //console.debug(await apiPost("updateLike", props.postId, undefined, userStore.loggedUserId.toString()))
@@ -38,8 +41,12 @@ async function likeIt() {
 <template>
     <button @click="likeIt()">
         <svg id="heart-icon">
-            <use class="heart-icon" href="../../../assets/icons/like.svg#heart" :fill-opacity="opacity"
-                fill="#fff000" />
+            <use
+                class="heart-icon"
+                href="../../../assets/icons/like.svg#heart"
+                :fill-opacity="opacity"
+                fill="#fff000"
+            />
         </svg>
     </button>
 </template>
@@ -74,26 +81,25 @@ svg:active {
     animation: none;
 }
 
-
 @keyframes liking {
     from {
-        transform: scale(1)
+        transform: scale(1);
     }
 
     25% {
-        transform: scale(0.95)
+        transform: scale(0.95);
     }
 
     50% {
-        transform: scale(1.1)
+        transform: scale(1.1);
     }
 
     75% {
-        transform: scale(0.95)
+        transform: scale(0.95);
     }
 
     to {
-        transform: scale(1)
+        transform: scale(1);
     }
 }
 </style>

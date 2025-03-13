@@ -1,31 +1,45 @@
 <script setup lang="ts">
-import { IonModal, IonToolbar, modalController, IonHeader, IonButton, IonButtons, IonTitle, IonItem, IonContent, IonInput, IonRadioGroup, IonRadio } from '@ionic/vue'
-import { ref } from 'vue'
-import { userDataStore } from '@/stores/UserDataStore'
+import {
+    IonToolbar,
+    modalController,
+    IonHeader,
+    IonButton,
+    IonButtons,
+    IonTitle,
+    IonItem,
+    IonContent,
+    IonInput,
+    IonRadioGroup,
+    IonRadio,
+} from "@ionic/vue"
+import { onMounted, ref } from "vue"
+import { userDataStore } from "@/stores/UserDataStore"
+import apiUser from "@/logic/API/apiUser"
 
 const userStore = userDataStore()
 
-let text = ref()
+const text = ref<string>()
 
-let sex: { [id: string]: string } = {
-    "M": "Male",
-    "F": "Female",
-    "O": "Other",
-    "N": "Rather not to say",
+const cancel = () => {
+    modalController.dismiss()
 }
 
-
-function cancel() {
-    modalController.dismiss({ id: "sex-modal" })
+const save = async () => {
+    await apiUser("update", 3, JSON.stringify({ sex: text.value })).then((response) => {
+        if (response.status == "success") {
+            userStore.addToDict("editedUser", "sex", text.value)
+        } else {
+            console.log(response)
+        }
+    })
+    modalController.dismiss()
 }
 
-function save() {
-    modalController.dismiss({ id: "sex-modal" })
-}
-
-function updateText() {
-}
-
+onMounted(() => {
+    if (userStore.getFromDict("editedUser", "sex") == undefined) text.value = userStore.getFromDict("user", "sex")
+    else text.value = userStore.getFromDict("editedUser", "sex")
+    console.log(text.value)
+})
 </script>
 
 <template>
@@ -34,31 +48,26 @@ function updateText() {
             <IonButtons slot="start">
                 <IonButton @click="cancel()">Cancel</IonButton>
             </IonButtons>
-            <IonTitle>Sex</IonTitle>
+            <IonTitle>Biological Sex</IonTitle>
             <IonButtons slot="end">
-                <IonButton class="save-button" :strong="true" @click="save()">
-                    Confirm</IonButton>
+                <IonButton class="save-button" :strong="true" @click="save()"> Confirm</IonButton>
             </IonButtons>
         </IonToolbar>
     </IonHeader>
     <IonContent>
         <IonRadioGroup v-model="text">
             <IonItem>
-                <IonRadio value="M" justify="space-between" @click="updateText()">Male</IonRadio>
+                <IonRadio value="m" justify="space-between">Male</IonRadio>
             </IonItem>
             <IonItem>
-                <IonRadio value="F" justify="space-between" @click="updateText()">Female</IonRadio>
+                <IonRadio value="f" justify="space-between">Female</IonRadio>
             </IonItem>
             <IonItem>
-                <IonRadio value="O" justify="space-between" @click="updateText()">Other</IonRadio>
-            </IonItem>
-            <IonItem>
-                <IonRadio value="N" justify="space-between" @click="updateText()">Rather not to say</IonRadio>
+                <IonRadio value="n" justify="space-between">Rather not to say</IonRadio>
             </IonItem>
         </IonRadioGroup>
     </IonContent>
 </template>
-
 
 <style scoped>
 ion-title {

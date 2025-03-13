@@ -1,24 +1,21 @@
 <script setup lang="ts">
-import { IonPage, IonTabs, IonRouterOutlet, IonTabBar, IonTabButton } from '@ionic/vue'
-import apiUser from '@/logic/API/apiUser'
-import { onMounted, ref } from 'vue'
+import { IonPage, IonTabs, IonRouterOutlet, IonTabBar, IonTabButton } from "@ionic/vue"
+import apiUser from "@/logic/API/apiUser"
+import { onMounted, ref } from "vue"
 
 const user_id = localStorage.getItem("logged_user_id") as unknown as number
 const profile_picture = ref<string>()
 
 onMounted(async () => {
-    await apiUser("profile", user_id, undefined, 'profile_picture,').then((response) => {
+    await apiUser("profile", user_id, undefined, "profile_picture,").then((response) => {
         if (response.status == "success") profile_picture.value = response.data.profile_picture
     })
-
 })
-
 </script>
 
-
 <template>
-    <IonPage class="ion-no-padding">
-        <IonTabs class="ion-no-padding">
+    <IonPage>
+        <IonTabs>
             <IonRouterOutlet></IonRouterOutlet>
             <IonTabBar slot="bottom">
                 <IonTabButton tab="user" class="no-filter" :href="'/user/' + user_id">
@@ -26,34 +23,30 @@ onMounted(async () => {
                 </IonTabButton>
 
                 <IonTabButton tab="community" href="/community/">
-                    <img class="colored" src="../../../assets/new_icons/Gym.svg" alt="">
+                    <img class="colored" src="../../../assets/new_icons/Gym.svg" alt="" />
                 </IonTabButton>
 
                 <IonTabButton tab="postadd" href="/addPost">
-                    <img src="../../../assets/icons/plusbutton.svg" alt="">
+                    <img src="../../../assets/icons/plusbutton.svg" alt="" />
                 </IonTabButton>
 
                 <IonTabButton tab="games" href="/games/">
-                    <img class="colored" src="../../../assets/new_icons/Games.svg" alt="">
+                    <img class="colored" src="../../../assets/new_icons/Games.svg" alt="" />
                 </IonTabButton>
 
                 <IonTabButton tab="forYou" href="/explore/">
-                    <img class="colored" src="../../../assets/new_icons/Search.svg" alt="">
+                    <img class="colored" src="../../../assets/new_icons/Search.svg" alt="" />
                 </IonTabButton>
             </IonTabBar>
         </IonTabs>
     </IonPage>
 </template>
 
-
 <script lang="ts">
 export default {
-    data: () => ({ value: 4 }),
+    data: () => ({ value: 2 }),
 }
-
-
 </script>
-
 
 <style scoped>
 img {
@@ -67,10 +60,7 @@ img {
 
 ion-tab-bar {
     --background: black;
-}
-
-IonTabButton {
-    max-width: 0;
+    padding-bottom: env(safe-area-inset-bottom);
 }
 
 .tab-selected {

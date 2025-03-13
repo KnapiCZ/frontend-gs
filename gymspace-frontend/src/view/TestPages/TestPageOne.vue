@@ -1,32 +1,31 @@
 <template>
-    <IonPage>
-        <IonHeader>
-            <IonToolbar>
-                <IonTitle>Media Test</IonTitle>
-            </IonToolbar>
-        </IonHeader>
-        <IonContent class="ion-padding">
-            <IonButton @click="getMedia">Load Media</IonButton>
-            <div v-if="mediaList.length">
-                <IonImg v-for="(media, index) in mediaList" :key="index" :src="media" />
-            </div>
-        </IonContent>
-    </IonPage>
+    <div>
+        <button @click="recordVideo">📹 Nahrát video</button>
+        <video v-if="videoPath" :src="videoPath" controls></video>
+    </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { Media } from '@capacitor-community/media';
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonImg } from '@ionic/vue';
+import { ref } from "vue"
 
-const mediaList = ref([]);
+const videoPath = ref(null)
 
-const getMedia = async () => {
-    try {
-        const result = await Media.getMedias({ quantity: 5 });
-        mediaList.value = result.medias.map(media => media.path);
-    } catch (error) {
-        console.error('Error fetching media:', error);
+const recordVideo = async () => {
+    if (!navigator.device || !navigator.device.capture) {
+        console.error("📛 Capture API není podporováno!")
+        return
     }
-};
+
+    navigator.device.capture.captureVideo(
+        (mediaFiles) => {
+            if (mediaFiles.length > 0) {
+                videoPath.value = mediaFiles[0].fullPath // Uložená cesta k videu
+            }
+        },
+        (error) => {
+            console.error("❌ Chyba při nahrávání videa:", error)
+        },
+        { limit: 1, duration: 15 }, // Například omezení na 15 sekund
+    )
+}
 </script>
