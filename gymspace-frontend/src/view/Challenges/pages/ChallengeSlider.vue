@@ -1,16 +1,15 @@
 <script setup lang="ts">
-import { Swiper, SwiperSlide } from 'swiper/vue'
-import { userDataStore } from '@/stores/UserDataStore'
-import apiPost from '@/logic/API/apiPost'
-import { IonModal } from '@ionic/vue'
-import ChallengeSwipeCard from '../components/ChallengeSwipeCard.vue'
+import { Swiper, SwiperSlide } from "swiper/vue"
+import { userDataStore } from "@/stores/UserDataStore"
+import apiPost from "@/logic/API/apiPost"
+import { IonModal } from "@ionic/vue"
+import ChallengeSwipeCard from "../components/ChallengeSwipeCard.vue"
 
 const props = defineProps<{
     row: string
     id: number
     cards: string[]
 }>()
-
 
 let userStore = userDataStore()
 //let postIds = await apiPost('recommendedPosts', userStore.loggedUserId)
@@ -21,33 +20,38 @@ let challenges = [props.id, 32, 12, 5]
 
 <template>
     <div :id="'challenge-modal' + props.row + props.id" class="image-wrapper">
-        <img id="challenge-thumbnail" src="../../../assets/images/photo1.jpg" alt="">
+        <img id="challenge-thumbnail" src="../../../assets/images/Bodybuilding.png" alt="" />
     </div>
-    <IonModal ref="modal" :trigger="'challenge-modal' + props.row + props.id"
-        :key="'challenge-swipe' + userStore.clickedChallenge">
-
+    <IonModal
+        ref="modal"
+        :trigger="'challenge-modal' + props.row + props.id"
+        :key="'challenge-swipe' + userStore.clickedChallenge"
+    >
         <div class="cards">
-            <ChallengeSwipeCard v-for="(card, index) in cards" :key="card" :card="card" :is-current="index === 0"
-                @cardAccepted="$emit('cardAccepted');" @cardRejected="$emit('cardRejected');"
-                @cardSkipped="$emit('cardSkipped');" @hideCard="$emit('hideCard');" />
+            <ChallengeSwipeCard
+                v-for="(card, index) in cards"
+                :key="card"
+                :card="card"
+                :is-current="index === 0"
+                @cardAccepted="$emit('cardAccepted')"
+                @cardRejected="$emit('cardRejected')"
+                @cardSkipped="$emit('cardSkipped')"
+                @hideCard="$emit('hideCard')"
+            />
         </div>
     </IonModal>
 </template>
 
-
 <script lang="ts">
-
 export default {
-
     props: {
         cards: {
             type: Array,
-            required: true
-        }
-    }
+            required: true,
+        },
+    },
 }
 </script>
-
 
 <style scoped>
 div.swiper {
