@@ -4,10 +4,10 @@ import { ref, onMounted } from "vue"
 import { userDataStore } from "@/stores/UserDataStore"
 import Swiper from "swiper"
 import { SwiperOptions } from "swiper/types"
-import { FreeMode, Pagination } from 'swiper/modules'
-import 'swiper/css'
-import 'swiper/css/free-mode'
-import 'swiper/css/pagination'
+import { FreeMode, Pagination } from "swiper/modules"
+import "swiper/css"
+import "swiper/css/free-mode"
+import "swiper/css/pagination"
 import "swiper/swiper-bundle.css"
 
 const modules = [FreeMode, Pagination]
@@ -17,8 +17,18 @@ const isChecked = ref(false) // Checkbox state
 const isOldEnough = ref(true)
 const days = Array.from({ length: 31 }, (_, i) => i + 1) // [1, 2, ..., 31]
 const months = [
-    "January", "February", "March", "April", "May", "June", "July",
-    "August", "September", "October", "November", "December"
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
 ]
 const years = Array.from({ length: 101 }, (_, i) => (new Date().getFullYear() - i).toString())
 
@@ -35,13 +45,13 @@ const daySwiper = ref<Swiper | null>(null)
 const monthSwiper = ref<Swiper | null>(null)
 const yearSwiper = ref<Swiper | null>(null)
 
-const customSwiperOptions = (customEvents: SwiperOptions['on'] = {}): SwiperOptions => ({
-    direction: 'vertical',
+const customSwiperOptions = (customEvents: SwiperOptions["on"] = {}): SwiperOptions => ({
+    direction: "vertical",
     slidesPerView: 3,
     centeredSlides: true,
     freeMode: false,
     pagination: {
-        clickable: true
+        clickable: true,
     },
     touchReleaseOnEdges: false,
     modules: modules,
@@ -52,17 +62,26 @@ const customSwiperOptions = (customEvents: SwiperOptions['on'] = {}): SwiperOpti
 
 // Initialize Swiper for each column
 const initializeSwiper = () => {
-    daySwiper.value = new Swiper('.day-swiper', customSwiperOptions({
-        slideChangeTransitionEnd: updateDayValue,
-    }))
+    daySwiper.value = new Swiper(
+        ".day-swiper",
+        customSwiperOptions({
+            slideChangeTransitionEnd: updateDayValue,
+        }),
+    )
 
-    monthSwiper.value = new Swiper('.month-swiper', customSwiperOptions({
-        slideChangeTransitionEnd: updateMonthValue,
-    }))
+    monthSwiper.value = new Swiper(
+        ".month-swiper",
+        customSwiperOptions({
+            slideChangeTransitionEnd: updateMonthValue,
+        }),
+    )
 
-    yearSwiper.value = new Swiper('.year-swiper', customSwiperOptions({
-        slideChangeTransitionEnd: updateYearValue,
-    }))
+    yearSwiper.value = new Swiper(
+        ".year-swiper",
+        customSwiperOptions({
+            slideChangeTransitionEnd: updateYearValue,
+        }),
+    )
 }
 
 const updateDayValue = () => {
@@ -106,12 +125,12 @@ const checkAge = () => {
     const age = Math.abs(ageDate.getUTCFullYear() - 1970) // Adjusting for the years difference
 
     if (age >= 13 && isChecked.value) {
-        const formattedMonth = (months.indexOf(selectedMonth.value) + 1).toString().padStart(2, '0')
-        const formattedDay = selectedDay.value.toString().padStart(2, '0')
+        const formattedMonth = (months.indexOf(selectedMonth.value) + 1).toString().padStart(2, "0")
+        const formattedDay = selectedDay.value.toString().padStart(2, "0")
         const formattedBirthDate = selectedYear.value + "-" + formattedMonth + "-" + formattedDay
 
         userStore.addToDict("registerData", "birthDate", formattedBirthDate)
-        router.push('/step-2')
+        router.push("/step-2")
     } else {
         isOldEnough.value = false
     }
@@ -131,38 +150,50 @@ onMounted(() => {
             <div class="date-slider box border-gradient wrapper-div">
                 <div class="swiper-container day-swiper">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide" v-for="(day) in days" :key="day">
-                            <div class="item" :class="{ active: day === selectedDay }">{{ day }}</div>
+                        <div class="swiper-slide" v-for="day in days" :key="day">
+                            <div class="item" :class="{ active: day === selectedDay }">
+                                {{ day }}
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="swiper-container month-swiper">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide" v-for="(month) in months" :key="month">
-                            <div class="item" :class="{ active: month === selectedMonth }">{{ month }}</div>
+                        <div class="swiper-slide" v-for="month in months" :key="month">
+                            <div class="item" :class="{ active: month === selectedMonth }">
+                                {{ month }}
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="swiper-container year-swiper">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide" v-for="(year) in years" :key="year">
-                            <div class="item" :class="{ active: year === selectedYear }">{{ year }}</div>
+                        <div class="swiper-slide" v-for="year in years" :key="year">
+                            <div class="item" :class="{ active: year === selectedYear }">
+                                {{ year }}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <p v-show="!isOldEnough" id="warning-age">
-                You must be at least 13 years old to use this app
-            </p>
+            <p v-show="!isOldEnough" id="warning-age">You must be at least 13 years old to use this app</p>
             <label class="pretty-checkbox box">
                 <input type="checkbox" v-model="isChecked" />
                 <span class="checkbox"></span>
-                <span class="label-text">I confirm that I have familiarized myself with the <a
-                        href="https://liborzabloudil.notion.site/Privacy-center-GymSpace-App-181a27c10d4180c28b3fd6973ffdf5d7?pvs=4">
-                        Privacy Policy </a> and the <a
-                        href="https://liborzabloudil.notion.site/Gymspace-Safety-Policy-0bd2b02002c845c9a14bbca1b52420ff?pvs=4">Terms
-                        and Conditions </a></span>
+                <span class="label-text"
+                    >I confirm that I have familiarized myself with the
+                    <a
+                        href="https://liborzabloudil.notion.site/Privacy-center-GymSpace-App-181a27c10d4180c28b3fd6973ffdf5d7?pvs=4"
+                    >
+                        Privacy Policy
+                    </a>
+                    and the
+                    <a
+                        href="https://liborzabloudil.notion.site/Gymspace-Safety-Policy-0bd2b02002c845c9a14bbca1b52420ff?pvs=4"
+                        >Terms and Conditions
+                    </a></span
+                >
             </label>
             <IonButton fill="solid" class="sign-up-button" @click="checkAge()">NEXT</IonButton>
         </IonContent>
@@ -179,7 +210,7 @@ ion-content {
 }
 
 #warning-age {
-    color: #F2634A;
+    color: #f2634a;
     font-weight: 800;
     width: 90%;
     text-align: center;
@@ -189,14 +220,16 @@ ion-content {
 .date-slider {
     margin: 60px auto;
     width: 90%;
-
 }
 
 .border-gradient::before {
-    background: linear-gradient(135deg,
+    background: linear-gradient(
+            135deg,
             rgb(255, 255, 255, 0.35) 14%,
             rgba(255, 255, 255, 0.59) 64%,
-            rgb(247, 205, 182, 0.94) 87%) #fff00021;
+            rgb(247, 205, 182, 0.94) 87%
+        )
+        #fff00021;
 }
 
 .swiper-container {
@@ -220,7 +253,9 @@ ion-content {
 .item {
     font-size: 16px;
     display: flex;
-    transition: transform 0.3s ease, color 0.3s ease;
+    transition:
+        transform 0.3s ease,
+        color 0.3s ease;
     scale: 0.8;
     opacity: 0.25;
 }
@@ -238,7 +273,7 @@ ion-content {
 
 .month-swiper::before,
 .month-swiper::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 20%;
     height: 60%;
@@ -278,7 +313,7 @@ ion-content {
     transition: background-color 0.3s ease;
 }
 
-.pretty-checkbox input[type="checkbox"]:checked+.checkbox {
+.pretty-checkbox input[type="checkbox"]:checked + .checkbox {
     background-color: #fff000;
 }
 

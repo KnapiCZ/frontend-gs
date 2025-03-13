@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import { IonContent, IonPage } from '@ionic/vue'
-import SportBox from '../components/SportBox.vue'
-import apiSport from '@/logic/API/apiSport'
+import { IonContent, IonPage } from "@ionic/vue"
+import SportBox from "../components/SportBox.vue"
+import apiSport from "@/logic/API/apiSport"
 
 let sports = await apiSport("allSports")
 sports = sports.data
-
 </script>
 
 <template>
@@ -14,13 +13,18 @@ sports = sports.data
             <h1 class="sign-up">Choose your sports</h1>
 
             <div class="grid-container">
-                <SportBox v-for="sport in sports" :key="sport.id" :title="sport.title" :description="sport.description"
-                    :imageSrc="sport.sport_image" :sport_id="sport.id" />
+                <SportBox
+                    v-for="sport in sports"
+                    :key="sport.id"
+                    :title="sport.title"
+                    :description="sport.description"
+                    :imageSrc="sport.sport_image"
+                    :sport_id="sport.id"
+                />
             </div>
         </IonContent>
     </IonPage>
 </template>
-
 
 <style scoped>
 .grid-container {
@@ -33,7 +37,7 @@ sports = sports.data
     box-sizing: border-box;
 }
 
-.grid-container>* {
+.grid-container > * {
     position: relative;
 }
 </style>
