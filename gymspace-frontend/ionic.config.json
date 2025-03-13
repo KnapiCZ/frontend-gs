@@ -1,7 +1,7 @@
 {
-  "name": "gymspace-frontend",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "vue-vite"
+    "name": "gymspace-frontend",
+    "integrations": {
+        "capacitor": {}
+    },
+    "type": "vue-vite"
 }
