@@ -1,24 +1,21 @@
 <script setup lang="ts">
-import { userDataStore } from '@/stores/UserDataStore'
-import { useIonRouter } from '@ionic/vue'
+import { userDataStore } from "@/stores/UserDataStore"
+import { useIonRouter } from "@ionic/vue"
 
 const router = useIonRouter()
 const userStore = userDataStore()
 const props = defineProps<{
-    title: string,
-    description: string,
-    imageSrc: string,
+    title: string
+    description: string
+    imageSrc: string
     sport_id: number
 }>()
 
-
 const toggleGlow = () => {
     userStore.addToDict("registerData", "sports", [props.sport_id])
-    router.push('/step-5')
-
+    router.push("/step-5")
 }
 </script>
-
 
 <template>
     <div class="card" @click="toggleGlow">
@@ -31,7 +28,6 @@ const toggleGlow = () => {
         </div>
     </div>
 </template>
-
 
 <style scoped>
 .card {
@@ -87,13 +83,13 @@ p {
     bottom: -1px;
     border-radius: 6px;
     padding: 1px;
-    background: linear-gradient(135deg,
-            #fff 4%,
-            #ffffff75 52%,
-            #ffffff59 80%) #fff00021;
-    mask: linear-gradient(white 0 0) content-box,
+    background: linear-gradient(135deg, #fff 4%, #ffffff75 52%, #ffffff59 80%) #fff00021;
+    mask:
+        linear-gradient(white 0 0) content-box,
         linear-gradient(white 0 0);
-    -webkit-mask: linear-gradient(white 0 0) content-box, linear-gradient(white 0 0);
+    -webkit-mask:
+        linear-gradient(white 0 0) content-box,
+        linear-gradient(white 0 0);
     mask-composite: exclude;
 }
 </style>

@@ -6,7 +6,7 @@ import apiUser from "@/logic/API/apiUser"
 
 const userStore = userDataStore()
 const router = useIonRouter()
-const selectedSex = ref('')
+const selectedSex = ref("")
 
 let user_id = localStorage.getItem("logged_user_id")
 let data = {}
@@ -16,13 +16,12 @@ const toggleSex = (sex: string) => {
 
 const setSex = async () => {
     userStore.addToDict("registerData", "sex", selectedSex.value)
-    let path = '/user/' + user_id
+    let path = "/user/" + user_id
 
     router.push(path)
     data = userStore.getDictAsJson("registerData")
-    await apiUser("update", (user_id as unknown as number), JSON.stringify(data))
+    await apiUser("update", user_id as unknown as number, JSON.stringify(data))
 }
-
 </script>
 
 <template>
@@ -30,24 +29,39 @@ const setSex = async () => {
         <IonContent class="sign-up-content top-padding-notch" :scroll-y="false">
             <h1 class="sign-up">Choose your gender...</h1>
             <div class="sex-buttons-container">
-                <img src="../../../assets/images/Male.png" alt="Male Icon" class="sex-icon"
-                    style="margin-right: 40%; bottom: 65%;" />
-                <button id="male" class="sex-button  border-gradient" :class="{ active: selectedSex === 'm' }"
-                    @click="toggleSex('m')">
+                <img
+                    src="../../../assets/images/Male.png"
+                    alt="Male Icon"
+                    class="sex-icon"
+                    style="margin-right: 40%; bottom: 65%"
+                />
+                <button
+                    id="male"
+                    class="sex-button border-gradient"
+                    :class="{ active: selectedSex === 'm' }"
+                    @click="toggleSex('m')"
+                >
                     MALE
                 </button>
-                <img src="../../../assets/images/Female.png" alt="Female Icon" class="sex-icon"
-                    style="margin-left: 25%; top: -25%;" />
-                <button id="female" class="sex-button border-gradient" :class="{ active: selectedSex === 'f' }"
-                    @click="toggleSex('f')">
+                <img
+                    src="../../../assets/images/Female.png"
+                    alt="Female Icon"
+                    class="sex-icon"
+                    style="margin-left: 25%; top: -25%"
+                />
+                <button
+                    id="female"
+                    class="sex-button border-gradient"
+                    :class="{ active: selectedSex === 'f' }"
+                    @click="toggleSex('f')"
+                >
                     FEMALE
                 </button>
             </div>
-            <IonButton fill="solid" class="sign-up-button" @click='setSex'>FINISH</IonButton>
+            <IonButton fill="solid" class="sign-up-button" @click="setSex">FINISH</IonButton>
         </IonContent>
     </IonPage>
 </template>
-
 
 <style scoped>
 h1 {
@@ -75,27 +89,31 @@ h1 {
     justify-content: center;
     align-items: center;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
     margin-left: 10px;
     margin-right: 10px;
 }
 
 #male.border-gradient::before {
-    background: linear-gradient(230deg,
-            rgba(255, 255, 255, 0.5) 0%,
-            rgba(255, 240, 0, 0.65) 28%,
-            rgba(255, 255, 255, 0.86) 51%,
-            rgba(255, 255, 255, 0.35) 80%);
+    background: linear-gradient(
+        230deg,
+        rgba(255, 255, 255, 0.5) 0%,
+        rgba(255, 240, 0, 0.65) 28%,
+        rgba(255, 255, 255, 0.86) 51%,
+        rgba(255, 255, 255, 0.35) 80%
+    );
 }
 
 #female.border-gradient::before {
-    background: linear-gradient(165deg,
-            rgba(255, 255, 255, 0.35) 14%,
-            rgba(255, 255, 255, 0.46) 44%,
-            rgba(255, 255, 255, 1) 89% rgba(255, 240, 0, 0.93) 100%);
+    background: linear-gradient(
+        165deg,
+        rgba(255, 255, 255, 0.35) 14%,
+        rgba(255, 255, 255, 0.46) 44%,
+        rgba(255, 255, 255, 1) 89% rgba(255, 240, 0, 0.93) 100%
+    );
 }
-
-
 
 .sex-button.active {
     border-color: #ffe600;

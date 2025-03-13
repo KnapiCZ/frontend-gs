@@ -71,7 +71,6 @@ const setHeight = () => {
     router.push("step-7")
 }
 
-
 onMounted(() => {
     updateTransformations()
 })
@@ -90,16 +89,18 @@ onMounted(() => {
                     </div>
                 </div>
                 <div class="scale-lines row">
-                    <div v-for="item in visibleScaleSteps" :key="item" :id="'scale-line-' + item"
-                        :class="['scale-line', { 'active': item === currentNumber }]">
-                    </div>
+                    <div
+                        v-for="item in visibleScaleSteps"
+                        :key="item"
+                        :id="'scale-line-' + item"
+                        :class="['scale-line', { active: item === currentNumber }]"
+                    ></div>
                 </div>
             </div>
             <IonButton fill="solid" class="sign-up-button" @click="setHeight">NEXT</IonButton>
         </IonContent>
     </IonPage>
 </template>
-
 
 <style scoped>
 .swiper-container {
@@ -118,7 +119,7 @@ onMounted(() => {
 }
 
 .border-gradient::before {
-    background: linear-gradient(45deg, #ffffffce 0%, #ffffff5b 10%, #fff00059 72%, #fff000 100%)
+    background: linear-gradient(45deg, #ffffffce 0%, #ffffff5b 10%, #fff00059 72%, #fff000 100%);
 }
 
 .value {
@@ -147,7 +148,9 @@ onMounted(() => {
     margin: 0 12px;
     background-color: #fff;
     text-align: center;
-    transition: transform 0.2s ease, opacity 0.2s ease;
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
 }
 
 .column {

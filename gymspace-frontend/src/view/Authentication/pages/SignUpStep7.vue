@@ -24,7 +24,7 @@ const onTouchMove = (e: TouchEvent) => {
     }
 }
 
-const onTouchEnd = () => { }
+const onTouchEnd = () => {}
 
 // Update visibleScaleSteps and manually trigger transformations
 const changeValue = async (delta: number) => {
@@ -96,9 +96,12 @@ onMounted(() => {
                     </div>
                 </div>
                 <div class="scale-lines row">
-                    <div v-for="item in visibleScaleSteps" :key="item" :id="'scale-line-' + item"
-                        :class="['scale-line', { 'active': item === currentNumber }]">
-                    </div>
+                    <div
+                        v-for="item in visibleScaleSteps"
+                        :key="item"
+                        :id="'scale-line-' + item"
+                        :class="['scale-line', { active: item === currentNumber }]"
+                    ></div>
                 </div>
             </div>
             <IonButton fill="solid" class="sign-up-button" @click="setWeigth">NEXT</IonButton>
@@ -123,7 +126,7 @@ onMounted(() => {
 }
 
 .border-gradient::before {
-    background: linear-gradient(45deg, #ffffffce 0%, #ffffff5b 10%, #fff00059 72%, #fff000 100%)
+    background: linear-gradient(45deg, #ffffffce 0%, #ffffff5b 10%, #fff00059 72%, #fff000 100%);
 }
 
 .value {
@@ -152,7 +155,9 @@ onMounted(() => {
     margin: 0 12px;
     background-color: #fff;
     text-align: center;
-    transition: transform 0.2s ease, opacity 0.2s ease;
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
 }
 
 .column {

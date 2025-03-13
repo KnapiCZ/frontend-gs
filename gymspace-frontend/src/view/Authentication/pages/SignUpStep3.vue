@@ -4,19 +4,17 @@ import { ref, onMounted } from "vue"
 import apiAuth from "@/logic/API/apiAuth"
 import "swiper/swiper-bundle.css"
 
-
-
 const router = useIonRouter()
 const code = ref(["", "", "", "", "", ""])
 const inputs = ref<HTMLInputElement[]>([])
-const error_message = ref('')
+const error_message = ref("")
 const sendCode = async () => {
     await apiAuth("send2FA")
 }
 
 const confirm2FA = async () => {
     const formattedCode = code.value.join("") // Join code digits as a string
-    await apiAuth("confirm2FA", JSON.stringify({ "token": formattedCode })).then((response) => {
+    await apiAuth("confirm2FA", JSON.stringify({ token: formattedCode })).then((response) => {
         if (response.status == "success") {
             router.push("/step-4")
         } else {
@@ -27,8 +25,8 @@ const confirm2FA = async () => {
 
 const onPaste = (event: ClipboardEvent): void => {
     event.preventDefault()
-    const pasteData = event.clipboardData?.getData('text') || ''
-    const digits = pasteData.split('').slice(0, 6) // Extract the pasted digits
+    const pasteData = event.clipboardData?.getData("text") || ""
+    const digits = pasteData.split("").slice(0, 6) // Extract the pasted digits
     digits.forEach((digit, index) => {
         if (!isNaN(Number(digit))) {
             code.value[index] = digit
@@ -52,8 +50,7 @@ const onBackspace = (index: number) => {
 
 onMounted(async () => {
     sendCode()
-});
-
+})
 </script>
 
 <template>
@@ -64,19 +61,30 @@ onMounted(async () => {
 
             <div class="verification-container">
                 <div class="code-inputs">
-                    <IonInput v-for="(digit, index) in code" :key="index" v-model="code[index]" maxlength="1"
-                        @input="onInput(index)" @paste="onPaste" @keydown.backspace="onBackspace(index)" ref="inputs"
-                        mode="ios" class="code-box border-gradient" type="text" inputmode="numeric" />
+                    <IonInput
+                        v-for="(digit, index) in code"
+                        :key="index"
+                        v-model="code[index]"
+                        maxlength="1"
+                        @input="onInput(index)"
+                        @paste="onPaste"
+                        @keydown.backspace="onBackspace(index)"
+                        ref="inputs"
+                        mode="ios"
+                        class="code-box border-gradient"
+                        type="text"
+                        inputmode="numeric"
+                    />
                 </div>
             </div>
             <div class="text-div">
-
                 <p>You have received an email with a 6-digit code.</p>
-                <br>
-                <p>If you did not receive such an email, please chceck your spam and wait for a few minutes then
+                <br />
+                <p>
+                    If you did not receive such an email, please chceck your spam and wait for a few minutes then
                     <a class="try-again" @click="sendCode">send again.</a>
                 </p>
-                <br>
+                <br />
                 <p class="resend-message">E-mail has been sent to you!</p>
                 <p class="error-message">{{ error_message }}</p>
             </div>
@@ -133,9 +141,11 @@ ion-input.code-box {
 
 ion-input.border-gradient::before {
     padding: 2px;
-    background: linear-gradient(125deg,
-            rgba(255, 255, 255, 0.35) 14%,
-            rgba(255, 255, 255, 0.59) 64%,
-            rgb(236, 218, 71, 0.47) 94%);
+    background: linear-gradient(
+        125deg,
+        rgba(255, 255, 255, 0.35) 14%,
+        rgba(255, 255, 255, 0.59) 64%,
+        rgb(236, 218, 71, 0.47) 94%
+    );
 }
 </style>

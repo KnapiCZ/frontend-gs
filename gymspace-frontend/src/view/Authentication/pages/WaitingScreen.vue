@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { IonPage, IonContent, IonGrid, IonRow, IonCol, IonButton, useIonRouter } from '@ionic/vue'
-import { ref, onMounted } from 'vue'
+import { IonPage, IonContent, IonGrid, IonRow, IonCol, IonButton, useIonRouter } from "@ionic/vue"
+import { ref, onMounted } from "vue"
 
 const router = useIonRouter()
 
 const time = ref({
     days: 0,
     hours: 0,
-    minutes: 0
+    minutes: 0,
 })
 
 const logOut = () => {
@@ -19,7 +19,7 @@ const deleteAccount = () => {
     router.navigate("/user/delete-account", "forward", "push")
 }
 
-const targetDate = new Date('2025-05-18T00:00:00').getTime()
+const targetDate = new Date("2025-05-18T00:00:00").getTime()
 
 const updateCountdown = () => {
     const now = new Date().getTime()
@@ -37,8 +37,7 @@ const updateCountdown = () => {
 onMounted(() => {
     updateCountdown()
     setInterval(updateCountdown, 1000)
-});
-
+})
 </script>
 
 <template>
@@ -51,7 +50,6 @@ onMounted(() => {
                 <p class="welcome-text">AND WELCOME TO</p>
                 <p class="gymspace-text">GYMSPACE</p>
                 <p class="launch-text">APP IS LAUNCHING IN:</p>
-
 
                 <div class="countdown box">
                     <div class="countdown-item">
@@ -77,8 +75,11 @@ onMounted(() => {
                 <IonRow>
                     <IonCol size="6">
                         <img class="info-card-images" src="../../../assets/images/web.png" alt="Globe Icon" />
-                        <a href="https://pcaczechia.com/product/tickets-championship-2025" target="_blank"
-                            class="info-card-link">
+                        <a
+                            href="https://pcaczechia.com/product/tickets-championship-2025"
+                            target="_blank"
+                            class="info-card-link"
+                        >
                             <div class="info-card border-gradient">
                                 <p class="card-title">Get Your Ticket</p>
                                 <p class="card-text">News, promotions & competitions!</p>
@@ -86,9 +87,12 @@ onMounted(() => {
                         </a>
                     </IonCol>
                     <IonCol size="6">
-                        <img class="info-card-images" src="../../../assets/images/kickstarter.png"
-                            alt="Kickstarter Icon" />
-                        <a href="https://startovac.cz/projekty/gymspace.app" target="_blank" class="info-card-link ">
+                        <img
+                            class="info-card-images"
+                            src="../../../assets/images/kickstarter.png"
+                            alt="Kickstarter Icon"
+                        />
+                        <a href="https://startovac.cz/projekty/gymspace.app" target="_blank" class="info-card-link">
                             <div class="info-card border-gradient">
                                 <p class="card-title">Crowdfunding</p>
                                 <p class="card-text">Support us and our GymSpace journey!</p>
@@ -98,32 +102,49 @@ onMounted(() => {
                 </IonRow>
             </IonGrid>
 
-            <a class="link-button " target="_blank"
-                href="https://pcaczechia.com/product/registrations-championship-2025">
+            <a
+                class="link-button"
+                target="_blank"
+                href="https://pcaczechia.com/product/registrations-championship-2025"
+            >
                 <div class="athlete-section border-gradient">
                     <p class="athlete-text">Are you an Athlete?</p>
                     <p class="championship-text">PARTICIPATE IN</p>
-                    <p class="highlight-text"><img src="../../../assets/images/PCACZECHIACHAMPIONSHIP2025.svg"></p>
-                    <p> Mam slevovy kod: <span class="slevovy-kod">gsapp15</span></p>
+                    <p class="highlight-text">
+                        <img src="../../../assets/images/PCACZECHIACHAMPIONSHIP2025.svg" />
+                    </p>
+                    <p>Mam slevovy kod: <span class="slevovy-kod">gsapp15</span></p>
                 </div>
             </a>
 
             <div class="social-icons box">
-                <a href="https://www.instagram.com/gymspace_official" target="_blank"
-                    class="social-icon-btn border-gradient box">
-                    <img class="social-icon-images" src="../../../assets/icons/instagram.svg">
+                <a
+                    href="https://www.instagram.com/gymspace_official"
+                    target="_blank"
+                    class="social-icon-btn border-gradient box"
+                >
+                    <img class="social-icon-images" src="../../../assets/icons/instagram.svg" />
                 </a>
-                <a href="https://www.facebook.com/gymspace.official" target="_blank"
-                    class="social-icon-btn border-gradient box">
-                    <img class="social-icon-images" src="../../../assets/icons/facebook.svg">
+                <a
+                    href="https://www.facebook.com/gymspace.official"
+                    target="_blank"
+                    class="social-icon-btn border-gradient box"
+                >
+                    <img class="social-icon-images" src="../../../assets/icons/facebook.svg" />
                 </a>
-                <a href="https://www.youtube.com/@gymspaceofficial" target="_blank"
-                    class="social-icon-btn border-gradient box">
-                    <img class="social-icon-images" src="../../../assets/icons/youtube.svg">
+                <a
+                    href="https://www.youtube.com/@gymspaceofficial"
+                    target="_blank"
+                    class="social-icon-btn border-gradient box"
+                >
+                    <img class="social-icon-images" src="../../../assets/icons/youtube.svg" />
                 </a>
-                <a href="https://www.tiktok.com/@gymspace.app" target="_blank"
-                    class="social-icon-btn border-gradient box">
-                    <img class="social-icon-images" src="../../../assets/icons/tiktok.svg">
+                <a
+                    href="https://www.tiktok.com/@gymspace.app"
+                    target="_blank"
+                    class="social-icon-btn border-gradient box"
+                >
+                    <img class="social-icon-images" src="../../../assets/icons/tiktok.svg" />
                 </a>
             </div>
             <IonCol>
@@ -157,44 +178,52 @@ onMounted(() => {
 .info-card,
 .welcome-header,
 .athlete-section {
-    background: rgba(0, 0, 0, 0.30);
+    background: rgba(0, 0, 0, 0.3);
     padding: 10px;
     border-radius: 6px;
-    box-shadow: -4px 4px 19.90px 1px #0000009E;
+    box-shadow: -4px 4px 19.9px 1px #0000009e;
     backdrop-filter: blur(20px);
 }
 
 .welcome-header.border-gradient::before {
-    background: linear-gradient(80deg,
-            rgba(255, 255, 255, 0.86) 0%,
-            rgba(255, 255, 255, 0.35) 10%,
-            rgba(255, 240, 0, 0.35) 72%,
-            rgba(255, 255, 255, 0.20) 100%);
+    background: linear-gradient(
+        80deg,
+        rgba(255, 255, 255, 0.86) 0%,
+        rgba(255, 255, 255, 0.35) 10%,
+        rgba(255, 240, 0, 0.35) 72%,
+        rgba(255, 255, 255, 0.2) 100%
+    );
 }
 
 .info-card.border-gradient::before {
-    background: linear-gradient(35deg,
-            rgba(255, 255, 255, 0.5) 0%,
-            rgba(255, 240, 0, 0.65) 28%,
-            rgba(255, 255, 255, 0.86) 51%,
-            rgba(255, 255, 255, 0.35) 80%);
+    background: linear-gradient(
+        35deg,
+        rgba(255, 255, 255, 0.5) 0%,
+        rgba(255, 240, 0, 0.65) 28%,
+        rgba(255, 255, 255, 0.86) 51%,
+        rgba(255, 255, 255, 0.35) 80%
+    );
 }
 
 .athlete-section.border-gradient::before {
-    background: linear-gradient(200deg,
-            rgba(255, 255, 255, 0.50) 0,
-            rgba(255, 0, 0, 1) 28%,
-            rgba(255, 255, 255, 0.86) 51%,
-            rgba(255, 255, 255, 0.35) 80%,
-            rgba(0, 141, 223, 0.56) 100%);
+    background: linear-gradient(
+        200deg,
+        rgba(255, 255, 255, 0.5) 0,
+        rgba(255, 0, 0, 1) 28%,
+        rgba(255, 255, 255, 0.86) 51%,
+        rgba(255, 255, 255, 0.35) 80%,
+        rgba(0, 141, 223, 0.56) 100%
+    );
 }
 
 .social-icon-btn.border-gradient::before {
     border-radius: 50%;
-    background: linear-gradient(180deg,
-            rgba(255, 255, 255, 0.53) 8%,
-            rgba(255, 255, 255, 0.46) 31%,
-            rgba(255, 240, 0, 0.20) 100%);
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.53) 8%,
+        rgba(255, 255, 255, 0.46) 31%,
+        rgba(255, 240, 0, 0.2) 100%
+    );
 }
 
 .info-card,
@@ -224,8 +253,7 @@ onMounted(() => {
 }
 
 .thank-you-text {
-
-    margin: 1.50vh auto;
+    margin: 1.5vh auto;
 }
 
 .welcome-text {
@@ -239,13 +267,13 @@ onMounted(() => {
     font-weight: 900;
     line-height: 3rem;
     color: #fff000;
-    margin: 2.00vh auto;
+    margin: 2vh auto;
     text-shadow:
-        0 0 1.53px #FFFF0080,
-        0 0 3.05px #FFFF0080,
-        0 0 10.68px #FFFF0080,
-        0 0 21.36px #FFFF0080,
-        0 0 36.62px #FFFF0080;
+        0 0 1.53px #ffff0080,
+        0 0 3.05px #ffff0080,
+        0 0 10.68px #ffff0080,
+        0 0 21.36px #ffff0080,
+        0 0 36.62px #ffff0080;
 }
 
 .launch-text {
@@ -253,7 +281,7 @@ onMounted(() => {
 }
 
 .countdown {
-    margin: 1.00vh 0;
+    margin: 1vh 0;
     gap: 20px;
 }
 
@@ -274,7 +302,7 @@ onMounted(() => {
     width: 1px;
     height: 55px;
     background-color: gray;
-    opacity: 0.50;
+    opacity: 0.5;
     margin-top: 10px;
 }
 
@@ -282,7 +310,7 @@ onMounted(() => {
     width: 60%;
     height: 1px;
     background-color: gray;
-    opacity: 0.50;
+    opacity: 0.5;
     margin: 2vh auto;
 }
 
@@ -334,7 +362,6 @@ img.info-card-images {
 }
 
 .social-icons {
-
     margin-top: 20px;
     gap: 35px;
 }
@@ -345,13 +372,13 @@ img.info-card-images {
 }
 
 .social-icon-btn {
-    width: 12.00vw;
+    width: 12vw;
     aspect-ratio: 1;
-    background-color: rgba(255, 255, 255, 0.10);
+    background-color: rgba(255, 255, 255, 0.1);
     border-radius: 50%;
-    transition: all 0.30s ease;
+    transition: all 0.3s ease;
     backdrop-filter: blur(20px);
-    box-shadow: -4px 4px 19.90px 1px #0000009E;
+    box-shadow: -4px 4px 19.9px 1px #0000009e;
 }
 
 ion-button {

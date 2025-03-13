@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import { IonContent, IonItem, IonList, IonPage, IonSearchbar, modalController } from "@ionic/vue"
-import { Geolocation } from '@capacitor/geolocation'
+import { Geolocation } from "@capacitor/geolocation"
 import { onMounted, ref } from "vue"
 import apiGym from "@/logic/API/apiGym"
 import ChooseGymModal from "../components/ChooseGymModal.vue"
 
 interface gym {
-    id: number,
-    title: string,
-    city: string,
+    id: number
+    title: string
+    city: string
     address: string
-    latitude: number,
+    latitude: number
     longitude: number
 }
 
@@ -20,9 +20,7 @@ declare global {
     }
 }
 
-
 const google = (window as any).google
-
 
 const searchQuery = ref("")
 
@@ -54,11 +52,11 @@ const openModal = async (gym_id: number) => {
         component: ChooseGymModal,
         breakpoints: [0.5, 0.6], // Define your breakpoints here
         initialBreakpoint: 0.5, // Set the initial breakpoint (default is 0.5)
-        cssClass: 'custom-modal-class border-radius', // Optional, if you want to add custom CSS classes
+        cssClass: "custom-modal-class border-radius", // Optional, if you want to add custom CSS classes
         showBackdrop: false,
         componentProps: {
-            gym_id: gym_id
-        }
+            gym_id: gym_id,
+        },
     })
 
     await modal.present()
@@ -82,7 +80,10 @@ const loadGoogleMapsApi = () => {
 
 const printCurrentPosition = async () => {
     const coordinates = await Geolocation.getCurrentPosition()
-    return { lat: coordinates.coords.latitude, lng: coordinates.coords.longitude }
+    return {
+        lat: coordinates.coords.latitude,
+        lng: coordinates.coords.longitude,
+    }
 }
 
 const initMap = async () => {
@@ -111,178 +112,178 @@ const initMap = async () => {
                 elementType: "geometry",
                 stylers: [
                     {
-                        color: "#212121"
-                    }
-                ]
+                        color: "#212121",
+                    },
+                ],
             },
             {
                 elementType: "labels.icon",
                 stylers: [
                     {
-                        visibility: "off"
-                    }
-                ]
+                        visibility: "off",
+                    },
+                ],
             },
             {
                 elementType: "labels.text.fill",
                 stylers: [
                     {
-                        color: "#757575"
-                    }
-                ]
+                        color: "#757575",
+                    },
+                ],
             },
             {
                 elementType: "labels.text.stroke",
                 stylers: [
                     {
-                        color: "#212121"
-                    }
-                ]
+                        color: "#212121",
+                    },
+                ],
             },
             {
                 featureType: "administrative",
                 elementType: "geometry",
                 stylers: [
                     {
-                        color: "#757575"
-                    }
-                ]
+                        color: "#757575",
+                    },
+                ],
             },
             {
                 featureType: "administrative.country",
                 elementType: "labels.text.fill",
                 stylers: [
                     {
-                        color: "#9e9e9e"
-                    }
-                ]
+                        color: "#9e9e9e",
+                    },
+                ],
             },
             {
                 featureType: "administrative.land_parcel",
                 elementType: "labels.text.fill",
                 stylers: [
                     {
-                        color: "#bdbdbd"
-                    }
-                ]
+                        color: "#bdbdbd",
+                    },
+                ],
             },
             {
                 featureType: "landscape",
                 elementType: "geometry",
                 stylers: [
                     {
-                        color: "#212121"
-                    }
-                ]
+                        color: "#212121",
+                    },
+                ],
             },
             {
                 featureType: "poi",
                 elementType: "geometry",
                 stylers: [
                     {
-                        color: "#2c2c2c"
-                    }
-                ]
+                        color: "#2c2c2c",
+                    },
+                ],
             },
             {
                 featureType: "poi.park",
                 elementType: "geometry",
                 stylers: [
                     {
-                        color: "#181818"
-                    }
-                ]
+                        color: "#181818",
+                    },
+                ],
             },
             {
                 featureType: "road",
                 elementType: "geometry.fill",
                 stylers: [
                     {
-                        color: "#2c2c2c"
-                    }
-                ]
+                        color: "#2c2c2c",
+                    },
+                ],
             },
             {
                 featureType: "road",
                 elementType: "geometry.stroke",
                 stylers: [
                     {
-                        color: "#3a3a3a"
-                    }
-                ]
+                        color: "#3a3a3a",
+                    },
+                ],
             },
             {
                 featureType: "road",
                 elementType: "labels.icon",
                 stylers: [
                     {
-                        visibility: "off"
-                    }
-                ]
+                        visibility: "off",
+                    },
+                ],
             },
             {
                 featureType: "road.highway",
                 elementType: "geometry",
                 stylers: [
                     {
-                        color: "#3c3c3c"
-                    }
-                ]
+                        color: "#3c3c3c",
+                    },
+                ],
             },
             {
                 featureType: "road.highway",
                 elementType: "geometry.stroke",
                 stylers: [
                     {
-                        color: "#3c3c3c"
-                    }
-                ]
+                        color: "#3c3c3c",
+                    },
+                ],
             },
             {
                 featureType: "road.highway.controlled_access",
                 elementType: "geometry",
                 stylers: [
                     {
-                        color: "#2e2e2e"
-                    }
-                ]
+                        color: "#2e2e2e",
+                    },
+                ],
             },
             {
                 featureType: "transit",
                 elementType: "geometry",
                 stylers: [
                     {
-                        color: "#2c2c2c"
-                    }
-                ]
+                        color: "#2c2c2c",
+                    },
+                ],
             },
             {
                 featureType: "transit.station",
                 elementType: "labels.text.fill",
                 stylers: [
                     {
-                        color: "#8a8a8a"
-                    }
-                ]
+                        color: "#8a8a8a",
+                    },
+                ],
             },
             {
                 featureType: "water",
                 elementType: "geometry",
                 stylers: [
                     {
-                        color: "#212121"
-                    }
-                ]
+                        color: "#212121",
+                    },
+                ],
             },
             {
                 featureType: "water",
                 elementType: "labels.text.fill",
                 stylers: [
                     {
-                        color: "#3d3d3d"
-                    }
-                ]
-            }
+                        color: "#3d3d3d",
+                    },
+                ],
+            },
         ],
         zoomControl: false,
         streetViewControl: false,
@@ -290,9 +291,8 @@ const initMap = async () => {
         mapTypeControl: false,
     })
 
-
-    const addMarker = (gym: gym, map) => {
-
+    const addMarker = (gym: gym, map: any) => {
+        console.log(gym)
         const marker = new google.maps.Marker({
             position: { lat: gym.latitude, lng: gym.longitude },
             map,
@@ -306,19 +306,17 @@ const initMap = async () => {
         marker.addListener("click", () => {
             openModal(gym.id)
         })
-
     }
-
 
     for (let i = 0; i < markerGyms.value.length; i++) {
         addMarker(markerGyms.value[i], map)
     }
-
 }
 
 const loadMarkers = async () => {
     await apiGym("location").then((response) => {
         if (response.status == "success") {
+            console.log(response.data)
             markerGyms.value = response.data
         }
     })
@@ -326,10 +324,9 @@ const loadMarkers = async () => {
 
 window.initMap = initMap // Expose initMap for callback
 
-await loadMarkers()
-
 onMounted(async () => {
     try {
+        await loadMarkers()
         await loadGoogleMapsApi()
         await initMap()
     } catch (error) {
@@ -340,17 +337,23 @@ onMounted(async () => {
 
 <template>
     <IonPage>
-        <IonContent class="sign-up-content ">
+        <IonContent class="sign-up-content">
             <div class="top-container">
                 <div class="title-container border-gradient">
-                    <p class="small-text">CHOOSE YOUR </p>
+                    <p class="small-text">CHOOSE YOUR</p>
                     <h1 class="highlight">HOME GYM</h1>
                 </div>
-                <IonSearchbar mode="md" showCancelButton="never" class="custom border-gradient"
-                    @update:modelValue="handleSearch" debounce="200" v-model="searchQuery" />
+                <IonSearchbar
+                    mode="md"
+                    showCancelButton="never"
+                    class="custom border-gradient"
+                    @update:modelValue="handleSearch"
+                    debounce="200"
+                    v-model="searchQuery"
+                />
                 <IonList v-if="searchQuery.length >= 3 && gyms.length != 0">
                     <IonItem v-for="gym in gyms" :key="gym.id" class="gym-bio" @click.once="openModal(gym.id)">
-                        <img class="logo" src="../../../assets/images/logo-glow.png" alt="">
+                        <img class="logo" src="../../../assets/images/logo-glow.png" alt="" />
                         <div class="gym-info">
                             <h2>{{ gym.title }}</h2>
                             <p class="bio-text">{{ gym.city }}, {{ gym.address }}</p>
@@ -359,14 +362,14 @@ onMounted(async () => {
                     </IonItem>
                 </IonList>
                 <p class="create-text">
-                    Can`t find your gym? <a href="/create-gym" class="create-link">Create it!</a>
+                    Can`t find your gym?
+                    <a href="/create-gym" class="create-link">Create it!</a>
                 </p>
             </div>
             <div id="map"></div>
         </IonContent>
     </IonPage>
 </template>
-
 
 <style scoped>
 #map {
@@ -405,7 +408,6 @@ h1 {
 }
 
 .highlight {
-    color: #fff000;
     font-weight: bold;
 }
 
@@ -415,14 +417,18 @@ ion-searchbar.custom {
     width: 97%;
     margin: 10px auto;
     padding: 0;
-    box-shadow: 0 0 10px #fff000, inset 0 0 25px 1px #7a7007;
+    box-shadow:
+        0 0 10px #fff000,
+        inset 0 0 25px 1px #7a7007;
     backdrop-filter: blur(5px);
     min-height: 0;
     border: none;
-    --background: linear-gradient(90deg,
-            rgba(224, 206, 13, 0.35) 0%,
-            rgba(175, 173, 150, 0.18) 88%,
-            rgb(169, 169, 169, 0.15) 100%);
+    --background: linear-gradient(
+        90deg,
+        rgba(224, 206, 13, 0.35) 0%,
+        rgba(175, 173, 150, 0.18) 88%,
+        rgb(169, 169, 169, 0.15) 100%
+    );
     --color: #fff;
     --placeholder-color: #fff;
     --icon-color: #fff000;
@@ -431,27 +437,31 @@ ion-searchbar.custom {
     --cancel-button-color: #19422d;
     --placeholder-font-weight: 700;
     --placeholder-opacity: 1;
-    --box-shadow: none
+    --box-shadow: none;
 }
 
 .title-container.border-gradient::before {
     border-radius: 0 0 6px 6px;
     padding-top: 0;
-    background: linear-gradient(180deg,
-            rgba(255, 255, 255, 0.46) 52%,
-            rgba(255, 255, 255, 0.69) 65%,
-            rgba(255, 240, 0, 0.68) 80%,
-            rgba(255, 240, 0, 0.34) 96%);
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.46) 52%,
+        rgba(255, 255, 255, 0.69) 65%,
+        rgba(255, 240, 0, 0.68) 80%,
+        rgba(255, 240, 0, 0.34) 96%
+    );
 }
 
 ion-searchbar.border-gradient::before {
-    background: conic-gradient(from 0deg,
-            rgba(255, 240, 0, 1) 0%,
-            rgba(255, 240, 0, 0.3) 50%,
-            rgba(255, 240, 0, 1) 73%,
-            rgba(255, 255, 255, 1) 75%,
-            rgba(255, 255, 255, 1) 77%,
-            rgba(255, 240, 0, 1) 79%)
+    background: conic-gradient(
+        from 0deg,
+        rgba(255, 240, 0, 1) 0%,
+        rgba(255, 240, 0, 0.3) 50%,
+        rgba(255, 240, 0, 1) 73%,
+        rgba(255, 255, 255, 1) 75%,
+        rgba(255, 255, 255, 1) 77%,
+        rgba(255, 240, 0, 1) 79%
+    );
 }
 
 .create-text {
@@ -503,6 +513,6 @@ ion-list {
 ion-item {
     padding: 2px 5px;
     border-radius: 6px;
-    --border-radius: 6px
+    --border-radius: 6px;
 }
 </style>

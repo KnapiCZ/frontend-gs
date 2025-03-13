@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { IonContent, IonButton, IonRow, IonCol, useIonRouter, modalController } from '@ionic/vue'
-import { onMounted, ref } from 'vue'
-import apiGym from '@/logic/API/apiGym'
-import apiUser from '@/logic/API/apiUser'
+import { IonContent, IonButton, IonRow, IonCol, useIonRouter, modalController } from "@ionic/vue"
+import { onMounted, ref } from "vue"
+import apiGym from "@/logic/API/apiGym"
+import apiUser from "@/logic/API/apiUser"
 
 const props = defineProps<{
     gym_id: number
@@ -17,10 +17,8 @@ const gymData = ref({
     country: "",
     creator: 0,
     count_members: 0,
-    count_spotters: 0
-
+    count_spotters: 0,
 })
-
 
 const joinGym = async () => {
     await apiGym("member-join", props.gym_id).then((response) => {
@@ -34,10 +32,14 @@ const joinGym = async () => {
 }
 
 const loadGym = async () => {
-    await apiGym("info", props.gym_id, undefined, "title,city,address,country,creator,count_members,count_spotters,").then((response) => {
+    await apiGym(
+        "info",
+        props.gym_id,
+        undefined,
+        "title,city,address,country,creator,count_members,count_spotters,",
+    ).then((response) => {
         if (response.status == "success") {
             gymData.value = response.data
-
         } else {
             error_message.value = response.message
         }
@@ -45,21 +47,18 @@ const loadGym = async () => {
     await apiUser("profile", gymData.value.creator, undefined, "username,").then((response) => {
         if (response.status == "success") gymData.value.creator = response.data.username
     })
-
-
 }
 
 onMounted(async () => {
     loadGym()
 })
-
 </script>
 
 <template>
     <ion-content class="custom ion-padding border-gradient" :key="props.gym_id">
         <div class="border-gradient">
             <div class="gym-bio">
-                <img class="logo" src="../../../assets/images/logo-glow.png" alt="">
+                <img class="logo" src="../../../assets/images/logo-glow.png" alt="" />
                 <div class="gym-info">
                     <h2>{{ gymData.title }}</h2>
                     <p class="bio-text">{{ gymData.country }}, {{ gymData.city }},{{ gymData.address }}</p>
@@ -80,9 +79,7 @@ onMounted(async () => {
                     <p class="small-title">spoting</p>
                 </IonCol>
             </IonRow>
-            <div class="gym-preview">
-                COMING SOON...
-            </div>
+            <div class="gym-preview">COMING SOON...</div>
             <p class="error-message">{{ error_message }}</p>
             <IonButton fill="solid" class="sign-up-button" @click="joinGym">JOIN THIS GYM</IonButton>
         </div>
@@ -92,12 +89,14 @@ onMounted(async () => {
 <style scoped>
 .border-gradient::before {
     inset: 0;
-    background: linear-gradient(190deg,
-            rgba(255, 255, 255, 0.59) 0%,
-            rgba(255, 240, 0, 0.98) 9%,
-            rgba(255, 255, 255, 0.46) 34%,
-            rgba(255, 255, 255, 0.69) 65%,
-            rgba(255, 240, 0, 0.34) 96%);
+    background: linear-gradient(
+        190deg,
+        rgba(255, 255, 255, 0.59) 0%,
+        rgba(255, 240, 0, 0.98) 9%,
+        rgba(255, 255, 255, 0.46) 34%,
+        rgba(255, 255, 255, 0.69) 65%,
+        rgba(255, 240, 0, 0.34) 96%
+    );
 }
 
 ion-page,
