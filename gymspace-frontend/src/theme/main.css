@@ -14,7 +14,7 @@
     font-family: "Etna-Sans-Serif";
     font-weight: 400;
     font-style: normal;
-    src: url(@/assets/fonts/Etna-Sans-Serif.otf);
+    src: url(@/assets/fonts/Etna-Sans-serif.otf);
 }
 
 * {
