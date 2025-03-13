@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import gymPoint from "../../../assets/new_icons/GymPoint.svg"
 defineProps<{
     points: number
 }>()
@@ -7,7 +8,7 @@ defineProps<{
 <template>
     <div class="points-wrapper row">
         <h5>{{ points }}</h5>
-        <img src="@/assets/icons/Points.svg" alt="Points" />
+        <img :src="gymPoint" alt="Points" />
     </div>
 </template>
 
@@ -21,8 +22,7 @@ defineProps<{
 }
 
 img {
-    filter: drop-shadow(0 0 1.526px rgba(255, 255, 0, 0.5)) drop-shadow(0 0 3.051px rgba(255, 255, 0, 0.5))
-        drop-shadow(0 0 10.68px rgba(255, 255, 0, 0.5)) drop-shadow(0 0 21.359px rgba(255, 255, 0, 0.5))
-        drop-shadow(0 0 36.616px rgba(255, 255, 0, 0.5)) drop-shadow(0 0 64.078px #ff0);
+    height: 60%;
+    filter: brightness(0) saturate(100%) invert(78%) sepia(74%) saturate(667%) hue-rotate(1deg) brightness(108%) contrast(103%) drop-shadow(0 0 1.526px rgba(255, 255, 0, 0.5)) drop-shadow(0 0 3.051px rgba(255, 255, 0, 0.5)) drop-shadow(0 0 10.68px rgba(255, 255, 0, 0.5)) drop-shadow(0 0 21.359px rgba(255, 255, 0, 0.5)) drop-shadow(0 0 36.616px rgba(255, 255, 0, 0.5)) drop-shadow(0 0 64.078px #ff0);
 }
 </style>

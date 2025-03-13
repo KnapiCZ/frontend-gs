@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import apiChallenge from '@/logic/API/apiChallenge'
-import { userDataStore } from '@/stores/UserDataStore'
+import { ref } from "vue"
+import apiChallenge from "@/logic/API/apiChallenge"
+import { userDataStore } from "@/stores/UserDataStore"
 // TODO: REDESIGN AFTER FIGMA DESIGN APPROVED !!!
 // TODO: REDESIGN AFTER FIGMA DESIGN APPROVED !!!
 // TODO: REDESIGN AFTER FIGMA DESIGN APPROVED !!!
@@ -14,15 +14,15 @@ const props = defineProps<{
 const user_id = localStorage.getItem("logged_user_id") ?? ""
 
 let data = {
-    "challenge": props.id,
-    "user": user_id,
-    "goal": 0,
-    "title": "dawd",
-    "description": "asdwad"
+    challenge: props.id,
+    user: user_id,
+    goal: 0,
+    title: "dawd",
+    description: "asdwad",
 }
 
-let challenge = await apiChallenge('getChallenge', props.id)
-let progress = await apiChallenge('getProgress', undefined,)
+let challenge = await apiChallenge("getChallenge", props.id)
+let progress = await apiChallenge("getProgress", undefined)
 let progressValue = ref(progress.progress)
 let progressCount = ref(0)
 let progressCompleted = ref(progress.completed)
@@ -30,34 +30,32 @@ let progressCompleted = ref(progress.completed)
 //TODO: predelat na api call neresit tady, zadat user a challenge id a vrati to zda je uzivatel pripojen
 function checkJoined() {
     if (challenge.members.includes(user_id)) {
-        progressCount.value = progressValue.value / data.challenge * 100
+        progressCount.value = (progressValue.value / data.challenge) * 100
         return true
-    }
-    else false
+    } else false
 }
 
 let isJoined = ref(checkJoined())
 
 async function joinChallenge() {
-    await apiChallenge('joinChallenge', props.id, user_id)
-    progress = await apiChallenge('getProgress', props.id, user_id)
+    await apiChallenge("joinChallenge", props.id, user_id)
+    progress = await apiChallenge("getProgress", props.id, user_id)
     progressValue = ref(progress.progress)
     isJoined.value = true
 }
 
 async function updateProgress() {
-    progressCount.value = progressValue.value / data.goal * 100
-    await apiChallenge('updateProgress', props.id, user_id, progressValue.value)
+    progressCount.value = (progressValue.value / data.goal) * 100
+    await apiChallenge("updateProgress", props.id, user_id, progressValue.value)
     if (progressCount.value == 100) {
         progressCompleted.value = true
     }
 }
-
 </script>
 
 <template>
     <div :key="'challenge' + props.id + keyChange" id="challenge-div" :class="{ active: isJoined }">
-        <img src="../../../assets/icons/trophy.svg" alt="">
+        <img src="../../../assets/icons/trophy.svg" alt="" />
         <h3>{{ data.title }}</h3>
         <p>{{ data.description }}</p>
         <p v-if="isJoined" id="progress-count">{{ progressValue }}/{{ data.goal }}</p>
@@ -68,17 +66,34 @@ async function updateProgress() {
 
         <div v-if="!progressCompleted" class="challenge-button-wrapper">
             <div v-if="isJoined" id="joined-buttons">
-                <button id="add-progress" @click="() => { progressValue += 1; updateProgress() }">Add +1</button>
-                <button id="complete-progress"
-                    @click="() => { progressValue = data.goal; updateProgress() }">Finish</button>
+                <button
+                    id="add-progress"
+                    @click="
+                        () => {
+                            progressValue += 1
+                            updateProgress()
+                        }
+                    "
+                >
+                    Add +1
+                </button>
+                <button
+                    id="complete-progress"
+                    @click="
+                        () => {
+                            progressValue = data.goal
+                            updateProgress()
+                        }
+                    "
+                >
+                    Finish
+                </button>
             </div>
             <button v-else id="join-challenge" @click="joinChallenge()">Join Challenge</button>
         </div>
         <p v-else id="completed">Completed</p>
-
     </div>
 </template>
-
 
 <style scoped>
 img {
@@ -111,7 +126,7 @@ img {
 #progress {
     background-color: #fff000;
     width: 50px;
-    height: 4px
+    height: 4px;
 }
 
 .challenge-button-wrapper {
