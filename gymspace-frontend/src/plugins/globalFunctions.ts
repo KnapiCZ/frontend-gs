@@ -1,2 +1,1 @@
-import { useRouter, useRoute } from 'vue-router';
-
+import { useRouter, useRoute } from "vue-router"

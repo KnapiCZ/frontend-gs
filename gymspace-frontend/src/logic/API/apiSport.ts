@@ -1,4 +1,4 @@
-import getConfig from "./apiConfig";
+import getConfig from "./apiConfig"
 
 /**
  * - allSports: gets all objects of sport
@@ -8,32 +8,26 @@ import getConfig from "./apiConfig";
  * @returns data you wanted from api
  */
 
-async function apiSport(apiType = '', objectId?: number) {
+async function apiSport(apiType = "", objectId?: number) {
     let response
     switch (apiType) {
-
         case "allSports":
-            response = await fetch(`${getConfig().apiBaseUrl}api/sport/`,
-                {
-                    method: 'GET',
-                    headers: getConfig().headers
-                }
-            )
+            response = await fetch(`${getConfig().apiBaseUrl}api/sport/`, {
+                method: "GET",
+                headers: getConfig().headers,
+            })
             return await response.json()
 
         case "sport":
-            response = await fetch(`${getConfig().apiBaseUrl}api/sport/${objectId}`,
-                {
-                    method: 'GET',
-                    headers: getConfig().headers
-                }
-            )
+            response = await fetch(`${getConfig().apiBaseUrl}api/sport/${objectId}`, {
+                method: "GET",
+                headers: getConfig().headers,
+            })
             return await response.json()
 
         default:
             return `Invalid apiType`
     }
-
 }
 
 export default apiSport
