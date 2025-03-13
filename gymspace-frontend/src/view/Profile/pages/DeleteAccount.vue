@@ -1,20 +1,31 @@
 <script setup lang="ts">
-import { IonContent, IonPage, IonButton, useIonRouter, IonInput, IonBackButton, IonToolbar, IonTitle, IonButtons, IonHeader } from "@ionic/vue"
-import { ref, onMounted } from "vue";
-import { eye } from 'ionicons/icons';
-import apiAuth from "@/logic/API/apiAuth";
-import apiUser from "@/logic/API/apiUser";
+import {
+    IonContent,
+    IonPage,
+    IonButton,
+    useIonRouter,
+    IonInput,
+    IonBackButton,
+    IonToolbar,
+    IonTitle,
+    IonButtons,
+    IonHeader,
+} from "@ionic/vue"
+import { ref, onMounted } from "vue"
+import { eye } from "ionicons/icons"
+import apiAuth from "@/logic/API/apiAuth"
+import apiUser from "@/logic/API/apiUser"
 import "swiper/swiper-bundle.css"
 
 const router = useIonRouter()
-const code = ref(["", "", "", "", "", ""]);
-const inputs = ref<HTMLInputElement[]>([]);
-const error_message = ref('')
-const passwordVisible = ref<boolean>(false);
+const code = ref(["", "", "", "", "", ""])
+const inputs = ref<HTMLInputElement[]>([])
+const error_message = ref("")
+const passwordVisible = ref<boolean>(false)
 const user_id = localStorage.getItem("logged_user_id") as unknown as number
 const form = ref({
     password: "",
-    email: ""
+    email: "",
 })
 
 const sendCode = async () => {
@@ -23,8 +34,16 @@ const sendCode = async () => {
 
 const confirm2FA = async () => {
     error_message.value = ""
-    const formattedCode = code.value.join(""); // Join code digits as a string
-    await apiUser("delete", user_id, JSON.stringify({ "token": formattedCode, "email": form.value.email, "password": form.value.password })).then((response) => {
+    const formattedCode = code.value.join("") // Join code digits as a string
+    await apiUser(
+        "delete",
+        user_id,
+        JSON.stringify({
+            token: formattedCode,
+            email: form.value.email,
+            password: form.value.password,
+        }),
+    ).then((response) => {
         if (response.status == "success") {
             localStorage.removeItem("Token")
             router.push("/login")
@@ -35,42 +54,39 @@ const confirm2FA = async () => {
 }
 
 const onPaste = (event: ClipboardEvent): void => {
-    event.preventDefault();
-    const pasteData = event.clipboardData?.getData('text') || '';
-    const digits = pasteData.split('').slice(0, 6); // Extract the pasted digits
+    event.preventDefault()
+    const pasteData = event.clipboardData?.getData("text") || ""
+    const digits = pasteData.split("").slice(0, 6) // Extract the pasted digits
     digits.forEach((digit, index) => {
         if (!isNaN(Number(digit))) {
-            code.value[index] = digit;
+            code.value[index] = digit
         }
-    });
-};
+    })
+}
 
 // Handle input
 const onInput = (index: number) => {
     if (code.value[index].length === 1 && index < code.value.length - 1) {
-        inputs.value[index + 1].focus();
+        inputs.value[index + 1].focus()
     }
-};
+}
 
 // Handle backspace
 const onBackspace = (index: number) => {
     if (code.value[index] === "" && index > 0) {
-        inputs.value[index - 1].focus();
+        inputs.value[index - 1].focus()
     }
-};
-
-const submitForm = () => {
-
 }
 
+const submitForm = () => {}
+
 const togglePasswordVisibility = () => {
-    passwordVisible.value = !passwordVisible.value;
-};
+    passwordVisible.value = !passwordVisible.value
+}
 
 onMounted(async () => {
-    sendCode();
-});
-
+    sendCode()
+})
 </script>
 
 <template>
@@ -78,7 +94,6 @@ onMounted(async () => {
         <IonHeader>
             <IonToolbar>
                 <IonButtons slot="start">
-
                     <IonBackButton></IonBackButton>
                 </IonButtons>
                 <IonTitle>Delete Account</IonTitle>
@@ -89,14 +104,34 @@ onMounted(async () => {
 
             <div class="input">
                 <form @submit.prevent="submitForm" ref="form">
-                    <IonInput id="email" class="custom" v-model="form.email" type="email" placeholder="Email"
-                        error-text="Invalid email" />
-                    <IonInput id="password" class="custom" v-model="form.password"
-                        :type="passwordVisible ? 'text' : 'password'" placeholder="Password">
-                        <IonButton class="show-password" @click="togglePasswordVisibility" fill="clear" slot="end"
-                            aria-label="Show/hide">
-                            <IonIcon slot="icon-only" :icon="eye" aria-hidden="true"
-                                style="font-size: 20px; vertical-align: top; padding: 0;">
+                    <IonInput
+                        id="email"
+                        class="custom"
+                        v-model="form.email"
+                        type="email"
+                        placeholder="Email"
+                        error-text="Invalid email"
+                    />
+                    <IonInput
+                        id="password"
+                        class="custom"
+                        v-model="form.password"
+                        :type="passwordVisible ? 'text' : 'password'"
+                        placeholder="Password"
+                    >
+                        <IonButton
+                            class="show-password"
+                            @click="togglePasswordVisibility"
+                            fill="clear"
+                            slot="end"
+                            aria-label="Show/hide"
+                        >
+                            <IonIcon
+                                slot="icon-only"
+                                :icon="eye"
+                                aria-hidden="true"
+                                style="font-size: 20px; vertical-align: top; padding: 0"
+                            >
                             </IonIcon>
                         </IonButton>
                     </IonInput>
@@ -104,21 +139,33 @@ onMounted(async () => {
             </div>
             <div class="verification-container">
                 <div class="code-inputs">
-                    <input v-for="(digit, index) in code" :key="index" v-model="code[index]" maxlength="1"
-                        @input="onInput(index)" @paste="onPaste" @keydown.backspace="onBackspace(index)" ref="inputs"
-                        class="code-box" type="text" inputmode="numeric" />
+                    <input
+                        v-for="(digit, index) in code"
+                        :key="index"
+                        v-model="code[index]"
+                        maxlength="1"
+                        @input="onInput(index)"
+                        @paste="onPaste"
+                        @keydown.backspace="onBackspace(index)"
+                        ref="inputs"
+                        class="code-box"
+                        type="text"
+                        inputmode="numeric"
+                    />
                 </div>
             </div>
             <div class="text-div">
-
-                <p>You have received an email with a 6-digit code. </p>
-                <br>
-                <p>If you did not receive such an email, please chceck your spam and wait or click:
+                <p>You have received an email with a 6-digit code.</p>
+                <br />
+                <p>
+                    If you did not receive such an email, please chceck your spam and wait or click:
                     <a class="try-again" @click="sendCode">send again.</a>
                 </p>
-                <br>
-                <p class="resend-message">Deleting your account will deactivate it for 30 days. After this period, your
-                    profile, data, and access to GymSpace will be permanently removed. This action cannot be undone.</p>
+                <br />
+                <p class="resend-message">
+                    Deleting your account will deactivate it for 30 days. After this period, your profile, data, and
+                    access to GymSpace will be permanently removed. This action cannot be undone.
+                </p>
                 <p class="error-message">{{ error_message }}</p>
             </div>
             <IonButton fill="solid" class="sign-up-button" @click="confirm2FA">DELETE ACCOUNT</IonButton>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { IonButton, modalController } from '@ionic/vue'
-import { ComponentRef } from '@ionic/core'
-import EditProfileModal from '../modals/EditProfileModal.vue'
+import { IonButton, modalController } from "@ionic/vue"
+import { ComponentRef } from "@ionic/core"
+import EditProfileModal from "../modals/EditProfileModal.vue"
 
 let isModalOpen = false
 
@@ -22,33 +22,30 @@ const openModal = async (modalComponent: ComponentRef) => {
 }
 </script>
 
-
-
 <template>
     <div class="border-gradient">
         <div class="buttons-wrapper row">
-            <div class="column" id="followers-modal">
+            <div class="column">
                 <IonButton id="user-edit" class="default" @click="openModal(EditProfileModal)">
-                    Edit profile
+                    Edit
                 </IonButton>
                 <p class="followed-by smallest-text">Followed by</p>
                 <p class="followers smallest-text">jan_fobl,mekenze,sd...</p>
             </div>
             <div class="row">
                 <div class="button-wrapper box border-gradient">
-                    <img class="rounded-button" src="../../../../assets/new_icons/chat.svg" alt="">
+                    <img class="rounded-button" src="../../../../assets/new_icons/chat.svg" alt="" />
                 </div>
                 <div class="button-wrapper box border-gradient">
-                    <img class="rounded-button" src="../../../../assets/new_icons/share.svg" alt="">
+                    <img class="rounded-button" src="../../../../assets/new_icons/share.svg" alt="" />
                 </div>
                 <div class="button-wrapper box border-gradient">
-                    <img class="rounded-button" src="../../../../assets/new_icons/options.svg" alt="">
+                    <img class="rounded-button" src="../../../../assets/new_icons/options.svg" alt="" />
                 </div>
             </div>
         </div>
     </div>
 </template>
-
 
 <style scoped>
 .column {
@@ -58,7 +55,7 @@ const openModal = async (modalComponent: ComponentRef) => {
 
 .border-gradient {
     margin: 10px 8px;
-    position: relative
+    position: relative;
 }
 
 .border-gradient::before {
@@ -72,14 +69,24 @@ const openModal = async (modalComponent: ComponentRef) => {
 
 .buttons-wrapper {
     width: auto;
+    padding: 12px 16px;
     border-radius: 6px;
     background: rgba(41, 40, 29, 0.18);
+}
+
+.row {
+    gap: 16px;
+    width: auto;
+}
+
+.column {
+    width: 100%;
 }
 
 .button-wrapper {
     height: 40px;
     aspect-ratio: 1;
-    margin: 5px;
+    margin: 0;
     border-radius: 50%;
     background-color: black;
 }
@@ -90,7 +97,7 @@ const openModal = async (modalComponent: ComponentRef) => {
     background: linear-gradient(180deg,
             rgba(255, 255, 255, 0.53) 8%,
             rgba(255, 255, 255, 0.46) 31%,
-            rgba(255, 255, 200, 0.20) 100%);
+            rgba(255, 255, 200, 0.2) 100%);
 }
 
 .rounded-button {
@@ -107,5 +114,9 @@ const openModal = async (modalComponent: ComponentRef) => {
     width: 100%;
     color: black;
     --background: #fff000;
+}
+
+#user-edit {
+    margin-bottom: 8px;
 }
 </style>

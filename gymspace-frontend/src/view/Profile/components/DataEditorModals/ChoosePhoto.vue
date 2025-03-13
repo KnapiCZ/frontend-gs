@@ -1,11 +1,27 @@
 <script setup lang="ts">
-import { IonContent, IonCol, IonFab, IonGrid, IonPage, IonHeader, IonIcon, IonImg, IonRow, IonTitle, IonToolbar, IonNavLink, IonButton, IonButtons, useIonRouter } from '@ionic/vue';
-import { camera, trash, close } from 'ionicons/icons';
-import { usePhotoGallery, UserPhoto } from '@/plugins/usePhotoGallery';
-import { userDataStore } from '@/stores/UserDataStore';
-const { photos, takePhoto } = usePhotoGallery();
+import {
+    IonContent,
+    IonCol,
+    IonFab,
+    IonGrid,
+    IonPage,
+    IonHeader,
+    IonIcon,
+    IonImg,
+    IonRow,
+    IonTitle,
+    IonToolbar,
+    IonNavLink,
+    IonButton,
+    IonButtons,
+    useIonRouter,
+} from "@ionic/vue"
+import { camera, trash, close } from "ionicons/icons"
+import { usePhotoGallery, UserPhoto } from "@/plugins/usePhotoGallery"
+import { userDataStore } from "@/stores/UserDataStore"
+const { photos, takePhoto } = usePhotoGallery()
 
-import PostCropper from '../components/PostCropper.vue';
+import PostCropper from "../components/PostCropper.vue"
 const userStore = userDataStore()
 </script>
 
@@ -26,14 +42,18 @@ const userStore = userDataStore()
         <IonContent>
             <IonFab vertical="bottom" horizontal="center" slot="fixed">
                 <button @click="takePhoto()">
-                    <img src="@/assets/icons/camera.svg">
+                    <img src="@/assets/icons/camera.svg" />
                 </button>
             </IonFab>
             <IonGrid>
                 <IonRow>
                     <IonCol size="3" :key="photo.filepath" v-for="photo in photos">
-                        <IonImg id="thumbnail" :src="photo.webviewPath"
-                            @click="userStore.choosenPhoto = (photo.webviewPath as unknown as string)"><img></IonImg>
+                        <IonImg
+                            id="thumbnail"
+                            :src="photo.filepath"
+                            @click="userStore.choosenPhoto = photo.webviewPath as unknown as string"
+                            ><img
+                        /></IonImg>
                     </IonCol>
                 </IonRow>
             </IonGrid>

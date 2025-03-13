@@ -1,20 +1,19 @@
 <script setup lang="ts">
 const props = defineProps({
-    social: []
+    social: [],
 })
 </script>
 
 <template>
     <div>
         <a v-if="props.social![0] != ''" :href="props.social![0]" target="_blank">
-            <img src="../../../../assets/icons/instagram.svg" alt="instagram">
+            <img src="../../../../assets/icons/instagram.svg" alt="instagram" />
         </a>
         <a v-if="props.social![1] != ''" :href="props.social![1]" target="_blank">
-            <img src="../../../../assets/icons/youtube.svg" alt="youtube">
+            <img src="../../../../assets/icons/youtube.svg" alt="youtube" />
         </a>
     </div>
 </template>
-
 
 <style scoped>
 div {
