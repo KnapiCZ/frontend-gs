@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import Swiper from 'swiper'
-import 'swiper/css'
+import { onMounted, ref } from "vue"
+import Swiper from "swiper"
+import "swiper/css"
 import "swiper/swiper-bundle.css"
 
 const props = defineProps<{
@@ -16,7 +16,8 @@ const props = defineProps<{
 
 const background_swiper = ref<Swiper | null>(null)
 
-const description = "We have been here for you since 2014. That's when we opened the largest We have been here for you since 2014. That's when we opened the largest We have been here for you since 2014. That's when we opened the largest..."
+const description =
+    "We have been here for you since 2014. That's when we opened the largest We have been here for you since 2014. That's when we opened the largest We have been here for you since 2014. That's when we opened the largest..."
 const expanded = ref(false)
 const truncatedText = description.slice(0, 80) + "..."
 
@@ -25,10 +26,10 @@ const toggleExpand = () => {
 }
 
 const initializeSwiper = () => {
-    background_swiper.value = new Swiper('.background-swiper', {
+    background_swiper.value = new Swiper(".background-swiper", {
         loop: true,
         autoplay: {
-            delay: 10000
+            delay: 10000,
         },
     })
 }
@@ -36,11 +37,9 @@ const initializeSwiper = () => {
 onMounted(() => {
     initializeSwiper()
 })
-
 </script>
 
 <template>
-
     <div class="swiper-container background-swiper">
         <div class="swiper-wrapper">
             <div class="swiper-slide" v-for="image in background_image">
@@ -78,7 +77,8 @@ onMounted(() => {
                     </button>
                 </p>
                 <a href="https://www.newpark.cz" target="_blank" class="header-link row">
-                    <img src="/src/assets/icons/link.svg" alt="link" class="header-link-icon" /> www.newpark.cz
+                    <img src="/src/assets/icons/link.svg" alt="link" class="header-link-icon" />
+                    www.newpark.cz
                 </a>
             </div>
         </div>
@@ -110,26 +110,27 @@ onMounted(() => {
 }
 
 .header-container .border-gradient {
-    background: linear-gradient(to bottom,
-            rgb(173, 173, 173) 4.06%,
-            rgba(170, 170, 170, 0.46) 45.45%,
-            rgba(22, 22, 22, 0.13) 100%);
+    background: linear-gradient(
+        to bottom,
+        rgb(173, 173, 173) 4.06%,
+        rgba(170, 170, 170, 0.46) 45.45%,
+        rgba(22, 22, 22, 0.13) 100%
+    );
 }
 
 .header-image {
     width: 14vw;
     aspect-ratio: 1;
     border-radius: 50%;
-    border: 2px solid #FFF000;
+    border: 2px solid #fff000;
     object-fit: contain;
 }
-
 
 h5 {
     margin-bottom: 4px;
 }
 
-.header-stats>div:nth-child(3) {
+.header-stats > div:nth-child(3) {
     border-left: 1px solid rgba(255, 255, 255, 0.2);
     border-right: 1px solid rgba(255, 255, 255, 0.2);
 }

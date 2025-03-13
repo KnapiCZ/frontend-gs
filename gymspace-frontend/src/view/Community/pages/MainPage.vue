@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { IonPage, IonContent, IonSearchbar, IonList, IonItem, modalController } from '@ionic/vue'
-import { userDataStore } from '@/stores/UserDataStore'
-import { onMounted, ref } from 'vue'
-import GymButton from '../components/GymButton.vue'
-import apiGym from '@/logic/API/apiGym'
-import apiDivision from '@/logic/API/apiDivision'
-import DivisionButton from '../components/DivisionButton.vue'
-import ChallengeModalComponent from '@/view/Challenges/components/ChallengeModalComponent.vue'
+import { IonPage, IonContent, IonSearchbar, IonList, IonItem, modalController } from "@ionic/vue"
+import { userDataStore } from "@/stores/UserDataStore"
+import { onMounted, ref } from "vue"
+import GymButton from "../components/GymButton.vue"
+import apiGym from "@/logic/API/apiGym"
+import apiDivision from "@/logic/API/apiDivision"
+import DivisionButton from "../components/DivisionButton.vue"
+import ChallengeModalComponent from "@/view/Challenges/components/ChallengeModalComponent.vue"
 
 const userStore = userDataStore()
 const gyms = ref<{ title: string; logo: string; id: number; city: string; address: string }[]>([])
@@ -19,12 +19,10 @@ const gym = ref({
     logo: "",
     id: 0,
     city: "",
-    address: ""
-
+    address: "",
 })
 
 let isModalOpen = false
-
 
 const openModal = async () => {
     if (isModalOpen) return
@@ -32,11 +30,10 @@ const openModal = async () => {
     isModalOpen = true
     const modal = await modalController.create({
         component: ChallengeModalComponent,
-        cssClass: 'custom-modal-class border-radius', // Optional, if you want to add custom CSS classes
         showBackdrop: false,
         componentProps: {
-            gym_id: 1
-        }
+            gym_id: 1,
+        },
     })
 
     await modal.present()
@@ -45,8 +42,6 @@ const openModal = async () => {
         isModalOpen = false
     })
 }
-
-
 
 const handleSearch = async () => {
     if (searchQuery.value.length >= 3) {
@@ -64,7 +59,6 @@ const handleSearch = async () => {
     }
 }
 
-
 const initializePageData = async () => {
     await apiGym("users-gym", 3).then((response) => {
         if (response.status == "success") {
@@ -77,10 +71,8 @@ const initializePageData = async () => {
     await apiDivision("users-divisions", 3).then((response) => {
         console.log(response)
         if (response.status == "success") {
-            if (response.data >= 0) {
-                myDivisions.value = response.data
-                console.log(myDivisions.value)
-            }
+            myDivisions.value = response.data
+            console.log(myDivisions.value)
         }
     })
 }
@@ -88,7 +80,6 @@ const initializePageData = async () => {
 onMounted(() => {
     initializePageData()
 })
-
 </script>
 
 <template>
@@ -98,7 +89,7 @@ onMounted(() => {
                 @update:modelValue="handleSearch" debounce="200" v-model="searchQuery" />
             <IonList v-if="searchQuery.length >= 3 && gyms.length != 0">
                 <IonItem v-for="gym in gyms" :key="gym.id" class="gym-bio">
-                    <img class="logo" src="../../../assets/images/logo-glow.png" alt="">
+                    <img class="logo" src="../../../assets/images/logo-glow.png" alt="" />
                     <div class="gym-info">
                         <h2>{{ gym.title }}</h2>
                         <p class="bio-text">{{ gym.city }}, {{ gym.address }}</p>
@@ -107,16 +98,19 @@ onMounted(() => {
                 </IonItem>
             </IonList>
             <p class="create-text">
-                Can`t find your gym? <a href="/create-gym" class="create-link">Create it!</a>
+                Can`t find your gym?
+                <a href="/create-gym" class="create-link">Create it!</a>
             </p>
-            <button @click="">Your Gyms <img v-show="userStore.userGymId.length > 3" id="arrow1"
-                    src="../../../assets/icons/arrowRight.svg"></button>
+            <h4 @click="">
+                Your Gyms
+                <img v-show="userStore.userGymId.length > 3" id="arrow1" src="../../../assets/icons/arrowRight.svg" />
+            </h4>
             <div id="extend1" :key="userStore.componentKey">
                 <GymButton v-if="myGymId != 0" :id="myGymId" :key="'gym' + userStore.componentKey + 2" />
-                <DivisionButton v-if="myDivisions.length > 0" v-for="division in myDivisions" :id="division"
+                <DivisionButton v-if="myDivisions != null" v-for="division in myDivisions" :id="division"
                     :key="'division' + userStore.componentKey + 2" />
-
             </div>
+            <p @click="openModal">LOLOLO CHALLLEGNE APMDOAWD</p>
         </IonContent>
     </IonPage>
 </template>
@@ -142,7 +136,9 @@ ion-searchbar.md.custom {
     width: 97%;
     margin: 10px auto;
     padding: 0;
-    box-shadow: 0 0 10px #fff000, inset 0 0 25px 1px #7a7007;
+    box-shadow:
+        0 0 10px #fff000,
+        inset 0 0 25px 1px #7a7007;
     backdrop-filter: blur(5px);
     min-height: 0;
     border-radius: 6px;
@@ -161,14 +157,13 @@ ion-searchbar.md.custom {
 }
 
 ion-search.border-gradient::before {
-
     background: conic-gradient(from 0deg,
             rgba(255, 240, 0, 1) 0%,
             rgba(255, 240, 0, 0.3) 50%,
             rgba(255, 240, 0, 1) 73%,
             rgba(255, 255, 255, 1) 75%,
             rgba(255, 255, 255, 1) 77%,
-            rgba(255, 240, 0, 1) 79%)
+            rgba(255, 240, 0, 1) 79%);
 }
 
 .create-text {
@@ -215,11 +210,12 @@ ion-list {
     margin: auto;
     border-radius: 6px;
     background-color: transparent;
+    z-index: 5;
 }
 
 ion-item {
     padding: 2px 5px;
     border-radius: 6px;
-    --border-radius: 6px
+    --border-radius: 6px;
 }
 </style>

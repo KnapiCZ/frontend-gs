@@ -1,17 +1,20 @@
 <script setup lang="ts">
-import Thumbnail from '@/view/Post/components/Thumbnail.vue';
+import Thumbnail from "@/view/Post/components/Thumbnail.vue"
 
 const props = defineProps<{
     gymId: number
     items: number[]
 }>()
-
 </script>
 
 <template>
     <div class="grid-container">
-        <Thumbnail v-for="data in items" :postID="data" :path="'/gym/' + props.gymId + '/feed/' + data"
-            class="grid-item" />
+        <Thumbnail
+            v-for="data in items"
+            :postID="data"
+            :path="'/gym/' + props.gymId + '/feed/' + data"
+            class="grid-item"
+        />
     </div>
 </template>
 
