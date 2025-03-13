@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { useIonRouter } from '@ionic/vue'
-import apiGym from '@/logic/API/apiGym'
-import { onMounted, ref } from 'vue'
-import background from '@/assets/images/BG.png'
+import { useIonRouter } from "@ionic/vue"
+import apiGym from "@/logic/API/apiGym"
+import { onMounted, ref } from "vue"
+import background from "@/assets/images/BG.png"
 
 const props = defineProps<{
     id: number
@@ -10,28 +10,27 @@ const props = defineProps<{
 const router = useIonRouter()
 
 const gym = ref({
-    title: 'Loading',
-    logo: '',
+    title: "Loading",
+    logo: "",
     count_not_seen_posts: 0,
     count_not_seen_messages: 0,
-
 })
 
 const goTo = () => {
-    router.push('/gym/' + props.id)
+    router.push("/gym/" + props.id)
 }
 
 onMounted(async () => {
-    await apiGym('info', props.id, undefined, 'title,logo,').then((response) => { //implementovat seen posts a pozdeji pak take messages
+    await apiGym("info", props.id, undefined, "title,logo,").then((response) => {
+        //implementovat seen posts a pozdeji pak take messages
         if (response.status == "success") gym.value = response.data
     })
-
 })
 </script>
 
 <template>
     <div @click="goTo" class="btn row" :style="{ 'background-image': background }">
-        <img class="logo-img" :src="gym.logo">
+        <img class="logo-img" :src="gym.logo" />
         <div class="text-div">
             <h2>{{ gym.title }}</h2>
             <ul>

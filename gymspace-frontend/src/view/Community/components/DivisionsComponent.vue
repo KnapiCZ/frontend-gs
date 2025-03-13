@@ -1,30 +1,31 @@
 <script setup>
-import { Swiper, SwiperSlide } from 'swiper/vue';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import { ref } from 'vue';
-import { Navigation } from 'swiper/modules';
-
+import { Swiper, SwiperSlide } from "swiper/vue"
+import "swiper/css"
+import "swiper/css/navigation"
+import { ref } from "vue"
+import { Navigation } from "swiper/modules"
+import { useIonRouter } from "@ionic/vue"
 //tady se kdyžtak dopíše odkaz na jednotlivé divize
+
+const router = useIonRouter()
+
 const divisions = [
     { name: "Bodybuilding", image: "Bodybuilding.png" },
     { name: "Powerlifting", image: "Powerlifting.png" },
     { name: "Calisthenics", image: "Calisthenics.png" },
     { name: "Strongmen", image: "Strongmen.png" },
     { name: "Fighting", image: "Fighting.png" },
-    { name: "Crossfit", image: "Crossfit.png" }
-];
-
-const swiperRef = ref(null);
+    { name: "Crossfit", image: "Crossfit.png" },
+]
+const swiperRef = ref(null)
 
 const slidePrev = () => {
-    if (swiperRef.value) swiperRef.value.slidePrev();
-};
+    if (swiperRef.value) swiperRef.value.slidePrev()
+}
 
 const slideNext = () => {
-    if (swiperRef.value) swiperRef.value.slideNext();
-};
-
+    if (swiperRef.value) swiperRef.value.slideNext()
+}
 </script>
 
 <template>
@@ -32,21 +33,27 @@ const slideNext = () => {
         <swiper :modules="[Navigation]" :slides-per-view="2" :space-between="0"
             @swiper="(swiper) => (swiperRef = swiper)" class="swiper-container">
             <swiper-slide v-for="division in divisions" :key="division.name">
-                <div class="division-card box">
+                <div class="division-card box" @click="router.navigate('/division/1', 'forward', 'push')">
                     <img :src="'src/assets/images/' + division.image" :alt="division.name" class="division-image" />
                     <div class="overlay border-gradient">
                         <h3>{{ division.name }}</h3>
-                        <p class="smallest-text row">SEE MORE <span><img
-                                    src="../../../assets/icons/SwipeArrowRight.svg"></span></p>
+                        <p class="smallest-text row">
+                            SEE MORE
+                            <span><img src="../../../assets/icons/SwipeArrowRight.svg" /></span>
+                        </p>
                     </div>
                 </div>
             </swiper-slide>
         </swiper>
 
         <div class="row">
-            <button @click="slidePrev" class="nav-button"><img src="../../../assets/icons/SwipeArrowLeft.svg"></button>
+            <button @click="slidePrev" class="nav-button">
+                <img src="../../../assets/icons/SwipeArrowLeft.svg" />
+            </button>
             <p class="swipe-text">SWIPE FOR MORE DIVISIONS</p>
-            <button @click="slideNext" class="nav-button"><img src="../../../assets/icons/SwipeArrowRight.svg"></button>
+            <button @click="slideNext" class="nav-button">
+                <img src="../../../assets/icons/SwipeArrowRight.svg" />
+            </button>
         </div>
     </div>
 </template>

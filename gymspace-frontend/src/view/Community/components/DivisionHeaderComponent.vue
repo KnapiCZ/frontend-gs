@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from "vue"
 
 const props = defineProps<{
     id: number
@@ -11,15 +11,14 @@ const props = defineProps<{
     members?: number | 0
 }>()
 
-
-const description = "We have been here for you since 2014. That's when we opened the largest We have been here for you since 2014. That's when we opened the largest We have been here for you since 2014. That's when we opened the largest..."
+const description =
+    "We have been here for you since 2014. That's when we opened the largest We have been here for you since 2014. That's when we opened the largest We have been here for you since 2014. That's when we opened the largest..."
 const expanded = ref(false)
 const truncatedText = description.slice(0, 80) + "..."
 
 const toggleExpand = () => {
     expanded.value = !expanded.value
-};
-
+}
 </script>
 
 <template>
@@ -56,7 +55,8 @@ const toggleExpand = () => {
                     </button>
                 </p>
                 <a href="https://www.newpark.cz" target="_blank" class="header-link row">
-                    <img src="/src/assets/icons/link.svg" alt="link" class="header-link-icon" /> www.newpark.cz
+                    <img src="/src/assets/icons/link.svg" alt="link" class="header-link-icon" />
+                    www.newpark.cz
                 </a>
             </div>
         </div>
@@ -75,6 +75,7 @@ const toggleExpand = () => {
 }
 
 .header-container {
+    background: rgba(0, 0, 0, 0.3);
     border-radius: 6px;
     padding: 16px;
     margin-top: 15vh;
@@ -89,12 +90,10 @@ const toggleExpand = () => {
             rgba(22, 22, 22, 0.13) 100%);
 }
 
-
-
 .header-image {
     width: 14vw;
     aspect-ratio: 1;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 h5 {
@@ -109,15 +108,6 @@ h5 {
 .header-stats {
     text-align: center;
     padding: 8px 0;
-}
-
-
-.header-description {
-    margin: 8px 0;
-}
-
-.header-stats {
-    margin-bottom: 16px;
 }
 
 .header-description {

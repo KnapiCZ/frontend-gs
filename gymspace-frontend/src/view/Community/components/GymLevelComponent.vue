@@ -1,5 +1,5 @@
 <script setup>
-import PointsComponent from "@/view/shared/components/PointsComponent.vue";
+import PointsComponent from "@/view/shared/components/PointsComponent.vue"
 import { computed } from "vue"
 
 const props = defineProps({
@@ -7,9 +7,9 @@ const props = defineProps({
     currentXP: Number,
     nextLevelXP: Number,
     gymPoints: Number,
-});
+})
 
-const progressPercentage = computed(() => (props.currentXP / props.nextLevelXP) * 100);
+const progressPercentage = computed(() => (props.currentXP / props.nextLevelXP) * 100)
 </script>
 
 <template>
@@ -39,8 +39,7 @@ const progressPercentage = computed(() => (props.currentXP / props.nextLevelXP) 
 <style scoped>
 .level-container {
     width: auto;
-    padding: 16px 8px;
-    margin-bottom: -8px;
+    margin: 16px;
 }
 
 .level-left {
@@ -53,8 +52,8 @@ const progressPercentage = computed(() => (props.currentXP / props.nextLevelXP) 
     font-size: 10px;
 }
 
-.row {
-    justify-content: space-evenly;
+.level-container.row {
+    justify-content: space-between;
 }
 
 .level-circle {
@@ -68,7 +67,7 @@ const progressPercentage = computed(() => (props.currentXP / props.nextLevelXP) 
 
 .level-bar {
     width: 70%;
-    margin-left: -12px;
+    margin-left: -16px;
     margin-top: 20px;
 }
 

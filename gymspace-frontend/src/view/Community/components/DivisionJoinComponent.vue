@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { IonButton } from "@ionic/vue"
 import { onMounted, ref } from "vue"
-import apiDivision from '@/logic/API/apiDivision'
+import apiDivision from "@/logic/API/apiDivision"
 
 const props = defineProps<{
     divisionId: number
@@ -24,13 +24,13 @@ const isJoined = async () => {
     })
 }
 const join = async () => {
-    await apiDivision(joined.value ? 'member-leave' : 'member-join', props.divisionId).then((response) => {
+    await apiDivision(joined.value ? "member-leave" : "member-join", props.divisionId).then((response) => {
         if (response.status == "success") joined.value = !joined.value
     })
 }
 
 const spot = async () => {
-    await apiDivision(spotted.value ? 'spotter-leave' : 'spotter-join', props.divisionId).then((response) => {
+    await apiDivision(spotted.value ? "spotter-leave" : "spotter-join", props.divisionId).then((response) => {
         if (response.status == "success") spotted.value = !spotted.value
     })
 }
@@ -39,20 +39,16 @@ onMounted(() => {
     isJoined()
     isSpotting()
 })
-
-
-
 </script>
-
 <template>
     <div class="join-spot-container border-gradient column">
         <div class="button-group box">
             <div class="button-div default-flex">
-                <IonButton v-show="spotted" class="default join-button " @click="join">{{ joined ? 'join' : "joined" }}
+                <IonButton v-show="spotted" class="default join-button" @click="join">{{ joined ? "join" : "joined" }}
                 </IonButton>
             </div>
             <div class="button-div default-flex">
-                <IonButton v-show="joined" class="default spot-button " @click="spot">{{ spotted ? "spot" : "spotted" }}
+                <IonButton v-show="joined" class="default spot-button" @click="spot">{{ spotted ? "spot" : "spotted" }}
                 </IonButton>
             </div>
         </div>
@@ -63,9 +59,9 @@ onMounted(() => {
                     <p class="smallest-text">janfobl......</p>
                 </div>
                 <div class="avatars box">
-                    <img class="avatar" src="../../../assets/images/gs_logo.png" alt="avatar1" style="z-index: 3;">
-                    <img class="avatar" src="../../../assets/images/gs_logo.png" alt="avatar2" style="z-index: 2;">
-                    <img class="avatar" src="../../../assets/images/gs_logo.png" alt="avatar3" style="z-index: 1;">
+                    <img class="avatar" src="../../../assets/images/gs_logo.png" alt="avatar1" style="z-index: 3" />
+                    <img class="avatar" src="../../../assets/images/gs_logo.png" alt="avatar2" style="z-index: 2" />
+                    <img class="avatar" src="../../../assets/images/gs_logo.png" alt="avatar3" style="z-index: 1" />
                 </div>
             </div>
             <div class="featured-users row">
@@ -74,9 +70,9 @@ onMounted(() => {
                     <p class="smallest-text">janfobl......</p>
                 </div>
                 <div class="avatars box">
-                    <img class="avatar" src="../../../assets/images/gs_logo.png" alt="avatar1" style="z-index: 3;">
-                    <img class="avatar" src="../../../assets/images/gs_logo.png" alt="avatar2" style="z-index: 2;">
-                    <img class="avatar" src="../../../assets/images/gs_logo.png" alt="avatar3" style="z-index: 1;">
+                    <img class="avatar" src="../../../assets/images/gs_logo.png" alt="avatar1" style="z-index: 3" />
+                    <img class="avatar" src="../../../assets/images/gs_logo.png" alt="avatar2" style="z-index: 2" />
+                    <img class="avatar" src="../../../assets/images/gs_logo.png" alt="avatar3" style="z-index: 1" />
                 </div>
             </div>
         </div>
@@ -108,11 +104,11 @@ onMounted(() => {
 .spot-button {
     width: 90%;
     color: black;
+    margin-bottom: 8px;
     --border-color: #fff000;
     --background: #fff000;
     --background-hover: #a39302;
     --background-activated: #a39302;
-
 }
 
 .spot-button {
@@ -122,8 +118,6 @@ onMounted(() => {
     --background-activated: #ffffff33;
     --background: transparent;
 }
-
-
 
 .user-info {
     width: 100%;

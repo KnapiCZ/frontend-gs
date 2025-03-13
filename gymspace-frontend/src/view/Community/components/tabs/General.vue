@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import ChallengeThumbGrid from '@/view/Challenges/pages/ChallengeThumbGrid.vue';
-import CommunityButton from '../CommunityButton.vue';
-import apiGym from '@/logic/API/apiGym';
-import DivisionThumbnail from '../DivisionThumbnail.vue';
+import ChallengeThumbGrid from "@/view/Challenges/pages/ChallengeThumbGrid.vue"
+import CommunityButton from "../CommunityButton.vue"
+import apiGym from "@/logic/API/apiGym"
+import DivisionThumbnail from "../DivisionThumbnail.vue"
 
 const props = defineProps<{
     gymId: number
@@ -14,25 +14,29 @@ let isActive = false
 function toggle() {
     if (!isActive) {
         isActive = true
-        document.getElementById("arrow")!.style.rotate = "270deg";
-        document.getElementById("extend")!.style.height = 71.3 + "vw";
-    }
-    else {
+        document.getElementById("arrow")!.style.rotate = "270deg"
+        document.getElementById("extend")!.style.height = 71.3 + "vw"
+    } else {
         isActive = false
         document.getElementById("arrow")!.style.rotate = "90deg"
-        document.getElementById("extend")!.style.height = 37 + "vw";
+        document.getElementById("extend")!.style.height = 37 + "vw"
     }
 }
-
 </script>
 
 <template>
     <div class="grid-division-container extend" id="extend">
-        <DivisionThumbnail v-for="division in divisions" type="division" :id="division" divisionType="small"
-            class="grid-division-item" />
+        <DivisionThumbnail
+            v-for="division in divisions"
+            type="division"
+            :id="division"
+            divisionType="small"
+            class="grid-division-item"
+        />
     </div>
-    <button v-if="divisions.length > 4" @click="toggle()"><img id="arrow"
-            src='../../../../assets/icons/arrowRight.svg'></button>
+    <button v-if="divisions.length > 4" @click="toggle()">
+        <img id="arrow" src="../../../../assets/icons/arrowRight.svg" />
+    </button>
 </template>
 
 <style scoped>

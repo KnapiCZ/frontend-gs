@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { watch, onMounted, ref, computed } from "vue"
+import { onMounted, computed } from "vue"
 import { updateDivisionColor } from "@/logic/utils/common"
+import PointsComponent from "@/view/shared/components/PointsComponent.vue"
 const props = defineProps<{
-    level: number,
-    currentXP: number,
-    nextLevelXP: number,
-    divisionPoints: number,
+    level: number
+    currentXP: number
+    nextLevelXP: number
+    divisionPoints: number
     sport: string
 }>()
 
@@ -17,16 +18,16 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="level-container box margin-inline-default">
-        <div class="level-left box">
+    <div class="level-container row">
+        <div class="level-left row">
             <p class="level-text">LV</p>
-            <div class="level-circle">
-                <span>{{ level }}</span>
+            <div class="level-circle box">
+                <h4>{{ level }}</h4>
             </div>
             <div class="level-bar">
                 <div class="progress-container">
                     <div class="progress-bar" :style="{ width: progressPercentage + '%' }"></div>
-                    <div class="ticks">
+                    <div class="ticks row">
                         <div v-for="(tick, index) in 50" :key="tick" id="tick" :class="{ long: index % 5 == 0 }"></div>
                     </div>
                 </div>
@@ -36,17 +37,14 @@ onMounted(() => {
             </div>
         </div>
 
-        <div class="gym-points">
-            <span class="points">{{ divisionPoints }}</span>
-            <img src="@/assets/icons/Points.svg" alt="Points" class="gym-icon" />
-        </div>
+        <PointsComponent :points="props.currentXP" />
     </div>
 </template>
 
 <style scoped>
 .level-container {
-    width: 100%;
-    margin-top: 16px;
+    width: auto;
+    margin: 16px;
 }
 
 .level-left {
@@ -57,7 +55,10 @@ onMounted(() => {
 .level-text {
     margin-bottom: 30px;
     font-size: 10px;
-    color: white;
+}
+
+.level-container.row {
+    justify-content: space-between;
 }
 
 .level-circle {
@@ -65,20 +66,13 @@ onMounted(() => {
     height: 36px;
     border-radius: 50%;
     background: black;
-    color: white;
-    font-weight: bold;
-    font-size: 16px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     box-shadow: 0 0 10px 5px var(--division-color);
     z-index: 10;
 }
 
 .level-bar {
     width: 70%;
-    margin-left: -12px;
+    margin-left: -16px;
     margin-top: 20px;
 }
 
@@ -98,9 +92,8 @@ onMounted(() => {
 }
 
 .ticks {
-    display: flex;
-    justify-content: space-between;
     position: absolute;
+    align-items: end;
     width: 100%;
     height: 100%;
     top: 0;
@@ -115,36 +108,11 @@ onMounted(() => {
 }
 
 .long {
-    height: 90%;
+    height: 70%;
 }
 
 .next-level-text {
     font-size: 12px;
-    color: white;
     text-align: right;
-}
-
-.gym-points {
-    width: 96px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
-    margin-right: 40px;
-}
-
-.points {
-    font-size: 14px;
-    font-weight: bold;
-    color: white;
-    margin: auto;
-}
-
-.gym-icon {
-    width: 20px;
-    height: 20px;
-    margin: auto;
 }
 </style>
