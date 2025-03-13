@@ -18,51 +18,67 @@
             <p><strong>Množství:</strong> {{ selectedCategory.quantity }}</p>
         </div>
 
-        <button @click="submitPayment" class="btn btn-primary" :disabled="!selectedCategory">
-            Zaplatit
-        </button>
+        <button @click="submitPayment" class="btn btn-primary" :disabled="!selectedCategory">Zaplatit</button>
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref } from "vue"
 
 // Definice typu pro kategorii
 interface Category {
-    id: number;
-    name: string;
-    description: string;
-    amount: number;
-    quantity: number;
+    id: number
+    name: string
+    description: string
+    amount: number
+    quantity: number
 }
 
 // Mock data pro kategorie
 const categories = ref<Category[]>([
-    { id: 1, name: "Členství", description: "Měsíční členství v gymu.", amount: 500, quantity: 1 },
-    { id: 2, name: "Jednorázový vstup", description: "Platba za jeden vstup do gymu.", amount: 100, quantity: 1 },
-    { id: 3, name: "VIP balíček", description: "VIP přístup na speciální akce.", amount: 2000, quantity: 1 },
-]);
+    {
+        id: 1,
+        name: "Členství",
+        description: "Měsíční členství v gymu.",
+        amount: 500,
+        quantity: 1,
+    },
+    {
+        id: 2,
+        name: "Jednorázový vstup",
+        description: "Platba za jeden vstup do gymu.",
+        amount: 100,
+        quantity: 1,
+    },
+    {
+        id: 3,
+        name: "VIP balíček",
+        description: "VIP přístup na speciální akce.",
+        amount: 2000,
+        quantity: 1,
+    },
+])
 
 // Vybraná kategorie
-const selectedCategory = ref<Category | null>(null);
+const selectedCategory = ref<Category | null>(null)
 
 // Aktualizace detailů vybrané kategorie
 const updateCategoryDetails = () => {
-    console.log("Vybraná kategorie:", selectedCategory.value);
-};
+    console.log("Vybraná kategorie:", selectedCategory.value)
+}
 
 // Mock odeslání platby
 const submitPayment = () => {
-    if (!selectedCategory.value) return;
+    if (!selectedCategory.value) return
 
     const paymentData = {
         categoryId: selectedCategory.value.id,
         amount: selectedCategory.value.amount,
-    };
+    }
 
-    console.log("Odesílám platbu:", paymentData);
-    alert(`Platba byla odeslána pro kategorii: ${selectedCategory.value.name}`);
-};
+    console.log("Odesílám platbu:", paymentData)
+    alert(`Platba byla odeslána pro kategorii: ${selectedCategory.value.name}`)
+}
 </script>
 
 <style scoped>

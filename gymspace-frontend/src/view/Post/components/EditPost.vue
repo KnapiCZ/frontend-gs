@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { IonButton, IonContent, IonModal, IonTextarea, IonItem, modalController } from '@ionic/vue';
-import { ref } from 'vue';
-import apiPost from '@/logic/API/apiPost';
-import { userDataStore } from '@/stores/UserDataStore';
+import { IonButton, IonContent, IonModal, IonTextarea, IonItem, modalController } from "@ionic/vue"
+import { ref } from "vue"
+import apiPost from "@/logic/API/apiPost"
+import { userDataStore } from "@/stores/UserDataStore"
 
 const props = defineProps<{
     userId: number
@@ -15,10 +15,10 @@ let text = ref(props.description)
 let index = userStore.userPostsId.indexOf(props.postId)
 
 async function save() {
-    let data = { "description": text.value }
-    console.debug(await apiPost('updatePost', props.postId, JSON.stringify(data)))
+    let data = { description: text.value }
+    console.debug(await apiPost("updatePost", props.postId, JSON.stringify(data)))
     userStore.userPostsKey[index] += 1
-    modalController.dismiss('post-edit' + props.postId)
+    modalController.dismiss("post-edit" + props.postId)
 }
 </script>
 
@@ -28,8 +28,15 @@ async function save() {
         <IonModal type="modal" :trigger="'post-edit' + props.postId" :initial-breakpoint="0.6" :breakpoints="[0.6, 1]">
             <h1>Edit post</h1>
             <IonContent>
-                <IonTextarea label="Description" label-placement="floating" :counter="true" :maxlength="500"
-                    :auto-grow="true" :value="text" @input="text = $event.target.value"></IonTextarea>
+                <IonTextarea
+                    label="Description"
+                    label-placement="floating"
+                    :counter="true"
+                    :maxlength="500"
+                    :auto-grow="true"
+                    :value="text"
+                    @input="text = $event.target.value"
+                ></IonTextarea>
                 <IonButton expand="full" @click="save()">save</IonButton>
             </IonContent>
         </IonModal>
@@ -46,7 +53,6 @@ ion-content {
     --margin: 10px 0px 10px 10px !important;
     height: fit-content;
     font-size: large;
-
 }
 
 ion-button {
@@ -68,6 +74,5 @@ img {
     height: 50%;
     margin: 10px 20px;
     vertical-align: middle;
-
 }
 </style>

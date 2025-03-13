@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { IonButton, IonContent, IonModal, useIonRouter, modalController } from '@ionic/vue';
+import { IonButton, IonContent, useIonRouter, modalController } from "@ionic/vue"
 
 const router = useIonRouter()
 
@@ -8,27 +8,17 @@ const logOut = () => {
     modalController.dismiss()
     router.replace("/login")
 }
-
 </script>
 
-
 <template>
-    <div>
-        <button id="user-menu">
-            <img src="@/assets/icons/settings.svg" alt="">
-        </button>
-        <IonModal type="modal" trigger="user-menu" :initial-breakpoint="0.5" :breakpoints="[0, 0.5, 1]">
-            <h1>Settings</h1>
-            <IonContent>
-                <IonButton expand="full">Your Account </IonButton>
-                <IonButton expand="full">Liked</IonButton>
-                <IonButton expand="full">Privacy</IonButton>
-                <IonButton expand="full">Notifications</IonButton>
-                <IonButton expand="full" color="danger" @click="logOut()">Log out
-                </IonButton>
-            </IonContent>
-        </IonModal>
-    </div>
+    <h1>Settings</h1>
+    <IonContent>
+        <IonButton expand="full">Your Account </IonButton>
+        <IonButton expand="full">Liked</IonButton>
+        <IonButton expand="full">Privacy</IonButton>
+        <IonButton expand="full">Notifications</IonButton>
+        <IonButton expand="full" color="danger" @click="logOut()">Log out </IonButton>
+    </IonContent>
 </template>
 
 <style scoped>
@@ -38,10 +28,9 @@ h1 {
 }
 
 ion-content {
-    margin-top: 10px !important;
+    margin-top: 10px;
     height: fit-content;
     font-size: large;
-
 }
 
 ion-button {
@@ -63,6 +52,5 @@ img {
     height: 50%;
     margin: 10px 20px;
     vertical-align: middle;
-
 }
 </style>

@@ -1,72 +1,75 @@
 <script setup lang="ts">
-import 'vue-advanced-cropper/dist/style.css';
-import { Cropper } from 'vue-advanced-cropper';
-import { usePhotoGallery, UserPhoto } from '@/plugins/usePhotoGallery';
-import { ref } from 'vue';
-const { photos, takePhoto } = usePhotoGallery();
+import "vue-advanced-cropper/dist/style.css"
+import { Cropper } from "vue-advanced-cropper"
+import { usePhotoGallery } from "@/plugins/usePhotoGallery"
+import { ref, computed } from "vue"
+import { userDataStore } from "@/stores/UserDataStore"
+
+const { photos, takePhoto } = usePhotoGallery()
+const userStore = userDataStore()
 
 const props = defineProps<{
-    ratios: []
+    ratios: [number, number][]
 }>()
 
-let count = ref(0)
+const count = ref(0)
 
+// Dynamický poměr stran podle počtu kliknutí
+const aspectRatio = computed(() => {
+    const ratio = props.ratios[count.value % props.ratios.length]
+    return ratio[0] / ratio[1]
+})
+
+// Funkce pro změnu poměru stran
+const changeRatio = () => {
+    count.value++
+}
+
+// Funkce pro změnu výřezu
+const onChange = ({
+    coordinates,
+    canvas,
+}: {
+    coordinates: { width: number; height: number; left: number; top: number }
+    canvas: HTMLCanvasElement
+}) => {
+    userStore.croppedChoosenPhoto = canvas.toDataURL()
+}
 </script>
 
 <template>
     <div class="wrapper">
-        <Cropper :key="'cropper' + count" classname="image-cropper" boundingBoxClass="bounding-box-class"
-            imageClass="cropper-image" backgroundClass="cropper-background" image-restriction="stencil"
-            @change="onChange" :src="userStore.choosenPhoto" :stencil-props="{
+        <Cropper
+            :key="'cropper' + count"
+            class="image-cropper"
+            boundingBoxClass="bounding-box-class"
+            imageClass="cropper-image"
+            backgroundClass="cropper-background"
+            image-restriction="stencil"
+            @change="onChange"
+            :src="userStore.choosenPhoto"
+            :stencil-props="{
                 previewClass: 'preview',
                 handlers: {},
                 movable: false,
                 resizable: false,
-                aspectRatio: props.ratios[count % 2][0] / props.ratios[count % 2][1],
-            }" :resize-image="{
+                aspectRatio: aspectRatio,
+            }"
+            :resize-image="{
                 adjustStencil: false,
-            }" />
-            <div class="control-panel">
-                <button v-if="props.ratios.length > 1" @click="() => count++">
-                    {{ props.ratios[count % 2][0] + '/' + props.ratios[count % 2][1] }}
-                </button>
-                                
-                <button @click="takePhoto()" class="camera-button">
-                    <img src="@/assets/icons/camera.svg" alt="Camera" />
-                </button>
-            </div>
+            }"
+        />
+        <div class="control-panel">
+            <button v-if="props.ratios.length > 1" @click="changeRatio">
+                {{ props.ratios[count % props.ratios.length][0] + "/" + props.ratios[count % props.ratios.length][1] }}
+            </button>
 
+            <button @click="takePhoto()" class="camera-button">
+                <img src="@/assets/icons/camera.svg" alt="Camera" />
+            </button>
+        </div>
     </div>
 </template>
-<script lang="ts">
-import { userDataStore } from '@/stores/UserDataStore';
-
-let userStore = userDataStore()
-
-export default {
-
-    components: {
-        Cropper,
-    },
-    data() {
-        return {
-            coordinates: {
-                width: 0,
-                height: 0,
-                left: 0,
-                top: 0,
-            },
-        };
-    },
-    methods: {
-        onChange({ coordinates, canvas, }) {
-            this.coordinates = coordinates;
-            userStore.croppedChoosenPhoto = canvas.toDataURL();
-        },
-    },
-};
-
-</script>
 
 <style scoped>
 .wrapper {
@@ -77,10 +80,10 @@ export default {
 }
 
 .image-cropper {
-    margin: 0 !important;
-    padding: 0 !important;
+    margin: 0;
+    padding: 0;
     height: 100%;
-    background-color: aliceblue;
+    background-color: black;
 }
 
 .control-panel {
@@ -93,7 +96,6 @@ export default {
     margin-top: 10px;
     bottom: calc(55%);
 }
-
 
 .camera-button {
     background-color: transparent;
@@ -115,6 +117,4 @@ button {
     border-radius: 10px;
     font-weight: bold;
 }
-
-
 </style>

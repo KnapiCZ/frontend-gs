@@ -17,15 +17,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref } from "vue"
 
 // Mock data pro lístky
 interface Ticket {
-    id: number;
-    title: string;
-    category: string;
-    amount: number;
-    date: string; // ISO datum
+    id: number
+    title: string
+    category: string
+    amount: number
+    date: string // ISO datum
 }
 
 const tickets = ref<Ticket[]>([
@@ -43,29 +43,29 @@ const tickets = ref<Ticket[]>([
         amount: 2000,
         date: "2025-01-05T14:00:00Z",
     },
-]);
+])
 
 // Formátování data
 const formatDate = (isoDate: string) => {
-    const date = new Date(isoDate);
+    const date = new Date(isoDate)
     return date.toLocaleDateString("cs-CZ", {
         day: "2-digit",
         month: "2-digit",
         year: "numeric",
         hour: "2-digit",
         minute: "2-digit",
-    });
-};
+    })
+}
 
 // Zobrazení detailů lístku
 const viewTicket = (ticketId: number) => {
-    const ticket = tickets.value.find((t) => t.id === ticketId);
+    const ticket = tickets.value.find((t) => t.id === ticketId)
     if (ticket) {
-        alert(`Zobrazuji detaily lístku:\n\n${ticket.title}\nČástka: ${ticket.amount} Kč`);
+        alert(`Zobrazuji detaily lístku:\n\n${ticket.title}\nČástka: ${ticket.amount} Kč`)
     } else {
-        alert("Lístek nebyl nalezen.");
+        alert("Lístek nebyl nalezen.")
     }
-};
+}
 </script>
 
 <style scoped>

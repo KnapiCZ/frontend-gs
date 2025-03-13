@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { IonPopover, IonItem, IonList } from '@ionic/vue';
-import { userDataStore } from '@/stores/UserDataStore';
-import apiPost from '@/logic/API/apiPost'
-import EditPost from './EditPost.vue';
+import { IonPopover, IonItem, IonList } from "@ionic/vue"
+import { userDataStore } from "@/stores/UserDataStore"
+import apiPost from "@/logic/API/apiPost"
+import EditPost from "./EditPost.vue"
 
 let userStore = userDataStore()
 const props = defineProps<{
@@ -24,7 +24,8 @@ const deletePost = async () => {
 </script>
 
 <template>
-    <button :id="'popover-button' + props.postId" class="pop-button"><img src="../../../assets/icons/menu.svg">
+    <button :id="'popover-button' + props.postId" class="pop-button">
+        <img src="../../../assets/icons/menu.svg" />
     </button>
     <ion-popover :trigger="'popover-button' + props.postId" :dismiss-on-select="true" :arrow="false">
         <ion-list>

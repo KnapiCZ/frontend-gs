@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { IonButton, IonCol, IonContent, IonPage, IonToolbar, useIonRouter } from '@ionic/vue'
-import { useRoute } from 'vue-router'
-import UnlockablePost from '../components/UnlockablePost.vue'
-import { ref } from 'vue'
-import Description from '@/view/Post/components/PostContainers/PostParts/Description.vue'
+import { IonButton, IonCol, IonContent, IonPage, IonToolbar, useIonRouter } from "@ionic/vue"
+import { useRoute } from "vue-router"
+import UnlockablePost from "../components/UnlockablePost.vue"
+import { ref } from "vue"
+import Description from "@/view/Post/components/PostContainers/PostParts/Description.vue"
 
 //Využije se později ve vývoji
 const props = defineProps<{
@@ -17,22 +17,21 @@ const user = ref({
     profile_picture: "",
     username: "Loading...",
     description: "Loading...",
-    count_followers: 0
+    count_followers: 0,
 })
 
 let id = route.params.id as unknown as number
 let isUserVerified = 1
 </script>
 
-
 <template>
     <IonPage>
         <IonToolbar>
-            <IonButton @click='router.back()' slot="start" class="back-button"><img
-                    src="../../../assets/icons/arrowRight.svg"></IonButton>
+            <IonButton @click="router.back()" slot="start" class="back-button"
+                ><img src="../../../assets/icons/arrowRight.svg"
+            /></IonButton>
         </IonToolbar>
-        <IonContent class="ion-padding" style="background-color: #0E0E0E;">
-
+        <IonContent class="ion-padding" style="background-color: #0e0e0e">
             <div class="profile-section">
                 <div class="profile-image-container">
                     <img class="profile-image" :src="user.profile_picture" />
@@ -45,7 +44,6 @@ let isUserVerified = 1
                 <p class="profile-bio">
                     {{ user.description }}
                 </p>
-
             </div>
 
             <div class="stats">
@@ -59,7 +57,6 @@ let isUserVerified = 1
                     <span class="stat-label">Subscribers</span>
                 </div>
             </div>
-
 
             <IonGrid>
                 <UnlockablePost :id="id" />
@@ -163,7 +160,7 @@ ion-button {
 
 .subscription {
     text-align: center;
-    background: #4F4F4F;
+    background: #4f4f4f;
     padding: 20px;
     border-radius: 8px;
     margin-bottom: 10px;

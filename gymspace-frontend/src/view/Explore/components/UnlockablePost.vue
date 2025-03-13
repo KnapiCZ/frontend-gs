@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { IonButton, IonCol, IonContent, IonPage, IonToolbar, useIonRouter } from '@ionic/vue'
-import { userDataStore } from '@/stores/UserDataStore'
-import { useRoute } from 'vue-router'
-import apiUser from '@/logic/API/apiUser'
+import { IonButton, IonCol, IonContent, IonPage, IonToolbar, useIonRouter } from "@ionic/vue"
+import { userDataStore } from "@/stores/UserDataStore"
+import { useRoute } from "vue-router"
+import apiUser from "@/logic/API/apiUser"
 
 //Využije se později ve vývoji
 const props = defineProps<{
@@ -14,19 +14,15 @@ const router = useIonRouter()
 const userStore = userDataStore()
 const baseUrl = await apiUser()
 let id = route.params.id as unknown as number
-let userData = await apiUser("profile", id);
-
+let userData = await apiUser("profile", id)
 </script>
-
 
 <template>
     <IonRow>
         <IonCol>
             <div class="subscription">
                 <img class="lock-icon" src="../../../assets/icons/lock.svg" />
-                <IonButton expand="block" class="subscribe-button">
-                    Subscribe for 4 € a month
-                </IonButton>
+                <IonButton expand="block" class="subscribe-button"> Subscribe for 4 € a month </IonButton>
             </div>
         </IonCol>
     </IonRow>
@@ -39,7 +35,7 @@ p {
 
 .subscription {
     text-align: center;
-    background: #4F4F4F;
+    background: #4f4f4f;
     padding: 20px;
     border-radius: 8px;
     margin-bottom: 10px;

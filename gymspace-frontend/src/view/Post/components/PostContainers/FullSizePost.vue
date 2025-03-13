@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import apiPost from '@/logic/API/apiPost';
-import apiUser from '@/logic/API/apiUser';
-import Description from './PostParts/Description.vue';
-import SideButtons from './PostParts/SideButtons.vue';
+import apiPost from "@/logic/API/apiPost"
+import apiUser from "@/logic/API/apiUser"
+import Description from "./PostParts/Description.vue"
+import SideButtons from "./PostParts/SideButtons.vue"
 
 const props = defineProps<{
     postId: number
@@ -10,17 +10,21 @@ const props = defineProps<{
 
 let post = await apiPost("getPost", props.postId)
 let postImg = post.media[0]
-
 </script>
 
 <template>
     <div id="MainContainer">
-        <img class="postImage" :src="postImg">
+        <img class="postImage" :src="postImg" />
         <div id="overlay"></div>
 
         <SideButtons :postId="props.postId" :userId="post.author" :description="post.description" />
-        <Description :userId="post.author" :likeCount="post.like_count" :description="post.description"
-            hashtags="#be_real" :songname="'None'" />
+        <Description
+            :userId="post.author"
+            :likeCount="post.like_count"
+            :description="post.description"
+            hashtags="#be_real"
+            :songname="'None'"
+        />
     </div>
 </template>
 
@@ -34,7 +38,6 @@ let postImg = post.media[0]
     justify-content: center;
     background-color: black;
     scroll-snap-align: start;
-
 }
 
 #overlay {
@@ -43,14 +46,19 @@ let postImg = post.media[0]
     top: 0;
     width: 100vw;
     height: 100vh;
-    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 20%, rgba(0, 0, 0, 0.1) 60%, rgba(0, 0, 0, 0.5) 100%);
+    background-image: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.3) 0%,
+        rgba(0, 0, 0, 0.1) 20%,
+        rgba(0, 0, 0, 0.1) 60%,
+        rgba(0, 0, 0, 0.5) 100%
+    );
 }
 
 video {
     width: 100%;
     height: 100%;
     pointer-events: none;
-
 }
 
 .postImage {

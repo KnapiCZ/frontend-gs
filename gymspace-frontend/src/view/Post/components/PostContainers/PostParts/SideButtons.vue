@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import LikeButton from '@/view/shared/components/LikeButton.vue';
-import OptionsButton from '../../OptionsButton.vue';
-import { userDataStore } from '@/stores/UserDataStore';
+import LikeButton from "@/view/shared/components/LikeButton.vue"
+import OptionsButton from "../../OptionsButton.vue"
+import { userDataStore } from "@/stores/UserDataStore"
 
 const userStore = userDataStore()
 const props = defineProps<{
@@ -9,14 +9,18 @@ const props = defineProps<{
     userId: number
     description: string
 }>()
-
 </script>
 
 <template>
     <div>
         <LikeButton class="postBtn" :userId="userStore.loggedUserId" :postId="props.postId" />
-        <OptionsButton v-if="props.userId == userStore.loggedUserId" class="items" :userId="props.userId"
-            :postId="props.postId" :description="props.description" />
+        <OptionsButton
+            v-if="props.userId == userStore.loggedUserId"
+            class="items"
+            :userId="props.userId"
+            :postId="props.postId"
+            :description="props.description"
+        />
     </div>
 </template>
 
@@ -33,7 +37,6 @@ const props = defineProps<{
     right: none;
     top: none;
     border-radius: 15px;
-
 }
 
 div {
