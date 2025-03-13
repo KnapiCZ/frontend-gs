@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { userDataStore } from '@/stores/UserDataStore'
-import Thumbnail from './Thumbnail.vue'
-import { onMounted, ref } from 'vue'
-import apiPost from '@/logic/API/apiPost'
-import router from '@/router'
+import { userDataStore } from "@/stores/UserDataStore"
+import Thumbnail from "./Thumbnail.vue"
+import { onMounted, ref } from "vue"
+import apiPost from "@/logic/API/apiPost"
+import router from "@/router"
 
 const posts = ref([])
 let id = router.currentRoute.value.params.id
 
 const loadPosts = async () => {
-    await apiPost('usersPosts', 3).then((response) => {
+    await apiPost("usersPosts", 3).then((response) => {
         console.log(response)
-        if (response.status == 'success') {
+        if (response.status == "success") {
             posts.value = response.data
         }
     })
@@ -19,9 +19,7 @@ const loadPosts = async () => {
 
 onMounted(async () => {
     loadPosts()
-}
-)
-
+})
 </script>
 
 <template>

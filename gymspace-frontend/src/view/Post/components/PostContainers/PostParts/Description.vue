@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import apiUser from '@/logic/API/apiUser';
-import FollowButton from '../../../../shared/components/FollowButton.vue';
-import { IonContent, IonRow } from '@ionic/vue';
-import { ref } from 'vue';
+import apiUser from "@/logic/API/apiUser"
+import FollowButton from "../../../../shared/components/FollowButton.vue"
+import { IonContent, IonRow } from "@ionic/vue"
+import { ref } from "vue"
 
 const props = defineProps<{
     userId: number
@@ -10,19 +10,20 @@ const props = defineProps<{
     description?: string
     hashtags?: string
     songname?: string
-}>();
+}>()
 
-let user = await apiUser("profile", props.userId, undefined, 'username,profile_picture').catch()
+let user = await apiUser("profile", props.userId, undefined, "username,profile_picture").catch()
 let text = ref(setText())
 
 function setText() {
-    if (props.likeCount == 1) { return 'Post was liked by ' + user.username }
-    if (props.likeCount > 1) { return 'Post was liked by ' + user.username + ' and ' + (props.likeCount - 1) + ' others' }
-    else return 'Post was liked by 0 users'
+    if (props.likeCount == 1) {
+        return "Post was liked by " + user.username
+    }
+    if (props.likeCount > 1) {
+        return "Post was liked by " + user.username + " and " + (props.likeCount - 1) + " others"
+    } else return "Post was liked by 0 users"
 }
-
 </script>
-
 
 <template>
     <IonContent :scrollY="false" class="description" background-color="transparent">
@@ -33,8 +34,7 @@ function setText() {
         </IonRow>
         <p id="middle-part" class="main-text">{{ description }}</p>
         <p id="middle-part" class="hashtags">{{ hashtags }}</p>
-        <p id="middle-part" class="liked-text">{{ text }}
-        </p>
+        <p id="middle-part" class="liked-text">{{ text }}</p>
     </IonContent>
 </template>
 
@@ -62,7 +62,6 @@ ion-row {
     object-fit: contain;
     border-radius: 30px;
 }
-
 
 .follow {
     color: black;

@@ -153,10 +153,13 @@ export default defineComponent({
     background-color: #1a1a14cc;
     border: 1px solid;
     border-color: transparent;
-    border-image: linear-gradient(to bottom,
+    border-image: linear-gradient(
+            to bottom,
             rgb(255, 255, 255) 4.06%,
             rgba(255, 255, 255, 0.46) 45.45%,
-            rgba(255, 240, 0, 0.13) 100%) 1;
+            rgba(255, 240, 0, 0.13) 100%
+        )
+        1;
     border-radius: 6px;
     box-shadow: -4px 4px 19.9px 1px #0000009e;
     height: 529px;
@@ -235,7 +238,7 @@ export default defineComponent({
     font-weight: 600;
     letter-spacing: 0;
     line-height: normal;
-    margin-top: -1.00px;
+    margin-top: -1px;
     position: relative;
     width: fit-content;
 }
@@ -271,7 +274,7 @@ export default defineComponent({
     font-weight: 600;
     letter-spacing: 0;
     line-height: normal;
-    margin-top: -1.00px;
+    margin-top: -1px;
     position: relative;
     width: fit-content;
 }
@@ -291,7 +294,12 @@ export default defineComponent({
     background-color: #fff000;
     border-radius: 5px;
     box-shadow:
-        0px 0px 1.03px #ffff0080, 0px 0px 2.07px #ffff0080, 0px 0px 7.23px #ffff0080, 0px 0px 14.46px #ffff0080, 0px 0px 24.79px #ffff0080, 0px 0px 43.38px #ffff0080;
+        0px 0px 1.03px #ffff0080,
+        0px 0px 2.07px #ffff0080,
+        0px 0px 7.23px #ffff0080,
+        0px 0px 14.46px #ffff0080,
+        0px 0px 24.79px #ffff0080,
+        0px 0px 43.38px #ffff0080;
     height: 52px;
     left: 0;
     position: absolute;
@@ -368,7 +376,7 @@ export default defineComponent({
     font-weight: 900;
     letter-spacing: 0;
     line-height: normal;
-    margin-top: -1.00px;
+    margin-top: -1px;
     position: relative;
     width: fit-content;
 }
@@ -463,7 +471,7 @@ export default defineComponent({
     font-weight: 700;
     letter-spacing: 0;
     line-height: normal;
-    margin-top: -1.00px;
+    margin-top: -1px;
     position: relative;
     width: fit-content;
 }

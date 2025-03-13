@@ -1,9 +1,21 @@
 <script setup lang="ts">
-import { useIonRouter, IonBackButton, IonButtons, IonContent, IonHeader, IonToolbar, IonButton, IonTitle, IonPage, IonTextarea, IonChip } from '@ionic/vue';
-import { userDataStore } from '@/stores/UserDataStore';
-import { ref } from 'vue';
-import apiPost from '@/logic/API/apiPost';
-import apiGym from '@/logic/API/apiGym';
+import {
+    useIonRouter,
+    IonBackButton,
+    IonButtons,
+    IonContent,
+    IonHeader,
+    IonToolbar,
+    IonButton,
+    IonTitle,
+    IonPage,
+    IonTextarea,
+    IonChip,
+} from "@ionic/vue"
+import { userDataStore } from "@/stores/UserDataStore"
+import { ref } from "vue"
+import apiPost from "@/logic/API/apiPost"
+import apiGym from "@/logic/API/apiGym"
 
 const userStore = userDataStore()
 const router = useIonRouter()
@@ -13,17 +25,22 @@ let choosen = ref(0)
 let choosenName = ref("")
 
 async function addPost() {
-    let data = { 'user_id': userStore.loggedUserId, 'description': text.value, 'division': choosen.value, 'media': [userStore.croppedChoosenPhoto], "mentioned_user": [2, 3] }
-    await apiPost('createPost', undefined, JSON.stringify(data))
-    router.replace('/foryou')
+    let data = {
+        user_id: userStore.loggedUserId,
+        description: text.value,
+        division: choosen.value,
+        media: [userStore.croppedChoosenPhoto],
+        mentioned_user: [2, 3],
+    }
+    await apiPost("createPost", undefined, JSON.stringify(data))
+    router.replace("/foryou")
 }
 
 for (let i = 0; i < userStore.userDivisionId.length; i++) {
-    let data = await await apiGym('info', userStore.userDivisionId[i], undefined, 'title')
+    let data = await await apiGym("info", userStore.userDivisionId[i], undefined, "title")
     names.push(data.title)
 }
 </script>
-
 
 <template>
     <IonPage>
@@ -39,19 +56,34 @@ for (let i = 0; i < userStore.userDivisionId.length; i++) {
             </IonToolbar>
         </IonHeader>
         <IonContent class="ion-padding">
-            <img id="choosen-image" :src="userStore.croppedChoosenPhoto">
-            <IonTextarea v-model="text" label="Description" placeholder="Write your thoughts here" :counter="true"
-                :maxlength="600" :auto-grow="true">
+            <img id="choosen-image" :src="userStore.croppedChoosenPhoto" />
+            <IonTextarea
+                v-model="text"
+                label="Description"
+                placeholder="Write your thoughts here"
+                :counter="true"
+                :maxlength="600"
+                :auto-grow="true"
+            >
             </IonTextarea>
-            <p class="choosen-division">Choosen division: <IonChip v-model="choosenName" id="choosen-chip"
-                    v-if="choosen != 0" @click="() => choosen = 0"> {{ choosenName }}
+            <p class="choosen-division">
+                Choosen division:
+                <IonChip v-model="choosenName" id="choosen-chip" v-if="choosen != 0" @click="() => (choosen = 0)">
+                    {{ choosenName }}
                 </IonChip>
             </p>
             <p class="your-divisions">Your divisions</p>
-            <IonChip id="chips" v-for="(id, index) in userStore.userDivisionId"
-                @click="() => { choosen = id; choosenName = names[index] }">
-                {{
-                    names[index] }}
+            <IonChip
+                id="chips"
+                v-for="(id, index) in userStore.userDivisionId"
+                @click="
+                    () => {
+                        choosen = id
+                        choosenName = names[index]
+                    }
+                "
+            >
+                {{ names[index] }}
             </IonChip>
         </IonContent>
     </IonPage>
@@ -80,14 +112,13 @@ ion-title {
 
 .your-divisions {
     margin-top: 10px;
-
 }
 
 #choosen-chip {
     padding: 0 5px;
     margin: 10px;
     --background: #fff000;
-    --color: black
+    --color: black;
 }
 
 #chips {
@@ -96,7 +127,6 @@ ion-title {
     --color: white;
     --background: grey;
     font-weight: bold;
-
 }
 
 ion-content {

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { IonPage } from '@ionic/vue';
+import { IonPage } from "@ionic/vue"
 
-import PostSlider from './../../Post/pages/PostSlider.vue';
+import PostSlider from "./../../Post/pages/PostSlider.vue"
 </script>
 
 <template>
