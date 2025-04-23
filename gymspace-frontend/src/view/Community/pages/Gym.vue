@@ -7,6 +7,7 @@ import GymJoinComponent from "../components/GymJoinComponent.vue"
 import GymLevelComponent from "../components/GymLevelComponent.vue"
 import DivisionsComponent from "../components/DivisionsComponent.vue"
 import apiGym from "@/logic/API/apiGym"
+import SeasonComponent from "../components/SeasonComponent.vue"
 
 const route = useRoute()
 const gym = ref({
@@ -42,23 +43,13 @@ onMounted(() => {
 <template>
     <IonPage>
         <IonContent>
-            <GymHeaderComponent
-                :logo="gym.logo"
-                :background_image="gym.background_image"
-                :name="gym.title"
-                :post-count="gym.count_posts"
-                :members="gym.count_members"
-                :spotters="gym.count_spotters"
-                :id="id"
-            />
-            <GymLevelComponent
-                :level="gym.level"
-                :currentXP="gym.points"
-                :nextLevelXP="12000"
-                :gymPoints="gym.points"
-            />
+            <GymHeaderComponent :logo="gym.logo" :background_image="gym.background_image" :name="gym.title"
+                :post-count="gym.count_posts" :members="gym.count_members" :spotters="gym.count_spotters" :id="id" />
+            <GymLevelComponent :level="gym.level" :currentXP="gym.points" :nextLevelXP="12000"
+                :gymPoints="gym.points" />
             <GymJoinComponent :gymId="id" />
             <DivisionsComponent />
+            <SeasonComponent />
             <IonSegment mode="md">
                 <IonSegmentButton value="posts" content-id="posts">
                     <img class="tab-image" src="../../../assets//new_icons/feed.svg" alt="" />

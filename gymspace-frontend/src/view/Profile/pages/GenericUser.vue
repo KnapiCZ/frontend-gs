@@ -88,7 +88,7 @@ onMounted(() => {
             </IonSegment>
             <IonSegmentView>
                 <IonSegmentContent id="posts">
-                    <SmallFeed />
+                    <SmallFeed :userId="renderedUser" />
                 </IonSegmentContent>
                 <IonSegmentContent id="challenges">HAHAchalalaHA</IonSegmentContent>
             </IonSegmentView>

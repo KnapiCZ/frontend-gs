@@ -11,24 +11,32 @@ const joined = ref(false)
 const spotted = ref(false)
 
 const isSpotting = async () => {
+    console.log(joined.value, spotted.value)
+
     await apiGym("spotter-get", props.gymId).then((response) => {
         if (response.status == "success") spotted.value = response.data
     })
 }
 
 const isJoined = async () => {
+    console.log(joined.value, spotted.value)
+
     await apiGym("member-get", props.gymId).then((response) => {
         if (response.status == "success") joined.value = response.data
     })
 }
 
 const join = async () => {
+    console.log(joined.value, spotted.value)
+
     await apiGym(joined.value ? "member-leave" : "member-join", props.gymId).then((response) => {
         if (response.status == "success") joined.value = !joined.value
     })
 }
 
 const spot = async () => {
+    console.log(joined.value, spotted.value)
+
     await apiGym(spotted.value ? "spotter-leave" : "spotter-join", props.gymId).then((response) => {
         if (response.status == "success") spotted.value = !spotted.value
     })
@@ -37,6 +45,7 @@ const spot = async () => {
 onMounted(() => {
     isJoined()
     isSpotting()
+    console.log(joined.value, spotted.value)
 })
 </script>
 
@@ -44,11 +53,12 @@ onMounted(() => {
     <div class="join-spot-container border-gradient column">
         <div class="button-group box">
             <div class="button-div default-flex">
-                <IonButton v-show="spotted" class="default join-button" @click="join">{{ joined ? "join" : "joined" }}
+                <IonButton v-show="!joined" class="default join-button" @click="join">{{ joined ? "join" : "joined" }}
                 </IonButton>
             </div>
             <div class="button-div default-flex">
-                <IonButton v-show="joined" class="default spot-button" @click="spot">{{ spotted ? "spot" : "spotted" }}
+                <IonButton v-show="!spotted" class="default spot-button" @click="spot">{{ spotted ? "spot" : "spotted"
+                }}
                 </IonButton>
             </div>
         </div>
