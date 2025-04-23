@@ -6,10 +6,13 @@ import apiPost from "@/logic/API/apiPost"
 import router from "@/router"
 
 const posts = ref([])
-let id = router.currentRoute.value.params.id
+
+const props = defineProps<{
+    userId: number
+}>()
 
 const loadPosts = async () => {
-    await apiPost("usersPosts", 3).then((response) => {
+    await apiPost("usersPosts", props.userId).then((response) => {
         console.log(response)
         if (response.status == "success") {
             posts.value = response.data
