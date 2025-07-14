@@ -69,7 +69,7 @@ const openModal = async (gym_id: number) => {
 const loadGoogleMapsApi = () => {
     return new Promise((resolve, reject) => {
         const script = document.createElement("script")
-        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAzxwhowxPHs0lNimraIdQIoETUcsrto-U&libraries=places&v=weekly&callback=initMap`
+        script.src = `https://maps.googleapis.com/maps/api/js?key=apiKey&libraries=places&v=weekly&callback=initMap`
         script.async = true
         script.defer = true
         script.onload = resolve
