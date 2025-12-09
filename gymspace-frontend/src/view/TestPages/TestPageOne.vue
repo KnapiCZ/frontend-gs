@@ -1,10 +1,3 @@
-<template>
-    <div>
-        <button @click="recordVideo">📹 Nahrát video</button>
-        <video v-if="videoPath" :src="videoPath" controls></video>
-    </div>
-</template>
-
 <script setup>
 import { ref } from "vue"
 
@@ -29,3 +22,16 @@ const recordVideo = async () => {
     )
 }
 </script>
+
+<template>
+  <div>
+    <button @click="recordVideo">
+      📹 Nahrát video
+    </button>
+    <video
+      v-if="videoPath"
+      :src="videoPath"
+      controls
+    />
+  </div>
+</template>

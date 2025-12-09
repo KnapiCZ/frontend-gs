@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref } from "vue"
-import PointsComponent from "@/view/shared/components/PointsComponent.vue"
 import { IonButton } from "@ionic/vue"
+import { ref } from "vue"
+
+import PointsComponent from "@/view/shared/components/PointsComponent.vue"
 
 const props = defineProps<{
     description: string
@@ -12,24 +13,33 @@ let isOpened = ref(false)
 </script>
 
 <template>
-    <div class="profile_info">
-        <div class="row">
-            <div class="column left default-flex">
-                <p class="closed" :class="{ 'opened': isOpened }">
-                    {{ description }}
-                </p>
-                <p v-if="description != ''" class="show-more-less" @click="isOpened = !isOpened">
-                    {{ isOpened ? "Showless" : "Show more" }}
-                </p>
-            </div>
-            <div class="column default-flex right">
-                <PointsComponent :points="props.points" />
-                <div class="wrapper-button border-gradient">
-                    <IonButton class="default">Contact</IonButton>
-                </div>
-            </div>
+  <div class="profile_info">
+    <div class="row">
+      <div class="column left default-flex">
+        <p
+          class="closed"
+          :class="{ 'opened': isOpened }"
+        >
+          {{ description }}
+        </p>
+        <p
+          v-if="description != ''"
+          class="show-more-less"
+          @click="isOpened = !isOpened"
+        >
+          {{ isOpened ? "Showless" : "Show more" }}
+        </p>
+      </div>
+      <div class="column default-flex right">
+        <PointsComponent :points="props.points" />
+        <div class="wrapper-button border-gradient">
+          <IonButton class="default">
+            Contact
+          </IonButton>
         </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <style scoped>
