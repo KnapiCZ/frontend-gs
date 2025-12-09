@@ -7,12 +7,7 @@ export default defineConfig(({ mode }) => {
     // Explicitly set NODE_ENV based on mode
     process.env.NODE_ENV = mode
     return {
-        plugins: [
-            vue({
-                ssr: false,
-            }),
-        ],
-
+        plugins: [vue()],
         resolve: {
             alias: {
                 "@": path.resolve(__dirname, "./src"),
