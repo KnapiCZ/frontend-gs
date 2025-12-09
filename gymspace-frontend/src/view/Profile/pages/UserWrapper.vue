@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { IonPage } from "@ionic/vue"
-import GenericUser from "./GenericUser.vue"
-import router from "@/router"
 import { ref, watch } from "vue"
+
+import router from "@/router"
+
+import GenericUser from "./GenericUser.vue"
 
 const renderedUserId = ref(router.currentRoute.value.params.id as unknown as number)
 
@@ -15,7 +17,10 @@ watch(
 </script>
 
 <template>
-    <IonPage class="ion-no-padding">
-        <GenericUser :key="renderedUserId" :renderedUser="renderedUserId" />
-    </IonPage>
+  <IonPage class="ion-no-padding">
+    <GenericUser
+      :key="renderedUserId"
+      :rendered-user="renderedUserId"
+    />
+  </IonPage>
 </template>

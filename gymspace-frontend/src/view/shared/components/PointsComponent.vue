@@ -1,15 +1,19 @@
 <script setup lang="ts">
-import gymPoint from "../../../assets/new_icons/GymPoint.svg"
+import gymPointSrc from "../../../assets/new_icons/GymPoint.svg"
+const gymPoint = gymPointSrc;
 defineProps<{
     points: number
 }>()
 </script>
 
 <template>
-    <div class="points-wrapper row">
-        <h5>{{ points }}</h5>
-        <img :src="gymPoint" alt="Points" />
-    </div>
+  <div class="points-wrapper row">
+    <h5>{{ points }}</h5>
+    <img
+      :src="gymPoint"
+      alt="Points"
+    >
+  </div>
 </template>
 
 <style scoped>

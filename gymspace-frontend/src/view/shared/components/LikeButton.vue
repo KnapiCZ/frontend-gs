@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue"
+
 import apiPost from "@/logic/API/apiPost"
 import { userDataStore } from "@/stores/UserDataStore"
 
@@ -34,30 +35,26 @@ const likeIt = async() => {
         opacity.value = 0
         outline.value = "#ffffff"
     }
-
-    //console.debug(await apiPost("updateLike", props.postId, undefined, userStore.loggedUserId.toString()))
 }
 </script>
 
 <template>
-    <button @click="likeIt()">
-        <svg id="heart-icon">
-            <use
-                class="heart-icon"
-                href="../../../assets/icons/like.svg#heart"
-                :fill-opacity="opacity"
-                fill="#fff000"
-            />
-        </svg>
-    </button>
+  <button @click="likeIt()">
+    <svg id="heart-icon">
+      <use
+        class="heart-icon"
+        href="../../../assets/icons/like.svg#heart"
+        :fill-opacity="opacity"
+        fill="#fff000"
+      />
+    </svg>
+  </button>
 </template>
 
 <style scoped>
 .heart-icon {
-    fill: #fff000 !important;
-    /* Override fill */
-    stroke: red !important;
-    /* Override stroke */
+    fill: #fff000;
+    stroke: red;
 }
 
 button {
@@ -66,8 +63,8 @@ button {
 }
 
 svg {
-    width: 100% !important;
-    height: 100% !important;
+    width: 100%;
+    height: 100%;
 }
 
 button:focus,

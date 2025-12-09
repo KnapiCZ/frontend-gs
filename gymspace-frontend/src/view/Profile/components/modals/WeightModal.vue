@@ -1,20 +1,18 @@
 <script setup lang="ts">
 import {
-    IonToolbar,
-    modalController,
-    IonHeader,
     IonButton,
     IonButtons,
-    IonTitle,
-    IonItem,
     IonContent,
+    IonHeader,
     IonInput,
-    IonRadioGroup,
-    IonRadio,
+    IonTitle,
+    IonToolbar,
+    modalController,
 } from "@ionic/vue"
 import { onMounted, ref } from "vue"
-import { userDataStore } from "@/stores/UserDataStore"
+
 import apiUser from "@/logic/API/apiUser"
+import { userDataStore } from "@/stores/UserDataStore"
 
 const userStore = userDataStore()
 
@@ -42,28 +40,40 @@ onMounted(() => {
 </script>
 
 <template>
-    <IonHeader>
-        <IonToolbar>
-            <IonButtons slot="start">
-                <IonButton @click="cancel()">Cancel</IonButton>
-            </IonButtons>
-            <IonTitle>Weight</IonTitle>
-            <IonButtons slot="end">
-                <IonButton class="save-button" :strong="true" @click="save()"> Confirm</IonButton>
-            </IonButtons>
-        </IonToolbar>
-    </IonHeader>
-    <IonContent>
-        <IonInput
-            v-model="text"
-            class="custom border-gradient"
-            fill="outline"
-            placeholder="Your Weight"
-            maxlength="4"
-            :counter="true"
-        />
-        <p>You can type here your weight.</p>
-    </IonContent>
+  <IonHeader>
+    <IonToolbar>
+      <template #start>
+        <IonButtons>
+          <IonButton @click="cancel()">
+            Cancel
+          </IonButton>
+        </IonButtons>
+      </template>
+      <IonTitle>Weight</IonTitle>
+      <template #end>
+        <IonButtons>
+          <IonButton
+            class="save-button"
+            :strong="true"
+            @click="save()"
+          >
+            Confirm
+          </IonButton>
+        </IonButtons>
+      </template>
+    </IonToolbar>
+  </IonHeader>
+  <IonContent>
+    <IonInput
+      v-model="text"
+      class="custom border-gradient"
+      fill="outline"
+      placeholder="Your Weight"
+      :maxlength="4"
+      :counter="true"
+    />
+    <p>You can type here your weight.</p>
+  </IonContent>
 </template>
 
 <style scoped>
