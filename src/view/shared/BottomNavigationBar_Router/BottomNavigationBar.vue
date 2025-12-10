@@ -8,8 +8,8 @@ const user_id = localStorage.getItem("logged_user_id") as unknown as number
 const profile_picture = ref<string>()
 
 onMounted(async () => {
-    await apiUser("profile", user_id, undefined, "profile_picture,").then((response) => {
-        if (response.status == "success") profile_picture.value = response.data.profile_picture
+    await apiUser.getProfile(user_id,["profile_picture"]).then(async (response) => {
+        if (response.status == "success" && response.data) profile_picture.value = response.data.profile_picture
     })
 })
 </script>

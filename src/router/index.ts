@@ -236,23 +236,15 @@ const router = createRouter({
     routes,
 })
 
-router.beforeEach(async (to: string) => {
-    // If the route doesn't require authentication, allow access
-    if (!to.meta.requiresAuth) {
-        return true // Explicitly allow navigation
-    }
+router.beforeEach(async (to) => {
+    if (!to.meta.requiresAuth) return true
 
     try {
-        // Confirm user authentication status
-        const response = await apiAuth("confirmAuth")
-        // Check if the user is authenticated by verifying the `log` value
-        if (!response?.data.user_id || typeof response.data.user_id !== "number") {
-            // Redirect to login if not authenticated
-            return { name: "login" }
-        }
+        const response = await apiAuth.confirmAuth()
+        if (response.status !== "success") return { name: "login" }
+
     } catch (error) {
-        console.error("Authentication error:", error)
-        // Redirect to login in case of an error
+        console.error("Auth check failed:", error)
         return { name: "login" }
     }
 })

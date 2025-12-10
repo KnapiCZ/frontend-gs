@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { IonPage, IonTabs, IonRouterOutlet, IonTabBar, IonTabButton, useIonRouter } from "@ionic/vue"
+import { IonPage, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs, useIonRouter } from "@ionic/vue"
 import { computed, ref } from "vue"
-import { useRoute } from "vue-router"
 import { watch } from "vue"
+import { useRoute } from "vue-router"
 
 // Router instance
 const router = useIonRouter()
@@ -58,26 +58,46 @@ watch(
 </script>
 
 <template>
-    <IonPage class="ion-no-padding">
-        <IonTabs class="ion-no-padding">
-            <IonRouterOutlet></IonRouterOutlet>
-            <IonTabBar id="sign-up-tab" slot="bottom">
-                <IonTabButton v-if="currentIndex !== null" class="back-button" @click="goBack"
-                    :disabled="!steps[currentIndex].canGoBack">
-                    <img src="../../../assets/icons/arrowBigLeft.png" alt="Back" />
-                </IonTabButton>
+  <IonPage class="ion-no-padding">
+    <IonTabs class="ion-no-padding">
+      <IonRouterOutlet />
+      <template #bottom>
+        <IonTabBar id="sign-up-tab">
+          <IonTabButton
+            v-if="currentIndex !== null"
+            class="back-button"
+            :disabled="!steps[currentIndex].canGoBack"
+            @click="goBack"
+          >
+            <img
+              src="../../../assets/icons/arrowBigLeft.png"
+              alt="Back"
+            >
+          </IonTabButton>
 
-                <div class="progress-dots">
-                    <div v-for="step in steps" :key="step.step" class="progress-dot"
-                        :class="{ active: step.step <= currentStep }"></div>
-                </div>
-                <IonTabButton v-if="currentIndex !== null" class="back-button skip" @click="skip"
-                    :disabled="!steps[currentIndex].canSkip">
-                    <img src="../../../assets/icons/arrowBigLeft.png" alt="Back" />
-                </IonTabButton>
-            </IonTabBar>
-        </IonTabs>
-    </IonPage>
+          <div class="progress-dots">
+            <div
+              v-for="step in steps"
+              :key="step.step"
+              class="progress-dot"
+              :class="{ active: step.step <= currentStep }"
+            />
+          </div>
+          <IonTabButton
+            v-if="currentIndex !== null"
+            class="back-button skip"
+            :disabled="!steps[currentIndex].canSkip"
+            @click="skip"
+          >
+            <img
+              src="../../../assets/icons/arrowBigLeft.png"
+              alt="Back"
+            >
+          </IonTabButton>
+        </IonTabBar>
+      </template>
+    </IonTabs>
+  </IonPage>
 </template>
 
 <style scoped>

@@ -31,12 +31,6 @@ const openModal = async () => {
         isModalOpen = false
     })
 }
-/*
-const checkLogin = () => {
-    if (renderedUserId.value == props.id) return true
-    else return false
-}
-*/
 
 let isUserVerified = 1
 </script>
