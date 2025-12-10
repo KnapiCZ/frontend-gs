@@ -19,13 +19,15 @@ export const authApi = {
     async getToken(credential: CredentialsPayload): Promise<ApiResponse<Token>> {
         const response = await fetch(`${BASE_URL}api-auth/`, {
             method: "POST",
-            headers: HEADERS,
+            headers: {
+                "Content-Type": "application/json",
+            },
             body: JSON.stringify(credential),
         })
         return await response.json()
     },
 
-    async confirmAuth(): Promise<ApiResponse<null>> {
+    async confirmAuth(): Promise<ApiResponse<{ user_id: number }>> {
         const response = await fetch(`${BASE_URL}api/confirm-auth/`, {
             method: "POST",
             headers: HEADERS,

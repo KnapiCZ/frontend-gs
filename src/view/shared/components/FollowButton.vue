@@ -9,7 +9,7 @@ const props = defineProps<{
 }>()
 const isFollowing = ref()
 
-isFollowing.value = await apiUser.isFollowing(props.userId)
+isFollowing.value = await apiUser.isFollowing(props.userId,12)
 
 const follow = async () => {
     await apiUser.follow(props.userId)
