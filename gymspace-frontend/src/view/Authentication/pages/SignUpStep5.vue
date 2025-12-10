@@ -12,7 +12,7 @@ let isModalOpen = false;
 
 const handleSearch = async () => {
     if (searchQuery.value.length >= 3) {
-        await apiGym("search", undefined, undefined, searchQuery.value).then((gymsQuery) => {
+        await apiGym("search", undefined, undefined, "title,address,country,city,id", searchQuery.value).then((gymsQuery) => {
             gyms.value = gymsQuery
         })
     } else {
@@ -309,7 +309,7 @@ onMounted(async () => {
 
 <template>
     <IonPage>
-        <IonContent :scroll-y="false">
+        <IonContent>
             <div class="top-container">
                 <div class="title-container">
                     <p class="small-text">CHOOSE YOUR </p>

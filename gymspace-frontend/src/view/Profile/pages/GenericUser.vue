@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { IonContent, IonPage, IonToolbar, IonButton } from '@ionic/vue';
 import { userDataStore } from '@/stores/UserDataStore';
+import { useRoute } from 'vue-router';
 import { useIonRouter } from '@ionic/vue';
 import ProfileTop from '../components/ProfileTop.vue'
 import CurrentUserButton from '../components/Buttons/CurrentUserButton.vue';
@@ -9,15 +10,13 @@ import TabBar from '../components/TabBar.vue';
 import OtherUserButton from '../components/Buttons/OtherUserButton.vue';
 import apiUser from '@/logic/API/apiUser';
 
-const router = useIonRouter()
+const route = useRoute();
 const userStore = userDataStore();
-const logged_user = localStorage.getItem("logged_user_id") as unknown as number
+const router = useIonRouter()
 
-const props = defineProps<{
-	renderedUser: number
-}>()
+userStore.renderedUserId = (route.params.id[0] as unknown) as number
+userStore.user = JSON.stringify(await apiUser("userProfile", userStore.renderedUserId))
 
-userStore.user = JSON.stringify(await apiUser("profile", props.renderedUser, undefined, "followers,contacts,profile_picture,background_picture,username,"))
 
 function checkLogin() {
 	if (userStore.renderedUserId == userStore.loggedUserId) return true;

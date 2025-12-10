@@ -1,35 +1,10 @@
-# Specifies intentionally untracked files to ignore when using Git
-# http://git-scm.com/docs/gitignore
-
-*~
-*.sw[mnpcod]
-.tmp
-*.tmp
-*.tmp.*
-*.sublime-project
-*.sublime-workspace
-.DS_Store
-Thumbs.db
-UserInterfaceState.xcuserstate
-$RECYCLE.BIN/
-
-*.log
-log.txt
-npm-debug.log*
-
-/.idea
-/.ionic
-/.sass-cache
-/.sourcemaps
-/.versions
-/.vscode/*
-!/.vscode/extensions.json
-/coverage
-/dist
-/node_modules
-/platforms
-/plugins
-/www
+gymspace/*.log
+gymspace/*.pot
+gymspace/*.pyc
+gymspace/__pycache__
+gymspace/*/__pycache__
+gymspace/*/migrations
+gymspace/media
 # Logs
 logs
 *.log
@@ -46,8 +21,8 @@ dist-ssr
 coverage
 *.local
 
-/cypress/videos/
-/cypress/screenshots/
+gymspace-frontend/cypress/videos/
+gymspace-frontend/cypress/screenshots/
 
 
 # Editor directories and files
@@ -59,6 +34,3 @@ coverage
 *.njsproj
 *.sln
 *.sw?
-
-resources/ios/**/*
-resources/android/**/*
