@@ -1,0 +1,415 @@
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    src: url("@/assets/fonts/Montserrat-VariableFont_wght.ttf");
+}
+
+@font-face {
+    font-family: "Montserrat";
+    font-style: italic;
+    src: url("@/assets/fonts/Montserrat-Italic-VariableFont_wght.ttf");
+}
+
+@font-face {
+    font-family: "Etna-Sans-Serif";
+    font-weight: 400;
+    font-style: normal;
+    src: url(@/assets/fonts/Etna-Sans-serif.otf);
+}
+
+* {
+    font-family: "Montserrat";
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    background: black;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+button {
+    all: unset
+}
+
+#app {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+img {
+    pointer-events: none;
+}
+
+.pop-button {
+    width: 30px;
+    aspect-ratio: 1;
+    position: absolute;
+    right: 0;
+    top: 0;
+    border-radius: 0 0 0 15px;
+    background-color: black;
+}
+
+.pop-button img {
+    width: 100%;
+    height: 100%;
+}
+
+.searchbar-input.sc-ion-searchbar-md,
+.searchbar-input.sc-ion-searchbar-ios {
+    background-position: center;
+}
+
+.input-bottom.sc-ion-input-ios .helper-text.sc-ion-input-ios,
+.input-bottom.sc-ion-input-md .helper-text.sc-ion-input-md,
+.input-bottom.sc-ion-input-ios .error-text.sc-ion-input-ios,
+.input-bottom.sc-ion-input-md .error-text.sc-ion-input-md {
+    color: rgb(255, 0, 0);
+    font-weight: bold;
+    text-shadow: rgb(0, 0, 0) 0 0 20px;
+}
+
+.sign-up-background-image {
+    opacity: 0.8;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: top center;
+    z-index: 0;
+}
+
+.pac-item {
+    cursor: default;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: wrap;
+    line-height: 20px;
+    text-align: left;
+    border: 1px solid #fff000;
+    font-size: 12px;
+    color: #515151;
+    padding: 5px 10px;
+    border-radius: 6px;
+    backdrop-filter: blur(5px);
+    margin: 5px 0;
+}
+
+.pac-item:hover {
+    background: black;
+    color: white;
+}
+
+.pac-item-query {
+    color: white;
+}
+
+.pac-matched {
+    color: var(--color-primary-tint);
+}
+
+.pac-icon-marker {
+    display: none;
+}
+
+.custom-modal-class {
+    margin: auto;
+    --width: 97%;
+    --border-radius: 6px;
+    --border-width: none;
+    --border-style: none;
+}
+
+.pac-container {
+    background-color: transparent;
+    position: absolute;
+    z-index: 1000;
+    border-radius: 6px;
+    border-top: none;
+    font-family: Arial, sans-serif;
+    -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    overflow: hidden;
+    width: 90%;
+    margin: auto 5%;
+    left: 0;
+}
+
+.pac-container:after {
+    background-image: none;
+    height: 0;
+}
+
+/*
+    Default container styles
+*/
+
+.wrapper-div {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    backdrop-filter: blur(20px);
+}
+
+/*
+    Default top notch pading
+*/
+
+.top-padding-notch {
+    --padding-top: 44px;
+}
+
+/*
+	Default Font styles
+*/
+
+h1 {
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+}
+
+h2 {
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+h3 {
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+h4 {
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+}
+
+h5 {
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+h6 {
+    font-family: Montserrat;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+}
+
+p {
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.225rem;
+    letter-spacing: -0.04063rem;
+}
+
+a {
+    color: #fff000;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+h1.sign-up {
+    position: relative;
+    text-align: left;
+    font-size: 6vh;
+    font-weight: 900;
+    width: 32vh;
+    margin: 4vh 5%;
+    text-shadow: 0 0 10px black;
+    z-index: 2;
+}
+
+.smallest-text {
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.05rem;
+    letter-spacing: -0.04063rem;
+}
+
+.error-message {
+    font-size: 14px;
+    font-weight: 300;
+    text-shadow: 0 0 10px black;
+    color: red;
+}
+
+/*
+	tab bar styles
+*/
+
+.tab-image {
+    width: 25px;
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(46deg) brightness(100%) contrast(100%);
+}
+
+.segment-button-checked .tab-image {
+    filter: brightness(0) saturate(100%) invert(92%) sepia(19%) saturate(5939%) hue-rotate(3deg) brightness(109%) contrast(105%);
+}
+
+ion-segment-button {
+    --indicator-color: #fff000;
+    --indicator-height: 2px;
+}
+
+ion-segment-view {
+    height: 150px;
+}
+
+ion-segment-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*
+	Flex classes use for flex setup insted of writing it to scoped css
+*/
+
+/*
+	Flex Containers
+*/
+
+.box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.row {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.column {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+/*
+	Flex Items (none for now)
+*/
+
+.default-flex {
+    flex: 1;
+}
+
+/*
+    Border gradient with working radius and transparent background and other global styles
+*/
+
+.border-gradient::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: 6px;
+    padding: 1px;
+    background: linear-gradient(135deg, #fff 4%, #ffffff75 52%, #ffffff59 80%, #fff00021);
+    mask:
+        linear-gradient(white 0 0) content-box,
+        linear-gradient(white 0 0);
+    -webkit-mask:
+        linear-gradient(white 0 0) content-box,
+        linear-gradient(white 0 0);
+    mask-composite: exclude;
+}
+
+.margin-inline-default {
+    margin: 0 8px;
+}
+
+/*
+    Ionic custom styles used to setup default look
+*/
+ion-textarea.custom,
+ion-input.custom {
+    text-align: left;
+    width: auto;
+    height: 50px;
+    margin: 25px;
+    font-size: 16px;
+    border-radius: 6px;
+    backdrop-filter: blur(26px);
+    --border-style: none;
+    --border-color: none;
+    --border-radius: none;
+    --background: #24242440;
+    --color: #fff;
+    --padding-end: 20px;
+    --padding-start: 20px;
+    --highlight-color-focused: #fff000;
+}
+
+ion-content.sign-up-content,
+ion-content.welcome-page {
+    overflow: hidden;
+    text-align: center;
+}
+
+ion-button.default {
+    width: 80%;
+    height: 25px;
+    min-height: 25px;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: uppercase;
+    border-radius: 6px;
+    --border-width: 1px;
+    --border-style: solid;
+    --border-color: #2f2f2f;
+    --background: #2f2f2f;
+    --border-radius: 6px;
+    --background-hover: #464646;
+    --background-activated: #464646;
+}
+
+ion-button.sign-up-button {
+    bottom: 20px;
+    width: 50%;
+    height: 44px;
+    margin: 36px auto;
+    color: black;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: uppercase;
+    border-radius: 6px;
+    box-shadow: 0 0 45px var(--color-primary-tint);
+    --border-radius: 6px;
+    --background: var(--color-primary-tint);
+    --background-hover: #bdb000;
+    --background-activated: #bdb000;
+    --background-focused: #bdb000;
+}
