@@ -1,104 +1,121 @@
-# Repozitář pro gymspace webovou aplikaci využívající Vue.js a Django.
+# frontend-gs (Gymspace web)
 
-## Zapnutí serveru pro Vue:
-Jdi do /gymspace-frontend/ v terminálu a napiš:
+Frontend pro **Gymspace** – webová/mobilní aplikace postavená na **Vue + Ionic** (Capacitor). Repo obsahuje i platformní projekty pro **Android** a **iOS**.
 
-```
-ionic serve  (pro local)
-ionic serve --external (pro hostovani)
-```
-
-# Commit Guidelines
-
-## Struktura commit zprávy
-
-Commit zpráva by měla mít dvě hlavní části:
-- **Titulek (header):** Krátké shrnutí změny (max. 50 znaků).
-- **Popis (body):** Delší vysvětlení změny (volitelné, ale doporučené).
-
-### Titulek commit zprávy
-1. **Buďte struční a konkrétní:** Titulek by měl jasně vyjádřit, co bylo změněno a proč.
-2. **Používejte přítomný čas:** Pište například "Přidává", "Opravuje", "Maže". Vyhýbejte se minulému času.
-3. **Začněte velkým písmenem:** Dodržujte formát s počátečním velkým písmenem.
-4. **Nepoužívejte tečky na konci:** Titulek commit zprávy by neměl mít na konci tečku.
-
-### Popis commit zprávy
-Popis je volitelný, ale měl by být použit, pokud je změna složitější nebo potřebuje další vysvětlení. Popis začíná jedním prázdným řádkem pod titulkem a může obsahovat:
-- **Co bylo změněno?**
-- **Proč byla změna provedena?**
-- **Jaké problémy to řeší?**
-
-## Tagy commit zpráv
-
-Pro označení povahy změny můžete použít tzv. tagy. Tyto tagy usnadňují rychlou orientaci v historii commitů.
-
-### Běžně používané tagy:
-
-- **feat:** Přidání nové funkcionality.  
-  `feat: Přidává funkci resetování hesla`
-
-- **fix:** Oprava chyby.  
-  `fix: Opravuje chybu v ověřování e-mailů`
-
-- **chore:** Údržba, která neovlivňuje funkcionalitu aplikace (např. aktualizace závislostí).  
-  `chore: Aktualizace závislostí na nejnovější verzi`
-
-- **refactor:** Změny ve struktuře kódu bez změny funkce (např. zlepšení čitelnosti, optimalizace).  
-  `refactor: Optimalizuje metodu pro výpočet slev`
-
-- **docs:** Změny v dokumentaci.  
-  `docs: Aktualizace README s novým návodem`
-
-- **test:** Přidání nebo změna testů.  
-  `test: Přidává testy pro validaci vstupů`
-
-- **style:** Změny týkající se formátování, stylu nebo whitespace.  
-  `style: Oprava odsazení a formátování kódu`
-
-- **perf:** Změny zlepšující výkon.  
-  `perf: Zlepšení výkonu při načítání velkých souborů`
-
-- **ci:** Změny týkající se CI/CD pipeline.  
-  `ci: Přidání automatických testů do CI pipeline`
-
-- **build:** Změny související s build systémem nebo externími závislostmi.  
-  `build: Přidání konfigurace pro webpack`
-
-- **revert:** Vrácení předchozího commitu.  
-  `revert: Vrací commit "Přidání funkce pro vyhledávání"`
-
-### Další specializované tagy:
-
-- **hotfix:** Rychlá oprava kritických chyb v produkci.  
-  `hotfix: Opravuje chybu, která způsobuje pád aplikace při spuštění`
-
-- **deploy:** Nasazení nové verze aplikace do produkce.  
-  `deploy: Nasazuje verzi 1.0.1 na produkci`
-
-- **security:** Změny týkající se zabezpečení aplikace.  
-  `security: Opravuje zranitelnost v autentifikačním systému`
-
-- **i18n:** Změny týkající se lokalizace nebo internacionalizace.  
-  `i18n: Přidává podporu pro německou lokalizaci`
-
-- **ux:** Změny, které zlepšují uživatelskou zkušenost.  
-  `ux: Zlepšuje zobrazování notifikací při načítání dat`
-
-- **db:** Změny týkající se databáze, např. migrace nebo úpravy schémat.  
-  `db: Přidání nového indexu pro tabulku uživatelů`
-
-- **config:** Změny konfigurací aplikace nebo vývojového prostředí.  
-  `config: Aktualizace konfigurace ESLint`
-
-### Kombinace tagů:
-
-Pokud commit odpovídá více kategoriím, můžete použít více tagů najednou.  
-Například:  
-`feat(build): Přidává nové skripty pro sestavení projektu`  
-`fix(ci): Oprava chyby v CI pipeline pro testování`
-
-## Doporučení
-
-- **Rozdělujte změny do menších commitů:** Každý commit by měl řešit jednu konkrétní úlohu nebo problém. To usnadňuje pochopení změn a vrácení zpět, pokud je to nutné.
-- **Konzistence:** Dodržujte konzistentní styl psaní commit zpráv v rámci celého projektu.
 ---
+
+## Tech stack
+
+- **Vue 3** + **TypeScript**
+- **Ionic Framework** (+ **Capacitor** pro Android/iOS)
+- **Pinia** (state management)
+- **Vite** (build & dev server)
+- **Cypress** (E2E testy)
+
+---
+
+## Požadavky
+
+- **Node.js** (doporučeně LTS) + **npm**
+- Pro mobilní buildy:
+  - **Android Studio** + Android SDK (Android)
+  - **Xcode** (iOS – pouze macOS)
+
+---
+
+## Rychlý start // pokud máte backend
+
+```bash
+npm install
+ionic serve
+```
+
+> Alternativně pro spuštění na zařízení v síti:
+```bash
+ionic serve --external
+```
+
+---
+
+## Konfigurace prostředí (.env)
+
+Repo obsahuje `.env.production`. Pro lokální běh si typicky vytvoř vlastní `.env` (necommitovat) a nastav potřebné proměnné podle backendu a prostředí.
+
+Tip:
+- držte tajemství mimo git (tokeny/klíče jen lokálně nebo přes CI secrets)
+
+---
+
+## Skripty & běžné příkazy
+
+### Web (build)
+```bash
+ionic build
+```
+
+### Capacitor (sync)
+Kdykoliv přidáš plugin nebo změníš web build:
+```bash
+ionic cap sync
+```
+
+### Android
+```bash
+ionic cap open android
+# nebo (pokud máš vše nastavené)
+ionic cap run android
+```
+
+### iOS
+```bash
+ionic cap open ios
+# nebo
+ionic cap run ios
+```
+
+---
+
+## Testy
+
+### E2E (Cypress)
+- Konfigurace je v `cypress.config.ts`.
+- Spuštění (dle toho, co máš v `package.json`):
+```bash
+npx cypress open
+# nebo
+npx cypress run
+```
+
+---
+
+## Struktura repozitáře
+
+- `src/` – hlavní aplikace (Vue/Ionic)
+- `resources/` – ikony, splash screeny a assety pro mobilní platformy
+- `android/` – Android projekt (Capacitor)
+- `ios/` – iOS projekt (Capacitor)
+- `tests/` – testy (dle struktury projektu)
+
+---
+
+## Commit pravidla (rychlá verze)
+
+Používej prefixy pro rychlou orientaci v historii:
+
+- `feat:` nová funkcionalita  
+- `fix:` oprava chyby  
+- `chore:` údržba / závislosti  
+- `refactor:` úprava struktury bez změny chování  
+- `docs:` dokumentace  
+- `test:` testy  
+- `style:` formátování  
+- `perf:` výkon  
+- `ci:` CI/CD  
+- `build:` build tooling  
+- `revert:` revert  
+- `hotfix:` rychlá oprava produkce  
+
+Příklad:
+```text
+feat: Přidává registraci přes OAuth
+```
