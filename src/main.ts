@@ -4,6 +4,7 @@ import "@ionic/vue/css/padding.css"
 /* Theme variables */
 import "@/theme/variables.css"
 import "@/theme/main.css"
+import "@/theme/utilities.css"
 
 import { IonicVue } from "@ionic/vue"
 import { createPinia } from "pinia"

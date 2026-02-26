@@ -1,0 +1,467 @@
+/* ============================================
+   LAYOUT UTILITIES
+   ============================================ */
+
+/* Flexbox */
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-col-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flex-between-center {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.items-start {
+    align-items: start;
+}
+
+.items-end {
+    align-items: end;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-start {
+    justify-content: start;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.justify-evenly {
+    justify-content: space-evenly;
+}
+
+/* Grid */
+.grid {
+    display: grid;
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+}
+
+/* Full Size */
+.w-full {
+    width: 100%;
+}
+
+.h-full {
+    height: 100%;
+}
+
+.w-h-full {
+    width: 100%;
+    height: 100%;
+}
+
+.wh-full {
+    width: 100%;
+    height: 100%;
+}
+
+.min-w-full {
+    min-width: 100%;
+}
+
+.min-h-full {
+    min-height: 100%;
+}
+
+/* Spacing commonly used margins */
+.m-auto {
+    margin: auto;
+}
+
+.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.my-auto {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.m-0 {
+    margin: 0;
+}
+
+.m-1 {
+    margin: 8px;
+}
+
+.m-2 {
+    margin: 16px;
+}
+
+.m-3 {
+    margin: 24px;
+}
+
+.mx-1 {
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.my-1 {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+/* Padding */
+.p-0 {
+    padding: 0;
+}
+
+.p-1 {
+    padding: 8px;
+}
+
+.p-2 {
+    padding: 16px;
+}
+
+.py-0 {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.px-1 {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.px-2 {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.px-3 {
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+.py-2 {
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+/* ============================================
+   TEXT UTILITIES
+   ============================================ */
+
+/* Text Ellipsis (common heading truncation) */
+.text-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.text-ellipsis-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-start {
+    text-align: left;
+}
+
+.text-end {
+    text-align: right;
+}
+
+/* ============================================
+   BORDER & RADIUS
+   ============================================ */
+
+/* Border Radius */
+.rounded-none {
+    border-radius: 0;
+}
+
+.rounded-sm {
+    border-radius: 6px;
+}
+
+.rounded-md {
+    border-radius: 10px;
+}
+
+.rounded-lg {
+    border-radius: 15px;
+}
+
+.rounded-full {
+    border-radius: 50%;
+}
+
+.rounded-top-left {
+    border-radius: 15px 0 0 0;
+}
+
+.rounded-bottom-right {
+    border-radius: 0 0 15px 0;
+}
+
+/* Borders */
+.border {
+    border: 1px solid;
+}
+
+.border-yellow {
+    border: 1px solid #fff000;
+}
+
+.border-semi-transparent {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ============================================
+   IMAGE & ASPECT RATIO UTILITIES
+   ============================================ */
+
+/* Object Fit */
+.object-cover {
+    object-fit: cover;
+}
+
+.object-contain {
+    object-fit: contain;
+}
+
+/* Aspect Ratios */
+.aspect-1 {
+    aspect-ratio: 1;
+}
+
+.aspect-square {
+    aspect-ratio: 1;
+}
+
+.aspect-video {
+    aspect-ratio: 16 / 9;
+}
+
+.aspect-4-5 {
+    aspect-ratio: 4 / 5;
+}
+
+.aspect-1-1-5 {
+    aspect-ratio: 1 / 1.5;
+}
+
+/* ============================================
+   COMMON COMPONENT PATTERNS
+   ============================================ */
+
+/* Circular Image (Profile Pictures, Avatars) */
+.circular-img {
+    border-radius: 50%;
+    aspect-ratio: 1;
+    object-fit: cover;
+}
+
+.circular-img-contain {
+    border-radius: 50%;
+    aspect-ratio: 1;
+    object-fit: contain;
+}
+
+/* Thumbnail Image (Posts) */
+.thumbnail-img {
+    width: 100%;
+    aspect-ratio: 1 / 1.5;
+    object-fit: cover;
+}
+
+/* Card Button Pattern (Gym/Division buttons) */
+.card-btn {
+    width: auto;
+    height: 90px;
+    margin: 8px;
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+    border: 1px solid #fff000;
+}
+
+.card-icon {
+    width: auto;
+    height: 60px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    object-fit: contain;
+}
+
+/* Heading Truncation (common in cards) */
+.card-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Container with Black Background */
+.container-dark {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+}
+
+/* Overlay Gradient (for images) */
+.overlay-gradient {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.3) 0%,
+        rgba(0, 0, 0, 0.1) 20%,
+        rgba(0, 0, 0, 0.1) 60%,
+        rgba(0, 0, 0, 0.5) 100%
+    );
+}
+
+/* ============================================
+   POSITION UTILITIES
+   ============================================ */
+
+.relative {
+    position: relative;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.fixed {
+    position: fixed;
+}
+
+/* ============================================
+   POINTER EVENTS
+   ============================================ */
+
+.pointer-events-none {
+    pointer-events: none;
+}
+
+.pointer-events-auto {
+    pointer-events: auto;
+}
+
+/* ============================================
+   Z-INDEX
+   ============================================ */
+
+.z-0 {
+    z-index: 0;
+}
+
+.z-10 {
+    z-index: 10;
+}
+
+.z-50 {
+    z-index: 50;
+}
+
+/* ============================================
+   BACKGROUND
+   ============================================ */
+
+.bg-black {
+    background-color: black;
+}
+
+.bg-semi-transparent {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ============================================
+   MISCELLANEOUS
+   ============================================ */
+
+.list-reset {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.list-inside {
+    list-style-position: inside;
+}
+
+.no-select {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.opacity-50 {
+    opacity: 0.5;
+}
+
+.opacity-75 {
+    opacity: 0.75;
+}
+
+.opacity-80 {
+    opacity: 0.8;
+}
