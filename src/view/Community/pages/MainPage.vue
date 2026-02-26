@@ -2,13 +2,15 @@
 import { IonPage, IonContent, IonSearchbar, IonList, IonItem, modalController } from "@ionic/vue"
 import { userDataStore } from "@/stores/UserDataStore"
 import { onMounted, ref } from "vue"
-import GymButton from "../components/GymButton.vue"
 import apiGym from "@/logic/API/apiGym"
 import apiDivision from "@/logic/API/apiDivision"
-import DivisionButton from "../components/DivisionButton.vue"
 import ChallengeModalComponent from "@/view/Challenges/components/ChallengeModalComponent.vue"
+import { useIonRouter } from "@ionic/vue"
+import background from "@/assets/images/BG.png"
+import { updateDivisionColor } from "@/logic/utils/common"
 
 const userStore = userDataStore()
+const router = useIonRouter()
 const gyms = ref<{ title: string; logo: string; id: number; city: string; address: string }[]>([])
 const searchQuery = ref("")
 const myGymId = ref(0)
@@ -21,6 +23,37 @@ const gym = ref({
     city: "",
     address: "",
 })
+
+// Inline GymButton logic
+const gymButtons = ref<{ [key: number]: { title: string; logo: string; count_not_seen_posts: number; count_not_seen_messages: number } }>({})
+
+const loadGymButton = async (id: number) => {
+    await apiGym("getInfo", id, undefined, "title,logo").then((response) => {
+        if (response.status == "success") {
+            gymButtons.value[id] = response.data
+        }
+    })
+}
+
+// Inline DivisionButton logic
+const divisionButtons = ref<{ [key: number]: { title: string; logo: string; sport_name: string; count_not_seen_posts: number; count_not_seen_messages: number } }>({})
+
+const loadDivisionButton = async (id: number) => {
+    await apiDivision("getInfo", id, undefined, "title,logo,sport_name").then((response) => {
+        if (response.status == "success") {
+            divisionButtons.value[id] = response.data
+            updateDivisionColor(response.data.sport_name)
+        }
+    })
+}
+
+const goToGym = (id: number) => {
+    router.push("/gym/" + id)
+}
+
+const goToDivision = (id: number) => {
+    router.push("/division/" + id)
+}
 
 let isModalOpen = false
 
@@ -60,19 +93,21 @@ const handleSearch = async () => {
 }
 
 const initializePageData = async () => {
-    await apiGym("users-gym", 3).then((response) => {
+    await apiGym("getUsersGym", 3).then((response) => {
         if (response.status == "success") {
             if (response.data >= 0) {
                 console.log(response.data)
                 myGymId.value = response.data
+                loadGymButton(response.data)
             }
         }
     })
-    await apiDivision("users-divisions", 3).then((response) => {
+    await apiDivision("getUsersDivisions", 3).then((response) => {
         console.log(response)
         if (response.status == "success") {
             myDivisions.value = response.data
             console.log(myDivisions.value)
+            myDivisions.value.forEach(div => loadDivisionButton(div))
         }
     })
 }
@@ -80,6 +115,7 @@ const initializePageData = async () => {
 onMounted(() => {
     initializePageData()
 })
+</script>
 </script>
 
 <template>
@@ -106,9 +142,32 @@ onMounted(() => {
                 <img v-show="userStore.userGymId.length > 3" id="arrow1" src="../../../assets/icons/arrowRight.svg" />
             </h4>
             <div id="extend1" :key="userStore.componentKey">
-                <GymButton v-if="myGymId != 0" :id="myGymId" :key="'gym' + userStore.componentKey + 2" />
-                <DivisionButton v-if="myDivisions != null" v-for="division in myDivisions" :id="division"
-                    :key="'division' + userStore.componentKey + 2" />
+                <!-- GymButton inline -->
+                <div v-if="myGymId != 0 && gymButtons[myGymId]" @click="goToGym(myGymId)" class="card-btn"
+                    :style="{ 'background-image': background }">
+                    <img class="card-icon" :src="gymButtons[myGymId].logo" />
+                    <div class="text-div">
+                        <h2 class="text-ellipsis">{{ gymButtons[myGymId].title }}</h2>
+                        <ul>
+                            <li>{{ gymButtons[myGymId].count_not_seen_posts }} New Posts</li>
+                            <li>{{ gymButtons[myGymId].count_not_seen_messages }} New Messages</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- DivisionButton inline -->
+                <div v-for="division in myDivisions" :key="'division' + userStore.componentKey + 2"
+                    v-if="divisionButtons[division]" @click="goToDivision(division)" class="card-btn"
+                    :style="{ borderColor: 'var(--division-color)', backgroundColor: 'rgba(255, 255, 255, 0.1)' }">
+                    <img class="card-icon" :src="divisionButtons[division].logo" />
+                    <div class="text-div">
+                        <h2 class="text-ellipsis">{{ divisionButtons[division].title }}</h2>
+                        <ul>
+                            <li>{{ divisionButtons[division].count_not_seen_posts }} New Posts</li>
+                            <li>{{ divisionButtons[division].count_not_seen_messages }} New Messages</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
             <p @click="openModal">LOLOLO CHALLLEGNE APMDOAWD</p>
         </IonContent>
@@ -217,5 +276,41 @@ ion-item {
     padding: 2px 5px;
     border-radius: 6px;
     --border-radius: 6px;
+}
+
+/* Inline card button styles from GymButton & DivisionButton */
+.card-btn {
+    width: auto;
+    height: 90px;
+    margin: 8px;
+    padding: 0 8px;
+    border-radius: 6px;
+    border: 1px solid #fff000;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.card-icon {
+    width: auto;
+    height: 60px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 1px solid #fff000;
+    object-fit: contain;
+}
+
+.text-div {
+    text-align: left;
+}
+
+.text-div h2 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.text-div ul {
+    list-style-position: inside;
 }
 </style>
