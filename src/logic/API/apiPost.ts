@@ -1,110 +1,101 @@
+import type { ApiResponse } from "../types/response"
+import type { Post, Like, Thumbnail, CreatePostPayload, UpdatePostPayload } from "../types/post"
 import getConfig from "./apiConfig"
 
-/**
- * if arguments are not specified for case -> use undefined
- * @description apiTypes:
- * - usersPosts: returns ids of all users posts, ARGS: data = user
- * - createPost: used to create users post, ARGS: data = division?, mentioned_user[], user_id, description, media[]
- * - getPost: returns data of post, ARGS: objectId
- * - updatePost: used to update post description (for now), ARGS: objectId, data = description
- * - deletePost: used to delete post, ARGS: objectId
- * - getThumbnail: (in progress)
- * - postLiked: status if user liked post ARGS: objectId=id of post, queryParams=usersId
- * - updateLike: updates like status of user and post, ARGS: objectId, data= user
- * - recommendedPosts: returns ids of posts of users i am following(looged_in user), ARGS: objectId(id of user for now)
- * - gymPosts: Vrati pole ID vsech prispevku do gymu, ARGS: objectId(id of gym)
- * - divisionPosts: Vrati pole ID vsech prispevku do divisionu: ARGS: objectId(id of division)
- * @param apiType - used to select one of apiTypes
- * @param objectId - id of object we are working with progress, challenge or vote
- * @param data - data needed for api needs successfully complete its task
- */
+const BASE_URL = getConfig().apiBaseUrl
+const HEADERS = getConfig().headers
 
-async function apiPost(apiType = "", objectId?: number, data?: string, queryParams?: string) {
-    let response
-    switch (apiType) {
-        case "usersPosts":
-            response = await fetch(`${getConfig().apiBaseUrl}api/posts/${objectId}/users-posts/`, {
-                method: "GET",
-                headers: getConfig().headers,
-            })
-            return await response.json()
+export const postApi = {
 
-        case "createPost":
-            response = await fetch(`${getConfig().apiBaseUrl}api/posts/`, {
-                method: "POST",
-                headers: getConfig().headers,
-                body: data,
-            })
-            return await response.json()
+    async getUsersPosts(userId: number): Promise<ApiResponse<number[]>> {
+        const response = await fetch(`${BASE_URL}api/posts/${userId}/users-posts/`, {
+            method: "GET",
+            headers: HEADERS,
+        })
+        return await response.json()
+    },
 
-        case "getPost":
-            response = await fetch(`${getConfig().apiBaseUrl}api/posts/${objectId}/`, {
-                method: "GET",
-                headers: getConfig().headers,
-            })
-            return await response.json()
+    async create(data: CreatePostPayload): Promise<ApiResponse<Post>> {
+        const response = await fetch(`${BASE_URL}api/posts/`, {
+            method: "POST",
+            headers: HEADERS,
+            body: JSON.stringify(data),
+        })
+        return await response.json()
+    },
 
-        case "updatePost":
-            response = await fetch(`${getConfig().apiBaseUrl}api/posts/${objectId}/`, {
-                method: "PATCH",
-                headers: getConfig().headers,
-                body: data,
-            })
-            return await response.json()
+    async get(postId: number): Promise<ApiResponse<Post>> {
+        const response = await fetch(`${BASE_URL}api/posts/${postId}/`, {
+            method: "GET",
+            headers: HEADERS,
+        })
+        return await response.json()
+    },
 
-        case "deletePost":
-            response = await fetch(`${getConfig().apiBaseUrl}api/posts/${objectId}/`, {
-                method: "DELETE",
-                headers: getConfig().headers,
-                body: data,
-            })
-            return await response.json()
+    async update(postId: number, data: UpdatePostPayload): Promise<ApiResponse<Post>> {
+        const response = await fetch(`${BASE_URL}api/posts/${postId}/`, {
+            method: "PATCH",
+            headers: HEADERS,
+            body: JSON.stringify(data),
+        })
+        return await response.json()
+    },
 
-        case "getThumbnail":
-            response = await fetch(`${getConfig().apiBaseUrl}api/users-posts/thumbnail/${objectId}/`, {
-                method: "GET",
-                headers: getConfig().headers,
-            })
-            return await response.json()
+    async delete(postId: number): Promise<ApiResponse<null>> {
+        const response = await fetch(`${BASE_URL}api/posts/${postId}/`, {
+            method: "DELETE",
+            headers: HEADERS,
+        })
+        return await response.json()
+    },
 
-        case "postLiked":
-            response = await fetch(`${getConfig().apiBaseUrl}api/like/${objectId}/?user_id=${queryParams}`, {
-                method: "GET",
-                headers: getConfig().headers,
-            })
-            return await response.json()
+    async getThumbnail(postId: number): Promise<ApiResponse<Thumbnail>> {
+        const response = await fetch(`${BASE_URL}api/users-posts/thumbnail/${postId}/`, {
+            method: "GET",
+            headers: HEADERS,
+        })
+        return await response.json()
+    },
 
-        case "updateLike":
-            response = await fetch(`${getConfig().apiBaseUrl}api/like/${objectId}/?user_id=${queryParams}`, {
-                method: "PATCH",
-                headers: getConfig().headers,
-            })
-            return await response.json()
+    async isPostLiked(postId: number, userId: string): Promise<ApiResponse<Like | null>> {
+        const response = await fetch(`${BASE_URL}api/like/${postId}/?user_id=${userId}`, {
+            method: "GET",
+            headers: HEADERS,
+        })
+        return await response.json()
+    },
 
-        case "recommendedPosts":
-            response = await fetch(`${getConfig().apiBaseUrl}api/users-gympage-recommended/${objectId}/`, {
-                method: "GET",
-                headers: getConfig().headers,
-            })
-            return await response.json()
+    async updateLike(postId: number, userId: string): Promise<ApiResponse<Like>> {
+        const response = await fetch(`${BASE_URL}api/like/${postId}/?user_id=${userId}`, {
+            method: "PATCH",
+            headers: HEADERS,
+        })
+        return await response.json()
+    },
 
-        case "gymPosts":
-            response = await fetch(`${getConfig().apiBaseUrl}api/gym-posts/${objectId}/`, {
-                method: "GET",
-                headers: getConfig().headers,
-            })
-            return await response.json()
+    async getRecommendedPosts(userId: number): Promise<ApiResponse<number[]>> {
+        const response = await fetch(`${BASE_URL}api/users-gympage-recommended/${userId}/`, {
+            method: "GET",
+            headers: HEADERS,
+        })
+        return await response.json()
+    },
 
-        case "divisionPosts":
-            response = await fetch(`${getConfig().apiBaseUrl}api/division-posts/${objectId}/`, {
-                method: "GET",
-                headers: getConfig().headers,
-            })
-            return await response.json()
+    async getGymPosts(gymId: number): Promise<ApiResponse<number[]>> {
+        const response = await fetch(`${BASE_URL}api/gym-posts/${gymId}/`, {
+            method: "GET",
+            headers: HEADERS,
+        })
+        return await response.json()
+    },
 
-        default:
-            return `Invalid apiType`
+    async getDivisionPosts(divisionId: number): Promise<ApiResponse<number[]>> {
+        const response = await fetch(`${BASE_URL}api/division-posts/${divisionId}/`, {
+            method: "GET",
+            headers: HEADERS,
+        })
+        return await response.json()
     }
 }
 
-export default apiPost
+export default postApi

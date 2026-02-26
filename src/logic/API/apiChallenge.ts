@@ -1,110 +1,102 @@
+import type { ApiResponse } from "../types/response"
+import type { Challenge, Progress, Vote, CreateProgressPayload, CreateVotePayload, UpdateProgressPayload } from "../types/challenge"
 import getConfig from "./apiConfig"
 
-/**
- * if arguments are not specified for case -> use undefined
- * @description apiTypes:
- * - allChallengesId: returns id of all challenges, ARGS: object_id
- * - getChallenge: returns data of challenge, ARGS: object_id
- * - getProgress: returns data of progress, ARGS: object_id
- * - createProgress: create progress, used when user joins new challenge, ARGS: data= user, challenge
- * - updateProgress: update progress of user (new video), ARGS: not done yet
- * - getVote: get vote data for specific progress and user ARGS: data = progress, user
- * - createVote: create vote for progress and user (user upvoted/downvoted) , ARGS: data = progress, user, upvote=True/False
- * - updateVote: used for updating vote (user changed from upvote to downovote, etc.)
- * - deleteVote: user unvoted progress, ARGS: object_id
- * @param apiType - used to select one of apiTypes
- * @param object_id - id of object we are working with progress, challenge or vote
- * @param data - data needed for api needs successfully complete its task
- * @param fields - (NOT USED NOW)data of user that you need to work with (if all use '' in fields), IN STRING WITHOUT SPACE -> 'id,handle,etc'
- */
+const BASE_URL = getConfig().apiBaseUrl
+const HEADERS = getConfig().headers
 
-async function apiChallenge(apiType = "", object_id?: number, data?: string) {
-    let response
+export const challengeApi = {
 
-    switch (apiType) {
-        case "allChallengesId":
-            response = await fetch(`${getConfig().apiBaseUrl}api/challenge/`, {
-                method: "GET",
-                headers: getConfig().headers,
-            })
-            return await response.json()
+    async allChallengesId(): Promise<ApiResponse<Challenge[]>> {
+        const response = await fetch(`${BASE_URL}api/challenge/`, {
+            method: "GET",
+            headers: HEADERS,
+        })
+        return await response.json()
+    },
 
-        case "getChallenge":
-            response = await fetch(`${getConfig().apiBaseUrl}api/challenge/${object_id}/`, {
-                method: "GET",
-                headers: getConfig().headers,
-            })
-            return await response.json()
+    async getChallenge(challengeId: number): Promise<ApiResponse<Challenge>> {
+        const response = await fetch(`${BASE_URL}api/challenge/${challengeId}/`, {
+            method: "GET",
+            headers: HEADERS,
+        })
+        return await response.json()
+    },
 
-        case "createChallenge":
-            response = await fetch(`${getConfig().apiBaseUrl}api/challenge/${object_id}/`, {
-                method: "GET",
-                headers: getConfig().headers,
-            })
-            return await response.json()
+    async createChallenge(challengeId: number): Promise<ApiResponse<Challenge>> {
+        const response = await fetch(`${BASE_URL}api/challenge/${challengeId}/`, {
+            method: "GET",
+            headers: HEADERS,
+        })
+        return await response.json()
+    },
 
-        case "updateChallenge":
-            response = await fetch(`${getConfig().apiBaseUrl}api/challenge/${object_id}/`, {
-                method: "GET",
-                headers: getConfig().headers,
-            })
-            return await response.json()
+    async updateChallenge(challengeId: number): Promise<ApiResponse<Challenge>> {
+        const response = await fetch(`${BASE_URL}api/challenge/${challengeId}/`, {
+            method: "GET",
+            headers: HEADERS,
+        })
+        return await response.json()
+    },
 
-        case "getProgress":
-            response = await fetch(`${getConfig().apiBaseUrl}api/progress/${object_id}/`, {
-                method: "GET",
-                headers: getConfig().headers,
-            })
-            return await response.json()
+    async getProgress(progressId: number): Promise<ApiResponse<Progress>> {
+        const response = await fetch(`${BASE_URL}api/progress/${progressId}/`, {
+            method: "GET",
+            headers: HEADERS,
+        })
+        return await response.json()
+    },
 
-        case "createProgress":
-            response = await fetch(`${getConfig().apiBaseUrl}api/progress/`, {
-                method: "POST",
-                headers: getConfig().headers,
-                body: data,
-            })
-            return await response.json()
+    async createProgress(data: CreateProgressPayload): Promise<ApiResponse<Progress>> {
+        const response = await fetch(`${BASE_URL}api/progress/`, {
+            method: "POST",
+            headers: HEADERS,
+            body: JSON.stringify(data),
+        })
+        return await response.json()
+    },
 
-        case "updateProgress":
-            response = await fetch(`${getConfig().apiBaseUrl}api/progress/${object_id}/`, {
-                method: "PATCH",
-                headers: getConfig().headers,
-                body: data,
-            })
-            return await response.json()
+    async updateProgress(progressId: number, data: UpdateProgressPayload): Promise<ApiResponse<Progress>> {
+        const response = await fetch(`${BASE_URL}api/progress/${progressId}/`, {
+            method: "PATCH",
+            headers: HEADERS,
+            body: JSON.stringify(data),
+        })
+        return await response.json()
+    },
 
-        case "getVote":
-            response = await fetch(`${getConfig().apiBaseUrl}api/vote/${object_id}`, {
-                method: "GET",
-                headers: getConfig().headers,
-            })
-            return await response.json()
+    async getVote(voteId: number): Promise<ApiResponse<Vote>> {
+        const response = await fetch(`${BASE_URL}api/vote/${voteId}`, {
+            method: "GET",
+            headers: HEADERS,
+        })
+        return await response.json()
+    },
 
-        case "createVote":
-            response = await fetch(`${getConfig().apiBaseUrl}api/vote/`, {
-                method: "POST",
-                headers: getConfig().headers,
-                body: data,
-            })
-            return await response.json()
+    async createVote(data: CreateVotePayload): Promise<ApiResponse<Vote>> {
+        const response = await fetch(`${BASE_URL}api/vote/`, {
+            method: "POST",
+            headers: HEADERS,
+            body: JSON.stringify(data),
+        })
+        return await response.json()
+    },
 
-        case "updateVote":
-            response = await fetch(`${getConfig().apiBaseUrl}api/vote/${object_id}/`, {
-                method: "POST",
-                headers: getConfig().headers,
-            })
-            return await response.json()
+    async updateVote(voteId: number): Promise<ApiResponse<Vote>> {
+        const response = await fetch(`${BASE_URL}api/vote/${voteId}/`, {
+            method: "POST",
+            headers: HEADERS,
+        })
+        return await response.json()
+    },
 
-        case "deleteVote":
-            response = await fetch(`${getConfig().apiBaseUrl}api/vote/${object_id}/`, {
-                method: "POST",
-                headers: getConfig().headers,
-            })
-            return await response.json()
-
-        default:
-            return `Invalid apiType`
+    async deleteVote(voteId: number): Promise<ApiResponse<null>> {
+        const response = await fetch(`${BASE_URL}api/vote/${voteId}/`, {
+            method: "POST",
+            headers: HEADERS,
+        })
+        return await response.json()
     }
 }
 
-export default apiChallenge
+export default challengeApi
